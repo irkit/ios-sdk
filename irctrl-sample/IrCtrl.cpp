@@ -89,8 +89,14 @@
 #define IR_COMP_DIS()   TIMSK1 &= ~_BV(OCIE1A)  /* Disable compare interrupt */
 #define IR_COMP_NEXT(n) OCR1A += (n)            /* Tx: Increase compare register by n count */
 
+/*
+ * 16MHz -> 500
+ *  8MHz -> 1000
+ */
+#define T_CLK           (1000000000 / (F_CPU / 8))
+
 /* Counter clock rate and register width */
-#define T_CLK           500                     /* Timer tick period [ns] */
+/* #define T_CLK           500 */                    /* Timer tick period [ns] */
 /*
 [sample 10MHz]
   T_CLK = 800
