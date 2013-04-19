@@ -3383,11 +3383,6 @@ design rules under a new name.</description>
 <contactref element="D1" pad="C"/>
 <wire x1="62.23" y1="33.02" x2="-18.73" y2="-180" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="D9/IROUT">
-<contactref element="IC1" pad="13"/>
-<contactref element="RB" pad="2"/>
-<wire x1="32.3" y1="40.7874" x2="74.34" y2="75.72" width="0" layer="19" extent="1-1"/>
-</signal>
 <signal name="+3V3">
 <contactref element="IC2" pad="AVDD"/>
 <contactref element="IC2" pad="AVDD@2"/>
@@ -3463,21 +3458,6 @@ design rules under a new name.</description>
 <wire x1="-0.85" y1="-170" x2="-0.85" y2="-180" width="0" layer="19" extent="1-1"/>
 <wire x1="2.54" y1="-160" x2="-0.85" y2="-170" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="D2/IRIN">
-<contactref element="IC1" pad="32"/>
-<contactref element="PL-IRM2161" pad="1"/>
-<wire x1="29.1" y1="49.3726" x2="-2.54" y2="-160" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="D3/BLERX">
-<contactref element="IC1" pad="1"/>
-<contactref element="IC2" pad="P0_4"/>
-<wire x1="16" y1="45.65" x2="27.6074" y2="47.88" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="D4/BLETX">
-<contactref element="IC1" pad="2"/>
-<contactref element="IC2" pad="P0_5"/>
-<wire x1="16" y1="44.4" x2="27.6074" y2="47.08" width="0" layer="19" extent="1-1"/>
-</signal>
 <signal name="D0/USBRX">
 <contactref element="IC1" pad="30"/>
 <contactref element="IC3" pad="1"/>
@@ -3522,6 +3502,26 @@ design rules under a new name.</description>
 <contactref element="R9" pad="1"/>
 <contactref element="LED6" pad="A"/>
 <wire x1="-10" y1="-231.05" x2="-20.85" y2="-230" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="D8/IRIN">
+<contactref element="IC1" pad="12"/>
+<contactref element="PL-IRM2161" pad="1"/>
+<wire x1="31.5" y1="40.7874" x2="-2.54" y2="-160" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="D3/IROUT">
+<contactref element="IC1" pad="1"/>
+<contactref element="RB" pad="2"/>
+<wire x1="27.6074" y1="47.88" x2="74.34" y2="75.72" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="D4/BLERX">
+<contactref element="IC1" pad="2"/>
+<contactref element="IC2" pad="P0_4"/>
+<wire x1="16" y1="45.65" x2="27.6074" y2="47.08" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="D5/BLETX">
+<contactref element="IC1" pad="9"/>
+<contactref element="IC2" pad="P0_5"/>
+<wire x1="16" y1="44.4" x2="29.1" y2="40.7874" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>

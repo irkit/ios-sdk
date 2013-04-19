@@ -16629,18 +16629,6 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="D1" gate="G$1" pin="C"/>
 </segment>
 </net>
-<net name="D9/IROUT" class="0">
-<segment>
-<pinref part="IC1" gate="1" pin="DIGITAL_9(PWM)"/>
-<wire x1="119.38" y1="198.12" x2="124.46" y2="198.12" width="0.1524" layer="91"/>
-<label x="124.46" y="198.12" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="RB" gate="G$1" pin="2"/>
-<wire x1="203.2" y1="35.56" x2="205.74" y2="35.56" width="0.1524" layer="91"/>
-<label x="187.96" y="35.56" size="1.778" layer="95" xref="yes"/>
-</segment>
-</net>
 <net name="+3V3" class="0">
 <segment>
 <pinref part="+3V2" gate="G$1" pin="+3V3"/>
@@ -16797,42 +16785,6 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <junction x="276.86" y="45.72"/>
 </segment>
 </net>
-<net name="D2/IRIN" class="0">
-<segment>
-<pinref part="IC1" gate="1" pin="DIGITAL_2"/>
-<wire x1="119.38" y1="218.44" x2="124.46" y2="218.44" width="0.1524" layer="91"/>
-<label x="124.46" y="218.44" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="PL-IRM2161" gate="1" pin="VOUT"/>
-<wire x1="271.78" y1="50.8" x2="281.94" y2="50.8" width="0.1524" layer="91"/>
-<label x="259.08" y="50.8" size="1.778" layer="95" xref="yes"/>
-</segment>
-</net>
-<net name="D3/BLERX" class="0">
-<segment>
-<pinref part="IC1" gate="1" pin="DIGITAL_3(PWM)"/>
-<wire x1="119.38" y1="215.9" x2="124.46" y2="215.9" width="0.1524" layer="91"/>
-<label x="124.46" y="215.9" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="IC2" gate="G$1" pin="P0_4"/>
-<wire x1="241.3" y1="215.9" x2="251.46" y2="215.9" width="0.1524" layer="91"/>
-<label x="251.46" y="215.9" size="1.778" layer="95" xref="yes"/>
-</segment>
-</net>
-<net name="D4/BLETX" class="0">
-<segment>
-<pinref part="IC1" gate="1" pin="DIGITAL_4"/>
-<wire x1="119.38" y1="213.36" x2="124.46" y2="213.36" width="0.1524" layer="91"/>
-<label x="124.46" y="213.36" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="IC2" gate="G$1" pin="P0_5"/>
-<wire x1="241.3" y1="213.36" x2="251.46" y2="213.36" width="0.1524" layer="91"/>
-<label x="251.46" y="213.36" size="1.778" layer="95" xref="yes"/>
-</segment>
-</net>
 <net name="D0/USBRX" class="0">
 <segment>
 <pinref part="IC1" gate="1" pin="DIGITAL_0(RX)"/>
@@ -16924,6 +16876,54 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <wire x1="152.4" y1="53.34" x2="152.4" y2="45.72" width="0.1524" layer="91"/>
 <pinref part="R9" gate="G$1" pin="1"/>
 <pinref part="LED6" gate="G$1" pin="A"/>
+</segment>
+</net>
+<net name="D8/IRIN" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_8"/>
+<wire x1="119.38" y1="200.66" x2="124.46" y2="200.66" width="0.1524" layer="91"/>
+<label x="124.46" y="200.66" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="PL-IRM2161" gate="1" pin="VOUT"/>
+<wire x1="271.78" y1="50.8" x2="281.94" y2="50.8" width="0.1524" layer="91"/>
+<label x="259.08" y="50.8" size="1.778" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="D3/IROUT" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_3(PWM)"/>
+<wire x1="119.38" y1="215.9" x2="124.46" y2="215.9" width="0.1524" layer="91"/>
+<label x="124.46" y="215.9" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="RB" gate="G$1" pin="2"/>
+<wire x1="203.2" y1="35.56" x2="205.74" y2="35.56" width="0.1524" layer="91"/>
+<label x="187.96" y="35.56" size="1.778" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="D4/BLERX" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_4"/>
+<wire x1="119.38" y1="213.36" x2="124.46" y2="213.36" width="0.1524" layer="91"/>
+<label x="124.46" y="213.36" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="P0_4"/>
+<wire x1="241.3" y1="215.9" x2="251.46" y2="215.9" width="0.1524" layer="91"/>
+<label x="251.46" y="215.9" size="1.778" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="D5/BLETX" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_5(PWM)"/>
+<wire x1="119.38" y1="210.82" x2="124.46" y2="210.82" width="0.1524" layer="91"/>
+<label x="124.46" y="210.82" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="P0_5"/>
+<wire x1="241.3" y1="213.36" x2="251.46" y2="213.36" width="0.1524" layer="91"/>
+<label x="251.46" y="213.36" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
