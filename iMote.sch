@@ -16067,8 +16067,8 @@ Production SKU IC-00870</description>
 <part name="LED2" library="led" deviceset="LED" device="CHIP-LED0805" value="BLUE"/>
 <part name="P+6" library="supply1" deviceset="+5V" device=""/>
 <part name="T1" library="transistor" deviceset="2SC1815" device=""/>
-<part name="RB" library="resistor" deviceset="R-US_" device="R2012" value="4.7k"/>
-<part name="RC" library="resistor" deviceset="R-US_" device="R2012" value="47"/>
+<part name="RB" library="resistor" deviceset="R-US_" device="R2012" value="470"/>
+<part name="RC" library="resistor" deviceset="R-US_" device="R2012" value="4.7"/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
 <part name="P+7" library="supply1" deviceset="+5V" device=""/>
 <part name="P+8" library="supply1" deviceset="+5V" device=""/>
@@ -16109,7 +16109,7 @@ Production SKU IC-00870</description>
 <part name="PL-IRM2161" library="akizukidenshi" deviceset="PL-IRM2161" device=""/>
 <part name="R7" library="resistor" deviceset="R-US_" device="R2012" value="200"/>
 <part name="C12" library="rcl" deviceset="C-EU" device="C2012" value="4.7uF"/>
-<part name="D1" library="akizukidenshi" deviceset="LED" device="" value="IR"/>
+<part name="D1" library="akizukidenshi" deviceset="LED" device="" value="TLN105B(F)"/>
 <part name="IC3" library="akizukidenshi" deviceset="FT232RL" device="SSOP"/>
 <part name="P+10" library="supply1" deviceset="+5V" device=""/>
 <part name="GND26" library="supply1" deviceset="GND" device=""/>
