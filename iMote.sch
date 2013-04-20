@@ -16075,7 +16075,6 @@ Production SKU IC-00870</description>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
 <part name="STANDOFF1" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="STANDOFF2" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
-<part name="STANDOFF3" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="STANDOFF4" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="IC2" library="sf-bluegiga" deviceset="BLE112-A-VISUAL" device=""/>
 <part name="CN2" library="pinhead" deviceset="PINHD-2X3" device="" value="ICSP"/>
@@ -16182,7 +16181,6 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="GND12" gate="1" x="271.78" y="30.48"/>
 <instance part="STANDOFF1" gate="G$1" x="327.66" y="40.64"/>
 <instance part="STANDOFF2" gate="G$1" x="332.74" y="40.64"/>
-<instance part="STANDOFF3" gate="G$1" x="337.82" y="40.64"/>
 <instance part="STANDOFF4" gate="G$1" x="342.9" y="40.64"/>
 <instance part="IC2" gate="G$1" x="220.98" y="220.98" smashed="yes">
 <attribute name="VALUE" x="205.74" y="248.158" size="1.778" layer="96"/>
