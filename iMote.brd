@@ -2847,6 +2847,13 @@ http://akizukidenshi.com/download/c2235_dim.pdf</description>
 </package>
 </packages>
 </library>
+<library name="git-revision">
+<packages>
+<package name="GIT-REVISION">
+<text x="0" y="0" size="1.27" layer="51">&gt;GIT</text>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -3088,6 +3095,7 @@ design rules under a new name.</description>
 <element name="LED5" library="led" package="CHIP-LED0805" value="USB/TX" x="19.21" y="75.91"/>
 <element name="R8" library="resistor" package="R2012" value="680" x="24" y="70.8" rot="R270"/>
 <element name="LED6" library="led" package="CHIP-LED0805" value="USB/RX" x="24.29" y="76.07"/>
+<element name="U$1" library="git-revision" package="GIT-REVISION" value="4fdebe4" x="1.27" y="-2.54"/>
 </elements>
 <signals>
 <signal name="!RESET">

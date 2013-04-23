@@ -16029,6 +16029,32 @@ Production SKU IC-00870</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="git-revision">
+<packages>
+<package name="GIT-REVISION">
+<text x="0" y="0" size="1.27" layer="51">&gt;GIT</text>
+</package>
+</packages>
+<symbols>
+<symbol name="GIT-REVISION">
+<text x="0" y="0" size="2.54" layer="94">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="GIT-REVISION">
+<gates>
+<gate name="G$1" symbol="GIT-REVISION" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="GIT-REVISION">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -16120,6 +16146,7 @@ Production SKU IC-00870</description>
 <part name="R8" library="resistor" deviceset="R-US_" device="R2012" value="680"/>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
 <part name="LED6" library="led" deviceset="LED" device="CHIP-LED0805" value="USB/RX"/>
+<part name="U$1" library="git-revision" deviceset="GIT-REVISION" device="" value="4fdebe4"/>
 </parts>
 <sheets>
 <sheet>
@@ -16227,6 +16254,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="R8" gate="G$1" x="152.4" y="58.42" rot="R90"/>
 <instance part="GND28" gate="1" x="152.4" y="30.48"/>
 <instance part="LED6" gate="G$1" x="152.4" y="43.18"/>
+<instance part="U$1" gate="G$1" x="362.966" y="11.43"/>
 </instances>
 <busses>
 </busses>
