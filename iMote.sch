@@ -16153,6 +16153,7 @@ Production SKU IC-00870</description>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
 <part name="LED6" library="led" deviceset="LED" device="CHIP-LED0805" value="USB/RX"/>
 <part name="U$1" library="git-revision" deviceset="GIT-REVISION" device="" value="4fdebe4"/>
+<part name="STANDOFF4" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16261,6 +16262,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="GND28" gate="1" x="152.4" y="30.48"/>
 <instance part="LED6" gate="G$1" x="152.4" y="43.18"/>
 <instance part="U$1" gate="G$1" x="362.966" y="11.43"/>
+<instance part="STANDOFF4" gate="G$1" x="337.82" y="40.64"/>
 </instances>
 <busses>
 </busses>
@@ -16647,6 +16649,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <junction x="111.76" y="99.06"/>
 <junction x="111.76" y="101.6"/>
 <junction x="111.76" y="104.14"/>
+<junction x="111.76" y="91.44"/>
 </segment>
 </net>
 <net name="N$10" class="0">
@@ -16940,28 +16943,28 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="187.96" y="35.56" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="D4/BLERX" class="0">
+<net name="D7/BLETX" class="0">
 <segment>
-<pinref part="IC1" gate="1" pin="DIGITAL_4"/>
-<wire x1="119.38" y1="213.36" x2="124.46" y2="213.36" width="0.1524" layer="91"/>
-<label x="124.46" y="213.36" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="IC3" gate="G$1" pin="P0_4"/>
-<wire x1="241.3" y1="215.9" x2="251.46" y2="215.9" width="0.1524" layer="91"/>
-<label x="251.46" y="215.9" size="1.778" layer="95" xref="yes"/>
-</segment>
-</net>
-<net name="D5/BLETX" class="0">
-<segment>
-<pinref part="IC1" gate="1" pin="DIGITAL_5(PWM)"/>
-<wire x1="119.38" y1="210.82" x2="124.46" y2="210.82" width="0.1524" layer="91"/>
-<label x="124.46" y="210.82" size="1.778" layer="95" xref="yes"/>
+<pinref part="IC1" gate="1" pin="DIGITAL_7"/>
+<wire x1="119.38" y1="205.74" x2="124.46" y2="205.74" width="0.1524" layer="91"/>
+<label x="124.46" y="205.74" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
 <pinref part="IC3" gate="G$1" pin="P0_5"/>
 <wire x1="241.3" y1="213.36" x2="251.46" y2="213.36" width="0.1524" layer="91"/>
 <label x="251.46" y="213.36" size="1.778" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="D6/BLERX" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_6(PWM)"/>
+<wire x1="119.38" y1="208.28" x2="124.46" y2="208.28" width="0.1524" layer="91"/>
+<label x="124.46" y="208.28" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="P0_4"/>
+<wire x1="241.3" y1="215.9" x2="251.46" y2="215.9" width="0.1524" layer="91"/>
+<label x="251.46" y="215.9" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 </nets>
