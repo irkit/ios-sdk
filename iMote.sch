@@ -16061,7 +16061,13 @@ Production SKU IC-00870</description>
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0" drill="0">
+<class number="0" name="default" width="0.254" drill="0">
+</class>
+<class number="1" name="power" width="0.4064" drill="0">
+</class>
+<class number="2" name="ir-power" width="1.016" drill="0">
+</class>
+<class number="3" name="gnd" width="0.6096" drill="0">
 </class>
 </classes>
 <parts>
@@ -16337,7 +16343,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="124.46" y="187.96" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="+5V" class="0">
+<net name="+5V" class="1">
 <segment>
 <pinref part="R1" gate="G$1" pin="2"/>
 <wire x1="25.4" y1="132.08" x2="25.4" y2="134.62" width="0.1524" layer="91"/>
@@ -16438,7 +16444,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <junction x="40.64" y="226.06"/>
 </segment>
 </net>
-<net name="GND" class="0">
+<net name="GND" class="3">
 <segment>
 <pinref part="C1" gate="G$1" pin="1"/>
 <wire x1="25.4" y1="236.22" x2="20.32" y2="236.22" width="0.1524" layer="91"/>
@@ -16633,21 +16639,21 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <wire x1="215.9" y1="35.56" x2="218.44" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$11" class="0">
+<net name="N$11" class="2">
 <segment>
 <pinref part="RC" gate="G$1" pin="1"/>
 <pinref part="T1" gate="G$1" pin="C"/>
 <wire x1="223.52" y1="43.18" x2="223.52" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$12" class="0">
+<net name="N$12" class="2">
 <segment>
 <pinref part="RC" gate="G$1" pin="2"/>
 <wire x1="223.52" y1="55.88" x2="223.52" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="D1" gate="G$1" pin="C"/>
 </segment>
 </net>
-<net name="+3V3" class="0">
+<net name="+3V3" class="1">
 <segment>
 <pinref part="IC3" gate="G$1" pin="DVDD"/>
 <wire x1="228.6" y1="193.04" x2="228.6" y2="182.88" width="0.1524" layer="91"/>
@@ -16736,7 +16742,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="LED3" gate="G$1" pin="A"/>
 </segment>
 </net>
-<net name="BLE/P0_0" class="0">
+<net name="BLE/P0_0" class="3">
 <segment>
 <pinref part="IC3" gate="G$1" pin="P0_0"/>
 <wire x1="241.3" y1="226.06" x2="251.46" y2="226.06" width="0.1524" layer="91"/>
