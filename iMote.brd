@@ -3103,7 +3103,7 @@ design rules under a new name.</description>
 <element name="LED5" library="led" package="CHIP-LED0805" value="USB/TX" x="22.324" y="55.59"/>
 <element name="R8" library="resistor" package="R2012" value="680" x="27.114" y="51.75" rot="R270"/>
 <element name="LED6" library="led" package="CHIP-LED0805" value="USB/RX" x="27.404" y="55.75"/>
-<element name="U$1" library="git-revision" package="GIT-REVISION" value="4fdebe4" x="0.254" y="-3.048"/>
+<element name="U$1" library="git-revision" package="GIT-REVISION" value="ccb4477" x="0.254" y="-3.048"/>
 <element name="STANDOFF4" library="SparkFun-Electromechanical" package="STAND-OFF" value="STAND-OFF" x="67.564" y="55.88"/>
 </elements>
 <signals>

@@ -16152,7 +16152,7 @@ Production SKU IC-00870</description>
 <part name="R8" library="resistor" deviceset="R-US_" device="R2012" value="680"/>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
 <part name="LED6" library="led" deviceset="LED" device="CHIP-LED0805" value="USB/RX"/>
-<part name="U$1" library="git-revision" deviceset="GIT-REVISION" device="" value="4fdebe4"/>
+<part name="U$1" library="git-revision" deviceset="GIT-REVISION" device="" value="ccb4477"/>
 <part name="STANDOFF4" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 </parts>
 <sheets>
