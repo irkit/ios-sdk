@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.025" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -251,6 +251,50 @@ http://akizukidenshi.com/download/c2235_dim.pdf</description>
 <rectangle x1="3.4125" y1="-3.9" x2="3.7375" y2="-2.9656" layer="51"/>
 <rectangle x1="4.0625" y1="-3.9" x2="4.3875" y2="-2.9656" layer="51"/>
 </package>
+<package name="BLE112-A">
+<description>Bluetooth Low Energy single-mode module - Bluetooth 4.0, chip antenna (CC2540)</description>
+<wire x1="-6.05" y1="-9.05" x2="-6.05" y2="9.05" width="0.127" layer="21"/>
+<wire x1="-6.05" y1="9.05" x2="6" y2="9.05" width="0.127" layer="21"/>
+<wire x1="6" y1="9.05" x2="6" y2="-9.05" width="0.127" layer="21"/>
+<wire x1="6" y1="-9.05" x2="-6.05" y2="-9.05" width="0.127" layer="21"/>
+<smd name="P1_5" x="-6.05" y="-6.85" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="USB-" x="-6.05" y="-5.6" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="USB+" x="-6.05" y="-4.35" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="GND@2" x="-6.05" y="-3.1" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="VDD_USB" x="-6.05" y="-1.85" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P1_6" x="-6.05" y="-0.6" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P1_7" x="-6.05" y="0.65" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P2_0" x="-6.05" y="1.9" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P2_1" x="-6.05" y="3.15" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P2_2" x="-6.05" y="4.4" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="AVDD@2" x="-6.05" y="5.65" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="AVDD" x="-6.05" y="6.9" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="GND" x="-6.05" y="8.15" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="GND@3" x="4.35" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="DVDD" x="3.1" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="P0_7" x="1.85" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="P1_0" x="0.6" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="P1_1" x="-0.65" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="P1_2" x="-1.9" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="P1_3" x="-3.15" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="P1_4" x="-4.4" y="-9.05" dx="0.85" dy="3" layer="1" roundness="100" rot="R180"/>
+<smd name="P0_6" x="6" y="-6.85" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P0_5" x="6" y="-5.6" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P0_4" x="6" y="-4.35" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P0_3" x="6" y="-3.1" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P0_2" x="6" y="-1.85" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P0_1" x="6" y="-0.6" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="P0_0" x="6" y="0.65" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="RESET" x="6" y="1.9" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<smd name="GND@4" x="6" y="3.15" dx="0.85" dy="3" layer="1" roundness="100" rot="R90"/>
+<text x="-4.35" y="7.8" size="0.8128" layer="51" rot="SR0">1</text>
+<text x="-4.35" y="-7.25" size="0.8128" layer="51" rot="SR0">13</text>
+<text x="3" y="-7.25" size="0.8128" layer="51" rot="SR0">22</text>
+<text x="3" y="2.75" size="0.8128" layer="51" rot="SR0">30</text>
+<text x="-6" y="9.4" size="1.016" layer="25" rot="SR0">&gt;NAME</text>
+<text x="0" y="9.4" size="1.016" layer="27" rot="SR0">&gt;VALUE</text>
+<rectangle x1="0.3" y1="3.7" x2="6" y2="9" layer="39"/>
+</package>
 </packages>
 <symbols>
 <symbol name="C-02235">
@@ -349,6 +393,45 @@ http://akizukidenshi.com/download/ds/paralight/PL-IRM2161-XD1.pdf</description>
 <pin name="PWREN" x="15.24" y="-12.7" length="middle" direction="pas" function="dot" rot="R180"/>
 <pin name="TXDEN" x="15.24" y="-15.24" length="middle" direction="pas" rot="R180"/>
 <pin name="SLEEP" x="15.24" y="-17.78" length="middle" direction="pas" function="dot" rot="R180"/>
+</symbol>
+<symbol name="BLE112-A-VISUAL">
+<wire x1="-15.24" y1="22.86" x2="15.24" y2="22.86" width="0.254" layer="94"/>
+<wire x1="15.24" y1="22.86" x2="15.24" y2="-22.86" width="0.254" layer="94"/>
+<wire x1="15.24" y1="-22.86" x2="-15.24" y2="-22.86" width="0.254" layer="94"/>
+<wire x1="-15.24" y1="-22.86" x2="-15.24" y2="22.86" width="0.254" layer="94"/>
+<text x="1.778" y="24.13" size="2.54" layer="96">&gt;VALUE</text>
+<text x="-15.24" y="24.13" size="2.54" layer="95">&gt;NAME</text>
+<pin name="GND" x="-20.32" y="20.32" visible="pin" length="middle" direction="pwr"/>
+<pin name="GND@2" x="-20.32" y="-2.54" visible="pin" length="middle" direction="pwr"/>
+<pin name="GND@3" x="10.16" y="-27.94" visible="pin" length="middle" direction="pwr" rot="R90"/>
+<pin name="GND@4" x="20.32" y="10.16" visible="pin" length="middle" direction="pwr" rot="R180"/>
+<pin name="AVDD" x="-20.32" y="17.78" visible="pin" length="middle" direction="pwr"/>
+<pin name="AVDD@2" x="-20.32" y="15.24" visible="pin" length="middle" direction="pwr"/>
+<pin name="P2_2" x="-20.32" y="12.7" visible="pin" length="middle"/>
+<pin name="P2_1" x="-20.32" y="10.16" visible="pin" length="middle"/>
+<pin name="P2_0" x="-20.32" y="7.62" visible="pin" length="middle"/>
+<pin name="P1_7" x="-20.32" y="5.08" visible="pin" length="middle"/>
+<pin name="P1_6" x="-20.32" y="2.54" visible="pin" length="middle"/>
+<pin name="VDD_USB" x="-20.32" y="0" visible="pin" length="middle" direction="pwr"/>
+<pin name="USB+" x="-20.32" y="-5.08" visible="pin" length="middle"/>
+<pin name="USB-" x="-20.32" y="-7.62" visible="pin" length="middle"/>
+<pin name="P1_5" x="-20.32" y="-10.16" visible="pin" length="middle"/>
+<pin name="P1_4" x="-7.62" y="-27.94" visible="pin" length="middle" rot="R90"/>
+<pin name="P1_3" x="-5.08" y="-27.94" visible="pin" length="middle" rot="R90"/>
+<pin name="P1_2" x="-2.54" y="-27.94" visible="pin" length="middle" rot="R90"/>
+<pin name="P1_1" x="0" y="-27.94" visible="pin" length="middle" rot="R90"/>
+<pin name="P1_0" x="2.54" y="-27.94" visible="pin" length="middle" rot="R90"/>
+<pin name="P0_7" x="5.08" y="-27.94" visible="pin" length="middle" rot="R90"/>
+<pin name="DVDD" x="7.62" y="-27.94" visible="pin" length="middle" direction="pwr" rot="R90"/>
+<pin name="P0_6" x="20.32" y="-10.16" visible="pin" length="middle" rot="R180"/>
+<pin name="P0_5" x="20.32" y="-7.62" visible="pin" length="middle" rot="R180"/>
+<pin name="P0_4" x="20.32" y="-5.08" visible="pin" length="middle" rot="R180"/>
+<pin name="P0_3" x="20.32" y="-2.54" visible="pin" length="middle" rot="R180"/>
+<pin name="P0_2" x="20.32" y="0" visible="pin" length="middle" rot="R180"/>
+<pin name="P0_1" x="20.32" y="2.54" visible="pin" length="middle" rot="R180"/>
+<pin name="P0_0" x="20.32" y="5.08" visible="pin" length="middle" rot="R180"/>
+<pin name="RESET" x="20.32" y="7.62" visible="pin" length="middle" direction="in" rot="R180"/>
+<wire x1="5.842" y1="8.636" x2="12.7" y2="8.636" width="0.127" layer="97"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -496,6 +579,51 @@ Production SKU IC-00870</description>
 <technology name="">
 <attribute name="PROD_ID" value="IC-00870"/>
 </technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="BLE112-A-VISUAL" prefix="U">
+<description>Bluetooth Low Energy single-mode module - Bluetooth 4.0, chip antenna</description>
+<gates>
+<gate name="G$1" symbol="BLE112-A-VISUAL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="BLE112-A">
+<connects>
+<connect gate="G$1" pin="AVDD" pad="AVDD"/>
+<connect gate="G$1" pin="AVDD@2" pad="AVDD@2"/>
+<connect gate="G$1" pin="DVDD" pad="DVDD"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="GND@2" pad="GND@2"/>
+<connect gate="G$1" pin="GND@3" pad="GND@3"/>
+<connect gate="G$1" pin="GND@4" pad="GND@4"/>
+<connect gate="G$1" pin="P0_0" pad="P0_0"/>
+<connect gate="G$1" pin="P0_1" pad="P0_1"/>
+<connect gate="G$1" pin="P0_2" pad="P0_2"/>
+<connect gate="G$1" pin="P0_3" pad="P0_3"/>
+<connect gate="G$1" pin="P0_4" pad="P0_4"/>
+<connect gate="G$1" pin="P0_5" pad="P0_5"/>
+<connect gate="G$1" pin="P0_6" pad="P0_6"/>
+<connect gate="G$1" pin="P0_7" pad="P0_7"/>
+<connect gate="G$1" pin="P1_0" pad="P1_0"/>
+<connect gate="G$1" pin="P1_1" pad="P1_1"/>
+<connect gate="G$1" pin="P1_2" pad="P1_2"/>
+<connect gate="G$1" pin="P1_3" pad="P1_3"/>
+<connect gate="G$1" pin="P1_4" pad="P1_4"/>
+<connect gate="G$1" pin="P1_5" pad="P1_5"/>
+<connect gate="G$1" pin="P1_6" pad="P1_6"/>
+<connect gate="G$1" pin="P1_7" pad="P1_7"/>
+<connect gate="G$1" pin="P2_0" pad="P2_0"/>
+<connect gate="G$1" pin="P2_1" pad="P2_1"/>
+<connect gate="G$1" pin="P2_2" pad="P2_2"/>
+<connect gate="G$1" pin="RESET" pad="RESET"/>
+<connect gate="G$1" pin="USB+" pad="USB+"/>
+<connect gate="G$1" pin="USB-" pad="USB-"/>
+<connect gate="G$1" pin="VDD_USB" pad="VDD_USB"/>
+</connects>
+<technologies>
+<technology name=""/>
 </technologies>
 </device>
 </devices>
