@@ -977,6 +977,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <text x="-0.762" y="-2.286" size="1.27" layer="27">&gt;VALUE</text>
 <wire x1="-0.4" y1="0.5" x2="0.4" y2="0.5" width="0.127" layer="21"/>
 <wire x1="-0.4" y1="-0.5" x2="0.4" y2="-0.5" width="0.127" layer="21"/>
+<rectangle x1="-0.5" y1="-0.7" x2="0.5" y2="0.7" layer="41"/>
 </package>
 <package name="TQFP32-08">
 <description>&lt;B&gt;Thin Plasic Quad Flat Package&lt;/B&gt; Grid 0.8 mm</description>
@@ -1842,6 +1843,8 @@ Production SKU IC-00870</description>
 </class>
 <class number="3" name="gnd" width="0.508" drill="0">
 </class>
+<class number="4" name="3.3v" width="0.4064" drill="0">
+</class>
 </classes>
 <parts>
 <part name="FRAME1" library="frames" deviceset="FRAME_B_L" device="" value="iMote"/>
@@ -2471,7 +2474,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="D1" gate="G$1" pin="C"/>
 </segment>
 </net>
-<net name="+3V3" class="1">
+<net name="+3V3" class="4">
 <segment>
 <pinref part="IC3" gate="G$1" pin="DVDD"/>
 <wire x1="228.6" y1="193.04" x2="228.6" y2="182.88" width="0.1524" layer="91"/>
