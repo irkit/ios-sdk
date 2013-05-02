@@ -1341,9 +1341,9 @@ design rules under a new name.</description>
 <wire x1="14" y1="14.3" x2="13" y2="14.3" width="0.508" layer="1"/>
 <wire x1="12.5" y1="14.8" x2="12.476" y2="14.854" width="0.508" layer="1"/>
 <wire x1="14" y1="14.3" x2="14.0494" y2="14.242" width="0.508" layer="1"/>
-<wire x1="15.2" y1="12.7" x2="14.1" y2="12.7" width="0.508" layer="1"/>
-<wire x1="15.2" y1="13.9" x2="15.2" y2="12.7" width="0.508" layer="1"/>
-<wire x1="14.9" y1="14.2" x2="15.2" y2="13.9" width="0.508" layer="1"/>
+<wire x1="15.5" y1="12.7" x2="14.1" y2="12.7" width="0.508" layer="1"/>
+<wire x1="15.5" y1="13.9" x2="15.5" y2="12.7" width="0.508" layer="1"/>
+<wire x1="14.9" y1="14.2" x2="15.5" y2="13.9" width="0.508" layer="1"/>
 <wire x1="14.3" y1="14.2" x2="14.9" y2="14.2" width="0.508" layer="1"/>
 <wire x1="14.1" y1="12.7" x2="14.0494" y2="12.642" width="0.508" layer="1"/>
 <wire x1="14.3" y1="14.2" x2="14.0494" y2="14.242" width="0.508" layer="1"/>
@@ -1622,15 +1622,10 @@ design rules under a new name.</description>
 <signal name="USBD-">
 <contactref element="CN1" pad="D-"/>
 <contactref element="IC2" pad="16"/>
-<wire x1="17" y1="37.6" x2="17" y2="38.4" width="0.254" layer="1"/>
-<wire x1="17.3" y1="37.3" x2="17" y2="37.6" width="0.254" layer="1"/>
-<wire x1="22.5" y1="37.3" x2="17.3" y2="37.3" width="0.254" layer="1"/>
-<wire x1="22.5" y1="42.6" x2="22.5" y2="37.3" width="0.254" layer="1"/>
-<wire x1="21.7" y1="43.4" x2="22.5" y2="42.6" width="0.254" layer="1"/>
-<wire x1="16.6" y1="43.4" x2="21.7" y2="43.4" width="0.254" layer="1"/>
-<wire x1="16.6" y1="42.4" x2="16.6" y2="43.4" width="0.254" layer="1"/>
-<wire x1="17" y1="38.4" x2="16.911" y2="38.4" width="0.254" layer="1"/>
-<wire x1="16.6" y1="42.4" x2="16.59" y2="42.308" width="0.254" layer="1"/>
+<wire x1="16.59" y1="42.308" x2="16.59" y2="39.91" width="0.2" layer="1"/>
+<wire x1="16.59" y1="39.91" x2="16.9" y2="39.6" width="0.2" layer="1"/>
+<wire x1="16.9" y1="39.6" x2="16.9" y2="38.4" width="0.254" layer="1"/>
+<wire x1="16.9" y1="38.4" x2="16.911" y2="38.4" width="0.254" layer="1"/>
 </signal>
 <signal name="USBD+">
 <contactref element="CN1" pad="D+"/>
