@@ -1218,10 +1218,10 @@ UX60SC-MB-5ST
 <text x="3" y="2.75" size="0.8128" layer="51" rot="SR0">30</text>
 <text x="-6" y="9.4" size="1.016" layer="25" rot="SR0">&gt;NAME</text>
 <text x="0" y="9.4" size="1.016" layer="27" rot="SR0">&gt;VALUE</text>
-<rectangle x1="0.3" y1="3.7" x2="6" y2="9" layer="42"/>
-<rectangle x1="0.3" y1="3.7" x2="6" y2="9" layer="39"/>
-<rectangle x1="0.3" y1="3.7" x2="6" y2="9" layer="40"/>
-<rectangle x1="0.3" y1="3.7" x2="6" y2="9" layer="41"/>
+<rectangle x1="0.3" y1="3.7" x2="7.8" y2="9" layer="42"/>
+<rectangle x1="0.3" y1="3.7" x2="7.8" y2="9" layer="39"/>
+<rectangle x1="0.3" y1="3.7" x2="7.8" y2="9" layer="40"/>
+<rectangle x1="0.3" y1="3.7" x2="7.8" y2="9" layer="41"/>
 </package>
 <package name="LED-2012">
 <description>&lt;b&gt;2012&lt;/b&gt;
@@ -1307,6 +1307,7 @@ UX60SC-MB-5ST
 <rectangle x1="2.7625" y1="-3.9" x2="3.0875" y2="-2.9656" layer="51"/>
 <rectangle x1="3.4125" y1="-3.9" x2="3.7375" y2="-2.9656" layer="51"/>
 <rectangle x1="4.0625" y1="-3.9" x2="4.3875" y2="-2.9656" layer="51"/>
+<circle x="-5.5" y="-3.2" radius="0.22360625" width="0.1" layer="21"/>
 </package>
 <package name="LED-3MM">
 <description>LED 3mm bullet</description>
@@ -1883,7 +1884,7 @@ Production SKU IC-00870</description>
 </class>
 <class number="2" name="ir-power" width="1.016" drill="0">
 </class>
-<class number="3" name="gnd" width="0.508" drill="0">
+<class number="3" name="gnd" width="0.4064" drill="0">
 </class>
 <class number="4" name="3.3v" width="0.4064" drill="0">
 </class>
