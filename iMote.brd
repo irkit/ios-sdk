@@ -1294,11 +1294,11 @@ design rules under a new name.</description>
 <contactref element="C11" pad="-"/>
 <contactref element="C10" pad="2"/>
 <contactref element="CN1" pad="GND"/>
-<polygon width="1.27" layer="16" isolate="1.016" thermals="no">
-<vertex x="3" y="47"/>
-<vertex x="40" y="47"/>
-<vertex x="40" y="3"/>
-<vertex x="3" y="3"/>
+<polygon width="1.27" layer="16">
+<vertex x="0" y="50"/>
+<vertex x="43" y="50"/>
+<vertex x="43" y="0"/>
+<vertex x="0" y="0"/>
 </polygon>
 <contactref element="IC2" pad="21"/>
 <contactref element="C6" pad="2"/>
