@@ -978,6 +978,7 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <wire x1="-0.4" y1="0.5" x2="0.4" y2="0.5" width="0.127" layer="21"/>
 <wire x1="-0.4" y1="-0.5" x2="0.4" y2="-0.5" width="0.127" layer="21"/>
 <rectangle x1="-0.5" y1="-0.7" x2="0.5" y2="0.7" layer="41"/>
+<rectangle x1="-0.5" y1="-0.7" x2="0.5" y2="0.7" layer="39"/>
 </package>
 <package name="TQFP32-08">
 <description>&lt;B&gt;Thin Plasic Quad Flat Package&lt;/B&gt; Grid 0.8 mm</description>
@@ -1133,21 +1134,30 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <rectangle x1="-1.9" y1="2.05" x2="-1.6" y2="2.5" layer="51"/>
 <rectangle x1="-1.55" y1="-1.55" x2="1.55" y2="1.55" layer="1"/>
 </package>
-<package name="C-02235">
-<description>基板取付用ＵＳＢコネクタ・ミニＢ
-スルーホールタイプ
-http://akizukidenshi.com/catalog/g/gC-02235/
-http://akizukidenshi.com/download/c2235_dim.pdf</description>
-<pad name="D+" x="0" y="3.4" drill="0.7"/>
-<pad name="GND" x="-1.6" y="3.4" drill="0.7"/>
-<pad name="VBUS" x="1.6" y="3.4" drill="0.7"/>
-<pad name="ID" x="-0.8" y="2.2" drill="0.7"/>
-<pad name="D-" x="0.8" y="2.2" drill="0.7"/>
-<pad name="SH2" x="-3.7" y="2.5" drill="1.4"/>
-<pad name="SH3" x="3.7" y="2.5" drill="1.4"/>
-<pad name="SH1" x="-3.7" y="-2.25" drill="1.4"/>
-<pad name="SH4" x="3.7" y="-2.25" drill="1.4"/>
-<text x="6.27" y="4" size="1.27" layer="21" rot="R270">&gt;NAME</text>
+<package name="USB-MINIB-UX60SC-MB">
+<description>USB MINIB Connector
+UX60SC-MB-5ST
+&lt;a href="http://akizukidenshi.com/catalog/g/gC-05690/"&gt;http://akizukidenshi.com/catalog/g/gC-05690/&lt;/a&gt;
+&lt;a href="http://akizukidenshi.com/download/ds/hirose/UX60SC-MB-5ST_UX60SC-MB-5S8.pdf"&gt;http://akizukidenshi.com/download/ds/hirose/UX60SC-MB-5ST_UX60SC-MB-5S8.pdf&lt;/a&gt;
+&lt;a href="http://www.hirose.co.jp/catalogj_hp/j24000153.pdf"&gt;http://www.hirose.co.jp/catalogj_hp/j24000153.pdf&lt;/a&gt;</description>
+<smd name="D+" x="0" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="D-" x="0.8" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="VBUS" x="1.6" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="ID" x="-0.8" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="GND" x="-1.6" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<rectangle x1="-2.95" y1="0" x2="2.95" y2="2.1" layer="41"/>
+<rectangle x1="-1.5" y1="2.1" x2="1.5" y2="3.6" layer="41"/>
+<wire x1="-3.85" y1="1.7" x2="-3.85" y2="0" width="0.127" layer="21"/>
+<wire x1="-3.85" y1="0" x2="3.85" y2="0" width="0.127" layer="21"/>
+<wire x1="3.85" y1="0" x2="3.85" y2="1.7" width="0.127" layer="21"/>
+<smd name="S$1" x="-3.65" y="4.15" dx="1.4" dy="4.7" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$2" x="3.65" y="4.15" dx="1.4" dy="4.7" layer="1" stop="no" thermals="no" cream="no"/>
+<rectangle x1="-2.95" y1="5" x2="-2.45" y2="6.5" layer="1"/>
+<rectangle x1="2.45" y1="5" x2="2.95" y2="6.5" layer="1"/>
+<rectangle x1="-1.5" y1="2.1" x2="1.5" y2="3.6" layer="39"/>
+<rectangle x1="-2.95" y1="0" x2="2.95" y2="2.1" layer="39"/>
+<smd name="S$3" x="-4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$4" x="4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
 </package>
 <package name="IR-RECEIVER">
 <pad name="2" x="0" y="0" drill="0.6"/>
@@ -1321,6 +1331,22 @@ grid 2.032 mm, diameter 5 mm</description>
 <text x="2.54" y="-2.159" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 <rectangle x1="0.254" y1="-1.016" x2="0.762" y2="1.016" layer="51"/>
 </package>
+<package name="USB-MINIB-C-02235">
+<description>基板取付用ＵＳＢコネクタ・ミニＢ
+スルーホールタイプ
+http://akizukidenshi.com/catalog/g/gC-02235/
+http://akizukidenshi.com/download/c2235_dim.pdf</description>
+<pad name="D+" x="0" y="3.4" drill="0.7"/>
+<pad name="GND" x="-1.6" y="3.4" drill="0.7"/>
+<pad name="VBUS" x="1.6" y="3.4" drill="0.7"/>
+<pad name="ID" x="-0.8" y="2.2" drill="0.7"/>
+<pad name="D-" x="0.8" y="2.2" drill="0.7"/>
+<pad name="SH2" x="-3.7" y="2.5" drill="1.4"/>
+<pad name="SH3" x="3.7" y="2.5" drill="1.4"/>
+<pad name="SH1" x="-3.7" y="-2.25" drill="1.4"/>
+<pad name="SH4" x="3.7" y="-2.25" drill="1.4"/>
+<text x="6.27" y="4" size="1.27" layer="21" rot="R270">&gt;NAME</text>
+</package>
 </packages>
 <symbols>
 <symbol name="R">
@@ -1388,20 +1414,20 @@ grid 2.032 mm, diameter 5 mm</description>
 <pin name="ANALOG_7" x="30.48" y="10.16" length="middle" direction="pas" rot="R180"/>
 <pin name="ANALOG_6" x="30.48" y="12.7" length="middle" direction="pas" rot="R180"/>
 </symbol>
-<symbol name="C-02235">
+<symbol name="USB-MINIB">
 <wire x1="-7.62" y1="10.16" x2="7.62" y2="10.16" width="0.254" layer="94"/>
 <wire x1="7.62" y1="10.16" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="7.62" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="-7.62" y1="-5.08" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
-<pin name="SH1" x="12.7" y="7.62" length="middle" rot="R180"/>
-<pin name="SH2" x="12.7" y="5.08" length="middle" rot="R180"/>
-<pin name="SH4" x="-12.7" y="7.62" length="middle"/>
-<pin name="SH3" x="-12.7" y="5.08" length="middle"/>
-<pin name="VBUS" x="-5.08" y="-10.16" length="middle" rot="R90"/>
-<pin name="D-" x="-2.54" y="-10.16" length="middle" rot="R90"/>
-<pin name="D+" x="0" y="-10.16" length="middle" rot="R90"/>
-<pin name="ID" x="2.54" y="-10.16" length="middle" rot="R90"/>
-<pin name="GND" x="5.08" y="-10.16" length="middle" rot="R90"/>
+<pin name="SH1" x="12.7" y="7.62" visible="pin" length="middle" rot="R180"/>
+<pin name="SH2" x="12.7" y="5.08" visible="pin" length="middle" rot="R180"/>
+<pin name="SH4" x="-12.7" y="7.62" visible="pin" length="middle"/>
+<pin name="SH3" x="-12.7" y="5.08" visible="pin" length="middle"/>
+<pin name="VBUS" x="-5.08" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="D-" x="-2.54" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="D+" x="0" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="ID" x="2.54" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="GND" x="5.08" y="-10.16" visible="pin" length="middle" rot="R90"/>
 <text x="-7.62" y="12.7" size="1.27" layer="95">&gt;NAME</text>
 </symbol>
 <symbol name="PL-IRM2161">
@@ -1644,18 +1670,14 @@ http://akizukidenshi.com/download/ds/paralight/PL-IRM2161-XD1.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="C-02235" prefix="CN">
+<deviceset name="USB-MINIB" prefix="CN">
 <description>USB-MiniB
-基板取付用ＵＳＢコネクタ・ミニＢ
-スルーホールタイプ
-C-02235
-http://akizukidenshi.com/catalog/g/gC-02235/
-http://akizukidenshi.com/download/c2235_dim.pdf</description>
+基板取付用ＵＳＢコネクタ・ミニＢ</description>
 <gates>
-<gate name="G$1" symbol="C-02235" x="0" y="0"/>
+<gate name="G$1" symbol="USB-MINIB" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="C-02235">
+<device name="-C-02235" package="USB-MINIB-C-02235">
 <connects>
 <connect gate="G$1" pin="D+" pad="D+"/>
 <connect gate="G$1" pin="D-" pad="D-"/>
@@ -1665,6 +1687,22 @@ http://akizukidenshi.com/download/c2235_dim.pdf</description>
 <connect gate="G$1" pin="SH2" pad="SH2"/>
 <connect gate="G$1" pin="SH3" pad="SH3"/>
 <connect gate="G$1" pin="SH4" pad="SH4"/>
+<connect gate="G$1" pin="VBUS" pad="VBUS"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-UX60SC-MB" package="USB-MINIB-UX60SC-MB">
+<connects>
+<connect gate="G$1" pin="D+" pad="D+"/>
+<connect gate="G$1" pin="D-" pad="D-"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="ID" pad="ID"/>
+<connect gate="G$1" pin="SH1" pad="S$1"/>
+<connect gate="G$1" pin="SH2" pad="S$2"/>
+<connect gate="G$1" pin="SH3" pad="S$3"/>
+<connect gate="G$1" pin="SH4" pad="S$4"/>
 <connect gate="G$1" pin="VBUS" pad="VBUS"/>
 </connects>
 <technologies>
@@ -1887,7 +1925,7 @@ Production SKU IC-00870</description>
 <part name="STANDOFF4" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="IC3" library="my" deviceset="BLE112-A-VISUAL" device=""/>
 <part name="CN2" library="pinhead" deviceset="PINHD-2X3" device="" value="ICSP"/>
-<part name="CN1" library="my" deviceset="C-02235" device=""/>
+<part name="CN1" library="my" deviceset="USB-MINIB" device="-UX60SC-MB"/>
 <part name="GND13" library="supply1" deviceset="GND" device=""/>
 <part name="GND14" library="supply1" deviceset="GND" device=""/>
 <part name="GND15" library="supply1" deviceset="GND" device=""/>

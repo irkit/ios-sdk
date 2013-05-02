@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="mm" unit="mm" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="mm" altunit="mm"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -32,11 +32,11 @@
 <layer number="36" name="bGlue" color="7" fill="5" visible="yes" active="yes"/>
 <layer number="37" name="tTest" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="38" name="bTest" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="39" name="tKeepout" color="4" fill="11" visible="yes" active="yes"/>
-<layer number="40" name="bKeepout" color="1" fill="11" visible="yes" active="yes"/>
+<layer number="39" name="tKeepout" color="4" fill="11" visible="no" active="yes"/>
+<layer number="40" name="bKeepout" color="1" fill="11" visible="no" active="yes"/>
 <layer number="41" name="tRestrict" color="4" fill="10" visible="yes" active="yes"/>
-<layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
-<layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
+<layer number="42" name="bRestrict" color="1" fill="10" visible="no" active="yes"/>
+<layer number="43" name="vRestrict" color="2" fill="10" visible="no" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
@@ -310,6 +310,7 @@ http://akizukidenshi.com/download/c2235_dim.pdf</description>
 <wire x1="-0.4" y1="0.5" x2="0.4" y2="0.5" width="0.127" layer="21"/>
 <wire x1="-0.4" y1="-0.5" x2="0.4" y2="-0.5" width="0.127" layer="21"/>
 <rectangle x1="-0.5" y1="-0.7" x2="0.5" y2="0.7" layer="41"/>
+<rectangle x1="-0.5" y1="-0.7" x2="0.5" y2="0.7" layer="39"/>
 </package>
 <package name="MLF32">
 <description>&lt;b&gt;32M1-A&lt;/b&gt; Micro Lead Frame package (MLF)</description>
@@ -500,19 +501,29 @@ grid 2.032 mm, diameter 5 mm</description>
 <rectangle x1="0.254" y1="-1.016" x2="0.762" y2="1.016" layer="51"/>
 </package>
 <package name="USB-MINIB-UX60SC-MB">
-<pad name="P$1" x="3.65" y="3.7" drill="3.2" diameter="3.6"/>
-<pad name="P$2" x="-3.65" y="3.7" drill="3.2" diameter="3.6"/>
-<smd name="P$3" x="0" y="6.1" dx="0.5" dy="1.4" layer="1"/>
-<smd name="P$4" x="0.8" y="6.1" dx="0.5" dy="1.4" layer="1"/>
-<smd name="P$5" x="1.6" y="6.1" dx="0.5" dy="1.4" layer="1"/>
-<smd name="P$6" x="-0.8" y="6.1" dx="0.5" dy="1.4" layer="1"/>
-<smd name="P$7" x="-1.6" y="6.1" dx="0.5" dy="1.4" layer="1"/>
-<smd name="P$8" x="-2.675" y="0.9" dx="2.35" dy="0.8" layer="1"/>
-<smd name="P$9" x="2.675" y="0.9" dx="2.35" dy="0.8" layer="1"/>
-<rectangle x1="-2.95" y1="0" x2="2.95" y2="0.5" layer="39"/>
-<rectangle x1="-2.95" y1="1.3" x2="2.95" y2="2.1" layer="39"/>
-<rectangle x1="-1.5" y1="0.5" x2="1.5" y2="1.3" layer="39"/>
+<description>USB MINIB Connector
+UX60SC-MB-5ST
+&lt;a href="http://akizukidenshi.com/catalog/g/gC-05690/"&gt;http://akizukidenshi.com/catalog/g/gC-05690/&lt;/a&gt;
+&lt;a href="http://akizukidenshi.com/download/ds/hirose/UX60SC-MB-5ST_UX60SC-MB-5S8.pdf"&gt;http://akizukidenshi.com/download/ds/hirose/UX60SC-MB-5ST_UX60SC-MB-5S8.pdf&lt;/a&gt;
+&lt;a href="http://www.hirose.co.jp/catalogj_hp/j24000153.pdf"&gt;http://www.hirose.co.jp/catalogj_hp/j24000153.pdf&lt;/a&gt;</description>
+<smd name="D+" x="0" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="D-" x="0.8" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="VBUS" x="1.6" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="ID" x="-0.8" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<smd name="GND" x="-1.6" y="5.8" dx="0.5" dy="1.4" layer="1"/>
+<rectangle x1="-2.95" y1="0" x2="2.95" y2="2.1" layer="41"/>
+<rectangle x1="-1.5" y1="2.1" x2="1.5" y2="3.6" layer="41"/>
+<wire x1="-3.85" y1="1.7" x2="-3.85" y2="0" width="0.127" layer="21"/>
+<wire x1="-3.85" y1="0" x2="3.85" y2="0" width="0.127" layer="21"/>
+<wire x1="3.85" y1="0" x2="3.85" y2="1.7" width="0.127" layer="21"/>
+<smd name="S$1" x="-3.65" y="4.15" dx="1.4" dy="4.7" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$2" x="3.65" y="4.15" dx="1.4" dy="4.7" layer="1" stop="no" thermals="no" cream="no"/>
+<rectangle x1="-2.95" y1="5" x2="-2.45" y2="6.5" layer="1"/>
+<rectangle x1="2.45" y1="5" x2="2.95" y2="6.5" layer="1"/>
 <rectangle x1="-1.5" y1="2.1" x2="1.5" y2="3.6" layer="39"/>
+<rectangle x1="-2.95" y1="0" x2="2.95" y2="2.1" layer="39"/>
+<smd name="S$3" x="-4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$4" x="4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
 </package>
 </packages>
 <symbols>
@@ -521,15 +532,15 @@ grid 2.032 mm, diameter 5 mm</description>
 <wire x1="7.62" y1="10.16" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="7.62" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="-7.62" y1="-5.08" x2="-7.62" y2="10.16" width="0.254" layer="94"/>
-<pin name="SH1" x="12.7" y="7.62" length="middle" rot="R180"/>
-<pin name="SH2" x="12.7" y="5.08" length="middle" rot="R180"/>
-<pin name="SH4" x="-12.7" y="7.62" length="middle"/>
-<pin name="SH3" x="-12.7" y="5.08" length="middle"/>
-<pin name="VBUS" x="-5.08" y="-10.16" length="middle" rot="R90"/>
-<pin name="D-" x="-2.54" y="-10.16" length="middle" rot="R90"/>
-<pin name="D+" x="0" y="-10.16" length="middle" rot="R90"/>
-<pin name="ID" x="2.54" y="-10.16" length="middle" rot="R90"/>
-<pin name="GND" x="5.08" y="-10.16" length="middle" rot="R90"/>
+<pin name="SH1" x="12.7" y="7.62" visible="pin" length="middle" rot="R180"/>
+<pin name="SH2" x="12.7" y="5.08" visible="pin" length="middle" rot="R180"/>
+<pin name="SH4" x="-12.7" y="7.62" visible="pin" length="middle"/>
+<pin name="SH3" x="-12.7" y="5.08" visible="pin" length="middle"/>
+<pin name="VBUS" x="-5.08" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="D-" x="-2.54" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="D+" x="0" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="ID" x="2.54" y="-10.16" visible="pin" length="middle" rot="R90"/>
+<pin name="GND" x="5.08" y="-10.16" visible="pin" length="middle" rot="R90"/>
 <text x="-7.62" y="12.7" size="1.27" layer="95">&gt;NAME</text>
 </symbol>
 <symbol name="V-REG-LDO">
@@ -737,11 +748,7 @@ http://akizukidenshi.com/download/ds/paralight/PL-IRM2161-XD1.pdf</description>
 <devicesets>
 <deviceset name="USB-MINIB" prefix="CN">
 <description>USB-MiniB
-基板取付用ＵＳＢコネクタ・ミニＢ
-スルーホールタイプ
-C-02235
-http://akizukidenshi.com/catalog/g/gC-02235/
-http://akizukidenshi.com/download/c2235_dim.pdf</description>
+基板取付用ＵＳＢコネクタ・ミニＢ</description>
 <gates>
 <gate name="G$1" symbol="USB-MINIB" x="0" y="0"/>
 </gates>
@@ -763,6 +770,17 @@ http://akizukidenshi.com/download/c2235_dim.pdf</description>
 </technologies>
 </device>
 <device name="-UX60SC-MB" package="USB-MINIB-UX60SC-MB">
+<connects>
+<connect gate="G$1" pin="D+" pad="D+"/>
+<connect gate="G$1" pin="D-" pad="D-"/>
+<connect gate="G$1" pin="GND" pad="GND"/>
+<connect gate="G$1" pin="ID" pad="ID"/>
+<connect gate="G$1" pin="SH1" pad="S$1"/>
+<connect gate="G$1" pin="SH2" pad="S$2"/>
+<connect gate="G$1" pin="SH3" pad="S$3"/>
+<connect gate="G$1" pin="SH4" pad="S$4"/>
+<connect gate="G$1" pin="VBUS" pad="VBUS"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>
