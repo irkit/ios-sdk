@@ -2050,7 +2050,7 @@ Production SKU IC-00870</description>
 <part name="R8" library="my" deviceset="R" device="" value="680"/>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
 <part name="LED6" library="my" deviceset="LED" device="-2012" value="USB/RX"/>
-<part name="U$1" library="git-revision" deviceset="GIT-REVISION" device="" value="ccb4477"/>
+<part name="U$1" library="git-revision" deviceset="GIT-REVISION" device="" value="9859471"/>
 <part name="STANDOFF3" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="C4" library="my" deviceset="C" device="-2012" value="0.1uF"/>
 <part name="C5" library="my" deviceset="C" device="-2012" value="0.1uF"/>
