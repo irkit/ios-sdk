@@ -109,8 +109,9 @@
 <wire x1="43" y1="0" x2="43" y2="50" width="0" layer="20"/>
 <wire x1="43" y1="50" x2="0" y2="50" width="0" layer="20"/>
 <wire x1="0" y1="50" x2="0" y2="0" width="0" layer="20"/>
-<rectangle x1="34.5" y1="21.7" x2="39.8" y2="23.2" layer="42"/>
+<rectangle x1="34.4" y1="21.7" x2="42.9" y2="23.2" layer="42"/>
 <text x="42.5" y="5.9" size="1" layer="51" font="vector" rot="R90">IMOTE</text>
+<rectangle x1="40.7" y1="23.3" x2="42.9" y2="30.8" layer="42"/>
 </plain>
 <libraries>
 <library name="switch-omron">
