@@ -1233,12 +1233,12 @@ UX60SC-MB-5ST
 <wire x1="3.85" y1="0" x2="3.85" y2="1.7" width="0.127" layer="21"/>
 <smd name="S$1" x="-3.65" y="4.15" dx="1.4" dy="4.7" layer="1" stop="no" thermals="no" cream="no"/>
 <smd name="S$2" x="3.65" y="4.15" dx="1.4" dy="4.7" layer="1" stop="no" thermals="no" cream="no"/>
-<rectangle x1="-2.95" y1="5" x2="-2.45" y2="6.5" layer="1"/>
-<rectangle x1="2.45" y1="5" x2="2.95" y2="6.5" layer="1"/>
 <rectangle x1="-1.5" y1="2.1" x2="1.5" y2="3.6" layer="39"/>
 <rectangle x1="-2.95" y1="0" x2="2.95" y2="2.1" layer="39"/>
-<smd name="S$3" x="-4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
-<smd name="S$4" x="4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$1@2" x="-4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$2@2" x="4.9" y="3.7" dx="1.1" dy="3.8" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$1@3" x="-2.7" y="5.75" dx="0.5" dy="1.5" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="S$2@3" x="2.7" y="5.75" dx="0.5" dy="1.5" layer="1" stop="no" thermals="no" cream="no"/>
 </package>
 <package name="IR-RECEIVER">
 <pad name="2" x="0" y="0" drill="0.6"/>
@@ -1787,8 +1787,8 @@ http://akizukidenshi.com/download/ds/paralight/PL-IRM2161-XD1.pdf</description>
 <connect gate="G$1" pin="ID" pad="ID"/>
 <connect gate="G$1" pin="SH1" pad="S$1"/>
 <connect gate="G$1" pin="SH2" pad="S$2"/>
-<connect gate="G$1" pin="SH3" pad="S$3"/>
-<connect gate="G$1" pin="SH4" pad="S$4"/>
+<connect gate="G$1" pin="SH3" pad="S$1@2 S$1@3"/>
+<connect gate="G$1" pin="SH4" pad="S$2@2 S$2@3"/>
 <connect gate="G$1" pin="VBUS" pad="VBUS"/>
 </connects>
 <technologies>
