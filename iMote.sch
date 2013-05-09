@@ -1409,6 +1409,39 @@ http://akizukidenshi.com/download/c2235_dim.pdf</description>
 <text x="-5.08" y="-3.937" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 <text x="-5.08" y="2.667" size="1.27" layer="25" ratio="10">&gt;NAME</text>
 </package>
+<package name="PINHEAD-1X03">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<wire x1="-3.175" y1="1.27" x2="-1.905" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="1.27" x2="-1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="0.635" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="-0.635" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.27" y1="0.635" x2="-0.635" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="1.27" x2="0.635" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="1.27" x2="1.27" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="0.635" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="-0.635" x2="0.635" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="0.635" y1="-1.27" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-0.635" y1="-1.27" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-3.81" y1="0.635" x2="-3.81" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="-3.175" y1="1.27" x2="-3.81" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="-3.81" y1="-0.635" x2="-3.175" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="-1.905" y1="-1.27" x2="-3.175" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.27" y1="0.635" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="1.27" x2="3.175" y2="1.27" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="1.27" x2="3.81" y2="0.635" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="-0.635" x2="3.175" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="3.175" y1="-1.27" x2="1.905" y2="-1.27" width="0.1524" layer="21"/>
+<wire x1="1.905" y1="-1.27" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
+<pad name="1" x="-2.54" y="0" drill="1.016" shape="octagon" rot="R90"/>
+<pad name="2" x="0" y="0" drill="1.016" shape="octagon" rot="R90"/>
+<pad name="3" x="2.54" y="0" drill="1.016" shape="octagon" rot="R90"/>
+<text x="-3.8862" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-3.81" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
+<rectangle x1="-2.794" y1="-0.254" x2="-2.286" y2="0.254" layer="51"/>
+<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
+</package>
 </packages>
 <symbols>
 <symbol name="R">
@@ -1622,6 +1655,17 @@ http://akizukidenshi.com/download/ds/paralight/PL-IRM2161-XD1.pdf</description>
 <text x="-5.08" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="2" x="5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1"/>
+</symbol>
+<symbol name="PINHEAD-1X03">
+<wire x1="-6.35" y1="-5.08" x2="1.27" y2="-5.08" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="-5.08" x2="1.27" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="5.08" x2="-6.35" y2="5.08" width="0.4064" layer="94"/>
+<wire x1="-6.35" y1="5.08" x2="-6.35" y2="-5.08" width="0.4064" layer="94"/>
+<text x="-6.35" y="5.715" size="1.778" layer="95">&gt;NAME</text>
+<text x="-6.35" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="1" x="-2.54" y="2.54" visible="pad" length="short" direction="pas" function="dot"/>
+<pin name="2" x="-2.54" y="0" visible="pad" length="short" direction="pas" function="dot"/>
+<pin name="3" x="-2.54" y="-2.54" visible="pad" length="short" direction="pas" function="dot"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -1965,6 +2009,24 @@ Production SKU IC-00870</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="PINHEAD-1X03" prefix="JP" uservalue="yes">
+<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
+<gates>
+<gate name="A" symbol="PINHEAD-1X03" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="PINHEAD-1X03">
+<connects>
+<connect gate="A" pin="1" pad="1"/>
+<connect gate="A" pin="2" pad="2"/>
+<connect gate="A" pin="3" pad="3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -2076,10 +2138,7 @@ Production SKU IC-00870</description>
 <part name="GND17" library="supply1" deviceset="GND" device=""/>
 <part name="CN4" library="pinhead" deviceset="PINHD-1X2" device=""/>
 <part name="P+9" library="supply1" deviceset="+5V" device=""/>
-<part name="CN5" library="pinhead" deviceset="PINHD-1X2" device=""/>
-<part name="P+11" library="supply1" deviceset="+5V" device=""/>
-<part name="GND14" library="supply1" deviceset="GND" device=""/>
-<part name="R10" library="my" deviceset="R" device="" value="1K"/>
+<part name="CN5" library="my" deviceset="PINHEAD-1X03" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -2098,7 +2157,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <text x="243.84" y="144.78" size="3.81" layer="94" ratio="10">CC HEADER</text>
 <text x="104.14" y="144.78" size="3.81" layer="94" ratio="10">USB MiniB Conn.</text>
 <text x="299.72" y="144.78" size="3.81" layer="94" ratio="10">IRLED Conn.</text>
-<text x="355.6" y="144.78" size="3.81" layer="94" ratio="10">CLEAR Switch</text>
+<text x="355.6" y="144.78" size="3.81" layer="94" ratio="10">PIN HEADER</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -2199,10 +2258,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="GND17" gate="1" x="175.26" y="233.68"/>
 <instance part="CN4" gate="G$1" x="320.04" y="127"/>
 <instance part="P+9" gate="1" x="309.88" y="137.16"/>
-<instance part="CN5" gate="G$1" x="368.3" y="116.84"/>
-<instance part="P+11" gate="1" x="355.6" y="137.16"/>
-<instance part="GND14" gate="1" x="355.6" y="111.76"/>
-<instance part="R10" gate="G$1" x="355.6" y="127" rot="R90"/>
+<instance part="CN5" gate="A" x="363.22" y="127"/>
 </instances>
 <busses>
 </busses>
@@ -2364,11 +2420,6 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="P+9" gate="1" pin="+5V"/>
 <wire x1="317.5" y1="129.54" x2="309.88" y2="129.54" width="0.1524" layer="91"/>
 <wire x1="309.88" y1="129.54" x2="309.88" y2="134.62" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="P+11" gate="1" pin="+5V"/>
-<pinref part="R10" gate="G$1" pin="2"/>
-<wire x1="355.6" y1="132.08" x2="355.6" y2="134.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -2625,12 +2676,6 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <wire x1="195.58" y1="241.3" x2="195.58" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="195.58" y1="238.76" x2="175.26" y2="238.76" width="0.1524" layer="91"/>
 <junction x="175.26" y="238.76"/>
-</segment>
-<segment>
-<pinref part="CN5" gate="G$1" pin="2"/>
-<pinref part="GND14" gate="1" pin="GND"/>
-<wire x1="365.76" y1="116.84" x2="355.6" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="355.6" y1="116.84" x2="355.6" y2="114.3" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
@@ -2927,18 +2972,6 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="259.08" y="50.8" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="D7/BLETX" class="0">
-<segment>
-<pinref part="IC1" gate="1" pin="DIGITAL_7"/>
-<wire x1="119.38" y1="205.74" x2="124.46" y2="205.74" width="0.1524" layer="91"/>
-<label x="124.46" y="205.74" size="1.778" layer="95" xref="yes"/>
-</segment>
-<segment>
-<pinref part="IC3" gate="G$1" pin="P0_5"/>
-<wire x1="241.3" y1="213.36" x2="251.46" y2="213.36" width="0.1524" layer="91"/>
-<label x="251.46" y="213.36" size="1.778" layer="95" xref="yes"/>
-</segment>
-</net>
 <net name="D6/BLERX" class="0">
 <segment>
 <pinref part="IC1" gate="1" pin="DIGITAL_6(PWM)"/>
@@ -2963,20 +2996,52 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="187.96" y="35.56" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
-<net name="D10/CLEAR" class="0">
+<net name="D10" class="0">
 <segment>
 <pinref part="IC1" gate="1" pin="DIGITAL_10(PWM)"/>
 <wire x1="119.38" y1="195.58" x2="124.46" y2="195.58" width="0.1524" layer="91"/>
 <label x="124.46" y="195.58" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="R10" gate="G$1" pin="1"/>
-<pinref part="CN5" gate="G$1" pin="1"/>
-<wire x1="355.6" y1="121.92" x2="355.6" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="355.6" y1="119.38" x2="365.76" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="355.6" y1="119.38" x2="353.06" y2="119.38" width="0.1524" layer="91"/>
-<junction x="355.6" y="119.38"/>
-<label x="353.06" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
+<pinref part="CN5" gate="A" pin="3"/>
+<wire x1="360.68" y1="124.46" x2="355.6" y2="124.46" width="0.1524" layer="91"/>
+<label x="355.6" y="124.46" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="D5/BLETX" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_5(PWM)"/>
+<wire x1="119.38" y1="210.82" x2="124.46" y2="210.82" width="0.1524" layer="91"/>
+<label x="124.46" y="210.82" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="IC3" gate="G$1" pin="P0_5"/>
+<wire x1="241.3" y1="213.36" x2="251.46" y2="213.36" width="0.1524" layer="91"/>
+<label x="251.46" y="213.36" size="1.778" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="D7" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_7"/>
+<wire x1="119.38" y1="205.74" x2="124.46" y2="205.74" width="0.1524" layer="91"/>
+<label x="124.46" y="205.74" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="CN5" gate="A" pin="1"/>
+<wire x1="360.68" y1="129.54" x2="355.6" y2="129.54" width="0.1524" layer="91"/>
+<label x="355.6" y="129.54" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="D9" class="0">
+<segment>
+<pinref part="IC1" gate="1" pin="DIGITAL_9(PWM)"/>
+<wire x1="119.38" y1="198.12" x2="124.46" y2="198.12" width="0.1524" layer="91"/>
+<label x="124.46" y="198.12" size="1.778" layer="95" xref="yes"/>
+</segment>
+<segment>
+<pinref part="CN5" gate="A" pin="2"/>
+<wire x1="360.68" y1="127" x2="355.6" y2="127" width="0.1524" layer="91"/>
+<label x="355.6" y="127" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
