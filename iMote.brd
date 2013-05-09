@@ -1101,7 +1101,7 @@ design rules under a new name.</description>
 <attribute name="NAME" x="6.794" y="45.302" size="0.8128" layer="25" rot="R90"/>
 <attribute name="VALUE" x="9.766" y="45.932" size="1.27" layer="27" rot="R90"/>
 </element>
-<element name="U$1" library="git-revision" package="GIT-REVISION" value="9859471" x="42.5" y="11.1" smashed="yes" rot="R90">
+<element name="U$1" library="git-revision" package="GIT-REVISION" value="5b47673" x="42.5" y="11.1" smashed="yes" rot="R90">
 <attribute name="VALUE" x="42.5" y="17.99" size="1" layer="51" rot="R90"/>
 </element>
 <element name="STANDOFF3" library="SparkFun-Electromechanical" package="STAND-OFF" value="STAND-OFF" x="40" y="47"/>
