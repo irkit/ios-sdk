@@ -359,10 +359,11 @@ UsedLibrary="/Applications/EAGLE-6.4.0/lbr/xilinx-xc9.lbr"
 UsedLibrary="/Applications/EAGLE-6.4.0/lbr/xilinx-xcv.lbr"
 UsedLibrary="/Applications/EAGLE-6.4.0/lbr/zetex.lbr"
 UsedLibrary="/Applications/EAGLE-6.4.0/lbr/zilog.lbr"
+UsedLibrary="my.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="360 248 959 647"
+Loc="360 248 1435 811"
 State=2
 Number=0
 

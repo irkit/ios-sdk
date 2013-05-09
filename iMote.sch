@@ -277,61 +277,6 @@
 </deviceset>
 </devicesets>
 </library>
-<library name="special">
-<description>&lt;b&gt;Special Devices&lt;/b&gt;&lt;p&gt;
-7-segment displays, switches, heatsinks, crystals, transformers, etc.&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="QS">
-<description>&lt;B&gt;CRYSTAL&lt;/B&gt;</description>
-<wire x1="-3.429" y1="-2.286" x2="3.429" y2="-2.286" width="0.1524" layer="21"/>
-<wire x1="3.429" y1="2.286" x2="-3.429" y2="2.286" width="0.1524" layer="21"/>
-<wire x1="-3.429" y1="-1.778" x2="3.429" y2="-1.778" width="0.0508" layer="21"/>
-<wire x1="3.429" y1="1.778" x2="-3.429" y2="1.778" width="0.0508" layer="21"/>
-<wire x1="3.429" y1="1.778" x2="3.429" y2="-1.778" width="0.0508" layer="21" curve="-180"/>
-<wire x1="3.429" y1="2.286" x2="3.429" y2="-2.286" width="0.1524" layer="21" curve="-180"/>
-<wire x1="-3.429" y1="2.286" x2="-3.429" y2="-2.286" width="0.1524" layer="21" curve="180"/>
-<wire x1="-3.429" y1="1.778" x2="-3.429" y2="-1.778" width="0.0508" layer="21" curve="180"/>
-<pad name="1" x="-2.54" y="0" drill="0.6096" shape="long" rot="R90"/>
-<pad name="2" x="2.54" y="0" drill="0.6096" shape="long" rot="R90"/>
-<text x="-5.08" y="-3.937" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-<text x="-5.08" y="2.667" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-</package>
-</packages>
-<symbols>
-<symbol name="XTAL">
-<wire x1="-1.27" y1="2.54" x2="1.397" y2="2.54" width="0.4064" layer="94"/>
-<wire x1="1.397" y1="2.54" x2="1.397" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="1.397" y1="-2.54" x2="-1.27" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="-1.27" y1="2.54" x2="-1.27" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="2.3368" y1="2.54" x2="2.3368" y2="-2.54" width="0.4064" layer="94"/>
-<wire x1="-2.286" y1="2.54" x2="-2.286" y2="-2.54" width="0.4064" layer="94"/>
-<text x="-5.08" y="3.81" size="1.778" layer="95">&gt;NAME</text>
-<text x="-5.08" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="2" x="5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1" rot="R180"/>
-<pin name="1" x="-5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="XTAL/S" prefix="Q" uservalue="yes">
-<description>&lt;B&gt;CRYSTAL&lt;/B&gt;</description>
-<gates>
-<gate name="G$1" symbol="XTAL" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="QS">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="supply1">
 <description>&lt;b&gt;Supply Symbols&lt;/b&gt;&lt;p&gt;
  GND, VCC, 0V, +5V, -5V, etc.&lt;p&gt;
@@ -1434,6 +1379,36 @@ http://akizukidenshi.com/download/c2235_dim.pdf</description>
 <pad name="SH4" x="3.7" y="-2.25" drill="1.4"/>
 <text x="6.27" y="4" size="1.27" layer="21" rot="R270">&gt;NAME</text>
 </package>
+<package name="XTAL-QS">
+<description>&lt;B&gt;CRYSTAL&lt;/B&gt;</description>
+<wire x1="-3.429" y1="-2.286" x2="3.429" y2="-2.286" width="0.1524" layer="21"/>
+<wire x1="3.429" y1="2.286" x2="-3.429" y2="2.286" width="0.1524" layer="21"/>
+<wire x1="-3.429" y1="-1.778" x2="3.429" y2="-1.778" width="0.0508" layer="21"/>
+<wire x1="3.429" y1="1.778" x2="-3.429" y2="1.778" width="0.0508" layer="21"/>
+<wire x1="3.429" y1="1.778" x2="3.429" y2="-1.778" width="0.0508" layer="21" curve="-180"/>
+<wire x1="3.429" y1="2.286" x2="3.429" y2="-2.286" width="0.1524" layer="21" curve="-180"/>
+<wire x1="-3.429" y1="2.286" x2="-3.429" y2="-2.286" width="0.1524" layer="21" curve="180"/>
+<wire x1="-3.429" y1="1.778" x2="-3.429" y2="-1.778" width="0.0508" layer="21" curve="180"/>
+<pad name="1" x="-2.54" y="0" drill="0.6096" shape="long" rot="R90"/>
+<pad name="2" x="2.54" y="0" drill="0.6096" shape="long" rot="R90"/>
+<text x="-5.08" y="-3.937" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-5.08" y="2.667" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+</package>
+<package name="XTAL-HC-49/S">
+<description>&lt;B&gt;CRYSTAL&lt;/B&gt;</description>
+<wire x1="-3.129" y1="-2.286" x2="3.129" y2="-2.286" width="0.1524" layer="21"/>
+<wire x1="3.129" y1="2.286" x2="-3.129" y2="2.286" width="0.1524" layer="21"/>
+<wire x1="-3.329" y1="-1.778" x2="3.329" y2="-1.778" width="0.0508" layer="21"/>
+<wire x1="3.329" y1="1.778" x2="-3.329" y2="1.778" width="0.0508" layer="21"/>
+<wire x1="3.329" y1="1.778" x2="3.329" y2="-1.778" width="0.0508" layer="21" curve="-180"/>
+<wire x1="3.129" y1="2.286" x2="3.129" y2="-2.286" width="0.1524" layer="21" curve="-180"/>
+<wire x1="-3.129" y1="2.286" x2="-3.129" y2="-2.286" width="0.1524" layer="21" curve="180"/>
+<wire x1="-3.329" y1="1.778" x2="-3.329" y2="-1.778" width="0.0508" layer="21" curve="180"/>
+<pad name="1" x="-2.44" y="0" drill="0.6096" shape="long" rot="R90"/>
+<pad name="2" x="2.44" y="0" drill="0.6096" shape="long" rot="R90"/>
+<text x="-5.08" y="-3.937" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="-5.08" y="2.667" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+</package>
 </packages>
 <symbols>
 <symbol name="R">
@@ -1635,6 +1610,18 @@ http://akizukidenshi.com/download/ds/paralight/PL-IRM2161-XD1.pdf</description>
 <pin name="+" x="0" y="0" visible="off" length="point" direction="pas" rot="R270"/>
 <text x="2.54" y="-2.54" size="1.778" layer="95">&gt;NAME</text>
 <text x="2.54" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+<symbol name="XTAL">
+<wire x1="-1.27" y1="2.54" x2="1.397" y2="2.54" width="0.4064" layer="94"/>
+<wire x1="1.397" y1="2.54" x2="1.397" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="1.397" y1="-2.54" x2="-1.27" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="2.54" x2="-1.27" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="2.3368" y1="2.54" x2="2.3368" y2="-2.54" width="0.4064" layer="94"/>
+<wire x1="-2.286" y1="2.54" x2="-2.286" y2="-2.54" width="0.4064" layer="94"/>
+<text x="-5.08" y="3.81" size="1.778" layer="95">&gt;NAME</text>
+<text x="-5.08" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="2" x="5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="1" x="-5.08" y="0" visible="pad" length="short" direction="pas" swaplevel="1"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -1952,6 +1939,32 @@ Production SKU IC-00870</description>
 </device>
 </devices>
 </deviceset>
+<deviceset name="XTAL" prefix="Q" uservalue="yes">
+<description>&lt;B&gt;CRYSTAL&lt;/B&gt;</description>
+<gates>
+<gate name="G$1" symbol="XTAL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-QS" package="XTAL-QS">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="-HC-49/S" package="XTAL-HC-49/S">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -1978,7 +1991,7 @@ Production SKU IC-00870</description>
 <part name="R3" library="my" deviceset="R" device="" value="330"/>
 <part name="R1" library="my" deviceset="R" device="" value="330"/>
 <part name="S1" library="switch-omron" deviceset="10-XX" device="" value="B3F-1000"/>
-<part name="Q1" library="special" deviceset="XTAL/S" device="" value="16MHz"/>
+<part name="Q1" library="my" deviceset="XTAL" device="-HC-49/S" value="16MHz"/>
 <part name="C1" library="my" deviceset="C" device="-2012" value="22pF"/>
 <part name="C2" library="my" deviceset="C" device="-2012" value="22pF"/>
 <part name="C3" library="my" deviceset="C" device="-2012" value="0.1uF"/>
