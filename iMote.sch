@@ -2070,8 +2070,8 @@ Production SKU IC-00870</description>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
 <part name="P+5" library="supply1" deviceset="+5V" device=""/>
-<part name="C10" library="my" deviceset="C" device="-2012" value="0.1uF"/>
-<part name="C11" library="my" deviceset="CPOL" device="" value="10uF"/>
+<part name="C6" library="my" deviceset="C" device="-2012" value="0.1uF"/>
+<part name="C7" library="my" deviceset="CPOL" device="" value="10uF"/>
 <part name="LED1" library="my" deviceset="LED" device="-2012" value="5V"/>
 <part name="LED2" library="my" deviceset="LED" device="-2012" value="ICSP"/>
 <part name="P+6" library="supply1" deviceset="+5V" device=""/>
@@ -2085,7 +2085,7 @@ Production SKU IC-00870</description>
 <part name="STANDOFF1" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="STANDOFF2" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
 <part name="STANDOFF4" library="SparkFun-Electromechanical" deviceset="STAND-OFF" device=""/>
-<part name="IC3" library="my" deviceset="BLE112-A-VISUAL" device=""/>
+<part name="IC2" library="my" deviceset="BLE112-A-VISUAL" device=""/>
 <part name="CN2" library="pinhead" deviceset="PINHD-2X3" device="" value="ICSP"/>
 <part name="CN1" library="my" deviceset="USB-MINIB" device="-UX60SC-MB"/>
 <part name="GND13" library="supply1" deviceset="GND" device=""/>
@@ -2093,7 +2093,7 @@ Production SKU IC-00870</description>
 <part name="+3V1" library="supply1" deviceset="+3V3" device=""/>
 <part name="+3V2" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND16" library="supply1" deviceset="GND" device=""/>
-<part name="C12" library="my" deviceset="C" device="-2012" value="0.1uF"/>
+<part name="C10" library="my" deviceset="C" device="-2012" value="0.1uF"/>
 <part name="C9" library="my" deviceset="C" device="-2012" value="0.1uF"/>
 <part name="GND18" library="supply1" deviceset="GND" device=""/>
 <part name="R4" library="my" deviceset="R" device="" value="1K"/>
@@ -2113,14 +2113,14 @@ Production SKU IC-00870</description>
 <part name="SJ1" library="jumper" deviceset="SJ" device="" value="0"/>
 <part name="PL-IRM1" library="my" deviceset="PL-IRM2161" device=""/>
 <part name="R9" library="my" deviceset="R" device="" value="200"/>
-<part name="C13" library="my" deviceset="C" device="-2012" value="4.7uF"/>
+<part name="C11" library="my" deviceset="C" device="-2012" value="4.7uF"/>
 <part name="D1" library="my" deviceset="LED" device="-3MM" value="OSIR5113A"/>
-<part name="IC2" library="my" deviceset="FT232RL" device="SSOP"/>
+<part name="IC3" library="my" deviceset="FT232RL" device="SSOP"/>
 <part name="P+10" library="supply1" deviceset="+5V" device=""/>
 <part name="GND26" library="supply1" deviceset="GND" device=""/>
 <part name="+3V7" library="supply1" deviceset="+3V3" device=""/>
-<part name="C6" library="my" deviceset="C" device="-2012" value="0.1uF"/>
-<part name="C7" library="my" deviceset="C" device="-2012" value="0.1uF"/>
+<part name="C12" library="my" deviceset="C" device="-2012" value="0.1uF"/>
+<part name="C13" library="my" deviceset="C" device="-2012" value="0.1uF"/>
 <part name="R7" library="my" deviceset="R" device="" value="680"/>
 <part name="GND27" library="supply1" deviceset="GND" device=""/>
 <part name="LED5" library="my" deviceset="LED" device="-2012" value="USB/TX"/>
@@ -2187,8 +2187,8 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="GND8" gate="1" x="53.34" y="182.88"/>
 <instance part="GND9" gate="1" x="25.4" y="30.48"/>
 <instance part="P+5" gate="1" x="40.64" y="223.52"/>
-<instance part="C10" gate="G$1" x="104.14" y="114.3"/>
-<instance part="C11" gate="G$1" x="114.3" y="116.84"/>
+<instance part="C6" gate="G$1" x="104.14" y="114.3"/>
+<instance part="C7" gate="G$1" x="114.3" y="116.84"/>
 <instance part="LED1" gate="G$1" x="25.4" y="43.18"/>
 <instance part="LED2" gate="G$1" x="50.8" y="43.18"/>
 <instance part="P+6" gate="1" x="25.4" y="68.58"/>
@@ -2202,7 +2202,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="STANDOFF1" gate="G$1" x="327.66" y="40.64"/>
 <instance part="STANDOFF2" gate="G$1" x="332.74" y="40.64"/>
 <instance part="STANDOFF4" gate="G$1" x="342.9" y="40.64"/>
-<instance part="IC3" gate="G$1" x="220.98" y="220.98" smashed="yes">
+<instance part="IC2" gate="G$1" x="220.98" y="220.98" smashed="yes">
 <attribute name="VALUE" x="205.74" y="248.158" size="1.778" layer="96"/>
 <attribute name="NAME" x="205.74" y="245.11" size="1.778" layer="95"/>
 </instance>
@@ -2213,7 +2213,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="+3V1" gate="G$1" x="233.68" y="187.96"/>
 <instance part="+3V2" gate="G$1" x="190.5" y="226.06"/>
 <instance part="GND16" gate="1" x="233.68" y="167.64"/>
-<instance part="C12" gate="G$1" x="233.68" y="177.8"/>
+<instance part="C10" gate="G$1" x="233.68" y="177.8"/>
 <instance part="C9" gate="G$1" x="190.5" y="213.36"/>
 <instance part="GND18" gate="1" x="190.5" y="200.66"/>
 <instance part="R4" gate="G$1" x="63.5" y="127" rot="R90"/>
@@ -2233,14 +2233,14 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <instance part="SJ1" gate="1" x="246.38" y="132.08"/>
 <instance part="PL-IRM1" gate="1" x="287.02" y="48.26" rot="R270"/>
 <instance part="R9" gate="G$1" x="276.86" y="58.42" rot="R90"/>
-<instance part="C13" gate="G$1" x="276.86" y="40.64"/>
+<instance part="C11" gate="G$1" x="276.86" y="40.64"/>
 <instance part="D1" gate="G$1" x="223.52" y="63.5"/>
-<instance part="IC2" gate="G$1" x="317.5" y="228.6"/>
+<instance part="IC3" gate="G$1" x="317.5" y="228.6"/>
 <instance part="P+10" gate="1" x="299.72" y="254"/>
 <instance part="GND26" gate="1" x="289.56" y="205.74"/>
 <instance part="+3V7" gate="G$1" x="289.56" y="254"/>
-<instance part="C6" gate="G$1" x="289.56" y="231.14"/>
-<instance part="C7" gate="G$1" x="342.9" y="233.68" rot="R90"/>
+<instance part="C12" gate="G$1" x="289.56" y="231.14"/>
+<instance part="C13" gate="G$1" x="342.9" y="233.68" rot="R90"/>
 <instance part="R7" gate="G$1" x="127" y="58.42" rot="R90"/>
 <instance part="GND27" gate="1" x="127" y="30.48"/>
 <instance part="LED5" gate="G$1" x="127" y="43.18"/>
@@ -2288,7 +2288,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="162.56" y="127" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="C7" gate="G$1" pin="2"/>
+<pinref part="C13" gate="G$1" pin="2"/>
 <wire x1="347.98" y1="233.68" x2="353.06" y2="233.68" width="0.1524" layer="91"/>
 <label x="353.06" y="233.68" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2370,19 +2370,19 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <wire x1="276.86" y1="63.5" x2="276.86" y2="66.04" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="VCC"/>
+<pinref part="IC3" gate="G$1" pin="VCC"/>
 <pinref part="P+10" gate="1" pin="+5V"/>
 <wire x1="302.26" y1="238.76" x2="299.72" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="299.72" y1="238.76" x2="299.72" y2="251.46" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="VCCIO"/>
+<pinref part="IC3" gate="G$1" pin="VCCIO"/>
 <wire x1="302.26" y1="233.68" x2="299.72" y2="233.68" width="0.1524" layer="91"/>
 <wire x1="299.72" y1="233.68" x2="299.72" y2="238.76" width="0.1524" layer="91"/>
 <junction x="299.72" y="238.76"/>
 </segment>
 <segment>
-<pinref part="C11" gate="G$1" pin="+"/>
+<pinref part="C7" gate="G$1" pin="+"/>
 <wire x1="114.3" y1="116.84" x2="114.3" y2="119.38" width="0.1524" layer="91"/>
-<pinref part="C10" gate="G$1" pin="1"/>
+<pinref part="C6" gate="G$1" pin="1"/>
 <wire x1="114.3" y1="119.38" x2="104.14" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="119.38" x2="104.14" y2="116.84" width="0.1524" layer="91"/>
 <junction x="114.3" y="119.38"/>
@@ -2522,17 +2522,17 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <junction x="139.7" y="137.16"/>
 </segment>
 <segment>
-<pinref part="IC3" gate="G$1" pin="GND@4"/>
+<pinref part="IC2" gate="G$1" pin="GND@4"/>
 <pinref part="GND15" gate="1" pin="GND"/>
 <wire x1="241.3" y1="231.14" x2="246.38" y2="231.14" width="0.1524" layer="91"/>
 <wire x1="246.38" y1="231.14" x2="246.38" y2="193.04" width="0.1524" layer="91"/>
-<pinref part="IC3" gate="G$1" pin="GND@3"/>
+<pinref part="IC2" gate="G$1" pin="GND@3"/>
 <wire x1="231.14" y1="193.04" x2="246.38" y2="193.04" width="0.1524" layer="91"/>
 <wire x1="246.38" y1="193.04" x2="246.38" y2="190.5" width="0.1524" layer="91"/>
 <junction x="246.38" y="193.04"/>
 </segment>
 <segment>
-<pinref part="C12" gate="G$1" pin="2"/>
+<pinref part="C10" gate="G$1" pin="2"/>
 <pinref part="GND16" gate="1" pin="GND"/>
 <wire x1="233.68" y1="172.72" x2="233.68" y2="170.18" width="0.1524" layer="91"/>
 </segment>
@@ -2540,7 +2540,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="GND18" gate="1" pin="GND"/>
 <pinref part="C9" gate="G$1" pin="2"/>
 <wire x1="190.5" y1="203.2" x2="190.5" y2="205.74" width="0.1524" layer="91"/>
-<pinref part="IC3" gate="G$1" pin="GND@2"/>
+<pinref part="IC2" gate="G$1" pin="GND@2"/>
 <wire x1="190.5" y1="205.74" x2="190.5" y2="208.28" width="0.1524" layer="91"/>
 <wire x1="200.66" y1="218.44" x2="198.12" y2="218.44" width="0.1524" layer="91"/>
 <wire x1="198.12" y1="218.44" x2="198.12" y2="205.74" width="0.1524" layer="91"/>
@@ -2573,7 +2573,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <wire x1="238.76" y1="111.76" x2="238.76" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="C13" gate="G$1" pin="2"/>
+<pinref part="C11" gate="G$1" pin="2"/>
 <pinref part="GND12" gate="1" pin="GND"/>
 <wire x1="276.86" y1="35.56" x2="271.78" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="271.78" y1="35.56" x2="271.78" y2="33.02" width="0.1524" layer="91"/>
@@ -2594,9 +2594,9 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 </segment>
 <segment>
 <pinref part="GND4" gate="1" pin="GND"/>
-<pinref part="C11" gate="G$1" pin="-"/>
+<pinref part="C7" gate="G$1" pin="-"/>
 <wire x1="114.3" y1="106.68" x2="114.3" y2="109.22" width="0.1524" layer="91"/>
-<pinref part="C10" gate="G$1" pin="2"/>
+<pinref part="C6" gate="G$1" pin="2"/>
 <pinref part="CN1" gate="G$1" pin="GND"/>
 <wire x1="104.14" y1="109.22" x2="114.3" y2="109.22" width="0.1524" layer="91"/>
 <wire x1="114.3" y1="109.22" x2="121.92" y2="109.22" width="0.1524" layer="91"/>
@@ -2604,13 +2604,13 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <junction x="114.3" y="109.22"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="GND21"/>
+<pinref part="IC3" gate="G$1" pin="GND21"/>
 <pinref part="GND26" gate="1" pin="GND"/>
 <wire x1="302.26" y1="210.82" x2="289.56" y2="210.82" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="210.82" x2="289.56" y2="208.28" width="0.1524" layer="91"/>
-<pinref part="C6" gate="G$1" pin="2"/>
+<pinref part="C12" gate="G$1" pin="2"/>
 <wire x1="289.56" y1="208.28" x2="289.56" y2="210.82" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="TEST"/>
+<pinref part="IC3" gate="G$1" pin="TEST"/>
 <wire x1="289.56" y1="210.82" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="213.36" x2="289.56" y2="215.9" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="215.9" x2="289.56" y2="218.44" width="0.1524" layer="91"/>
@@ -2618,20 +2618,20 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <wire x1="289.56" y1="220.98" x2="289.56" y2="226.06" width="0.1524" layer="91"/>
 <wire x1="302.26" y1="220.98" x2="289.56" y2="220.98" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="220.98" x2="289.56" y2="218.44" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="AGND"/>
+<pinref part="IC3" gate="G$1" pin="AGND"/>
 <wire x1="289.56" y1="218.44" x2="289.56" y2="215.9" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="215.9" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="213.36" x2="289.56" y2="210.82" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="210.82" x2="289.56" y2="208.28" width="0.1524" layer="91"/>
 <wire x1="302.26" y1="218.44" x2="289.56" y2="218.44" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="218.44" x2="289.56" y2="215.9" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="GND7"/>
+<pinref part="IC3" gate="G$1" pin="GND7"/>
 <wire x1="289.56" y1="215.9" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="213.36" x2="289.56" y2="210.82" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="210.82" x2="289.56" y2="208.28" width="0.1524" layer="91"/>
 <wire x1="302.26" y1="215.9" x2="289.56" y2="215.9" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="215.9" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
-<pinref part="IC2" gate="G$1" pin="GND18"/>
+<pinref part="IC3" gate="G$1" pin="GND18"/>
 <wire x1="289.56" y1="213.36" x2="289.56" y2="210.82" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="210.82" x2="289.56" y2="208.28" width="0.1524" layer="91"/>
 <wire x1="302.26" y1="213.36" x2="289.56" y2="213.36" width="0.1524" layer="91"/>
@@ -2670,7 +2670,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="C8" gate="G$1" pin="2"/>
 <pinref part="GND17" gate="1" pin="GND"/>
 <wire x1="175.26" y1="241.3" x2="175.26" y2="238.76" width="0.1524" layer="91"/>
-<pinref part="IC3" gate="G$1" pin="GND"/>
+<pinref part="IC2" gate="G$1" pin="GND"/>
 <wire x1="175.26" y1="238.76" x2="175.26" y2="236.22" width="0.1524" layer="91"/>
 <wire x1="200.66" y1="241.3" x2="195.58" y2="241.3" width="0.1524" layer="91"/>
 <wire x1="195.58" y1="241.3" x2="195.58" y2="238.76" width="0.1524" layer="91"/>
@@ -2710,11 +2710,11 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 </net>
 <net name="+3V3" class="4">
 <segment>
-<pinref part="IC3" gate="G$1" pin="DVDD"/>
+<pinref part="IC2" gate="G$1" pin="DVDD"/>
 <wire x1="228.6" y1="193.04" x2="228.6" y2="182.88" width="0.1524" layer="91"/>
 <wire x1="228.6" y1="182.88" x2="233.68" y2="182.88" width="0.1524" layer="91"/>
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
-<pinref part="C12" gate="G$1" pin="1"/>
+<pinref part="C10" gate="G$1" pin="1"/>
 <wire x1="233.68" y1="185.42" x2="233.68" y2="182.88" width="0.1524" layer="91"/>
 <wire x1="233.68" y1="182.88" x2="233.68" y2="180.34" width="0.1524" layer="91"/>
 <junction x="233.68" y="182.88"/>
@@ -2740,16 +2740,16 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <junction x="264.16" y="132.08"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="3V3OUT"/>
+<pinref part="IC3" gate="G$1" pin="3V3OUT"/>
 <pinref part="+3V7" gate="G$1" pin="+3V3"/>
 <wire x1="302.26" y1="236.22" x2="289.56" y2="236.22" width="0.1524" layer="91"/>
 <wire x1="289.56" y1="236.22" x2="289.56" y2="251.46" width="0.1524" layer="91"/>
-<pinref part="C6" gate="G$1" pin="1"/>
+<pinref part="C12" gate="G$1" pin="1"/>
 <wire x1="289.56" y1="233.68" x2="289.56" y2="236.22" width="0.1524" layer="91"/>
 <junction x="289.56" y="236.22"/>
 </segment>
 <segment>
-<pinref part="IC3" gate="G$1" pin="VDD_USB"/>
+<pinref part="IC2" gate="G$1" pin="VDD_USB"/>
 <wire x1="190.5" y1="220.98" x2="200.66" y2="220.98" width="0.1524" layer="91"/>
 <pinref part="C9" gate="G$1" pin="1"/>
 <wire x1="190.5" y1="220.98" x2="190.5" y2="215.9" width="0.1524" layer="91"/>
@@ -2761,12 +2761,12 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="C8" gate="G$1" pin="1"/>
 <pinref part="+3V5" gate="G$1" pin="+3V3"/>
 <wire x1="175.26" y1="248.92" x2="175.26" y2="251.46" width="0.1524" layer="91"/>
-<pinref part="IC3" gate="G$1" pin="AVDD"/>
+<pinref part="IC2" gate="G$1" pin="AVDD"/>
 <wire x1="175.26" y1="251.46" x2="175.26" y2="254" width="0.1524" layer="91"/>
 <wire x1="200.66" y1="238.76" x2="198.12" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="198.12" y1="238.76" x2="198.12" y2="251.46" width="0.1524" layer="91"/>
 <wire x1="198.12" y1="251.46" x2="175.26" y2="251.46" width="0.1524" layer="91"/>
-<pinref part="IC3" gate="G$1" pin="AVDD@2"/>
+<pinref part="IC2" gate="G$1" pin="AVDD@2"/>
 <wire x1="200.66" y1="236.22" x2="198.12" y2="236.22" width="0.1524" layer="91"/>
 <wire x1="198.12" y1="236.22" x2="198.12" y2="238.76" width="0.1524" layer="91"/>
 <junction x="198.12" y="238.76"/>
@@ -2787,7 +2787,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <junction x="66.04" y="119.38"/>
 </segment>
 <segment>
-<pinref part="IC3" gate="G$1" pin="RESET"/>
+<pinref part="IC2" gate="G$1" pin="RESET"/>
 <wire x1="241.3" y1="228.6" x2="251.46" y2="228.6" width="0.1524" layer="91"/>
 <label x="251.46" y="228.6" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2806,7 +2806,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 </net>
 <net name="BLE/P0_0" class="3">
 <segment>
-<pinref part="IC3" gate="G$1" pin="P0_0"/>
+<pinref part="IC2" gate="G$1" pin="P0_0"/>
 <wire x1="241.3" y1="226.06" x2="251.46" y2="226.06" width="0.1524" layer="91"/>
 <label x="251.46" y="226.06" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2825,7 +2825,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 </net>
 <net name="BLE/P2_2" class="0">
 <segment>
-<pinref part="IC3" gate="G$1" pin="P2_2"/>
+<pinref part="IC2" gate="G$1" pin="P2_2"/>
 <wire x1="198.12" y1="233.68" x2="200.66" y2="233.68" width="0.1524" layer="91"/>
 <label x="182.88" y="233.68" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2837,7 +2837,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 </net>
 <net name="BLE/P2_1" class="0">
 <segment>
-<pinref part="IC3" gate="G$1" pin="P2_1"/>
+<pinref part="IC2" gate="G$1" pin="P2_1"/>
 <wire x1="198.12" y1="231.14" x2="200.66" y2="231.14" width="0.1524" layer="91"/>
 <label x="182.88" y="231.14" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2862,7 +2862,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <wire x1="281.94" y1="45.72" x2="276.86" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="276.86" y1="45.72" x2="276.86" y2="53.34" width="0.1524" layer="91"/>
 <pinref part="R9" gate="G$1" pin="1"/>
-<pinref part="C13" gate="G$1" pin="1"/>
+<pinref part="C11" gate="G$1" pin="1"/>
 <wire x1="276.86" y1="45.72" x2="276.86" y2="43.18" width="0.1524" layer="91"/>
 <junction x="276.86" y="45.72"/>
 </segment>
@@ -2874,7 +2874,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="124.46" y="223.52" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="TXD"/>
+<pinref part="IC3" gate="G$1" pin="TXD"/>
 <wire x1="332.74" y1="246.38" x2="340.36" y2="246.38" width="0.1524" layer="91"/>
 <label x="340.36" y="246.38" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2886,7 +2886,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="124.46" y="220.98" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="RXD"/>
+<pinref part="IC3" gate="G$1" pin="RXD"/>
 <wire x1="332.74" y1="243.84" x2="340.36" y2="243.84" width="0.1524" layer="91"/>
 <label x="340.36" y="243.84" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2898,7 +2898,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="93.98" y="127" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="USBDM"/>
+<pinref part="IC3" gate="G$1" pin="USBDM"/>
 <wire x1="302.26" y1="246.38" x2="287.02" y2="246.38" width="0.1524" layer="91"/>
 <label x="276.86" y="246.38" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2910,21 +2910,21 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="93.98" y="124.46" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC2" gate="G$1" pin="USBDP"/>
+<pinref part="IC3" gate="G$1" pin="USBDP"/>
 <wire x1="302.26" y1="243.84" x2="287.02" y2="243.84" width="0.1524" layer="91"/>
 <label x="276.86" y="243.84" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$8" class="0">
 <segment>
-<pinref part="IC2" gate="G$1" pin="DTR"/>
+<pinref part="IC3" gate="G$1" pin="DTR"/>
 <wire x1="332.74" y1="233.68" x2="340.36" y2="233.68" width="0.1524" layer="91"/>
-<pinref part="C7" gate="G$1" pin="1"/>
+<pinref part="C13" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="USB/TXLED" class="0">
 <segment>
-<pinref part="IC2" gate="G$1" pin="TXLED"/>
+<pinref part="IC3" gate="G$1" pin="TXLED"/>
 <wire x1="332.74" y1="220.98" x2="340.36" y2="220.98" width="0.1524" layer="91"/>
 <label x="340.36" y="220.98" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2936,7 +2936,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 </net>
 <net name="USB/RXLED" class="0">
 <segment>
-<pinref part="IC2" gate="G$1" pin="RXLED"/>
+<pinref part="IC3" gate="G$1" pin="RXLED"/>
 <wire x1="332.74" y1="218.44" x2="340.36" y2="218.44" width="0.1524" layer="91"/>
 <label x="340.36" y="218.44" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -2979,7 +2979,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="124.46" y="208.28" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC3" gate="G$1" pin="P0_4"/>
+<pinref part="IC2" gate="G$1" pin="P0_4"/>
 <wire x1="241.3" y1="215.9" x2="251.46" y2="215.9" width="0.1524" layer="91"/>
 <label x="251.46" y="215.9" size="1.778" layer="95" xref="yes"/>
 </segment>
@@ -3015,7 +3015,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <label x="124.46" y="210.82" size="1.778" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="IC3" gate="G$1" pin="P0_5"/>
+<pinref part="IC2" gate="G$1" pin="P0_5"/>
 <wire x1="241.3" y1="213.36" x2="251.46" y2="213.36" width="0.1524" layer="91"/>
 <label x="251.46" y="213.36" size="1.778" layer="95" xref="yes"/>
 </segment>
