@@ -363,7 +363,7 @@ UsedLibrary="my.lbr"
 
 [Win_1]
 Type="Control Panel"
-Loc="360 248 1435 811"
+Loc="360 248 1795 1103"
 State=2
 Number=0
 

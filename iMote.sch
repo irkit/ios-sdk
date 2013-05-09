@@ -2804,7 +2804,7 @@ http://creativecommons.org/license/by-sa/2.5/</text>
 <pinref part="LED3" gate="G$1" pin="A"/>
 </segment>
 </net>
-<net name="BLE/P0_0" class="3">
+<net name="BLE/P0_0" class="0">
 <segment>
 <pinref part="IC2" gate="G$1" pin="P0_0"/>
 <wire x1="241.3" y1="226.06" x2="251.46" y2="226.06" width="0.1524" layer="91"/>
