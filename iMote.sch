@@ -967,8 +967,8 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <library name="git-revision">
 <packages>
 <package name="GIT-REVISION">
-<text x="0" y="0" size="1" layer="51">GIT REV.</text>
-<text x="8.89" y="0" size="1.27" layer="51">&gt;VALUE</text>
+<text x="0" y="0" size="1" layer="25">GIT REV.</text>
+<text x="8.89" y="0" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>

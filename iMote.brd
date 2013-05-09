@@ -110,7 +110,7 @@
 <wire x1="43" y1="50" x2="0" y2="50" width="0" layer="20"/>
 <wire x1="0" y1="50" x2="0" y2="0" width="0" layer="20"/>
 <rectangle x1="34.4" y1="21.7" x2="42.9" y2="23.2" layer="42"/>
-<text x="42.5" y="5.9" size="1" layer="51" font="vector" rot="R90">IMOTE</text>
+<text x="42.5" y="5.9" size="1" layer="25" font="vector" rot="R90">IMOTE</text>
 <rectangle x1="40.7" y1="23.3" x2="42.9" y2="30.8" layer="42"/>
 </plain>
 <libraries>
@@ -388,8 +388,8 @@ This is the mechanical footprint for a #4 phillips button head screw. Use the ke
 <library name="git-revision">
 <packages>
 <package name="GIT-REVISION">
-<text x="0" y="0" size="1" layer="51">GIT REV.</text>
-<text x="8.89" y="0" size="1.27" layer="51">&gt;VALUE</text>
+<text x="0" y="0" size="1" layer="25">GIT REV.</text>
+<text x="8.89" y="0" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 </packages>
 </library>
@@ -1102,7 +1102,7 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="9.766" y="45.932" size="1.27" layer="27" rot="R90"/>
 </element>
 <element name="U$1" library="git-revision" package="GIT-REVISION" value="5b47673" x="42.5" y="11.1" smashed="yes" rot="R90">
-<attribute name="VALUE" x="42.5" y="17.99" size="1" layer="51" rot="R90"/>
+<attribute name="VALUE" x="42.5" y="17.99" size="1" layer="25" rot="R90"/>
 </element>
 <element name="STANDOFF3" library="SparkFun-Electromechanical" package="STAND-OFF" value="STAND-OFF" x="40" y="47"/>
 <element name="C4" library="my" package="2012" value="0.1uF" x="10.5" y="15.2" smashed="yes" rot="R90">
