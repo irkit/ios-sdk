@@ -362,3 +362,5 @@ void ble_evt_hardware_soft_timer(const struct ble_msg_hardware_soft_timer_evt_t 
 
 /**adc result**/
 void ble_evt_hardware_adc_result(const struct ble_msg_hardware_adc_result_evt_t *msg) {}
+
+void ble_default(const void* msg) {}

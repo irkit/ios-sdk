@@ -14,8 +14,8 @@
 #include "cmd_def.h"
 
 
-void (*bglib_output)(uint8 len1,uint8* data1,uint16 len2,uint8* data2)=0;    
-static const struct ble_msg  apis[]={
+void (*bglib_output)(uint8 len1,uint8* data1,uint16 len2,uint8* data2)=0;
+const struct ble_msg  apis[]={
     {{(uint8)ble_dev_type_ble|(uint8)ble_msg_type_cmd|0x0,0x1,ble_cls_system,ble_cmd_system_reset_id}, 0x2,(ble_cmd_handler)ble_default},
     {{(uint8)ble_dev_type_ble|(uint8)ble_msg_type_cmd|0x0,0x0,ble_cls_system,ble_cmd_system_hello_id}, 0x0,(ble_cmd_handler)ble_default},
     {{(uint8)ble_dev_type_ble|(uint8)ble_msg_type_cmd|0x0,0x0,ble_cls_system,ble_cmd_system_address_get_id}, 0x0,(ble_cmd_handler)ble_default},
@@ -221,7 +221,7 @@ static const struct ble_msg  apis[]={
     {{(uint8)ble_dev_type_ble|(uint8)ble_msg_type_evt|0x0,0x7,ble_cls_hardware,ble_evt_hardware_io_port_status_id}, 0x2226, (ble_cmd_handler)ble_evt_hardware_io_port_status},
     {{(uint8)ble_dev_type_ble|(uint8)ble_msg_type_evt|0x0,0x1,ble_cls_hardware,ble_evt_hardware_soft_timer_id}, 0x2,    (ble_cmd_handler)ble_evt_hardware_soft_timer},
     {{(uint8)ble_dev_type_ble|(uint8)ble_msg_type_evt|0x0,0x3,ble_cls_hardware,ble_evt_hardware_adc_result_id}, 0x52,   (ble_cmd_handler)ble_evt_hardware_adc_result},
-    {{0,0,0,0}, 0, 0}}; 
+    {{0,0,0,0}, 0, 0}};
 const struct ble_msg * ble_get_msg(uint8 idx)
 {
     return &apis[idx];
@@ -229,7 +229,7 @@ const struct ble_msg * ble_get_msg(uint8 idx)
 const struct ble_msg * ble_find_msg_hdr(struct ble_header hdr)
 {
     const struct ble_msg *msg=apis;
-    
+
     while(msg->handler)
     {
         if(((msg->hdr.type_hilen&0xF8)==(hdr.type_hilen&0xF8))&&
@@ -247,7 +247,7 @@ const struct ble_msg * ble_get_msg_hdr(struct ble_header hdr)
             return NULL;
         if(hdr.command>=ble_class_evt_handlers[hdr.cls].maxhandlers)
             return NULL;
-        return ble_class_evt_handlers[hdr.cls].msgs[hdr.command];        
+        return ble_class_evt_handlers[hdr.cls].msgs[hdr.command];
     }else
     if((hdr.type_hilen&0x80)==ble_msg_type_rsp)
     {
@@ -255,12 +255,12 @@ const struct ble_msg * ble_get_msg_hdr(struct ble_header hdr)
             return NULL;
         if(hdr.command>=ble_class_rsp_handlers[hdr.cls].maxhandlers)
             return NULL;
-        return ble_class_rsp_handlers[hdr.cls].msgs[hdr.command];        
+        return ble_class_rsp_handlers[hdr.cls].msgs[hdr.command];
     }
-           
+
     return ble_find_msg_hdr(hdr);
 }
-void ble_send_message(uint8 msgid,...)            
+void ble_send_message(uint8 msgid,...)
 {
     uint32 i;
     uint32 u32;
@@ -273,15 +273,15 @@ void ble_send_message(uint8 msgid,...)
     uint16 data_len=0;
     va_list va;
     va_start(va,msgid);
-    
+
     i=apis[msgid].params;
     packet.header=apis[msgid].hdr;
     while(i)
     {
-    
+
         switch(i&0xF)
         {
-        
+
             case 7://int32
             case 6://uint32
                 u32=va_arg(va,uint32);
@@ -300,18 +300,18 @@ void ble_send_message(uint8 msgid,...)
             case 2://uint8
                 u8=va_arg(va,int);
                 *b++=u8&0xff;
-            break;     
-            
+            break;
+
             case 9://string
             case 8://uint8 array
                 data_len=va_arg(va,int);
-                *b++=data_len;        
-                
+                *b++=data_len;
+
                 //assuming default packet<256
                 u16=data_len+packet.header.lolen;
                 packet.header.lolen=u16&0xff;
                 packet.header.type_hilen|=u16>>8;
-                 
+
                 data_ptr=va_arg(va,uint8*);
             break;
             case 10://hwaddr
