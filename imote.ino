@@ -92,11 +92,12 @@ void setup() {
 
 void readMac() {
     static uint8_t write_count = 1;
-    while ((Serial.available())) {
+
+    if ( Serial.available() > 0 ) {
         uint8_t ch = Serial.read();
 
         // echo
-        printf("%c\r\n", ch);
+        printf("serial: %c\r\n", ch);
 
         if (ch == '0') {
             // Reset BLE112 module
