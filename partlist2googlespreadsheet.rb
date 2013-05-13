@@ -23,9 +23,9 @@ class PartSheet
     new(spreadsheet)
   end
 
-  def sync_with_csv( csv_string )
-    csv_keys = []
-    worksheet = @spreadsheet.worksheets.first
+  def merge_csv( csv_string )
+    csv_keys         = []
+    worksheet        = @spreadsheet.worksheets.first
     spreadsheet_rows = worksheet.list.to_hash_array
 
     csv = CSV.new( csv_string, {
@@ -42,13 +42,13 @@ class PartSheet
         newlistkeys         = worksheet.list.keys | csv_keys
         if worksheet.list.keys.length != newlistkeys.length
           worksheet.list.keys = newlistkeys
-          puts "udpated header row"
+          puts "updated header row"
         end
 
         next
       end
 
-      found = spreadsheet_rows.index { |r| r["Part"] == csv_row.field("Part") }
+      found = spreadsheet_rows.index { |r| yield( csv_row, r ) }
 
       if found != nil
         # update
@@ -98,7 +98,9 @@ def main
 
   csv = IO.read( semicollon_csv_file ).gsub( /\";/, "\"," )
 
-  sheet.sync_with_csv( csv )
+  sheet.merge_csv( csv ) {|csv_row, spreadsheet_row|
+    csv_row.field("Part") == spreadsheet_row["Part"]
+  }
 end
 
 main
