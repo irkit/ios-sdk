@@ -23,42 +23,46 @@ class PartSheet
     new(spreadsheet)
   end
 
-  def sync_with_csv( csv )
+  def sync_with_csv( csv_string )
     csv_keys = []
-    firstline = true
     worksheet = @spreadsheet.worksheets.first
     spreadsheet_rows = worksheet.list.to_hash_array
 
-    CSV.parse( csv ) do |csv_row|
-      csv_row.compact!
-
-      if firstline
-        firstline = false
-
+    csv = CSV.new( csv_string, {
+        headers:        :first_row,
+        return_headers: true,
+      })
+    csv.each do |csv_row|
+      if csv_row.header_row?
         # nil terminated
-        csv_keys = csv_row.compact! || csv_row
+        csv_keys = csv_row.fields
+        csv_keys.select! {|key| key && ! key.empty? }
 
         # update keys if new ones appear
-        newlistkeys = worksheet.list.keys | csv_keys
-        worksheet.list.keys = newlistkeys if worksheet.list.keys.length != newlistkeys.length
+        newlistkeys         = worksheet.list.keys | csv_keys
+        if worksheet.list.keys.length != newlistkeys.length
+          worksheet.list.keys = newlistkeys
+          puts "udpated header row"
+        end
+
         next
       end
 
-      found = spreadsheet_rows.index {|r| r["Part"] == csv_row[ 0 ]}
+      found = spreadsheet_rows.index { |r| r["Part"] == csv_row.field("Part") }
 
       if found != nil
         # update
-        csv_row.each_index do |index|
-          if worksheet.list[ found ][ csv_keys[ index ] ] != csv_row[ index ]
-            puts "updating row[ #{index} ] = #{csv_row[index]}"
-            worksheet.list[ found ][ csv_keys[ index ] ] = csv_row[ index ]
+        csv_row.each do |key,value|
+          if key && ! key.empty? && ( worksheet.list[ found ][ key ] != value )
+            puts "updating row[ #{found} ][ #{key} ] = #{value}"
+            worksheet.list[ found ][ key ] = value
           end
         end
       else
         # create
         new_row = {}
-        csv_keys.each_index do |index|
-          new_row[ csv_keys[ index ] ] = csv_row[ index ]
+        csv_row.each do |key,value|
+          new_row[ key ] = value if (key && ! key.empty?)
         end
         worksheet.list.push( new_row )
         puts "created new row: #{new_row}"
