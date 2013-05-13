@@ -99,7 +99,8 @@ def main
   csv = IO.read( semicollon_csv_file ).gsub( /\";/, "\"," )
 
   sheet.merge_csv( csv ) {|csv_row, spreadsheet_row|
-    csv_row.field("Part") == spreadsheet_row["Part"]
+    (csv_row.field("Value") == spreadsheet_row["Value"]) &&
+    (csv_row.field("Parts") == spreadsheet_row["Parts"])
   }
 end
 
