@@ -10,4 +10,23 @@
 
 @implementation IRKit
 
++ (id) sharedInstance {
+    static IRKit* instance;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        instance = [[IRKit alloc] init];
+    });
+    return instance;
+}
+
+- (id)init {
+    self = [super init];
+    if (! self) { return nil; }
+    
+    
+
+    return self;
+}
+
+
 @end

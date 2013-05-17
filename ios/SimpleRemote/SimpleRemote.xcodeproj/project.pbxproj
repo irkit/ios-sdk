@@ -18,13 +18,15 @@
 		C76CFF6B17462E0800F972B7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6A17462E0800F972B7 /* Default-568h@2x.png */; };
 		C76CFF6E17462E0800F972B7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */; };
 		C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF7017462E0800F972B7 /* SRMainViewController.m */; };
-		C76CFF7417462E0800F972B7 /* SRFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF7317462E0800F972B7 /* SRFlipsideViewController.m */; };
 		C76CFF7C17462E0800F972B7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF7B17462E0800F972B7 /* SenTestingKit.framework */; };
 		C76CFF7D17462E0800F972B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5417462E0800F972B7 /* UIKit.framework */; };
 		C76CFF7E17462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
 		C76CFF8617462E0800F972B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF8417462E0800F972B7 /* InfoPlist.strings */; };
 		C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */; };
 		C7FAB00717462FC100125BCB /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
+		C7FAB00F17464ABA00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB00E17464AB900125BCB /* Log.m */; };
+		C7FAB01C174653AE00125BCB /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */; };
+		C7FAB01D174653AE00125BCB /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +56,6 @@
 		C76CFF6D17462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C76CFF6F17462E0800F972B7 /* SRMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRMainViewController.h; sourceTree = "<group>"; };
 		C76CFF7017462E0800F972B7 /* SRMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRMainViewController.m; sourceTree = "<group>"; };
-		C76CFF7217462E0800F972B7 /* SRFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRFlipsideViewController.h; sourceTree = "<group>"; };
-		C76CFF7317462E0800F972B7 /* SRFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRFlipsideViewController.m; sourceTree = "<group>"; };
 		C76CFF7A17462E0800F972B7 /* SimpleRemoteTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleRemoteTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CFF7B17462E0800F972B7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C76CFF8317462E0800F972B7 /* SimpleRemoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleRemoteTests-Info.plist"; sourceTree = "<group>"; };
@@ -63,6 +63,10 @@
 		C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleRemoteTests.h; sourceTree = "<group>"; };
 		C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleRemoteTests.m; sourceTree = "<group>"; };
 		C7FAB00617462FC100125BCB /* libIRKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIRKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos/libIRKit.a"; sourceTree = "<group>"; };
+		C7FAB00B1746481700125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		C7FAB00E17464AB900125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		C7FAB01A174653AE00125BCB /* IRReceiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRReceiveViewController.h; sourceTree = "<group>"; };
+		C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRReceiveViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,13 +128,13 @@
 		C76CFF5A17462E0800F972B7 /* SimpleRemote */ = {
 			isa = PBXGroup;
 			children = (
+				C7FAB01A174653AE00125BCB /* IRReceiveViewController.h */,
+				C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */,
 				C76CFF6317462E0800F972B7 /* SRAppDelegate.h */,
 				C76CFF6417462E0800F972B7 /* SRAppDelegate.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
 				C76CFF6F17462E0800F972B7 /* SRMainViewController.h */,
 				C76CFF7017462E0800F972B7 /* SRMainViewController.m */,
-				C76CFF7217462E0800F972B7 /* SRFlipsideViewController.h */,
-				C76CFF7317462E0800F972B7 /* SRFlipsideViewController.m */,
 				C76CFF5B17462E0800F972B7 /* Supporting Files */,
 			);
 			path = SimpleRemote;
@@ -139,6 +143,8 @@
 		C76CFF5B17462E0800F972B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C7FAB00E17464AB900125BCB /* Log.m */,
+				C7FAB00B1746481700125BCB /* Log.h */,
 				C76CFF5C17462E0800F972B7 /* SimpleRemote-Info.plist */,
 				C76CFF5D17462E0800F972B7 /* InfoPlist.strings */,
 				C76CFF6017462E0800F972B7 /* main.m */,
@@ -283,7 +289,8 @@
 				C76CFF6117462E0800F972B7 /* main.m in Sources */,
 				C76CFF6517462E0800F972B7 /* SRAppDelegate.m in Sources */,
 				C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */,
-				C76CFF7417462E0800F972B7 /* SRFlipsideViewController.m in Sources */,
+				C7FAB00F17464ABA00125BCB /* Log.m in Sources */,
+				C7FAB01C174653AE00125BCB /* IRReceiveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */,
+				C7FAB01D174653AE00125BCB /* IRReceiveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

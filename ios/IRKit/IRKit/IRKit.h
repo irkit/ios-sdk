@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+//#import "IRReceiveViewController.h"
 
 @interface IRKit : NSObject
+
++ (IRKit*) sharedInstance;
 
 @end

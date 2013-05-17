@@ -9,7 +9,11 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-    #import <IRKit/IRKit.h>
-#endif
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import <IRKit/IRKit.h>
+#import "Log.h"
+
+#endif // __OBJC__

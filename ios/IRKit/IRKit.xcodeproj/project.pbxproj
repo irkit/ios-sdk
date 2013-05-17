@@ -403,6 +403,7 @@
 				C752D72517462C7B008B644A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C752D72617462C7B008B644A /* Build configuration list for PBXNativeTarget "IRKitTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +412,7 @@
 				C752D72817462C7B008B644A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
