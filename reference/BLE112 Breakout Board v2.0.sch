@@ -1,1 +1,0 @@
-/Users/mash/proj/mbed/docs/ble112-breakoutboard/BLE112 Breakout Board v2.0.sch
