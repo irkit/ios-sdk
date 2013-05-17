@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C76CFF5517462E0800F972B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5417462E0800F972B7 /* UIKit.framework */; };
+		C76CFF5717462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
+		C76CFF5917462E0800F972B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
+		C76CFF5F17462E0800F972B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF5D17462E0800F972B7 /* InfoPlist.strings */; };
+		C76CFF6117462E0800F972B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF6017462E0800F972B7 /* main.m */; };
+		C76CFF6517462E0800F972B7 /* SRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF6417462E0800F972B7 /* SRAppDelegate.m */; };
+		C76CFF6717462E0800F972B7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6617462E0800F972B7 /* Default.png */; };
+		C76CFF6917462E0800F972B7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6817462E0800F972B7 /* Default@2x.png */; };
+		C76CFF6B17462E0800F972B7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6A17462E0800F972B7 /* Default-568h@2x.png */; };
+		C76CFF6E17462E0800F972B7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */; };
+		C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF7017462E0800F972B7 /* SRMainViewController.m */; };
+		C76CFF7417462E0800F972B7 /* SRFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF7317462E0800F972B7 /* SRFlipsideViewController.m */; };
+		C76CFF7C17462E0800F972B7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF7B17462E0800F972B7 /* SenTestingKit.framework */; };
+		C76CFF7D17462E0800F972B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5417462E0800F972B7 /* UIKit.framework */; };
+		C76CFF7E17462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
+		C76CFF8617462E0800F972B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF8417462E0800F972B7 /* InfoPlist.strings */; };
+		C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */; };
+		C7FAB00717462FC100125BCB /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C76CFF7F17462E0800F972B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C76CFF4917462E0800F972B7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C76CFF5017462E0800F972B7;
+			remoteInfo = SimpleRemote;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C76CFF5117462E0800F972B7 /* SimpleRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76CFF5417462E0800F972B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C76CFF5617462E0800F972B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C76CFF5817462E0800F972B7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C76CFF5C17462E0800F972B7 /* SimpleRemote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleRemote-Info.plist"; sourceTree = "<group>"; };
+		C76CFF5E17462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C76CFF6017462E0800F972B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C76CFF6217462E0800F972B7 /* SimpleRemote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleRemote-Prefix.pch"; sourceTree = "<group>"; };
+		C76CFF6317462E0800F972B7 /* SRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRAppDelegate.h; sourceTree = "<group>"; };
+		C76CFF6417462E0800F972B7 /* SRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRAppDelegate.m; sourceTree = "<group>"; };
+		C76CFF6617462E0800F972B7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		C76CFF6817462E0800F972B7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		C76CFF6A17462E0800F972B7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C76CFF6D17462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		C76CFF6F17462E0800F972B7 /* SRMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRMainViewController.h; sourceTree = "<group>"; };
+		C76CFF7017462E0800F972B7 /* SRMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRMainViewController.m; sourceTree = "<group>"; };
+		C76CFF7217462E0800F972B7 /* SRFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRFlipsideViewController.h; sourceTree = "<group>"; };
+		C76CFF7317462E0800F972B7 /* SRFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRFlipsideViewController.m; sourceTree = "<group>"; };
+		C76CFF7A17462E0800F972B7 /* SimpleRemoteTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleRemoteTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76CFF7B17462E0800F972B7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C76CFF8317462E0800F972B7 /* SimpleRemoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleRemoteTests-Info.plist"; sourceTree = "<group>"; };
+		C76CFF8517462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleRemoteTests.h; sourceTree = "<group>"; };
+		C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleRemoteTests.m; sourceTree = "<group>"; };
+		C7FAB00617462FC100125BCB /* libIRKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIRKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos/libIRKit.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C76CFF4E17462E0800F972B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7FAB00717462FC100125BCB /* libIRKit.a in Frameworks */,
+				C76CFF5517462E0800F972B7 /* UIKit.framework in Frameworks */,
+				C76CFF5717462E0800F972B7 /* Foundation.framework in Frameworks */,
+				C76CFF5917462E0800F972B7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C76CFF7617462E0800F972B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C76CFF7C17462E0800F972B7 /* SenTestingKit.framework in Frameworks */,
+				C76CFF7D17462E0800F972B7 /* UIKit.framework in Frameworks */,
+				C76CFF7E17462E0800F972B7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C76CFF4817462E0800F972B7 = {
+			isa = PBXGroup;
+			children = (
+				C76CFF5A17462E0800F972B7 /* SimpleRemote */,
+				C76CFF8117462E0800F972B7 /* SimpleRemoteTests */,
+				C76CFF5317462E0800F972B7 /* Frameworks */,
+				C76CFF5217462E0800F972B7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C76CFF5217462E0800F972B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C76CFF5117462E0800F972B7 /* SimpleRemote.app */,
+				C76CFF7A17462E0800F972B7 /* SimpleRemoteTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C76CFF5317462E0800F972B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C7FAB00617462FC100125BCB /* libIRKit.a */,
+				C76CFF5417462E0800F972B7 /* UIKit.framework */,
+				C76CFF5617462E0800F972B7 /* Foundation.framework */,
+				C76CFF5817462E0800F972B7 /* CoreGraphics.framework */,
+				C76CFF7B17462E0800F972B7 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C76CFF5A17462E0800F972B7 /* SimpleRemote */ = {
+			isa = PBXGroup;
+			children = (
+				C76CFF6317462E0800F972B7 /* SRAppDelegate.h */,
+				C76CFF6417462E0800F972B7 /* SRAppDelegate.m */,
+				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
+				C76CFF6F17462E0800F972B7 /* SRMainViewController.h */,
+				C76CFF7017462E0800F972B7 /* SRMainViewController.m */,
+				C76CFF7217462E0800F972B7 /* SRFlipsideViewController.h */,
+				C76CFF7317462E0800F972B7 /* SRFlipsideViewController.m */,
+				C76CFF5B17462E0800F972B7 /* Supporting Files */,
+			);
+			path = SimpleRemote;
+			sourceTree = "<group>";
+		};
+		C76CFF5B17462E0800F972B7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C76CFF5C17462E0800F972B7 /* SimpleRemote-Info.plist */,
+				C76CFF5D17462E0800F972B7 /* InfoPlist.strings */,
+				C76CFF6017462E0800F972B7 /* main.m */,
+				C76CFF6217462E0800F972B7 /* SimpleRemote-Prefix.pch */,
+				C76CFF6617462E0800F972B7 /* Default.png */,
+				C76CFF6817462E0800F972B7 /* Default@2x.png */,
+				C76CFF6A17462E0800F972B7 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C76CFF8117462E0800F972B7 /* SimpleRemoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */,
+				C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */,
+				C76CFF8217462E0800F972B7 /* Supporting Files */,
+			);
+			path = SimpleRemoteTests;
+			sourceTree = "<group>";
+		};
+		C76CFF8217462E0800F972B7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C76CFF8317462E0800F972B7 /* SimpleRemoteTests-Info.plist */,
+				C76CFF8417462E0800F972B7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C76CFF5017462E0800F972B7 /* SimpleRemote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C76CFF8C17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemote" */;
+			buildPhases = (
+				C76CFF4D17462E0800F972B7 /* Sources */,
+				C76CFF4E17462E0800F972B7 /* Frameworks */,
+				C76CFF4F17462E0800F972B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleRemote;
+			productName = SimpleRemote;
+			productReference = C76CFF5117462E0800F972B7 /* SimpleRemote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C76CFF7917462E0800F972B7 /* SimpleRemoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C76CFF8F17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemoteTests" */;
+			buildPhases = (
+				C76CFF7517462E0800F972B7 /* Sources */,
+				C76CFF7617462E0800F972B7 /* Frameworks */,
+				C76CFF7717462E0800F972B7 /* Resources */,
+				C76CFF7817462E0800F972B7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C76CFF8017462E0800F972B7 /* PBXTargetDependency */,
+			);
+			name = SimpleRemoteTests;
+			productName = SimpleRemoteTests;
+			productReference = C76CFF7A17462E0800F972B7 /* SimpleRemoteTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C76CFF4917462E0800F972B7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SR;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "KAYAC Inc.";
+			};
+			buildConfigurationList = C76CFF4C17462E0800F972B7 /* Build configuration list for PBXProject "SimpleRemote" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C76CFF4817462E0800F972B7;
+			productRefGroup = C76CFF5217462E0800F972B7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C76CFF5017462E0800F972B7 /* SimpleRemote */,
+				C76CFF7917462E0800F972B7 /* SimpleRemoteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C76CFF4F17462E0800F972B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C76CFF5F17462E0800F972B7 /* InfoPlist.strings in Resources */,
+				C76CFF6717462E0800F972B7 /* Default.png in Resources */,
+				C76CFF6917462E0800F972B7 /* Default@2x.png in Resources */,
+				C76CFF6B17462E0800F972B7 /* Default-568h@2x.png in Resources */,
+				C76CFF6E17462E0800F972B7 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C76CFF7717462E0800F972B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C76CFF8617462E0800F972B7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C76CFF7817462E0800F972B7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C76CFF4D17462E0800F972B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C76CFF6117462E0800F972B7 /* main.m in Sources */,
+				C76CFF6517462E0800F972B7 /* SRAppDelegate.m in Sources */,
+				C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */,
+				C76CFF7417462E0800F972B7 /* SRFlipsideViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C76CFF7517462E0800F972B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C76CFF8017462E0800F972B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C76CFF5017462E0800F972B7 /* SimpleRemote */;
+			targetProxy = C76CFF7F17462E0800F972B7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C76CFF5D17462E0800F972B7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C76CFF5E17462E0800F972B7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C76CFF6D17462E0800F972B7 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		C76CFF8417462E0800F972B7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C76CFF8517462E0800F972B7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C76CFF8A17462E0800F972B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C76CFF8B17462E0800F972B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C76CFF8D17462E0800F972B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
+				INFOPLIST_FILE = "SimpleRemote/SimpleRemote-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C76CFF8E17462E0800F972B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
+				INFOPLIST_FILE = "SimpleRemote/SimpleRemote-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C76CFF9017462E0800F972B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SimpleRemote.app/SimpleRemote";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
+				INFOPLIST_FILE = "SimpleRemoteTests/SimpleRemoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		C76CFF9117462E0800F972B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SimpleRemote.app/SimpleRemote";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
+				INFOPLIST_FILE = "SimpleRemoteTests/SimpleRemoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C76CFF4C17462E0800F972B7 /* Build configuration list for PBXProject "SimpleRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C76CFF8A17462E0800F972B7 /* Debug */,
+				C76CFF8B17462E0800F972B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C76CFF8C17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C76CFF8D17462E0800F972B7 /* Debug */,
+				C76CFF8E17462E0800F972B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C76CFF8F17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C76CFF9017462E0800F972B7 /* Debug */,
+				C76CFF9117462E0800F972B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C76CFF4917462E0800F972B7 /* Project object */;
+}
