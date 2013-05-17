@@ -16,6 +16,8 @@
 		C752D71717462C7B008B644A /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C752D71D17462C7B008B644A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C752D71B17462C7B008B644A /* InfoPlist.strings */; };
 		C752D72017462C7B008B644A /* IRKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C752D71F17462C7B008B644A /* IRKitTests.m */; };
+		C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
+		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 		C752D71C17462C7B008B644A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C752D71E17462C7B008B644A /* IRKitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRKitTests.h; sourceTree = "<group>"; };
 		C752D71F17462C7B008B644A /* IRKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRKitTests.m; sourceTree = "<group>"; };
+		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
+		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
+		C7FAB0251746889000125BCB /* IRConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */,
 				C752D70217462C7B008B644A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +89,7 @@
 		C752D6F517462C7B008B644A = {
 			isa = PBXGroup;
 			children = (
+				C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */,
 				C752D70317462C7B008B644A /* IRKit */,
 				C752D71817462C7B008B644A /* IRKitTests */,
 				C752D70017462C7B008B644A /* Frameworks */,
@@ -113,6 +121,7 @@
 			children = (
 				C752D70617462C7B008B644A /* IRKit.h */,
 				C752D70817462C7B008B644A /* IRKit.m */,
+				C7FAB0251746889000125BCB /* IRConst.h */,
 				C752D70417462C7B008B644A /* Supporting Files */,
 			);
 			path = IRKit;
@@ -121,6 +130,8 @@
 		C752D70417462C7B008B644A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C7FAB02017467CBF00125BCB /* Log.h */,
+				C7FAB02117467CBF00125BCB /* Log.m */,
 				C752D70517462C7B008B644A /* IRKit-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -244,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C752D70917462C7B008B644A /* IRKit.m in Sources */,
+				C7FAB02217467CBF00125BCB /* Log.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

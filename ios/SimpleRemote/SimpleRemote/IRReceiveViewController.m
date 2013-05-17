@@ -50,12 +50,36 @@
     self.delegate = nil;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewWillAppear:animated];
+    
+    [self connect];
+}
+
+#pragma mark - 
+#pragma - UI events
+
+- (void)cancelButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+    [self dismissViewControllerAnimated:YES completion:^{
+        LOG(@"dismissed");
+    }];
+}
+
+#pragma - BTLE
+
+- (void)connect {
+    LOG_CURRENT_METHOD;
+    
+    [[IRKit sharedInstance] startScan];
 }
 
 - (void)didReceiveMemoryWarning

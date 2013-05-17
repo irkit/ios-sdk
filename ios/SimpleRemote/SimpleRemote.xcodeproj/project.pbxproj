@@ -27,6 +27,7 @@
 		C7FAB00F17464ABA00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB00E17464AB900125BCB /* Log.m */; };
 		C7FAB01C174653AE00125BCB /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */; };
 		C7FAB01D174653AE00125BCB /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */; };
+		C7FAB02417467D6800125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB02317467D6800125BCB /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		C7FAB00E17464AB900125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		C7FAB01A174653AE00125BCB /* IRReceiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRReceiveViewController.h; sourceTree = "<group>"; };
 		C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRReceiveViewController.m; sourceTree = "<group>"; };
+		C7FAB02317467D6800125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7FAB02417467D6800125BCB /* CoreBluetooth.framework in Frameworks */,
 				C7FAB00717462FC100125BCB /* libIRKit.a in Frameworks */,
 				C76CFF5517462E0800F972B7 /* UIKit.framework in Frameworks */,
 				C76CFF5717462E0800F972B7 /* Foundation.framework in Frameworks */,
@@ -97,6 +100,7 @@
 		C76CFF4817462E0800F972B7 = {
 			isa = PBXGroup;
 			children = (
+				C7FAB02317467D6800125BCB /* CoreBluetooth.framework */,
 				C76CFF5A17462E0800F972B7 /* SimpleRemote */,
 				C76CFF8117462E0800F972B7 /* SimpleRemoteTests */,
 				C76CFF5317462E0800F972B7 /* Frameworks */,

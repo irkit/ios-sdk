@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 //#import "IRReceiveViewController.h"
 
-@interface IRKit : NSObject
+@interface IRKit : NSObject<CBCentralManagerDelegate, CBPeripheralDelegate>
 
 + (IRKit*) sharedInstance;
+- (void) startScan;
+- (void) stopScan;
+@property BOOL autoConnect;
 
 @end

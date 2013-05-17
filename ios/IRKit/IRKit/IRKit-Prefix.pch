@@ -3,5 +3,7 @@
 //
 
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-#endif
+#import <Foundation/Foundation.h>
+#import "Log.h"
+
+#endif // __OBJC__
