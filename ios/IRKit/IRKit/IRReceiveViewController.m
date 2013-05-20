@@ -9,6 +9,8 @@
 #import "IRReceiveViewController.h"
 #import "IRPeripheralLoadingCell.h"
 #import "IRSignalLoadingCell.h"
+#import "IRPeripheralCell.h"
+#import "IRSignalCell.h"
 
 @interface IRReceiveViewController ()
 
@@ -110,7 +112,7 @@
         }
         case 1:
         {
-            return 1;
+            return [IRKit sharedInstance].numberOfSignals + 1;
         }
     }
     return 0;
@@ -135,8 +137,10 @@
             // otherwise show peripheral info
             cell = [tableView dequeueReusableCellWithIdentifier:@"IRPeripheralCell"];
             if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"IRPeripheralCell"];
+                cell = [[IRPeripheralCell alloc] initWithReuseIdentifier:@"IRPeripheralCell"];
             }
+            // cell.peripheral = [[IRKit sharedInstance].peripherals objectAtIndex: indexPath.row];
+            ((IRPeripheralCell*)cell).peripheral = [[IRPeripheral alloc] init];
             return cell;
         }
     case 1:
@@ -160,8 +164,9 @@
             // otherwise show signal info
             cell = [tableView dequeueReusableCellWithIdentifier:@"IRSignalCell"];
             if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"IRSignalCell"];
+                cell = [[IRSignalCell alloc] initWithReuseIdentifier:@"IRSignalCell"];
             }
+            ((IRSignalCell*)cell).signal = [[IRSignal alloc] init];
             return cell;
         }
     }

@@ -29,6 +29,12 @@
 		C7554F3F1749EFF900BDF920 /* IRSignalLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */; };
 		C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F411749F2E000BDF920 /* IRPeripherals.m */; };
 		C7554F431749F2E000BDF920 /* IRPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F411749F2E000BDF920 /* IRPeripherals.m */; };
+		C75B5682174A405B00FFE5CB /* IRPeripheralCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */; };
+		C75B5685174A79DD00FFE5CB /* IRPeripherals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F401749F2E000BDF920 /* IRPeripherals.h */; };
+		C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5686174A7AB100FFE5CB /* IRSignals.m */; };
+		C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5688174A7AB200FFE5CB /* IRSignal.m */; };
+		C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5687174A7AB100FFE5CB /* IRSignals.h */; };
+		C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B568D174A7BC800FFE5CB /* IRSignalCell.m */; };
 		C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 /* End PBXBuildFile section */
@@ -50,6 +56,8 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */,
+				C75B5685174A79DD00FFE5CB /* IRPeripherals.h in CopyFiles */,
 				C7554F231749D9D400BDF920 /* IRReceiveViewController.h in CopyFiles */,
 				C7554F1B1749D61A00BDF920 /* IRConst.h in CopyFiles */,
 				C752D70717462C7B008B644A /* IRKit.h in CopyFiles */,
@@ -83,6 +91,15 @@
 		C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalLoadingCell.m; sourceTree = "<group>"; };
 		C7554F401749F2E000BDF920 /* IRPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripherals.h; sourceTree = "<group>"; };
 		C7554F411749F2E000BDF920 /* IRPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripherals.m; sourceTree = "<group>"; };
+		C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralCell.m; sourceTree = "<group>"; };
+		C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralCell.h; sourceTree = "<group>"; };
+		C75B5684174A41E000FFE5CB /* kayac_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kayac_logo.jpg; sourceTree = "<group>"; };
+		C75B5686174A7AB100FFE5CB /* IRSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignals.m; sourceTree = "<group>"; };
+		C75B5687174A7AB100FFE5CB /* IRSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignals.h; sourceTree = "<group>"; };
+		C75B5688174A7AB200FFE5CB /* IRSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignal.m; sourceTree = "<group>"; };
+		C75B5689174A7AB200FFE5CB /* IRSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignal.h; sourceTree = "<group>"; };
+		C75B568D174A7BC800FFE5CB /* IRSignalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalCell.m; sourceTree = "<group>"; };
+		C75B568E174A7BC800FFE5CB /* IRSignalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalCell.h; sourceTree = "<group>"; };
 		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
@@ -146,12 +163,21 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C75B568D174A7BC800FFE5CB /* IRSignalCell.m */,
+				C75B568E174A7BC800FFE5CB /* IRSignalCell.h */,
+				C75B5686174A7AB100FFE5CB /* IRSignals.m */,
+				C75B5687174A7AB100FFE5CB /* IRSignals.h */,
+				C75B5688174A7AB200FFE5CB /* IRSignal.m */,
+				C75B5689174A7AB200FFE5CB /* IRSignal.h */,
+				C75B5683174A41D600FFE5CB /* assets */,
 				C7554F401749F2E000BDF920 /* IRPeripherals.h */,
 				C7554F411749F2E000BDF920 /* IRPeripherals.m */,
 				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
 				C7554F311749E65B00BDF920 /* IRPeripheral.m */,
 				C7554F3C1749EFF900BDF920 /* IRSignalLoadingCell.h */,
 				C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */,
+				C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */,
+				C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */,
 				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
 				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
 				C7554F1C1749D84C00BDF920 /* IRFunc.h */,
@@ -193,6 +219,14 @@
 				C752D71B17462C7B008B644A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C75B5683174A41D600FFE5CB /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				C75B5684174A41E000FFE5CB /* kayac_logo.jpg */,
+			);
+			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +335,10 @@
 				C7554F3A1749ED8400BDF920 /* IRPeripheralLoadingCell.m in Sources */,
 				C7554F3E1749EFF900BDF920 /* IRSignalLoadingCell.m in Sources */,
 				C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */,
+				C75B5682174A405B00FFE5CB /* IRPeripheralCell.m in Sources */,
+				C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */,
+				C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */,
+				C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

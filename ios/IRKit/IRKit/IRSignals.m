@@ -1,26 +1,26 @@
 //
-//  IRPeripherals.m
+//  IRSignals.m
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/05/20.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRPeripherals.h"
+#import "IRSignals.h"
 
-@interface IRPeripherals ()
+@interface IRSignals ()
 
-@property (nonatomic, strong) NSMutableArray* peripherals; // array of IRPeripheral
+@property (nonatomic, strong) NSMutableArray* signals; // array of IRSignal
 
 @end
 
-@implementation IRPeripherals
+@implementation IRSignals
 
 - (id)init {
     self = [super init];
     if (! self) { return nil; }
     
-    _peripherals = [[NSMutableArray alloc] initWithArray:@[]];
+    _signals = [[NSMutableArray alloc] initWithArray:@[]];
     
     return self;
 }
@@ -28,26 +28,26 @@
 - (BOOL)containsObject:(id)object {
     LOG_CURRENT_METHOD;
     
-    return [_peripherals containsObject:object];
+    return [_signals containsObject:object];
 }
 
 - (void)addObject:(id)object {
     LOG( @"object: ", object );
     
-    [_peripherals addObject:object];
+    [_signals addObject:object];
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
     LOG( @"index: %d", index);
     
-    return [_peripherals objectAtIndex:index];
+    return [_signals objectAtIndex:index];
 }
 
 - (NSUInteger) count {
     LOG_CURRENT_METHOD;
     
     return 1; // testing
-    // return _peripherals.count;
+    // return _signals.count;
 }
 
 @end

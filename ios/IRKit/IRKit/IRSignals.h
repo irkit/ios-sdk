@@ -1,5 +1,5 @@
 //
-//  IRPeripherals.h
+//  IRSignals.h
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/05/20.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IRPeripherals : NSObject
+@interface IRSignals : NSObject
 
 - (BOOL)containsObject:(id)object;
 - (void)addObject:(id)object;

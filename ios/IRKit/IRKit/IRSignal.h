@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IRPeripheral : NSObject
+@interface IRSignal : NSObject
 
 @property (nonatomic, strong) NSString *name;
 

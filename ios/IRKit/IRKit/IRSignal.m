@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRPeripheral.h"
+#import "IRSignal.h"
 
-@implementation IRPeripheral
+@implementation IRSignal
 
 - (NSString*)name {
     LOG_CURRENT_METHOD;

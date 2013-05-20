@@ -8,14 +8,11 @@
 
 #import "IRKit.h"
 #import "IRFunc.h" // private
-#import "IRPeripherals.h"
 
 @interface IRKit ()
 
 @property (nonatomic, strong) CBCentralManager* manager;
 @property (nonatomic, strong) CBPeripheral* peripheral;
-@property (nonatomic, strong) IRPeripherals *peripherals;
-@property (nonatomic, strong) NSMutableArray* signals; // array of IRSignal
 
 @end
 
@@ -71,7 +68,8 @@
 - (void)loadFromPersistentStore {
     LOG_CURRENT_METHOD;
     
-    
+    self.peripherals = [[IRPeripherals alloc] init];
+    self.signals = [[IRSignals alloc] init];
 }
 
 #pragma mark -
@@ -107,13 +105,13 @@
 - (void)centralManager:(CBCentralManager *)central
 didFailToConnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
-    LOG_CURRENT_METHOD;
+    LOG(@"peripheral: %@", peripheral);
 
 }
 
 - (void)centralManager:(CBCentralManager *)central
 didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    LOG_CURRENT_METHOD;
+    LOG(@"peripherals: %@", peripherals);
 
 }
 
@@ -165,6 +163,8 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 - (void) peripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error
 {
+    LOG( @"peripheral: %@ error: %@", peripheral, error);
+
     for (CBService *service in peripheral.services)
     {
         LOG(@"Service found with UUID: %@ RSSI: %@", service.UUID, peripheral.RSSI);
@@ -197,6 +197,8 @@ didDiscoverServices:(NSError *)error
 didDiscoverCharacteristicsForService:(CBService *)service
               error:(NSError *)error
 {
+    LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
+
     if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
     {
         for (CBCharacteristic *characteristic in service.characteristics)
@@ -256,8 +258,12 @@ didDiscoverCharacteristicsForService:(CBService *)service
 /*
  Invoked upon completion of a -[readValueForCharacteristic:] request or on the reception of a notification/indication.
  */
-- (void) peripheral:(CBPeripheral *)aPeripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+- (void) peripheral:(CBPeripheral *)aPeripheral
+didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
+              error:(NSError *)error
 {
+    LOG( @"peripheral: %@ charactristic: %@ error: %@", aPeripheral, characteristic, error);
+    
     /* Updated value for heart rate measurement received */
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A37"]])
     {

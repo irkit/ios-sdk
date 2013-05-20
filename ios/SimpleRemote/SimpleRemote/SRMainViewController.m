@@ -26,9 +26,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     
-    if ([IRKit sharedInstance].numberOfPeripherals == 0) {
-        [self addBarButtonPressed: nil];
-    }
+    //if ([IRKit sharedInstance].numberOfPeripherals == 0) {
+    [self addBarButtonPressed: nil];
+    //}
 }
 
 - (IBAction)addBarButtonPressed:(id)sender {
