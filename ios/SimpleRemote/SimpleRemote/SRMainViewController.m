@@ -7,7 +7,6 @@
 //
 
 #import "SRMainViewController.h"
-#import "IRReceiveViewController.h"
 
 @interface SRMainViewController ()
 
@@ -19,8 +18,17 @@
 
 - (void)viewDidLoad
 {
+    LOG_CURRENT_METHOD;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    
+    if ([IRKit sharedInstance].numberOfPeripherals == 0) {
+        [self addBarButtonPressed: nil];
+    }
 }
 
 - (IBAction)addBarButtonPressed:(id)sender {

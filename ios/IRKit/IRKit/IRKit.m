@@ -7,12 +7,20 @@
 //
 
 #import "IRKit.h"
+#import "IRFunc.h" // private
+#import "IRPeripherals.h"
 
-@implementation IRKit {
-    CBCentralManager* manager;
-    NSMutableArray* peripherals;
-    CBPeripheral* peripheral;
-}
+@interface IRKit ()
+
+@property (nonatomic, strong) CBCentralManager* manager;
+@property (nonatomic, strong) CBPeripheral* peripheral;
+@property (nonatomic, strong) IRPeripherals *peripherals;
+@property (nonatomic, strong) NSMutableArray* signals; // array of IRSignal
+
+@end
+
+@implementation IRKit
+
 @synthesize autoConnect;
 
 + (id) sharedInstance {
@@ -28,93 +36,123 @@
     self = [super init];
     if (! self) { return nil; }
 
-    manager = [[CBCentralManager alloc] initWithDelegate:self
-                                                   queue:nil];
+    _manager = [[CBCentralManager alloc] initWithDelegate:self
+                                                    queue:nil];
+    [self loadFromPersistentStore];
 
     return self;
 }
 
 - (void) startScan {
     LOG_CURRENT_METHOD;
-    [manager scanForPeripheralsWithServices:[NSArray arrayWithObject:[CBUUID UUIDWithString:@"180D"]]
-                                    options:nil];
+    
+//    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID_STRING ]
+//                                     options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
+    // find anything
+    [_manager scanForPeripheralsWithServices:nil
+                                     options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
 }
 
 - (void) stopScan {
     LOG_CURRENT_METHOD;
-    [manager stopScan];
+    [_manager stopScan];
+}
+
+- (NSUInteger) numberOfPeripherals {
+    LOG_CURRENT_METHOD;
+    return [_peripherals count];
+}
+
+- (NSUInteger) numberOfSignals {
+    LOG_CURRENT_METHOD;
+    return [_signals count];
+}
+
+- (void)loadFromPersistentStore {
+    LOG_CURRENT_METHOD;
+    
+    
 }
 
 #pragma mark -
 #pragma CBCentralManagerDelegate
 
 - (void)centralManager:(CBCentralManager *)central
- didDiscoverPeripheral:(CBPeripheral *)_peripheral
+ didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
-    LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", _peripheral, advertisementData, RSSI );
-    
-    if( ![peripherals containsObject:_peripheral] ) {
-        [peripherals addObject:_peripheral];
+    LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
+
+    if( ![_peripherals containsObject:peripheral] ) {
+        [_peripherals addObject:peripheral];
     }
-    
+
+    /* iOS 6.0 bug workaround : connect to device before displaying UUID !
+     The reason for this is that the CFUUID .UUID property of CBPeripheral
+     here is null the first time an unkown (never connected before in any app)
+     peripheral is connected. So therefore we connect to all peripherals we find.
+     */
+
+    peripheral.delegate = self;
+    [_manager connectPeripheral:peripheral
+                        options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES }];
+
     /* Retreive already known devices */
     if(autoConnect) {
-        [manager retrievePeripherals:[NSArray arrayWithObject: (id)_peripheral.UUID]];
+        [_manager retrievePeripherals:[NSArray arrayWithObject: (id)peripheral.UUID]];
     }
-    
+
 }
 
 - (void)centralManager:(CBCentralManager *)central
 didFailToConnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     LOG_CURRENT_METHOD;
-    
+
 }
 
 - (void)centralManager:(CBCentralManager *)central
 didRetrieveConnectedPeripherals:(NSArray *)peripherals {
     LOG_CURRENT_METHOD;
-    
+
 }
 
 /*
  Invoked when the central manager retrieves the list of known peripherals.
  */
 - (void)centralManager:(CBCentralManager *)central
-didRetrievePeripherals:(NSArray *)_peripherals {
-    LOG( @"peripherals: %@", _peripherals);
-    
-    [self stopScan];
-    
+didRetrievePeripherals:(NSArray *)peripherals {
+    LOG( @"peripherals: %@", peripherals);
+
+//    [self stopScan];
+
     /* If there are any known devices, automatically connect to the 1st one. */
-    if([_peripherals count] >=1)
+    if([peripherals count] >=1)
     {
-        peripheral = [_peripherals objectAtIndex:0]; // retain peripheral
-        LOG( @"peripheral %@ RSSI: %@", peripheral.UUID, peripheral.RSSI );
-        [manager connectPeripheral:peripheral
-                           options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
-                                                               forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
+        self.peripheral = [peripherals objectAtIndex:0];
+        LOG( @"peripheral %@ RSSI: %@", _peripheral.UUID, _peripheral.RSSI );
+        [_manager connectPeripheral:_peripheral
+                            options: @{ CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES }];
     }
 }
 
 - (void)centralManager:(CBCentralManager *)central
-  didConnectPeripheral:(CBPeripheral *)_peripheral {
-    LOG( @"peripheral: %@, RSSI: %@", _peripheral, _peripheral.RSSI );
-    
-    [_peripheral setDelegate:self];
-    [_peripheral discoverServices:nil];
-    
+  didConnectPeripheral:(CBPeripheral *)peripheral {
+    LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
+
+    [peripheral setDelegate:self];
+    [peripheral discoverServices:nil];
 }
 
 - (void)centralManager:(CBCentralManager *)central
 didDisconnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
-    LOG_CURRENT_METHOD;
+    LOG( @"peripheral: %@ error: %@", peripheral, error);
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    LOG( @"state: %d", [central state]);
+    LOG( @"state: %@", NSStringFromCBCentralManagerState([central state]));
+    
 }
 
 #pragma mark -
@@ -124,29 +162,29 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
  Invoked upon completion of a -[discoverServices:] request.
  Discover available characteristics on interested services
  */
-- (void) peripheral:(CBPeripheral *)_peripheral
+- (void) peripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error
 {
-    for (CBService *service in _peripheral.services)
+    for (CBService *service in peripheral.services)
     {
-        LOG(@"Service found with UUID: %@ RSSI: %@", service.UUID, _peripheral.RSSI);
-        
+        LOG(@"Service found with UUID: %@ RSSI: %@", service.UUID, peripheral.RSSI);
+
         /* Heart Rate Service */
         if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
         {
-            [_peripheral discoverCharacteristics:nil forService:service];
+            [peripheral discoverCharacteristics:nil forService:service];
         }
-        
+
         /* Device Information Service */
         if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
         {
-            [_peripheral discoverCharacteristics:nil forService:service];
+            [peripheral discoverCharacteristics:nil forService:service];
         }
-        
+
         /* GAP (Generic Access Profile) for Device Name */
         if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
         {
-            [_peripheral discoverCharacteristics:nil forService:service];
+            [peripheral discoverCharacteristics:nil forService:service];
         }
     }
 }
@@ -155,7 +193,7 @@ didDiscoverServices:(NSError *)error
  Invoked upon completion of a -[discoverCharacteristics:forService:] request.
  Perform appropriate operations on interested characteristics
  */
-- (void) peripheral:(CBPeripheral *)_peripheral
+- (void) peripheral:(CBPeripheral *)peripheral
 didDiscoverCharacteristicsForService:(CBService *)service
               error:(NSError *)error
 {
@@ -166,28 +204,28 @@ didDiscoverCharacteristicsForService:(CBService *)service
             /* Set notification on heart rate measurement */
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A37"]])
             {
-                [_peripheral setNotifyValue:YES
+                [peripheral setNotifyValue:YES
                           forCharacteristic:characteristic];
                 LOG(@"Found a Heart Rate Measurement Characteristic");
             }
             /* Read body sensor location */
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A38"]])
             {
-                [_peripheral readValueForCharacteristic:characteristic];
+                [peripheral readValueForCharacteristic:characteristic];
                 LOG(@"Found a Body Sensor Location Characteristic");
             }
-            
+
             /* Write heart rate control point */
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A39"]])
             {
                 uint8_t val = 1;
                 NSData* valData = [NSData dataWithBytes:(void*)&val length:sizeof(val)];
-                [_peripheral writeValue:valData forCharacteristic:characteristic
+                [peripheral writeValue:valData forCharacteristic:characteristic
                                    type:CBCharacteristicWriteWithResponse];
             }
         }
     }
-    
+
     if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
     {
         for (CBCharacteristic *characteristic in service.characteristics)
@@ -195,12 +233,12 @@ didDiscoverCharacteristicsForService:(CBService *)service
             /* Read device name */
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
             {
-                [_peripheral readValueForCharacteristic:characteristic];
-                LOG(@"Found a Device Name Characteristic, RSSI: %@", _peripheral.RSSI);
+                [peripheral readValueForCharacteristic:characteristic];
+                LOG(@"Found a Device Name Characteristic, RSSI: %@", peripheral.RSSI);
             }
         }
     }
-    
+
     if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
     {
         for (CBCharacteristic *characteristic in service.characteristics)
@@ -208,7 +246,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
             /* Read manufacturer name */
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
             {
-                [_peripheral readValueForCharacteristic:characteristic];
+                [peripheral readValueForCharacteristic:characteristic];
                 LOG(@"Found a Device Manufacturer Name Characteristic");
             }
         }

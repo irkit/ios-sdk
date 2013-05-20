@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IRKit.h"
 
 @protocol IRReceiveViewDelegate <NSObject>
 @end
 
-@interface IRReceiveViewController : UIViewController
+@interface IRReceiveViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, assign) id<IRReceiveViewDelegate> delegate;
 

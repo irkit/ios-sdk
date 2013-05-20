@@ -25,8 +25,6 @@
 		C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */; };
 		C7FAB00717462FC100125BCB /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
 		C7FAB00F17464ABA00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB00E17464AB900125BCB /* Log.m */; };
-		C7FAB01C174653AE00125BCB /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */; };
-		C7FAB01D174653AE00125BCB /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */; };
 		C7FAB02417467D6800125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB02317467D6800125BCB /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,8 +64,6 @@
 		C7FAB00617462FC100125BCB /* libIRKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIRKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos/libIRKit.a"; sourceTree = "<group>"; };
 		C7FAB00B1746481700125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB00E17464AB900125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
-		C7FAB01A174653AE00125BCB /* IRReceiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRReceiveViewController.h; sourceTree = "<group>"; };
-		C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRReceiveViewController.m; sourceTree = "<group>"; };
 		C7FAB02317467D6800125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -100,7 +96,6 @@
 		C76CFF4817462E0800F972B7 = {
 			isa = PBXGroup;
 			children = (
-				C7FAB02317467D6800125BCB /* CoreBluetooth.framework */,
 				C76CFF5A17462E0800F972B7 /* SimpleRemote */,
 				C76CFF8117462E0800F972B7 /* SimpleRemoteTests */,
 				C76CFF5317462E0800F972B7 /* Frameworks */,
@@ -120,6 +115,7 @@
 		C76CFF5317462E0800F972B7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7FAB02317467D6800125BCB /* CoreBluetooth.framework */,
 				C7FAB00617462FC100125BCB /* libIRKit.a */,
 				C76CFF5417462E0800F972B7 /* UIKit.framework */,
 				C76CFF5617462E0800F972B7 /* Foundation.framework */,
@@ -132,8 +128,6 @@
 		C76CFF5A17462E0800F972B7 /* SimpleRemote */ = {
 			isa = PBXGroup;
 			children = (
-				C7FAB01A174653AE00125BCB /* IRReceiveViewController.h */,
-				C7FAB01B174653AE00125BCB /* IRReceiveViewController.m */,
 				C76CFF6317462E0800F972B7 /* SRAppDelegate.h */,
 				C76CFF6417462E0800F972B7 /* SRAppDelegate.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
@@ -294,7 +288,6 @@
 				C76CFF6517462E0800F972B7 /* SRAppDelegate.m in Sources */,
 				C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */,
 				C7FAB00F17464ABA00125BCB /* Log.m in Sources */,
-				C7FAB01C174653AE00125BCB /* IRReceiveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */,
-				C7FAB01D174653AE00125BCB /* IRReceiveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

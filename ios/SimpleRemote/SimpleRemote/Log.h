@@ -11,7 +11,7 @@ NSString *sp(NSString *format, ...);
 #  define LOG(...)           NSLog(@"%s#%d %@", __PRETTY_FUNCTION__, __LINE__, sp(__VA_ARGS__))
 #
 #else
-#  define LOG(...)           ()
-#  define LOG_CURRENT_METHOD ()
+#  define LOG(...)
+#  define LOG_CURRENT_METHOD 
 #
 #endif

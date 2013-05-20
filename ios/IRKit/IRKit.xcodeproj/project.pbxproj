@@ -16,6 +16,19 @@
 		C752D71717462C7B008B644A /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C752D71D17462C7B008B644A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C752D71B17462C7B008B644A /* InfoPlist.strings */; };
 		C752D72017462C7B008B644A /* IRKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C752D71F17462C7B008B644A /* IRKitTests.m */; };
+		C7554F1B1749D61A00BDF920 /* IRConst.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7FAB0251746889000125BCB /* IRConst.h */; };
+		C7554F1E1749D84C00BDF920 /* IRFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F1D1749D84C00BDF920 /* IRFunc.m */; };
+		C7554F211749D99800BDF920 /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F201749D99800BDF920 /* IRReceiveViewController.m */; };
+		C7554F221749D99800BDF920 /* IRReceiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F201749D99800BDF920 /* IRReceiveViewController.m */; };
+		C7554F231749D9D400BDF920 /* IRReceiveViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F1F1749D99800BDF920 /* IRReceiveViewController.h */; };
+		C7554F321749E65B00BDF920 /* IRPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F311749E65B00BDF920 /* IRPeripheral.m */; };
+		C7554F331749E65B00BDF920 /* IRPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F311749E65B00BDF920 /* IRPeripheral.m */; };
+		C7554F3A1749ED8400BDF920 /* IRPeripheralLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */; };
+		C7554F3B1749ED8400BDF920 /* IRPeripheralLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */; };
+		C7554F3E1749EFF900BDF920 /* IRSignalLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */; };
+		C7554F3F1749EFF900BDF920 /* IRSignalLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */; };
+		C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F411749F2E000BDF920 /* IRPeripherals.m */; };
+		C7554F431749F2E000BDF920 /* IRPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F411749F2E000BDF920 /* IRPeripherals.m */; };
 		C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 /* End PBXBuildFile section */
@@ -37,6 +50,8 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7554F231749D9D400BDF920 /* IRReceiveViewController.h in CopyFiles */,
+				C7554F1B1749D61A00BDF920 /* IRConst.h in CopyFiles */,
 				C752D70717462C7B008B644A /* IRKit.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -56,6 +71,18 @@
 		C752D71C17462C7B008B644A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C752D71E17462C7B008B644A /* IRKitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRKitTests.h; sourceTree = "<group>"; };
 		C752D71F17462C7B008B644A /* IRKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRKitTests.m; sourceTree = "<group>"; };
+		C7554F1C1749D84C00BDF920 /* IRFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRFunc.h; sourceTree = "<group>"; };
+		C7554F1D1749D84C00BDF920 /* IRFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRFunc.m; sourceTree = "<group>"; };
+		C7554F1F1749D99800BDF920 /* IRReceiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRReceiveViewController.h; sourceTree = "<group>"; };
+		C7554F201749D99800BDF920 /* IRReceiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRReceiveViewController.m; sourceTree = "<group>"; };
+		C7554F301749E65B00BDF920 /* IRPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheral.h; sourceTree = "<group>"; };
+		C7554F311749E65B00BDF920 /* IRPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheral.m; sourceTree = "<group>"; };
+		C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralLoadingCell.h; sourceTree = "<group>"; };
+		C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralLoadingCell.m; sourceTree = "<group>"; };
+		C7554F3C1749EFF900BDF920 /* IRSignalLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalLoadingCell.h; sourceTree = "<group>"; };
+		C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalLoadingCell.m; sourceTree = "<group>"; };
+		C7554F401749F2E000BDF920 /* IRPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripherals.h; sourceTree = "<group>"; };
+		C7554F411749F2E000BDF920 /* IRPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripherals.m; sourceTree = "<group>"; };
 		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
@@ -89,7 +116,6 @@
 		C752D6F517462C7B008B644A = {
 			isa = PBXGroup;
 			children = (
-				C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */,
 				C752D70317462C7B008B644A /* IRKit */,
 				C752D71817462C7B008B644A /* IRKitTests */,
 				C752D70017462C7B008B644A /* Frameworks */,
@@ -109,6 +135,7 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */,
 				C752D70117462C7B008B644A /* Foundation.framework */,
 				C752D71017462C7B008B644A /* SenTestingKit.framework */,
 				C752D71217462C7B008B644A /* UIKit.framework */,
@@ -119,9 +146,21 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C7554F401749F2E000BDF920 /* IRPeripherals.h */,
+				C7554F411749F2E000BDF920 /* IRPeripherals.m */,
+				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
+				C7554F311749E65B00BDF920 /* IRPeripheral.m */,
+				C7554F3C1749EFF900BDF920 /* IRSignalLoadingCell.h */,
+				C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */,
+				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
+				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
+				C7554F1C1749D84C00BDF920 /* IRFunc.h */,
+				C7554F1D1749D84C00BDF920 /* IRFunc.m */,
 				C752D70617462C7B008B644A /* IRKit.h */,
 				C752D70817462C7B008B644A /* IRKit.m */,
 				C7FAB0251746889000125BCB /* IRConst.h */,
+				C7554F1F1749D99800BDF920 /* IRReceiveViewController.h */,
+				C7554F201749D99800BDF920 /* IRReceiveViewController.m */,
 				C752D70417462C7B008B644A /* Supporting Files */,
 			);
 			path = IRKit;
@@ -256,6 +295,12 @@
 			files = (
 				C752D70917462C7B008B644A /* IRKit.m in Sources */,
 				C7FAB02217467CBF00125BCB /* Log.m in Sources */,
+				C7554F1E1749D84C00BDF920 /* IRFunc.m in Sources */,
+				C7554F211749D99800BDF920 /* IRReceiveViewController.m in Sources */,
+				C7554F321749E65B00BDF920 /* IRPeripheral.m in Sources */,
+				C7554F3A1749ED8400BDF920 /* IRPeripheralLoadingCell.m in Sources */,
+				C7554F3E1749EFF900BDF920 /* IRSignalLoadingCell.m in Sources */,
+				C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +309,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C752D72017462C7B008B644A /* IRKitTests.m in Sources */,
+				C7554F221749D99800BDF920 /* IRReceiveViewController.m in Sources */,
+				C7554F331749E65B00BDF920 /* IRPeripheral.m in Sources */,
+				C7554F3B1749ED8400BDF920 /* IRPeripheralLoadingCell.m in Sources */,
+				C7554F3F1749EFF900BDF920 /* IRSignalLoadingCell.m in Sources */,
+				C7554F431749F2E000BDF920 /* IRPeripherals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,12 +360,16 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
 		};
@@ -333,12 +387,16 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				GCC_WARN_PEDANTIC = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
 		};
