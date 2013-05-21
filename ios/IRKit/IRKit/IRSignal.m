@@ -15,4 +15,11 @@
     return @"name";
 }
 
+// array of number of 38kHz counter between edges
+// 1st edge is ↓
+- (NSArray*)data {
+    LOG_CURRENT_METHOD;
+    return @[ @100, @100, @100, @100, @100 ];
+}
+
 @end

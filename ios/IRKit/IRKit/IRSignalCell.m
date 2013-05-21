@@ -7,6 +7,13 @@
 //
 
 #import "IRSignalCell.h"
+#import "IRChartView.h"
+
+@interface IRSignalCell ()
+
+@property (nonatomic, strong) IRChartView *chartView;
+
+@end
 
 @implementation IRSignalCell
 
@@ -25,6 +32,11 @@
         
         // text label
         self.textLabel.text = @"signal 1";
+        
+        int margin = 20;
+        int height = 200;
+        self.chartView = [[IRChartView alloc] initWithFrame: (CGRect){ margin, margin, 300 - margin*2, height - margin*2 }];
+        [self.contentView addSubview: self.chartView];
     }
     return self;
 }
@@ -41,8 +53,7 @@
     
     self.textLabel.text = signal.name;
     self.detailTextLabel.text = signal.name;
-    
-    // TODO: draw graph?
+    self.chartView.data = signal.data;
 }
 
 @end

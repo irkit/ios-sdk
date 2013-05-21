@@ -11,5 +11,6 @@
 @interface IRSignal : NSObject
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSArray *data;
 
 @end

@@ -118,6 +118,25 @@
     return 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG_CURRENT_METHOD;
+    switch (indexPath.section) {
+        case 0:
+        {
+            return 44;
+        }
+        case 1:
+        {
+            switch (indexPath.row) {
+                case 0:
+                    return 200;
+                default:
+                    return 44;
+            }
+        }
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
     
