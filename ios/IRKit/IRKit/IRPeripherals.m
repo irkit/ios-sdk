@@ -8,6 +8,8 @@
 
 #import "IRPeripherals.h"
 
+#define LOCAL_LOG_DISABLED
+
 @interface IRPeripherals ()
 
 @property (nonatomic, strong) NSMutableArray* peripherals; // array of IRPeripheral

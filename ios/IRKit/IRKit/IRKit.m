@@ -167,25 +167,29 @@ didDiscoverServices:(NSError *)error
 
     for (CBService *service in peripheral.services)
     {
-        LOG(@"Service found with UUID: %@ RSSI: %@", service.UUID, peripheral.RSSI);
+        LOG(@"Service found: %@", service);
 
-        /* Heart Rate Service */
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
-        {
-            [peripheral discoverCharacteristics:nil forService:service];
-        }
+        // TODO: delete this row
+        // discover characterstics for all services (just interested now)
+        [peripheral discoverCharacteristics:nil forService:service];
 
-        /* Device Information Service */
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
-        {
-            [peripheral discoverCharacteristics:nil forService:service];
-        }
-
-        /* GAP (Generic Access Profile) for Device Name */
-        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
-        {
-            [peripheral discoverCharacteristics:nil forService:service];
-        }
+//        // Device Information Service
+//        if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
+//        {
+//            [peripheral discoverCharacteristics:nil forService:service];
+//        }
+//        
+//        // GAP (Generic Access Profile) for Device Name
+//        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
+//        {
+//            [peripheral discoverCharacteristics:nil forService:service];
+//        }
+//
+//        // GATT (Generic Attribute Profile)
+//        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAttributeProfileString]] )
+//        {
+//            [peripheral discoverCharacteristics:nil forService:service];
+//        }
     }
 }
 
@@ -199,34 +203,39 @@ didDiscoverCharacteristicsForService:(CBService *)service
 {
     LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
 
-    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
+    for (CBCharacteristic *characteristic in service.characteristics)
     {
-        for (CBCharacteristic *characteristic in service.characteristics)
-        {
-            /* Set notification on heart rate measurement */
-            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A37"]])
-            {
-                [peripheral setNotifyValue:YES
-                          forCharacteristic:characteristic];
-                LOG(@"Found a Heart Rate Measurement Characteristic");
-            }
-            /* Read body sensor location */
-            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A38"]])
-            {
-                [peripheral readValueForCharacteristic:characteristic];
-                LOG(@"Found a Body Sensor Location Characteristic");
-            }
-
-            /* Write heart rate control point */
-            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A39"]])
-            {
-                uint8_t val = 1;
-                NSData* valData = [NSData dataWithBytes:(void*)&val length:sizeof(val)];
-                [peripheral writeValue:valData forCharacteristic:characteristic
-                                   type:CBCharacteristicWriteWithResponse];
-            }
-        }
+        LOG( @"discovered characteristic: %@", characteristic );
     }
+
+//    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
+//    {
+//        for (CBCharacteristic *characteristic in service.characteristics)
+//        {
+//            /* Set notification on heart rate measurement */
+//            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A37"]])
+//            {
+//                [peripheral setNotifyValue:YES
+//                          forCharacteristic:characteristic];
+//                LOG(@"Found a Heart Rate Measurement Characteristic");
+//            }
+//            /* Read body sensor location */
+//            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A38"]])
+//            {
+//                [peripheral readValueForCharacteristic:characteristic];
+//                LOG(@"Found a Body Sensor Location Characteristic");
+//            }
+//
+//            /* Write heart rate control point */
+//            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A39"]])
+//            {
+//                uint8_t val = 1;
+//                NSData* valData = [NSData dataWithBytes:(void*)&val length:sizeof(val)];
+//                [peripheral writeValue:valData forCharacteristic:characteristic
+//                                   type:CBCharacteristicWriteWithResponse];
+//            }
+//        }
+//    }
 
     if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
     {
@@ -241,11 +250,13 @@ didDiscoverCharacteristicsForService:(CBService *)service
         }
     }
 
+    // org.bluetooth.service.device_information
     if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
     {
         for (CBCharacteristic *characteristic in service.characteristics)
         {
-            /* Read manufacturer name */
+            // Read manufacturer name
+            // 2a29: org.bluetooth.characteristic.manufacturer_name_string
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
             {
                 [peripheral readValueForCharacteristic:characteristic];
@@ -262,30 +273,14 @@ didDiscoverCharacteristicsForService:(CBService *)service
 didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
               error:(NSError *)error
 {
-    LOG( @"peripheral: %@ charactristic: %@ error: %@", aPeripheral, characteristic, error);
+    LOG( @"peripheral: %@ charactristic: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.value, error);
     
-    /* Updated value for heart rate measurement received */
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A37"]])
-    {
-        if( (characteristic.value)  || !error )
-        {
-            /* Update UI with heart rate data */
-            //            [self updateWithHRMData:characteristic.value];
-        }
-    }
-    /* Value for body sensor location received */
-    else  if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A38"]])
-    {
-        NSData * updatedValue = characteristic.value;
-        LOG( @"updatedValue: %@", updatedValue);
-    }
-    /* Value for device Name received */
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
     {
         NSString * deviceName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         LOG(@"Device Name = %@", deviceName);
     }
-    /* Value for manufacturer name received */
+    // 2a29: org.bluetooth.characteristic.manufacturer_name_string
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
     {
         NSString* manufacturer = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
