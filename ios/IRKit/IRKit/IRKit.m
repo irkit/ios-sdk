@@ -12,7 +12,6 @@
 @interface IRKit ()
 
 @property (nonatomic, strong) CBCentralManager* manager;
-@property (nonatomic, strong) CBPeripheral* peripheral;
 
 @end
 
@@ -35,7 +34,15 @@
 
     _manager = [[CBCentralManager alloc] initWithDelegate:self
                                                     queue:nil];
-    [self loadFromPersistentStore];
+    
+    _peripherals = [[IRPeripherals alloc] init];
+    NSArray *knownPeripherals = [_peripherals knownPeripheralUUIDs];
+    if ([knownPeripherals count]) {
+        LOG( @"retrieve: %@", knownPeripherals );
+        [_manager retrievePeripherals: knownPeripherals];
+    }
+    
+    _signals = [[IRSignals alloc] init];
 
     return self;
 }
@@ -65,13 +72,6 @@
     return [_signals count];
 }
 
-- (void)loadFromPersistentStore {
-    LOG_CURRENT_METHOD;
-    
-    self.peripherals = [[IRPeripherals alloc] init];
-    self.signals = [[IRSignals alloc] init];
-}
-
 #pragma mark -
 #pragma CBCentralManagerDelegate
 
@@ -81,9 +81,7 @@
                   RSSI:(NSNumber *)RSSI {
     LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
 
-    if( ![_peripherals containsObject:peripheral] ) {
-        [_peripherals addObject:peripheral];
-    }
+    [_peripherals addPeripheral:peripheral]; // retain
 
     /* iOS 6.0 bug workaround : connect to device before displaying UUID !
      The reason for this is that the CFUUID .UUID property of CBPeripheral
@@ -94,12 +92,6 @@
     peripheral.delegate = self;
     [_manager connectPeripheral:peripheral
                         options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES }];
-
-    /* Retreive already known devices */
-    if(autoConnect) {
-        [_manager retrievePeripherals:[NSArray arrayWithObject: (id)peripheral.UUID]];
-    }
-
 }
 
 - (void)centralManager:(CBCentralManager *)central
@@ -122,15 +114,12 @@ didRetrieveConnectedPeripherals:(NSArray *)peripherals {
 didRetrievePeripherals:(NSArray *)peripherals {
     LOG( @"peripherals: %@", peripherals);
 
-//    [self stopScan];
+    for (CBPeripheral *peripheral in peripherals) {
+        [_peripherals addPeripheral:peripheral]; // retain
 
-    /* If there are any known devices, automatically connect to the 1st one. */
-    if([peripherals count] >=1)
-    {
-        self.peripheral = [peripherals objectAtIndex:0];
-        LOG( @"peripheral %@ RSSI: %@", _peripheral.UUID, _peripheral.RSSI );
-        [_manager connectPeripheral:_peripheral
-                            options: @{ CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES }];
+        peripheral.delegate = self;
+        [_manager connectPeripheral:peripheral
+                            options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES }];
     }
 }
 
@@ -138,6 +127,10 @@ didRetrievePeripherals:(NSArray *)peripherals {
   didConnectPeripheral:(CBPeripheral *)peripheral {
     LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
 
+    // iOS 6.0 bug workaround : connect to device before displaying UUID !
+    // The reason for this is that the CFUUID .UUID property of CBPeripheral
+    // here is null the first time an unkown (never connected before in any app)
+    // peripheral is connected. So therefore we connect to all peripherals we find.
     [peripheral setDelegate:self];
     [peripheral discoverServices:nil];
 }
@@ -146,6 +139,8 @@ didRetrievePeripherals:(NSArray *)peripherals {
 didDisconnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     LOG( @"peripheral: %@ error: %@", peripheral, error);
+    
+    // TODO removeFromPeripherals??
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {

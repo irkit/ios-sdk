@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IRPeripheral : NSObject
+@interface IRPeripheral : CBPeripheral
 
-@property (nonatomic, strong) NSString *name;
+@property(nonatomic, copy) NSString *customizedName;
 
 @end

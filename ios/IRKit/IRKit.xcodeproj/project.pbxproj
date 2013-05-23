@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E0174B8EB100872C04 /* IRChartView.m */; };
+		C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */; };
+		C73E37E7174DF20300872C04 /* IRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E6174DF20300872C04 /* IRHelper.m */; };
 		C752D70217462C7B008B644A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
 		C752D70717462C7B008B644A /* IRKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C752D70617462C7B008B644A /* IRKit.h */; };
 		C752D70917462C7B008B644A /* IRKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C752D70817462C7B008B644A /* IRKit.m */; };
@@ -70,6 +72,10 @@
 /* Begin PBXFileReference section */
 		C73E37DF174B8EB100872C04 /* IRChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRChartView.h; sourceTree = "<group>"; };
 		C73E37E0174B8EB100872C04 /* IRChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRChartView.m; sourceTree = "<group>"; };
+		C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPersistentStore.h; sourceTree = "<group>"; };
+		C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPersistentStore.m; sourceTree = "<group>"; };
+		C73E37E5174DF20300872C04 /* IRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelper.h; sourceTree = "<group>"; };
+		C73E37E6174DF20300872C04 /* IRHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHelper.m; sourceTree = "<group>"; };
 		C752D6FE17462C7B008B644A /* libIRKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIRKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C752D70117462C7B008B644A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C752D70517462C7B008B644A /* IRKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IRKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -193,6 +199,10 @@
 				C7554F1F1749D99800BDF920 /* IRReceiveViewController.h */,
 				C7554F201749D99800BDF920 /* IRReceiveViewController.m */,
 				C752D70417462C7B008B644A /* Supporting Files */,
+				C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */,
+				C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */,
+				C73E37E5174DF20300872C04 /* IRHelper.h */,
+				C73E37E6174DF20300872C04 /* IRHelper.m */,
 			);
 			path = IRKit;
 			sourceTree = "<group>";
@@ -345,6 +355,8 @@
 				C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */,
 				C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */,
 				C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */,
+				C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */,
+				C73E37E7174DF20300872C04 /* IRHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

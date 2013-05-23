@@ -10,9 +10,9 @@
 
 @interface IRPeripherals : NSObject
 
-- (BOOL)containsObject:(id)object;
-- (void)addObject:(id)object;
+- (void)addPeripheral:(CBPeripheral*) peripheral;
 - (id)objectAtIndex:(NSUInteger)index;
+- (NSArray*) knownPeripheralUUIDs;
 
 @property (nonatomic, getter = count) NSUInteger count;
 

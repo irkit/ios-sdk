@@ -10,7 +10,7 @@
 
 @implementation IRPeripheral
 
-- (NSString*)name {
+- (NSString*) customizedName {
     LOG_CURRENT_METHOD;
     return @"name";
 }
