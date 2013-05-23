@@ -8,7 +8,7 @@
 
 #import "IRPeripherals.h"
 
-#define LOCAL_LOG_DISABLED
+#define LOG_DISABLED 1
 
 @interface IRPeripherals ()
 

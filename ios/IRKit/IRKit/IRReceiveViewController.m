@@ -12,6 +12,8 @@
 #import "IRPeripheralCell.h"
 #import "IRSignalCell.h"
 
+#define LOG_DISABLED 1
+
 @interface IRReceiveViewController ()
 
 @property (nonatomic, strong) UITableView* tableView;
