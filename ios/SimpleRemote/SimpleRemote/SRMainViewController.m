@@ -47,4 +47,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+#pragma mark IRReceiveViewDelegate
+
+- (void)receiveViewControllerDidFinish:(IRReceiveViewController *)viewController {
+    LOG_CURRENT_METHOD;
+    
+}
+
+
 @end

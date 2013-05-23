@@ -9,11 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "IRKit.h"
 
-@protocol IRReceiveViewDelegate <NSObject>
-@end
+// pre definition for delegate
+@protocol IRReceiveViewDelegate;
 
 @interface IRReceiveViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, assign) id<IRReceiveViewDelegate> delegate;
+
+@end
+
+@protocol IRReceiveViewDelegate <NSObject>
+
+@required
+- (void)receiveViewControllerDidFinish:(IRReceiveViewController *)viewController;
 
 @end

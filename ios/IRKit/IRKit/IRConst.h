@@ -9,6 +9,9 @@
 #ifndef IRKit_IRConst_h
 #define IRKit_IRConst_h
 
+#pragma Bluetooth definitions
+
+
 #define IRKIT_SERVICE_UUID_STRING (@"33CE5403-ECD2-4B90-9922-490268BBC73E")
 #define IRKIT_SERVICE_UUID        [CBUUID UUIDWithString: IRKIT_SERVICE_UUID_STRING]
 
@@ -17,5 +20,11 @@
 
 // see https://www.bluetooth.org/en-us/specification/assigned-numbers-overview/service-discovery
 #define BASE_UUID (@"00000000-0000-1000-8000-00805F9B34FB")
+
+
+#pragma mark -
+#pragma NSNotification names
+
+#define IRKitDidDiscoverPeripheralNotification @"IRKit::DidDiscover"
 
 #endif

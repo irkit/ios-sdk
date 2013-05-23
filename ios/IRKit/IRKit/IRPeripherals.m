@@ -15,10 +15,11 @@
 
 @interface IRPeripherals ()
 
-@property (nonatomic, strong) NSMutableArray* peripherals; // array of CBPeripheral
+// array of CBPeripheral
+@property (nonatomic, strong) NSMutableArray* peripherals;
 
-// CBPeripheral.UUID => name :NSString
-@property (nonatomic, strong) NSMutableDictionary* customNameForPeripheralUUID;
+// CBPeripheral.UUID => IRPeripheral
+@property (nonatomic, strong) NSMutableDictionary* irperipheralForUUID;
 
 @end
 
@@ -28,52 +29,63 @@
     self = [super init];
     if (! self) { return nil; }
     
-    _customNameForPeripheralUUID = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)[IRPersistentStore objectForKey: @"peripherals"]];
-    LOG( @"_customNameForPeripheralUUID: %@", _customNameForPeripheralUUID );
+    [self load];
     
     _peripherals = [[NSMutableArray alloc] init];
     
     return self;
 }
 
-- (void)addPeripheral:(CBPeripheral*) peripheral {
+- (NSInteger)addPeripheral:(CBPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
     
     [_peripherals addObject:peripheral];
     
-    if (peripheral.UUID &&
-        peripheral.name &&
-        ! [_customNameForPeripheralUUID objectForKey: peripheral.UUID])
-    {
-        [_customNameForPeripheralUUID setObject:peripheral.name
-                                         forKey:[IRHelper stringFromCFUUID:peripheral.UUID]];
-        [self save];
+    if ( ! peripheral.UUID || ! peripheral.name ) {
+        return -1;
     }
+    
+    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
+    if ( [_irperipheralForUUID objectForKey: uuidKey] ) {
+        return -1;
+    }
+
+    IRPeripheral *p = [[IRPeripheral alloc] init];
+    p.customizedName = peripheral.name; // defaults to original name
+    p.foundDate      = [NSDate date];
+    p.isPaired       = @NO;
+    [_irperipheralForUUID setObject:p
+                             forKey:uuidKey];
+    [self save];
+    
+    // new peripheral is inserted in index:0
+    // because we provide our peripherals with foundDate DESC order
+    return 0;
+}
+
+- (void)removePeripheral: (CBPeripheral*) peripheral {
+    LOG( @"peripheral: %@", peripheral );
+    
+    [_peripherals removeObject:peripheral];
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
     LOG( @"index: %d", index);
     
-    return [_peripherals objectAtIndex:index];
+    NSArray* keys = [_irperipheralForUUID keysSortedByValueUsingSelector:@selector(compareByFirstFoundDate:)];
+    NSString* key = [keys objectAtIndex: key];
+    return [_irperipheralForUUID objectForKey: key];
 }
 
 - (NSUInteger) count {
     LOG_CURRENT_METHOD;
     
-    return _peripherals.count;
+    return _irperipheralForUUID.count;
 }
 
 - (NSArray*) knownPeripheralUUIDs {
     LOG_CURRENT_METHOD;
-    
-    NSMutableArray *ret = [NSMutableArray arrayWithCapacity: _peripherals.count];
-    [_peripherals enumerateObjectsUsingBlock:
-     ^(id currentObject, NSUInteger idx, BOOL *stop)
-     {
-         [ret addObject: (id)( ((IRPeripheral*) currentObject).UUID ) ];
-     }
-     ];
-    return ret;
+    return [_irperipheralForUUID allKeys];
 }
 
 #pragma mark -
@@ -82,9 +94,22 @@
 - (void) save {
     LOG_CURRENT_METHOD;
     
-    [IRPersistentStore storeObject:_customNameForPeripheralUUID
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_irperipheralForUUID];
+    [IRPersistentStore storeObject:data
                             forKey:@"peripherals"];
     [IRPersistentStore synchronize];
+}
+
+- (void) load {
+    LOG_CURRENT_METHOD;
+    
+    NSData* data = [IRPersistentStore objectForKey: @"peripherals"];
+    
+    _irperipheralForUUID = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if ( ! _irperipheralForUUID ) {
+        _irperipheralForUUID = [[NSMutableDictionary alloc] init];
+    }
+    LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
 }
 
 @end

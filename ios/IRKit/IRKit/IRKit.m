@@ -81,7 +81,15 @@
                   RSSI:(NSNumber *)RSSI {
     LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
 
-    [_peripherals addPeripheral:peripheral]; // retain
+    NSInteger addedIndex = [_peripherals addPeripheral:peripheral]; // retain
+    if (addedIndex >= 0) {
+        [[NSNotificationCenter defaultCenter]
+           postNotificationName:IRKitDidDiscoverPeripheralNotification
+                         object:nil
+                       userInfo:@{
+                         @"addedIndex": [NSNumber numberWithInteger:addedIndex]
+                       }];
+    }
 
     /* iOS 6.0 bug workaround : connect to device before displaying UUID !
      The reason for this is that the CFUUID .UUID property of CBPeripheral
@@ -115,7 +123,15 @@ didRetrievePeripherals:(NSArray *)peripherals {
     LOG( @"peripherals: %@", peripherals);
 
     for (CBPeripheral *peripheral in peripherals) {
-        [_peripherals addPeripheral:peripheral]; // retain
+        NSInteger addedIndex = [_peripherals addPeripheral:peripheral]; // retain
+        if (addedIndex >= 0) {
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:IRKitDidDiscoverPeripheralNotification
+                              object:nil
+                            userInfo:@{
+                              @"addedIndex": [NSNumber numberWithInteger:addedIndex]
+                            }];
+        }
 
         peripheral.delegate = self;
         [_manager connectPeripheral:peripheral

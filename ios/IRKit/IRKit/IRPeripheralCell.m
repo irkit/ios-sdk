@@ -13,7 +13,7 @@
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     LOG_CURRENT_METHOD;
     
-    self = [super initWithStyle:UITableViewCellStyleDefault
+    self = [super initWithStyle:UITableViewCellStyleValue1
                 reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
@@ -24,7 +24,7 @@
         self.imageView.image = [UIImage imageNamed:@"kayac_logo.jpg"];
         
         // text label
-        self.textLabel.text = @"found 1";
+        self.textLabel.text = @"peripheral";
     }
     return self;
 }
@@ -39,8 +39,8 @@
 - (void)setPeripheral:(IRPeripheral *)peripheral {
     LOG( @"peripheral: %@", peripheral);
     
-    self.textLabel.text = peripheral.name;
-    self.detailTextLabel.text = peripheral.name;
+    self.textLabel.text = peripheral.customizedName;
+    self.detailTextLabel.text = [peripheral.foundDate description];
     
     // TODO: draw graph?
 }

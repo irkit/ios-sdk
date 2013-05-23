@@ -12,11 +12,10 @@
 #import "IRPeripheralCell.h"
 #import "IRSignalCell.h"
 
-#define LOG_DISABLED 1
-
 @interface IRReceiveViewController ()
 
 @property (nonatomic, strong) UITableView* tableView;
+@property (nonatomic, strong) id peripheralDiscoveredObserver;
 
 @end
 
@@ -52,26 +51,40 @@
     self.view = view;
 }
 
-- (void)initialize {
-    LOG_CURRENT_METHOD;
-    _delegate = nil;
-}
-
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
     
+    _peripheralDiscoveredObserver = [[NSNotificationCenter defaultCenter]
+        addObserverForName:IRKitDidDiscoverPeripheralNotification
+                    object:nil
+                     queue:[NSOperationQueue mainQueue]
+                usingBlock:^(NSNotification *note) {
+                    NSDictionary* userInfo = note.userInfo;
+                    NSNumber* addedIndex = [userInfo objectForKey: @"addedIndex"];
+                    NSIndexPath* peripheralIndexPath = [NSIndexPath indexPathForRow:[addedIndex integerValue]
+                                                                          inSection:0];
+                    [self.tableView insertRowsAtIndexPaths:@[peripheralIndexPath]
+                                          withRowAnimation:UITableViewRowAnimationTop];
+                }];
 }
 
-#pragma mark - 
-#pragma - UI events
+- (void) viewWillDisappear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter]
+        removeObserver:_peripheralDiscoveredObserver];
+    _peripheralDiscoveredObserver = nil;
+}
+
+#pragma mark -
+#pragma mark UI events
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
@@ -88,7 +101,29 @@
 }
 
 #pragma mark -
-#pragma - UITableViewDelegate, UITableViewDataSource
+#pragma mark UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG_CURRENT_METHOD;
+    switch (indexPath.section) {
+        case 0:
+        {
+            return 44;
+        }
+        case 1:
+        {
+            switch (indexPath.row) {
+                case 0:
+                    return 200;
+                default:
+                    return 44;
+            }
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     LOG_CURRENT_METHOD;
@@ -120,25 +155,6 @@
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LOG_CURRENT_METHOD;
-    switch (indexPath.section) {
-        case 0:
-        {
-            return 44;
-        }
-        case 1:
-        {
-            switch (indexPath.row) {
-                case 0:
-                    return 200;
-                default:
-                    return 44;
-            }
-        }
-    }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
     
@@ -160,8 +176,7 @@
             if (cell == nil) {
                 cell = [[IRPeripheralCell alloc] initWithReuseIdentifier:@"IRPeripheralCell"];
             }
-            // cell.peripheral = [[IRKit sharedInstance].peripherals objectAtIndex: indexPath.row];
-            ((IRPeripheralCell*)cell).peripheral = [[IRPeripheral alloc] init];
+            ((IRPeripheralCell*)cell).peripheral = [[IRKit sharedInstance].peripherals objectAtIndex: indexPath.row];
             return cell;
         }
     case 1:

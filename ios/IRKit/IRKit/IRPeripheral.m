@@ -10,9 +10,37 @@
 
 @implementation IRPeripheral
 
-- (NSString*) customizedName {
-    LOG_CURRENT_METHOD;
-    return @"name";
+- (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
+    return [self.foundDate compare: otherPeripheral.foundDate];
+}
+
+#pragma mark -
+#pragma NSKeyedArchiving
+
+- (void)encodeWithCoder:(NSCoder*)coder {
+    [coder encodeObject:_customizedName forKey:@"c"];
+    [coder encodeObject:_isPaired       forKey:@"p"];
+    [coder encodeObject:_foundDate      forKey:@"f"];
+}
+
+- (id)initWithCoder:(NSCoder*)coder {
+    self = [super init];
+    if (self) {
+        _customizedName = [coder decodeObjectForKey:@"c"];
+        _isPaired       = [coder decodeObjectForKey:@"p"];
+        _foundDate      = [coder decodeObjectForKey:@"f"];
+        
+        if ( ! _customizedName ) {
+            _customizedName = @"unknown";
+        }
+        if ( ! _isPaired ) {
+            _isPaired = @NO;
+        }
+        if ( ! _foundDate ) {
+            _foundDate = [NSDate date];
+        }
+    }
+    return self;
 }
 
 @end
