@@ -2,3 +2,4 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 NSString *NSStringFromCBCentralManagerState(CBCentralManagerState);
+NSString *NSStringFromCBCharacteristicProperty(CBCharacteristicProperties);

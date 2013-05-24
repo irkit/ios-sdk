@@ -178,7 +178,7 @@ didDiscoverServices:(NSError *)error
 
     for (CBService *service in peripheral.services)
     {
-        LOG(@"Service found: %@", service);
+        LOG(@"service: %@ UUID: %@", service, service.UUID);
 
         // TODO: delete this row
         // discover characterstics for all services (just interested now)
@@ -216,9 +216,14 @@ didDiscoverCharacteristicsForService:(CBService *)service
 
     for (CBCharacteristic *characteristic in service.characteristics)
     {
-        LOG( @"discovered characteristic: %@", characteristic );
+        LOG( @"characteristic: %@", characteristic );
+        LOG( @"UUID: %@", characteristic.UUID );
+        LOG( @"value: %@", characteristic.value );
+        LOG( @"descriptors: %@", characteristic.descriptors);
+        LOG( @"properties: %@", NSStringFromCBCharacteristicProperty(characteristic.properties));
+        LOG( @"isNotifying: %d", characteristic.isNotifying);
+        LOG( @"isBroadcasted: %d", characteristic.isBroadcasted);
     }
-
 //    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
 //    {
 //        for (CBCharacteristic *characteristic in service.characteristics)
