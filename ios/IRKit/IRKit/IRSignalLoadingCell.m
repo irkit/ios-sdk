@@ -16,7 +16,27 @@
                 reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.textLabel.text = @"waiting for signal...";
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        CGRect cellFrame = self.frame;
+        
+        // activity indicator
+        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [activityView startAnimating];
+        CGRect frame = activityView.frame;
+        frame.origin.y = (cellFrame.size.height - activityView.frame.size.height) / 2;
+        frame.origin.x = cellFrame.size.width - activityView.frame.size.width - 30;
+        activityView.frame = frame;
+        [self.contentView addSubview: activityView];
+        
+        // text label
+        frame = self.textLabel.frame;
+        frame.origin.x = 40;
+        frame.origin.y = 0;
+        self.textLabel.frame = frame;
+        self.textLabel.text = @"waiting for signal ...";
+        self.textLabel.opaque = NO;
+        self.textLabel.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

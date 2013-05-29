@@ -29,6 +29,7 @@ static const unsigned char whitePNGImage[] = {
                 reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         // set default image
         NSData* data = [NSData dataWithBytes:whitePNGImage

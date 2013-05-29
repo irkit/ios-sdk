@@ -18,6 +18,7 @@
                 reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         CGRect cellFrame = self.frame;
         
@@ -35,7 +36,9 @@
         frame.origin.x = 40;
         frame.origin.y = 0;
         self.textLabel.frame = frame;
-        self.textLabel.text = @"waiting for device ...";
+        
+        // 0x26A0: Car tab, page:4 row:3 column:3
+        self.textLabel.text = @"\U000026A0 connect device ...";
         self.textLabel.opaque = NO;
         self.textLabel.backgroundColor = [UIColor clearColor];
     }

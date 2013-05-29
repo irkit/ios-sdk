@@ -156,14 +156,14 @@
 		C727D2291754FBC20006810C /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */,
+				C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */,
+				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
+				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
 				C75B568D174A7BC800FFE5CB /* IRSignalCell.m */,
 				C75B568E174A7BC800FFE5CB /* IRSignalCell.h */,
-				C7554F3C1749EFF900BDF920 /* IRSignalLoadingCell.h */,
 				C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */,
-				C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */,
-				C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */,
-				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
-				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
+				C7554F3C1749EFF900BDF920 /* IRSignalLoadingCell.h */,
 			);
 			name = cells;
 			sourceTree = "<group>";

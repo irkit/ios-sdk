@@ -28,7 +28,7 @@
     
     // navbar
     UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    UINavigationItem *title = [[UINavigationItem alloc] initWithTitle:@"Title"];
+    UINavigationItem *title = [[UINavigationItem alloc] initWithTitle:@"IRKit Devices & Signals"];
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc]
                                initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                     target:self
@@ -107,6 +107,9 @@
     switch (changeKind) {
         case NSKeyValueChangeInsertion:
         {
+            // TODO if number of peripherals changed from 0 -> 1
+            // show signals section animated:YES
+
             [self.tableView insertRowsAtIndexPaths:indexes
                                   withRowAnimation:UITableViewRowAnimationFade];
             break;
@@ -152,12 +155,33 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG_CURRENT_METHOD;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    switch (indexPath.section) {
+        case 0:
+        {
+            break;
+        }
+        case 1:
+        {
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 #pragma mark -
 #pragma mark UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     LOG_CURRENT_METHOD;
-    return 2;
+    if ([IRKit sharedInstance].numberOfPeripherals > 0) {
+        return 2;
+    }
+    return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
