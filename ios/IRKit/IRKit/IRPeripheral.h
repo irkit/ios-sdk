@@ -14,6 +14,7 @@
 @property(nonatomic, copy) NSString *customizedName;
 @property(nonatomic, copy) NSNumber *isPaired;
 @property(nonatomic, copy) NSDate   *foundDate;
+@property(nonatomic, strong) CBPeripheral *peripheral; // might be nil
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 

@@ -50,11 +50,11 @@
 - (void) startScan {
     LOG_CURRENT_METHOD;
     
-    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
-                                     options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
+//    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
+//                                     options:nil];
     // find anything
-//    [_manager scanForPeripheralsWithServices:nil
-//                                     options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
+    [_manager scanForPeripheralsWithServices:nil
+                                     options:nil];
 }
 
 - (void) stopScan {

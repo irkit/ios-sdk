@@ -60,18 +60,10 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
     
-    _peripheralDiscoveredObserver = [[NSNotificationCenter defaultCenter]
-        addObserverForName:IRKitDidDiscoverPeripheralNotification
-                    object:nil
-                     queue:[NSOperationQueue mainQueue]
-                usingBlock:^(NSNotification *note) {
-                    NSDictionary* userInfo = note.userInfo;
-                    NSNumber* addedIndex = [userInfo objectForKey: @"addedIndex"];
-                    NSIndexPath* peripheralIndexPath = [NSIndexPath indexPathForRow:[addedIndex integerValue]
-                                                                          inSection:0];
-                    [self.tableView insertRowsAtIndexPaths:@[peripheralIndexPath]
-                                          withRowAnimation:UITableViewRowAnimationTop];
-                }];
+    [[IRKit sharedInstance].peripherals addObserver:self
+                                         forKeyPath:@"peripherals"
+                                            options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew
+                                            context:NULL];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -98,6 +90,44 @@
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    LOG( @"keyPath: %@", keyPath );
+
+    NSKeyValueChange changeKind = [change objectForKey: NSKeyValueChangeKindKey];
+    NSIndexPath *indexes        = [change objectForKey: NSKeyValueChangeIndexesKey];
+    LOG( @"changeKind: %d, indexes: %@", changeKind, indexes);
+    switch (changeKind) {
+        case NSKeyValueChangeInsertion:
+        {
+            [self.tableView insertRowsAtIndexPaths:indexes
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSKeyValueChangeRemoval:
+        {
+            [self.tableView deleteRowsAtIndexPaths:indexes
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        case NSKeyValueChangeReplacement:
+        {
+            [self.tableView reloadRowsAtIndexPaths:indexes
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
 }
 
 #pragma mark -

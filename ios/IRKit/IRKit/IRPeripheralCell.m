@@ -8,6 +8,7 @@
 
 #import "IRPeripheralCell.h"
 #import "IR_ISNetwork.h"
+#import "IRHelper.h"
 
 // NSString *url = @"http://placehold.jp/ffffff/ffffff/1x1.png";
 static const unsigned char whitePNGImage[] = {
@@ -44,6 +45,7 @@ static const unsigned char whitePNGImage[] = {
         _secondTextLabel.textAlignment = NSTextAlignmentRight;
         _secondTextLabel.opaque        = NO;
         _secondTextLabel.backgroundColor = [UIColor clearColor];
+        _secondTextLabel.adjustsFontSizeToFitWidth = YES;
         [self.contentView addSubview:_secondTextLabel];
     }
     return self;
@@ -81,8 +83,12 @@ static const unsigned char whitePNGImage[] = {
 - (void)setPeripheral:(IRPeripheral *)peripheral {
     LOG( @"peripheral: %@", peripheral);
 
+    _peripheral = peripheral;
+    
     self.textLabel.text = peripheral.customizedName;
-    self.secondTextLabel.text = [peripheral.foundDate description];
+    if (peripheral.peripheral) {
+        self.secondTextLabel.text = [IRHelper stringFromCFUUID:peripheral.peripheral.UUID];
+    }
 
     // load image from internet
     NSString *url = @"http://maaash.jp/lab/irkit/irkit-board.png";
@@ -100,6 +106,26 @@ static const unsigned char whitePNGImage[] = {
                          }];
 
     // TODO: draw graph?
+
+    [self.peripheral addObserver:self
+                      forKeyPath:@"peripheral"
+                         options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                         context:NULL];
+}
+
+#pragma mark -
+#pragma mark KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    LOG( @"keyPath: %@", keyPath );
+    
+    NSString *uuid = [IRHelper stringFromCFUUID:self.peripheral.peripheral.UUID];
+    LOG( @"uuid: %@", uuid );
+    self.secondTextLabel.text = uuid;
+    [self setNeedsDisplay];
 }
 
 @end

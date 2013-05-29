@@ -46,11 +46,15 @@
     }
     
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-    if ( [_irperipheralForUUID objectForKey: uuidKey] ) {
+    IRPeripheral *p = [_irperipheralForUUID objectForKey: uuidKey];
+    if (p) {
+        // found known but disconnected peripheral
+        p.peripheral = peripheral;
         return -1;
     }
 
-    IRPeripheral *p = [[IRPeripheral alloc] init];
+    p                = [[IRPeripheral alloc] init];
+    p.peripheral     = nil;
     p.customizedName = peripheral.name; // defaults to original name
     p.foundDate      = [NSDate date];
     p.isPaired       = @NO;
