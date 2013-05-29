@@ -38,6 +38,10 @@
 		C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5688174A7AB200FFE5CB /* IRSignal.m */; };
 		C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5687174A7AB100FFE5CB /* IRSignals.h */; };
 		C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B568D174A7BC800FFE5CB /* IRSignalCell.m */; };
+		C7AFD0561755F10A007EE1DA /* IR_ISImageNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD04E1755F10A007EE1DA /* IR_ISImageNetworkOperation.m */; };
+		C7AFD0571755F10A007EE1DA /* IR_ISJSONNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0501755F10A007EE1DA /* IR_ISJSONNetworkOperation.m */; };
+		C7AFD0581755F10A007EE1DA /* IR_ISNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0531755F10A007EE1DA /* IR_ISNetworkClient.m */; };
+		C7AFD0591755F10A007EE1DA /* IR_ISNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0551755F10A007EE1DA /* IR_ISNetworkOperation.m */; };
 		C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 /* End PBXBuildFile section */
@@ -102,13 +106,21 @@
 		C7554F411749F2E000BDF920 /* IRPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripherals.m; sourceTree = "<group>"; };
 		C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralCell.m; sourceTree = "<group>"; };
 		C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralCell.h; sourceTree = "<group>"; };
-		C75B5684174A41E000FFE5CB /* kayac_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kayac_logo.jpg; sourceTree = "<group>"; };
 		C75B5686174A7AB100FFE5CB /* IRSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignals.m; sourceTree = "<group>"; };
 		C75B5687174A7AB100FFE5CB /* IRSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignals.h; sourceTree = "<group>"; };
 		C75B5688174A7AB200FFE5CB /* IRSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignal.m; sourceTree = "<group>"; };
 		C75B5689174A7AB200FFE5CB /* IRSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignal.h; sourceTree = "<group>"; };
 		C75B568D174A7BC800FFE5CB /* IRSignalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalCell.m; sourceTree = "<group>"; };
 		C75B568E174A7BC800FFE5CB /* IRSignalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalCell.h; sourceTree = "<group>"; };
+		C7AFD04D1755F10A007EE1DA /* IR_ISImageNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISImageNetworkOperation.h; sourceTree = "<group>"; };
+		C7AFD04E1755F10A007EE1DA /* IR_ISImageNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IR_ISImageNetworkOperation.m; sourceTree = "<group>"; };
+		C7AFD04F1755F10A007EE1DA /* IR_ISJSONNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISJSONNetworkOperation.h; sourceTree = "<group>"; };
+		C7AFD0501755F10A007EE1DA /* IR_ISJSONNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IR_ISJSONNetworkOperation.m; sourceTree = "<group>"; };
+		C7AFD0511755F10A007EE1DA /* IR_ISNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISNetwork.h; sourceTree = "<group>"; };
+		C7AFD0521755F10A007EE1DA /* IR_ISNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISNetworkClient.h; sourceTree = "<group>"; };
+		C7AFD0531755F10A007EE1DA /* IR_ISNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IR_ISNetworkClient.m; sourceTree = "<group>"; };
+		C7AFD0541755F10A007EE1DA /* IR_ISNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISNetworkOperation.h; sourceTree = "<group>"; };
+		C7AFD0551755F10A007EE1DA /* IR_ISNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IR_ISNetworkOperation.m; sourceTree = "<group>"; };
 		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
@@ -139,7 +151,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C727D2291754FBC20006810C /* cell */ = {
+		C727D2291754FBC20006810C /* cells */ = {
 			isa = PBXGroup;
 			children = (
 				C75B568D174A7BC800FFE5CB /* IRSignalCell.m */,
@@ -151,7 +163,7 @@
 				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
 				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
 			);
-			name = cell;
+			name = cells;
 			sourceTree = "<group>";
 		};
 		C752D6F517462C7B008B644A = {
@@ -187,14 +199,14 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
-				C727D2291754FBC20006810C /* cell */,
+				C7AFD04B1755F0FA007EE1DA /* dependencies */,
+				C727D2291754FBC20006810C /* cells */,
 				C73E37DF174B8EB100872C04 /* IRChartView.h */,
 				C73E37E0174B8EB100872C04 /* IRChartView.m */,
 				C75B5686174A7AB100FFE5CB /* IRSignals.m */,
 				C75B5687174A7AB100FFE5CB /* IRSignals.h */,
 				C75B5688174A7AB200FFE5CB /* IRSignal.m */,
 				C75B5689174A7AB200FFE5CB /* IRSignal.h */,
-				C75B5683174A41D600FFE5CB /* assets */,
 				C7554F401749F2E000BDF920 /* IRPeripherals.h */,
 				C7554F411749F2E000BDF920 /* IRPeripherals.m */,
 				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
@@ -244,13 +256,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C75B5683174A41D600FFE5CB /* assets */ = {
+		C7AFD04B1755F0FA007EE1DA /* dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				C75B5684174A41E000FFE5CB /* kayac_logo.jpg */,
+				C7AFD04C1755F10A007EE1DA /* ISNetwork */,
 			);
-			name = assets;
+			name = dependencies;
 			sourceTree = "<group>";
+		};
+		C7AFD04C1755F10A007EE1DA /* ISNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				C7AFD04D1755F10A007EE1DA /* IR_ISImageNetworkOperation.h */,
+				C7AFD04E1755F10A007EE1DA /* IR_ISImageNetworkOperation.m */,
+				C7AFD04F1755F10A007EE1DA /* IR_ISJSONNetworkOperation.h */,
+				C7AFD0501755F10A007EE1DA /* IR_ISJSONNetworkOperation.m */,
+				C7AFD0511755F10A007EE1DA /* IR_ISNetwork.h */,
+				C7AFD0521755F10A007EE1DA /* IR_ISNetworkClient.h */,
+				C7AFD0531755F10A007EE1DA /* IR_ISNetworkClient.m */,
+				C7AFD0541755F10A007EE1DA /* IR_ISNetworkOperation.h */,
+				C7AFD0551755F10A007EE1DA /* IR_ISNetworkOperation.m */,
+			);
+			name = ISNetwork;
+			path = Dependencies/ISNetwork;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -365,6 +394,10 @@
 				C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */,
 				C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */,
 				C73E37E7174DF20300872C04 /* IRHelper.m in Sources */,
+				C7AFD0561755F10A007EE1DA /* IR_ISImageNetworkOperation.m in Sources */,
+				C7AFD0571755F10A007EE1DA /* IR_ISJSONNetworkOperation.m in Sources */,
+				C7AFD0581755F10A007EE1DA /* IR_ISNetworkClient.m in Sources */,
+				C7AFD0591755F10A007EE1DA /* IR_ISNetworkOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
