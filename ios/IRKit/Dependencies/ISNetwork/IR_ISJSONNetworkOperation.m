@@ -1,6 +1,6 @@
-#import "ISJSONNetworkOperation.h"
+#import "IR_ISJSONNetworkOperation.h"
 
-@implementation ISJSONNetworkOperation
+@implementation IR_ISJSONNetworkOperation
 
 - (id)processData:(NSData *)data
 {

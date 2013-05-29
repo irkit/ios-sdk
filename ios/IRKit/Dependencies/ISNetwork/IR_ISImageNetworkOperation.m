@@ -1,6 +1,6 @@
-#import "ISImageNetworkOperation.h"
+#import "IR_ISImageNetworkOperation.h"
 
-@implementation ISImageNetworkOperation
+@implementation IR_ISImageNetworkOperation
 
 - (id)processData:(NSData *)data
 {

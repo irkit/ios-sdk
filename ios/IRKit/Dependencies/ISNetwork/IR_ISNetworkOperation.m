@@ -1,14 +1,14 @@
-#import "ISNetworkOperation.h"
-#import "ISNetworkClient.h"
+#import "IR_ISNetworkOperation.h"
+#import "IR_ISNetworkClient.h"
 
-@interface ISNetworkOperation ()
+@interface IR_ISNetworkOperation ()
 
 @property BOOL isExecuting;
 @property BOOL isFinished;
 
 @end
 
-@implementation ISNetworkOperation 
+@implementation IR_ISNetworkOperation 
 
 #pragma mark - KVO
 
@@ -110,7 +110,7 @@
 
 + (id)operationWithRequest:(NSURLRequest *)request handler:(void (^)(NSHTTPURLResponse *, id, NSError *))handler
 {
-    ISNetworkOperation *operation = [[[self class] alloc] init];
+    IR_ISNetworkOperation *operation = [[[self class] alloc] init];
     operation.request = request;
     operation.handler = handler;
     
@@ -121,19 +121,19 @@
 
 + (NSOperationQueue *)sharedOperationQueue
 {
-    return [ISNetworkClient sharedClient].operationQueue;
+    return [IR_ISNetworkClient sharedClient].operationQueue;
 }
 
 + (void)sendRequest:(NSURLRequest *)request handler:(void (^)(NSHTTPURLResponse *, id, NSError *))handler
 {
-    ISNetworkOperation *operation = [self operationWithRequest:request handler:handler];
-    [[ISNetworkClient sharedClient].operationQueue addOperation:operation];
+    IR_ISNetworkOperation *operation = [self operationWithRequest:request handler:handler];
+    [[IR_ISNetworkClient sharedClient].operationQueue addOperation:operation];
 }
 
 - (void)enqueueWithHandler:(void (^)(NSHTTPURLResponse *, id, NSError *))handler
 {
     self.handler = handler;
-    [[ISNetworkClient sharedClient].operationQueue addOperation:self];
+    [[IR_ISNetworkClient sharedClient].operationQueue addOperation:self];
 }
 
 @end

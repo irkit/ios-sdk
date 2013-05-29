@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 
-@interface ISNetworkClient : NSObject
+@interface IR_ISNetworkClient : NSObject
 
 @property BOOL managesActivityIndicator;
 @property (readonly, strong, nonatomic) NSOperationQueue *operationQueue;
 
-+ (ISNetworkClient *)sharedClient;
++ (IR_ISNetworkClient *)sharedClient;
 
 + (void)cancelAllOperations;
 + (void)sendRequest:(NSURLRequest *)request handler:(void (^)(NSHTTPURLResponse *response, id object, NSError *error))handler;

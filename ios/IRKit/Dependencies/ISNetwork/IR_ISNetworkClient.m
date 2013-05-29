@@ -1,14 +1,14 @@
-#import "ISNetworkClient.h"
-#import "ISNetworkOperation.h"
+#import "IR_ISNetworkClient.h"
+#import "IR_ISNetworkOperation.h"
 
-@interface ISNetworkClient ()
+@interface IR_ISNetworkClient ()
 
 @property (strong, nonatomic) NSOperationQueue *operationQueue;
 
 @end
 
 
-@implementation ISNetworkClient
+@implementation IR_ISNetworkClient
 
 #pragma mark - shortcuts
 
@@ -25,8 +25,8 @@
         NSLog(@"invalid operation class.");
         return;
     }
-    ISNetworkClient *client = [ISNetworkClient sharedClient];
-    ISNetworkOperation *operation = [operationClass operationWithRequest:request handler:handler];
+    IR_ISNetworkClient *client = [IR_ISNetworkClient sharedClient];
+    IR_ISNetworkOperation *operation = [operationClass operationWithRequest:request handler:handler];
     if (!operation) {
         NSLog(@"could not construct operation.");
         return;
@@ -38,15 +38,15 @@
 + (void)sendRequest:(NSURLRequest *)request handler:(void (^)(NSHTTPURLResponse *, id, NSError *))handler
 {
     [self sendRequest:request
-       operationClass:[ISNetworkOperation class]
+       operationClass:[IR_ISNetworkOperation class]
               handler:handler];
 }
 
 #pragma mark - life cycle
 
-+ (ISNetworkClient *)sharedClient
++ (IR_ISNetworkClient *)sharedClient
 {
-    static ISNetworkClient *client = nil;
+    static IR_ISNetworkClient *client = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         client = [[self alloc] init];

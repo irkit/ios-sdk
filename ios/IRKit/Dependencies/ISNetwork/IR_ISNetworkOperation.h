@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@interface ISNetworkOperation : NSOperation <NSURLConnectionDataDelegate>
+@interface IR_ISNetworkOperation : NSOperation <NSURLConnectionDataDelegate>
 
 @property (strong, nonatomic) NSURLRequest *request;
 @property (strong, nonatomic) NSHTTPURLResponse *response;
