@@ -102,7 +102,6 @@
 		C7554F411749F2E000BDF920 /* IRPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripherals.m; sourceTree = "<group>"; };
 		C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralCell.m; sourceTree = "<group>"; };
 		C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralCell.h; sourceTree = "<group>"; };
-		C75B5684174A41E000FFE5CB /* kayac_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kayac_logo.jpg; sourceTree = "<group>"; };
 		C75B5686174A7AB100FFE5CB /* IRSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignals.m; sourceTree = "<group>"; };
 		C75B5687174A7AB100FFE5CB /* IRSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignals.h; sourceTree = "<group>"; };
 		C75B5688174A7AB200FFE5CB /* IRSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignal.m; sourceTree = "<group>"; };
@@ -139,7 +138,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C727D2291754FBC20006810C /* cell */ = {
+		C727D2291754FBC20006810C /* cells */ = {
 			isa = PBXGroup;
 			children = (
 				C75B568D174A7BC800FFE5CB /* IRSignalCell.m */,
@@ -151,7 +150,7 @@
 				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
 				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
 			);
-			name = cell;
+			name = cells;
 			sourceTree = "<group>";
 		};
 		C752D6F517462C7B008B644A = {
@@ -187,14 +186,13 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
-				C727D2291754FBC20006810C /* cell */,
+				C727D2291754FBC20006810C /* cells */,
 				C73E37DF174B8EB100872C04 /* IRChartView.h */,
 				C73E37E0174B8EB100872C04 /* IRChartView.m */,
 				C75B5686174A7AB100FFE5CB /* IRSignals.m */,
 				C75B5687174A7AB100FFE5CB /* IRSignals.h */,
 				C75B5688174A7AB200FFE5CB /* IRSignal.m */,
 				C75B5689174A7AB200FFE5CB /* IRSignal.h */,
-				C75B5683174A41D600FFE5CB /* assets */,
 				C7554F401749F2E000BDF920 /* IRPeripherals.h */,
 				C7554F411749F2E000BDF920 /* IRPeripherals.m */,
 				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
@@ -242,14 +240,6 @@
 				C752D71B17462C7B008B644A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C75B5683174A41D600FFE5CB /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				C75B5684174A41E000FFE5CB /* kayac_logo.jpg */,
-			);
-			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

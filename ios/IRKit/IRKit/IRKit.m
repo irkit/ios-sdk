@@ -50,11 +50,11 @@
 - (void) startScan {
     LOG_CURRENT_METHOD;
     
-//    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID_STRING ]
-//                                     options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
-    // find anything
-    [_manager scanForPeripheralsWithServices:nil
+    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
                                      options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
+    // find anything
+//    [_manager scanForPeripheralsWithServices:nil
+//                                     options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
 }
 
 - (void) stopScan {
@@ -216,13 +216,8 @@ didDiscoverCharacteristicsForService:(CBService *)service
 
     for (CBCharacteristic *characteristic in service.characteristics)
     {
-        LOG( @"characteristic: %@", characteristic );
-        LOG( @"UUID: %@", characteristic.UUID );
-        LOG( @"value: %@", characteristic.value );
-        LOG( @"descriptors: %@", characteristic.descriptors);
-        LOG( @"properties: %@", NSStringFromCBCharacteristicProperty(characteristic.properties));
-        LOG( @"isNotifying: %d", characteristic.isNotifying);
-        LOG( @"isBroadcasted: %d", characteristic.isBroadcasted);
+        LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",
+            characteristic, characteristic.UUID, characteristic.value, characteristic.descriptors, NSStringFromCBCharacteristicProperty(characteristic.properties), characteristic.isNotifying, characteristic.isBroadcasted );
     }
 //    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
 //    {
