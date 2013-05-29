@@ -139,6 +139,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C727D2291754FBC20006810C /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				C75B568D174A7BC800FFE5CB /* IRSignalCell.m */,
+				C75B568E174A7BC800FFE5CB /* IRSignalCell.h */,
+				C7554F3C1749EFF900BDF920 /* IRSignalLoadingCell.h */,
+				C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */,
+				C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */,
+				C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */,
+				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
+				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
+			);
+			name = cell;
+			sourceTree = "<group>";
+		};
 		C752D6F517462C7B008B644A = {
 			isa = PBXGroup;
 			children = (
@@ -172,10 +187,9 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C727D2291754FBC20006810C /* cell */,
 				C73E37DF174B8EB100872C04 /* IRChartView.h */,
 				C73E37E0174B8EB100872C04 /* IRChartView.m */,
-				C75B568D174A7BC800FFE5CB /* IRSignalCell.m */,
-				C75B568E174A7BC800FFE5CB /* IRSignalCell.h */,
 				C75B5686174A7AB100FFE5CB /* IRSignals.m */,
 				C75B5687174A7AB100FFE5CB /* IRSignals.h */,
 				C75B5688174A7AB200FFE5CB /* IRSignal.m */,
@@ -185,12 +199,6 @@
 				C7554F411749F2E000BDF920 /* IRPeripherals.m */,
 				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
 				C7554F311749E65B00BDF920 /* IRPeripheral.m */,
-				C7554F3C1749EFF900BDF920 /* IRSignalLoadingCell.h */,
-				C7554F3D1749EFF900BDF920 /* IRSignalLoadingCell.m */,
-				C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */,
-				C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */,
-				C7554F381749ED8400BDF920 /* IRPeripheralLoadingCell.h */,
-				C7554F391749ED8400BDF920 /* IRPeripheralLoadingCell.m */,
 				C7554F1C1749D84C00BDF920 /* IRFunc.h */,
 				C7554F1D1749D84C00BDF920 /* IRFunc.m */,
 				C752D70617462C7B008B644A /* IRKit.h */,
