@@ -7,17 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IRPeripheral.h"
 
 @interface IRPeripherals : NSObject
 
-- (NSInteger)addPeripheral:(CBPeripheral*) peripheral;
-- (void)removePeripheral: (CBPeripheral*) peripheral;
-
 - (id)objectAtIndex:(NSUInteger)index;
-- (NSUInteger) count;
-
 - (NSArray*) knownPeripheralUUIDs;
+- (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral;
 
-@property (nonatomic, getter = count) NSUInteger count;
+#pragma mark -
+#pragma mark Key Value Coding - Mutable Unordered Accessors
+
+- (NSSet*) peripherals;
+- (NSUInteger) countOfPeripherals;
+- (NSEnumerator *)enumeratorOfPeripherals;
+- (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)object;
+- (void)addPeripheralsObject:(CBPeripheral*) peripheral;
+- (void)removePeripheralsObject: (CBPeripheral*) peripheral;
 
 @end

@@ -42,6 +42,7 @@
 		C7AFD0571755F10A007EE1DA /* IR_ISJSONNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0501755F10A007EE1DA /* IR_ISJSONNetworkOperation.m */; };
 		C7AFD0581755F10A007EE1DA /* IR_ISNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0531755F10A007EE1DA /* IR_ISNetworkClient.m */; };
 		C7AFD0591755F10A007EE1DA /* IR_ISNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0551755F10A007EE1DA /* IR_ISNetworkOperation.m */; };
+		C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; };
 		C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */,
 				C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */,
 				C75B5685174A79DD00FFE5CB /* IRPeripherals.h in CopyFiles */,
 				C7554F231749D9D400BDF920 /* IRReceiveViewController.h in CopyFiles */,

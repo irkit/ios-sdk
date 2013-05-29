@@ -70,9 +70,8 @@
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
     
-    [[NSNotificationCenter defaultCenter]
-        removeObserver:_peripheralDiscoveredObserver];
-    _peripheralDiscoveredObserver = nil;
+    [[IRKit sharedInstance].peripherals removeObserver:self
+                                            forKeyPath:@"peripherals"];
 }
 
 #pragma mark -
@@ -94,6 +93,7 @@
 
 #pragma mark -
 #pragma mark KVO
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object

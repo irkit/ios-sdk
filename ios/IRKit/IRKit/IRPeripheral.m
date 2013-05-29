@@ -29,6 +29,7 @@
         _customizedName = [coder decodeObjectForKey:@"c"];
         _isPaired       = [coder decodeObjectForKey:@"p"];
         _foundDate      = [coder decodeObjectForKey:@"f"];
+        _peripheral     = nil;
         
         if ( ! _customizedName ) {
             _customizedName = @"unknown";

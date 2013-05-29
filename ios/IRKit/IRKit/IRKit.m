@@ -8,6 +8,7 @@
 
 #import "IRKit.h"
 #import "IRFunc.h" // private
+#import "IRPeripheral.h"
 
 @interface IRKit ()
 
@@ -64,7 +65,7 @@
 
 - (NSUInteger) numberOfPeripherals {
     LOG_CURRENT_METHOD;
-    return [_peripherals count];
+    return [_peripherals countOfPeripherals];
 }
 
 - (NSUInteger) numberOfSignals {
@@ -81,13 +82,17 @@
                   RSSI:(NSNumber *)RSSI {
     LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
 
-    NSInteger addedIndex = [_peripherals addPeripheral:peripheral]; // retain
-    if (addedIndex >= 0) {
+    if ( ! [_peripherals memberOfPeripherals: peripheral] ) {
+        [_peripherals addPeripheralsObject:peripheral]; // retain
+        IRPeripheral *p = [_peripherals IRPeripheralForPeripheral: peripheral];
+        if (!p) {
+            p = [NSNull null];
+        }
         [[NSNotificationCenter defaultCenter]
            postNotificationName:IRKitDidDiscoverPeripheralNotification
                          object:nil
                        userInfo:@{
-                         @"addedIndex": [NSNumber numberWithInteger:addedIndex]
+                         @"peripheral": p
                        }];
     }
 
@@ -123,13 +128,17 @@ didRetrievePeripherals:(NSArray *)peripherals {
     LOG( @"peripherals: %@", peripherals);
 
     for (CBPeripheral *peripheral in peripherals) {
-        NSInteger addedIndex = [_peripherals addPeripheral:peripheral]; // retain
-        if (addedIndex >= 0) {
+        if ( ! [_peripherals memberOfPeripherals: peripheral] ) {
+            [_peripherals addPeripheralsObject:peripheral]; // retain
+            IRPeripheral *p = [_peripherals IRPeripheralForPeripheral: peripheral];
+            if (!p) {
+                p = [NSNull null];
+            }
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:IRKitDidDiscoverPeripheralNotification
                               object:nil
                             userInfo:@{
-                              @"addedIndex": [NSNumber numberWithInteger:addedIndex]
+                              @"peripheral": p
                             }];
         }
 
