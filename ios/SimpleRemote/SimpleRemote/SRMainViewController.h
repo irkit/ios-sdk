@@ -6,8 +6,6 @@
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRFlipsideViewController.h"
-
-@interface SRMainViewController : UIViewController <SRFlipsideViewControllerDelegate>
+@interface SRMainViewController : UITableViewController <IRReceiveViewDelegate>
 
 @end

@@ -10,14 +10,35 @@
 
 @interface SRMainViewController ()
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addBarButtonItem;
+
 @end
 
 @implementation SRMainViewController
 
 - (void)viewDidLoad
 {
+    LOG_CURRENT_METHOD;
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    
+    //if ([IRKit sharedInstance].numberOfPeripherals == 0) {
+    [self addBarButtonPressed: nil];
+    //}
+}
+
+- (IBAction)addBarButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+    
+    IRReceiveViewController* receiver = [[IRReceiveViewController alloc] init];
+    receiver.delegate = self;
+    [self presentViewController:receiver animated:YES completion:^{
+        LOG( @"presented" );
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,18 +47,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Flipside View
+#pragma mark -
+#pragma mark IRReceiveViewDelegate
 
-- (void)flipsideViewControllerDidFinish:(SRFlipsideViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)receiveViewControllerDidFinish:(IRReceiveViewController *)viewController {
+    LOG_CURRENT_METHOD;
+    
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showAlternate"]) {
-        [[segue destinationViewController] setDelegate:self];
-    }
-}
 
 @end
