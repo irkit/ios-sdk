@@ -51,11 +51,11 @@
 - (void) startScan {
     LOG_CURRENT_METHOD;
     
-//    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
-//                                     options:nil];
-    // find anything
-    [_manager scanForPeripheralsWithServices:nil
+    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
                                      options:nil];
+    // find anything
+//    [_manager scanForPeripheralsWithServices:nil
+//                                     options:nil];
 }
 
 - (void) stopScan {
@@ -228,6 +228,16 @@ didDiscoverCharacteristicsForService:(CBService *)service
         LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",
             characteristic, characteristic.UUID, characteristic.value, characteristic.descriptors, NSStringFromCBCharacteristicProperty(characteristic.properties), characteristic.isNotifying, characteristic.isBroadcasted );
     }
+    
+    if ([service.UUID isEqual:IRKIT_SERVICE_UUID]) {
+        for (CBCharacteristic *characteristic in service.characteristics) {
+            if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
+                LOG( @"read ir data" );
+                [peripheral readValueForCharacteristic:characteristic];
+            }
+        }
+        
+    }
 //    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
 //    {
 //        for (CBCharacteristic *characteristic in service.characteristics)
@@ -257,33 +267,33 @@ didDiscoverCharacteristicsForService:(CBService *)service
 //        }
 //    }
 
-    if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
-    {
-        for (CBCharacteristic *characteristic in service.characteristics)
-        {
-            /* Read device name */
-            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
-            {
-                [peripheral readValueForCharacteristic:characteristic];
-                LOG(@"Found a Device Name Characteristic, RSSI: %@", peripheral.RSSI);
-            }
-        }
-    }
-
-    // org.bluetooth.service.device_information
-    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
-    {
-        for (CBCharacteristic *characteristic in service.characteristics)
-        {
-            // Read manufacturer name
-            // 2a29: org.bluetooth.characteristic.manufacturer_name_string
-            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
-            {
-                [peripheral readValueForCharacteristic:characteristic];
-                LOG(@"Found a Device Manufacturer Name Characteristic");
-            }
-        }
-    }
+//    if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
+//    {
+//        for (CBCharacteristic *characteristic in service.characteristics)
+//        {
+//            /* Read device name */
+//            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
+//            {
+//                [peripheral readValueForCharacteristic:characteristic];
+//                LOG(@"Found a Device Name Characteristic, RSSI: %@", peripheral.RSSI);
+//            }
+//        }
+//    }
+//
+//    // org.bluetooth.service.device_information
+//    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
+//    {
+//        for (CBCharacteristic *characteristic in service.characteristics)
+//        {
+//            // Read manufacturer name
+//            // 2a29: org.bluetooth.characteristic.manufacturer_name_string
+//            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
+//            {
+//                [peripheral readValueForCharacteristic:characteristic];
+//                LOG(@"Found a Device Manufacturer Name Characteristic");
+//            }
+//        }
+//    }
 }
 
 /*
@@ -293,7 +303,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
 didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
               error:(NSError *)error
 {
-    LOG( @"peripheral: %@ charactristic: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.value, error);
+    LOG( @"peripheral: %@ charactristic: %@ UUID: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.UUID, characteristic.value, error);
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
     {

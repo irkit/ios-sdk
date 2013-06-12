@@ -30,7 +30,7 @@
     
     [self load];
     
-    _peripherals = [[NSMutableArray alloc] init];
+    _peripherals = [[NSMutableSet alloc] init];
     
     return self;
 }
