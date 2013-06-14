@@ -101,29 +101,45 @@
                        context:(void *)context {
     LOG( @"keyPath: %@", keyPath );
 
-    NSKeyValueChange changeKind = [change objectForKey: NSKeyValueChangeKindKey];
-    NSIndexPath *indexes        = [change objectForKey: NSKeyValueChangeIndexesKey];
-    LOG( @"changeKind: %d, indexes: %@", changeKind, indexes);
+    int changeKind = [[change objectForKey: NSKeyValueChangeKindKey] intValue];
     switch (changeKind) {
         case NSKeyValueChangeInsertion:
         {
-            // TODO if number of peripherals changed from 0 -> 1
-            // show signals section animated:YES
+            BOOL firstPeripheral = ([IRKit sharedInstance].numberOfPeripherals == 1);
 
-            [self.tableView insertRowsAtIndexPaths:indexes
-                                  withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView beginUpdates];
+            if (firstPeripheral) {
+                // it's our first peripheral
+                // let's show the signals section
+                [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:1]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            else {
+                [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            [self.tableView endUpdates];
             break;
         }
         case NSKeyValueChangeRemoval:
         {
-            [self.tableView deleteRowsAtIndexPaths:indexes
-                                  withRowAnimation:UITableViewRowAnimationFade];
+            // TODO animation
+            [self.tableView reloadData];
+//            [self.tableView beginUpdates];
+//            [self.tableView deleteRowsAtIndexPaths:indexes
+//                                  withRowAnimation:UITableViewRowAnimationFade];
+//            [self.tableView endUpdates];
             break;
         }
         case NSKeyValueChangeReplacement:
         {
-            [self.tableView reloadRowsAtIndexPaths:indexes
-                                  withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView reloadData];
+//            [self.tableView beginUpdates];
+//            [self.tableView reloadRowsAtIndexPaths:indexes
+//                                  withRowAnimation:UITableViewRowAnimationFade];
+//            [self.tableView endUpdates];
             break;
         }
         default:
