@@ -89,8 +89,6 @@
 - (void)addPeripheralsObject:(CBPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
     
-    [_peripherals addObject:peripheral];
-    
     if ( ! peripheral.UUID || ! peripheral.name ) {
         return;
     }
@@ -100,17 +98,18 @@
     if (p) {
         // found known but disconnected peripheral
         p.peripheral = peripheral;
-        return;
     }
-    
-    p                = [[IRPeripheral alloc] init];
-    p.peripheral     = nil;
-    p.customizedName = peripheral.name; // defaults to original name
-    p.foundDate      = [NSDate date];
-    p.isPaired       = @NO;
-    [_irperipheralForUUID setObject:p
-                             forKey:uuidKey];
-    [self save];
+    else {
+        p                = [[IRPeripheral alloc] init];
+        p.peripheral     = nil;
+        p.customizedName = peripheral.name; // defaults to original name
+        p.foundDate      = [NSDate date];
+        p.isPaired       = @NO;
+        [_irperipheralForUUID setObject:p
+                                 forKey:uuidKey];
+        [self save];
+    }
+    [_peripherals addObject:peripheral];
 }
 
 - (void)removePeripheralsObject: (CBPeripheral*) peripheral {
