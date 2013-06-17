@@ -6,6 +6,6 @@
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-@interface SRMainViewController : UITableViewController <IRReceiveViewDelegate>
+@interface SRMainViewController : UITableViewController <IRReceiveViewDelegate, IRNewPeripheralViewControllerDelegate>
 
 @end

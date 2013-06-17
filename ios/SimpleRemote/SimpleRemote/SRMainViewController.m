@@ -26,19 +26,24 @@
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     
-    //if ([IRKit sharedInstance].numberOfPeripherals == 0) {
-    [self addBarButtonPressed: nil];
-    //}
+    if ([IRKit sharedInstance].numberOfPeripherals == 0) {
+        //[self addBarButtonPressed: nil];
+        IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
+        c.delegate = self;
+        [self presentViewController:c animated:YES completion:^{
+            LOG( @"presented" );
+        }];
+    }
 }
 
 - (IBAction)addBarButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
     
-    IRReceiveViewController* receiver = [[IRReceiveViewController alloc] init];
-    receiver.delegate = self;
-    [self presentViewController:receiver animated:YES completion:^{
-        LOG( @"presented" );
-    }];
+//    IRReceiveViewController* receiver = [[IRReceiveViewController alloc] init];
+//    receiver.delegate = self;
+//    [self presentViewController:receiver animated:YES completion:^{
+//        LOG( @"presented" );
+//    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,6 +56,14 @@
 #pragma mark IRReceiveViewDelegate
 
 - (void)receiveViewControllerDidFinish:(IRReceiveViewController *)viewController {
+    LOG_CURRENT_METHOD;
+    
+}
+
+#pragma mark -
+#pragma mark IRNewPeripheralViewControllerDelegate
+
+- (void)newPeripheralViewControllerDidFinish:(IRReceiveViewController *)viewController {
     LOG_CURRENT_METHOD;
     
 }

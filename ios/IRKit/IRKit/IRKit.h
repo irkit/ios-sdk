@@ -10,6 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "IRConst.h"
 #import "IRReceiveViewController.h"
+#import "IRNewPeripheralViewController.h"
 #import "IRPeripherals.h"
 #import "IRSignals.h"
 
