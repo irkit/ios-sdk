@@ -233,6 +233,8 @@ didDiscoverCharacteristicsForService:(CBService *)service
         for (CBCharacteristic *characteristic in service.characteristics) {
             if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
                 LOG( @"are we authenticated?" );
+                [peripheral setNotifyValue:YES
+                         forCharacteristic:characteristic];
                 [peripheral readValueForCharacteristic:characteristic];
             }
         }
@@ -305,14 +307,19 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
 {
     LOG( @"peripheral: %@ charactristic: %@ UUID: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.UUID, characteristic.value, error);
     
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
-    {
+    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
+        NSData *value = characteristic.value;
+        unsigned char authorized = 0;
+        [value getBytes:&authorized length:1];
+        LOG( @"authorized: %d", authorized );
+    }
+    
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
         NSString * deviceName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         LOG(@"Device Name = %@", deviceName);
     }
     // 2a29: org.bluetooth.characteristic.manufacturer_name_string
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
-    {
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]]) {
         NSString* manufacturer = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         LOG(@"Manufacturer Name = %@", manufacturer);
     }
