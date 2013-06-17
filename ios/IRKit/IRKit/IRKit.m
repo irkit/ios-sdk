@@ -191,7 +191,8 @@ didDiscoverServices:(NSError *)error
 
         // TODO: delete this row
         // discover characterstics for all services (just interested now)
-        [peripheral discoverCharacteristics:nil forService:service];
+        [peripheral discoverCharacteristics:nil
+                                 forService:service];
 
 //        // Device Information Service
 //        if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
@@ -231,8 +232,8 @@ didDiscoverCharacteristicsForService:(CBService *)service
     
     if ([service.UUID isEqual:IRKIT_SERVICE_UUID]) {
         for (CBCharacteristic *characteristic in service.characteristics) {
-            if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
-                LOG( @"read ir data" );
+            if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
+                LOG( @"are we authenticated?" );
                 [peripheral readValueForCharacteristic:characteristic];
             }
         }
