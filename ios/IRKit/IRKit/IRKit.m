@@ -189,9 +189,8 @@ didDiscoverServices:(NSError *)error
     {
         LOG(@"service: %@ UUID: %@", service, service.UUID);
 
-        // TODO: delete this row
         // discover characterstics for all services (just interested now)
-        [peripheral discoverCharacteristics:nil
+        [peripheral discoverCharacteristics:IRKIT_CHARACTERISTICS
                                  forService:service];
 
 //        // Device Information Service
