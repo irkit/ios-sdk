@@ -63,9 +63,13 @@
 #pragma mark -
 #pragma mark IRNewPeripheralViewControllerDelegate
 
-- (void)newPeripheralViewControllerDidFinish:(IRReceiveViewController *)viewController {
-    LOG_CURRENT_METHOD;
-    
+- (void)newPeripheralViewController:(IRReceiveViewController *)viewController
+                didFinishWithResult:(IRNewPeripheralResult)result {
+    LOG( @"result: %@", NSStringFromIRNewPeripheralResult(result) );
+ 
+    [self dismissViewControllerAnimated:YES completion:^{
+        LOG(@"dismissed");
+    }];
 }
 
 

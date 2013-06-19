@@ -12,13 +12,12 @@
 
 @interface IRKit ()
 
-@property (nonatomic, strong) CBCentralManager* manager;
+@property (nonatomic) CBCentralManager* manager;
+@property (nonatomic) BOOL shouldScan;
 
 @end
 
 @implementation IRKit
-
-@synthesize autoConnect;
 
 + (id) sharedInstance {
     static IRKit* instance;
@@ -44,6 +43,10 @@
     }
     
     _signals = [[IRSignals alloc] init];
+    
+    _autoConnect = NO;
+    _isScanning  = NO;
+    _shouldScan  = NO;
 
     return self;
 }
@@ -51,15 +54,23 @@
 - (void) startScan {
     LOG_CURRENT_METHOD;
     
-    [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
-                                     options:nil];
-    // find anything
-//    [_manager scanForPeripheralsWithServices:nil
-//                                     options:nil];
+    if (_manager.state == CBCentralManagerStatePoweredOn) {
+        _isScanning = YES;
+        [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
+                                         options:nil];
+        // find anything
+        // [_manager scanForPeripheralsWithServices:nil
+        //                                  options:nil];
+    }
+    else {
+        _shouldScan = YES; // scans when powered on
+    }
 }
 
 - (void) stopScan {
     LOG_CURRENT_METHOD;
+    _isScanning = NO;
+    _shouldScan = NO;
     [_manager stopScan];
 }
 
@@ -171,6 +182,10 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     LOG( @"state: %@", NSStringFromCBCentralManagerState([central state]));
     
+    if (_shouldScan && (central.state == CBCentralManagerStatePoweredOn)) {
+        _shouldScan = NO;
+        [self startScan];
+    }
 }
 
 #pragma mark -

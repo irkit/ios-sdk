@@ -55,7 +55,12 @@
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
+
     self.title = @"Scene 1";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+         initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                              target:self.navigationController.delegate
+                              action:@selector(cancelButtonPressed:)];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

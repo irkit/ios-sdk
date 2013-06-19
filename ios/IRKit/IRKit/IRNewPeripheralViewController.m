@@ -15,6 +15,23 @@
 
 @end
 
+NSString *NSStringFromIRNewPeripheralResult(IRNewPeripheralResult result)
+{
+    NSString *ret;
+    switch (result) {
+        case IRNewPeripheralResultCancelled:
+            ret = @"Cancelled";
+            break;
+        case IRNewPeripheralResultNew:
+            ret = @"New";
+            break;
+        default:
+            LOG( @"unexpected result: %d", result );
+            ret = @"*UNEXPECTED RESULT*";
+    }
+    return ret;
+}
+
 @implementation IRNewPeripheralViewController
 
 - (void)loadView {
@@ -26,6 +43,7 @@
 
     UIViewController *first = [[IRNewPeripheralScene1ViewController alloc]init];
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
+    _navController.delegate = self;
 
     [view addSubview:_navController.view];
     self.view = view;
@@ -51,9 +69,8 @@
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self dismissViewControllerAnimated:YES completion:^{
-        LOG(@"dismissed");
-    }];
+    [self.delegate newPeripheralViewController:self
+                           didFinishWithResult:IRNewPeripheralResultCancelled];
 }
 
 - (void)didReceiveMemoryWarning

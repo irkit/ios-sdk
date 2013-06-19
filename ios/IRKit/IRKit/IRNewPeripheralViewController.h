@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "IRKit.h"
 
+typedef NS_ENUM( NSUInteger, IRNewPeripheralResult ) {
+    IRNewPeripheralResultCancelled = 0,
+    IRNewPeripheralResultNew       = 1
+};
+NSString *NSStringFromIRNewPeripheralResult(IRNewPeripheralResult);
+
 // pre definition for delegate
 @protocol IRNewPeripheralViewControllerDelegate;
 
@@ -21,6 +27,8 @@
 @protocol IRNewPeripheralViewControllerDelegate <NSObject>
 
 @required
-- (void)newPeripheralViewControllerDidFinish:(IRNewPeripheralViewController *)viewController;
+
+// Your implementation of this method should dismiss view controller.
+- (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithResult:(IRNewPeripheralResult)result;
 
 @end

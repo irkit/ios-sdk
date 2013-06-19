@@ -40,7 +40,7 @@
     
     NSArray* keys = [_irperipheralForUUID keysSortedByValueUsingSelector:@selector(compareByFirstFoundDate:)];
     NSString* key = [keys objectAtIndex: key];
-    return [_irperipheralForUUID objectForKey: key];
+    return _irperipheralForUUID[key];
 }
 
 - (NSArray*) knownPeripheralUUIDs {
@@ -54,7 +54,7 @@
         return nil;
     }
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-    return [_irperipheralForUUID objectForKey: uuidKey];
+    return _irperipheralForUUID[uuidKey];
 }
 
 
@@ -94,7 +94,7 @@
     }
     
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-    IRPeripheral *p = [_irperipheralForUUID objectForKey: uuidKey];
+    IRPeripheral *p = _irperipheralForUUID[uuidKey];
     if (p) {
         // found known but disconnected peripheral
         p.peripheral = peripheral;

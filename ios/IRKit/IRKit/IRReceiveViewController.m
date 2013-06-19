@@ -101,7 +101,7 @@
                        context:(void *)context {
     LOG( @"keyPath: %@", keyPath );
 
-    int changeKind = [[change objectForKey: NSKeyValueChangeKindKey] intValue];
+    int changeKind = [change[NSKeyValueChangeKindKey] intValue];
     switch (changeKind) {
         case NSKeyValueChangeInsertion:
         {
