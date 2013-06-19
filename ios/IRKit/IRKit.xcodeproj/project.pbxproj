@@ -27,6 +27,7 @@
 		C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5688174A7AB200FFE5CB /* IRSignal.m */; };
 		C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5687174A7AB100FFE5CB /* IRSignals.h */; };
 		C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B568D174A7BC800FFE5CB /* IRSignalCell.m */; };
+		C77150EC17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */; };
 		C79DE3CF176F2C2D0088679E /* scene2.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CD176F2C2D0088679E /* scene2.png */; };
 		C79DE3D0176F2C2D0088679E /* scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CE176F2C2D0088679E /* scene1.png */; };
 		C7AFD0561755F10A007EE1DA /* IR_ISImageNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD04E1755F10A007EE1DA /* IR_ISImageNetworkOperation.m */; };
@@ -103,6 +104,8 @@
 		C75B5689174A7AB200FFE5CB /* IRSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignal.h; sourceTree = "<group>"; };
 		C75B568D174A7BC800FFE5CB /* IRSignalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalCell.m; sourceTree = "<group>"; };
 		C75B568E174A7BC800FFE5CB /* IRSignalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalCell.h; sourceTree = "<group>"; };
+		C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene2ViewController.m; sourceTree = "<group>"; };
+		C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene2ViewController.h; sourceTree = "<group>"; };
 		C79DE3B1176F20A30088679E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C79DE3B3176F20B50088679E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C79DE3B9176F25260088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,6 +288,8 @@
 		C7C7A308176EFC7300C9A62F /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */,
+				C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */,
 				C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */,
 				C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */,
 				C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */,
@@ -407,6 +412,7 @@
 				C7AFD0591755F10A007EE1DA /* IR_ISNetworkOperation.m in Sources */,
 				C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */,
 				C7C7A30E176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m in Sources */,
+				C77150EC17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +574,7 @@
 				C79DE3C4176F25260088679E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

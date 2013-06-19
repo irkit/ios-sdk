@@ -7,6 +7,7 @@
 //
 
 #import "SRAppDelegate.h"
+#import <IRKit/IRKit.h>
 
 @implementation SRAppDelegate
 

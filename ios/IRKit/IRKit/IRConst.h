@@ -9,7 +9,8 @@
 #ifndef IRKit_IRConst_h
 #define IRKit_IRConst_h
 
-#pragma Bluetooth definitions
+#pragma mark -
+#pragma mark Bluetooth definitions
 
 #define IRKIT_SERVICE_UUID_STRING (@"195AE58A-437A-489B-B0CD-B7C9C394BAE4")
 #define IRKIT_SERVICE_UUID        [CBUUID UUIDWithString: IRKIT_SERVICE_UUID_STRING]
@@ -55,6 +56,7 @@
 #pragma mark -
 #pragma NSNotification names
 
-#define IRKitDidDiscoverPeripheralNotification @"IRKit::DidDiscover"
+#define IRKitDidConnectPeripheralNotification @"IRKit::DidConnect"
+#define IRKitPeripheralAuthorizedNotification @"IRKit::Authorized"
 
 #endif

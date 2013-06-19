@@ -1,5 +1,5 @@
 //
-//  IRNewPeripheralScene1ViewController.h
+//  IRNewPeripheralScene2ViewController.h
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IRNewPeripheralScene1ViewController : UIViewController
+@interface IRNewPeripheralScene2ViewController : UIViewController
 
 @end

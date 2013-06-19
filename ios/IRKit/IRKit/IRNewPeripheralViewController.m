@@ -11,7 +11,7 @@
 
 @interface IRNewPeripheralViewController ()
 
-@property (nonatomic, strong) UINavigationController *navController;
+@property (nonatomic) UINavigationController *navController;
 
 @end
 
@@ -37,15 +37,13 @@ NSString *NSStringFromIRNewPeripheralResult(IRNewPeripheralResult result)
 - (void)loadView {
     LOG_CURRENT_METHOD;
     
-    CGRect frame = [[UIScreen mainScreen] bounds];
-    LOG(@"frame: %@", NSStringFromCGRect(frame));
-    UIView *view = [[UIView alloc] initWithFrame:frame];
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    UIView *view = [[UIView alloc] initWithFrame:bounds];
 
     UIViewController *first = [[IRNewPeripheralScene1ViewController alloc]init];
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
-    _navController.delegate = self;
-
     [view addSubview:_navController.view];
+
     self.view = view;
 }
 
@@ -57,11 +55,22 @@ NSString *NSStringFromIRNewPeripheralResult(IRNewPeripheralResult result)
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
+    
+    // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
+    // prevent showing the weird 20px empty zone on top of navigationbar
+    // when presented in caller's viewDidLoad
+    [self.navController setNavigationBarHidden:YES];
+    [self.navController setNavigationBarHidden:NO];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewDidAppear:animated];
 }
 
 #pragma mark -

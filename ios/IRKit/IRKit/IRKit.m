@@ -99,12 +99,6 @@
         if (!p) {
             p = [NSNull null];
         }
-        [[NSNotificationCenter defaultCenter]
-           postNotificationName:IRKitDidDiscoverPeripheralNotification
-                         object:nil
-                       userInfo:@{
-                         @"peripheral": p
-                       }];
     }
 
     /* iOS 6.0 bug workaround : connect to device before displaying UUID !
@@ -145,12 +139,6 @@ didRetrievePeripherals:(NSArray *)peripherals {
             if (!p) {
                 p = [NSNull null];
             }
-            [[NSNotificationCenter defaultCenter]
-                postNotificationName:IRKitDidDiscoverPeripheralNotification
-                              object:nil
-                            userInfo:@{
-                              @"peripheral": p
-                            }];
         }
 
         peripheral.delegate = self;
@@ -162,6 +150,12 @@ didRetrievePeripherals:(NSArray *)peripherals {
 - (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
+    
+    _isAuthorized = NO; // init
+
+    [[NSNotificationCenter defaultCenter]
+                postNotificationName:IRKitDidConnectPeripheralNotification
+                              object:nil];
 
     // iOS 6.0 bug workaround : connect to device before displaying UUID !
     // The reason for this is that the CFUUID .UUID property of CBPeripheral
@@ -327,6 +321,13 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         unsigned char authorized = 0;
         [value getBytes:&authorized length:1];
         LOG( @"authorized: %d", authorized );
+        _isAuthorized = authorized;
+        
+        if (_isAuthorized) {
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:IRKitPeripheralAuthorizedNotification
+                              object:nil];
+        }
     }
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
