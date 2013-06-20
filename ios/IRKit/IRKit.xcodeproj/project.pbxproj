@@ -30,6 +30,12 @@
 		C77150EC17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */; };
 		C77150EF17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */; };
 		C77150F11772921A004F9FE3 /* scene3.png in Resources */ = {isa = PBXBuildFile; fileRef = C77150F01772921A004F9FE3 /* scene3.png */; };
+		C77150F21772D635004F9FE3 /* IRSignalCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B568E174A7BC800FFE5CB /* IRSignalCell.h */; };
+		C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; };
+		C77150F61772DCC7004F9FE3 /* IRSignalSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150F41772DCC7004F9FE3 /* IRSignalSelectorViewController.m */; };
+		C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */; };
+		C77150FA1772E054004F9FE3 /* IRSignalSelectorViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150F51772DCC7004F9FE3 /* IRSignalSelectorViewController.h */; };
+		C77150FC1772E30B004F9FE3 /* newsignal.png in Resources */ = {isa = PBXBuildFile; fileRef = C77150FB1772E30B004F9FE3 /* newsignal.png */; };
 		C79DE3CF176F2C2D0088679E /* scene2.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CD176F2C2D0088679E /* scene2.png */; };
 		C79DE3D0176F2C2D0088679E /* scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CE176F2C2D0088679E /* scene1.png */; };
 		C7AFD0561755F10A007EE1DA /* IR_ISImageNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD04E1755F10A007EE1DA /* IR_ISImageNetworkOperation.m */; };
@@ -61,6 +67,9 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C77150FA1772E054004F9FE3 /* IRSignalSelectorViewController.h in CopyFiles */,
+				C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */,
+				C77150F21772D635004F9FE3 /* IRSignalCell.h in CopyFiles */,
 				C7C7A30B176F017600C9A62F /* IRNewPeripheralViewController.h in CopyFiles */,
 				C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */,
 				C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */,
@@ -111,6 +120,11 @@
 		C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene3ViewController.m; sourceTree = "<group>"; };
 		C77150EE17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene3ViewController.h; sourceTree = "<group>"; };
 		C77150F01772921A004F9FE3 /* scene3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scene3.png; sourceTree = "<group>"; };
+		C77150F41772DCC7004F9FE3 /* IRSignalSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSelectorViewController.m; sourceTree = "<group>"; };
+		C77150F51772DCC7004F9FE3 /* IRSignalSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSelectorViewController.h; sourceTree = "<group>"; };
+		C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalViewController.m; sourceTree = "<group>"; };
+		C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalViewController.h; sourceTree = "<group>"; };
+		C77150FB1772E30B004F9FE3 /* newsignal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsignal.png; sourceTree = "<group>"; };
 		C79DE3B1176F20A30088679E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C79DE3B3176F20B50088679E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C79DE3B9176F25260088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -255,6 +269,7 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C77150FB1772E30B004F9FE3 /* newsignal.png */,
 				C79DE3CE176F2C2D0088679E /* scene1.png */,
 				C79DE3CD176F2C2D0088679E /* scene2.png */,
 				C77150F01772921A004F9FE3 /* scene3.png */,
@@ -290,6 +305,10 @@
 		C7C7A308176EFC7300C9A62F /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */,
+				C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */,
+				C77150F41772DCC7004F9FE3 /* IRSignalSelectorViewController.m */,
+				C77150F51772DCC7004F9FE3 /* IRSignalSelectorViewController.h */,
 				C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */,
 				C77150EE17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.h */,
 				C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */,
@@ -386,6 +405,7 @@
 				C79DE3D0176F2C2D0088679E /* scene1.png in Resources */,
 				C79DE3CF176F2C2D0088679E /* scene2.png in Resources */,
 				C77150F11772921A004F9FE3 /* scene3.png in Resources */,
+				C77150FC1772E30B004F9FE3 /* newsignal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +439,8 @@
 				C7C7A30E176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m in Sources */,
 				C77150EC17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m in Sources */,
 				C77150EF17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m in Sources */,
+				C77150F61772DCC7004F9FE3 /* IRSignalSelectorViewController.m in Sources */,
+				C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

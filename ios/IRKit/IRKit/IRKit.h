@@ -11,8 +11,11 @@
 #import "IRConst.h"
 #import "IRReceiveViewController.h"
 #import "IRNewPeripheralViewController.h"
+#import "IRSignalSelectorViewController.h"
 #import "IRPeripherals.h"
 #import "IRSignals.h"
+#import "IRSignal.h"
+#import "IRSignalCell.h"
 
 @interface IRKit : NSObject<CBCentralManagerDelegate, CBPeripheralDelegate>
 

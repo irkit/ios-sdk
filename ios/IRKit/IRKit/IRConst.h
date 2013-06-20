@@ -54,9 +54,15 @@
 #define IRKIT_SERVICE_BATTERY_SERVICE    0x180F
 
 #pragma mark -
-#pragma NSNotification names
+#pragma mark NSNotification names
 
 #define IRKitDidConnectPeripheralNotification @"IRKit::DidConnect"
 #define IRKitPeripheralAuthorizedNotification @"IRKit::Authorized"
+#define IRKitDidReceiveSignalNotification     @"IRKit::ReceivedSignal"
+
+#pragma mark -
+#pragma mark UITableViewCell identifiers
+
+#define IRKitCellIdentifierSignal @"IRKit::UITableViewCell::Signal"
 
 #endif

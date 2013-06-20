@@ -22,7 +22,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,12 +60,95 @@
 
 - (void)newPeripheralViewController:(IRReceiveViewController *)viewController
                   didFinishWithInfo:(NSDictionary*)info {
-    LOG( @"result: %@", info );
+    LOG( @"info: %@", info );
  
     [self dismissViewControllerAnimated:YES completion:^{
         LOG(@"dismissed");
     }];
 }
 
+#pragma mark -
+#pragma mark IRSignalSelectorViewControllerDelegate
+
+- (void)signalSelectorViewController:(IRSignalSelectorViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+    LOG( @"info: %@", info );
+
+    [self dismissViewControllerAnimated:YES completion:^{
+        LOG(@"dismissed");
+    }];
+}
+
+#pragma mark -
+#pragma mark UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LOG_CURRENT_METHOD;
+    
+    UITableViewCell *cell;
+    
+    if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
+        // last line is always "+ New Signal"
+        // TODO IRKit SDK provides this?
+        cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:@"NewSignalCell"];
+        }
+        cell.textLabel.text = @"+ Add New Signal";
+        return cell;
+    }
+    // otherwise show peripheral info
+    cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
+    if (cell == nil) {
+        cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
+    }
+    ((IRSignalCell*)cell).signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    LOG_CURRENT_METHOD;
+    
+    switch (section) {
+        case 0:
+        {
+            return [IRKit sharedInstance].numberOfSignals + 1;
+        }
+    }
+    return 0;
+
+}
+
+#pragma mark -
+#pragma mark UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LOG_CURRENT_METHOD;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    switch (indexPath.section) {
+        case 0:
+            switch (indexPath.row) {
+                case 0:
+                    {
+                        IRSignalSelectorViewController *c = [[IRSignalSelectorViewController alloc] init];
+                        c.delegate = (id<IRSignalSelectorViewControllerDelegate>)self;
+                        [self presentViewController:c animated:YES completion:^{
+                            LOG( @"presented" );
+                        }];
+                    }
+                    break;
+                default:
+                    break;
+            }
+            break;
+            
+        default:
+            break;
+    }
+}
 
 @end

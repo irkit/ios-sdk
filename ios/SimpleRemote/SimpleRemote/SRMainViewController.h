@@ -8,6 +8,6 @@
 
 #import <IRKit/IRKit.h>
 
-@interface SRMainViewController : UITableViewController <IRNewPeripheralViewControllerDelegate>
+@interface SRMainViewController : UITableViewController <IRNewPeripheralViewControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @end

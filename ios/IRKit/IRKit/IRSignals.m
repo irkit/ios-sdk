@@ -20,7 +20,7 @@
     self = [super init];
     if (! self) { return nil; }
     
-    _signals = [[NSMutableArray alloc] initWithArray:@[]];
+    _signals = [[NSMutableArray alloc] initWithCapacity:0];
     
     return self;
 }
@@ -46,8 +46,7 @@
 - (NSUInteger) count {
     LOG_CURRENT_METHOD;
     
-    return 1; // testing
-    // return _signals.count;
+    return _signals.count;
 }
 
 @end
