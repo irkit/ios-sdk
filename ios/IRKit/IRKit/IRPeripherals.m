@@ -118,9 +118,6 @@
     [_peripherals removeObject:peripheral];
 }
 
-#pragma mark -
-#pragma Private methods
-
 - (void) save {
     LOG_CURRENT_METHOD;
     
@@ -129,6 +126,9 @@
                             forKey:@"peripherals"];
     [IRPersistentStore synchronize];
 }
+
+#pragma mark -
+#pragma Private methods
 
 - (void) load {
     LOG_CURRENT_METHOD;

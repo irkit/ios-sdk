@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "IRKit.h"
 
-typedef NS_ENUM( NSUInteger, IRNewPeripheralResult ) {
-    IRNewPeripheralResultCancelled = 0,
-    IRNewPeripheralResultNew       = 1
-};
-NSString *NSStringFromIRNewPeripheralResult(IRNewPeripheralResult);
+#define IRNewPeripheralViewControllerResult          @"result"
+#define IRNewPeripheralViewControllerResultCancelled @"cancelled"
+#define IRNewPeripheralViewControllerResultNew       @"new"
+#define IRNewPeripheralViewControllerPeripheral      @"peripheral"
 
 // pre definition for delegate
 @protocol IRNewPeripheralViewControllerDelegate;
@@ -22,6 +21,8 @@ NSString *NSStringFromIRNewPeripheralResult(IRNewPeripheralResult);
 
 @property (nonatomic, assign) id<IRNewPeripheralViewControllerDelegate> delegate;
 
+- (void)doneButtonPressed:(id)sender;
+
 @end
 
 @protocol IRNewPeripheralViewControllerDelegate <NSObject>
@@ -29,6 +30,6 @@ NSString *NSStringFromIRNewPeripheralResult(IRNewPeripheralResult);
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithResult:(IRNewPeripheralResult)result;
+- (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
 
 @end

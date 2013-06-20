@@ -7,6 +7,7 @@
 //
 
 #import "IRNewPeripheralScene2ViewController.h"
+#import "IRNewPeripheralScene3ViewController.h"
 #import "IRKit.h"
 
 @interface IRNewPeripheralScene2ViewController ()
@@ -70,6 +71,8 @@
                      queue:[NSOperationQueue mainQueue]
                 usingBlock:^(NSNotification *note) {
                     LOG( @"irkit authorized");
+                    IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+                    [self.navigationController pushViewController:c animated:YES];
                 }];
     }
 

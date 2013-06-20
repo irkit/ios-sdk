@@ -84,6 +84,11 @@
     return [_signals count];
 }
 
+- (void) save {
+    LOG_CURRENT_METHOD;
+    [_peripherals save];
+}
+
 #pragma mark -
 #pragma CBCentralManagerDelegate
 

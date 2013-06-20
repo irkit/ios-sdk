@@ -24,5 +24,6 @@
 - (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)object;
 - (void)addPeripheralsObject:(CBPeripheral*) peripheral;
 - (void)removePeripheralsObject: (CBPeripheral*) peripheral;
+- (void) save;
 
 @end

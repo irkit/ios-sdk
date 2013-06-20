@@ -20,6 +20,7 @@
 
 - (void) startScan;
 - (void) stopScan;
+- (void) save;
 
 @property (nonatomic) BOOL autoConnect;
 @property (nonatomic) BOOL isScanning;
