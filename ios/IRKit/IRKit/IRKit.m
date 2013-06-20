@@ -36,13 +36,7 @@
                                                     queue:nil];
     
     _peripherals = [[IRPeripherals alloc] init];
-    NSArray *knownPeripherals = [_peripherals knownPeripheralUUIDs];
-    if ([knownPeripherals count]) {
-        LOG( @"retrieve: %@", knownPeripherals );
-        [_manager retrievePeripherals: knownPeripherals];
-    }
-    
-    _signals = [[IRSignals alloc] init];
+    _signals     = [[IRSignals alloc] init];
     
     _autoConnect = NO;
     _isScanning  = NO;
@@ -183,6 +177,13 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
     
     if (_shouldScan && (central.state == CBCentralManagerStatePoweredOn)) {
         _shouldScan = NO;
+
+        NSArray *knownPeripherals = [_peripherals knownPeripheralUUIDs];
+        if ([knownPeripherals count]) {
+            LOG( @"retrieve: %@", knownPeripherals );
+            [_manager retrievePeripherals: knownPeripherals];
+        }
+
         [self startScan];
     }
 }

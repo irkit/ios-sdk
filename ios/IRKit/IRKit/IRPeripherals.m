@@ -43,9 +43,13 @@
     return _irperipheralForUUID[key];
 }
 
+// returns NSArray of CFUUIDs
 - (NSArray*) knownPeripheralUUIDs {
     LOG_CURRENT_METHOD;
-    return [_irperipheralForUUID allKeys];
+    return [IRHelper mapObjects:[_irperipheralForUUID allKeys]
+                     usingBlock:(id)^(id obj, NSUInteger idx) {
+                         return (__bridge_transfer id)(CFUUIDCreateFromString(NULL, (CFStringRef)obj));
+                     }];
 }
 
 - (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral {

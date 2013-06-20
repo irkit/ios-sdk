@@ -11,5 +11,6 @@
 @interface IRHelper : NSObject
 
 + (NSString*)stringFromCFUUID: (CFUUIDRef) uuid;
++ (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block;
 
 @end
