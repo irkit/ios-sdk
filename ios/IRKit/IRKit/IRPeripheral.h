@@ -11,10 +11,10 @@
 
 @interface IRPeripheral : NSObject
 
-@property(nonatomic, copy) NSString *customizedName;
-@property(nonatomic, copy) NSNumber *isPaired;
-@property(nonatomic, copy) NSDate   *foundDate;
-@property(nonatomic, strong) CBPeripheral *peripheral; // might be nil
+@property (nonatomic, copy) NSString *customizedName;
+@property (nonatomic, copy) NSNumber *isPaired;
+@property (nonatomic, copy) NSDate   *foundDate;
+@property (nonatomic) CBPeripheral *peripheral;
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 

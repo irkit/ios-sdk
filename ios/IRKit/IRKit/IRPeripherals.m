@@ -14,11 +14,11 @@
 
 @interface IRPeripherals ()
 
-// NSMutableSet of CBPeripherals
-@property (nonatomic, strong) NSMutableSet* peripherals;
+// just to retain a CBPeripheral without an UUID
+@property (nonatomic) NSMutableSet* unknownPeripherals;
 
 // CBPeripheral.UUID => IRPeripheral
-@property (nonatomic, strong) NSMutableDictionary* irperipheralForUUID;
+@property (nonatomic) NSMutableDictionary* irperipheralForUUID;
 
 @end
 
@@ -28,10 +28,9 @@
     self = [super init];
     if (! self) { return nil; }
     
+    _unknownPeripherals = [[NSMutableSet alloc] init];
     [self load];
-    
-    _peripherals = [[NSMutableSet alloc] init];
-    
+        
     return self;
 }
 
@@ -65,37 +64,46 @@
 #pragma mark -
 #pragma mark Key Value Coding - Mutable Unordered Accessors
 
-- (NSSet*) peripherals {
+- (NSArray*) peripherals {
     LOG_CURRENT_METHOD;
     
-    return _peripherals;
+    return [_irperipheralForUUID allValues];
 }
 
 - (NSUInteger) countOfPeripherals {
     LOG_CURRENT_METHOD;
     
-    return _peripherals.count;
+    return [_irperipheralForUUID count];
 }
 
 - (NSEnumerator *)enumeratorOfPeripherals {
     LOG_CURRENT_METHOD;
     
-    return _peripherals.objectEnumerator;
+    return _irperipheralForUUID.objectEnumerator;
 }
 
-- (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)object {
+- (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)peripheral {
     LOG_CURRENT_METHOD;
     
-    return [_peripherals member:object];
+    if (!peripheral.UUID) {
+        return nil;
+    }
+    NSString *uuid = [IRHelper stringFromCFUUID:peripheral.UUID];
+    return _irperipheralForUUID[uuid];
 }
 
 // -add<Key>Object:
 - (void)addPeripheralsObject:(CBPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
     
-    if ( ! peripheral.UUID || ! peripheral.name ) {
+    //    if ( ! peripheral.UUID || ! peripheral.name ) {
+    if ( ! peripheral.UUID ) {
+        // just to retain while 1st connect attempt
+        [_unknownPeripherals addObject:peripheral];
         return;
     }
+    // we got it's UUID, so don't need to retain peripheral in _unknownPeripherals anymore, we're gonna retain it in _irperipheralForUUID
+    [_unknownPeripherals removeObject:peripheral];
     
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
     IRPeripheral *p = _irperipheralForUUID[uuidKey];
@@ -105,21 +113,24 @@
     }
     else {
         p                = [[IRPeripheral alloc] init];
-        p.peripheral     = nil;
+        p.peripheral     = peripheral;
         p.customizedName = peripheral.name; // defaults to original name
         p.foundDate      = [NSDate date];
         p.isPaired       = @NO;
-        [_irperipheralForUUID setObject:p
-                                 forKey:uuidKey];
+        _irperipheralForUUID[uuidKey] = p;
         [self save];
     }
-    [_peripherals addObject:peripheral];
 }
 
 - (void)removePeripheralsObject: (CBPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
     
-    [_peripherals removeObject:peripheral];
+    if ( ! peripheral.UUID ) {
+        [_unknownPeripherals removeObject:peripheral];
+        return;
+    }
+    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
+    [_irperipheralForUUID removeObjectForKey:uuidKey];
 }
 
 - (void) save {

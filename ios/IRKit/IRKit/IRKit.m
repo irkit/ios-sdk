@@ -92,13 +92,7 @@
                   RSSI:(NSNumber *)RSSI {
     LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
 
-    if ( ! [_peripherals memberOfPeripherals: peripheral] ) {
-        [_peripherals addPeripheralsObject:peripheral]; // retain
-        IRPeripheral *p = [_peripherals IRPeripheralForPeripheral: peripheral];
-        if (!p) {
-            p = [NSNull null];
-        }
-    }
+    [_peripherals addPeripheralsObject:peripheral]; // retain
 
     /* iOS 6.0 bug workaround : connect to device before displaying UUID !
      The reason for this is that the CFUUID .UUID property of CBPeripheral
@@ -132,13 +126,7 @@ didRetrievePeripherals:(NSArray *)peripherals {
     LOG( @"peripherals: %@", peripherals);
 
     for (CBPeripheral *peripheral in peripherals) {
-        if ( ! [_peripherals memberOfPeripherals: peripheral] ) {
-            [_peripherals addPeripheralsObject:peripheral]; // retain
-            IRPeripheral *p = [_peripherals IRPeripheralForPeripheral: peripheral];
-            if (!p) {
-                p = [NSNull null];
-            }
-        }
+        [_peripherals addPeripheralsObject:peripheral]; // retain
 
         peripheral.delegate = self;
         [_manager connectPeripheral:peripheral
