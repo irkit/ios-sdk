@@ -1,0 +1,22 @@
+msc {
+    # entities
+    user, peripheral, central;
+
+    user -> peripheral [label = "Power ON"];
+    peripheral note peripheral [label = "Starts advertising"];
+    peripheral -> central [label = "Advertise"];
+
+    user -> central [label = "Launch App"];
+
+    peripheral <= central [label = "Connect, fetch services, characteristics"];
+    peripheral >> central [label = "..."];
+
+    peripheral <= central [label = "Read 'IR Authentication Status' c12c"];
+    peripheral >> central [label = "0 - Unauthorized"];
+
+    user -> peripheral [label = "Presses auth button"];
+    peripheral => central [label = "Indicate 'IR Authentication Status' c12c = 1"];
+    peripheral << central [label = "Indication response"];
+
+    user note central [label = "Successfully authenticated and connected"];
+}
