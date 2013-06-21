@@ -1,0 +1,21 @@
+msc {
+    # entities
+    user, peripheral, central;
+
+    # space
+    |||;
+
+    user note central [label = "Successfully authenticated and connected"];
+
+    user -> peripheral [label = "Send IR signal"];
+    peripheral -> central [label = "Notify 'IR Unread Status' c12c = 1"];
+
+    peripheral <= central [label = "Read 'IR Data' c12c"];
+    peripheral >> central [label = "IR data"];
+    peripheral <= central [label = "Read 'IR Data' c12c"];
+    peripheral >> central [label = "IR data"];
+    peripheral <= central [label = "Read 'IR Data' c12c"];
+    peripheral >> central [label = "IR data"];
+
+    central note central [label = "Successfully received IR signal"];
+}
