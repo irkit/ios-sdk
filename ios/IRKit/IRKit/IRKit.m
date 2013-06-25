@@ -240,6 +240,12 @@ didDiscoverCharacteristicsForService:(CBService *)service
                          forCharacteristic:characteristic];
                 [peripheral readValueForCharacteristic:characteristic];
             }
+            else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
+                LOG( @"do we have unread signals?" );
+                [peripheral setNotifyValue:YES
+                         forCharacteristic:characteristic];
+                [peripheral readValueForCharacteristic:characteristic];
+            }
         }
         
     }
@@ -322,6 +328,12 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
                 postNotificationName:IRKitPeripheralAuthorizedNotification
                               object:nil];
         }
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
+        NSData *value = characteristic.value;
+        unsigned char unread = 0;
+        [value getBytes:&unread length:1];
+        LOG( @"unread: %d", unread );
     }
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
