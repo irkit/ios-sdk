@@ -84,7 +84,7 @@
 }
 
 #pragma mark -
-#pragma CBCentralManagerDelegate
+#pragma mark CBCentralManagerDelegate
 
 - (void)centralManager:(CBCentralManager *)central
  didDiscoverPeripheral:(CBPeripheral *)peripheral
@@ -177,7 +177,7 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 }
 
 #pragma mark -
-#pragma CBPeripheralDelegate
+#pragma mark CBPeripheralDelegate
 
 /*
  Invoked upon completion of a -[discoverServices:] request.

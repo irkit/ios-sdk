@@ -1,22 +1,22 @@
 //
-//  IRNewPeripheralScene3ViewController.m
+//  IRSignalNameEditViewController.m
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRNewPeripheralScene3ViewController.h"
+#import "IRSignalNameEditViewController.h"
 #import "IRConst.h"
 
-@interface IRNewPeripheralScene3ViewController ()
+@interface IRSignalNameEditViewController ()
 
 @property (nonatomic) UILabel *label;
 @property (nonatomic) UITextField *textField;
 
 @end
 
-@implementation IRNewPeripheralScene3ViewController
+@implementation IRSignalNameEditViewController
 
 - (void)loadView {
     LOG_CURRENT_METHOD;
@@ -24,11 +24,6 @@
     CGRect frame = [[UIScreen mainScreen] bounds];
     LOG(@"frame: %@", NSStringFromCGRect(frame));
     UIView *view = [[UIView alloc] initWithFrame:frame];
-
-    // image
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/scene3.png"]];
-    imageView.frame = frame;
-    [view addSubview: imageView];
 
     // label
     _label = [[UILabel alloc] init];
@@ -46,7 +41,7 @@
     
     // input
     _textField = [[UITextField alloc] init];
-    _textField.placeholder = @"IRKitの名前";
+    _textField.placeholder = @"ボタンの名前";
     _textField.textColor   = [UIColor blackColor];
     _textField.textAlignment = NSTextAlignmentLeft;
     _textField.adjustsFontSizeToFitWidth = YES;
@@ -61,24 +56,26 @@
     _textField.frame = frame;
     LOG(@"textField.frame: %@", NSStringFromCGRect(frame));
     [view addSubview:_textField];
-
+    
+    // TODO use uitableview to select signal name from preset
+    
     self.view = view;
 }
 
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-
-    _label.text = @"IRKitデバイスを認識しました!!! このIRKitに名前をつけてください";
+    
+    _label.text = @"このボタンの名前を決めましょう";
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-
-    self.title = @"Scene 3";
-    self.navigationItem.hidesBackButton    = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+    
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.rightBarButtonItem =
+        [[UIBarButtonItem alloc]
          initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                               target:self
                               action:@selector(doneButtonPressed:)];
@@ -89,13 +86,18 @@
     [super viewWillDisappear:animated];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewDidAppear:animated];
+}
+
 - (void) processTextField {
     LOG( @"text: %@", _textField.text );
     
     if (! _textField.text) {
         return;
     }
-
+    
     NSRegularExpression *regex = [NSRegularExpression
                                   regularExpressionWithPattern:@"^\s*$"
                                                        options:nil
@@ -109,27 +111,26 @@
         return;
     }
     
-    [self.delegate scene3ViewController:self
-                      didFinishWithInfo:@{
-        IRViewControllerResultType: IRViewControllerResultTypeDone,
-        IRViewControllerResultText: _textField.text
+    [self.delegate signalNameEditViewController:self
+                              didFinishWithInfo:@{
+            IRViewControllerResultType: IRViewControllerResultTypeDone,
+            IRViewControllerResultText: _textField.text
      }];
 }
 
 #pragma mark -
 #pragma mark UI events
 
+- (void)doneButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+    [self processTextField];
+}
+
 - (void)didReceiveMemoryWarning
 {
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)doneButtonPressed:(id)selector
-{
-    LOG(@"text: %@", self.textField.text);
-    [self processTextField];
 }
 
 #pragma mark -

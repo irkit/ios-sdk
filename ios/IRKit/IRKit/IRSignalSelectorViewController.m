@@ -7,11 +7,14 @@
 //
 
 #import "IRSignalSelectorViewController.h"
-#import "IRNewSignalViewController.h"
+#import "IRSignalNameEditViewController.h"
 
 @interface IRSignalSelectorViewController ()
 
 @property (nonatomic) UINavigationController *navController;
+@property (nonatomic) id observer;
+@property (nonatomic) BOOL isShowingNewViewController;
+@property (nonatomic) IRSignal *selectedSignal;
 
 @end
 
@@ -24,14 +27,20 @@
     UIView *view = [[UIView alloc] initWithFrame:bounds];
 
     UIViewController *c;
-    if ([IRKit sharedInstance].signals.count==0) {
-        // show waiting for signal view
-        c = [[IRNewSignalViewController alloc] init];
-    }
-    else {
-        // show tableview of signals, + new signal button
-        // c = [[IRSignalTableViewController alloc] init];
-    }
+//    if ([IRKit sharedInstance].signals.count==0) {
+//        // show waiting for signal view
+//        c = [[IRNewSignalViewController alloc] init];
+//        ((IRNewSignalViewController*)c).delegate = self;
+//        _isShowingNewViewController = YES;
+//    }
+//    else {
+//        // show tableview of signals, + new signal button
+//        // c = [[IRSignalTableViewController alloc] init];
+//        _isShowingNewViewController = NO;
+//    }
+    c = [[IRSignalNameEditViewController alloc] init];
+    ((IRSignalNameEditViewController*)c).delegate = self;
+    _isShowingNewViewController = NO;
     
     _navController = [[UINavigationController alloc] initWithRootViewController:c];
     _navController.delegate = self;
@@ -54,11 +63,28 @@
     // when presented in caller's viewDidLoad
     [self.navController setNavigationBarHidden:YES];
     [self.navController setNavigationBarHidden:NO];
+    
+    if (_isShowingNewViewController) {
+        _observer = [[NSNotificationCenter defaultCenter]
+                     addObserverForName:IRKitDidReceiveSignalNotification
+                                 object:nil
+                                  queue:[NSOperationQueue mainQueue]
+                             usingBlock:^(NSNotification *note) {
+                        LOG( @"new signal received");
+                         
+                        IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] init];
+                        c.delegate = self;
+                        _isShowingNewViewController = NO;
+                        [self.navigationController pushViewController:c
+                                                             animated:YES];
+                     }];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver: _observer];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -76,15 +102,15 @@
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
     [self.delegate signalSelectorViewController:self didFinishWithInfo:@{
-        IRSignalSelectorViewControllerResult: IRSignalSelectorViewControllerResultCancelled
+        IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }
 
 - (void)signalSelected:(id)sender {
     LOG_CURRENT_METHOD;
     [self.delegate signalSelectorViewController:self didFinishWithInfo:@{
-        IRSignalSelectorViewControllerResult: IRSignalSelectorViewControllerResultNew,
-        IRSignalSelectorViewControllerSignal:
+        IRViewControllerResultType: IRViewControllerResultTypeDone,
+        IRViewControllerResultSignal:
             [[IRKit sharedInstance].signals objectAtIndex:0]
      }];
 }
@@ -95,5 +121,62 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+#pragma mark IRNewSignalViewControllerDelegate
+
+- (void)newSignalViewController:(IRNewSignalViewController *)viewController
+              didFinishWithInfo:(NSDictionary *)info {
+    LOG_CURRENT_METHOD;
+    
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        if ([IRKit sharedInstance].signals.count==0) {
+            [self.delegate signalSelectorViewController:self
+                                      didFinishWithInfo:@{
+                   IRViewControllerResultType: IRViewControllerResultTypeCancelled
+             }];
+        }
+        else {
+            // TODO show signal table view
+            // c = [[IRSignalTableViewController alloc] init];
+        }
+    }
+    else {
+        // received new signal
+        
+        self.selectedSignal = [[IRKit sharedInstance].signals objectAtIndex:0];
+        IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] init];
+        c.delegate = self;
+        [_navController pushViewController:c animated:YES];
+    }
+}
+
+#pragma mark -
+#pragma mark IRSignalNameEditViewControllerDelegate
+
+- (void)signalNameEditViewController:(IRSignalNameEditViewController *)viewController
+                   didFinishWithInfo:(NSDictionary*)info;
+{
+    LOG_CURRENT_METHOD;
+    
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        // TODO show signal table view
+        // c = [[IRSignalTableViewController alloc] init];
+    }
+    else {
+        // received new signal, and set a name for it
+        
+        NSString *signalName = info[IRViewControllerResultText];
+        _selectedSignal.name = signalName;
+        [[IRKit sharedInstance] save];
+
+        [self.delegate signalSelectorViewController:self
+                                  didFinishWithInfo:@{
+                IRViewControllerResultType: IRViewControllerResultTypeDone,
+                IRViewControllerResultSignal: _selectedSignal
+         }];
+    }
+}
+
 
 @end

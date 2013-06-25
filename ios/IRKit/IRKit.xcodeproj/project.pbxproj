@@ -46,6 +46,11 @@
 		C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */; };
 		C7C7A30B176F017600C9A62F /* IRNewPeripheralViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */; };
 		C7C7A30E176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */; };
+		C7EF92E2177941B700D07D81 /* IRSignalNameEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7EF92E0177941B700D07D81 /* IRSignalNameEditViewController.m */; };
+		C7EF92E317794D4A00D07D81 /* IRNewSignalViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */; };
+		C7EF92E417797DCE00D07D81 /* IRNewPeripheralScene3ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EE17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.h */; };
+		C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */; };
+		C7EF92E617797DCE00D07D81 /* IRNewPeripheralScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */; };
 		C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 /* End PBXBuildFile section */
@@ -67,6 +72,10 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7EF92E417797DCE00D07D81 /* IRNewPeripheralScene3ViewController.h in CopyFiles */,
+				C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */,
+				C7EF92E617797DCE00D07D81 /* IRNewPeripheralScene1ViewController.h in CopyFiles */,
+				C7EF92E317794D4A00D07D81 /* IRNewSignalViewController.h in CopyFiles */,
 				C77150FA1772E054004F9FE3 /* IRSignalSelectorViewController.h in CopyFiles */,
 				C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */,
 				C77150F21772D635004F9FE3 /* IRSignalCell.h in CopyFiles */,
@@ -145,6 +154,8 @@
 		C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene1ViewController.m; sourceTree = "<group>"; };
 		C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene1ViewController.h; sourceTree = "<group>"; };
 		C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C7EF92E0177941B700D07D81 /* IRSignalNameEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalNameEditViewController.m; sourceTree = "<group>"; };
+		C7EF92E1177941B700D07D81 /* IRSignalNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalNameEditViewController.h; sourceTree = "<group>"; };
 		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
@@ -305,18 +316,20 @@
 		C7C7A308176EFC7300C9A62F /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
-				C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */,
-				C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */,
 				C77150F41772DCC7004F9FE3 /* IRSignalSelectorViewController.m */,
 				C77150F51772DCC7004F9FE3 /* IRSignalSelectorViewController.h */,
-				C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */,
-				C77150EE17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.h */,
-				C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */,
-				C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */,
-				C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */,
-				C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */,
+				C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */,
+				C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */,
+				C7EF92E0177941B700D07D81 /* IRSignalNameEditViewController.m */,
+				C7EF92E1177941B700D07D81 /* IRSignalNameEditViewController.h */,
 				C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */,
 				C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */,
+				C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */,
+				C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */,
+				C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */,
+				C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */,
+				C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */,
+				C77150EE17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.h */,
 				C7554F201749D99800BDF920 /* IRReceiveViewController.m */,
 				C7554F1F1749D99800BDF920 /* IRReceiveViewController.h */,
 			);
@@ -441,6 +454,7 @@
 				C77150EF17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m in Sources */,
 				C77150F61772DCC7004F9FE3 /* IRSignalSelectorViewController.m in Sources */,
 				C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */,
+				C7EF92E2177941B700D07D81 /* IRSignalNameEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

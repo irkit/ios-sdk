@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "IRKit.h"
-
-#define IRSignalSelectorViewControllerResult          @"result"
-#define IRSignalSelectorViewControllerResultCancelled @"cancelled"
-#define IRSignalSelectorViewControllerResultNew       @"new"
-#define IRSignalSelectorViewControllerSignal          @"signal"
+#import "IRNewSignalViewController.h"
 
 // pre definition for delegate
 @protocol IRSignalSelectorViewControllerDelegate;
 
-@interface IRSignalSelectorViewController : UIViewController<UINavigationControllerDelegate>
+@interface IRSignalSelectorViewController : UIViewController<UINavigationControllerDelegate, IRNewSignalViewControllerDelegate>
 
 @property (nonatomic, assign) id<IRSignalSelectorViewControllerDelegate> delegate;
 
+- (void)cancelButtonPressed:(id)sender;
 - (void)signalSelected:(id)sender;
 
 @end

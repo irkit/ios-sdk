@@ -7,11 +7,14 @@
 //
 
 #import "IRNewPeripheralViewController.h"
-#import "IRNewPeripheralScene1ViewController.h"
+#import "IRKit.h"
 
 @interface IRNewPeripheralViewController ()
 
 @property (nonatomic) UINavigationController *navController;
+
+@property (nonatomic) id observer1;
+@property (nonatomic) id observer2;
 
 @end
 
@@ -23,7 +26,8 @@
     CGRect bounds = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:bounds];
 
-    UIViewController *first = [[IRNewPeripheralScene1ViewController alloc]init];
+    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc]init];
+    first.delegate = self;
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
     _navController.delegate = self;
     [view addSubview:_navController.view];
@@ -43,13 +47,41 @@
     // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
     // prevent showing the weird 20px empty zone on top of navigationbar
     // when presented in caller's viewDidLoad
-    [self.navController setNavigationBarHidden:YES];
-    [self.navController setNavigationBarHidden:NO];
+    [_navController setNavigationBarHidden:YES];
+    [_navController setNavigationBarHidden:NO];
+    
+    _observer1 = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:IRKitDidConnectPeripheralNotification
+                             object:nil
+                              queue:[NSOperationQueue mainQueue]
+                         usingBlock:^(NSNotification *note) {
+                             LOG( @"new irkit connected");
+                             IRNewPeripheralScene2ViewController *c =
+                             [[IRNewPeripheralScene2ViewController alloc] init];
+                             c.delegate = self;
+                             [_navController pushViewController:c
+                                                       animated:YES];
+                 }];
+    
+    _observer2 = [[NSNotificationCenter defaultCenter]
+                 addObserverForName:IRKitPeripheralAuthorizedNotification
+                             object:nil
+                              queue:[NSOperationQueue mainQueue]
+                         usingBlock:^(NSNotification *note) {
+                             LOG( @"irkit authorized");
+                             IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+                             c.delegate = self;
+                             [_navController pushViewController:c
+                                                       animated:YES];
+                 }];
+
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver: _observer1];
+    [[NSNotificationCenter defaultCenter] removeObserver: _observer2];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -64,28 +96,62 @@
 #pragma mark -
 #pragma mark UI events
 
-- (void)cancelButtonPressed:(id)sender {
-    LOG_CURRENT_METHOD;
-    [self.delegate newPeripheralViewController:self
-                             didFinishWithInfo:@{
-        IRNewPeripheralViewControllerResult: IRNewPeripheralViewControllerResultCancelled
-     }];
-}
-
-- (void)doneButtonPressed:(id)sender {
-    LOG_CURRENT_METHOD;
-    [self.delegate newPeripheralViewController:self
-                             didFinishWithInfo:@{
-        IRNewPeripheralViewControllerResult: IRNewPeripheralViewControllerResultNew,
-        IRNewPeripheralViewControllerPeripheral: [[IRKit sharedInstance].peripherals objectAtIndex:0]
-     }];
-}
-
 - (void)didReceiveMemoryWarning
 {
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -
+#pragma mark IRNewPeripheralScene1ViewControllerDelegate
+
+- (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+    
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController:self
+                                 didFinishWithInfo:@{
+                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
+         }];
+    }
+    // shouldnt happen
+}
+
+#pragma mark -
+#pragma mark IRNewPeripheralScene2ViewControllerDelegate
+
+- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+    
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController:self
+                                 didFinishWithInfo:@{
+                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
+         }];
+    }
+    // shouldnt happen
+}
+
+#pragma mark -
+#pragma mark IRNewPeripheralScene3ViewControllerDelegate
+
+- (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+    
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
+        NSString *text = info[IRViewControllerResultText];
+        IRPeripheral *peripheral = [[IRKit sharedInstance].peripherals objectAtIndex:0];
+        peripheral.customizedName = text;
+        [[IRKit sharedInstance] save];
+
+        [self.delegate newPeripheralViewController:self
+                                 didFinishWithInfo:@{
+                IRViewControllerResultType: IRViewControllerResultTypeDone,
+                IRViewControllerResultPeripheral: peripheral
+         }];
+
+    }
 }
 
 @end

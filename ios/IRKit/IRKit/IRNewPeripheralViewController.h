@@ -7,21 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IRKit.h"
-
-#define IRNewPeripheralViewControllerResult          @"result"
-#define IRNewPeripheralViewControllerResultCancelled @"cancelled"
-#define IRNewPeripheralViewControllerResultNew       @"new"
-#define IRNewPeripheralViewControllerPeripheral      @"peripheral"
+#import "IRNewPeripheralScene1ViewController.h"
+#import "IRNewPeripheralScene2ViewController.h"
+#import "IRNewPeripheralScene3ViewController.h"
 
 // pre definition for delegate
 @protocol IRNewPeripheralViewControllerDelegate;
 
-@interface IRNewPeripheralViewController : UIViewController<UINavigationControllerDelegate>
+@interface IRNewPeripheralViewController : UIViewController<UINavigationControllerDelegate, IRNewPeripheralScene1ViewControllerDelegate>
 
 @property (nonatomic, assign) id<IRNewPeripheralViewControllerDelegate> delegate;
-
-- (void)doneButtonPressed:(id)sender;
 
 @end
 

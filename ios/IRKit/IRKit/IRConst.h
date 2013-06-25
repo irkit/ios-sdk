@@ -65,4 +65,14 @@
 
 #define IRKitCellIdentifierSignal @"IRKit::UITableViewCell::Signal"
 
+#pragma mark -
+#pragma mark IR*ViewControllerDelegate
+
+#define IRViewControllerResultType           @"result"
+#define IRViewControllerResultTypeCancelled  @"cancelled"
+#define IRViewControllerResultTypeDone       @"done"
+#define IRViewControllerResultPeripheral     @"peripheral"
+#define IRViewControllerResultSignal         @"signal"
+#define IRViewControllerResultText           @"text"
+
 #endif

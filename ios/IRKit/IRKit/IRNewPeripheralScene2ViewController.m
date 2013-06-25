@@ -7,13 +7,11 @@
 //
 
 #import "IRNewPeripheralScene2ViewController.h"
-#import "IRNewPeripheralScene3ViewController.h"
-#import "IRKit.h"
+#import "IRConst.h"
 
 @interface IRNewPeripheralScene2ViewController ()
 
 @property (nonatomic) UILabel *label;
-@property (nonatomic) id observer;
 
 @end
 
@@ -62,25 +60,13 @@
     self.title = @"Scene 2";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
          initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                              target:self.navigationController.delegate
+                              target:self
                               action:@selector(cancelButtonPressed:)];
-
-    _observer = [[NSNotificationCenter defaultCenter]
-        addObserverForName:IRKitPeripheralAuthorizedNotification
-                    object:nil
-                     queue:[NSOperationQueue mainQueue]
-                usingBlock:^(NSNotification *note) {
-                    LOG( @"irkit authorized");
-                    IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
-                    [self.navigationController pushViewController:c animated:YES];
-                }];
-    }
+}
 
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
-
-    [[NSNotificationCenter defaultCenter] removeObserver: _observer];
 }
 
 #pragma mark -
@@ -91,6 +77,14 @@
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)cancelButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+    [self.delegate scene2ViewController:self
+                      didFinishWithInfo:@{
+             IRViewControllerResultType: IRViewControllerResultTypeCancelled
+     }];
 }
 
 @end
