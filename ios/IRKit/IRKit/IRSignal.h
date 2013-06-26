@@ -10,6 +10,7 @@
 
 @interface IRSignal : NSObject
 
+- (id) initWithData: (NSData*) newData;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSArray *data;
 

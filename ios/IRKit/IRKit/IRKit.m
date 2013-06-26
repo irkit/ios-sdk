@@ -9,6 +9,7 @@
 #import "IRKit.h"
 #import "IRFunc.h" // private
 #import "IRPeripheral.h"
+#import "IRHelper.h"
 
 @interface IRKit ()
 
@@ -334,6 +335,19 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         unsigned char unread = 0;
         [value getBytes:&unread length:1];
         LOG( @"unread: %d", unread );
+        
+        if (unread) {
+            // read ir data
+            CBCharacteristic *irDataC12C = [IRHelper findCharacteristicInSameServiceWithCharacteristic: characteristic
+                                    withCBUUID: IRKIT_CHARACTERISTIC_IR_DATA_UUID];
+            
+            [aPeripheral readValueForCharacteristic:irDataC12C];
+        }
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
+        NSData *value = characteristic.value;
+        LOG( @"value.length: %d", value.length );
+        IRSignal *signal = [[IRSignal alloc] initWithData: value];
     }
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
