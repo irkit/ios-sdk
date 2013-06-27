@@ -7,13 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IRSignal.h"
 
 @interface IRSignals : NSObject
 
-- (BOOL)containsObject:(id)object;
-- (void)addObject:(id)object;
-- (id)objectAtIndex:(NSUInteger)index;
+- (void) save;
 
-@property (nonatomic, getter = count) NSUInteger count;
+#pragma mark -
+#pragma mark Key Value Coding - Mutable Indexed Accessors
+
+- (NSArray*) signals;
+- (NSUInteger) countOfSignals;
+- (id) objectInSignalsAtIndex:(NSUInteger)index;
+- (void) insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index;
+- (void) removeObjectFromSignalsAtIndex:(NSUInteger)index;
+- (void) replaceObjectInSignalsAtIndex:(NSUInteger)index;
 
 @end

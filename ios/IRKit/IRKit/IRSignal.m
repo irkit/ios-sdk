@@ -7,6 +7,14 @@
 //
 
 #import "IRSignal.h"
+#import "IRHelper.h"
+#import "IRKit.h"
+
+@interface IRSignal ()
+
+@property (nonatomic) NSString* uuid;
+
+@end
 
 @implementation IRSignal
 
@@ -31,12 +39,59 @@
     
     LOG( @"data: %@", _data);
     
+    _receivedDate = [NSDate date];
     return self;
 }
 
 - (NSString*)name {
     LOG_CURRENT_METHOD;
-    return @"name";
+    return _name ? _name : @"unknown name";
+}
+
+- (IRPeripheral*)peripheral {
+    LOG_CURRENT_METHOD;
+    if ( _peripheral ) {
+        return _peripheral;
+    }
+    if ( _uuid ) {
+        // we can't use [IRKit sharedInstance] inside our initWithCoder
+        // so we temporary save peripheral.UUID in _uuid
+        // and recover IRPeripheral afterwards (here)
+        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForUUID:_uuid];
+        return _peripheral;
+    }
+    return nil;
+}
+
+#pragma mark -
+#pragma NSKeyedArchiving
+
+- (void)encodeWithCoder:(NSCoder*)coder {
+    LOG_CURRENT_METHOD;
+    [coder encodeObject:_name                       forKey:@"n"];
+    [coder encodeObject:_data                       forKey:@"d"];
+    [coder encodeObject:_receivedDate               forKey:@"r"];
+    [coder encodeObject:[IRHelper stringFromCFUUID: _peripheral.peripheral.UUID]
+                 forKey:@"u"];
+}
+
+- (id)initWithCoder:(NSCoder*)coder {
+    LOG_CURRENT_METHOD;
+    self = [super init];
+    if (self) {
+        _name         = [coder decodeObjectForKey:@"n"];
+        _data         = [coder decodeObjectForKey:@"d"];
+        _receivedDate = [coder decodeObjectForKey:@"r"];
+        _uuid         = [coder decodeObjectForKey:@"u"];
+        
+        if ( ! _name ) {
+            _name = @"unknown";
+        }
+        if ( ! _receivedDate ) {
+            _receivedDate = [NSDate date];
+        }
+    }
+    return self;
 }
 
 @end

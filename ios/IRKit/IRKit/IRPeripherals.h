@@ -14,6 +14,7 @@
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSArray*) knownPeripheralUUIDs;
 - (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral;
+- (IRPeripheral*)IRPeripheralForUUID: (NSString*)uuid;
 
 #pragma mark -
 #pragma mark Key Value Coding - Mutable Unordered Accessors

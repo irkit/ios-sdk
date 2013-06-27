@@ -7,6 +7,7 @@
 //
 
 #import "IRSignals.h"
+#import "IRPersistentStore.h"
 
 @interface IRSignals ()
 
@@ -20,33 +21,61 @@
     self = [super init];
     if (! self) { return nil; }
     
-    _signals = [[NSMutableArray alloc] initWithCapacity:0];
+    [self load];
     
     return self;
 }
 
-- (BOOL)containsObject:(id)object {
+- (void) save {
     LOG_CURRENT_METHOD;
     
-    return [_signals containsObject:object];
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_signals];
+    [IRPersistentStore storeObject:data
+                            forKey:@"signals"];
+    [IRPersistentStore synchronize];
 }
 
-- (void)addObject:(id)object {
-    LOG( @"object: ", object );
+#pragma mark -
+#pragma Private methods
+
+- (void) load {
+    LOG_CURRENT_METHOD;
     
-    [_signals addObject:object];
+    NSData* data = [IRPersistentStore objectForKey: @"signals"];
+    
+    _signals = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if ( ! _signals ) {
+        _signals = [[NSMutableArray alloc] init];
+    }
+    LOG( @"_signals: %@", _signals );
 }
 
-- (id)objectAtIndex:(NSUInteger)index {
-    LOG( @"index: %d", index);
-    
+#pragma mark -
+#pragma mark Key Value Coding - Mutable Indexed Accessors
+
+- (NSArray*) signals {
+    return _signals;
+}
+
+
+- (NSUInteger) countOfSignals {
+    return _signals.count;
+}
+
+- (id)objectInSignalsAtIndex:(NSUInteger)index {
     return [_signals objectAtIndex:index];
 }
 
-- (NSUInteger) count {
-    LOG_CURRENT_METHOD;
-    
-    return _signals.count;
+- (void) insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index {
+    [_signals insertObject:object atIndex:index];
+}
+
+- (void) removeObjectFromSignalsAtIndex:(NSUInteger)index {
+    [_signals removeObjectAtIndex:index];
+}
+
+- (void) replaceObjectInSignalsAtIndex:(NSUInteger)index withObject:(id)object {
+    [_signals replaceObjectAtIndex:index withObject:object];
 }
 
 @end

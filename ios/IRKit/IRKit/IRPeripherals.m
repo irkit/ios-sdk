@@ -60,6 +60,37 @@
     return _irperipheralForUUID[uuidKey];
 }
 
+- (IRPeripheral*)IRPeripheralForUUID: (NSString*)uuid {
+    LOG_CURRENT_METHOD;
+    if ( ! uuid ) {
+        return nil;
+    }
+    return _irperipheralForUUID[uuid];
+}
+
+- (void) save {
+    LOG_CURRENT_METHOD;
+    
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_irperipheralForUUID];
+    [IRPersistentStore storeObject:data
+                            forKey:@"peripherals"];
+    [IRPersistentStore synchronize];
+}
+
+#pragma mark -
+#pragma Private methods
+
+- (void) load {
+    LOG_CURRENT_METHOD;
+    
+    NSData* data = [IRPersistentStore objectForKey: @"peripherals"];
+    
+    _irperipheralForUUID = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if ( ! _irperipheralForUUID ) {
+        _irperipheralForUUID = [[NSMutableDictionary alloc] init];
+    }
+    LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
+}
 
 #pragma mark -
 #pragma mark Key Value Coding - Mutable Unordered Accessors
@@ -131,30 +162,6 @@
     }
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
     [_irperipheralForUUID removeObjectForKey:uuidKey];
-}
-
-- (void) save {
-    LOG_CURRENT_METHOD;
-    
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_irperipheralForUUID];
-    [IRPersistentStore storeObject:data
-                            forKey:@"peripherals"];
-    [IRPersistentStore synchronize];
-}
-
-#pragma mark -
-#pragma Private methods
-
-- (void) load {
-    LOG_CURRENT_METHOD;
-    
-    NSData* data = [IRPersistentStore objectForKey: @"peripherals"];
-    
-    _irperipheralForUUID = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    if ( ! _irperipheralForUUID ) {
-        _irperipheralForUUID = [[NSMutableDictionary alloc] init];
-    }
-    LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
 }
 
 @end

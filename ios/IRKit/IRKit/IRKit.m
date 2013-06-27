@@ -71,12 +71,12 @@
 
 - (NSUInteger) numberOfPeripherals {
     LOG_CURRENT_METHOD;
-    return [_peripherals countOfPeripherals];
+    return _peripherals.countOfPeripherals;
 }
 
 - (NSUInteger) numberOfSignals {
     LOG_CURRENT_METHOD;
-    return [_signals count];
+    return _signals.countOfSignals;
 }
 
 - (void) save {
@@ -348,6 +348,11 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         NSData *value = characteristic.value;
         LOG( @"value.length: %d", value.length );
         IRSignal *signal = [[IRSignal alloc] initWithData: value];
+        IRPeripheral *peripheral = [_peripherals IRPeripheralForPeripheral:aPeripheral];
+        signal.peripheral = peripheral;
+        [_signals insertObject:signal
+              inSignalsAtIndex:0];
+        [_signals save];
     }
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {

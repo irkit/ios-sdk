@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IRPeripheral.h"
 
 @interface IRSignal : NSObject
 
 - (id) initWithData: (NSData*) newData;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSArray *data;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic) NSArray *data;
+@property (nonatomic) NSDate *receivedDate;
+@property (nonatomic) IRPeripheral *peripheral;
 
 @end

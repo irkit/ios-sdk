@@ -103,7 +103,7 @@
     if (cell == nil) {
         cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
     }
-    ((IRSignalCell*)cell).signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
+    ((IRSignalCell*)cell).signal = [[IRKit sharedInstance].signals objectInSignalsAtIndex: indexPath.row];
     return cell;
 }
 

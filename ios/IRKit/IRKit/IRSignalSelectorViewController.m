@@ -111,7 +111,7 @@
     [self.delegate signalSelectorViewController:self didFinishWithInfo:@{
         IRViewControllerResultType: IRViewControllerResultTypeDone,
         IRViewControllerResultSignal:
-            [[IRKit sharedInstance].signals objectAtIndex:0]
+            [[IRKit sharedInstance].signals objectInSignalsAtIndex:0]
      }];
 }
 
@@ -130,7 +130,7 @@
     LOG_CURRENT_METHOD;
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        if ([IRKit sharedInstance].signals.count==0) {
+        if ([IRKit sharedInstance].signals.countOfSignals==0) {
             [self.delegate signalSelectorViewController:self
                                       didFinishWithInfo:@{
                    IRViewControllerResultType: IRViewControllerResultTypeCancelled
@@ -144,7 +144,7 @@
     else {
         // received new signal
         
-        self.selectedSignal = [[IRKit sharedInstance].signals objectAtIndex:0];
+        self.selectedSignal = [[IRKit sharedInstance].signals objectInSignalsAtIndex:0];
         IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] init];
         c.delegate = self;
         [_navController pushViewController:c animated:YES];
