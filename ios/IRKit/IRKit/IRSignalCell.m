@@ -56,4 +56,8 @@
     self.chartView.data = signal.data;
 }
 
++ (CGFloat)height {
+    return 200;
+}
+
 @end

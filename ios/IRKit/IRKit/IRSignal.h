@@ -11,7 +11,9 @@
 
 @interface IRSignal : NSObject
 
-- (id) initWithData: (NSData*) newData;
+- (id)initWithData: (NSData*) newData;
+- (void)sendWithCompletion: (void (^)(NSError* error))block;
+
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSArray *data;
 @property (nonatomic) NSDate *receivedDate;

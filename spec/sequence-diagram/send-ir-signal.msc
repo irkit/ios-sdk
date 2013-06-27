@@ -8,11 +8,15 @@ msc {
     user note central [label = "Successfully authenticated and connected"];
 
     user -> central [label = "Select IR signal to send"];
-    peripheral <= central [label = "Write 'IR Data' c12c = '...'"];
+
+    peripheral <= central [label = "Write 'IR Data' offset = '0' value = '...'"];
     peripheral >> central [label = "ack"];
-    peripheral <= central [label = "Write 'IR Data' c12c = '...'"];
+    peripheral <= central [label = "Write 'IR Data' offset = '...' value = '...'"];
     peripheral >> central [label = "ack"];
-    peripheral <= central [label = "Write 'IR Data' c12c = '...'"];
+    peripheral <= central [label = "Write 'IR Data' offset = '...' value = '...'"];
+    peripheral >> central [label = "ack"];
+
+    peripheral <= central [label = "Write 'IR Control Point' value = '0 - Send IR Data'"];
     peripheral >> central [label = "ack"];
 
     peripheral -> irreceiver [label = "Send IR signal"];

@@ -11,7 +11,7 @@
 
 @interface IRSignals ()
 
-@property (nonatomic, strong) NSMutableArray* signals; // array of IRSignal
+@property (nonatomic, strong) NSMutableSet* signals; // set of IRSignal
 
 @end
 
@@ -35,6 +35,15 @@
     [IRPersistentStore synchronize];
 }
 
+- (id)objectAtIndex:(NSUInteger)index {
+    LOG( @"index: %d", index);
+    
+    NSArray* signals = [_signals sortedArrayUsingDescriptors:
+                            @[ [NSSortDescriptor sortDescriptorWithKey: @"receivedDate"
+                                                             ascending: NO] ]];
+    return signals[index];
+}
+
 #pragma mark -
 #pragma Private methods
 
@@ -43,9 +52,9 @@
     
     NSData* data = [IRPersistentStore objectForKey: @"signals"];
     
-    _signals = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    _signals = (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     if ( ! _signals ) {
-        _signals = [[NSMutableArray alloc] init];
+        _signals = [[NSMutableSet alloc] init];
     }
     LOG( @"_signals: %@", _signals );
 }
@@ -54,28 +63,33 @@
 #pragma mark Key Value Coding - Mutable Indexed Accessors
 
 - (NSArray*) signals {
-    return _signals;
+    return [_signals allObjects];
 }
-
 
 - (NSUInteger) countOfSignals {
     return _signals.count;
 }
 
-- (id)objectInSignalsAtIndex:(NSUInteger)index {
-    return [_signals objectAtIndex:index];
+- (NSEnumerator*)enumeratorOfSignals {
+    return _signals.objectEnumerator;
 }
 
-- (void) insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index {
-    [_signals insertObject:object atIndex:index];
+- (IRSignal*)memberOfSignals:(IRSignal *)object {
+    
+    // TODO don't allow same signal data to exist
+
+    return [_signals member:object];
 }
 
-- (void) removeObjectFromSignalsAtIndex:(NSUInteger)index {
-    [_signals removeObjectAtIndex:index];
+- (void)addSignalsObject:(IRSignal *)object {
+
+    // TODO don't allow same signal data to exist
+    
+    [_signals addObject:object];
 }
 
-- (void) replaceObjectInSignalsAtIndex:(NSUInteger)index withObject:(id)object {
-    [_signals replaceObjectAtIndex:index withObject:object];
+- (void)removeSignalsObject:(IRSignal *)object {
+    [_signals removeObject:object];
 }
 
 @end

@@ -12,15 +12,16 @@
 @interface IRSignals : NSObject
 
 - (void) save;
+- (id)objectAtIndex:(NSUInteger)index;
 
 #pragma mark -
-#pragma mark Key Value Coding - Mutable Indexed Accessors
+#pragma mark Key Value Coding - Mutable Unordered Accessors
 
 - (NSArray*) signals;
 - (NSUInteger) countOfSignals;
-- (id) objectInSignalsAtIndex:(NSUInteger)index;
-- (void) insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index;
-- (void) removeObjectFromSignalsAtIndex:(NSUInteger)index;
-- (void) replaceObjectInSignalsAtIndex:(NSUInteger)index;
+- (NSEnumerator*)enumeratorOfSignals;
+- (IRSignal*)memberOfSignals:(IRSignal *)object;
+- (void)addSignalsObject:(IRSignal *)object;
+- (void)removeSignalsObject:(IRSignal *)object;
 
 @end

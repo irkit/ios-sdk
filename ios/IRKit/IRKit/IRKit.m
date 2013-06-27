@@ -15,6 +15,7 @@
 
 @property (nonatomic) CBCentralManager* manager;
 @property (nonatomic) BOOL shouldScan;
+@property (nonatomic, copy) void (^writeResponseBlock)(NSError *error);
 
 @end
 
@@ -82,6 +83,41 @@
 - (void) save {
     LOG_CURRENT_METHOD;
     [_peripherals save];
+}
+
+- (void) writeIRPeripheral: (IRPeripheral*)peripheral
+                     value: (NSData*)value
+ forCharacteristicWithUUID: (CBUUID*)characteristicUUID
+         ofServiceWithUUID: (CBUUID*)serviceUUID
+                completion: (void (^)(NSError *error))block {
+    LOG_CURRENT_METHOD;
+    CBPeripheral *p = peripheral.peripheral;
+    if ( _writeResponseBlock ) {
+        // TODO already writing??
+    }
+    if ( ! p ) {
+        // TODO no peripheral?
+    }
+    if ( ! p.isConnected ) {
+        // TODO not connected
+        
+    }
+    for (CBService *service in p.services) {
+        if ( [service.UUID isEqual:serviceUUID]) {
+            for (CBCharacteristic *c12c in service.characteristics) {
+                if ([c12c.UUID isEqual:characteristicUUID]) {
+                    _writeResponseBlock = block;
+                    [p writeValue:value
+                forCharacteristic:c12c
+                             type:CBCharacteristicWriteWithResponse];
+                    return;
+                }
+            }
+        }
+    }
+    NSError *error;
+    // TODO no c12c found
+    block( error );
 }
 
 #pragma mark -
@@ -350,9 +386,10 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         IRSignal *signal = [[IRSignal alloc] initWithData: value];
         IRPeripheral *peripheral = [_peripherals IRPeripheralForPeripheral:aPeripheral];
         signal.peripheral = peripheral;
-        [_signals insertObject:signal
-              inSignalsAtIndex:0];
-        [_signals save];
+        if (! [_signals memberOfSignals:signal]) {
+            [_signals addSignalsObject:signal];
+            [_signals save];
+        }
     }
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
@@ -363,6 +400,18 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]]) {
         NSString* manufacturer = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         LOG(@"Manufacturer Name = %@", manufacturer);
+    }
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral
+didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
+             error:(NSError *)error
+{
+    LOG( @"peripheral: %@ charactristic: %@ UUID: %@ error: %@", peripheral, characteristic, characteristic.UUID, error);
+    
+    if (_writeResponseBlock) {
+        _writeResponseBlock(error);
+        _writeResponseBlock = nil;
     }
 }
 

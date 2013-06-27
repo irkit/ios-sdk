@@ -43,6 +43,74 @@
     return self;
 }
 
+- (void)sendWithCompletion: (void (^)(NSError* error))block {
+    LOG_CURRENT_METHOD;
+    [self writeIRDataWithCompletion: ^(NSError *error) {
+        if ( ! error ) {
+            [self writeControlPointWithCompletion: ^(NSError *error) {
+                if ( ! error ) {
+                    block(nil); // send succeeded!
+                    return;
+                }
+                block(error);
+            }];
+            return;
+        }
+        block(error);
+    }];
+}
+
+- (void)writeIRDataWithCompletion: (void (^)(NSError *error))block {
+    LOG_CURRENT_METHOD;
+    [[IRKit sharedInstance] writeIRPeripheral: _peripheral
+                                        value: [self signalAsNSData]
+                    forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_IR_DATA_UUID
+                            ofServiceWithUUID: IRKIT_SERVICE_UUID
+                                   completion: ^(NSError *error) {
+                                       block(error);
+                                   }];
+}
+
+- (void)writeControlPointWithCompletion: (void (^)(NSError *error))block {
+    LOG_CURRENT_METHOD;
+    
+    [[IRKit sharedInstance] writeIRPeripheral: _peripheral
+                                        value: [self controlPointSendValue]
+                    forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
+                            ofServiceWithUUID: IRKIT_SERVICE_UUID
+                                   completion: ^(NSError *error) {
+                                       block(error);
+                                   }];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (NSData*) signalAsNSData {
+    LOG_CURRENT_METHOD;
+    if ( ! _data.count ) {
+        return nil;
+    }
+    // uint16_t value for each NSArray entry
+    NSMutableData *ret = [NSMutableData dataWithCapacity: _data.count * 2];
+    [_data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
+        uint16_t interval = [obj shortValue];
+        [ret appendData: [NSData dataWithBytes:&interval
+                                        length:2]];
+    }];
+    LOG( @" ret: %@", ret);
+    return ret;
+}
+
+- (NSData*) controlPointSendValue {
+    LOG_CURRENT_METHOD;
+    uint8_t value = IRKIT_CONTROL_POINT_VALUE_SEND;
+    return [NSData dataWithBytes:&value length:1];
+}
+
+#pragma mark -
+#pragma mark Accessors
+
 - (NSString*)name {
     LOG_CURRENT_METHOD;
     return _name ? _name : @"unknown name";
@@ -68,11 +136,15 @@
 
 - (void)encodeWithCoder:(NSCoder*)coder {
     LOG_CURRENT_METHOD;
-    [coder encodeObject:_name                       forKey:@"n"];
-    [coder encodeObject:_data                       forKey:@"d"];
-    [coder encodeObject:_receivedDate               forKey:@"r"];
-    [coder encodeObject:[IRHelper stringFromCFUUID: _peripheral.peripheral.UUID]
-                 forKey:@"u"];
+
+    if ( _peripheral.peripheral.UUID ) {
+        _uuid = [IRHelper stringFromCFUUID:_peripheral.peripheral.UUID];
+    }
+    
+    [coder encodeObject:_name         forKey:@"n"];
+    [coder encodeObject:_data         forKey:@"d"];
+    [coder encodeObject:_receivedDate forKey:@"r"];
+    [coder encodeObject:_uuid         forKey:@"u"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {

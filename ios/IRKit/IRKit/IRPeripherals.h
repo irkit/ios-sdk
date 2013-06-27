@@ -19,7 +19,7 @@
 #pragma mark -
 #pragma mark Key Value Coding - Mutable Unordered Accessors
 
-- (NSSet*) peripherals;
+- (NSArray*) peripherals;
 - (NSUInteger) countOfPeripherals;
 - (NSEnumerator *)enumeratorOfPeripherals;
 - (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)object;

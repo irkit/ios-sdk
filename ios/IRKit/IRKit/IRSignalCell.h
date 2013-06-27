@@ -12,6 +12,7 @@
 @interface IRSignalCell : UITableViewCell
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
++ (CGFloat)height;
 
 @property (nonatomic, strong) IRSignal *signal;
 

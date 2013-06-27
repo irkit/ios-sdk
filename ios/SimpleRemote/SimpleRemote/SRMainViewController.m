@@ -103,7 +103,7 @@
     if (cell == nil) {
         cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
     }
-    ((IRSignalCell*)cell).signal = [[IRKit sharedInstance].signals objectInSignalsAtIndex: indexPath.row];
+    ((IRSignalCell*)cell).signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
     return cell;
 }
 
@@ -124,6 +124,20 @@
 #pragma mark -
 #pragma mark UITableViewDelegate
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LOG_CURRENT_METHOD;
+    switch (indexPath.section) {
+        case 0:
+            if (indexPath.row < [IRKit sharedInstance].numberOfSignals) {
+                return [IRSignalCell height];
+            }
+        default:
+            break;
+    }
+    return 44;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
@@ -131,21 +145,21 @@
 
     switch (indexPath.section) {
         case 0:
-            switch (indexPath.row) {
-                case 0:
-                    {
-                        IRSignalSelectorViewController *c = [[IRSignalSelectorViewController alloc] init];
-                        c.delegate = (id<IRSignalSelectorViewControllerDelegate>)self;
-                        [self presentViewController:c animated:YES completion:^{
-                            LOG( @"presented" );
-                        }];
-                    }
-                    break;
-                default:
-                    break;
+            {
+                if (indexPath.row < [IRKit sharedInstance].numberOfSignals) {
+                    IRSignal *signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
+                    [signal sendWithCompletion:^(NSError *error) {
+                        LOG( @"sent: %@", error );
+                    }];
+                    return;
+                }
+                IRSignalSelectorViewController *c = [[IRSignalSelectorViewController alloc] init];
+                c.delegate = (id<IRSignalSelectorViewControllerDelegate>)self;
+                [self presentViewController:c animated:YES completion:^{
+                    LOG( @"presented" );
+                }];
             }
             break;
-            
         default:
             break;
     }

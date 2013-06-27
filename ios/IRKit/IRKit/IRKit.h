@@ -24,6 +24,12 @@
 - (void) startScan;
 - (void) stopScan;
 - (void) save;
+- (void) writeIRPeripheral: (IRPeripheral*)peripheral
+                     value: (NSData*)value
+ forCharacteristicWithUUID: (CBUUID*)characteristicUUID
+         ofServiceWithUUID: (CBUUID*)serviceUUID
+                completion: (void (^)(NSError *error))block;
+
 
 @property (nonatomic) BOOL autoConnect;
 @property (nonatomic) BOOL isScanning;
