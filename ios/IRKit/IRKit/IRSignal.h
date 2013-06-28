@@ -12,7 +12,9 @@
 @interface IRSignal : NSObject
 
 - (id)initWithData: (NSData*) newData;
+- (NSComparisonResult) compareByReceivedDate: (IRSignal*) otherSignal;
 - (void)sendWithCompletion: (void (^)(NSError* error))block;
+- (NSString*) uniqueID;
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSArray *data;

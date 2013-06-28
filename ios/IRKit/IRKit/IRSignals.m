@@ -11,7 +11,8 @@
 
 @interface IRSignals ()
 
-@property (nonatomic, strong) NSMutableSet* signals; // set of IRSignal
+// md5(signals) => IRSignal
+@property (nonatomic, strong) NSMutableDictionary* signals;
 
 @end
 
@@ -26,6 +27,14 @@
     return self;
 }
 
+- (id)objectAtIndex:(NSUInteger)index {
+    LOG( @"index: %d", index);
+    
+    NSArray* keys = [_signals keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)];
+    NSString* key = [keys objectAtIndex: key];
+    return _signals[key];
+}
+
 - (void) save {
     LOG_CURRENT_METHOD;
     
@@ -33,15 +42,6 @@
     [IRPersistentStore storeObject:data
                             forKey:@"signals"];
     [IRPersistentStore synchronize];
-}
-
-- (id)objectAtIndex:(NSUInteger)index {
-    LOG( @"index: %d", index);
-    
-    NSArray* signals = [_signals sortedArrayUsingDescriptors:
-                            @[ [NSSortDescriptor sortDescriptorWithKey: @"receivedDate"
-                                                             ascending: NO] ]];
-    return signals[index];
 }
 
 #pragma mark -
@@ -54,7 +54,7 @@
     
     _signals = (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     if ( ! _signals ) {
-        _signals = [[NSMutableSet alloc] init];
+        _signals = [[NSMutableDictionary alloc] init];
     }
     LOG( @"_signals: %@", _signals );
 }
@@ -63,7 +63,7 @@
 #pragma mark Key Value Coding - Mutable Indexed Accessors
 
 - (NSArray*) signals {
-    return [_signals allObjects];
+    return [_signals allValues];
 }
 
 - (NSUInteger) countOfSignals {
@@ -75,21 +75,22 @@
 }
 
 - (IRSignal*)memberOfSignals:(IRSignal *)object {
+    LOG_CURRENT_METHOD;
     
-    // TODO don't allow same signal data to exist
-
-    return [_signals member:object];
+    return _signals[object.uniqueID];
 }
 
 - (void)addSignalsObject:(IRSignal *)object {
 
-    // TODO don't allow same signal data to exist
+    if ( [self memberOfSignals:object] ) {
+        return;
+    }
     
-    [_signals addObject:object];
+    _signals[object.uniqueID] = object;
 }
 
 - (void)removeSignalsObject:(IRSignal *)object {
-    [_signals removeObject:object];
+    [_signals removeObjectForKey:object.uniqueID];
 }
 
 @end

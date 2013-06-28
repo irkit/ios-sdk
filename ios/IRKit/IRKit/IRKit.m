@@ -39,7 +39,6 @@
     
     _peripherals = [[IRPeripherals alloc] init];
     _signals     = [[IRSignals alloc] init];
-    
     _autoConnect = NO;
     _isScanning  = NO;
     _shouldScan  = NO;

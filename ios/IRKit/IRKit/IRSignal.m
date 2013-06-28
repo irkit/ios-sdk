@@ -43,6 +43,15 @@
     return self;
 }
 
+- (NSComparisonResult) compareByReceivedDate: (IRSignal*) otherSignal {
+    return [self.receivedDate compare: otherSignal.receivedDate];
+}
+
+- (NSString*) uniqueID {
+    LOG_CURRENT_METHOD;
+    return [IRHelper sha1: _data];
+}
+
 - (void)sendWithCompletion: (void (^)(NSError* error))block {
     LOG_CURRENT_METHOD;
     [self writeIRDataWithCompletion: ^(NSError *error) {
@@ -62,7 +71,9 @@
 
 - (void)writeIRDataWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
-    [[IRKit sharedInstance] writeIRPeripheral: _peripheral
+    
+    // don't access the 
+    [[IRKit sharedInstance] writeIRPeripheral: self.peripheral
                                         value: [self signalAsNSData]
                     forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_IR_DATA_UUID
                             ofServiceWithUUID: IRKIT_SERVICE_UUID
@@ -74,7 +85,7 @@
 - (void)writeControlPointWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
     
-    [[IRKit sharedInstance] writeIRPeripheral: _peripheral
+    [[IRKit sharedInstance] writeIRPeripheral: self.peripheral
                                         value: [self controlPointSendValue]
                     forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
                             ofServiceWithUUID: IRKIT_SERVICE_UUID
@@ -137,9 +148,8 @@
 - (void)encodeWithCoder:(NSCoder*)coder {
     LOG_CURRENT_METHOD;
 
-    if ( _peripheral.peripheral.UUID ) {
-        _uuid = [IRHelper stringFromCFUUID:_peripheral.peripheral.UUID];
-    }
+    _uuid = _uuid ? _uuid
+                  : [IRHelper stringFromCFUUID:self.peripheral.peripheral.UUID];
     
     [coder encodeObject:_name         forKey:@"n"];
     [coder encodeObject:_data         forKey:@"d"];

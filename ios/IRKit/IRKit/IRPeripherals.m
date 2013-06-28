@@ -104,7 +104,7 @@
 - (NSUInteger) countOfPeripherals {
     LOG_CURRENT_METHOD;
     
-    return [_irperipheralForUUID count];
+    return _irperipheralForUUID.count;
 }
 
 - (NSEnumerator *)enumeratorOfPeripherals {
