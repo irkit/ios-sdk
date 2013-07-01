@@ -89,7 +89,7 @@
  forCharacteristicWithUUID: (CBUUID*)characteristicUUID
          ofServiceWithUUID: (CBUUID*)serviceUUID
                 completion: (void (^)(NSError *error))block {
-    LOG_CURRENT_METHOD;
+    LOG( @"peripheral: %@ service: %@ c12c: %@ value: %@", peripheral, serviceUUID, characteristicUUID, value );
     CBPeripheral *p = peripheral.peripheral;
     if ( _writeResponseBlock ) {
         // TODO already writing??
