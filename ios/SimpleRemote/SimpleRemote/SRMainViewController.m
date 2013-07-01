@@ -142,6 +142,12 @@
                                           reuseIdentifier:@"NewSignalCell"];
         }
         cell.textLabel.text = @"+ Add New Signal";
+
+//        int margin = 20;
+//        int height = 100;
+//        IRChartView *chartView = [[IRChartView alloc] initWithFrame: (CGRect){ margin, margin, 300 - margin*2, height - margin*2 }];
+//        chartView.data = @[ @1000, @500, @500 ];
+//        [cell.contentView addSubview: chartView];
         return cell;
     }
     return [[IRKit sharedInstance].signals tableView:tableView cellForRowAtIndexPath: indexPath];
@@ -151,7 +157,7 @@
 {
     LOG_CURRENT_METHOD;
 
-    return [[IRKit sharedInstance].signals tableView:tableView numberOfRowsInSection:section];
+    return [[IRKit sharedInstance].signals tableView:tableView numberOfRowsInSection:section] + 1;
 }
 
 #pragma mark -

@@ -54,6 +54,7 @@
     self.textLabel.text = signal.name;
     self.detailTextLabel.text = signal.name;
     self.chartView.data = signal.data;
+//    self.chartView.data = @[ @1000, @500, @500 ];
 }
 
 + (CGFloat)height {
