@@ -24,6 +24,8 @@
 		C76CFF8617462E0800F972B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF8417462E0800F972B7 /* InfoPlist.strings */; };
 		C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */; };
 		C79DE3CB176F27870088679E /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CA176F27870088679E /* IRKitResources.bundle */; };
+		C7C0DB801781D2DA00AECAC2 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C0DB7E1781D2DA00AECAC2 /* gear@2x.png */; };
+		C7C0DB811781D2DA00AECAC2 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C0DB7F1781D2DA00AECAC2 /* gear.png */; };
 		C7FAB00717462FC100125BCB /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
 		C7FAB00F17464ABA00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB00E17464AB900125BCB /* Log.m */; };
 		C7FAB02417467D6800125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB02317467D6800125BCB /* CoreBluetooth.framework */; };
@@ -63,6 +65,8 @@
 		C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleRemoteTests.h; sourceTree = "<group>"; };
 		C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleRemoteTests.m; sourceTree = "<group>"; };
 		C79DE3CA176F27870088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = IRKitResources.bundle; path = "../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos/IRKitResources.bundle"; sourceTree = "<group>"; };
+		C7C0DB7E1781D2DA00AECAC2 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
+		C7C0DB7F1781D2DA00AECAC2 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		C7FAB00617462FC100125BCB /* libIRKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIRKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos/libIRKit.a"; sourceTree = "<group>"; };
 		C7FAB00B1746481700125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB00E17464AB900125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				C76CFF5D17462E0800F972B7 /* InfoPlist.strings */,
 				C76CFF6017462E0800F972B7 /* main.m */,
 				C76CFF6217462E0800F972B7 /* SimpleRemote-Prefix.pch */,
+				C7C0DB7F1781D2DA00AECAC2 /* gear.png */,
+				C7C0DB7E1781D2DA00AECAC2 /* gear@2x.png */,
 				C76CFF6617462E0800F972B7 /* Default.png */,
 				C76CFF6817462E0800F972B7 /* Default@2x.png */,
 				C76CFF6A17462E0800F972B7 /* Default-568h@2x.png */,
@@ -254,6 +260,8 @@
 				C76CFF6B17462E0800F972B7 /* Default-568h@2x.png in Resources */,
 				C76CFF6E17462E0800F972B7 /* MainStoryboard.storyboard in Resources */,
 				C79DE3CB176F27870088679E /* IRKitResources.bundle in Resources */,
+				C7C0DB801781D2DA00AECAC2 /* gear@2x.png in Resources */,
+				C7C0DB811781D2DA00AECAC2 /* gear.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

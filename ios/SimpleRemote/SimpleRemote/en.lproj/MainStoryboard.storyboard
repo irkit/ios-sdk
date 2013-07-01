@@ -4,14 +4,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller - Edit Signal-->
+        <!--Main View Controller - Create Remote Icon-->
         <scene sceneID="ozj-dN-OH9">
             <objects>
                 <tableViewController id="oaV-El-VRv" customClass="SRMainViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="JpI-Mm-1g0">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="l2X-7H-7g7">
                                 <rect key="frame" x="0.0" y="46" width="320" height="45"/>
@@ -24,13 +24,12 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Edit Signal" id="6b8-Tm-3DT">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="a99-O6-OjG">
+                    <navigationItem key="navigationItem" title="Create Remote Icon" id="6b8-Tm-3DT">
+                        <barButtonItem key="leftBarButtonItem" image="gear.png" style="plain" id="a99-O6-OjG">
                             <connections>
                                 <action selector="addBarButtonPressed:" destination="oaV-El-VRv" id="99s-hY-aZG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="uek-mI-WCs"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2t4-6u-8at" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -41,7 +40,9 @@
         <scene sceneID="aUR-eY-w7e">
             <objects>
                 <navigationController definesPresentationContext="YES" id="AFw-Yb-N5c" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OAm-Cd-OWg">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="OAm-Cd-OWg">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -53,6 +54,9 @@
             <point key="canvasLocation" x="138" y="205"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear.png" width="20" height="20"/>
+    </resources>
     <classes>
         <class className="SRMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SRMainViewController.h"/>
