@@ -8,6 +8,8 @@
 
 #import "IRSignals.h"
 #import "IRPersistentStore.h"
+#import "IRConst.h"
+#import "IRSignalCell.h"
 
 @interface IRSignals ()
 
@@ -52,11 +54,20 @@
     
     NSData* data = [IRPersistentStore objectForKey: @"signals"];
     
-    _signals = (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    if ( ! _signals ) {
+    NSMutableSet *set = (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if ( set ) {
+        _signals = set;
+    }
+    else {
         _signals = [[NSMutableDictionary alloc] init];
     }
     LOG( @"_signals: %@", _signals );
+}
+
+- (NSInteger) indexOfSignal: (IRSignal*) signal {
+    LOG_CURRENT_METHOD;
+
+    return [[_signals keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)] indexOfObject:signal.uniqueID];
 }
 
 #pragma mark -
@@ -71,6 +82,7 @@
 }
 
 - (NSEnumerator*)enumeratorOfSignals {
+    // TODO sort using receivedDate
     return _signals.objectEnumerator;
 }
 
@@ -87,10 +99,68 @@
     }
     
     _signals[object.uniqueID] = object;
+    
+    if (_delegate) {
+        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
+            [_delegate controller:self
+                  didChangeObject:object
+                      atIndexPath:nil
+                    forChangeType:IRAnimatingTypeInsert
+                     newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        }
+        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
+            [_delegate controllerDidChangeContent:self];
+        }
+    }
 }
 
 - (void)removeSignalsObject:(IRSignal *)object {
+    NSInteger row;
+    if (_delegate) {
+        row = [self indexOfSignal: object];
+    }
     [_signals removeObjectForKey:object.uniqueID];
+    
+    if (_delegate) {
+        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
+            [_delegate controller:self
+                  didChangeObject:object
+                      atIndexPath:[NSIndexPath indexPathForRow:row
+                                                     inSection:0]
+                    forChangeType:IRAnimatingTypeDelete
+                     newIndexPath:nil];
+        }
+        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
+            [_delegate controllerDidChangeContent:self];
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG_CURRENT_METHOD;
+
+    IRSignalCell *cell = (IRSignalCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
+    if (cell == nil) {
+        cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
+    }
+    cell.signal = [self objectAtIndex: indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    return self.countOfSignals;
+}
+
+#pragma mark -
+#pragma mark UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG_CURRENT_METHOD;
+    return [IRSignalCell height];
 }
 
 @end

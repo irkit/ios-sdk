@@ -7,10 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "IRSignal.h"
 
-@interface IRSignals : NSObject
+typedef NS_ENUM(NSUInteger, IRAnimatingType) {
+    IRAnimatingTypeInsert = 1,
+    IRAnimatingTypeDelete = 2
+};
 
+@protocol IRAnimatingControllerDelegate <NSObject>
+
+@optional
+- (void)controller:(id)controller
+   didChangeObject:(id)object
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(IRAnimatingType)type
+      newIndexPath:(NSIndexPath *)newIndexPath;
+- (void)controllerDidChangeContent:(id)controller;
+
+@end
+
+@interface IRSignals : NSObject<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, assign) id<IRAnimatingControllerDelegate> delegate;
 - (void) save;
 - (id)objectAtIndex:(NSUInteger)index;
 

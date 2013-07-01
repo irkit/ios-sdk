@@ -39,6 +39,20 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewWillAppear:animated];
+
+    [IRKit sharedInstance].signals.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewWillDisappear:animated];
+
+    [IRKit sharedInstance].signals.delegate = nil;
+}
+
 - (IBAction)addBarButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
     
@@ -79,6 +93,38 @@
 }
 
 #pragma mark -
+#pragma mark IRAnimatingControllerDelegate
+
+- (void)controller:(id)controller
+   didChangeObject:(id)object
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(IRAnimatingType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    LOG( @"object: %@ changeType: %d newIndexPath: %@", object, type, newIndexPath );
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+        case IRAnimatingTypeInsert:
+            [tableView beginUpdates];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView endUpdates];
+            break;
+            
+        case IRAnimatingTypeDelete:
+            [tableView beginUpdates];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [tableView endUpdates];
+            break;
+    }
+}
+
+- (void) controllerDidChangeContent:(id)controller {
+    LOG_CURRENT_METHOD;
+}
+
+#pragma mark -
 #pragma mark UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,27 +144,14 @@
         cell.textLabel.text = @"+ Add New Signal";
         return cell;
     }
-    // otherwise show peripheral info
-    cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
-    if (cell == nil) {
-        cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
-    }
-    ((IRSignalCell*)cell).signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
-    return cell;
+    return [[IRKit sharedInstance].signals tableView:tableView cellForRowAtIndexPath: indexPath];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     LOG_CURRENT_METHOD;
-    
-    switch (section) {
-        case 0:
-        {
-            return [IRKit sharedInstance].numberOfSignals + 1;
-        }
-    }
-    return 0;
 
+    return [[IRKit sharedInstance].signals tableView:tableView numberOfRowsInSection:section];
 }
 
 #pragma mark -
@@ -127,15 +160,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
-    switch (indexPath.section) {
-        case 0:
-            if (indexPath.row < [IRKit sharedInstance].numberOfSignals) {
-                return [IRSignalCell height];
-            }
-        default:
-            break;
+    if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
+        return 44;
     }
-    return 44;
+    return [[IRKit sharedInstance].signals tableView: tableView
+                             heightForRowAtIndexPath: indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
