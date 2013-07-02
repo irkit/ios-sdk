@@ -43,6 +43,9 @@
 		C7AFD0581755F10A007EE1DA /* IR_ISNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0531755F10A007EE1DA /* IR_ISNetworkClient.m */; };
 		C7AFD0591755F10A007EE1DA /* IR_ISNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0551755F10A007EE1DA /* IR_ISNetworkOperation.m */; };
 		C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37DF174B8EB100872C04 /* IRChartView.h */; };
+		C7C0DB881782EF4100AECAC2 /* IRSignalTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C0DB861782EF4100AECAC2 /* IRSignalTableViewController.m */; };
+		C7C0DB891782F32200AECAC2 /* IRSignalTableViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C0DB871782EF4100AECAC2 /* IRSignalTableViewController.h */; };
+		C7C0DB8A1782F3DB00AECAC2 /* IRSignalNameEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7EF92E1177941B700D07D81 /* IRSignalNameEditViewController.h */; };
 		C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; };
 		C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */; };
 		C7C7A30B176F017600C9A62F /* IRNewPeripheralViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */; };
@@ -73,6 +76,8 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7C0DB8A1782F3DB00AECAC2 /* IRSignalNameEditViewController.h in CopyFiles */,
+				C7C0DB891782F32200AECAC2 /* IRSignalTableViewController.h in CopyFiles */,
 				C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */,
 				C7EF92E417797DCE00D07D81 /* IRNewPeripheralScene3ViewController.h in CopyFiles */,
 				C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */,
@@ -151,6 +156,8 @@
 		C7AFD0531755F10A007EE1DA /* IR_ISNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IR_ISNetworkClient.m; sourceTree = "<group>"; };
 		C7AFD0541755F10A007EE1DA /* IR_ISNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISNetworkOperation.h; sourceTree = "<group>"; };
 		C7AFD0551755F10A007EE1DA /* IR_ISNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IR_ISNetworkOperation.m; sourceTree = "<group>"; };
+		C7C0DB861782EF4100AECAC2 /* IRSignalTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalTableViewController.m; sourceTree = "<group>"; };
+		C7C0DB871782EF4100AECAC2 /* IRSignalTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalTableViewController.h; sourceTree = "<group>"; };
 		C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralViewController.m; sourceTree = "<group>"; };
 		C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralViewController.h; sourceTree = "<group>"; };
 		C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene1ViewController.m; sourceTree = "<group>"; };
@@ -324,6 +331,8 @@
 				C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */,
 				C7EF92E0177941B700D07D81 /* IRSignalNameEditViewController.m */,
 				C7EF92E1177941B700D07D81 /* IRSignalNameEditViewController.h */,
+				C7C0DB861782EF4100AECAC2 /* IRSignalTableViewController.m */,
+				C7C0DB871782EF4100AECAC2 /* IRSignalTableViewController.h */,
 				C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */,
 				C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */,
 				C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */,
@@ -457,6 +466,7 @@
 				C77150F61772DCC7004F9FE3 /* IRSignalSelectorViewController.m in Sources */,
 				C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */,
 				C7EF92E2177941B700D07D81 /* IRSignalNameEditViewController.m in Sources */,
+				C7C0DB881782EF4100AECAC2 /* IRSignalTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

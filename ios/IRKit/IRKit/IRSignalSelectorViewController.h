@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "IRKit.h"
 #import "IRNewSignalViewController.h"
+#import "IRSignalNameEditViewController.h"
+#import "IRSignalTableViewController.h"
 
 // pre definition for delegate
 @protocol IRSignalSelectorViewControllerDelegate;
 
-@interface IRSignalSelectorViewController : UIViewController<UINavigationControllerDelegate, IRNewSignalViewControllerDelegate>
+@interface IRSignalSelectorViewController : UIViewController<UINavigationControllerDelegate, IRNewSignalViewControllerDelegate,IRSignalNameEditViewControllerDelegate, IRSignalTableViewControllerDelegate>
 
 @property (nonatomic, assign) id<IRSignalSelectorViewControllerDelegate> delegate;
 
@@ -25,7 +27,6 @@
 @protocol IRSignalSelectorViewControllerDelegate <NSObject>
 
 @required
-
 // Your implementation of this method should dismiss view controller.
 - (void)signalSelectorViewController:(IRSignalSelectorViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
 

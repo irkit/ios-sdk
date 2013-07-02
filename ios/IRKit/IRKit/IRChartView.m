@@ -8,6 +8,8 @@
 
 #import "IRChartView.h"
 
+#define LOG_DISABLED 1
+
 #define MARGIN_TOP    10.
 #define PADDING_BOTTOM 10.
 #define INTERVAL_MARGIN_LEFT   0.
