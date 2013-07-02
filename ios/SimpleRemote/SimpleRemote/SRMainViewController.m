@@ -133,31 +133,61 @@
     
     UITableViewCell *cell;
     
-    if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
-        // last line is always "+ New Signal"
-        // TODO IRKit SDK provides this?
-        cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                          reuseIdentifier:@"NewSignalCell"];
-        }
-        cell.textLabel.text = @"+ Add New Signal";
-
-//        int margin = 20;
-//        int height = 100;
-//        IRChartView *chartView = [[IRChartView alloc] initWithFrame: (CGRect){ margin, margin, 300 - margin*2, height - margin*2 }];
-//        chartView.data = @[ @1000, @500, @500 ];
-//        [cell.contentView addSubview: chartView];
-        return cell;
+    switch (indexPath.section) {
+        case 0:
+            if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
+                // last line is always "+ New Signal"
+                // TODO IRKit SDK provides this?
+                cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
+                if (cell == nil) {
+                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                  reuseIdentifier:@"NewSignalCell"];
+                }
+                cell.textLabel.text = @"+ Add New Signal";
+                
+                //        int margin = 20;
+                //        int height = 100;
+                //        IRChartView *chartView = [[IRChartView alloc] initWithFrame: (CGRect){ margin, margin, 300 - margin*2, height - margin*2 }];
+                //        chartView.data = @[ @1000, @500, @500 ];
+                //        [cell.contentView addSubview: chartView];
+                break;
+            }
+            cell = [[IRKit sharedInstance].signals tableView:tableView cellForRowAtIndexPath: indexPath];
+            break;
+        case 1:
+            break;
+        case 2:
+        default:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                              reuseIdentifier:@"NewSignalCell"];
+            }
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = @"Go!";
+            break;
     }
-    return [[IRKit sharedInstance].signals tableView:tableView cellForRowAtIndexPath: indexPath];
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     LOG_CURRENT_METHOD;
 
-    return [[IRKit sharedInstance].signals tableView:tableView numberOfRowsInSection:section] + 1;
+    switch (section) {
+        case 0:
+            return [[IRKit sharedInstance].signals tableView:tableView numberOfRowsInSection:section] + 1;
+        case 1:
+            return 0;
+        case 2:
+        default:
+            return 1;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    LOG_CURRENT_METHOD;
+    return 3;
 }
 
 #pragma mark -
@@ -198,6 +228,53 @@
         default:
             break;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    switch (section) {
+        case 0:
+            return 60.;
+        case 1:
+            return 110.;
+        case 2:
+        default:
+            return 60.;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    float offsetLeft = 20.;
+    UIView *view = [[UIView alloc] initWithFrame:(CGRect){0.,0.,320.,50.}];
+    UILabel *label = [[UILabel alloc] initWithFrame:(CGRect){ offsetLeft, 0., 320.-offsetLeft,50.}];
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = [UIColor whiteColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
+    switch (section) {
+        case 0:
+            label.text = @"1 Select Signal";
+            break;
+        case 1:
+            label.text = @"2 Select Icon Image";
+            break;
+        case 2:
+        default:
+            label.text = @"3 Create App Icon";
+            break;
+    }
+    [view addSubview:label];
+
+    if (section == 1) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon.png"]];
+        imageView.frame = (CGRect){ (view.frame.size.width - imageView.frame.size.width)/2.,
+                                    50,
+                                    imageView.frame.size.width,
+                                    imageView.frame.size.height };
+        [view addSubview:imageView];
+    }
+
+    return view;
 }
 
 @end
