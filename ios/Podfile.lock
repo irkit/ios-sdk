@@ -1,0 +1,13 @@
+PODS:
+  - BlocksKit (1.8.2):
+    - libffi
+  - libffi (3.0.13)
+
+DEPENDENCIES:
+  - BlocksKit
+
+SPEC CHECKSUMS:
+  BlocksKit: 7396526b0816734103f6133fbb1a520c8b04e80c
+  libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
+
+COCOAPODS: 0.21.0

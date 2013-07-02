@@ -1,0 +1,4 @@
+platform :ios, "5.0"
+pod 'BlocksKit'
+workspace 'IRKit.xcworkspace'
+xcodeproj 'SimpleRemote/SimpleRemote.xcodeproj'
