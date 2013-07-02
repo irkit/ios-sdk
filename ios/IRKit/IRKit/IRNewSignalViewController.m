@@ -23,7 +23,7 @@
     CGRect frame = [[UIScreen mainScreen] bounds];
     LOG(@"frame: %@", NSStringFromCGRect(frame));
     UIView *view = [[UIView alloc] initWithFrame:frame];
-
+    
     // image
     UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/newsignal.png"]];
     imageView.frame = frame;

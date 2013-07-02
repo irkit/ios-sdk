@@ -25,9 +25,9 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Remote Icon" id="6b8-Tm-3DT">
-                        <barButtonItem key="leftBarButtonItem" image="gear.png" id="a99-O6-OjG">
+                        <barButtonItem key="leftBarButtonItem" image="gear.png" id="qBT-bQ-0X1">
                             <connections>
-                                <action selector="addBarButtonPressed:" destination="oaV-El-VRv" id="99s-hY-aZG"/>
+                                <action selector="settingsButtonPressed:" destination="oaV-El-VRv" id="4SJ-in-jVS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -57,14 +57,6 @@
     <resources>
         <image name="gear.png" width="20" height="20"/>
     </resources>
-    <classes>
-        <class className="SRMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SRMainViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addBarButtonItem" candidateClass="UIBarButtonItem"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

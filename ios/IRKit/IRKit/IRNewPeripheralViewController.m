@@ -29,7 +29,6 @@
     IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc]init];
     first.delegate = self;
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
-    _navController.delegate = self;
     [view addSubview:_navController.view];
 
     self.view = view;

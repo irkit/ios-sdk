@@ -7,10 +7,9 @@
 //
 
 #import "SRMainViewController.h"
+#import <BlocksKit/BlocksKit.h>
 
 @interface SRMainViewController ()
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addBarButtonItem;
 
 @end
 
@@ -22,7 +21,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 
-    self.tableView.delegate = self;
+    self.tableView.delegate   = self;
     self.tableView.dataSource = self;
 }
 
@@ -53,7 +52,7 @@
     [IRKit sharedInstance].signals.delegate = nil;
 }
 
-- (IBAction)addBarButtonPressed:(id)sender {
+- (IBAction)settingsButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
     
     IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
@@ -82,11 +81,10 @@
 }
 
 #pragma mark -
-#pragma mark IRSignalSelectorViewControllerDelegate
+#pragma mark IRNewSignalViewControllerDelegate
 
-- (void)signalSelectorViewController:(IRSignalSelectorViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)newSignalViewController:(IRNewSignalViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
-
     [self dismissViewControllerAnimated:YES completion:^{
         LOG(@"dismissed");
     }];
@@ -136,20 +134,13 @@
     switch (indexPath.section) {
         case 0:
             if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
-                // last line is always "+ New Signal"
-                // TODO IRKit SDK provides this?
+                // last line is always "+ Add New Signal"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
                 if (cell == nil) {
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                   reuseIdentifier:@"NewSignalCell"];
                 }
                 cell.textLabel.text = @"+ Add New Signal";
-                
-                //        int margin = 20;
-                //        int height = 100;
-                //        IRChartView *chartView = [[IRChartView alloc] initWithFrame: (CGRect){ margin, margin, 300 - margin*2, height - margin*2 }];
-                //        chartView.data = @[ @1000, @500, @500 ];
-                //        [cell.contentView addSubview: chartView];
                 break;
             }
             cell = [[IRKit sharedInstance].signals tableView:tableView cellForRowAtIndexPath: indexPath];
@@ -196,11 +187,18 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
-    if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
-        return 44;
+    switch (indexPath.section) {
+        case 0:
+            if (indexPath.row >= [IRKit sharedInstance].numberOfSignals) {
+                return 44;
+            }
+            return [[IRKit sharedInstance].signals tableView: tableView
+                                     heightForRowAtIndexPath: indexPath];
+        case 1:
+        case 2:
+        default:
+            return 44;
     }
-    return [[IRKit sharedInstance].signals tableView: tableView
-                             heightForRowAtIndexPath: indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -211,18 +209,37 @@
     switch (indexPath.section) {
         case 0:
             {
-                if (indexPath.row < [IRKit sharedInstance].numberOfSignals) {
-                    IRSignal *signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
-                    [signal sendWithCompletion:^(NSError *error) {
-                        LOG( @"sent: %@", error );
+                if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
+                    IRNewSignalViewController *c = [[IRNewSignalViewController alloc] init];
+                    c.delegate = (id<IRNewSignalViewControllerDelegate>)self;
+                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:c];
+                    [self presentViewController:nav animated:YES completion:^{
+                        LOG( @"presented" );
                     }];
                     return;
                 }
-                IRSignalSelectorViewController *c = [[IRSignalSelectorViewController alloc] init];
-                c.delegate = (id<IRSignalSelectorViewControllerDelegate>)self;
-                [self presentViewController:c animated:YES completion:^{
-                    LOG( @"presented" );
+                IRSignal *signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
+                UIActionSheet *sheet = [UIActionSheet actionSheetWithTitle:@"Please select one."];
+                [sheet addButtonWithTitle:@"Test Send" handler:^{
+                    [signal sendWithCompletion:^(NSError *error) {
+                        LOG( @"sent: %@", error );
+                    }];
                 }];
+                [sheet addButtonWithTitle:@"Remove" handler:^{
+                    [[IRKit sharedInstance].signals removeSignalsObject:signal];
+                    LOG( @"removed: %@", signal );
+                }];
+                [sheet setCancelButtonWithTitle:nil handler:^{
+                    LOG( @"canceled" );
+                }];
+                [sheet showInView:self.view];
+            }
+            break;
+        case 1:
+        case 2:
+            {
+                NSURL *url = [NSURL URLWithString: @"http://www.google.com/"];
+                [[UIApplication sharedApplication] openURL: url];
             }
             break;
         default:
@@ -266,12 +283,18 @@
     [view addSubview:label];
 
     if (section == 1) {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon.png"]];
-        imageView.frame = (CGRect){ (view.frame.size.width - imageView.frame.size.width)/2.,
-                                    50,
-                                    imageView.frame.size.width,
-                                    imageView.frame.size.height };
-        [view addSubview:imageView];
+        UIImage *image = [UIImage imageNamed: @"icon.png"];
+        UIButton *button = [[UIButton alloc] init];
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        button.frame = (CGRect){ (view.frame.size.width - image.size.width)/2.,
+                                  50,
+                                  image.size.width,
+                                  image.size.height };
+        [button addEventHandler:^(id sender) {
+            LOG( @"tapped" );
+            // TODO show icon selector
+        } forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:button];
     }
 
     return view;

@@ -42,6 +42,14 @@
     _autoConnect = NO;
     _isScanning  = NO;
     _shouldScan  = NO;
+    [[NSNotificationCenter defaultCenter]
+     addObserverForName:UIApplicationWillTerminateNotification
+                 object:nil
+                  queue:[NSOperationQueue mainQueue]
+             usingBlock:^(NSNotification *note) {
+                      LOG( @"terminating" );
+                      [self save];
+                  }];
 
     return self;
 }
@@ -82,6 +90,7 @@
 - (void) save {
     LOG_CURRENT_METHOD;
     [_peripherals save];
+    [_signals save];
 }
 
 - (void) writeIRPeripheral: (IRPeripheral*)peripheral
