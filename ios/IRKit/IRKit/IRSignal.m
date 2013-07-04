@@ -72,26 +72,23 @@
 - (void)writeIRDataWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
     
-    // don't access the 
-    [[IRKit sharedInstance] writeIRPeripheral: self.peripheral
-                                        value: [self signalAsNSData]
-                    forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_IR_DATA_UUID
-                            ofServiceWithUUID: IRKIT_SERVICE_UUID
-                                   completion: ^(NSError *error) {
-                                       block(error);
-                                   }];
+    [self.peripheral writeData:[self signalAsNSData]
+     forCharacteristicWithUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
+             ofServiceWithUUID:IRKIT_SERVICE_UUID
+                    completion:^(NSError *error) {
+                        block(error);
+                    }];
 }
 
 - (void)writeControlPointWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
     
-    [[IRKit sharedInstance] writeIRPeripheral: self.peripheral
-                                        value: [self controlPointSendValue]
-                    forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
-                            ofServiceWithUUID: IRKIT_SERVICE_UUID
-                                   completion: ^(NSError *error) {
-                                       block(error);
-                                   }];
+    [self.peripheral writeData: [self controlPointSendValue]
+     forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
+             ofServiceWithUUID: IRKIT_SERVICE_UUID
+                    completion: ^(NSError *error) {
+                        block(error);
+                    }];
 }
 
 #pragma mark -

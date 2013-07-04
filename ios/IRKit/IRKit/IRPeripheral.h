@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IRPeripheral : NSObject
+@interface IRPeripheral : NSObject<CBPeripheralDelegate>
 
 @property (nonatomic, copy) NSString *customizedName;
 @property (nonatomic, copy) NSNumber *isPaired;
@@ -20,6 +20,10 @@
 @property (nonatomic) BOOL shouldReadIRData;
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
+- (void) writeData: (NSData*)value
+forCharacteristicWithUUID: (CBUUID*)characteristicUUID
+ ofServiceWithUUID: (CBUUID*)serviceUUID
+        completion: (void (^)(NSError *error))block;
 - (void) restartDisconnectTimer;
 
 @end

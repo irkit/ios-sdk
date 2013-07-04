@@ -74,4 +74,9 @@
 #define IRViewControllerResultSignal         @"signal"
 #define IRViewControllerResultText           @"text"
 
+#pragma mark -
+#pragma mark Errors
+
+#define IRKIT_ERROR_DOMAIN @"irkit"
+
 #endif
