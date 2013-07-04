@@ -10,7 +10,7 @@
 #import "IRPersistentStore.h"
 #import "IRHelper.h"
 
-//#define LOG_DISABLED 1
+#define LOG_DISABLED 1
 
 @interface IRPeripherals ()
 

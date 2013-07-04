@@ -80,8 +80,8 @@
                         IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] init];
                         c.delegate = self;
                         _isShowingNewViewController = NO;
-                        [self.navigationController pushViewController:c
-                                                             animated:YES];
+                        [_navController pushViewController:c
+                                                  animated:YES];
                      }];
     }
 }

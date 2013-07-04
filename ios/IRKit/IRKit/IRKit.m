@@ -16,6 +16,7 @@
 @property (nonatomic) CBCentralManager* manager;
 @property (nonatomic) BOOL shouldScan;
 @property (nonatomic, copy) void (^writeResponseBlock)(NSError *error);
+@property (nonatomic) id observer;
 
 @end
 
@@ -36,31 +37,40 @@
 
     _manager = [[CBCentralManager alloc] initWithDelegate:self
                                                     queue:nil];
-    
+
     _peripherals = [[IRPeripherals alloc] init];
     _signals     = [[IRSignals alloc] init];
     _autoConnect = NO;
     _isScanning  = NO;
     _shouldScan  = NO;
-    [[NSNotificationCenter defaultCenter]
-     addObserverForName:UIApplicationWillTerminateNotification
-                 object:nil
-                  queue:[NSOperationQueue mainQueue]
-             usingBlock:^(NSNotification *note) {
+    __weak IRKit *_self = self;
+    _observer    = [[NSNotificationCenter defaultCenter]
+                    addObserverForName:UIApplicationWillTerminateNotification
+                                object:nil
+                                queue:[NSOperationQueue mainQueue]
+                           usingBlock:^(NSNotification *note) {
                       LOG( @"terminating" );
-                      [self save];
+                      [_self save];
                   }];
 
     return self;
 }
 
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+}
+
 - (void) startScan {
     LOG_CURRENT_METHOD;
-    
+
     if (_manager.state == CBCentralManagerStatePoweredOn) {
         _isScanning = YES;
+
+        // we want duplicates: peripheral updates receivedCount in adv packet when receiving IR data
         [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
-                                         options:nil];
+                                         options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES
+         }];
         // find anything
         // [_manager scanForPeripheralsWithServices:nil
         //                                  options:nil];
@@ -108,7 +118,7 @@
     }
     if ( ! p.isConnected ) {
         // TODO not connected
-        
+
     }
     for (CBService *service in p.services) {
         if ( [service.UUID isEqual:serviceUUID]) {
@@ -128,6 +138,11 @@
     block( error );
 }
 
+- (void) disconnectPeripheral: (IRPeripheral*)peripheral {
+    LOG_CURRENT_METHOD;
+    [_manager cancelPeripheralConnection: peripheral.peripheral];
+}
+
 #pragma mark -
 #pragma mark CBCentralManagerDelegate
 
@@ -138,16 +153,34 @@
     LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
 
     [_peripherals addPeripheralsObject:peripheral]; // retain
-
-    /* iOS 6.0 bug workaround : connect to device before displaying UUID !
-     The reason for this is that the CFUUID .UUID property of CBPeripheral
-     here is null the first time an unkown (never connected before in any app)
-     peripheral is connected. So therefore we connect to all peripherals we find.
-     */
-
     peripheral.delegate = self;
-    [_manager connectPeripheral:peripheral
-                        options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES }];
+
+    IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
+    NSData *data = advertisementData[CBAdvertisementDataManufacturerDataKey];
+    uint8_t receivedCount;
+    if (data) {
+        [data getBytes:&receivedCount
+                 range:(NSRange){0,1}];
+        LOG( @"peripheral: %@ receivedCount: %d", peripheral, receivedCount );
+    }
+
+    // connect when:
+    // * app not authorized = we need to connect to receive auth c12c's indication
+    // * peripheral's received count has changed = peripheral should have received IR data, we're gonna read it
+    if ( ! p.authorized ) {
+        [_manager connectPeripheral:peripheral
+                            options:@{
+            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
+         }];
+    }
+    else if (p.receivedCount != receivedCount) {
+        p.shouldReadIRData = YES;
+        [_manager connectPeripheral:peripheral
+                            options:@{
+            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
+         }];
+    }
+    p.receivedCount = receivedCount;
 }
 
 - (void)centralManager:(CBCentralManager *)central
@@ -172,28 +205,21 @@ didRetrievePeripherals:(NSArray *)peripherals {
 
     for (CBPeripheral *peripheral in peripherals) {
         [_peripherals addPeripheralsObject:peripheral]; // retain
-
         peripheral.delegate = self;
-        [_manager connectPeripheral:peripheral
-                            options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES }];
+
+//        [_manager connectPeripheral:peripheral
+//                            options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES }];
     }
 }
 
 - (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
-    
-    _isAuthorized = NO; // init
 
     [[NSNotificationCenter defaultCenter]
                 postNotificationName:IRKitDidConnectPeripheralNotification
                               object:nil];
 
-    // iOS 6.0 bug workaround : connect to device before displaying UUID !
-    // The reason for this is that the CFUUID .UUID property of CBPeripheral
-    // here is null the first time an unkown (never connected before in any app)
-    // peripheral is connected. So therefore we connect to all peripherals we find.
-    [peripheral setDelegate:self];
     [peripheral discoverServices:nil];
 }
 
@@ -201,13 +227,13 @@ didRetrievePeripherals:(NSArray *)peripherals {
 didDisconnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     LOG( @"peripheral: %@ error: %@", peripheral, error);
-    
+
     // TODO removeFromPeripherals??
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     LOG( @"state: %@", NSStringFromCBCentralManagerState([central state]));
-    
+
     if (_shouldScan && (central.state == CBCentralManagerStatePoweredOn)) {
         _shouldScan = NO;
 
@@ -246,7 +272,7 @@ didDiscoverServices:(NSError *)error
 //        {
 //            [peripheral discoverCharacteristics:nil forService:service];
 //        }
-//        
+//
 //        // GAP (Generic Access Profile) for Device Name
 //        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
 //        {
@@ -270,30 +296,43 @@ didDiscoverCharacteristicsForService:(CBService *)service
               error:(NSError *)error
 {
     LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
+    IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
 
     for (CBCharacteristic *characteristic in service.characteristics)
     {
         LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",
             characteristic, characteristic.UUID, characteristic.value, characteristic.descriptors, NSStringFromCBCharacteristicProperty(characteristic.properties), characteristic.isNotifying, characteristic.isBroadcasted );
     }
-    
+
     if ([service.UUID isEqual:IRKIT_SERVICE_UUID]) {
+        // make sure we're not eternally connected
+        BOOL shouldStayConnected = NO;
+        
         for (CBCharacteristic *characteristic in service.characteristics) {
-            if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
-                LOG( @"are we authenticated?" );
-                [peripheral setNotifyValue:YES
-                         forCharacteristic:characteristic];
-                [peripheral readValueForCharacteristic:characteristic];
+            if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID]) {
+                if ( ! p.authorized ) {
+                    LOG( @"are we authorized?" );
+                    [peripheral setNotifyValue:YES
+                             forCharacteristic:characteristic];
+                    [peripheral readValueForCharacteristic:characteristic];
+                    shouldStayConnected = YES;
+                }
             }
-            else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
-                LOG( @"do we have unread signals?" );
-                [peripheral setNotifyValue:YES
-                         forCharacteristic:characteristic];
-                [peripheral readValueForCharacteristic:characteristic];
+            else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
+                if ( p.authorized && p.shouldReadIRData ) {
+                    LOG( @"read IR data" );
+                    p.shouldReadIRData = NO;
+                    [peripheral readValueForCharacteristic:characteristic];
+                    shouldStayConnected = YES;
+                }
             }
         }
-        
+
+        if ( ! shouldStayConnected ) {
+            [p restartDisconnectTimer];
+        }
     }
+    
 //    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
 //    {
 //        for (CBCharacteristic *characteristic in service.characteristics)
@@ -360,46 +399,42 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
               error:(NSError *)error
 {
     LOG( @"peripheral: %@ charactristic: %@ UUID: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.UUID, characteristic.value, error);
-    
-    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
+
+    // disconnect when authorized
+    // we connect only when we need to
+    IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:aPeripheral];
+
+    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID]) {
         NSData *value = characteristic.value;
         unsigned char authorized = 0;
         [value getBytes:&authorized length:1];
         LOG( @"authorized: %d", authorized );
-        _isAuthorized = authorized;
-        
-        if (_isAuthorized) {
+
+        if (authorized) {
+            p.authorized = YES;
+            [_peripherals save];
+
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:IRKitPeripheralAuthorizedNotification
                               object:nil];
+            [p restartDisconnectTimer];
         }
-    }
-    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
-        NSData *value = characteristic.value;
-        unsigned char unread = 0;
-        [value getBytes:&unread length:1];
-        LOG( @"unread: %d", unread );
-        
-        if (unread) {
-            // read ir data
-            CBCharacteristic *irDataC12C = [IRHelper findCharacteristicInSameServiceWithCharacteristic: characteristic
-                                    withCBUUID: IRKIT_CHARACTERISTIC_IR_DATA_UUID];
-            
-            [aPeripheral readValueForCharacteristic:irDataC12C];
+        else {
+            // retain connection while waiting for user to press auth switch
         }
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
         NSData *value = characteristic.value;
         LOG( @"value.length: %d", value.length );
         IRSignal *signal = [[IRSignal alloc] initWithData: value];
-        IRPeripheral *peripheral = [_peripherals IRPeripheralForPeripheral:aPeripheral];
-        signal.peripheral = peripheral;
+        signal.peripheral = p;
         if (! [_signals memberOfSignals:signal]) {
             [_signals addSignalsObject:signal];
             [_signals save];
         }
+        [p restartDisconnectTimer];
     }
-    
+
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
         NSString * deviceName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         LOG(@"Device Name = %@", deviceName);
@@ -416,11 +451,13 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error
 {
     LOG( @"peripheral: %@ charactristic: %@ UUID: %@ error: %@", peripheral, characteristic, characteristic.UUID, error);
-    
+
     if (_writeResponseBlock) {
         _writeResponseBlock(error);
         _writeResponseBlock = nil;
     }
+    IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
+    [p restartDisconnectTimer];
 }
 
 @end

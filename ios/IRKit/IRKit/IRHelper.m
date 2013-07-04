@@ -27,6 +27,19 @@
     return result;
 }
 
++ (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid {
+    LOG_CURRENT_METHOD;
+  
+    for (CBService *service in peripheral.services) {
+        for (CBCharacteristic *c12c in service.characteristics) {
+            if ([c12c.UUID isEqual:uuid]) {
+                return c12c;
+            }
+        }
+    }
+    return nil;
+}
+
 + (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic withCBUUID:(CBUUID*)uuid {
     LOG_CURRENT_METHOD;
     

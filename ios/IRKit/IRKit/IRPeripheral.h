@@ -15,7 +15,11 @@
 @property (nonatomic, copy) NSNumber *isPaired;
 @property (nonatomic, copy) NSDate   *foundDate;
 @property (nonatomic) CBPeripheral *peripheral;
+@property (nonatomic) uint8_t receivedCount;
+@property (nonatomic) BOOL authorized;
+@property (nonatomic) BOOL shouldReadIRData;
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
+- (void) restartDisconnectTimer;
 
 @end

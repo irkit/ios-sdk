@@ -58,8 +58,8 @@
                              IRNewPeripheralScene2ViewController *c =
                              [[IRNewPeripheralScene2ViewController alloc] init];
                              c.delegate = self;
-                             [_navController pushViewController:c
-                                                       animated:YES];
+                             [self.navController pushViewController:c
+                                                            animated:YES];
                  }];
     
     _observer2 = [[NSNotificationCenter defaultCenter]
@@ -70,8 +70,8 @@
                              LOG( @"irkit authorized");
                              IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
                              c.delegate = self;
-                             [_navController pushViewController:c
-                                                       animated:YES];
+                             [self.navController pushViewController:c
+                                                            animated:YES];
                  }];
 
 }

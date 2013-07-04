@@ -12,6 +12,7 @@
 
 + (NSString*)stringFromCFUUID: (CFUUIDRef) uuid;
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block;
++ (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid;
 + (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic withCBUUID:(CBUUID*)uuid;
 + (NSString*) sha1:(NSArray*) array;
 
