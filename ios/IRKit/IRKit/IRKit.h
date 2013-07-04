@@ -26,6 +26,7 @@
 - (void) stopScan;
 - (void) save;
 - (void) disconnectPeripheral: (IRPeripheral*)peripheral;
+- (void) retrieveKnownPeripherals;
 
 @property (nonatomic) BOOL autoConnect;
 @property (nonatomic) BOOL isScanning;

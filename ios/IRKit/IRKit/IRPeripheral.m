@@ -8,10 +8,14 @@
 
 #import "IRPeripheral.h"
 #import "IRKit.h"
+#import "IRHelper.h"
+#import "IRWriteOperationQueue.h"
+#import "IRWriteOperation.h"
 
 @interface IRPeripheral ()
 
 @property (nonatomic, copy) void (^writeResponseBlock)(NSError *error);
+@property (nonatomic) IRWriteOperationQueue *writeQueue;
 
 @end
 
@@ -23,12 +27,47 @@
     if ( ! self ) {
         return nil;
     }
+    _foundDate        = [NSDate date];
+    _receivedCount    = IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN; // on memory should be enough
     _authorized       = NO;
     _shouldReadIRData = NO;
-    // on memory should be enough
-    _receivedCount = 0;
-
+    _writeQueue       = nil;
+    
     return self;
+}
+
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+    [_peripheral removeObserver:self
+                     forKeyPath:@"isConnected"];
+}
+
+- (BOOL)isConnected {
+    // TODO use state on iOS7
+    return _peripheral ? _peripheral.isConnected : NO;
+}
+
+- (void)connect {
+    LOG_CURRENT_METHOD;
+
+    _wantsToConnect = YES;
+    [[IRKit sharedInstance] retrieveKnownPeripherals];
+}
+
+- (void)setPeripheral:(CBPeripheral *)peripheral {
+    LOG_CURRENT_METHOD;
+    
+    [_peripheral removeObserver:self
+                     forKeyPath:@"isConnected"];
+    _peripheral = peripheral;
+    [_peripheral addObserver:self
+                  forKeyPath:@"isConnected"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+
+    if ( ! _writeQueue ) {
+        _writeQueue = [[IRWriteOperationQueue alloc] init];
+    }
 }
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
@@ -42,38 +81,36 @@
     LOG( @"service: %@ c12c: %@ value: %@", serviceUUID, characteristicUUID, value );
     NSError *error;
     
-    if ( _writeResponseBlock ) {
-        // TODO already writing??
-        block( error );
+    if ( _writeQueue || ! _peripheral ) {
+        error = [NSError errorWithDomain:IRKIT_ERROR_DOMAIN
+                                    code:IRKIT_ERROR_CODE_NOT_READY
+                                userInfo:nil];
+        block(error);
+        return;
     }
-    if ( ! _peripheral ) {
-        // TODO no peripheral?
+    
+    if ( ! self.isConnected ) {
+        [self connect];
     }
-    if ( ! _peripheral.isConnected ) {
-        // TODO not connected
-        
-    }
-    for (CBService *service in _peripheral.services) {
-        if ( [service.UUID isEqual:serviceUUID]) {
-            for (CBCharacteristic *c12c in service.characteristics) {
-                if ([c12c.UUID isEqual:characteristicUUID]) {
-                    _writeResponseBlock = block;
-                    [_peripheral writeValue:value
-                          forCharacteristic:c12c
-                                       type:CBCharacteristicWriteWithResponse];
-                    return;
-                }
-            }
-        }
-    }
-    // TODO no c12c found
-    block( error );
+    
+    IRWriteOperation *op = [IRWriteOperation operationToPeripheral:self
+                                                          withData:value
+                                         forCharacteristicWithUUID:characteristicUUID
+                                                 ofServiceWithUUID:serviceUUID
+                                                        completion:^(NSError *error) {
+                                                        block(error);
+                                                    }];
+    [_writeQueue addOperation:op];
 }
 
-- (void) restartDisconnectTimer {
+- (void) restartDisconnectTimerIfNeeded {
     LOG_CURRENT_METHOD;
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
+
+    if ( _writeQueue.operationCount ) {
+        return; // stay connected
+    }
     
     // disconnect after interval
     // regarding that we might want to continuously write to this peripheral
@@ -86,6 +123,22 @@
     LOG_CURRENT_METHOD;
     [[IRKit sharedInstance] disconnectPeripheral: self];
 }
+
+#pragma mark -
+#pragma mark key value observation
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    LOG( @"keyPath: %@ ofObject: %@ change: %@ context: %@", keyPath, object, change, context);
+    
+    if ([keyPath isEqualToString:@"isConnected"]) {
+        _wantsToConnect = NO;
+        [_writeQueue setSuspended: ! self.isConnected];
+    }
+}
+
 
 #pragma mark -
 #pragma mark CBPeripheralDelegate
@@ -168,7 +221,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
         }
         
         if ( ! shouldStayConnected ) {
-            [self restartDisconnectTimer];
+            [self restartDisconnectTimerIfNeeded];
         }
     }
     
@@ -255,7 +308,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             [[NSNotificationCenter defaultCenter]
              postNotificationName:IRKitPeripheralAuthorizedNotification
              object:nil];
-            [self restartDisconnectTimer];
+            [self restartDisconnectTimerIfNeeded];
         }
         else {
             // retain connection while waiting for user to press auth switch
@@ -270,7 +323,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             [[IRKit sharedInstance].signals addSignalsObject:signal];
             [[IRKit sharedInstance].signals save];
         }
-        [self restartDisconnectTimer];
+        [self restartDisconnectTimerIfNeeded];
     }
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
@@ -290,37 +343,30 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
 {
     LOG( @"peripheral: %@ charactristic: %@ UUID: %@ error: %@", peripheral, characteristic, characteristic.UUID, error);
     
-    if (_writeResponseBlock) {
-        _writeResponseBlock(error);
-        _writeResponseBlock = nil;
-    }
-    [self restartDisconnectTimer];
+    [_writeQueue didWriteValueForCharacteristic:characteristic
+                                          error:error];
+    [self restartDisconnectTimerIfNeeded];
 }
 
 #pragma mark -
-#pragma NSKeyedArchiving
+#pragma mark NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
     [coder encodeObject:_customizedName forKey:@"c"];
-    [coder encodeObject:_isPaired       forKey:@"p"];
     [coder encodeObject:_foundDate      forKey:@"f"];
     [coder encodeObject:[NSNumber numberWithBool:_authorized] forKey:@"a"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
-    self = [super init];
+    self = [self init];
     if (self) {
         _customizedName = [coder decodeObjectForKey:@"c"];
-        _isPaired       = [coder decodeObjectForKey:@"p"];
         _foundDate      = [coder decodeObjectForKey:@"f"];
         _authorized     = [[coder decodeObjectForKey:@"a"] boolValue];
         _peripheral     = nil;
         
         if ( ! _customizedName ) {
             _customizedName = @"unknown";
-        }
-        if ( ! _isPaired ) {
-            _isPaired = @NO;
         }
         if ( ! _foundDate ) {
             _foundDate = [NSDate date];

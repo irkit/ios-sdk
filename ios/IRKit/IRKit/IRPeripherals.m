@@ -146,8 +146,6 @@
         p                = [[IRPeripheral alloc] init];
         p.peripheral     = peripheral;
         p.customizedName = peripheral.name; // defaults to original name
-        p.foundDate      = [NSDate date];
-        p.isPaired       = @NO;
         _irperipheralForUUID[uuidKey] = p;
         [self save];
     }

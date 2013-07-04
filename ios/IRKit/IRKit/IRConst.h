@@ -77,6 +77,9 @@
 #pragma mark -
 #pragma mark Errors
 
-#define IRKIT_ERROR_DOMAIN @"irkit"
+#define IRKIT_ERROR_DOMAIN              @"irkit"
+#define IRKIT_ERROR_CODE_NOT_READY      1
+#define IRKIT_ERROR_CODE_DISCONNECTED   2
+#define IRKIT_ERROR_CODE_C12C_NOT_FOUND 3
 
 #endif

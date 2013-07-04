@@ -9,21 +9,25 @@
 
 #import <Foundation/Foundation.h>
 
+// receivedCount is uint8_t and can't be 0xFFFF
+#define IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN 0xFFFF
+
 @interface IRPeripheral : NSObject<CBPeripheralDelegate>
 
 @property (nonatomic, copy) NSString *customizedName;
-@property (nonatomic, copy) NSNumber *isPaired;
 @property (nonatomic, copy) NSDate   *foundDate;
 @property (nonatomic) CBPeripheral *peripheral;
-@property (nonatomic) uint8_t receivedCount;
+@property (nonatomic) uint16_t receivedCount;
 @property (nonatomic) BOOL authorized;
 @property (nonatomic) BOOL shouldReadIRData;
+@property (nonatomic) BOOL wantsToConnect;
 
+- (BOOL) isConnected;
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 - (void) writeData: (NSData*)value
 forCharacteristicWithUUID: (CBUUID*)characteristicUUID
  ofServiceWithUUID: (CBUUID*)serviceUUID
         completion: (void (^)(NSError *error))block;
-- (void) restartDisconnectTimer;
+- (void) restartDisconnectTimerIfNeeded;
 
 @end

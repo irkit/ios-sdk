@@ -107,6 +107,16 @@
     [_manager cancelPeripheralConnection: peripheral.peripheral];
 }
 
+- (void) retrieveKnownPeripherals {
+    LOG_CURRENT_METHOD;
+
+    NSArray *knownPeripherals = [_peripherals knownPeripheralUUIDs];
+    if ([knownPeripherals count]) {
+        LOG( @"retrieve: %@", knownPeripherals );
+        [_manager retrievePeripherals: knownPeripherals];
+    }
+}
+
 #pragma mark -
 #pragma mark CBCentralManagerDelegate
 
@@ -137,7 +147,8 @@
             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
          }];
     }
-    else if (p.receivedCount != receivedCount) {
+    else if ( (p.receivedCount != IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN) &&
+              (p.receivedCount != (uint16_t)receivedCount) ) {
         p.shouldReadIRData = YES;
         [_manager connectPeripheral:peripheral
                             options:@{
@@ -154,12 +165,6 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
 
 }
 
-- (void)centralManager:(CBCentralManager *)central
-didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    LOG(@"peripherals: %@", peripherals);
-
-}
-
 /*
  Invoked when the central manager retrieves the list of known peripherals.
  */
@@ -171,9 +176,11 @@ didRetrievePeripherals:(NSArray *)peripherals {
         [_peripherals addPeripheralsObject:peripheral]; // retain
         IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
         peripheral.delegate = p;
-
-//        [_manager connectPeripheral:peripheral
-//                            options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES }];
+        
+        if (p.wantsToConnect) {
+            [_manager connectPeripheral:peripheral
+                                options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES }];
+        }
     }
 }
 
@@ -202,12 +209,7 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
     if (_shouldScan && (central.state == CBCentralManagerStatePoweredOn)) {
         _shouldScan = NO;
 
-        NSArray *knownPeripherals = [_peripherals knownPeripheralUUIDs];
-        if ([knownPeripherals count]) {
-            LOG( @"retrieve: %@", knownPeripherals );
-            [_manager retrievePeripherals: knownPeripherals];
-        }
-
+        [self retrieveKnownPeripherals];
         [self startScan];
     }
 }
