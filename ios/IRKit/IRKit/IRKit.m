@@ -108,8 +108,8 @@
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
         // don't disconnect in the background
-        LOG( @"dont disconnect in the background" );
-        return;
+//        LOG( @"dont disconnect in the background" );
+//        return;
     }
 
     [_manager cancelPeripheralConnection: peripheral.peripheral];
@@ -226,6 +226,9 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
     [[NSNotificationCenter defaultCenter]
         postNotificationName:IRKitDidDisconnectPeripheralNotification
                       object:@{ IRKitPeripheralUserInfoKey: p } ];
+    
+    [self stopScan];
+    [self startScan];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
