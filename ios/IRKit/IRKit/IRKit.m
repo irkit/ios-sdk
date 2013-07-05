@@ -104,6 +104,14 @@
 
 - (void) disconnectPeripheral: (IRPeripheral*)peripheral {
     LOG_CURRENT_METHOD;
+    
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
+        // don't disconnect in the background
+        LOG( @"dont disconnect in the background" );
+        return;
+    }
+
     [_manager cancelPeripheralConnection: peripheral.peripheral];
 }
 
@@ -140,6 +148,7 @@
     // connect when:
     // * app not authorized = we need to connect to receive auth c12c's indication
     // * peripheral's received count has changed = peripheral should have received IR data, we're gonna read it
+    // * we're in background
     if ( ! p.authorized ) {
         [_manager connectPeripheral:peripheral
                             options:@{
@@ -153,6 +162,16 @@
                             options:@{
             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
          }];
+    }
+    else {
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        if (state == UIApplicationStateBackground || state == UIApplicationStateInactive)
+        {
+            [_manager connectPeripheral:peripheral
+                                options:@{
+                CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
+            }];
+        }
     }
     p.receivedCount = receivedCount;
 }
