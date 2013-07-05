@@ -206,6 +206,11 @@ didDiscoverCharacteristicsForService:(CBService *)service
                     shouldStayConnected = YES;
                 }
             }
+            else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
+                LOG( @"registering for notifications on unread status" );
+                [peripheral setNotifyValue:YES
+                         forCharacteristic:characteristic];
+            }
         }
         
         if ( ! shouldStayConnected ) {
@@ -265,8 +270,8 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             [[IRKit sharedInstance].peripherals save];
             
             [[NSNotificationCenter defaultCenter]
-             postNotificationName:IRKitPeripheralAuthorizedNotification
-             object:nil];
+                postNotificationName:IRKitPeripheralAuthorizedNotification
+                              object:nil];
             [self restartDisconnectTimerIfNeeded];
         }
         else {

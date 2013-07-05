@@ -13,7 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    LOG_CURRENT_METHOD;
+    LOG( @"options: %@", launchOptions );
     // Override point for customization after application launch.
 
     [[IRKit sharedInstance] startScan];
