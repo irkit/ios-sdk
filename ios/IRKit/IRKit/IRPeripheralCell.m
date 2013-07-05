@@ -120,8 +120,7 @@ static const unsigned char whitePNGImage[] = {
                      context:NULL];
 }
 
-#pragma mark -
-#pragma mark KVO
+#pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object

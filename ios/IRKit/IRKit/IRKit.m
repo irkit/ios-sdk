@@ -117,26 +117,25 @@
     }
 }
 
-#pragma mark -
-#pragma mark CBCentralManagerDelegate
+#pragma mark - CBCentralManagerDelegate
 
 - (void)centralManager:(CBCentralManager *)central
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
-    LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
+    // LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
 
     [_peripherals addPeripheralsObject:peripheral]; // retain
     IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
     peripheral.delegate = p;
 
     NSData *data = advertisementData[CBAdvertisementDataManufacturerDataKey];
-    uint8_t receivedCount;
+    uint8_t receivedCount = 0;
     if (data) {
         [data getBytes:&receivedCount
                  range:(NSRange){0,1}];
-        LOG( @"peripheral: %@ receivedCount: %d", peripheral, receivedCount );
     }
+    LOG( @"peripheral: %@ receivedCount: %d", peripheral, receivedCount );
 
     // connect when:
     // * app not authorized = we need to connect to receive auth c12c's indication

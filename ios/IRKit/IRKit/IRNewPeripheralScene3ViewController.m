@@ -116,8 +116,7 @@
      }];
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)didReceiveMemoryWarning
 {
@@ -132,8 +131,7 @@
     [self processTextField];
 }
 
-#pragma mark -
-#pragma mark UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField
 {

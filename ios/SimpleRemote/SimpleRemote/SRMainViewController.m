@@ -68,8 +68,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralViewControllerDelegate
+#pragma mark - IRNewPeripheralViewControllerDelegate
 
 - (void)newPeripheralViewController:(IRReceiveViewController *)viewController
                   didFinishWithInfo:(NSDictionary*)info {
@@ -80,8 +79,7 @@
     }];
 }
 
-#pragma mark -
-#pragma mark IRNewSignalViewControllerDelegate
+#pragma mark - IRNewSignalViewControllerDelegate
 
 - (void)newSignalViewController:(IRNewSignalViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
@@ -90,8 +88,7 @@
     }];
 }
 
-#pragma mark -
-#pragma mark IRAnimatingControllerDelegate
+#pragma mark - IRAnimatingControllerDelegate
 
 - (void)controller:(id)controller
    didChangeObject:(id)object
@@ -122,8 +119,7 @@
     LOG_CURRENT_METHOD;
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -181,8 +177,7 @@
     return 3;
 }
 
-#pragma mark -
-#pragma mark UITableViewDelegate
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

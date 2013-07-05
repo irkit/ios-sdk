@@ -77,8 +77,7 @@
     [IRPersistentStore synchronize];
 }
 
-#pragma mark -
-#pragma Private methods
+#pragma mark - Private methods
 
 - (void) load {
     LOG_CURRENT_METHOD;
@@ -92,8 +91,7 @@
     LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
 }
 
-#pragma mark -
-#pragma mark Key Value Coding - Mutable Unordered Accessors
+#pragma mark - Key Value Coding - Mutable Unordered Accessors
 
 - (NSArray*) peripherals {
     LOG_CURRENT_METHOD;

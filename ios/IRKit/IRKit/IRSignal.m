@@ -91,8 +91,7 @@
                     }];
 }
 
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (NSData*) signalAsNSData {
     LOG_CURRENT_METHOD;
@@ -116,8 +115,7 @@
     return [NSData dataWithBytes:&value length:1];
 }
 
-#pragma mark -
-#pragma mark Accessors
+#pragma mark - Accessors
 
 - (NSString*)name {
     LOG_CURRENT_METHOD;
@@ -139,8 +137,7 @@
     return nil;
 }
 
-#pragma mark -
-#pragma NSKeyedArchiving
+#pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
     LOG_CURRENT_METHOD;

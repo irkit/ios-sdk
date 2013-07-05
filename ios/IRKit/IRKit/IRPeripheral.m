@@ -52,7 +52,7 @@
 }
 
 - (void)setPeripheral:(CBPeripheral *)peripheral {
-    LOG_CURRENT_METHOD;
+    // LOG_CURRENT_METHOD;
     
     _peripheral = peripheral;
 
@@ -118,8 +118,7 @@
     [_writeQueue setSuspended: ! self.isConnected];
 }
 
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (void) disconnect {
     LOG_CURRENT_METHOD;
@@ -128,8 +127,7 @@
     [[IRKit sharedInstance] disconnectPeripheral: self];
 }
 
-#pragma mark -
-#pragma mark CBPeripheralDelegate
+#pragma mark - CBPeripheralDelegate
 
 /*
  Invoked upon completion of a -[discoverServices:] request.
@@ -214,35 +212,6 @@ didDiscoverCharacteristicsForService:(CBService *)service
             [self restartDisconnectTimerIfNeeded];
         }
     }
-    
-    //    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180D"]])
-    //    {
-    //        for (CBCharacteristic *characteristic in service.characteristics)
-    //        {
-    //            /* Set notification on heart rate measurement */
-    //            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A37"]])
-    //            {
-    //                [peripheral setNotifyValue:YES
-    //                          forCharacteristic:characteristic];
-    //                LOG(@"Found a Heart Rate Measurement Characteristic");
-    //            }
-    //            /* Read body sensor location */
-    //            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A38"]])
-    //            {
-    //                [peripheral readValueForCharacteristic:characteristic];
-    //                LOG(@"Found a Body Sensor Location Characteristic");
-    //            }
-    //
-    //            /* Write heart rate control point */
-    //            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A39"]])
-    //            {
-    //                uint8_t val = 1;
-    //                NSData* valData = [NSData dataWithBytes:(void*)&val length:sizeof(val)];
-    //                [peripheral writeValue:valData forCharacteristic:characteristic
-    //                                   type:CBCharacteristicWriteWithResponse];
-    //            }
-    //        }
-    //    }
     
     //    if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
     //    {
@@ -338,8 +307,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     [self restartDisconnectTimerIfNeeded];
 }
 
-#pragma mark -
-#pragma mark NSKeyedArchiving
+#pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
     [coder encodeObject:_customizedName forKey:@"c"];

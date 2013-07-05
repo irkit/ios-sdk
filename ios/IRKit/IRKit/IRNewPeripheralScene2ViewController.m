@@ -69,8 +69,7 @@
     [super viewWillDisappear:animated];
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)didReceiveMemoryWarning
 {

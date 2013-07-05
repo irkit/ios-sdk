@@ -33,8 +33,7 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 - (void) save;
 - (id)objectAtIndex:(NSUInteger)index;
 
-#pragma mark -
-#pragma mark Key Value Coding - Mutable Unordered Accessors
+#pragma mark - Key Value Coding - Mutable Unordered Accessors
 
 - (NSArray*) signals;
 - (NSUInteger) countOfSignals;

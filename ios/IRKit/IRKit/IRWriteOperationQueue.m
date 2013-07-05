@@ -20,7 +20,7 @@
     if ( ! self ) {
         return nil;
     }
-    
+
     [self setSuspended:YES];
     [self setMaxConcurrentOperationCount:1];
     return self;
@@ -38,7 +38,6 @@
                                  error:error];
 }
 
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 @end

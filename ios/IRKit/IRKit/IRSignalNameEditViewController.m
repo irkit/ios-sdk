@@ -118,8 +118,7 @@
      }];
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)doneButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
@@ -133,8 +132,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField
 {

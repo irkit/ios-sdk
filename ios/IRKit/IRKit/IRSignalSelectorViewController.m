@@ -101,8 +101,7 @@
     LOG_CURRENT_METHOD;
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
@@ -127,8 +126,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralViewControllerDelegate
+#pragma mark - IRNewPeripheralViewControllerDelegate
 
 - (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
@@ -147,9 +145,7 @@
     [self.navController pushViewController:c animated:YES];
 }
 
-
-#pragma mark -
-#pragma mark IRNewSignalViewControllerDelegate
+#pragma mark - IRNewSignalViewControllerDelegate
 
 - (void)newSignalViewController:(IRNewSignalViewController *)viewController
               didFinishWithInfo:(NSDictionary *)info {
@@ -177,8 +173,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark IRSignalNameEditViewControllerDelegate
+#pragma mark - IRSignalNameEditViewControllerDelegate
 
 - (void)signalNameEditViewController:(IRSignalNameEditViewController *)viewController
                    didFinishWithInfo:(NSDictionary*)info;
@@ -204,8 +199,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark IRSignalTableViewControllerDelegate
+#pragma mark - IRSignalTableViewControllerDelegate
 
 - (void)signalTableViewController:(IRSignalTableViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;

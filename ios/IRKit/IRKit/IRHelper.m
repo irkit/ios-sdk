@@ -37,8 +37,7 @@
     return s;
 }
 
-#pragma mark -
-#pragma mark UUID related
+#pragma mark - UUID related
 
 + (NSString*)stringFromCFUUID: (CFUUIDRef) uuid {
     if ( ! uuid ) {
@@ -54,8 +53,7 @@
     return [uuid1.data isEqualToData:uuid2.data];
 }
 
-#pragma mark -
-#pragma mark CoreBluetooth related
+#pragma mark - CoreBluetooth related
 
 + (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid {
     LOG_CURRENT_METHOD;

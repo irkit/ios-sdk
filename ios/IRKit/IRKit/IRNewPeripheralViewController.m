@@ -92,8 +92,7 @@
     LOG_CURRENT_METHOD;
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)didReceiveMemoryWarning
 {
@@ -102,8 +101,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralScene1ViewControllerDelegate
+#pragma mark - IRNewPeripheralScene1ViewControllerDelegate
 
 - (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
@@ -117,8 +115,7 @@
     // shouldnt happen
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralScene2ViewControllerDelegate
+#pragma mark - IRNewPeripheralScene2ViewControllerDelegate
 
 - (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
@@ -132,8 +129,7 @@
     // shouldnt happen
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralScene3ViewControllerDelegate
+#pragma mark - IRNewPeripheralScene3ViewControllerDelegate
 
 - (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;

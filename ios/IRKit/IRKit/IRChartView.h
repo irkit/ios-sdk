@@ -10,6 +10,6 @@
 
 @interface IRChartView : UIView
 
-@property (nonatomic, strong) NSArray *data;
+@property (nonatomic) NSArray *data;
 
 @end
