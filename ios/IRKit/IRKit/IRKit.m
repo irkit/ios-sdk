@@ -188,9 +188,11 @@ didRetrievePeripherals:(NSArray *)peripherals {
   didConnectPeripheral:(CBPeripheral *)peripheral {
     LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
 
+    IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
+
     [[NSNotificationCenter defaultCenter]
                 postNotificationName:IRKitDidConnectPeripheralNotification
-                              object:nil];
+                              object:@{ IRKitPeripheralUserInfoKey: p } ];
 
     [peripheral discoverServices:nil];
 }
@@ -200,7 +202,12 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
                  error:(NSError *)error {
     LOG( @"peripheral: %@ error: %@", peripheral, error);
 
-    // TODO removeFromPeripherals??
+    IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
+    [p didDisconnect];
+
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:IRKitDidDisconnectPeripheralNotification
+                      object:@{ IRKitPeripheralUserInfoKey: p } ];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {

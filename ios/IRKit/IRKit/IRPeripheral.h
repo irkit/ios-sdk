@@ -29,5 +29,6 @@ forCharacteristicWithUUID: (CBUUID*)characteristicUUID
  ofServiceWithUUID: (CBUUID*)serviceUUID
         completion: (void (^)(NSError *error))block;
 - (void) restartDisconnectTimerIfNeeded;
+- (void) didDisconnect;
 
 @end

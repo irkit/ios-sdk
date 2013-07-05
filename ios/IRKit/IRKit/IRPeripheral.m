@@ -32,14 +32,11 @@
     _authorized       = NO;
     _shouldReadIRData = NO;
     _writeQueue       = nil;
-    
     return self;
 }
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [_peripheral removeObserver:self
-                     forKeyPath:@"isConnected"];
 }
 
 - (BOOL)isConnected {
@@ -57,17 +54,12 @@
 - (void)setPeripheral:(CBPeripheral *)peripheral {
     LOG_CURRENT_METHOD;
     
-    [_peripheral removeObserver:self
-                     forKeyPath:@"isConnected"];
     _peripheral = peripheral;
-    [_peripheral addObserver:self
-                  forKeyPath:@"isConnected"
-                     options:NSKeyValueObservingOptionNew
-                     context:nil];
 
     if ( ! _writeQueue ) {
         _writeQueue = [[IRWriteOperationQueue alloc] init];
     }
+    [_writeQueue setSuspended: ! self.isConnected];
 }
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
@@ -81,7 +73,7 @@
     LOG( @"service: %@ c12c: %@ value: %@", serviceUUID, characteristicUUID, value );
     NSError *error;
     
-    if ( _writeQueue || ! _peripheral ) {
+    if ( ! _writeQueue || ! _peripheral ) {
         error = [NSError errorWithDomain:IRKIT_ERROR_DOMAIN
                                     code:IRKIT_ERROR_CODE_NOT_READY
                                 userInfo:nil];
@@ -100,6 +92,7 @@
                                                         completion:^(NSError *error) {
                                                         block(error);
                                                     }];
+    [_writeQueue setSuspended: ! self.isConnected];
     [_writeQueue addOperation:op];
 }
 
@@ -119,26 +112,21 @@
                afterDelay:1.];
 }
 
-- (void) disconnect {
+- (void) didDisconnect {
     LOG_CURRENT_METHOD;
-    [[IRKit sharedInstance] disconnectPeripheral: self];
+    
+    [_writeQueue setSuspended: ! self.isConnected];
 }
 
 #pragma mark -
-#pragma mark key value observation
+#pragma mark Private methods
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    LOG( @"keyPath: %@ ofObject: %@ change: %@ context: %@", keyPath, object, change, context);
-    
-    if ([keyPath isEqualToString:@"isConnected"]) {
-        _wantsToConnect = NO;
-        [_writeQueue setSuspended: ! self.isConnected];
-    }
+- (void) disconnect {
+    LOG_CURRENT_METHOD;
+
+    [_writeQueue setSuspended: YES];
+    [[IRKit sharedInstance] disconnectPeripheral: self];
 }
-
 
 #pragma mark -
 #pragma mark CBPeripheralDelegate
@@ -190,6 +178,8 @@ didDiscoverCharacteristicsForService:(CBService *)service
 {
     LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
     
+    [_writeQueue setSuspended: ! self.isConnected];
+
     for (CBCharacteristic *characteristic in service.characteristics)
     {
         LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",

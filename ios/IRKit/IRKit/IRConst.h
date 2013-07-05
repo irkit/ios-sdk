@@ -55,9 +55,12 @@
 #pragma mark -
 #pragma mark NSNotification names
 
-#define IRKitDidConnectPeripheralNotification @"IRKit::DidConnect"
-#define IRKitPeripheralAuthorizedNotification @"IRKit::Authorized"
-#define IRKitDidReceiveSignalNotification     @"IRKit::ReceivedSignal"
+#define IRKitDidConnectPeripheralNotification    @"IRKit::DidConnect"
+#define IRKitDidDisconnectPeripheralNotification @"IRKit::DidDisconnect"
+#define IRKitPeripheralAuthorizedNotification    @"IRKit::Authorized"
+#define IRKitDidReceiveSignalNotification        @"IRKit::ReceivedSignal"
+
+#define IRKitPeripheralUserInfoKey @"peripheral"
 
 #pragma mark -
 #pragma mark UITableViewCell identifiers

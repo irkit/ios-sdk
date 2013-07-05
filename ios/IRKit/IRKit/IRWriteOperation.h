@@ -16,8 +16,8 @@
 
 + (IRWriteOperation*) operationToPeripheral:(IRPeripheral*)peripheral
                                    withData:(NSData*)data
-                  forCharacteristicWithUUID: (CBUUID*)characteristicUUID
-                          ofServiceWithUUID: (CBUUID*)serviceUUID
-                                 completion: (void (^)(NSError *error))completion;
+                  forCharacteristicWithUUID:(CBUUID*)characteristicUUID
+                          ofServiceWithUUID:(CBUUID*)serviceUUID
+                                 completion:(void (^)(NSError *error))completion;
 
 @end
