@@ -17,7 +17,8 @@
     // Override point for customization after application launch.
 
     [[IRKit sharedInstance] startScan];
-
+    [IRKit sharedInstance].retainConnectionInBackground = YES;
+    
     return YES;
 }
 							

@@ -30,6 +30,7 @@
 
 @property (nonatomic) BOOL autoConnect;
 @property (nonatomic) BOOL isScanning;
+@property (nonatomic) BOOL retainConnectionInBackground;
 
 @property (nonatomic, getter = numberOfPeripherals) NSUInteger numberOfPeripherals;
 @property (nonatomic, getter = numberOfSignals) NSUInteger numberOfSignals;

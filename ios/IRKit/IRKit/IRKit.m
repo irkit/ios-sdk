@@ -51,6 +51,7 @@
                       LOG( @"terminating" );
                       [_self save];
                   }];
+    _retainConnectionInBackground = NO;
 
     return self;
 }
@@ -105,11 +106,13 @@
 - (void) disconnectPeripheral: (IRPeripheral*)peripheral {
     LOG_CURRENT_METHOD;
     
-    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-    if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
-        // don't disconnect in the background
-//        LOG( @"dont disconnect in the background" );
-//        return;
+    if (_retainConnectionInBackground) {
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
+            // don't disconnect in the background
+            LOG( @"dont disconnect in the background" );
+            return;
+        }
     }
 
     [_manager cancelPeripheralConnection: peripheral.peripheral];
@@ -148,7 +151,7 @@
     // connect when:
     // * app not authorized = we need to connect to receive auth c12c's indication
     // * peripheral's received count has changed = peripheral should have received IR data, we're gonna read it
-    // * we're in background
+    // * we're in background and retainConnectionInBackground is YES
     if ( ! p.authorized ) {
         [_manager connectPeripheral:peripheral
                             options:@{
@@ -163,10 +166,9 @@
             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
          }];
     }
-    else {
+    else if (_retainConnectionInBackground) {
         UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-        if (state == UIApplicationStateBackground || state == UIApplicationStateInactive)
-        {
+        if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
             [_manager connectPeripheral:peripheral
                                 options:@{
                 CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
@@ -226,7 +228,9 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
     [[NSNotificationCenter defaultCenter]
         postNotificationName:IRKitDidDisconnectPeripheralNotification
                       object:@{ IRKitPeripheralUserInfoKey: p } ];
-    
+
+    // hack
+    // see http://stackoverflow.com/questions/9896562/what-exactly-can-corebluetooth-applications-do-whilst-in-the-background/17484051#17484051
     [self stopScan];
     [self startScan];
 }
