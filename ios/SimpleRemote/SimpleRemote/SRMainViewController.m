@@ -12,6 +12,7 @@
 @interface SRMainViewController ()
 
 @property (nonatomic) IRSignals *signals;
+@property (nonatomic) id signalObserver;
 
 @end
 
@@ -28,6 +29,21 @@
 
     _signals = [[IRSignals alloc] init];
     _signals.delegate = self;
+
+    __weak IRSignals *__signals = _signals;
+    _signalObserver = [[NSNotificationCenter defaultCenter]
+                          addObserverForName:IRKitDidReceiveSignalNotification
+                                      object:nil
+                                       queue:nil
+                                  usingBlock:^(NSNotification *note) {
+                                      IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
+                                      [__signals addSignalsObject:signal];
+    }];
+}
+
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+    [[NSNotificationCenter defaultCenter] removeObserver: _signalObserver];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -46,7 +62,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -86,10 +101,11 @@
 - (void)newSignalViewController:(IRNewSignalViewController *)viewController
               didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
-    if ([info[IRViewControllerResultType] isEqual: IRViewControllerResultTypeDone]) {
-        [_signals addSignalsObject:info[IRViewControllerResultSignal]];
-        [_signals save];
-    }
+    // we're gonna show new signals even without using IRNewSignalViewController used
+//    if ([info[IRViewControllerResultType] isEqual: IRViewControllerResultTypeDone]) {
+//        [_signals addSignalsObject:info[IRViewControllerResultSignal]];
+//        [_signals save];
+//    }
     [self dismissViewControllerAnimated:YES completion:^{
         LOG(@"dismissed");
     }];

@@ -44,7 +44,7 @@
 }
 
 - (NSComparisonResult) compareByReceivedDate: (IRSignal*) otherSignal {
-    return [self.receivedDate compare: otherSignal.receivedDate];
+    return [otherSignal.receivedDate compare: _receivedDate];
 }
 
 - (NSString*) uniqueID {

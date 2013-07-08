@@ -33,7 +33,7 @@
     LOG( @"index: %d", index);
     
     NSArray* keys = [_signals keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)];
-    NSString* key = [keys objectAtIndex: key];
+    NSString* key = [keys objectAtIndex: index];
     return _signals[key];
 }
 
@@ -140,7 +140,7 @@
 #pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LOG_CURRENT_METHOD;
+    LOG( @"indexPath.row: %d", indexPath.row);
 
     IRSignalCell *cell = (IRSignalCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
     if (cell == nil) {
