@@ -311,10 +311,12 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         LOG( @"value.length: %d", value.length );
         IRSignal *signal = [[IRSignal alloc] initWithData: value];
         signal.peripheral = self;
-        if (! [[IRKit sharedInstance].signals memberOfSignals:signal]) {
-            [[IRKit sharedInstance].signals addSignalsObject:signal];
-            [[IRKit sharedInstance].signals save];
-        }
+        
+        [[NSNotificationCenter defaultCenter]
+            postNotificationName:IRKitDidReceiveSignalNotification
+                          object:self
+                        userInfo:@{IRKitSignalUserInfoKey: signal}];
+        
         [self restartDisconnectTimerIfNeeded];
     }
     

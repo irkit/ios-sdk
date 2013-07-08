@@ -13,7 +13,7 @@
 
 @interface IRSignals ()
 
-// md5(signals) => IRSignal
+// IRSignal.uniqueID => IRSignal
 @property (nonatomic, strong) NSMutableDictionary* signals;
 
 @end

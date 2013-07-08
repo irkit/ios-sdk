@@ -7,6 +7,7 @@
 //
 
 #import "IRNewSignalViewController.h"
+#import "IRSignal.h"
 #import "IRConst.h"
 
 @interface IRNewSignalViewController ()
@@ -51,6 +52,23 @@
     [super viewDidLoad];
 
     _label.text = @"リモコンをIRKitに向けて、リモコンのボタンを押してください";
+    
+    __weak IRNewSignalViewController *_self = self;
+    [[NSNotificationCenter defaultCenter]
+        addObserverForName:IRKitDidReceiveSignalNotification
+                    object:nil
+                     queue:nil
+                usingBlock:^(NSNotification *note) {
+                    IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
+                    if ([_delegate respondsToSelector:@selector(newSignalViewController:didFinishWithInfo:)]) {
+                        [_delegate performSelector:@selector(newSignalViewController:didFinishWithInfo:)
+                                        withObject:_self
+                                        withObject:@{
+                        IRViewControllerResultType: IRViewControllerResultTypeDone,
+                      IRViewControllerResultSignal: signal
+                         }];
+                    }
+                }];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

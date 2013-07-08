@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "IRConst.h"
-#import "IRReceiveViewController.h"
 #import "IRNewPeripheralViewController.h"
-#import "IRSignalSelectorViewController.h"
+#import "IRNewSignalViewController.h"
 #import "IRPeripherals.h"
 #import "IRSignals.h"
 #import "IRSignal.h"
@@ -33,8 +32,6 @@
 @property (nonatomic) BOOL retainConnectionInBackground;
 
 @property (nonatomic, getter = numberOfPeripherals) NSUInteger numberOfPeripherals;
-@property (nonatomic, getter = numberOfSignals) NSUInteger numberOfSignals;
-@property (nonatomic, strong) IRPeripherals *peripherals;
-@property (nonatomic, strong) IRSignals *signals;
+@property (nonatomic) IRPeripherals *peripherals;
 
 @end

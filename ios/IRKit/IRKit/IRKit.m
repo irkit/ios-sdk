@@ -38,7 +38,6 @@
                                                     queue:nil];
 
     _peripherals = [[IRPeripherals alloc] init];
-    _signals     = [[IRSignals alloc] init];
     _autoConnect = NO;
     _isScanning  = NO;
     _shouldScan  = NO;
@@ -92,15 +91,9 @@
     return _peripherals.countOfPeripherals;
 }
 
-- (NSUInteger) numberOfSignals {
-    LOG_CURRENT_METHOD;
-    return _signals.countOfSignals;
-}
-
 - (void) save {
     LOG_CURRENT_METHOD;
     [_peripherals save];
-    [_signals save];
 }
 
 - (void) disconnectPeripheral: (IRPeripheral*)peripheral {
@@ -212,7 +205,8 @@ didRetrievePeripherals:(NSArray *)peripherals {
 
     [[NSNotificationCenter defaultCenter]
                 postNotificationName:IRKitDidConnectPeripheralNotification
-                              object:@{ IRKitPeripheralUserInfoKey: p } ];
+                              object:self
+                            userInfo:@{ IRKitPeripheralUserInfoKey: p } ];
 
     [peripheral discoverServices:nil];
 }
@@ -227,7 +221,8 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 
     [[NSNotificationCenter defaultCenter]
         postNotificationName:IRKitDidDisconnectPeripheralNotification
-                      object:@{ IRKitPeripheralUserInfoKey: p } ];
+                      object:self
+                    userInfo:@{ IRKitPeripheralUserInfoKey: p } ];
 
     // hack
     // see http://stackoverflow.com/questions/9896562/what-exactly-can-corebluetooth-applications-do-whilst-in-the-background/17484051#17484051

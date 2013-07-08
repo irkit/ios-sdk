@@ -14,6 +14,7 @@
 @interface IRSignalTableViewController ()
 
 @property (nonatomic) UITableView* tableView;
+@property (nonatomic) IRSignals* signals;
 
 @end
 
@@ -78,7 +79,7 @@
     switch (indexPath.section) {
     case 0:
     {
-        if (indexPath.row >= [IRKit sharedInstance].numberOfSignals) {
+        if (indexPath.row >= [_signals countOfSignals]) {
             return 44.;
         }
         return [IRSignalCell height];
@@ -95,7 +96,7 @@
     switch (indexPath.section) {
         case 0:
         {
-            if (indexPath.row >= [IRKit sharedInstance].numberOfSignals) {
+            if (indexPath.row >= [_signals countOfSignals]) {
                 // TODO pressed "waiting for signal..."
             }
             break;
@@ -117,7 +118,7 @@
     switch (section) {
         case 0:
         {
-            return [IRKit sharedInstance].numberOfSignals + 1;
+            return [_signals countOfSignals] + 1;
         }
     }
     return 0;
@@ -131,7 +132,7 @@
     switch (indexPath.section) {
     case 0:
         {
-            if (indexPath.row >= [IRKit sharedInstance].numberOfSignals) {
+            if (indexPath.row >= [_signals countOfSignals]) {
                 // last line is always "waiting for signal..."
                 cell = [tableView dequeueReusableCellWithIdentifier:@"IRSignalLoadingCell"];
                 if (cell == nil) {
@@ -139,8 +140,8 @@
                 }
                 break;
             }
-            cell = [[IRKit sharedInstance].signals tableView:_tableView
-                                       cellForRowAtIndexPath:indexPath];
+            cell = [_signals tableView:_tableView
+                 cellForRowAtIndexPath:indexPath];
             break;
         }
     }

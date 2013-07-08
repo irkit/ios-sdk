@@ -11,6 +11,8 @@
 
 @interface SRMainViewController ()
 
+@property (nonatomic) IRSignals *signals;
+
 @end
 
 @implementation SRMainViewController
@@ -23,6 +25,9 @@
 
     self.tableView.delegate   = self;
     self.tableView.dataSource = self;
+
+    _signals = [[IRSignals alloc] init];
+    _signals.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -42,14 +47,11 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
-    [IRKit sharedInstance].signals.delegate = self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
-
-    [IRKit sharedInstance].signals.delegate = nil;
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {
@@ -70,7 +72,7 @@
 
 #pragma mark - IRNewPeripheralViewControllerDelegate
 
-- (void)newPeripheralViewController:(IRReceiveViewController *)viewController
+- (void)newPeripheralViewController:(IRNewPeripheralViewController*)viewController
                   didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
  
@@ -81,8 +83,13 @@
 
 #pragma mark - IRNewSignalViewControllerDelegate
 
-- (void)newSignalViewController:(IRNewSignalViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)newSignalViewController:(IRNewSignalViewController *)viewController
+              didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
+    if ([info[IRViewControllerResultType] isEqual: IRViewControllerResultTypeDone]) {
+        [_signals addSignalsObject:info[IRViewControllerResultSignal]];
+        [_signals save];
+    }
     [self dismissViewControllerAnimated:YES completion:^{
         LOG(@"dismissed");
     }];
@@ -129,7 +136,7 @@
     
     switch (indexPath.section) {
         case 0:
-            if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
+            if (_signals.countOfSignals <= indexPath.row) {
                 // last line is always "+ Add New Signal"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
                 if (cell == nil) {
@@ -139,7 +146,8 @@
                 cell.textLabel.text = @"+ Add New Signal";
                 break;
             }
-            cell = [[IRKit sharedInstance].signals tableView:tableView cellForRowAtIndexPath: indexPath];
+            cell = [_signals tableView:tableView
+                 cellForRowAtIndexPath: indexPath];
             break;
         case 1:
             break;
@@ -163,7 +171,8 @@
 
     switch (section) {
         case 0:
-            return [[IRKit sharedInstance].signals tableView:tableView numberOfRowsInSection:section] + 1;
+            return [_signals tableView:tableView
+                 numberOfRowsInSection:section] + 1;
         case 1:
             return 0;
         case 2:
@@ -184,11 +193,11 @@
     LOG_CURRENT_METHOD;
     switch (indexPath.section) {
         case 0:
-            if (indexPath.row >= [IRKit sharedInstance].numberOfSignals) {
+            if (indexPath.row >= _signals.countOfSignals) {
                 return 44;
             }
-            return [[IRKit sharedInstance].signals tableView: tableView
-                                     heightForRowAtIndexPath: indexPath];
+            return [_signals tableView: tableView
+               heightForRowAtIndexPath: indexPath];
         case 1:
         case 2:
         default:
@@ -204,7 +213,8 @@
     switch (indexPath.section) {
         case 0:
             {
-                if ([IRKit sharedInstance].numberOfSignals <= indexPath.row) {
+                if (_signals.countOfSignals <= indexPath.row) {
+                    // pressed Add New Signal cell
                     IRNewSignalViewController *c = [[IRNewSignalViewController alloc] init];
                     c.delegate = (id<IRNewSignalViewControllerDelegate>)self;
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:c];
@@ -213,7 +223,7 @@
                     }];
                     return;
                 }
-                IRSignal *signal = [[IRKit sharedInstance].signals objectAtIndex: indexPath.row];
+                IRSignal *signal = [_signals objectAtIndex: indexPath.row];
                 UIActionSheet *sheet = [UIActionSheet actionSheetWithTitle:@"Please select one."];
                 [sheet addButtonWithTitle:@"Test Send" handler:^{
                     [signal sendWithCompletion:^(NSError *error) {
@@ -221,7 +231,7 @@
                     }];
                 }];
                 [sheet addButtonWithTitle:@"Remove" handler:^{
-                    [[IRKit sharedInstance].signals removeSignalsObject:signal];
+                    [_signals removeSignalsObject:signal];
                     LOG( @"removed: %@", signal );
                 }];
                 [sheet setCancelButtonWithTitle:nil handler:^{
