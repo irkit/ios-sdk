@@ -18,5 +18,7 @@ msc {
     peripheral => central [label = "Indicate 'IR Authentication Status' c12c = 1"];
     peripheral << central [label = "Indication response"];
 
-    user note central [label = "Successfully authenticated and connected"];
+    user note central [label = "Successfully authenticated"];
+
+    peripheral <- central [label = "Disconnect"];
 }

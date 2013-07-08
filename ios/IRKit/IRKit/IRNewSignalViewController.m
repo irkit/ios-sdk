@@ -23,7 +23,7 @@
     CGRect frame = [[UIScreen mainScreen] bounds];
     LOG(@"frame: %@", NSStringFromCGRect(frame));
     UIView *view = [[UIView alloc] initWithFrame:frame];
-
+    
     // image
     UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/newsignal.png"]];
     imageView.frame = frame;
@@ -69,8 +69,7 @@
     [super viewWillDisappear:animated];
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)didReceiveMemoryWarning
 {

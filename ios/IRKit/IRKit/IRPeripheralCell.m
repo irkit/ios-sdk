@@ -52,6 +52,12 @@ static const unsigned char whitePNGImage[] = {
     return self;
 }
 
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+    [_peripheral removeObserver:self
+                     forKeyPath:@"peripheral"];
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     LOG_CURRENT_METHOD;
@@ -108,14 +114,13 @@ static const unsigned char whitePNGImage[] = {
 
     // TODO: draw graph?
 
-    [self.peripheral addObserver:self
-                      forKeyPath:@"peripheral"
-                         options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                         context:NULL];
+    [_peripheral addObserver:self
+                  forKeyPath:@"peripheral"
+                     options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                     context:NULL];
 }
 
-#pragma mark -
-#pragma mark KVO
+#pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object

@@ -14,7 +14,7 @@
 // pre definition for delegate
 @protocol IRNewPeripheralViewControllerDelegate;
 
-@interface IRNewPeripheralViewController : UIViewController<UINavigationControllerDelegate, IRNewPeripheralScene1ViewControllerDelegate>
+@interface IRNewPeripheralViewController : UIViewController<IRNewPeripheralScene1ViewControllerDelegate>
 
 @property (nonatomic, assign) id<IRNewPeripheralViewControllerDelegate> delegate;
 

@@ -18,23 +18,19 @@
 #import "IRSignalCell.h"
 #import "IRChartView.h"
 
-@interface IRKit : NSObject<CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface IRKit : NSObject<CBCentralManagerDelegate>
 
 + (IRKit*) sharedInstance;
 
 - (void) startScan;
 - (void) stopScan;
 - (void) save;
-- (void) writeIRPeripheral: (IRPeripheral*)peripheral
-                     value: (NSData*)value
- forCharacteristicWithUUID: (CBUUID*)characteristicUUID
-         ofServiceWithUUID: (CBUUID*)serviceUUID
-                completion: (void (^)(NSError *error))block;
-
+- (void) disconnectPeripheral: (IRPeripheral*)peripheral;
+- (void) retrieveKnownPeripherals;
 
 @property (nonatomic) BOOL autoConnect;
 @property (nonatomic) BOOL isScanning;
-@property (nonatomic) BOOL isAuthorized;
+@property (nonatomic) BOOL retainConnectionInBackground;
 
 @property (nonatomic, getter = numberOfPeripherals) NSUInteger numberOfPeripherals;
 @property (nonatomic, getter = numberOfSignals) NSUInteger numberOfSignals;

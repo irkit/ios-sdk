@@ -29,7 +29,6 @@
     IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc]init];
     first.delegate = self;
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
-    _navController.delegate = self;
     [view addSubview:_navController.view];
 
     self.view = view;
@@ -59,8 +58,8 @@
                              IRNewPeripheralScene2ViewController *c =
                              [[IRNewPeripheralScene2ViewController alloc] init];
                              c.delegate = self;
-                             [_navController pushViewController:c
-                                                       animated:YES];
+                             [self.navController pushViewController:c
+                                                            animated:YES];
                  }];
     
     _observer2 = [[NSNotificationCenter defaultCenter]
@@ -71,8 +70,8 @@
                              LOG( @"irkit authorized");
                              IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
                              c.delegate = self;
-                             [_navController pushViewController:c
-                                                       animated:YES];
+                             [self.navController pushViewController:c
+                                                            animated:YES];
                  }];
 
 }
@@ -93,8 +92,7 @@
     LOG_CURRENT_METHOD;
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)didReceiveMemoryWarning
 {
@@ -103,8 +101,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralScene1ViewControllerDelegate
+#pragma mark - IRNewPeripheralScene1ViewControllerDelegate
 
 - (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
@@ -118,8 +115,7 @@
     // shouldnt happen
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralScene2ViewControllerDelegate
+#pragma mark - IRNewPeripheralScene2ViewControllerDelegate
 
 - (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
@@ -133,8 +129,7 @@
     // shouldnt happen
 }
 
-#pragma mark -
-#pragma mark IRNewPeripheralScene3ViewControllerDelegate
+#pragma mark - IRNewPeripheralScene3ViewControllerDelegate
 
 - (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;

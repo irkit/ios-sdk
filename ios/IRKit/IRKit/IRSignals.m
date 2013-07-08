@@ -46,8 +46,7 @@
     [IRPersistentStore synchronize];
 }
 
-#pragma mark -
-#pragma Private methods
+#pragma mark - Private methods
 
 - (void) load {
     LOG_CURRENT_METHOD;
@@ -70,8 +69,7 @@
     return [[_signals keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)] indexOfObject:signal.uniqueID];
 }
 
-#pragma mark -
-#pragma mark Key Value Coding - Mutable Indexed Accessors
+#pragma mark - Key Value Coding - Mutable Indexed Accessors
 
 - (NSArray*) signals {
     return [_signals allValues];
@@ -118,6 +116,9 @@
     NSInteger row;
     if (_delegate) {
         row = [self indexOfSignal: object];
+        if (row == NSNotFound) {
+            LOG( @"something weird happened" );
+        }
     }
     [_signals removeObjectForKey:object.uniqueID];
     
@@ -136,8 +137,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
@@ -155,8 +155,7 @@
     return self.countOfSignals;
 }
 
-#pragma mark -
-#pragma mark UITableViewDelegate
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;

@@ -74,8 +74,7 @@
                                             forKeyPath:@"peripherals"];
 }
 
-#pragma mark -
-#pragma mark UI events
+#pragma mark - UI events
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
@@ -91,9 +90,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark KVO
-
+#pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
@@ -149,8 +146,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark UITableViewDelegate
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
@@ -189,8 +185,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     LOG_CURRENT_METHOD;

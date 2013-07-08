@@ -10,7 +10,7 @@
 #import "IRPersistentStore.h"
 #import "IRHelper.h"
 
-//#define LOG_DISABLED 1
+#define LOG_DISABLED 1
 
 @interface IRPeripherals ()
 
@@ -77,8 +77,7 @@
     [IRPersistentStore synchronize];
 }
 
-#pragma mark -
-#pragma Private methods
+#pragma mark - Private methods
 
 - (void) load {
     LOG_CURRENT_METHOD;
@@ -92,8 +91,7 @@
     LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
 }
 
-#pragma mark -
-#pragma mark Key Value Coding - Mutable Unordered Accessors
+#pragma mark - Key Value Coding - Mutable Unordered Accessors
 
 - (NSArray*) peripherals {
     LOG_CURRENT_METHOD;
@@ -146,8 +144,6 @@
         p                = [[IRPeripheral alloc] init];
         p.peripheral     = peripheral;
         p.customizedName = peripheral.name; // defaults to original name
-        p.foundDate      = [NSDate date];
-        p.isPaired       = @NO;
         _irperipheralForUUID[uuidKey] = p;
         [self save];
     }

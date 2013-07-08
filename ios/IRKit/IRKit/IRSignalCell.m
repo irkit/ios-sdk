@@ -27,14 +27,12 @@
 
         CGRect cellFrame = self.frame;
         
-        // image
-        self.imageView.image = [UIImage imageNamed:@"kayac_logo.jpg"];
-        
         // text label
         self.textLabel.text = @"signal 1";
-        
+
+        // chart
         int margin = 20;
-        int height = 200;
+        int height = 100;
         self.chartView = [[IRChartView alloc] initWithFrame: (CGRect){ margin, margin, 300 - margin*2, height - margin*2 }];
         [self.contentView addSubview: self.chartView];
     }
@@ -51,10 +49,10 @@
 - (void)setSignal:(IRSignal *)signal {
     LOG( @"signal: %@", signal);
     
-    self.textLabel.text = signal.name;
+    self.textLabel.text       = signal.name;
     self.detailTextLabel.text = signal.name;
-    self.chartView.data = signal.data;
-//    self.chartView.data = @[ @1000, @500, @500 ];
+    self.chartView.data       = signal.data;
+    [self.chartView setNeedsDisplay];
 }
 
 + (CGFloat)height {
