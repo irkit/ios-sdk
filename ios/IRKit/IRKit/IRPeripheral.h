@@ -22,7 +22,7 @@
 @property (nonatomic) BOOL shouldReadIRData;
 @property (nonatomic) BOOL wantsToConnect;
 
-- (BOOL) isConnected;
+- (BOOL) isReady;
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 - (void) writeData: (NSData*)value
 forCharacteristicWithUUID: (CBUUID*)characteristicUUID

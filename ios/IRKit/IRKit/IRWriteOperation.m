@@ -31,7 +31,7 @@
     self.isExecuting = YES;
     self.isFinished  = NO;
 
-    if ( ! _peripheral.isConnected ) {
+    if ( ! _peripheral.isReady ) {
         // should be connected when started
         dispatch_async( dispatch_get_main_queue(),
                        ^{

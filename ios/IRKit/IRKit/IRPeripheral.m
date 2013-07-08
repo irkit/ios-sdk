@@ -39,9 +39,10 @@
     LOG_CURRENT_METHOD;
 }
 
-- (BOOL)isConnected {
+- (BOOL)isReady {
     // TODO use state on iOS7
-    return _peripheral ? _peripheral.isConnected : NO;
+    return _peripheral ? _peripheral.isConnected && [self canReadAllCharacteristics]
+                       : NO;
 }
 
 - (void)connect {
@@ -59,7 +60,7 @@
     if ( ! _writeQueue ) {
         _writeQueue = [[IRWriteOperationQueue alloc] init];
     }
-    [_writeQueue setSuspended: ! self.isConnected];
+    [_writeQueue setSuspended: ! self.isReady];
 }
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
@@ -81,7 +82,7 @@
         return;
     }
     
-    if ( ! self.isConnected ) {
+    if ( ! _peripheral.isConnected ) {
         [self connect];
     }
     
@@ -92,7 +93,7 @@
                                                         completion:^(NSError *error) {
                                                         block(error);
                                                     }];
-    [_writeQueue setSuspended: ! self.isConnected];
+    [_writeQueue setSuspended: ! self.isReady];
     [_writeQueue addOperation:op];
 }
 
@@ -115,7 +116,7 @@
 - (void) didDisconnect {
     LOG_CURRENT_METHOD;
     
-    [_writeQueue setSuspended: ! self.isConnected];
+    [_writeQueue setSuspended: YES];
 }
 
 #pragma mark - Private methods
@@ -125,6 +126,30 @@
 
     [_writeQueue setSuspended: YES];
     [[IRKit sharedInstance] disconnectPeripheral: self];
+}
+
+- (BOOL) canReadAllCharacteristics {
+    LOG_CURRENT_METHOD;
+    
+    int found = 0;
+    for (CBService *service in _peripheral.services) {
+        if (! [IRHelper CBUUID:service.UUID
+               isEqualToCBUUID:IRKIT_SERVICE_UUID] ) {
+            continue;
+        }
+        for (CBCharacteristic *c12c in service.characteristics) {
+            for (CBCharacteristic *expected_c12c in IRKIT_CHARACTERISTICS) {
+                if ([IRHelper CBUUID:c12c.UUID
+                     isEqualToCBUUID:expected_c12c]) {
+                    found ++;
+                }
+            }
+        }
+    }
+    if ( found >= [IRKIT_CHARACTERISTICS count]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - CBPeripheralDelegate
@@ -176,7 +201,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
 {
     LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
     
-    [_writeQueue setSuspended: ! self.isConnected];
+    [_writeQueue setSuspended: ! self.isReady];
 
     for (CBCharacteristic *characteristic in service.characteristics)
     {
@@ -190,6 +215,9 @@ didDiscoverCharacteristicsForService:(CBService *)service
         
         for (CBCharacteristic *characteristic in service.characteristics) {
             if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID]) {
+                // when uninstalled and re-installed after _authorized is YES
+                // _authorized is initialized to NO,
+                // so we try to read it, and peripheral responds with YES
                 if ( ! _authorized ) {
                     LOG( @"are we authorized?" );
                     [peripheral setNotifyValue:YES
