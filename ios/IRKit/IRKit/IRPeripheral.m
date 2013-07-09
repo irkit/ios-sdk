@@ -310,8 +310,9 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         NSData *value = characteristic.value;
         LOG( @"value.length: %d", value.length );
         
-        if (value.length > 0) {
+        if (value.length > 1) {
             // can be 0
+            // length: 1 should be invalid ir data
             
             IRSignal *signal = [[IRSignal alloc] initWithData: value];
             signal.peripheral = self;
