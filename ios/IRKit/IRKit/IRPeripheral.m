@@ -284,6 +284,12 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
 {
     LOG( @"peripheral: %@ charactristic: %@ UUID: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.UUID, characteristic.value, error);
     
+    if (error) {
+        // TODO error handling
+        [self restartDisconnectTimerIfNeeded];
+        return;
+    }
+    
     // disconnect when authorized
     // we connect only when we need to
     
@@ -309,14 +315,18 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
         NSData *value = characteristic.value;
         LOG( @"value.length: %d", value.length );
-        IRSignal *signal = [[IRSignal alloc] initWithData: value];
-        signal.peripheral = self;
         
-        [[NSNotificationCenter defaultCenter]
-            postNotificationName:IRKitDidReceiveSignalNotification
-                          object:self
-                        userInfo:@{IRKitSignalUserInfoKey: signal}];
-        
+        if (value.length > 0) {
+            // can be 0
+            
+            IRSignal *signal = [[IRSignal alloc] initWithData: value];
+            signal.peripheral = self;
+            
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:IRKitDidReceiveSignalNotification
+                              object:self
+                            userInfo:@{IRKitSignalUserInfoKey: signal}];
+        }
         [self restartDisconnectTimerIfNeeded];
     }
     
