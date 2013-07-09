@@ -9,8 +9,10 @@
 #import "IRPeripherals.h"
 #import "IRPersistentStore.h"
 #import "IRHelper.h"
+#import "IRConst.h"
+#import "IRPeripheralCell.h"
 
-#define LOG_DISABLED 1
+// #define LOG_DISABLED 1
 
 @interface IRPeripherals ()
 
@@ -27,16 +29,16 @@
 - (id)init {
     self = [super init];
     if (! self) { return nil; }
-    
+
     _unknownPeripherals = [[NSMutableSet alloc] init];
     [self load];
-        
+
     return self;
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
     LOG( @"index: %d", index);
-    
+
     NSArray* keys = [_irperipheralForUUID keysSortedByValueUsingSelector:@selector(compareByFirstFoundDate:)];
     NSString* key = [keys objectAtIndex: index];
     return _irperipheralForUUID[key];
@@ -70,7 +72,7 @@
 
 - (void) save {
     LOG_CURRENT_METHOD;
-    
+
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_irperipheralForUUID];
     [IRPersistentStore storeObject:data
                             forKey:@"peripherals"];
@@ -81,9 +83,9 @@
 
 - (void) load {
     LOG_CURRENT_METHOD;
-    
+
     NSData* data = [IRPersistentStore objectForKey: @"peripherals"];
-    
+
     _irperipheralForUUID = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     if ( ! _irperipheralForUUID ) {
         _irperipheralForUUID = [[NSMutableDictionary alloc] init];
@@ -95,25 +97,25 @@
 
 - (NSArray*) peripherals {
     LOG_CURRENT_METHOD;
-    
+
     return [_irperipheralForUUID allValues];
 }
 
 - (NSUInteger) countOfPeripherals {
     LOG_CURRENT_METHOD;
-    
+
     return _irperipheralForUUID.count;
 }
 
 - (NSEnumerator *)enumeratorOfPeripherals {
     LOG_CURRENT_METHOD;
-    
+
     return _irperipheralForUUID.objectEnumerator;
 }
 
 - (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)peripheral {
     LOG_CURRENT_METHOD;
-    
+
     if (!peripheral.UUID) {
         return nil;
     }
@@ -124,7 +126,7 @@
 // -add<Key>Object:
 - (void)addPeripheralsObject:(CBPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
-    
+
     //    if ( ! peripheral.UUID || ! peripheral.name ) {
     if ( ! peripheral.UUID ) {
         // just to retain while 1st connect attempt
@@ -133,7 +135,7 @@
     }
     // we got it's UUID, so don't need to retain peripheral in _unknownPeripherals anymore, we're gonna retain it in _irperipheralForUUID
     [_unknownPeripherals removeObject:peripheral];
-    
+
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
     IRPeripheral *p = _irperipheralForUUID[uuidKey];
     if (p) {
@@ -151,13 +153,38 @@
 
 - (void)removePeripheralsObject: (CBPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
-    
+
     if ( ! peripheral.UUID ) {
         [_unknownPeripherals removeObject:peripheral];
         return;
     }
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
     [_irperipheralForUUID removeObjectForKey:uuidKey];
+}
+
+#pragma mark - UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG( @"indexPath.row: %d", indexPath.row);
+
+    IRPeripheralCell *cell = (IRPeripheralCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
+    if (cell == nil) {
+        cell = [[IRPeripheralCell alloc] initWithReuseIdentifier:IRKitCellIdentifierPeripheral];
+    }
+    cell.peripheral = [self objectAtIndex: indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    return self.countOfPeripherals;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG_CURRENT_METHOD;
+    return [IRPeripheralCell height];
 }
 
 @end

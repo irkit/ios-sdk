@@ -66,7 +66,8 @@
 
 #pragma mark - UITableViewCell identifiers
 
-#define IRKitCellIdentifierSignal @"IRKit::UITableViewCell::Signal"
+#define IRKitCellIdentifierSignal     @"IRKit::UITableViewCell::Signal"
+#define IRKitCellIdentifierPeripheral @"IRKit::UITableViewCell::Peripheral"
 
 #pragma mark - IR*ViewControllerDelegate
 

@@ -12,7 +12,6 @@
 @interface IRNewPeripheralViewController ()
 
 @property (nonatomic) UINavigationController *navController;
-
 @property (nonatomic) id observer1;
 @property (nonatomic) id observer2;
 
@@ -26,11 +25,12 @@
     CGRect bounds = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:bounds];
 
-    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc]init];
+    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] init];
     first.delegate = self;
+    
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
     [view addSubview:_navController.view];
-
+    
     self.view = view;
 }
 
@@ -46,8 +46,8 @@
     // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
     // prevent showing the weird 20px empty zone on top of navigationbar
     // when presented in caller's viewDidLoad
-    [_navController setNavigationBarHidden:YES];
-    [_navController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO];
     
     _observer1 = [[NSNotificationCenter defaultCenter]
                  addObserverForName:IRKitDidConnectPeripheralNotification
@@ -58,8 +58,8 @@
                              IRNewPeripheralScene2ViewController *c =
                              [[IRNewPeripheralScene2ViewController alloc] init];
                              c.delegate = self;
-                             [self.navController pushViewController:c
-                                                            animated:YES];
+                             [self.navigationController pushViewController:c
+                                                                  animated:YES];
                  }];
     
     _observer2 = [[NSNotificationCenter defaultCenter]
@@ -70,8 +70,8 @@
                              LOG( @"irkit authorized");
                              IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
                              c.delegate = self;
-                             [self.navController pushViewController:c
-                                                            animated:YES];
+                             [self.navigationController pushViewController:c
+                                                                  animated:YES];
                  }];
 
 }

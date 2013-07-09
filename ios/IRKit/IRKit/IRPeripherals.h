@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "IRPeripheral.h"
 
-@interface IRPeripherals : NSObject
+@interface IRPeripherals : NSObject<UITableViewDelegate,UITableViewDataSource>
 
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSArray*) knownPeripheralUUIDs;

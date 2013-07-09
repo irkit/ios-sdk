@@ -120,6 +120,10 @@ static const unsigned char whitePNGImage[] = {
                      context:NULL];
 }
 
++ (CGFloat)height {
+    return 200;
+}
+
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

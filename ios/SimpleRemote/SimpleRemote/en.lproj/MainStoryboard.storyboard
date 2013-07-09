@@ -12,22 +12,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="identifier" id="l2X-7H-7g7">
-                                <rect key="frame" x="0.0" y="46" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableViewCell>
-                        </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Remote Icon" id="6b8-Tm-3DT">
                         <barButtonItem key="leftBarButtonItem" image="gear.png" id="qBT-bQ-0X1">
                             <connections>
                                 <action selector="settingsButtonPressed:" destination="oaV-El-VRv" id="4SJ-in-jVS"/>
+                                <segue destination="dSW-Ph-HSd" kind="modal" id="Bmx-Mo-Q7H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -35,6 +25,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2t4-6u-8at" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="652" y="205"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="myw-3K-Erg">
+            <objects>
+                <tableViewController id="dSW-Ph-HSd" customClass="SRSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="j76-PH-xvJ">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" barStyle="blackTranslucent" id="taQ-3d-3UH">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Settings" id="IQi-Bk-JyX">
+                                    <barButtonItem key="leftBarButtonItem" systemItem="done" id="EwE-JU-Frc">
+                                        <connections>
+                                            <action selector="closeButtonTouched:" destination="dSW-Ph-HSd" id="JiJ-F3-vB7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="dSW-Ph-HSd" id="3hj-mu-f1x"/>
+                            <outlet property="delegate" destination="dSW-Ph-HSd" id="nfE-vx-T56"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rTf-ap-f1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="652" y="785"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aUR-eY-w7e">

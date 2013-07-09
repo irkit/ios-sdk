@@ -12,6 +12,7 @@
 @interface IRPeripheralCell : UITableViewCell
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
++ (CGFloat)height;
 
 @property (nonatomic, strong) IRPeripheral *peripheral;
 

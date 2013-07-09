@@ -31,7 +31,7 @@
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL retainConnectionInBackground;
 
-@property (nonatomic, getter = numberOfPeripherals) NSUInteger numberOfPeripherals;
+@property (nonatomic) NSUInteger numberOfPeripherals;
 @property (nonatomic) IRPeripherals *peripherals;
 
 @end

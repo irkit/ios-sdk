@@ -55,8 +55,11 @@
                                            return;
                                        }
                                        IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
+                                       UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:c];
                                        c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-                                       [self presentViewController:c animated:YES completion:^{
+                                       [self presentViewController:nav
+                                                          animated:YES
+                                                        completion:^{
                                            LOG( @"presented" );
                                            _showingNewPeripheralViewController = YES;
                                        }];
