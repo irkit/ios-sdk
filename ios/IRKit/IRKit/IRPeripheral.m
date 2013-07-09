@@ -72,8 +72,9 @@
          ofServiceWithUUID: (CBUUID*)serviceUUID
                 completion: (void (^)(NSError *error))block {
     LOG( @"service: %@ c12c: %@ value: %@", serviceUUID, characteristicUUID, value );
-    NSError *error;
+    [self restartDisconnectTimer];
     
+    NSError *error;
     if ( ! _writeQueue || ! _peripheral ) {
         error = [NSError errorWithDomain:IRKIT_ERROR_DOMAIN
                                     code:IRKIT_ERROR_CODE_NOT_READY
@@ -97,20 +98,16 @@
     [_writeQueue addOperation:op];
 }
 
-- (void) restartDisconnectTimerIfNeeded {
+- (void) restartDisconnectTimer {
     LOG_CURRENT_METHOD;
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 
-    if ( _writeQueue.operationCount ) {
-        return; // stay connected
-    }
-    
     // disconnect after interval
     // regarding that we might want to continuously write to this peripheral
     [self performSelector:@selector(disconnect)
                withObject:nil
-               afterDelay:1.];
+               afterDelay:5.];
 }
 
 - (void) didDisconnect {
@@ -162,7 +159,8 @@
 didDiscoverServices:(NSError *)error
 {
     LOG( @"peripheral: %@ error: %@", peripheral, error);
-    
+    [self restartDisconnectTimer];
+
     for (CBService *service in peripheral.services)
     {
         LOG(@"service: %@ UUID: %@", service, service.UUID);
@@ -200,7 +198,8 @@ didDiscoverCharacteristicsForService:(CBService *)service
               error:(NSError *)error
 {
     LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
-    
+    [self restartDisconnectTimer];
+
     [_writeQueue setSuspended: ! self.isReady];
 
     for (CBCharacteristic *characteristic in service.characteristics)
@@ -239,10 +238,6 @@ didDiscoverCharacteristicsForService:(CBService *)service
                 [peripheral setNotifyValue:YES
                          forCharacteristic:characteristic];
             }
-        }
-        
-        if ( ! shouldStayConnected ) {
-            [self restartDisconnectTimerIfNeeded];
         }
     }
     
@@ -283,10 +278,10 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
               error:(NSError *)error
 {
     LOG( @"peripheral: %@ charactristic: %@ UUID: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.UUID, characteristic.value, error);
-    
+    [self restartDisconnectTimer];
+
     if (error) {
         // TODO error handling
-        [self restartDisconnectTimerIfNeeded];
         return;
     }
     
@@ -306,7 +301,6 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             [[NSNotificationCenter defaultCenter]
                 postNotificationName:IRKitPeripheralAuthorizedNotification
                               object:nil];
-            [self restartDisconnectTimerIfNeeded];
         }
         else {
             // retain connection while waiting for user to press auth switch
@@ -327,7 +321,6 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
                               object:self
                             userInfo:@{IRKitSignalUserInfoKey: signal}];
         }
-        [self restartDisconnectTimerIfNeeded];
     }
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
@@ -346,10 +339,10 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error
 {
     LOG( @"peripheral: %@ charactristic: %@ UUID: %@ error: %@", peripheral, characteristic, characteristic.UUID, error);
-    
+    [self restartDisconnectTimer];
+
     [_writeQueue didWriteValueForCharacteristic:characteristic
                                           error:error];
-    [self restartDisconnectTimerIfNeeded];
 }
 
 #pragma mark - NSKeyedArchiving
