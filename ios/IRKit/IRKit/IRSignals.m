@@ -24,8 +24,6 @@
     self = [super init];
     if (! self) { return nil; }
     
-    [self load];
-    
     return self;
 }
 
@@ -37,22 +35,11 @@
     return _signals[key];
 }
 
-- (void) save {
-    LOG_CURRENT_METHOD;
-    
-    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:_signals];
-    [IRPersistentStore storeObject:data
-                            forKey:@"signals"];
-    [IRPersistentStore synchronize];
+- (NSData*)data {
+    return [NSKeyedArchiver archivedDataWithRootObject:_signals];
 }
 
-#pragma mark - Private methods
-
-- (void) load {
-    LOG_CURRENT_METHOD;
-    
-    NSData* data = [IRPersistentStore objectForKey: @"signals"];
-    
+- (void)loadFromData: (NSData*)data {
     NSMutableSet *set = (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     if ( set ) {
         _signals = set;
@@ -60,8 +47,10 @@
     else {
         _signals = [[NSMutableDictionary alloc] init];
     }
-    LOG( @"_signals: %@", _signals );
+    LOG( @"loaded signals: %@", _signals );
 }
+
+#pragma mark - Private methods
 
 - (NSInteger) indexOfSignal: (IRSignal*) signal {
     LOG_CURRENT_METHOD;

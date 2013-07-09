@@ -27,17 +27,21 @@
     self.tableView.delegate   = self;
     self.tableView.dataSource = self;
 
+    NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+    NSData *data = [d objectForKey: @"signals"];
     _signals = [[IRSignals alloc] init];
+    [_signals loadFromData:data];
     _signals.delegate = self;
 
-    __weak IRSignals *__signals = _signals;
+    __weak SRMainViewController *_self = self;
     _signalObserver = [[NSNotificationCenter defaultCenter]
                           addObserverForName:IRKitDidReceiveSignalNotification
                                       object:nil
                                        queue:nil
                                   usingBlock:^(NSNotification *note) {
                                       IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
-                                      [__signals addSignalsObject:signal];
+                                      [_self.signals addSignalsObject:signal];
+                                      [_self saveSignals];
     }];
 }
 
@@ -69,6 +73,15 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)saveSignals {
+    NSUserDefaults *d2 = [NSUserDefaults standardUserDefaults];
+    [d2 setObject:_signals.data
+           forKey:@"signals"];
+    [d2 synchronize];
+}
+
+#pragma mark - UI events
+
 - (IBAction)settingsButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
     
@@ -79,8 +92,7 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -248,6 +260,7 @@
                 }];
                 [sheet addButtonWithTitle:@"Remove" handler:^{
                     [_signals removeSignalsObject:signal];
+                    [self saveSignals];
                     LOG( @"removed: %@", signal );
                 }];
                 [sheet setCancelButtonWithTitle:nil handler:^{

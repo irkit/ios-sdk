@@ -30,8 +30,9 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 @interface IRSignals : NSObject<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, assign) id<IRAnimatingControllerDelegate> delegate;
-- (void) save;
 - (id)objectAtIndex:(NSUInteger)index;
+- (NSData*)data;
+- (void)loadFromData: (NSData*)data;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 

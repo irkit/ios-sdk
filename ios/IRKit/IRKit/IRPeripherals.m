@@ -38,7 +38,7 @@
     LOG( @"index: %d", index);
     
     NSArray* keys = [_irperipheralForUUID keysSortedByValueUsingSelector:@selector(compareByFirstFoundDate:)];
-    NSString* key = [keys objectAtIndex: key];
+    NSString* key = [keys objectAtIndex: index];
     return _irperipheralForUUID[key];
 }
 

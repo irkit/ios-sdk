@@ -97,7 +97,7 @@
     CGPathAddLineToPoint(path, NULL, rightX*intervalScale,
                                      bottomY);
     // →
-    rightX += (double)[_data[_data.count-1] shortValue];
+    rightX += (double)(_data.count ? [_data[_data.count-1] shortValue] : 0);
     LOG( @"rightX: %f", rightX);
     CGPathAddLineToPoint(path, NULL, rightX*intervalScale,
                                      bottomY);
