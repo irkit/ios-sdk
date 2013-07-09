@@ -55,10 +55,11 @@
 
 #pragma mark - NSNotification names
 
-#define IRKitDidConnectPeripheralNotification    @"IRKit::DidConnect"
-#define IRKitDidDisconnectPeripheralNotification @"IRKit::DidDisconnect"
-#define IRKitPeripheralAuthorizedNotification    @"IRKit::Authorized"
-#define IRKitDidReceiveSignalNotification        @"IRKit::ReceivedSignal"
+#define IRKitDidConnectPeripheralNotification              @"IRKit::DidConnect"
+#define IRKitDidDisconnectPeripheralNotification           @"IRKit::DidDisconnect"
+#define IRKitDidAuthorizePeripheralNotification            @"IRKit::Authorized"
+#define IRKitDidDiscoverUnauthorizedPeripheralNotification @"IRKit::DiscoveredUnauthorized"
+#define IRKitDidReceiveSignalNotification                  @"IRKit::ReceivedSignal"
 
 #define IRKitPeripheralUserInfoKey               @"peripheral"
 #define IRKitSignalUserInfoKey                   @"signal"

@@ -13,6 +13,8 @@
 
 @property (nonatomic) IRSignals *signals;
 @property (nonatomic) id signalObserver;
+@property (nonatomic) id peripheralObserver;
+@property (nonatomic) BOOL showingNewPeripheralViewController;
 
 @end
 
@@ -43,11 +45,28 @@
                                       [_self.signals addSignalsObject:signal];
                                       [_self saveSignals];
     }];
+    // show view controller when another peripheral is found
+    _peripheralObserver = [[NSNotificationCenter defaultCenter]
+                           addObserverForName:IRKitDidDiscoverUnauthorizedPeripheralNotification
+                                       object:nil
+                                        queue:nil
+                                   usingBlock:^(NSNotification *note) {
+                                       if (_showingNewPeripheralViewController) {
+                                           return;
+                                       }
+                                       IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
+                                       c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
+                                       [self presentViewController:c animated:YES completion:^{
+                                           LOG( @"presented" );
+                                           _showingNewPeripheralViewController = YES;
+                                       }];
+                                   } ];
 }
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
     [[NSNotificationCenter defaultCenter] removeObserver: _signalObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver: _peripheralObserver];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,6 +78,7 @@
         c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
         [self presentViewController:c animated:YES completion:^{
             LOG( @"presented" );
+            _showingNewPeripheralViewController = YES;
         }];
     }
 }
@@ -105,6 +125,7 @@
  
     [self dismissViewControllerAnimated:YES completion:^{
         LOG(@"dismissed");
+        _showingNewPeripheralViewController = NO;
     }];
 }
 

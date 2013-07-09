@@ -98,10 +98,16 @@
     [_writeQueue addOperation:op];
 }
 
-- (void) restartDisconnectTimer {
+- (void) cancelDisconnectTimer {
     LOG_CURRENT_METHOD;
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
+- (void) restartDisconnectTimer {
+    LOG_CURRENT_METHOD;
+    
+    [self cancelDisconnectTimer];
 
     // disconnect after interval
     // regarding that we might want to continuously write to this peripheral
@@ -209,9 +215,6 @@ didDiscoverCharacteristicsForService:(CBService *)service
     }
     
     if ([service.UUID isEqual:IRKIT_SERVICE_UUID]) {
-        // make sure we're not eternally connected
-        BOOL shouldStayConnected = NO;
-        
         for (CBCharacteristic *characteristic in service.characteristics) {
             if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID]) {
                 // when uninstalled and re-installed after _authorized is YES
@@ -222,7 +225,6 @@ didDiscoverCharacteristicsForService:(CBService *)service
                     [peripheral setNotifyValue:YES
                              forCharacteristic:characteristic];
                     [peripheral readValueForCharacteristic:characteristic];
-                    shouldStayConnected = YES;
                 }
             }
             else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
@@ -230,7 +232,6 @@ didDiscoverCharacteristicsForService:(CBService *)service
                     LOG( @"read IR data" );
                     _shouldReadIRData = NO;
                     [peripheral readValueForCharacteristic:characteristic];
-                    shouldStayConnected = YES;
                 }
             }
             else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
@@ -299,11 +300,12 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             [[IRKit sharedInstance].peripherals save];
             
             [[NSNotificationCenter defaultCenter]
-                postNotificationName:IRKitPeripheralAuthorizedNotification
+                postNotificationName:IRKitDidAuthorizePeripheralNotification
                               object:nil];
         }
         else {
             // retain connection while waiting for user to press auth switch
+            [self cancelDisconnectTimer];
         }
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {

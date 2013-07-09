@@ -63,7 +63,7 @@
                  }];
     
     _observer2 = [[NSNotificationCenter defaultCenter]
-                 addObserverForName:IRKitPeripheralAuthorizedNotification
+                 addObserverForName:IRKitDidAuthorizePeripheralNotification
                              object:nil
                               queue:[NSOperationQueue mainQueue]
                          usingBlock:^(NSNotification *note) {
