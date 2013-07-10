@@ -41,8 +41,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)closeButtonTouched:(id)sender {
+- (IBAction)doneButtonTouched:(id)sender {
     LOG_CURRENT_METHOD;
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 LOG(@"dismissed");
+                             }];
+}
+
+#pragma mark - IRPeripheralNameEditViewControllerDelegate
+
+- (void)peripheralNameEditViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info
+{
+    LOG( @"info: %@", info );
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  LOG(@"dismissed");
@@ -54,7 +65,6 @@
 - (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithInfo:(NSDictionary *)info
 {
     LOG( @"info: %@", info );
-    
     [self dismissViewControllerAnimated:YES
                              completion:^{
         LOG(@"dismissed");
@@ -82,6 +92,19 @@
     return 0;
 }
 
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"Peripherals";
+        case 1:
+            return @"Info";
+        default:
+            break;
+    }
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
@@ -104,14 +127,24 @@
                                            cellForRowAtIndexPath:indexPath];
             break;
         case 1:
-        case 2:
         default:
             cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                               reuseIdentifier:@"cell"];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
-            cell.textLabel.text = @"more";
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = @"Help";
+                    break;
+                case 1:
+                    cell.textLabel.text = @"Open Source";
+                    break;
+                case 2:
+                    cell.textLabel.text = @"Buy Peripheral";
+                    break;
+            }
             break;
     }
     return cell;
@@ -136,9 +169,56 @@
                 }];
                 return;
             }
-        }
+            IRPeripheral *peripheral = [[IRKit sharedInstance].peripherals objectAtIndex: indexPath.row];
+            UIActionSheet *sheet = [UIActionSheet actionSheetWithTitle:@""];
+            [sheet addButtonWithTitle:@"Edit Name" handler:^{
+                IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] init];
+                c.peripheral = peripheral;
+                c.delegate   = self;
+                [self.navigationController pushViewController:c
+                                                     animated:YES];
+            }];
+            [sheet setCancelButtonWithTitle:nil handler:^{
+                LOG( @"canceled" );
+            }];
+            [sheet showInView:self.view];
             break;
-
+        }
+        case 1:
+        {
+            switch (indexPath.row) {
+                case 0:
+                {
+                    IRWebViewController *c = [[IRWebViewController alloc] init];
+                    c.url = @"https://lobi.co/sp/faq/ja";
+                    c.title = @"Help";
+                    [self.navigationController pushViewController:c
+                                                         animated:YES];
+                    break;
+                }
+                case 1:
+                {
+                    IRWebViewController *c = [[IRWebViewController alloc] init];
+                    c.url = @"http://github.com/mash";
+                    c.title = @"Opensource";
+                    [self.navigationController pushViewController:c
+                                                         animated:YES];
+                    break;
+                }
+                case 2:
+                {
+                    IRWebViewController *c = [[IRWebViewController alloc] init];
+                    c.url = @"http://www.amazon.co.jp/";
+                    c.title = @"Buy Peripheral";
+                    [self.navigationController pushViewController:c
+                                                         animated:YES];
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
         default:
             break;
     }

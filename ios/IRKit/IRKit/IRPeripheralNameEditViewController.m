@@ -1,22 +1,22 @@
 //
-//  IRSignalNameEditViewController.m
+//  IRPeripheralNameEditViewController.m
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRSignalNameEditViewController.h"
+#import "IRPeripheralNameEditViewController.h"
 #import "IRConst.h"
 
-@interface IRSignalNameEditViewController ()
+@interface IRPeripheralNameEditViewController ()
 
 @property (nonatomic) UILabel *label;
 @property (nonatomic) UITextField *textField;
 
 @end
 
-@implementation IRSignalNameEditViewController
+@implementation IRPeripheralNameEditViewController
 
 - (void)loadView {
     LOG_CURRENT_METHOD;
@@ -38,7 +38,7 @@
     LOG(@"label.frame: %@", NSStringFromCGRect(frame));
     _label.frame = frame;
     [view addSubview:_label];
-    
+
     // input
     _textField = [[UITextField alloc] init];
     _textField.placeholder = @"ボタンの名前";
@@ -56,24 +56,23 @@
     _textField.frame = frame;
     LOG(@"textField.frame: %@", NSStringFromCGRect(frame));
     [view addSubview:_textField];
-    
-    // TODO use uitableview to select signal name from preset
-    
+
+    // TODO use uitableview to select peripheral name from preset
+
     self.view = view;
 }
 
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-    
+
     _label.text = @"このボタンの名前を決めましょう";
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-    
-    self.navigationItem.hidesBackButton = YES;
+
     self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc]
          initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -93,11 +92,11 @@
 
 - (void) processTextField {
     LOG( @"text: %@", _textField.text );
-    
+
     if (! _textField.text) {
         return;
     }
-    
+
     NSRegularExpression *regex = [NSRegularExpression
                                   regularExpressionWithPattern:@"^\s*$"
                                                        options:nil
@@ -105,16 +104,17 @@
     NSUInteger matches = [regex numberOfMatchesInString:_textField.text
                                                 options:nil
                                                   range:NSMakeRange(0,_textField.text.length)];
-    
+
     if (matches > 0) {
         // empty or whitespace only
         return;
     }
     
-    [self.delegate signalNameEditViewController:self
-                              didFinishWithInfo:@{
-            IRViewControllerResultType: IRViewControllerResultTypeDone,
-            IRViewControllerResultText: _textField.text
+    _peripheral.customizedName = _textField.text;
+
+    [self.delegate peripheralNameEditViewController:self
+                                  didFinishWithInfo:@{
+            IRViewControllerResultType: IRViewControllerResultTypeDone
      }];
 }
 

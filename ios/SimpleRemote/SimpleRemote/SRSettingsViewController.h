@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <IRKit/IRKit.h>
 
-@interface SRSettingsViewController : UITableViewController<IRNewPeripheralViewControllerDelegate>
+@interface SRSettingsViewController : UITableViewController<IRNewPeripheralViewControllerDelegate,
+    IRPeripheralNameEditViewControllerDelegate>
 
 @end
