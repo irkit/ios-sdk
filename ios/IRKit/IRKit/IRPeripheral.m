@@ -220,12 +220,10 @@ didDiscoverCharacteristicsForService:(CBService *)service
                 // when uninstalled and re-installed after _authorized is YES
                 // _authorized is initialized to NO,
                 // so we try to read it, and peripheral responds with YES
-                if ( ! _authorized ) {
-                    LOG( @"are we authorized?" );
-                    [peripheral setNotifyValue:YES
-                             forCharacteristic:characteristic];
-                    [peripheral readValueForCharacteristic:characteristic];
-                }
+                LOG( @"are we authorized?" );
+                [peripheral setNotifyValue:YES
+                         forCharacteristic:characteristic];
+                [peripheral readValueForCharacteristic:characteristic];
             }
             else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
                 if ( _authorized && _shouldReadIRData ) {
@@ -294,16 +292,21 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         unsigned char authorized = 0;
         [value getBytes:&authorized length:1];
         LOG( @"authorized: %d", authorized );
-        
-        if (authorized) {
-            _authorized = YES;
+
+        if ( _authorized != authorized ) {
+            // authorized state changed
+            _authorized = authorized;
             [[IRKit sharedInstance].peripherals save];
-            
-            [[NSNotificationCenter defaultCenter]
-                postNotificationName:IRKitDidAuthorizePeripheralNotification
-                              object:nil];
+            if ( _authorized ) {
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:IRKitDidAuthorizePeripheralNotification
+                 object:nil];
+            }
         }
-        else {
+
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        if ( (state == UIApplicationStateActive) &&
+             ! authorized ) {
             // retain connection while waiting for user to press auth switch
             [self cancelDisconnectTimer];
         }

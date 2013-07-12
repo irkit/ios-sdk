@@ -99,7 +99,7 @@
 - (void) disconnectPeripheral: (IRPeripheral*)peripheral {
     LOG_CURRENT_METHOD;
     
-    if (_retainConnectionInBackground) {
+    if (_retainConnectionInBackground && peripheral.authorized) {
         UIApplicationState state = [[UIApplication sharedApplication] applicationState];
         if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
             // don't disconnect in the background
@@ -141,17 +141,20 @@
     }
     LOG( @"peripheral: %@ receivedCount: %d", peripheral, receivedCount );
 
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+
     // connect when:
-    // * app not authorized = we need to connect to receive auth c12c's indication
-    // * peripheral's received count has changed = peripheral should have received IR data, we're gonna read it
+    // * app in foreground and not authorized = we need to connect to receive auth c12c's indication
+    // * app in foreground and peripheral's received count has changed = peripheral should have received IR data, we're gonna read it
     // * we're in background and retainConnectionInBackground is YES
-    if ( ! p.authorized ) {
+    if ( (state == UIApplicationStateActive) && ! p.authorized ) {
         [_manager connectPeripheral:peripheral
                             options:@{
             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
          }];
     }
-    else if ( (p.receivedCount != IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN) &&
+    else if ( (state == UIApplicationStateActive) &&
+              (p.receivedCount != IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN) &&
               (p.receivedCount != (uint16_t)receivedCount) ) {
         p.shouldReadIRData = YES;
         [_manager connectPeripheral:peripheral
@@ -159,14 +162,12 @@
             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
          }];
     }
-    else if (_retainConnectionInBackground) {
-        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-        if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
-            [_manager connectPeripheral:peripheral
-                                options:@{
-                CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
-            }];
-        }
+    else if ( _retainConnectionInBackground &&
+              (state != UIApplicationStateActive) ) {
+        [_manager connectPeripheral:peripheral
+                            options:@{
+            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
+        }];
     }
     p.receivedCount = receivedCount;
 }
