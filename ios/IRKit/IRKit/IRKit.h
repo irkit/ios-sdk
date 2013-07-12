@@ -28,6 +28,7 @@
 - (void) save;
 - (void) disconnectPeripheral: (IRPeripheral*)peripheral;
 - (void) retrieveKnownPeripherals;
+- (NSUInteger) numberOfAuthorizedPeripherals;
 
 @property (nonatomic) BOOL autoConnect;
 @property (nonatomic) BOOL isScanning;

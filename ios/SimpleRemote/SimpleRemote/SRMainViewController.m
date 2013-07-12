@@ -76,7 +76,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:YES];
 
-    if ([IRKit sharedInstance].numberOfPeripherals == 0) {
+    if ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0) {
         IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
         c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
         [self presentViewController:c animated:YES completion:^{

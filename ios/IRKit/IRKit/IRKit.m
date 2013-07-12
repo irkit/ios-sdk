@@ -86,11 +86,6 @@
     [_manager stopScan];
 }
 
-- (NSUInteger) numberOfPeripherals {
-    LOG_CURRENT_METHOD;
-    return _peripherals.countOfPeripherals;
-}
-
 - (void) save {
     LOG_CURRENT_METHOD;
     [_peripherals save];
@@ -119,6 +114,16 @@
         LOG( @"retrieve: %@", knownPeripherals );
         [_manager retrievePeripherals: knownPeripherals];
     }
+}
+
+- (NSUInteger) numberOfAuthorizedPeripherals {
+    LOG_CURRENT_METHOD;
+    return _peripherals.countOfAuthorizedPeripherals;
+}
+
+- (NSUInteger) numberOfPeripherals {
+    LOG_CURRENT_METHOD;
+    return _peripherals.countOfPeripherals;
 }
 
 #pragma mark - CBCentralManagerDelegate

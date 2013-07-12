@@ -79,6 +79,14 @@
     [IRPersistentStore synchronize];
 }
 
+- (NSUInteger) countOfAuthorizedPeripherals {
+    LOG_CURRENT_METHOD;
+    return [[[_irperipheralForUUID allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return [(IRPeripheral*)evaluatedObject authorized];
+        }]
+    ] count];
+}
+
 #pragma mark - Private methods
 
 - (void) load {
