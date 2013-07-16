@@ -1,0 +1,25 @@
+digraph ir_state {
+    rankdir=TB;
+
+    node [shape = circle, label="IDLE (0)",        fontsize=12] IDLE;
+    node [shape = circle, label="RECVING (1)",     fontsize=12] RECVING;
+    node [shape = circle, label="RECVED (2)",      fontsize=12] RECVED;
+    node [shape = circle, label="XMITTING (3)",    fontsize=12] XMITTING;
+    node [shape = circle, label="RECVED_IDLE (4)", fontsize=12] RECVED_IDLE;
+
+    node [shape = point ]; START
+
+    START -> IDLE [ label = "Initialize" ];
+
+    IDLE -> RECVING  [ label = "Falling edge" ];
+    IDLE -> IDLE     [ label = "Overflow continues" ];
+    IDLE -> XMITTING [ label = "IR_xmit called" ];
+
+    RECVED_IDLE -> IDLE [ label = "Any edge" ];
+    RECVING -> RECVED [ label = "Overflowed" ];
+    XMITTING -> IDLE [ label = "All data sent" ];
+    RECVING -> RECVED [ label = "Trailer detected" ];
+    // * -> IDLE [ label = "Timeout" ];
+
+    RECVED -> RECVED_IDLE [ label = "Updated BLE Adv data" ];
+}
