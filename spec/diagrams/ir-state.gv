@@ -11,15 +11,16 @@ digraph ir_state {
 
     START -> IDLE [ label = "Initialize" ];
 
-    IDLE -> RECVING  [ label = "Falling edge" ];
     IDLE -> IDLE     [ label = "Overflow continues" ];
+    IDLE -> RECVING  [ label = "Falling edge" ];
     IDLE -> XMITTING [ label = "IR_xmit called" ];
 
-    RECVED_IDLE -> IDLE [ label = "Any edge" ];
     RECVING -> RECVED [ label = "Overflowed" ];
-    XMITTING -> IDLE [ label = "All data sent" ];
     RECVING -> RECVED [ label = "Trailer detected" ];
-    // * -> IDLE [ label = "Timeout" ];
 
     RECVED -> RECVED_IDLE [ label = "Updated BLE Adv data" ];
+
+    XMITTING -> IDLE [ label = "All data sent" ];
+
+    RECVED_IDLE -> IDLE [ label = "Any edge" ];
 }
