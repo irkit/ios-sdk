@@ -55,9 +55,8 @@
                                            return;
                                        }
                                        IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
-                                       UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:c];
                                        c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-                                       [self presentViewController:nav
+                                       [self presentViewController:c
                                                           animated:YES
                                                         completion:^{
                                            LOG( @"presented" );
@@ -79,7 +78,9 @@
     if ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0) {
         IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
         c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-        [self presentViewController:c animated:YES completion:^{
+        [self presentViewController:c
+                           animated:YES
+                         completion:^{
             LOG( @"presented" );
             _showingNewPeripheralViewController = YES;
         }];
@@ -110,7 +111,9 @@
     
     IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
     c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-    [self presentViewController:c animated:YES completion:^{
+    [self presentViewController:c
+                       animated:YES
+                     completion:^{
         LOG( @"presented" );
     }];
 }
@@ -126,7 +129,8 @@
                   didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
  
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
         LOG(@"dismissed");
         _showingNewPeripheralViewController = NO;
     }];
@@ -269,8 +273,9 @@
                     // pressed Add New Signal cell
                     IRNewSignalViewController *c = [[IRNewSignalViewController alloc] init];
                     c.delegate = (id<IRNewSignalViewControllerDelegate>)self;
-                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:c];
-                    [self presentViewController:nav animated:YES completion:^{
+                    [self presentViewController:c
+                                       animated:YES
+                                     completion:^{
                         LOG( @"presented" );
                     }];
                     return;

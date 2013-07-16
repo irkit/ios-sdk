@@ -36,6 +36,8 @@
 		C77150FC1772E30B004F9FE3 /* newsignal.png in Resources */ = {isa = PBXBuildFile; fileRef = C77150FB1772E30B004F9FE3 /* newsignal.png */; };
 		C79DE3CF176F2C2D0088679E /* scene2.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CD176F2C2D0088679E /* scene2.png */; };
 		C79DE3D0176F2C2D0088679E /* scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CE176F2C2D0088679E /* scene1.png */; };
+		C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */; };
+		C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */; };
 		C7AFD0561755F10A007EE1DA /* IR_ISImageNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD04E1755F10A007EE1DA /* IR_ISImageNetworkOperation.m */; };
 		C7AFD0571755F10A007EE1DA /* IR_ISJSONNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0501755F10A007EE1DA /* IR_ISJSONNetworkOperation.m */; };
 		C7AFD0581755F10A007EE1DA /* IR_ISNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFD0531755F10A007EE1DA /* IR_ISNetworkClient.m */; };
@@ -76,6 +78,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */,
 				C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */,
 				C7F7D754178CED2400C3CF0F /* IRPeripheralNameEditViewController.h in CopyFiles */,
 				C7C0DB891782F32200AECAC2 /* IRSignalTableViewController.h in CopyFiles */,
@@ -146,6 +149,8 @@
 		C79DE3BD176F25260088679E /* IRKitResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitResources-Info.plist"; sourceTree = "<group>"; };
 		C79DE3CD176F2C2D0088679E /* scene2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scene2.png; sourceTree = "<group>"; };
 		C79DE3CE176F2C2D0088679E /* scene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scene1.png; sourceTree = "<group>"; };
+		C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene1ViewController.h; sourceTree = "<group>"; };
+		C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene1ViewController.m; sourceTree = "<group>"; };
 		C7AFD04D1755F10A007EE1DA /* IR_ISImageNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISImageNetworkOperation.h; sourceTree = "<group>"; };
 		C7AFD04E1755F10A007EE1DA /* IR_ISImageNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IR_ISImageNetworkOperation.m; sourceTree = "<group>"; };
 		C7AFD04F1755F10A007EE1DA /* IR_ISJSONNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IR_ISJSONNetworkOperation.h; sourceTree = "<group>"; };
@@ -340,6 +345,8 @@
 			children = (
 				C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */,
 				C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */,
+				C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */,
+				C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */,
 				C7C0DB861782EF4100AECAC2 /* IRSignalTableViewController.m */,
 				C7C0DB871782EF4100AECAC2 /* IRSignalTableViewController.h */,
 				C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */,
@@ -479,6 +486,7 @@
 				C73CB4DA17856CC200B3F2C0 /* IRWriteOperationQueue.m in Sources */,
 				C7F7D753178CEC4B00C3CF0F /* IRPeripheralNameEditViewController.m in Sources */,
 				C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */,
+				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

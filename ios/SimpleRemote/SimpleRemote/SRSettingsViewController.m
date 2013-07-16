@@ -164,7 +164,9 @@
                 // pressed Add New Peripheral cell
                 IRNewPeripheralViewController *c = [[IRNewPeripheralViewController alloc] init];
                 c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-                [self presentViewController:c animated:YES completion:^{
+                [self presentViewController:c
+                                   animated:YES
+                                 completion:^{
                     LOG( @"presented" );
                 }];
                 return;
