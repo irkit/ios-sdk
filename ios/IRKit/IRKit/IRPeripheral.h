@@ -22,6 +22,12 @@
 @property (nonatomic) BOOL shouldReadIRData;
 @property (nonatomic) BOOL wantsToConnect;
 
+@property (nonatomic) NSString *manufacturerName;
+@property (nonatomic) NSString *modelName;
+@property (nonatomic) NSString *hardwareRevision;
+@property (nonatomic) NSString *firmwareRevision;
+@property (nonatomic) NSString *softwareRevision;
+
 - (BOOL) isReady;
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 - (void) writeData: (NSData*)value
@@ -29,5 +35,6 @@ forCharacteristicWithUUID: (CBUUID*)characteristicUUID
  ofServiceWithUUID: (CBUUID*)serviceUUID
         completion: (void (^)(NSError *error))block;
 - (void) didDisconnect;
+- (NSString*) modelNameAndRevision;
 
 @end

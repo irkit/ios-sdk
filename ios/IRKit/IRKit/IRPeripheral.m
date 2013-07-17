@@ -32,6 +32,12 @@
     _authorized       = NO;
     _shouldReadIRData = NO;
     _writeQueue       = nil;
+    
+    _manufacturerName = nil;
+    _modelName        = nil;
+    _hardwareRevision = nil;
+    _firmwareRevision = nil;
+    _softwareRevision = nil;
     return self;
 }
 
@@ -120,6 +126,14 @@
     LOG_CURRENT_METHOD;
     
     [_writeQueue setSuspended: YES];
+}
+
+- (NSString*) modelNameAndRevision {
+    LOG_CURRENT_METHOD;
+    if ( ! _modelName || ! _hardwareRevision || ! _firmwareRevision || ! _softwareRevision ) {
+        return @"unknown";
+    }
+    return [@[_modelName, _hardwareRevision, _firmwareRevision, _softwareRevision] componentsJoinedByString:@"/"];
 }
 
 #pragma mark - Private methods
@@ -294,24 +308,24 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     
     // 2a29: org.bluetooth.characteristic.manufacturer_name_string
     if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MANUFACTURER_NAME_UUID]) {
-        NSString* manufacturer = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Manufacturer Name = %@", manufacturer);
+        _manufacturerName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Manufacturer Name = %@", _manufacturerName);
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MODEL_NAME_UUID]) {
-        NSString* model = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Model Name = %@", model);
+        _modelName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Model Name = %@", _modelName);
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_HARDWARE_REVISION_UUID]) {
-        NSString* hardware = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Hardware Revision = %@", hardware);
+        _hardwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Hardware Revision = %@", _hardwareRevision);
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_FIRMWARE_REVISION_UUID]) {
-        NSString* firmware = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Firmware Revision = %@", firmware);
+        _firmwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Firmware Revision = %@", _firmwareRevision);
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_SOFTWARE_REVISION_UUID]) {
-        NSString* software = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Software Revision = %@", software);
+        _softwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Software Revision = %@", _softwareRevision);
     }
 }
 
@@ -332,15 +346,29 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     [coder encodeObject:_customizedName forKey:@"c"];
     [coder encodeObject:_foundDate      forKey:@"f"];
     [coder encodeObject:[NSNumber numberWithBool:_authorized] forKey:@"a"];
+
+    // d: Device information
+    [coder encodeObject:_manufacturerName forKey:@"dm"];
+    [coder encodeObject:_modelName        forKey:@"do"];
+    [coder encodeObject:_hardwareRevision forKey:@"dh"];
+    [coder encodeObject:_firmwareRevision forKey:@"df"];
+    [coder encodeObject:_softwareRevision forKey:@"ds"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
     self = [self init];
     if (self) {
-        _customizedName = [coder decodeObjectForKey:@"c"];
-        _foundDate      = [coder decodeObjectForKey:@"f"];
-        _authorized     = [[coder decodeObjectForKey:@"a"] boolValue];
-        _peripheral     = nil;
+        _customizedName   = [coder decodeObjectForKey:@"c"];
+        _foundDate        = [coder decodeObjectForKey:@"f"];
+        _authorized       = [[coder decodeObjectForKey:@"a"] boolValue];
+        
+        _manufacturerName = [coder decodeObjectForKey:@"dm"];
+        _modelName        = [coder decodeObjectForKey:@"do"];
+        _hardwareRevision = [coder decodeObjectForKey:@"dh"];
+        _firmwareRevision = [coder decodeObjectForKey:@"df"];
+        _softwareRevision = [coder decodeObjectForKey:@"ds"];
+        
+        _peripheral       = nil;
         
         if ( ! _customizedName ) {
             _customizedName = @"unknown";

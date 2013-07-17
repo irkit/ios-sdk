@@ -130,9 +130,7 @@ static const unsigned char whitePNGImage[] = {
                        context:(void *)context {
     LOG( @"keyPath: %@", keyPath );
     
-    NSString *uuid = [IRHelper stringFromCFUUID:self.peripheral.peripheral.UUID];
-    LOG( @"uuid: %@", uuid );
-    self.secondTextLabel.text = uuid;
+    self.secondTextLabel.text = [NSString stringWithFormat:@"%@\n%@",[IRHelper stringFromCFUUID:_peripheral.peripheral.UUID], _peripheral.modelNameAndRevision];
     [self setNeedsDisplay];
 }
 
