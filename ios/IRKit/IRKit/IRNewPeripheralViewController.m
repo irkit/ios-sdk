@@ -36,7 +36,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
     
-    __weak IRNewPeripheralViewController *_self =
+    __weak IRNewPeripheralViewController *_self = self;
     [[NSNotificationCenter defaultCenter]
         addObserverForName:IRKitDidConnectPeripheralNotification
         object:nil

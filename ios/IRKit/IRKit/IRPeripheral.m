@@ -174,24 +174,6 @@ didDiscoverServices:(NSError *)error
         // discover characterstics for all services (just interested now)
         [peripheral discoverCharacteristics:IRKIT_CHARACTERISTICS
                                  forService:service];
-        
-        //        // Device Information Service
-        //        if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
-        //        {
-        //            [peripheral discoverCharacteristics:nil forService:service];
-        //        }
-        //
-        //        // GAP (Generic Access Profile) for Device Name
-        //        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
-        //        {
-        //            [peripheral discoverCharacteristics:nil forService:service];
-        //        }
-        //
-        //        // GATT (Generic Attribute Profile)
-        //        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAttributeProfileString]] )
-        //        {
-        //            [peripheral discoverCharacteristics:nil forService:service];
-        //        }
     }
 }
 
@@ -240,33 +222,14 @@ didDiscoverCharacteristicsForService:(CBService *)service
         }
     }
     
-    //    if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
-    //    {
-    //        for (CBCharacteristic *characteristic in service.characteristics)
-    //        {
-    //            /* Read device name */
-    //            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
-    //            {
-    //                [peripheral readValueForCharacteristic:characteristic];
-    //                LOG(@"Found a Device Name Characteristic, RSSI: %@", peripheral.RSSI);
-    //            }
-    //        }
-    //    }
-    //
-    //    // org.bluetooth.service.device_information
-    //    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
-    //    {
-    //        for (CBCharacteristic *characteristic in service.characteristics)
-    //        {
-    //            // Read manufacturer name
-    //            // 2a29: org.bluetooth.characteristic.manufacturer_name_string
-    //            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
-    //            {
-    //                [peripheral readValueForCharacteristic:characteristic];
-    //                LOG(@"Found a Device Manufacturer Name Characteristic");
-    //            }
-    //        }
-    //    }
+    // org.bluetooth.service.device_information
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
+    {
+        for (CBCharacteristic *characteristic in service.characteristics)
+        {
+            [peripheral readValueForCharacteristic:characteristic];
+        }
+    }
 }
 
 /*
@@ -329,14 +292,26 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         }
     }
     
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
-        NSString * deviceName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Device Name = %@", deviceName);
-    }
     // 2a29: org.bluetooth.characteristic.manufacturer_name_string
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]]) {
+    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MANUFACTURER_NAME_UUID]) {
         NSString* manufacturer = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
         LOG(@"Manufacturer Name = %@", manufacturer);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MODEL_NAME_UUID]) {
+        NSString* model = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Model Name = %@", model);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_HARDWARE_REVISION_UUID]) {
+        NSString* hardware = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Hardware Revision = %@", hardware);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_FIRMWARE_REVISION_UUID]) {
+        NSString* firmware = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Firmware Revision = %@", firmware);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_SOFTWARE_REVISION_UUID]) {
+        NSString* software = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Software Revision = %@", software);
     }
 }
 
