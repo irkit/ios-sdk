@@ -69,8 +69,7 @@
 }
 
 - (NSEnumerator*)enumeratorOfSignals {
-    // TODO sort using receivedDate
-    return _signals.objectEnumerator;
+    return [_signals.allValues sortedArrayUsingSelector:@selector(compareByReceivedDate:)].objectEnumerator;
 }
 
 - (IRSignal*)memberOfSignals:(IRSignal *)object {

@@ -118,7 +118,7 @@
 - (NSEnumerator *)enumeratorOfPeripherals {
     LOG_CURRENT_METHOD;
 
-    return _irperipheralForUUID.objectEnumerator;
+    return [_irperipheralForUUID.allValues sortedArrayUsingSelector:@selector(compareByFirstFoundDate:)].objectEnumerator;
 }
 
 - (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)peripheral {

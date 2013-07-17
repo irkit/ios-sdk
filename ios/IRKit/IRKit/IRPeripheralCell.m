@@ -112,8 +112,6 @@ static const unsigned char whitePNGImage[] = {
                              self.imageView.image = object;
                          }];
 
-    // TODO: draw graph?
-
     [_peripheral addObserver:self
                   forKeyPath:@"peripheral"
                      options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld

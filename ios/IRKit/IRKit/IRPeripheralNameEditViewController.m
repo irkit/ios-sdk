@@ -57,8 +57,6 @@
     LOG(@"textField.frame: %@", NSStringFromCGRect(frame));
     [view addSubview:_textField];
 
-    // TODO use uitableview to select peripheral name from preset
-
     self.view = view;
 }
 
