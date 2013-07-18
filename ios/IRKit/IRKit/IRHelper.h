@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface IRHelper : NSObject
 
@@ -18,5 +19,7 @@
 
 + (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid;
 + (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic withCBUUID:(CBUUID*)uuid;
++ (void)loadImage:(NSString*)url
+completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler;
 
 @end

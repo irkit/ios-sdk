@@ -7,7 +7,6 @@
 //
 
 #import "IRPeripheralCell.h"
-#import "IR_ISNetwork.h"
 #import "IRHelper.h"
 
 // NSString *url = @"http://placehold.jp/ffffff/ffffff/1x1.png";
@@ -99,18 +98,12 @@ static const unsigned char whitePNGImage[] = {
 
     // load image from internet
     NSString *url = @"http://maaash.jp/lab/irkit/irkit-board.png";
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
-                                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                         timeoutInterval:60.];
-    [IR_ISNetworkClient sendRequest:request
-                  operationClass:[IR_ISImageNetworkOperation class]
-                         handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
-                             LOG( @"loaded: %@", response.URL);
-                             if (error || response.statusCode != 200) {
-                                 return;
-                             }
-                             self.imageView.image = object;
-                         }];
+    [IRHelper loadImage:url completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
+        if (error || (response.statusCode != 200) || ! image) {
+            return;
+        }
+        self.imageView.image = image;
+    }];
 
     [_peripheral addObserver:self
                   forKeyPath:@"peripheral"
