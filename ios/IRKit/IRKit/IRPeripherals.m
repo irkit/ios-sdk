@@ -97,7 +97,8 @@
 
     NSData* data = [IRPersistentStore objectForKey: @"peripherals"];
 
-    _irperipheralForUUID = (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    _irperipheralForUUID = data ? (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data]
+                                : nil;
     if ( ! _irperipheralForUUID ) {
         _irperipheralForUUID = [[NSMutableDictionary alloc] init];
     }
@@ -161,7 +162,8 @@
         peripheral.delegate = p;
     }
     else {
-        p                   = [[IRPeripheral alloc] initWithManager:_manager];
+        p                   = [[IRPeripheral alloc] init];
+        [p setManager: _manager];
         [p setPeripheral: peripheral];
         p.customizedName    = peripheral.name; // defaults to original name
         peripheral.delegate = p;

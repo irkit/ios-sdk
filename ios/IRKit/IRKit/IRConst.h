@@ -50,26 +50,31 @@
 #define IRKIT_SERVICE_BASE_UUID (@"00000000-0000-1000-8000-00805F9B34FB")
 
 // org.bluetooth.service.immediate_alert
-#define IRKIT_SERVICE_IMMEDIATE_ALERT    0x1802
+#define IRKIT_SERVICE_IMMEDIATE_ALERT    [CBUUID UUIDWithString: @"1802"]
 
 // org.bluetooth.service.link_loss
-#define IRKIT_SERVICE_LINK_LOSS          0x1803
+#define IRKIT_SERVICE_LINK_LOSS          [CBUUID UUIDWithString: @"1803"]
 
 // org.bluetooth.service.tx_power
-#define IRKIT_SERVICE_TX_POWER           0x1804
+#define IRKIT_SERVICE_TX_POWER           [CBUUID UUIDWithString: @"1804"]
 
 // org.bluetooth.service.device_information
-#define IRKIT_SERVICE_DEVICE_INFORMATION 0x180A
+#define IRKIT_SERVICE_DEVICE_INFORMATION [CBUUID UUIDWithString: @"180A"]
 
 // org.bluetooth.service.battery_service
-#define IRKIT_SERVICE_BATTERY_SERVICE    0x180F
+#define IRKIT_SERVICE_BATTERY_SERVICE    [CBUUID UUIDWithString: @"180F"]
 
 #pragma mark - NSNotification names
 
+// discovered unauthorized peripheral
+#define IRKitDidDiscoverUnauthorizedPeripheralNotification @"IRKit::DiscoveredUnauthorized"
+
+// user authorized peripheral for the 1st time
+#define IRKitDidAuthorizePeripheralNotification            @"IRKit::Authorized"
+
+// connected to peripheral and ready to send
 #define IRKitDidConnectPeripheralNotification              @"IRKit::DidConnect"
 #define IRKitDidDisconnectPeripheralNotification           @"IRKit::DidDisconnect"
-#define IRKitDidAuthorizePeripheralNotification            @"IRKit::Authorized"
-#define IRKitDidDiscoverUnauthorizedPeripheralNotification @"IRKit::DiscoveredUnauthorized"
 #define IRKitDidReceiveSignalNotification                  @"IRKit::ReceivedSignal"
 
 #define IRKitSignalUserInfoKey                   @"signal"

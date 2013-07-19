@@ -40,7 +40,8 @@
 }
 
 - (void)loadFromData: (NSData*)data {
-    NSMutableSet *set = (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSMutableSet *set = data ? (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data]
+                             : nil;
     if ( set ) {
         _signals = set;
     }

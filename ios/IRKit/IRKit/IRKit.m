@@ -39,14 +39,13 @@
 
     _peripherals = [[IRPeripherals alloc] initWithManager:_manager];
     _shouldScan  = NO;
-    __weak IRKit *_self = self;
     _observer    = [[NSNotificationCenter defaultCenter]
                     addObserverForName:UIApplicationWillTerminateNotification
                                 object:nil
                                 queue:[NSOperationQueue mainQueue]
                            usingBlock:^(NSNotification *note) {
                       LOG( @"terminating" );
-                      [_self save];
+                      [[IRKit sharedInstance] save];
                   }];
     _retainConnectionInBackground = NO;
 
@@ -77,16 +76,14 @@
     LOG_CURRENT_METHOD;
     
     if (_manager.state == CBCentralManagerStatePoweredOn) {
-        // we want duplicates: peripheral updates receivedCount in adv packet when receiving IR data
+        // we want duplicates:
+        // peripheral updates receivedCount in adv packet when receiving IR data
         [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
                                          options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES
          }];
-        // find anything
-        // [_manager scanForPeripheralsWithServices:nil
-        //                                  options:nil];
     }
     else {
-        _shouldScan = YES; // scans when powered on
+        _shouldScan = YES; // starts scanning when powered on
     }
 }
 

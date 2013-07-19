@@ -11,6 +11,8 @@
 #import "IRHelper.h"
 #import <CommonCrypto/CommonDigest.h>
 
+#define LOG_DISABLED 1
+
 @implementation IRHelper
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block {

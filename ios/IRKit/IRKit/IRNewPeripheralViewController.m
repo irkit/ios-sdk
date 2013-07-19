@@ -37,31 +37,38 @@
     [super viewDidLoad];
     
     __weak IRNewPeripheralViewController *_self = self;
-    [[NSNotificationCenter defaultCenter]
-        addObserverForName:IRKitDidConnectPeripheralNotification
-        object:nil
-        queue:[NSOperationQueue mainQueue]
-        usingBlock:^(NSNotification *note) {
-            LOG( @"new irkit connected");
-            IRNewPeripheralScene2ViewController *c =
-            [[IRNewPeripheralScene2ViewController alloc] init];
-            c.delegate = _self;
-            [_self.navController pushViewController:c
-                                           animated:YES];
-        }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidConnectPeripheralNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      LOG( @"new irkit connected");
+                                                      IRPeripheral *p = (IRPeripheral*)(note.object);
+                                                      if (p.authorized) {
+                                                          LOG( @"already authorized" );
+                                                          // skip to step3 if peripheral
+                                                          // remembers me
+                                                          IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+                                                          c.delegate = _self;
+                                                          [_self.navController pushViewController:c
+                                                                                         animated:YES];
+                                                          return;
+                                                      }
+                                                      IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] init];
+                                                      c.delegate = _self;
+                                                      [_self.navController pushViewController:c
+                                                                                     animated:YES];
+                                                  }];
     
-    [[NSNotificationCenter defaultCenter]
-        addObserverForName:IRKitDidAuthorizePeripheralNotification
-        object:nil
-        queue:[NSOperationQueue mainQueue]
-        usingBlock:^(NSNotification *note) {
-            LOG( @"irkit authorized");
-            IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
-            c.delegate = _self;
-            [_self.navController pushViewController:c
-                                           animated:YES];
-        }];
-
+    [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidAuthorizePeripheralNotification
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *note) {
+                                                      LOG( @"irkit authorized");
+                                                      IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+                                                      c.delegate = _self;
+                                                      [_self.navController pushViewController:c
+                                                                                     animated:YES];
+                                                  }];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

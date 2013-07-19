@@ -27,7 +27,6 @@
 @property (nonatomic) NSString *firmwareRevision;
 @property (nonatomic) NSString *softwareRevision;
 
-- (id) initWithManager: (CBCentralManager*)manager;
 - (BOOL) isReady;
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 
