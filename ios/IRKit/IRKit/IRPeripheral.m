@@ -51,13 +51,6 @@
                        : NO;
 }
 
-- (void)connect {
-    LOG_CURRENT_METHOD;
-
-    _wantsToConnect = YES;
-    [[IRKit sharedInstance] retrieveKnownPeripherals];
-}
-
 - (void)setPeripheral:(CBPeripheral *)peripheral {
     // LOG_CURRENT_METHOD;
     
@@ -104,24 +97,6 @@
     [_writeQueue addOperation:op];
 }
 
-- (void) cancelDisconnectTimer {
-    LOG_CURRENT_METHOD;
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-}
-
-- (void) restartDisconnectTimer {
-    LOG_CURRENT_METHOD;
-    
-    [self cancelDisconnectTimer];
-
-    // disconnect after interval
-    // regarding that we might want to continuously write to this peripheral
-    [self performSelector:@selector(disconnect)
-               withObject:nil
-               afterDelay:5.];
-}
-
 - (void) didDisconnect {
     LOG_CURRENT_METHOD;
     
@@ -138,11 +113,36 @@
 
 #pragma mark - Private methods
 
+- (void)connect {
+    LOG_CURRENT_METHOD;
+    
+    _wantsToConnect = YES;
+    [[IRKit sharedInstance] retrieveKnownPeripherals];
+}
+
 - (void) disconnect {
     LOG_CURRENT_METHOD;
 
     [_writeQueue setSuspended: YES];
     [[IRKit sharedInstance] disconnectPeripheral: self];
+}
+
+- (void) cancelDisconnectTimer {
+    LOG_CURRENT_METHOD;
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
+- (void) restartDisconnectTimer {
+    LOG_CURRENT_METHOD;
+    
+    [self cancelDisconnectTimer];
+    
+    // disconnect after interval
+    // regarding that we might want to continuously write to this peripheral
+    [self performSelector:@selector(disconnect)
+               withObject:nil
+               afterDelay:5.];
 }
 
 - (BOOL) canReadAllCharacteristics {
