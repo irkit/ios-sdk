@@ -22,14 +22,17 @@
 // CBPeripheral.UUID => IRPeripheral
 @property (nonatomic) NSMutableDictionary* irperipheralForUUID;
 
+@property (nonatomic) CBCentralManager* manager;
+
 @end
 
 @implementation IRPeripherals
 
-- (id)init {
-    self = [super init];
+- (id)initWithManager: (CBCentralManager*) manager {
+    self = [self init];
     if (! self) { return nil; }
 
+    _manager = manager;
     _unknownPeripherals = [[NSMutableSet alloc] init];
     [self load];
 
@@ -98,6 +101,11 @@
     if ( ! _irperipheralForUUID ) {
         _irperipheralForUUID = [[NSMutableDictionary alloc] init];
     }
+    
+    for (IRPeripheral* peripheral in [_irperipheralForUUID allValues]) {
+        [peripheral setManager:_manager];
+    }
+    
     LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
 }
 
@@ -141,19 +149,22 @@
         [_unknownPeripherals addObject:peripheral];
         return;
     }
-    // we got it's UUID, so don't need to retain peripheral in _unknownPeripherals anymore, we're gonna retain it in _irperipheralForUUID
+    // we got it's UUID, so don't need to retain peripheral in _unknownPeripherals anymore, we'll retain it in _irperipheralForUUID
     [_unknownPeripherals removeObject:peripheral];
 
     NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
+
     IRPeripheral *p = _irperipheralForUUID[uuidKey];
     if (p) {
         // found known but disconnected peripheral
-        p.peripheral = peripheral;
+        [p setPeripheral: peripheral];
+        peripheral.delegate = p;
     }
     else {
-        p                = [[IRPeripheral alloc] init];
-        p.peripheral     = peripheral;
-        p.customizedName = peripheral.name; // defaults to original name
+        p                   = [[IRPeripheral alloc] initWithManager:_manager];
+        [p setPeripheral: peripheral];
+        p.customizedName    = peripheral.name; // defaults to original name
+        peripheral.delegate = p;
         _irperipheralForUUID[uuidKey] = p;
         [self save];
     }

@@ -44,25 +44,12 @@
                        });
         return;
     }
-    for (CBService *service in _peripheral.peripheral.services) {
-        LOG( @"service: %@, UUID: %@", service, service.UUID );
-        
-        if ( [IRHelper CBUUID: service.UUID
-              isEqualToCBUUID: _serviceUUID]) {
-            for (CBCharacteristic *c12c in service.characteristics) {
-                LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",
-                    c12c, c12c.UUID, c12c.value, c12c.descriptors, NSStringFromCBCharacteristicProperty(c12c.properties), c12c.isNotifying, c12c.isBroadcasted );
 
-                if ([IRHelper CBUUID: c12c.UUID
-                     isEqualToCBUUID: _characteristicUUID]) {
-                    LOG( @"wrote to service: %@ c12c: %@ data: %@", _serviceUUID, _characteristicUUID, _data );
-                    [_peripheral.peripheral writeValue:_data
-                                     forCharacteristic:c12c
-                                                  type:CBCharacteristicWriteWithResponse];
-                    return;
-                }
-            }
-        }
+    BOOL wrote = [_peripheral writeValue:_data
+               forCharacteristicWithUUID:_characteristicUUID
+                       ofServiceWithUUID:_serviceUUID];
+    if (wrote) {
+        return;
     }
     dispatch_async( dispatch_get_main_queue(), ^{
         LOG( @"not found service: %@ c12c: %@", _serviceUUID, _characteristicUUID );

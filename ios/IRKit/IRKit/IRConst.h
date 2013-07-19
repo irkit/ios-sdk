@@ -72,7 +72,6 @@
 #define IRKitDidDiscoverUnauthorizedPeripheralNotification @"IRKit::DiscoveredUnauthorized"
 #define IRKitDidReceiveSignalNotification                  @"IRKit::ReceivedSignal"
 
-#define IRKitPeripheralUserInfoKey               @"peripheral"
 #define IRKitSignalUserInfoKey                   @"signal"
 
 #pragma mark - UITableViewCell identifiers
@@ -85,8 +84,8 @@
 #define IRViewControllerResultType           @"result"
 #define IRViewControllerResultTypeCancelled  @"cancelled"
 #define IRViewControllerResultTypeDone       @"done"
-#define IRViewControllerResultPeripheral     IRKitPeripheralUserInfoKey
-#define IRViewControllerResultSignal         IRKitSignalUserInfoKey
+#define IRViewControllerResultPeripheral     @"peripheral"
+#define IRViewControllerResultSignal         @"signal"
 #define IRViewControllerResultText           @"text"
 
 #pragma mark - Errors

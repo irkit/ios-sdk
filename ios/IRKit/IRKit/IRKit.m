@@ -37,9 +37,7 @@
     _manager = [[CBCentralManager alloc] initWithDelegate:self
                                                     queue:nil];
 
-    _peripherals = [[IRPeripherals alloc] init];
-    _autoConnect = NO;
-    _isScanning  = NO;
+    _peripherals = [[IRPeripherals alloc] initWithManager:_manager];
     _shouldScan  = NO;
     __weak IRKit *_self = self;
     _observer    = [[NSNotificationCenter defaultCenter]
@@ -60,12 +58,25 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_observer];
 }
 
+- (void) save {
+    LOG_CURRENT_METHOD;
+    [_peripherals save];
+}
+
+- (NSUInteger) numberOfAuthorizedPeripherals {
+    LOG_CURRENT_METHOD;
+    return _peripherals.countOfAuthorizedPeripherals;
+}
+
+- (NSUInteger) numberOfPeripherals {
+    LOG_CURRENT_METHOD;
+    return _peripherals.countOfPeripherals;
+}
+
 - (void) startScan {
     LOG_CURRENT_METHOD;
-
+    
     if (_manager.state == CBCentralManagerStatePoweredOn) {
-        _isScanning = YES;
-
         // we want duplicates: peripheral updates receivedCount in adv packet when receiving IR data
         [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
                                          options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES
@@ -81,49 +92,20 @@
 
 - (void) stopScan {
     LOG_CURRENT_METHOD;
-    _isScanning = NO;
     _shouldScan = NO;
     [_manager stopScan];
 }
 
-- (void) save {
-    LOG_CURRENT_METHOD;
-    [_peripherals save];
-}
-
-- (void) disconnectPeripheral: (IRPeripheral*)peripheral {
-    LOG_CURRENT_METHOD;
-    
-    if (_retainConnectionInBackground && peripheral.authorized) {
-        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-        if (state == UIApplicationStateBackground || state == UIApplicationStateInactive) {
-            // don't disconnect in the background
-            LOG( @"dont disconnect in the background" );
-            return;
-        }
-    }
-
-    [_manager cancelPeripheralConnection: peripheral.peripheral];
-}
+#pragma mark - Private
 
 - (void) retrieveKnownPeripherals {
     LOG_CURRENT_METHOD;
-
+    
     NSArray *knownPeripherals = [_peripherals knownPeripheralUUIDs];
     if ([knownPeripherals count]) {
         LOG( @"retrieve: %@", knownPeripherals );
         [_manager retrievePeripherals: knownPeripherals];
     }
-}
-
-- (NSUInteger) numberOfAuthorizedPeripherals {
-    LOG_CURRENT_METHOD;
-    return _peripherals.countOfAuthorizedPeripherals;
-}
-
-- (NSUInteger) numberOfPeripherals {
-    LOG_CURRENT_METHOD;
-    return _peripherals.countOfPeripherals;
 }
 
 #pragma mark - CBCentralManagerDelegate
@@ -136,45 +118,8 @@
 
     [_peripherals addPeripheralsObject:peripheral]; // retain
     IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
-    peripheral.delegate = p;
-
-    NSData *data = advertisementData[CBAdvertisementDataManufacturerDataKey];
-    uint8_t receivedCount = 0;
-    if (data) {
-        [data getBytes:&receivedCount
-                 range:(NSRange){0,1}];
-    }
-    LOG( @"peripheral: %@ receivedCount: %d", peripheral, receivedCount );
-
-    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-
-    // connect when:
-    // * app in foreground and not authorized = we need to connect to receive auth c12c's indication
-    // * app in foreground and peripheral's received count has changed = peripheral should have received IR data, we're gonna read it
-    // * we're in background and retainConnectionInBackground is YES
-    if ( (state == UIApplicationStateActive) && ! p.authorized ) {
-        [_manager connectPeripheral:peripheral
-                            options:@{
-            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
-         }];
-    }
-    else if ( (state == UIApplicationStateActive) &&
-              (p.receivedCount != IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN) &&
-              (p.receivedCount != (uint16_t)receivedCount) ) {
-        p.shouldReadIRData = YES;
-        [_manager connectPeripheral:peripheral
-                            options:@{
-            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
-         }];
-    }
-    else if ( _retainConnectionInBackground &&
-              (state != UIApplicationStateActive) ) {
-        [_manager connectPeripheral:peripheral
-                            options:@{
-            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
-        }];
-    }
-    p.receivedCount = receivedCount;
+    [p didDiscoverWithAdvertisementData: advertisementData
+                                   RSSI: RSSI];
 }
 
 - (void)centralManager:(CBCentralManager *)central
@@ -194,12 +139,7 @@ didRetrievePeripherals:(NSArray *)peripherals {
     for (CBPeripheral *peripheral in peripherals) {
         [_peripherals addPeripheralsObject:peripheral]; // retain
         IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
-        peripheral.delegate = p;
-        
-        if (p.wantsToConnect) {
-            [_manager connectPeripheral:peripheral
-                                options:@{ CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES }];
-        }
+        [p didRetrieve];
     }
 }
 
@@ -208,13 +148,7 @@ didRetrievePeripherals:(NSArray *)peripherals {
     LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
 
     IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
-
-    [[NSNotificationCenter defaultCenter]
-                postNotificationName:IRKitDidConnectPeripheralNotification
-                              object:self
-                            userInfo:@{ IRKitPeripheralUserInfoKey: p } ];
-
-    [peripheral discoverServices:nil];
+    [p didConnect];
 }
 
 - (void)centralManager:(CBCentralManager *)central
@@ -224,11 +158,6 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 
     IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
     [p didDisconnect];
-
-    [[NSNotificationCenter defaultCenter]
-        postNotificationName:IRKitDidDisconnectPeripheralNotification
-                      object:self
-                    userInfo:@{ IRKitPeripheralUserInfoKey: p } ];
 
     // hack
     // see http://stackoverflow.com/questions/9896562/what-exactly-can-corebluetooth-applications-do-whilst-in-the-background/17484051#17484051

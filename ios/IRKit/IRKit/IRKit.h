@@ -26,15 +26,11 @@
 - (void) startScan;
 - (void) stopScan;
 - (void) save;
-- (void) disconnectPeripheral: (IRPeripheral*)peripheral;
-- (void) retrieveKnownPeripherals;
-- (NSUInteger) numberOfAuthorizedPeripherals;
 
-@property (nonatomic) BOOL autoConnect;
-@property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL retainConnectionInBackground;
 
-@property (nonatomic) NSUInteger numberOfPeripherals;
+@property (nonatomic, readonly) NSUInteger numberOfAuthorizedPeripherals;
+@property (nonatomic, readonly) NSUInteger numberOfPeripherals;
 @property (nonatomic) IRPeripherals *peripherals;
 
 @end

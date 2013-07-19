@@ -92,9 +92,7 @@ static const unsigned char whitePNGImage[] = {
     _peripheral = peripheral;
     
     self.textLabel.text = peripheral.customizedName;
-    if (peripheral.peripheral) {
-        self.secondTextLabel.text = [IRHelper stringFromCFUUID:peripheral.peripheral.UUID];
-    }
+    self.secondTextLabel.text = peripheral.modelNameAndRevision;
 
     // load image from internet
     NSString *url = @"http://maaash.jp/lab/irkit/irkit-board.png";
@@ -123,7 +121,7 @@ static const unsigned char whitePNGImage[] = {
                        context:(void *)context {
     LOG( @"keyPath: %@", keyPath );
     
-    self.secondTextLabel.text = [NSString stringWithFormat:@"%@\n%@",[IRHelper stringFromCFUUID:_peripheral.peripheral.UUID], _peripheral.modelNameAndRevision];
+    self.secondTextLabel.text = _peripheral.modelNameAndRevision;
     [self setNeedsDisplay];
 }
 
