@@ -7,11 +7,13 @@
 //
 
 #import "IRNewPeripheralScene2ViewController.h"
+#import "IRNewPeripheralScene3ViewController.h"
 #import "IRConst.h"
 
 @interface IRNewPeripheralScene2ViewController ()
 
 @property (nonatomic) UILabel *label;
+@property (nonatomic) id observer;
 
 @end
 
@@ -64,9 +66,40 @@
                               action:@selector(cancelButtonPressed:)];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewDidAppear:animated];
+
+    if (_peripheral.authorized) {
+        [self didAuthorize];
+        return;
+    }
+    // TODO what if authorized here? synchronize?
+    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidAuthorizePeripheralNotification
+                                                                  object:nil
+                                                                   queue:[NSOperationQueue mainQueue]
+                                                              usingBlock:^(NSNotification *note) {
+                                                                  LOG( @"irkit authorized");
+                                                                  [self didAuthorize];
+                                                              }];
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+}
+
+- (void) didAuthorize {
+    LOG_CURRENT_METHOD;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+
+    IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+    c.delegate = self.delegate;
+    [self.navigationController pushViewController:c
+                                         animated:YES];
 }
 
 #pragma mark - UI events

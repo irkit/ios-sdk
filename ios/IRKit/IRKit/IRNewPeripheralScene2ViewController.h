@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IRPeripheral.h"
 
 @protocol IRNewPeripheralScene2ViewControllerDelegate;
 
 @interface IRNewPeripheralScene2ViewController : UIViewController
 
 @property (nonatomic, assign) id<IRNewPeripheralScene2ViewControllerDelegate> delegate;
+@property (nonatomic) IRPeripheral *peripheral;
 
 @end
 

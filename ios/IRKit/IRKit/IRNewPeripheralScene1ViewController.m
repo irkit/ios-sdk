@@ -7,11 +7,15 @@
 //
 
 #import "IRNewPeripheralScene1ViewController.h"
+#import "IRNewPeripheralScene2ViewController.h"
+#import "IRNewPeripheralScene3ViewController.h"
 #import "IRConst.h"
+#import "IRPeripheral.h"
 
 @interface IRNewPeripheralScene1ViewController ()
 
 @property (nonatomic) UILabel *label;
+@property (nonatomic) id observer;
 
 @end
 
@@ -64,9 +68,48 @@
                               action:@selector(cancelButtonPressed:)];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewDidAppear:animated];
+
+    // TODO what if already connected?
+    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidConnectPeripheralNotification
+                                                                  object:nil
+                                                                   queue:[NSOperationQueue mainQueue]
+                                                              usingBlock:^(NSNotification *note) {
+                                                                  LOG( @"new irkit connected");
+                                                                  [self didConnectPeripheral: note.object];
+                                                              }];
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+}
+
+- (void) didConnectPeripheral: (IRPeripheral*)peripheral {
+    LOG_CURRENT_METHOD;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+
+    if (peripheral.authorized) {
+        LOG( @"already authorized" );
+        // skip to step3 if peripheral
+        // remembers me
+        IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+        c.delegate = self.delegate;
+        [self.navigationController pushViewController:c
+                                             animated:YES];
+        return;
+    }
+    IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] init];
+    c.peripheral = peripheral;
+    c.delegate = self.delegate;
+    [self.navigationController pushViewController:c
+                                         animated:YES];
+
 }
 
 #pragma mark - UI events

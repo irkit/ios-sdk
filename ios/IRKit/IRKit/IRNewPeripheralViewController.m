@@ -35,40 +35,6 @@
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-    
-    __weak IRNewPeripheralViewController *_self = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidConnectPeripheralNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      LOG( @"new irkit connected");
-                                                      IRPeripheral *p = (IRPeripheral*)(note.object);
-                                                      if (p.authorized) {
-                                                          LOG( @"already authorized" );
-                                                          // skip to step3 if peripheral
-                                                          // remembers me
-                                                          IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
-                                                          c.delegate = _self;
-                                                          [_self.navController pushViewController:c
-                                                                                         animated:YES];
-                                                          return;
-                                                      }
-                                                      IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] init];
-                                                      c.delegate = _self;
-                                                      [_self.navController pushViewController:c
-                                                                                     animated:YES];
-                                                  }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidAuthorizePeripheralNotification
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *note) {
-                                                      LOG( @"irkit authorized");
-                                                      IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
-                                                      c.delegate = _self;
-                                                      [_self.navController pushViewController:c
-                                                                                     animated:YES];
-                                                  }];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -103,21 +69,23 @@
 
 #pragma mark - IRNewPeripheralScene1ViewControllerDelegate
 
-- (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
                                  didFinishWithInfo:@{
                         IRViewControllerResultType: IRViewControllerResultTypeCancelled
-         }];
+         }];    
     }
     // shouldnt happen
 }
 
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
 
-- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -131,7 +99,8 @@
 
 #pragma mark - IRNewPeripheralScene3ViewControllerDelegate
 
-- (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
