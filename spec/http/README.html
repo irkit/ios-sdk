@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>README.html</title>
+<link rel="stylesheet" type="text/css" media="all" href="https://gist.github.com/andyferra/2554919/raw/2e66cabdafe1c9a7f354aa2ebf5bc38265e638e5/github.css"  />
+
+</head>
+
+<body>
+
+<h1>
+<a name="http-api-docs" class="anchor" href="#http-api-docs"><span class="octicon octicon-link"></span></a>HTTP API Docs</h1>
+
+<p>Host: getirkit.appspot.com</p>
+
+<h2>
+<a name="post-appsoneicons" class="anchor" href="#post-appsoneicons"><span class="octicon octicon-link"></span></a>POST /apps/one/icons</h2>
+
+<p>Create Icon with image data and ir signal data.</p>
+
+<h3>
+<a name="request-parameters" class="anchor" href="#request-parameters"><span class="octicon octicon-link"></span></a>Request parameters</h3>
+
+<ul>
+<li>
+<p>icon</p>
+
+<p>multipart/form-data jpeg or png binary</p>
+</li>
+<li>
+<p>irdata</p>
+
+<p>IR data</p>
+</li>
+<li>
+<p>irfreq</p>
+
+<p>IR carrier frequency in KHz
+Optional, default: 38</p>
+</li>
+</ul><h3>
+<a name="response-json" class="anchor" href="#response-json"><span class="octicon octicon-link"></span></a>Response JSON</h3>
+
+<pre><code>{
+  icon: {
+    id: "xxxxxx",
+    url: "xxxxxxx"
+  }
+}
+</code></pre>
+
+<h2>
+<a name="get-appsoneiconsiconid" class="anchor" href="#get-appsoneiconsiconid"><span class="octicon octicon-link"></span></a>GET /apps/one/icons/{icon.id}</h2>
+
+<p>Redirect to data scheme which user bookmarks</p>
+
+<h3>
+<a name="path-parameters" class="anchor" href="#path-parameters"><span class="octicon octicon-link"></span></a>Path parameters</h3>
+
+<ul>
+<li>
+<p>icon.id</p>
+
+<p>id retrieved by POST /apps/one/icons</p>
+</li>
+</ul>
+</body>
+</html>
