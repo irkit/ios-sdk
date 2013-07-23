@@ -16,12 +16,38 @@
     LOG( @"options: %@", launchOptions );
     // Override point for customization after application launch.
 
+    NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
+    if (url) {
+        return [[IRKit sharedInstance] canHandleOpenURL: url];
+    }
+
     [[IRKit sharedInstance] startScan];
     [IRKit sharedInstance].retainConnectionInBackground = YES;
     
     return YES;
 }
-							
+
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    LOG( @"options: %@", launchOptions);
+
+    NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
+    if (url) {
+        return [[IRKit sharedInstance] canHandleOpenURL: url];
+    }
+
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    LOG( @"url: %@, sourceApplication: %@, annotation: %@", url, sourceApplication, annotation );
+
+    if ([[IRKit sharedInstance] canHandleOpenURL:url]) {
+        [[IRKit sharedInstance] handleOpenURL: url];
+        return YES;
+    }
+    return NO;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
