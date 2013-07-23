@@ -306,9 +306,9 @@
                           withIRData: nil
                           withIRFreq: 38
                    completionHandler: ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
-                       
+                       LOG( @"response: %@, json: %@, error: %@", response, json, error);
+                       [[UIApplication sharedApplication] openURL: json[@"Icon"][@"Url"]];
                    }];
-                // [[UIApplication sharedApplication] openURL: url];
             }
             break;
         default:
