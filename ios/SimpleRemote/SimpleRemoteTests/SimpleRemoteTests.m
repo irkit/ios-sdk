@@ -41,6 +41,10 @@ BOOL _isFinished; // test finished
        completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
            LOG(@"response: %@, image: %@, error: %@", response, json, error);
            STAssertTrue(response.statusCode == 200, @"status code valid");
+           STAssertTrue(json[@"Icon"] != nil, @"Icon key");
+           STAssertTrue(json[@"Icon"][@"Id"] != nil, @"Icon.Id key");
+           STAssertTrue(json[@"Icon"][@"Url"] != nil, @"Icon.Url key");
+           STAssertTrue(error == nil, @"no error");
            _isFinished = YES;
        }];
 }
