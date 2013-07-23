@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7155BBBEDD9A4019A91ACFAD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185857DF7F994520AB0E59D6 /* libPods.a */; };
+		C713AACF179E8636005AF8AE /* SRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C713AACE179E8636005AF8AE /* SRHelper.m */; };
 		C76CFF5517462E0800F972B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5417462E0800F972B7 /* UIKit.framework */; };
 		C76CFF5717462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
 		C76CFF5917462E0800F972B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
@@ -47,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		185857DF7F994520AB0E59D6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C713AACD179E8636005AF8AE /* SRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRHelper.h; sourceTree = "<group>"; };
+		C713AACE179E8636005AF8AE /* SRHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRHelper.m; sourceTree = "<group>"; };
 		C76CFF5117462E0800F972B7 /* SimpleRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CFF5417462E0800F972B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C76CFF5617462E0800F972B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -155,6 +158,8 @@
 				C76CFF7017462E0800F972B7 /* SRMainViewController.m */,
 				C7A796C9178C4F4A00E15608 /* SRSettingsViewController.h */,
 				C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */,
+				C713AACD179E8636005AF8AE /* SRHelper.h */,
+				C713AACE179E8636005AF8AE /* SRHelper.m */,
 				C76CFF5B17462E0800F972B7 /* Supporting Files */,
 			);
 			path = SimpleRemote;
@@ -350,6 +355,7 @@
 				C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */,
 				C7FAB00F17464ABA00125BCB /* Log.m in Sources */,
 				C7A796CB178C4F4A00E15608 /* SRSettingsViewController.m in Sources */,
+				C713AACF179E8636005AF8AE /* SRHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

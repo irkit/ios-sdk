@@ -8,6 +8,7 @@
 
 #import "SRMainViewController.h"
 #import <BlocksKit/BlocksKit.h>
+#import "SRHelper.h"
 
 @interface SRMainViewController ()
 
@@ -301,8 +302,13 @@
         case 1:
         case 2:
             {
-                NSURL *url = [NSURL URLWithString: @"http://www.google.com/"];
-                [[UIApplication sharedApplication] openURL: url];
+                [SRHelper uploadIcon: nil
+                          withIRData: nil
+                          withIRFreq: 38
+                   completionHandler: ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
+                       
+                   }];
+                // [[UIApplication sharedApplication] openURL: url];
             }
             break;
         default:

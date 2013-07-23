@@ -99,6 +99,7 @@
         return nil;
     }
     // uint16_t value for each NSArray entry
+    // signal data is always Little-Endian
     NSMutableData *ret = [NSMutableData dataWithCapacity: _data.count * 2];
     [_data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
         uint16_t interval = [obj shortValue];
