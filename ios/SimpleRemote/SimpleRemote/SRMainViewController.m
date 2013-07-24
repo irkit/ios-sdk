@@ -78,6 +78,9 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:YES];
 
+    // temp
+    _cancelled = YES;
+    
     if (! _cancelled && ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0)) {
         IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
         c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
@@ -201,11 +204,6 @@
             if (_signals.countOfSignals <= indexPath.row) {
                 // last line is always "+ Add New Signal"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
-                if (cell == nil) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                  reuseIdentifier:@"NewSignalCell"];
-                }
-                cell.textLabel.text = @"+ Add New Signal";
                 break;
             }
             cell = [_signals tableView:tableView
@@ -337,10 +335,13 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     LOG_CURRENT_METHOD;
     float offsetLeft = 20.;
-    UIView *view = [[UIView alloc] initWithFrame:(CGRect){0.,0.,320.,50.}];
-    UILabel *label = [[UILabel alloc] initWithFrame:(CGRect){ offsetLeft, 0., 320.-offsetLeft,50.}];
+    float headerHeight = 48.;
+    float labelHeight = 32.;
+    UIView *view = [[UIView alloc] initWithFrame:(CGRect){0.,0.,320.,headerHeight}];
+    UILabel *label = [[UILabel alloc] initWithFrame:(CGRect){ offsetLeft, 0., 320.-offsetLeft,labelHeight}];
+    label.textColor       = [UIColor colorWithRed:0x79/255. green:0x7a/255. blue:0x80/255. alpha:1.0];
     label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
+    // label.font = [UIFont fontWithName:@"Avenir-Light" size:32];
     label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
     switch (section) {
         case 0:
