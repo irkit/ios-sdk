@@ -14,6 +14,14 @@
 		C71D90AA1797862300CEC73F /* IRHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D90A91797862300CEC73F /* IRHelperTests.m */; };
 		C71D90AD17978B1700CEC73F /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C71D90AE17978B2E00CEC73F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
+		C73503D517A020CB0057D51B /* bg_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503CD17A020CB0057D51B /* bg_graph.png */; };
+		C73503D617A020CB0057D51B /* bg_graph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503CE17A020CB0057D51B /* bg_graph@2x.png */; };
+		C73503D717A020CB0057D51B /* tutorial_pairing.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503CF17A020CB0057D51B /* tutorial_pairing.png */; };
+		C73503D817A020CB0057D51B /* tutorial_pairing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D017A020CB0057D51B /* tutorial_pairing@2x.png */; };
+		C73503D917A020CB0057D51B /* tutorial_powerup.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D117A020CB0057D51B /* tutorial_powerup.png */; };
+		C73503DA17A020CB0057D51B /* tutorial_powerup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D217A020CB0057D51B /* tutorial_powerup@2x.png */; };
+		C73503DB17A020CB0057D51B /* tutorial_remote.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D317A020CB0057D51B /* tutorial_remote.png */; };
+		C73503DC17A020CB0057D51B /* tutorial_remote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D417A020CB0057D51B /* tutorial_remote@2x.png */; };
 		C73CB4D717856B5C00B3F2C0 /* IRWriteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D617856B5B00B3F2C0 /* IRWriteOperation.m */; };
 		C73CB4DA17856CC200B3F2C0 /* IRWriteOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D917856CC100B3F2C0 /* IRWriteOperationQueue.m */; };
 		C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E0174B8EB100872C04 /* IRChartView.m */; };
@@ -36,13 +44,9 @@
 		C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B568D174A7BC800FFE5CB /* IRSignalCell.m */; };
 		C77150EC17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */; };
 		C77150EF17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */; };
-		C77150F11772921A004F9FE3 /* scene3.png in Resources */ = {isa = PBXBuildFile; fileRef = C77150F01772921A004F9FE3 /* scene3.png */; };
 		C77150F21772D635004F9FE3 /* IRSignalCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B568E174A7BC800FFE5CB /* IRSignalCell.h */; };
 		C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; };
 		C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */; };
-		C77150FC1772E30B004F9FE3 /* newsignal.png in Resources */ = {isa = PBXBuildFile; fileRef = C77150FB1772E30B004F9FE3 /* newsignal.png */; };
-		C79DE3CF176F2C2D0088679E /* scene2.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CD176F2C2D0088679E /* scene2.png */; };
-		C79DE3D0176F2C2D0088679E /* scene1.png in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CE176F2C2D0088679E /* scene1.png */; };
 		C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */; };
 		C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */; };
 		C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37DF174B8EB100872C04 /* IRChartView.h */; };
@@ -115,6 +119,14 @@
 		C71D90A517977D6A00CEC73F /* IRKitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRKitTests.h; sourceTree = "<group>"; };
 		C71D90A81797862300CEC73F /* IRHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelperTests.h; sourceTree = "<group>"; };
 		C71D90A91797862300CEC73F /* IRHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHelperTests.m; sourceTree = "<group>"; };
+		C73503CD17A020CB0057D51B /* bg_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_graph.png; sourceTree = "<group>"; };
+		C73503CE17A020CB0057D51B /* bg_graph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_graph@2x.png"; sourceTree = "<group>"; };
+		C73503CF17A020CB0057D51B /* tutorial_pairing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_pairing.png; sourceTree = "<group>"; };
+		C73503D017A020CB0057D51B /* tutorial_pairing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_pairing@2x.png"; sourceTree = "<group>"; };
+		C73503D117A020CB0057D51B /* tutorial_powerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_powerup.png; sourceTree = "<group>"; };
+		C73503D217A020CB0057D51B /* tutorial_powerup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_powerup@2x.png"; sourceTree = "<group>"; };
+		C73503D317A020CB0057D51B /* tutorial_remote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_remote.png; sourceTree = "<group>"; };
+		C73503D417A020CB0057D51B /* tutorial_remote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_remote@2x.png"; sourceTree = "<group>"; };
 		C73CB4D517856B5B00B3F2C0 /* IRWriteOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWriteOperation.h; sourceTree = "<group>"; };
 		C73CB4D617856B5B00B3F2C0 /* IRWriteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWriteOperation.m; sourceTree = "<group>"; };
 		C73CB4D817856CC100B3F2C0 /* IRWriteOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWriteOperationQueue.h; sourceTree = "<group>"; };
@@ -153,16 +165,12 @@
 		C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene2ViewController.h; sourceTree = "<group>"; };
 		C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene3ViewController.m; sourceTree = "<group>"; };
 		C77150EE17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene3ViewController.h; sourceTree = "<group>"; };
-		C77150F01772921A004F9FE3 /* scene3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scene3.png; sourceTree = "<group>"; };
 		C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalViewController.m; sourceTree = "<group>"; };
 		C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalViewController.h; sourceTree = "<group>"; };
-		C77150FB1772E30B004F9FE3 /* newsignal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newsignal.png; sourceTree = "<group>"; };
 		C79DE3B1176F20A30088679E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C79DE3B3176F20B50088679E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C79DE3B9176F25260088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79DE3BD176F25260088679E /* IRKitResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitResources-Info.plist"; sourceTree = "<group>"; };
-		C79DE3CD176F2C2D0088679E /* scene2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scene2.png; sourceTree = "<group>"; };
-		C79DE3CE176F2C2D0088679E /* scene1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scene1.png; sourceTree = "<group>"; };
 		C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene1ViewController.h; sourceTree = "<group>"; };
 		C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene1ViewController.m; sourceTree = "<group>"; };
 		C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralViewController.m; sourceTree = "<group>"; };
@@ -343,10 +351,14 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C77150FB1772E30B004F9FE3 /* newsignal.png */,
-				C79DE3CE176F2C2D0088679E /* scene1.png */,
-				C79DE3CD176F2C2D0088679E /* scene2.png */,
-				C77150F01772921A004F9FE3 /* scene3.png */,
+				C73503CD17A020CB0057D51B /* bg_graph.png */,
+				C73503CE17A020CB0057D51B /* bg_graph@2x.png */,
+				C73503CF17A020CB0057D51B /* tutorial_pairing.png */,
+				C73503D017A020CB0057D51B /* tutorial_pairing@2x.png */,
+				C73503D117A020CB0057D51B /* tutorial_powerup.png */,
+				C73503D217A020CB0057D51B /* tutorial_powerup@2x.png */,
+				C73503D317A020CB0057D51B /* tutorial_remote.png */,
+				C73503D417A020CB0057D51B /* tutorial_remote@2x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -480,10 +492,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C79DE3D0176F2C2D0088679E /* scene1.png in Resources */,
-				C79DE3CF176F2C2D0088679E /* scene2.png in Resources */,
-				C77150F11772921A004F9FE3 /* scene3.png in Resources */,
-				C77150FC1772E30B004F9FE3 /* newsignal.png in Resources */,
+				C73503D517A020CB0057D51B /* bg_graph.png in Resources */,
+				C73503D617A020CB0057D51B /* bg_graph@2x.png in Resources */,
+				C73503D717A020CB0057D51B /* tutorial_pairing.png in Resources */,
+				C73503D817A020CB0057D51B /* tutorial_pairing@2x.png in Resources */,
+				C73503D917A020CB0057D51B /* tutorial_powerup.png in Resources */,
+				C73503DA17A020CB0057D51B /* tutorial_powerup@2x.png in Resources */,
+				C73503DB17A020CB0057D51B /* tutorial_remote.png in Resources */,
+				C73503DC17A020CB0057D51B /* tutorial_remote@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
