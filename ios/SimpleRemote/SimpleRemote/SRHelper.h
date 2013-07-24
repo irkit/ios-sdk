@@ -10,6 +10,8 @@
 
 @interface SRHelper : NSObject
 
++ (UIImage *)imageWithColor:(UIColor *)color;
+
 + (void)uploadIcon:(UIImage *)image
         withIRData:(NSArray *)data
         withIRFreq:(int)freq

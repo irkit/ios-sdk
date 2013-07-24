@@ -110,7 +110,7 @@ static const unsigned char whitePNGImage[] = {
 }
 
 + (CGFloat)height {
-    return 200;
+    return 150;
 }
 
 #pragma mark - KVO

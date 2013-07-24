@@ -11,6 +11,8 @@
 #import "IRPeripheral.h"
 #import "IRHelper.h"
 
+static BOOL useCustomizedStyle;
+
 @interface IRKit ()
 
 @property (nonatomic) CBCentralManager* manager;
