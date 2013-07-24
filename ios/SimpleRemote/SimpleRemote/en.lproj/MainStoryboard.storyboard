@@ -8,45 +8,133 @@
         <scene sceneID="ozj-dN-OH9">
             <objects>
                 <tableViewController id="oaV-El-VRv" customClass="SRMainViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="48" sectionFooterHeight="22" id="JpI-Mm-1g0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JpI-Mm-1g0">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.086274509799999996" green="0.086274509799999996" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Mul-jU-3Bi">
+                            <rect key="frame" x="0.0" y="146" width="320" height="62"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uf6-Xc-BLC">
+                                    <color key="backgroundColor" red="1" green="0.29803921570000003" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="5q6-aM-Vbd"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="24"/>
+                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="✓CREATE ICON">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="createIconPressed:" destination="oaV-El-VRv" eventType="touchUpInside" id="m0j-AS-dYU"/>
+                                        <action selector="createIconTouchDowned:" destination="oaV-El-VRv" eventType="touchDown" id="nQL-kg-VB4"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="uf6-Xc-BLC" firstAttribute="centerX" secondItem="Mul-jU-3Bi" secondAttribute="centerX" type="default" id="BH4-uU-E3R"/>
+                                <constraint firstItem="uf6-Xc-BLC" firstAttribute="top" secondItem="Mul-jU-3Bi" secondAttribute="top" constant="12" type="user" id="Qoe-Dm-V0R"/>
+                                <constraint firstItem="uf6-Xc-BLC" firstAttribute="leading" secondItem="Mul-jU-3Bi" secondAttribute="leading" constant="12" type="user" id="uMq-K6-qzi"/>
+                            </constraints>
+                            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewSignalCell" rowHeight="44" id="SdG-pm-nwD">
-                                <rect key="frame" x="0.0" y="48" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="NewSignalCell" rowHeight="44" id="SdG-pm-nwD">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="+ Add New Signal" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XW8-WK-URM">
-                                            <color key="backgroundColor" red="0.16862745098039217" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
-                                            <color key="textColor" red="0.47450980390000003" green="0.47843137250000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRp-Bt-3eg">
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="+ Add New Signal" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XW8-WK-URM">
+                                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
+                                                    <color key="textColor" red="0.47450980390000003" green="0.47843137250000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="XW8-WK-URM" firstAttribute="leading" secondItem="eRp-Bt-3eg" secondAttribute="leading" type="default" id="0bW-G1-TlL"/>
+                                                <constraint firstItem="XW8-WK-URM" firstAttribute="trailing" secondItem="eRp-Bt-3eg" secondAttribute="trailing" type="default" id="Ybs-dj-Pcx"/>
+                                                <constraint firstItem="XW8-WK-URM" firstAttribute="top" secondItem="eRp-Bt-3eg" secondAttribute="top" type="default" id="stB-pJ-nsx"/>
+                                                <constraint firstItem="XW8-WK-URM" firstAttribute="bottom" secondItem="eRp-Bt-3eg" secondAttribute="bottom" type="default" id="vwR-L3-EXE"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="eRp-Bt-3eg" firstAttribute="top" secondItem="SdG-pm-nwD" secondAttribute="top" type="default" id="4eE-5l-5gn"/>
+                                    <constraint firstItem="eRp-Bt-3eg" firstAttribute="centerX" secondItem="SdG-pm-nwD" secondAttribute="centerX" type="default" id="NCF-re-cEw"/>
+                                    <constraint firstItem="eRp-Bt-3eg" firstAttribute="bottom" secondItem="SdG-pm-nwD" secondAttribute="bottom" type="default" id="jDt-FQ-csA"/>
+                                    <constraint firstItem="eRp-Bt-3eg" firstAttribute="leading" secondItem="SdG-pm-nwD" secondAttribute="leading" constant="12" id="kHc-QS-ENT"/>
+                                </constraints>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectImageCell" rowHeight="80" id="S69-GF-4kz">
+                                <rect key="frame" x="0.0" y="66" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMX-QE-JOL">
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Default" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2n-Bl-CLY">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="L8s-5b-bDq"/>
+                                                        <constraint firstAttribute="width" constant="226" id="cSN-ou-yYQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
+                                                    <color key="textColor" red="0.47450980390000003" green="0.47843137250000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" image="icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="xXe-zp-Kc2">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="58" id="G5y-DO-1va"/>
+                                                        <constraint firstAttribute="width" constant="58" id="GUy-GZ-6d6"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icn_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="yik-X3-VT2"/>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="f2n-Bl-CLY" firstAttribute="top" secondItem="qMX-QE-JOL" secondAttribute="top" constant="-1" id="9O4-LN-IrH"/>
+                                                <constraint firstAttribute="trailing" secondItem="yik-X3-VT2" secondAttribute="trailing" constant="12" type="user" id="9Pi-94-Lek"/>
+                                                <constraint firstItem="yik-X3-VT2" firstAttribute="centerY" secondItem="f2n-Bl-CLY" secondAttribute="centerY" type="default" id="BGH-4P-SgP"/>
+                                                <constraint firstItem="f2n-Bl-CLY" firstAttribute="leading" secondItem="xXe-zp-Kc2" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="SMN-sm-eZB"/>
+                                                <constraint firstItem="xXe-zp-Kc2" firstAttribute="centerY" secondItem="yik-X3-VT2" secondAttribute="centerY" type="user" id="ZGO-sO-BPO"/>
+                                                <constraint firstItem="xXe-zp-Kc2" firstAttribute="leading" secondItem="qMX-QE-JOL" secondAttribute="leading" constant="13" id="t4f-X4-CIn"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="0.16862745098039217" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="XW8-WK-URM" firstAttribute="trailing" secondItem="SdG-pm-nwD" secondAttribute="trailing" type="default" id="4FL-y4-fbe"/>
-                                    <constraint firstItem="XW8-WK-URM" firstAttribute="top" secondItem="SdG-pm-nwD" secondAttribute="top" type="default" id="8fl-GU-fnW"/>
-                                    <constraint firstItem="XW8-WK-URM" firstAttribute="leading" secondItem="SdG-pm-nwD" secondAttribute="leading" type="default" id="Vws-1f-qJe"/>
-                                    <constraint firstItem="XW8-WK-URM" firstAttribute="bottom" secondItem="SdG-pm-nwD" secondAttribute="bottom" type="default" id="Zel-UB-Bar"/>
+                                    <constraint firstItem="qMX-QE-JOL" firstAttribute="leading" secondItem="S69-GF-4kz" secondAttribute="leading" constant="12" id="Y6r-Ev-FNS"/>
+                                    <constraint firstItem="qMX-QE-JOL" firstAttribute="bottom" secondItem="S69-GF-4kz" secondAttribute="bottom" type="default" id="sVS-ys-82k"/>
+                                    <constraint firstItem="qMX-QE-JOL" firstAttribute="centerX" secondItem="S69-GF-4kz" secondAttribute="centerX" type="default" id="uQO-kS-lRb"/>
+                                    <constraint firstItem="qMX-QE-JOL" firstAttribute="top" secondItem="S69-GF-4kz" secondAttribute="top" type="default" id="xdp-la-oNn"/>
                                 </constraints>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Remote Icon" id="6b8-Tm-3DT">
-                        <barButtonItem key="leftBarButtonItem" image="gear.png" id="qBT-bQ-0X1">
+                        <barButtonItem key="leftBarButtonItem" tag="1" title="　" style="plain" id="qBT-bQ-0X1">
                             <connections>
                                 <action selector="settingsButtonPressed:" destination="oaV-El-VRv" id="4SJ-in-jVS"/>
                                 <segue destination="wZT-r5-mld" kind="modal" id="RdT-w1-ye0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2t4-6u-8at" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,7 +202,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gear.png" width="20" height="20"/>
+        <image name="icn_arrow.png" width="15" height="15"/>
+        <image name="icon.png" width="57" height="57"/>
     </resources>
     <classes>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -123,6 +212,8 @@
         <class className="SRMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SRMainViewController.h"/>
             <relationships>
+                <relationship kind="action" name="createIconPressed:"/>
+                <relationship kind="action" name="createIconTouchDowned:"/>
                 <relationship kind="action" name="settingsButtonPressed:"/>
             </relationships>
         </class>

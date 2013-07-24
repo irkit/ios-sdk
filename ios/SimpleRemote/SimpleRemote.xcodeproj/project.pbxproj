@@ -25,6 +25,11 @@
 		C76CFF7E17462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
 		C76CFF8617462E0800F972B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF8417462E0800F972B7 /* InfoPlist.strings */; };
 		C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */; };
+		C78E3A01179F7703009AA9AC /* SRMainTableHeaderViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A00179F7703009AA9AC /* SRMainTableHeaderViews.xib */; };
+		C78E3A04179F9D9A009AA9AC /* icn_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A02179F9D9A009AA9AC /* icn_arrow.png */; };
+		C78E3A05179F9D9A009AA9AC /* icn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A03179F9D9A009AA9AC /* icn_arrow@2x.png */; };
+		C78E3A08179FA950009AA9AC /* icn_actionbar_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A06179FA950009AA9AC /* icn_actionbar_menu.png */; };
+		C78E3A09179FA950009AA9AC /* icn_actionbar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A07179FA950009AA9AC /* icn_actionbar_menu@2x.png */; };
 		C79DE3CB176F27870088679E /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CA176F27870088679E /* IRKitResources.bundle */; };
 		C7A796CB178C4F4A00E15608 /* SRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */; };
 		C7C0DB801781D2DA00AECAC2 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C0DB7E1781D2DA00AECAC2 /* gear@2x.png */; };
@@ -72,6 +77,11 @@
 		C76CFF8517462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleRemoteTests.h; sourceTree = "<group>"; };
 		C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleRemoteTests.m; sourceTree = "<group>"; };
+		C78E3A00179F7703009AA9AC /* SRMainTableHeaderViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SRMainTableHeaderViews.xib; sourceTree = "<group>"; };
+		C78E3A02179F9D9A009AA9AC /* icn_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_arrow.png; sourceTree = "<group>"; };
+		C78E3A03179F9D9A009AA9AC /* icn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow@2x.png"; sourceTree = "<group>"; };
+		C78E3A06179FA950009AA9AC /* icn_actionbar_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_menu.png; sourceTree = "<group>"; };
+		C78E3A07179FA950009AA9AC /* icn_actionbar_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_menu@2x.png"; sourceTree = "<group>"; };
 		C79DE3CA176F27870088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = IRKitResources.bundle; path = "../../../../Library/Developer/Xcode/DerivedData/IRKit-emamwwlqmnxfxtgrgkmfdnmdrehd/Build/Products/Debug-iphoneos/IRKitResources.bundle"; sourceTree = "<group>"; };
 		C7A796C9178C4F4A00E15608 /* SRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSettingsViewController.h; sourceTree = "<group>"; };
 		C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSettingsViewController.m; sourceTree = "<group>"; };
@@ -153,13 +163,14 @@
 			children = (
 				C76CFF6317462E0800F972B7 /* SRAppDelegate.h */,
 				C76CFF6417462E0800F972B7 /* SRAppDelegate.m */,
-				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
 				C76CFF6F17462E0800F972B7 /* SRMainViewController.h */,
 				C76CFF7017462E0800F972B7 /* SRMainViewController.m */,
 				C7A796C9178C4F4A00E15608 /* SRSettingsViewController.h */,
 				C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */,
 				C713AACD179E8636005AF8AE /* SRHelper.h */,
 				C713AACE179E8636005AF8AE /* SRHelper.m */,
+				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
+				C78E3A00179F7703009AA9AC /* SRMainTableHeaderViews.xib */,
 				C76CFF5B17462E0800F972B7 /* Supporting Files */,
 			);
 			path = SimpleRemote;
@@ -168,6 +179,10 @@
 		C76CFF5B17462E0800F972B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C78E3A06179FA950009AA9AC /* icn_actionbar_menu.png */,
+				C78E3A07179FA950009AA9AC /* icn_actionbar_menu@2x.png */,
+				C78E3A02179F9D9A009AA9AC /* icn_arrow.png */,
+				C78E3A03179F9D9A009AA9AC /* icn_arrow@2x.png */,
 				C7FAB00E17464AB900125BCB /* Log.m */,
 				C7FAB00B1746481700125BCB /* Log.h */,
 				C76CFF5C17462E0800F972B7 /* SimpleRemote-Info.plist */,
@@ -288,6 +303,11 @@
 				C7C0DB811781D2DA00AECAC2 /* gear.png in Resources */,
 				C7C0DB8417825B9F00AECAC2 /* icon@2x.png in Resources */,
 				C7C0DB8517825B9F00AECAC2 /* icon.png in Resources */,
+				C78E3A01179F7703009AA9AC /* SRMainTableHeaderViews.xib in Resources */,
+				C78E3A04179F9D9A009AA9AC /* icn_arrow.png in Resources */,
+				C78E3A05179F9D9A009AA9AC /* icn_arrow@2x.png in Resources */,
+				C78E3A08179FA950009AA9AC /* icn_actionbar_menu.png in Resources */,
+				C78E3A09179FA950009AA9AC /* icn_actionbar_menu@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

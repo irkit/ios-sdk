@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
        atIndexPath:(NSIndexPath *)indexPath
      forChangeType:(IRAnimatingType)type
       newIndexPath:(NSIndexPath *)newIndexPath;
+
+// TODO do we need this?
 - (void)controllerDidChangeContent:(id)controller;
 
 @end

@@ -65,6 +65,17 @@
                                            _showingNewPeripheralViewController = YES;
                                        }];
                                    } ];
+
+    // customize left bar button
+    UIBarButtonItem *left = self.navigationItem.leftBarButtonItem;
+    UIImage *bgImage = [UIImage imageNamed:@"icn_actionbar_menu.png"];
+    UIImage *bgImageReal = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(28, 24, 0, 0)];
+
+    [left setBackgroundImage:bgImageReal
+                    forState:UIControlStateNormal
+                  barMetrics:UIBarMetricsDefault];
+    [left setBackgroundVerticalPositionAdjustment:5. forBarMetrics:UIBarMetricsDefault];
+
     _cancelled = NO;
 }
 
@@ -122,6 +133,19 @@
                      completion:^{
         LOG( @"presented" );
     }];
+}
+
+- (IBAction)createIconPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+
+//    [SRHelper uploadIcon: nil
+//              withIRData: nil
+//              withIRFreq: 38
+//       completionHandler: ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
+//           LOG( @"response: %@, json: %@, error: %@", response, json, error);
+//           [[UIApplication sharedApplication] openURL: json[@"Icon"][@"Url"]];
+//       }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -210,16 +234,10 @@
                  cellForRowAtIndexPath: indexPath];
             break;
         case 1:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"SelectImageCell"];
             break;
         case 2:
         default:
-            cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                              reuseIdentifier:@"NewSignalCell"];
-            }
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = @"Go!";
             break;
     }
     return cell;
@@ -234,16 +252,16 @@
             return [_signals tableView:tableView
                  numberOfRowsInSection:section] + 1;
         case 1:
-            return 0;
+            return 1;
         case 2:
         default:
-            return 1;
+            return 0;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     LOG_CURRENT_METHOD;
-    return 3;
+    return 2;
 }
 
 #pragma mark - UITableViewDelegate
@@ -259,6 +277,7 @@
             return [_signals tableView: tableView
                heightForRowAtIndexPath: indexPath];
         case 1:
+            return 80;
         case 2:
         default:
             return 44;
@@ -303,16 +322,6 @@
             }
             break;
         case 1:
-        case 2:
-            {
-                [SRHelper uploadIcon: nil
-                          withIRData: nil
-                          withIRFreq: 38
-                   completionHandler: ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
-                       LOG( @"response: %@, json: %@, error: %@", response, json, error);
-                       [[UIApplication sharedApplication] openURL: json[@"Icon"][@"Url"]];
-                   }];
-            }
             break;
         default:
             break;
@@ -323,56 +332,34 @@
     LOG_CURRENT_METHOD;
     switch (section) {
         case 0:
-            return 60.;
+            return 40;
         case 1:
-            return 110.;
-        case 2:
+            return 40;
         default:
-            return 60.;
+            break;
     }
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     LOG_CURRENT_METHOD;
-    float offsetLeft = 20.;
-    float headerHeight = 48.;
-    float labelHeight = 32.;
-    UIView *view = [[UIView alloc] initWithFrame:(CGRect){0.,0.,320.,headerHeight}];
-    UILabel *label = [[UILabel alloc] initWithFrame:(CGRect){ offsetLeft, 0., 320.-offsetLeft,labelHeight}];
-    label.textColor       = [UIColor colorWithRed:0x79/255. green:0x7a/255. blue:0x80/255. alpha:1.0];
-    label.backgroundColor = [UIColor clearColor];
-    // label.font = [UIFont fontWithName:@"Avenir-Light" size:32];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
     switch (section) {
         case 0:
-            label.text = @"1 Select Signal";
-            break;
         case 1:
-            label.text = @"2 Select Icon Image";
-            break;
         case 2:
+        {
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SRMainTableHeaderViews" owner:self options:nil];
+            return [topLevelObjects objectAtIndex:section];
+        }
         default:
-            label.text = @"3 Create App Icon";
             break;
     }
-    [view addSubview:label];
-
-    if (section == 1) {
-        UIImage *image = [UIImage imageNamed: @"icon.png"];
-        UIButton *button = [[UIButton alloc] init];
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        button.frame = (CGRect){ (view.frame.size.width - image.size.width)/2.,
-                                  50,
-                                  image.size.width,
-                                  image.size.height };
-        [button addEventHandler:^(id sender) {
-            LOG( @"tapped" );
-            // TODO show icon selector
-        } forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
-    }
-
-    return view;
+    return nil;
 }
 
 @end
