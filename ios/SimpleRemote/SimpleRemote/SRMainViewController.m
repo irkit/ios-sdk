@@ -16,6 +16,7 @@
 @property (nonatomic) id signalObserver;
 @property (nonatomic) id peripheralObserver;
 @property (nonatomic) BOOL showingNewPeripheralViewController;
+@property (nonatomic) BOOL cancelled;
 
 @end
 
@@ -64,6 +65,7 @@
                                            _showingNewPeripheralViewController = YES;
                                        }];
                                    } ];
+    _cancelled = NO;
 }
 
 - (void)dealloc {
@@ -76,7 +78,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:YES];
 
-    if ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0) {
+    if (! _cancelled && ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0)) {
         IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
         c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
         [self presentViewController:c
@@ -130,6 +132,9 @@
                   didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
  
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        _cancelled = YES;
+    }
     [self dismissViewControllerAnimated:YES
                              completion:^{
         LOG(@"dismissed");
