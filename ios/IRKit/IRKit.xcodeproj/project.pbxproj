@@ -22,6 +22,19 @@
 		C73503DA17A020CB0057D51B /* tutorial_powerup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D217A020CB0057D51B /* tutorial_powerup@2x.png */; };
 		C73503DB17A020CB0057D51B /* tutorial_remote.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D317A020CB0057D51B /* tutorial_remote.png */; };
 		C73503DC17A020CB0057D51B /* tutorial_remote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D417A020CB0057D51B /* tutorial_remote@2x.png */; };
+		C735040E17A029C30057D51B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
+		C735040F17A029C30057D51B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
+		C735041017A029C30057D51B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
+		C735041617A029C40057D51B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C735041417A029C40057D51B /* InfoPlist.strings */; };
+		C735041817A029C40057D51B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C735041717A029C40057D51B /* main.m */; };
+		C735041C17A029C40057D51B /* IRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C735041B17A029C40057D51B /* IRAppDelegate.m */; };
+		C735041E17A029C40057D51B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C735041D17A029C40057D51B /* Default.png */; };
+		C735042017A029C40057D51B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C735041F17A029C40057D51B /* Default@2x.png */; };
+		C735042217A029C40057D51B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C735042117A029C40057D51B /* Default-568h@2x.png */; };
+		C735042517A029C40057D51B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C735042317A029C40057D51B /* MainStoryboard.storyboard */; };
+		C735042E17A02B0D0057D51B /* IRSamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */; };
+		C735042F17A0304A0057D51B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
+		C735043217A030A60057D51B /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C73CB4D717856B5C00B3F2C0 /* IRWriteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D617856B5B00B3F2C0 /* IRWriteOperation.m */; };
 		C73CB4DA17856CC200B3F2C0 /* IRWriteOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D917856CC100B3F2C0 /* IRWriteOperationQueue.m */; };
 		C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E0174B8EB100872C04 /* IRChartView.m */; };
@@ -127,6 +140,19 @@
 		C73503D217A020CB0057D51B /* tutorial_powerup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_powerup@2x.png"; sourceTree = "<group>"; };
 		C73503D317A020CB0057D51B /* tutorial_remote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_remote.png; sourceTree = "<group>"; };
 		C73503D417A020CB0057D51B /* tutorial_remote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_remote@2x.png"; sourceTree = "<group>"; };
+		C735040D17A029C30057D51B /* IRKitViewSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRKitViewSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C735041317A029C30057D51B /* IRKitViewSamples-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitViewSamples-Info.plist"; sourceTree = "<group>"; };
+		C735041517A029C40057D51B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C735041717A029C40057D51B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C735041917A029C40057D51B /* IRKitViewSamples-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IRKitViewSamples-Prefix.pch"; sourceTree = "<group>"; };
+		C735041A17A029C40057D51B /* IRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRAppDelegate.h; sourceTree = "<group>"; };
+		C735041B17A029C40057D51B /* IRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRAppDelegate.m; sourceTree = "<group>"; };
+		C735041D17A029C40057D51B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		C735041F17A029C40057D51B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		C735042117A029C40057D51B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C735042417A029C40057D51B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		C735042C17A02B0D0057D51B /* IRSamplesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSamplesTableViewController.h; sourceTree = "<group>"; };
+		C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSamplesTableViewController.m; sourceTree = "<group>"; };
 		C73CB4D517856B5B00B3F2C0 /* IRWriteOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWriteOperation.h; sourceTree = "<group>"; };
 		C73CB4D617856B5B00B3F2C0 /* IRWriteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWriteOperation.m; sourceTree = "<group>"; };
 		C73CB4D817856CC100B3F2C0 /* IRWriteOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWriteOperationQueue.h; sourceTree = "<group>"; };
@@ -200,6 +226,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C735040A17A029C30057D51B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C735043217A030A60057D51B /* libIRKit.a in Frameworks */,
+				C735042F17A0304A0057D51B /* CoreBluetooth.framework in Frameworks */,
+				C735040E17A029C30057D51B /* UIKit.framework in Frameworks */,
+				C735040F17A029C30057D51B /* Foundation.framework in Frameworks */,
+				C735041017A029C30057D51B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C752D6FB17462C7B008B644A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,10 +260,10 @@
 		C71D909A17977D2200CEC73F /* IRKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				C71D90A91797862300CEC73F /* IRHelperTests.m */,
 				C71D90A81797862300CEC73F /* IRHelperTests.h */,
-				C71D90A417977D6A00CEC73F /* IRKitTests.m */,
+				C71D90A91797862300CEC73F /* IRHelperTests.m */,
 				C71D90A517977D6A00CEC73F /* IRKitTests.h */,
+				C71D90A417977D6A00CEC73F /* IRKitTests.m */,
 				C71D909B17977D2200CEC73F /* Supporting Files */,
 			);
 			path = IRKitTests;
@@ -255,6 +293,33 @@
 			name = cells;
 			sourceTree = "<group>";
 		};
+		C735041117A029C30057D51B /* IRKitViewSamples */ = {
+			isa = PBXGroup;
+			children = (
+				C735041A17A029C40057D51B /* IRAppDelegate.h */,
+				C735041B17A029C40057D51B /* IRAppDelegate.m */,
+				C735042C17A02B0D0057D51B /* IRSamplesTableViewController.h */,
+				C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */,
+				C735042317A029C40057D51B /* MainStoryboard.storyboard */,
+				C735041217A029C30057D51B /* Supporting Files */,
+			);
+			path = IRKitViewSamples;
+			sourceTree = "<group>";
+		};
+		C735041217A029C30057D51B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C735041317A029C30057D51B /* IRKitViewSamples-Info.plist */,
+				C735041417A029C40057D51B /* InfoPlist.strings */,
+				C735041717A029C40057D51B /* main.m */,
+				C735041917A029C40057D51B /* IRKitViewSamples-Prefix.pch */,
+				C735041D17A029C40057D51B /* Default.png */,
+				C735041F17A029C40057D51B /* Default@2x.png */,
+				C735042117A029C40057D51B /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		C73CB4DB17856CD100B3F2C0 /* operation */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +337,7 @@
 				C752D70317462C7B008B644A /* IRKit */,
 				C79DE3BB176F25260088679E /* IRKitResources */,
 				C71D909A17977D2200CEC73F /* IRKitTests */,
+				C735041117A029C30057D51B /* IRKitViewSamples */,
 				C752D70017462C7B008B644A /* Frameworks */,
 				C752D6FF17462C7B008B644A /* Products */,
 			);
@@ -283,6 +349,7 @@
 				C752D6FE17462C7B008B644A /* libIRKit.a */,
 				C79DE3B9176F25260088679E /* IRKitResources.bundle */,
 				C71D909817977D2200CEC73F /* IRKitTests.octest */,
+				C735040D17A029C30057D51B /* IRKitViewSamples.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -416,6 +483,23 @@
 			productReference = C71D909817977D2200CEC73F /* IRKitTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		C735040C17A029C30057D51B /* IRKitViewSamples */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C735042917A029C40057D51B /* Build configuration list for PBXNativeTarget "IRKitViewSamples" */;
+			buildPhases = (
+				C735040917A029C30057D51B /* Sources */,
+				C735040A17A029C30057D51B /* Frameworks */,
+				C735040B17A029C30057D51B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IRKitViewSamples;
+			productName = IRKitViewSamples;
+			productReference = C735040D17A029C30057D51B /* IRKitViewSamples.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C752D6FD17462C7B008B644A /* IRKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C752D72317462C7B008B644A /* Build configuration list for PBXNativeTarget "IRKit" */;
@@ -475,6 +559,7 @@
 				C752D6FD17462C7B008B644A /* IRKit */,
 				C79DE3B8176F25260088679E /* IRKitResources */,
 				C71D909717977D2200CEC73F /* IRKitTests */,
+				C735040C17A029C30057D51B /* IRKitViewSamples */,
 			);
 		};
 /* End PBXProject section */
@@ -485,6 +570,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				C71D909F17977D2200CEC73F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C735040B17A029C30057D51B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C735041617A029C40057D51B /* InfoPlist.strings in Resources */,
+				C735041E17A029C40057D51B /* Default.png in Resources */,
+				C735042017A029C40057D51B /* Default@2x.png in Resources */,
+				C735042217A029C40057D51B /* Default-568h@2x.png in Resources */,
+				C735042517A029C40057D51B /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +609,16 @@
 			files = (
 				C71D90A617977D6A00CEC73F /* IRKitTests.m in Sources */,
 				C71D90AA1797862300CEC73F /* IRHelperTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C735040917A029C30057D51B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C735041817A029C40057D51B /* main.m in Sources */,
+				C735041C17A029C40057D51B /* IRAppDelegate.m in Sources */,
+				C735042E17A02B0D0057D51B /* IRSamplesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +684,22 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		C735041417A029C40057D51B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C735041517A029C40057D51B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C735042317A029C40057D51B /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C735042417A029C40057D51B /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -609,6 +732,32 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		C735042A17A029C40057D51B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IRKitViewSamples/IRKitViewSamples-Prefix.pch";
+				INFOPLIST_FILE = "IRKitViewSamples/IRKitViewSamples-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C735042B17A029C40057D51B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IRKitViewSamples/IRKitViewSamples-Prefix.pch";
+				INFOPLIST_FILE = "IRKitViewSamples/IRKitViewSamples-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -735,6 +884,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C735042917A029C40057D51B /* Build configuration list for PBXNativeTarget "IRKitViewSamples" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C735042A17A029C40057D51B /* Debug */,
+				C735042B17A029C40057D51B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		C752D6F917462C7B008B644A /* Build configuration list for PBXProject "IRKit" */ = {
 			isa = XCConfigurationList;

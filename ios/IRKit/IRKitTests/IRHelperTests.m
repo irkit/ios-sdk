@@ -31,7 +31,8 @@
 
 - (void)testLoadImage
 {
-    [IRHelper loadImage:@"http://www.google.com/" completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
+    [IRHelper loadImage:@"http://www.google.com/"
+      completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
         STAssertTrue(response.statusCode >= 200, @"status code valid");
         _isFinished = YES;
     }];
