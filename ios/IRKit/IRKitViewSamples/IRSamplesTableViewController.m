@@ -10,6 +10,7 @@
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRNewPeripheralScene3ViewController.h"
+#import "IRNewSignalScene1ViewController.h"
 
 @interface IRSamplesTableViewController ()
 
@@ -44,8 +45,10 @@
 }
 
 #pragma mark - IRNewPeripheralScene1ViewControllerDelegate
+#pragma mark - IRNewSignalScene1ViewControllerDelegate
 
-- (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+//  TODO merge all callbacks into a single IRViewController:didFinishWithInfo: message?
+- (void)scene1ViewController:(id)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -71,11 +74,6 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 3;
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,9 +97,17 @@
         }
             break;
         case 2:
-        default:
         {
             IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+            c.delegate = self;
+
+            [self.navigationController pushViewController:c animated:YES];
+        }
+            break;
+        case 3:
+        default:
+        {
+            IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] init];
             c.delegate = self;
 
             [self.navigationController pushViewController:c animated:YES];

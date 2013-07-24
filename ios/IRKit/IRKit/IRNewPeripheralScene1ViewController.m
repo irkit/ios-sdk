@@ -29,7 +29,9 @@
     UIView *view = [[UIView alloc] initWithFrame:frame];
 
     // image
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/tutorial_powerup.png"]];
+    UIImage *image = [UIImage imageNamed:@"IRKitResources.bundle/tutorial_powerup.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage: image];
+    
     imageView.frame = frame;
     [view addSubview: imageView];
     

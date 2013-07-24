@@ -88,6 +88,13 @@
 			remoteGlobalIDString = C752D6FD17462C7B008B644A;
 			remoteInfo = IRKit;
 		};
+		C735043817A038FB0057D51B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C752D6F617462C7B008B644A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C79DE3B8176F25260088679E;
+			remoteInfo = IRKitResources;
+		};
 		C79DE3C8176F271A0088679E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C752D6F617462C7B008B644A /* Project object */;
@@ -495,6 +502,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C735043917A038FB0057D51B /* PBXTargetDependency */,
 			);
 			name = IRKitViewSamples;
 			productName = IRKitViewSamples;
@@ -526,6 +534,7 @@
 				C79DE3B5176F25260088679E /* Sources */,
 				C79DE3B6176F25260088679E /* Frameworks */,
 				C79DE3B7176F25260088679E /* Resources */,
+				C735043717A0361C0057D51B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -604,6 +613,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C735043717A0361C0057D51B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -ex\necho $BUILT_PRODUCTS_DIR\necho $TARGET_BUILD_DIR";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C71D909417977D2200CEC73F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -669,6 +694,11 @@
 			isa = PBXTargetDependency;
 			target = C752D6FD17462C7B008B644A /* IRKit */;
 			targetProxy = C71D90AB17978B0800CEC73F /* PBXContainerItemProxy */;
+		};
+		C735043917A038FB0057D51B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C79DE3B8176F25260088679E /* IRKitResources */;
+			targetProxy = C735043817A038FB0057D51B /* PBXContainerItemProxy */;
 		};
 		C79DE3C9176F271A0088679E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -851,7 +881,7 @@
 		C79DE3C3176F25260088679E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -864,7 +894,7 @@
 		C79DE3C4176F25260088679E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

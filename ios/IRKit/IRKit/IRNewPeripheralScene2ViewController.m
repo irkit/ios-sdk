@@ -27,7 +27,7 @@
     UIView *view = [[UIView alloc] initWithFrame:frame];
 
     // image
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/scene2.png"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/tutorial_pairing.png"]];
     imageView.frame = frame;
     [view addSubview: imageView];
 

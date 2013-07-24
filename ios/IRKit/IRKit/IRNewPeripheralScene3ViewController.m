@@ -25,11 +25,6 @@
     LOG(@"frame: %@", NSStringFromCGRect(frame));
     UIView *view = [[UIView alloc] initWithFrame:frame];
 
-    // image
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/scene3.png"]];
-    imageView.frame = frame;
-    [view addSubview: imageView];
-
     // label
     _label = [[UILabel alloc] init];
     _label.textAlignment = NSTextAlignmentCenter;
