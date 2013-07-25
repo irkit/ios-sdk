@@ -19,33 +19,13 @@
 
 @implementation IRNewPeripheralScene2ViewController
 
-- (void)loadView {
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
-
-    CGRect frame = [[UIScreen mainScreen] bounds];
-    LOG(@"frame: %@", NSStringFromCGRect(frame));
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-
-    // image
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/tutorial_pairing.png"]];
-    imageView.frame = frame;
-    [view addSubview: imageView];
-
-    // label
-    _label = [[UILabel alloc] init];
-    _label.textAlignment = NSTextAlignmentCenter;
-    _label.opaque        = NO;
-    _label.textColor       = [UIColor whiteColor];
-    _label.backgroundColor = [UIColor clearColor];
-    _label.adjustsFontSizeToFitWidth = YES;
-    frame.origin.x = 0;
-    frame.origin.y = frame.size.height / 2 - 50;
-    frame.size.height = 100;
-    LOG(@"label.frame: %@", NSStringFromCGRect(frame));
-    _label.frame = frame;
-    [view addSubview:_label];
-
-    self.view = view;
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -96,7 +76,11 @@
 
     [[NSNotificationCenter defaultCenter] removeObserver:_observer];
 
-    IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] initWithNibName:@"IRNewPeripheralScene3ViewController"
+                                                                                                   bundle:resources];
     c.delegate = self.delegate;
     [self.navigationController pushViewController:c
                                          animated:YES];

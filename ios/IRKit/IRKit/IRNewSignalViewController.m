@@ -23,8 +23,12 @@
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:bounds];
-    
-    IRNewSignalScene1ViewController *first = [[IRNewSignalScene1ViewController alloc] init];
+
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    IRNewSignalScene1ViewController *first = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
+                                                                                               bundle:resources];
     first.delegate = self;
     
     _navController = [[UINavigationController alloc] initWithRootViewController:first];

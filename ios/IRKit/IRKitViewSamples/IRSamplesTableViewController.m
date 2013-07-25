@@ -79,10 +79,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources" ofType:@"bundle"]];
     switch (indexPath.row) {
         case 0:
         {
-            IRNewPeripheralScene1ViewController *c = [[IRNewPeripheralScene1ViewController alloc] init];
+            IRNewPeripheralScene1ViewController *c = [[IRNewPeripheralScene1ViewController alloc] initWithNibName:@"IRNewPeripheralScene1ViewController"
+                                                                                                           bundle:resources];
             c.delegate = self;
 
             [self.navigationController pushViewController:c animated:YES];
@@ -90,7 +93,8 @@
             break;
         case 1:
         {
-            IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] init];
+            IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName:@"IRNewPeripheralScene2ViewController"
+                                                                                                           bundle:resources];
             c.delegate = self;
 
             [self.navigationController pushViewController:c animated:YES];
@@ -98,7 +102,8 @@
             break;
         case 2:
         {
-            IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
+            IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] initWithNibName:@"IRNewPeripheralScene3ViewController"
+                                                                                                           bundle:resources];
             c.delegate = self;
 
             [self.navigationController pushViewController:c animated:YES];
@@ -107,7 +112,8 @@
         case 3:
         default:
         {
-            IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] init];
+            IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
+                                                                                                   bundle:resources];
             c.delegate = self;
 
             [self.navigationController pushViewController:c animated:YES];
