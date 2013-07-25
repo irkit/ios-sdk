@@ -66,16 +66,6 @@
                                        }];
                                    } ];
 
-    // customize left bar button
-    UIBarButtonItem *left = self.navigationItem.leftBarButtonItem;
-    UIImage *bgImage = [UIImage imageNamed:@"icn_actionbar_menu.png"];
-    UIImage *bgImageReal = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(28, 24, 0, 0)];
-
-    [left setBackgroundImage:bgImageReal
-                    forState:UIControlStateNormal
-                  barMetrics:UIBarMetricsDefault];
-    [left setBackgroundVerticalPositionAdjustment:5. forBarMetrics:UIBarMetricsDefault];
-
     _cancelled = NO;
 }
 
