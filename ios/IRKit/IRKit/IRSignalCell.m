@@ -46,7 +46,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setSignal:(IRSignal *)signal {
+- (void)inflateFromSignal:(IRSignal*)signal {
     LOG( @"signal: %@", signal);
     
     self.textLabel.text       = signal.name;

@@ -135,7 +135,7 @@
     if (cell == nil) {
         cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
     }
-    cell.signal = [self objectAtIndex: indexPath.row];
+    [cell inflateFromSignal:[self objectAtIndex:indexPath.row]];
     return cell;
 }
 

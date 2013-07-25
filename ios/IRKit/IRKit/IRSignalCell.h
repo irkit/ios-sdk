@@ -13,7 +13,6 @@
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 + (CGFloat)height;
-
-@property (nonatomic, strong) IRSignal *signal;
+- (void)inflateFromSignal:(IRSignal*)signal;
 
 @end
