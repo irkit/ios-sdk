@@ -19,16 +19,6 @@
 
 @implementation IRChartView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        self.backgroundColor = [UIColor whiteColor];
-    }
-    return self;
-}
-
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -56,7 +46,7 @@
     double topY          = MARGIN_TOP;
     double bottomY       = self.frame.size.height - PADDING_BOTTOM;
     double bottomLineY   = self.frame.size.height;
-    
+
     CGMutablePathRef path = CGPathCreateMutable();
     // start from bottom-left
     double rightX = INTERVAL_MARGIN_LEFT;
@@ -157,8 +147,8 @@
     // gradient
     CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
     CGFloat components[] = {
-        0.9f, 0.9f, 1.0f, 1.0f,     // R, G, B, Alpha
-        0.9f, 0.9f, 1.0f, 1.0f
+        0.f, 0.f, 0.f, 0.f,     // R, G, B, Alpha
+        0.f, 0.f, 0.f, 0.f
     };
     CGFloat locations[] = { 0.0f, 1.0f };
     size_t count = sizeof(components)/ (sizeof(CGFloat)* 4);
@@ -182,8 +172,8 @@
 
     // add outline
     CGContextAddPath(context, outlinePath);
-    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-    CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor cyanColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
     CGContextSetLineWidth(context, 1);
     CGContextDrawPath(context, kCGPathFillStroke);
     CGPathRelease(outlinePath);

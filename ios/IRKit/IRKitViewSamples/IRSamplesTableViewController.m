@@ -128,6 +128,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     NSBundle *main = [NSBundle mainBundle];
     NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources" ofType:@"bundle"]];
     switch (indexPath.row) {
