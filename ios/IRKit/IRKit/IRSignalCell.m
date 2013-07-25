@@ -11,32 +11,13 @@
 
 @interface IRSignalCell ()
 
-@property (nonatomic, strong) IRChartView *chartView;
-
 @end
 
 @implementation IRSignalCell
 
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
-    LOG_CURRENT_METHOD;
-    
-    self = [super initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-
-        CGRect cellFrame = self.frame;
-        
-        // text label
-        self.textLabel.text = @"signal 1";
-
-        // chart
-        int margin = 20;
-        int height = 100;
-        self.chartView = [[IRChartView alloc] initWithFrame: (CGRect){ margin, margin, 300 - margin*2, height - margin*2 }];
-        [self.contentView addSubview: self.chartView];
-    }
-    return self;
++ (void)load {
+    // tell linker we need this class
+    [IRChartView class];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -49,14 +30,14 @@
 - (void)inflateFromSignal:(IRSignal*)signal {
     LOG( @"signal: %@", signal);
     
-    self.textLabel.text       = signal.name;
-    self.detailTextLabel.text = signal.name;
-    self.chartView.data       = signal.data;
-    [self.chartView setNeedsDisplay];
+    _nameLabel.text         = signal.name;
+    _receivedDateLabel.text = signal.name;
+    _signalChartView.data   = signal.data;
+    [_signalChartView setNeedsDisplay];
 }
 
 + (CGFloat)height {
-    return 200;
+    return 150.;
 }
 
 @end

@@ -11,6 +11,8 @@
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRNewPeripheralScene3ViewController.h"
 #import "IRNewSignalScene1ViewController.h"
+#import "IRSignal.h"
+#import "IRSignalCell.h"
 
 @interface IRSamplesTableViewController ()
 
@@ -36,6 +38,12 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    [self.tableView registerNib:[UINib nibWithNibName:@"IRSignalCell" bundle:resources]
+         forCellReuseIdentifier:@"IRSignalCell"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,7 +82,48 @@
     return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 6;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRNewPeripheralScene1"];
+        case 1:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRNewPeripheralScene2"];
+        case 2:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRNewPeripheralScene3"];
+        case 3:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
+        case 4:
+        {
+            IRSignalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IRSignalCell"];
+
+            unsigned short data[10] = { 100,100,100,100,100,100,100,100,100,100 };
+            NSData *irdata = [NSData dataWithBytes:data length:10];
+            IRSignal *signal = [[IRSignal alloc] initWithData: irdata];
+
+            [cell inflateFromSignal:signal];
+            return cell;
+        }
+        case 5:
+        default:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
+    }
+}
+
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 4:
+            return [IRSignalCell height];
+
+        default:
+            return 44;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

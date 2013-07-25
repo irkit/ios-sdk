@@ -63,6 +63,9 @@
 		C7626F8617A1086900D6D746 /* txt_tutorial_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7626F8417A1086900D6D746 /* txt_tutorial_02@2x.png */; };
 		C7626F8817A10A6200D6D746 /* IRNewPeripheralScene3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7626F8717A10A6200D6D746 /* IRNewPeripheralScene3ViewController.xib */; };
 		C7693F8117A1132400EC43FC /* IRNewSignalScene1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7693F8017A1132400EC43FC /* IRNewSignalScene1ViewController.xib */; };
+		C7693F8317A121E500EC43FC /* IRSignalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7693F8217A121E500EC43FC /* IRSignalCell.xib */; };
+		C7693F8617A12AF900EC43FC /* icn_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C7693F8417A12AF900EC43FC /* icn_arrow.png */; };
+		C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */; };
 		C77150EC17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */; };
 		C77150EF17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */; };
 		C77150F21772D635004F9FE3 /* IRSignalCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B568E174A7BC800FFE5CB /* IRSignalCell.h */; };
@@ -214,6 +217,9 @@
 		C7626F8417A1086900D6D746 /* txt_tutorial_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "txt_tutorial_02@2x.png"; sourceTree = "<group>"; };
 		C7626F8717A10A6200D6D746 /* IRNewPeripheralScene3ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRNewPeripheralScene3ViewController.xib; sourceTree = "<group>"; };
 		C7693F8017A1132400EC43FC /* IRNewSignalScene1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRNewSignalScene1ViewController.xib; sourceTree = "<group>"; };
+		C7693F8217A121E500EC43FC /* IRSignalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRSignalCell.xib; sourceTree = "<group>"; };
+		C7693F8417A12AF900EC43FC /* icn_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_arrow.png; sourceTree = "<group>"; };
+		C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow@2x.png"; sourceTree = "<group>"; };
 		C77150EA17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene2ViewController.m; sourceTree = "<group>"; };
 		C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene2ViewController.h; sourceTree = "<group>"; };
 		C77150ED17728F9C004F9FE3 /* IRNewPeripheralScene3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene3ViewController.m; sourceTree = "<group>"; };
@@ -450,6 +456,8 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7693F8417A12AF900EC43FC /* icn_arrow.png */,
+				C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */,
 				C7626F8317A1086900D6D746 /* txt_tutorial_02.png */,
 				C7626F8417A1086900D6D746 /* txt_tutorial_02@2x.png */,
 				C7626F7D17A1079400D6D746 /* bg_light.png */,
@@ -470,6 +478,7 @@
 				C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */,
 				C7626F8717A10A6200D6D746 /* IRNewPeripheralScene3ViewController.xib */,
 				C7693F8017A1132400EC43FC /* IRNewSignalScene1ViewController.xib */,
+				C7693F8217A121E500EC43FC /* IRSignalCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -656,6 +665,9 @@
 				C7626F8617A1086900D6D746 /* txt_tutorial_02@2x.png in Resources */,
 				C7626F8817A10A6200D6D746 /* IRNewPeripheralScene3ViewController.xib in Resources */,
 				C7693F8117A1132400EC43FC /* IRNewSignalScene1ViewController.xib in Resources */,
+				C7693F8317A121E500EC43FC /* IRSignalCell.xib in Resources */,
+				C7693F8617A12AF900EC43FC /* icn_arrow.png in Resources */,
+				C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
