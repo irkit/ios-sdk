@@ -22,7 +22,6 @@
                                         <constraint firstAttribute="height" constant="48" id="5q6-aM-Vbd"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="24"/>
-                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="✓CREATE ICON">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,7 +31,6 @@
                                     </state>
                                     <connections>
                                         <action selector="createIconPressed:" destination="oaV-El-VRv" eventType="touchUpInside" id="m0j-AS-dYU"/>
-                                        <action selector="createIconTouchDowned:" destination="oaV-El-VRv" eventType="touchDown" id="nQL-kg-VB4"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -205,6 +203,24 @@
         <image name="icn_arrow.png" width="15" height="15"/>
         <image name="icon.png" width="57" height="57"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SRMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SRMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="createIconPressed:"/>
+                <relationship kind="action" name="settingsButtonPressed:"/>
+            </relationships>
+        </class>
+        <class className="SRSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SRSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="doneButtonTouched:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

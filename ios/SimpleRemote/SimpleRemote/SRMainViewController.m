@@ -351,7 +351,6 @@
     switch (section) {
         case 0:
         case 1:
-        case 2:
         {
             NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SRMainTableHeaderViews" owner:self options:nil];
             return [topLevelObjects objectAtIndex:section];
