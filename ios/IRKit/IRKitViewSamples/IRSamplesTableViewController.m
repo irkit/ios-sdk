@@ -97,6 +97,8 @@
         case 3:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
         case 4:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRWeb"];
+        case 5:
         {
             IRSignalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IRSignalCell"];
 
@@ -107,7 +109,6 @@
             [cell inflateFromSignal:signal];
             return cell;
         }
-        case 5:
         default:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
     }
@@ -161,7 +162,6 @@
         }
             break;
         case 3:
-        default:
         {
             IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
                                                                                                    bundle:resources];
@@ -169,6 +169,16 @@
 
             [self.navigationController pushViewController:c animated:YES];
         }
+            break;
+        case 4:
+        {
+            IRWebViewController *c = [[IRWebViewController alloc] init];
+            c.url = @"http://github.com/irkit/";
+            c.title = @"github.com/irkit";
+            [self.navigationController pushViewController:c animated:YES];
+        }
+            break;
+        default:
             break;
     }
 }

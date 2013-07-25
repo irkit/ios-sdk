@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7155BBBEDD9A4019A91ACFAD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185857DF7F994520AB0E59D6 /* libPods.a */; };
+		C70FC95A17A16D7D00CDA14F /* SRSettingsTableHeaderViews.xib in Resources */ = {isa = PBXBuildFile; fileRef = C70FC95917A16D7D00CDA14F /* SRSettingsTableHeaderViews.xib */; };
 		C713AACF179E8636005AF8AE /* SRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C713AACE179E8636005AF8AE /* SRHelper.m */; };
 		C73503F117A021070057D51B /* icn_actionbar_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503DD17A021060057D51B /* icn_actionbar_back.png */; };
 		C73503F217A021070057D51B /* icn_actionbar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503DE17A021060057D51B /* icn_actionbar_back@2x.png */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		185857DF7F994520AB0E59D6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C70FC95917A16D7D00CDA14F /* SRSettingsTableHeaderViews.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SRSettingsTableHeaderViews.xib; sourceTree = "<group>"; };
 		C713AACD179E8636005AF8AE /* SRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRHelper.h; sourceTree = "<group>"; };
 		C713AACE179E8636005AF8AE /* SRHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRHelper.m; sourceTree = "<group>"; };
 		C73503DD17A021060057D51B /* icn_actionbar_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_back.png; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				C78E3A00179F7703009AA9AC /* SRMainTableHeaderViews.xib */,
 				C7A796C9178C4F4A00E15608 /* SRSettingsViewController.h */,
 				C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */,
+				C70FC95917A16D7D00CDA14F /* SRSettingsTableHeaderViews.xib */,
 				C713AACD179E8636005AF8AE /* SRHelper.h */,
 				C713AACE179E8636005AF8AE /* SRHelper.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
@@ -388,6 +391,7 @@
 				C735040217A021070057D51B /* icn_tabbar_icon@2x.png in Resources */,
 				C735040317A021070057D51B /* shadow.png in Resources */,
 				C735040417A021070057D51B /* shadow@2x.png in Resources */,
+				C70FC95A17A16D7D00CDA14F /* SRSettingsTableHeaderViews.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

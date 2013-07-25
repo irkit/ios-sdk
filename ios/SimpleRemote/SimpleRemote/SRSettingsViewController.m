@@ -9,6 +9,8 @@
 #import "SRSettingsViewController.h"
 #import <BlocksKit/BlocksKit.h>
 
+#define kAppStoreURLTemplate @"itms-apps://itunes.apple.com/app/id%@"
+
 @interface SRSettingsViewController ()
 
 @end
@@ -24,15 +26,19 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+#ifdef DEBUG
+    version = [NSString stringWithFormat:@"%@ DEBUG",version];
+#endif
+    version = [NSString stringWithFormat:@"Version: %@",version];
+    [_versionButton setTitle:version
+                    forState:UIControlStateNormal];
+    [_versionButton setTitle:version
+                    forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,12 +47,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)doneButtonTouched:(id)sender {
+- (IBAction)cancelButtonTouched:(id)sender {
     LOG_CURRENT_METHOD;
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  LOG(@"dismissed");
                              }];
+}
+
+- (IBAction)versionButtonTouched:(id)sender {
+    LOG_CURRENT_METHOD;
+
+    // TODO fix app id
+    NSString *url = [NSString stringWithFormat:kAppStoreURLTemplate, @"xxxxxxxxxxxxxx"];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
@@ -92,20 +106,6 @@
     return 0;
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    
-    switch (section) {
-        case 0:
-            return @"Peripherals";
-        case 1:
-            return @"Info";
-        default:
-            break;
-    }
-    return nil;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
@@ -117,38 +117,22 @@
             if ([IRKit sharedInstance].numberOfPeripherals <= indexPath.row) {
                 // last line is always "+ Add New Peripheral"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewPeripheralCell"];
-                if (cell == nil) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                  reuseIdentifier:@"NewPeripheralCell"];
-                }
-                cell.textLabel.text = @"+ Add New Peripheral";
                 break;
             }
             cell = [[IRKit sharedInstance].peripherals tableView:tableView
                                            cellForRowAtIndexPath:indexPath];
             break;
         case 1:
-        default:
-            cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                              reuseIdentifier:@"cell"];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = @"Help";
-                    break;
+                    return [tableView dequeueReusableCellWithIdentifier:@"Help"];
                 case 1:
-                    cell.textLabel.text = @"Open Source";
-                    break;
+                    return [tableView dequeueReusableCellWithIdentifier:@"Opensource"];
                 case 2:
-                    cell.textLabel.text = @"Buy Peripheral";
-                    break;
+                    return [tableView dequeueReusableCellWithIdentifier:@"Buydevice"];
             }
             break;
     }
-    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16];
     return cell;
 }
 
@@ -194,7 +178,7 @@
                 case 0:
                 {
                     IRWebViewController *c = [[IRWebViewController alloc] init];
-                    c.url = @"https://lobi.co/sp/faq/ja";
+                    c.url = @"http://irkit.github.com/";
                     c.title = @"Help";
                     [self.navigationController pushViewController:c
                                                          animated:YES];
@@ -203,7 +187,7 @@
                 case 1:
                 {
                     IRWebViewController *c = [[IRWebViewController alloc] init];
-                    c.url = @"http://github.com/mash";
+                    c.url = @"http://github.com/irkit";
                     c.title = @"Opensource";
                     [self.navigationController pushViewController:c
                                                          animated:YES];
@@ -212,7 +196,7 @@
                 case 2:
                 {
                     IRWebViewController *c = [[IRWebViewController alloc] init];
-                    c.url = @"http://www.amazon.co.jp/";
+                    c.url = @"http://www.amazon.co.jp/s/field-keywords=irkit";
                     c.title = @"Buy Peripheral";
                     [self.navigationController pushViewController:c
                                                          animated:YES];
@@ -226,6 +210,39 @@
         default:
             break;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    switch (section) {
+        case 0:
+            return 40;
+        case 1:
+            return 16;
+        default:
+            break;
+    }
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    switch (section) {
+        case 0:
+        case 1:
+        {
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SRSettingsTableHeaderViews" owner:self options:nil];
+            return [topLevelObjects objectAtIndex:section];
+        }
+        default:
+            break;
+    }
+    return nil;
 }
 
 @end

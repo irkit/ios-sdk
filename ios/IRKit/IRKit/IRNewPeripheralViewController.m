@@ -26,7 +26,7 @@
     NSBundle *main = [NSBundle mainBundle];
     NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
                                                                   ofType:@"bundle"]];
-    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] initWithNibName:@"IRNewPeripheralScene1ViewController.xib"
+    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] initWithNibName:@"IRNewPeripheralScene1ViewController"
                                                                                                        bundle:resources];
     first.delegate = self;
     

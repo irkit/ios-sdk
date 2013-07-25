@@ -12,4 +12,6 @@
 @interface SRSettingsViewController : UITableViewController<IRNewPeripheralViewControllerDelegate,
     IRPeripheralNameEditViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *versionButton;
+
 @end
