@@ -24,4 +24,6 @@
 @property (nonatomic) NSDate *receivedDate;
 @property (nonatomic) IRPeripheral *peripheral;
 
+@property (nonatomic) NSString* peripheralUUID;
+
 @end

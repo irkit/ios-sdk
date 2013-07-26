@@ -12,9 +12,7 @@
 
 + (UIImage *)imageWithColor:(UIColor *)color;
 
-+ (void)uploadIcon:(UIImage *)image
-        withIRData:(NSArray *)data
-        withIRFreq:(int)freq
- completionHandler:(void (^)(NSHTTPURLResponse *response, NSDictionary *json, NSError *error)) handler;
++ (void)createIRSignalsIcon:(UIImage *)image
+          completionHandler:(void (^)(NSHTTPURLResponse *response, NSDictionary *json, NSError *error)) handler;
 
 @end

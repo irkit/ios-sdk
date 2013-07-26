@@ -131,14 +131,11 @@
 - (IBAction)createIconPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
-//    [SRHelper uploadIcon: nil
-//              withIRData: nil
-//              withIRFreq: 38
-//       completionHandler: ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
-//           LOG( @"response: %@, json: %@, error: %@", response, json, error);
-//           [[UIApplication sharedApplication] openURL: json[@"Icon"][@"Url"]];
-//       }];
-
+    [SRHelper createIRSignalsIcon:[UIImage imageNamed:@"icon.png"]
+                completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
+                    LOG( @"response: %@, json: %@, error: %@", response, json, error);
+                    [[UIApplication sharedApplication] openURL: json[@"Icon"][@"Url"]];
+                }];
 }
 
 - (void)didReceiveMemoryWarning {

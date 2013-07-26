@@ -10,6 +10,8 @@
 
 #import "SimpleRemoteTests.h"
 #import "SRHelper.h"
+#import "SRSignals.h"
+#import <IRKit/IRKit.h>
 
 @implementation SimpleRemoteTests {
 BOOL _isFinished; // test finished
@@ -32,22 +34,36 @@ BOOL _isFinished; // test finished
 
 - (void)testUploadIcon
 {
-//    UIImage *image = [UIImage imageNamed:@"icon.png"];
-//    NSArray *irdata = @[ @100, @100, @100 ];
+    UIImage *image = [UIImage imageNamed:@"icon.png"];
+    NSString *name = @"エアコンオン";
+    NSNumber *frequency = @38;
+    NSArray *data = @[ @100, @100, @100, @100 ];
+    NSNumber *date = @1374803718;
+    NSString *uuidString = @"ED572663-3FAA-4258-8126-5ADD908048CE";
 
-//    [SRHelper uploadIcon:image
-//              withIRData:irdata
-//              withIRFreq:38
-//       completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
-//           LOG(@"response: %@, image: %@, error: %@", response, json, error);
-//           STAssertTrue(response.statusCode == 200, @"status code valid");
-//           STAssertTrue(json[@"Icon"] != nil, @"Icon key");
-//           STAssertTrue(json[@"Icon"][@"Id"] != nil, @"Icon.Id key");
-//           STAssertTrue(json[@"Icon"][@"Url"] != nil, @"Icon.Url key");
-//           STAssertTrue(error == nil, @"no error");
-//           _isFinished = YES;
-//       }];
-    _isFinished = YES;
+    NSDictionary *signalDictionary = @{
+                                       @"name":name,
+                                       @"frequency":frequency,
+                                       @"data":data,
+                                       @"receivedDate":date,
+                                       @"uuid":uuidString,
+                                       };
+
+    IRSignal *signal = [[IRSignal alloc] initWithDictionary:signalDictionary];
+    IRSignals *signals = [[IRSignals alloc] init];
+    [signals addSignalsObject: signal];
+    [SRSignals sharedInstance].signals = signals;
+
+    [SRHelper createIRSignalsIcon:image
+                completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
+                   LOG(@"response: %@, image: %@, error: %@", response, json, error);
+                   STAssertTrue(response.statusCode == 200, @"status code valid");
+                   STAssertTrue(json[@"Icon"] != nil, @"Icon key");
+                   STAssertTrue(json[@"Icon"][@"Id"] != nil, @"Icon.Id key");
+                   STAssertTrue(json[@"Icon"][@"Url"] != nil, @"Icon.Url key");
+                   STAssertTrue(error == nil, @"no error");
+                   _isFinished = YES;
+                }];
 }
 
 @end

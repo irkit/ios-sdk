@@ -53,7 +53,7 @@
     LOG( @"loaded signals: %@", _signals );
 }
 
-- (NSString*)jsonRepresentation {
+- (NSString*)JSONRepresentation {
     LOG_CURRENT_METHOD;
 
     NSArray *signals = [IRHelper mapObjects:self.signals

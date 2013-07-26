@@ -8,6 +8,7 @@
 
 #import "SRHelper.h"
 #import "AFNetworking.h"
+#import "SRSignals.h"
 
 @implementation SRHelper
 
@@ -25,35 +26,28 @@
     return image;
 }
 
-+ (void)uploadIcon:(UIImage *)image
-        withIRData:(NSArray *)data
-        withIRFreq:(int)freq
- completionHandler:(void (^)(NSHTTPURLResponse *response, NSDictionary *json, NSError *error)) completion {
++ (void)createIRSignalsIcon:(UIImage *)image
+          completionHandler:(void (^)(NSHTTPURLResponse *, NSDictionary *, NSError *))completion {
     LOG_CURRENT_METHOD;
 
     NSURL *url = [NSURL URLWithString:@"http://localhost:8080"];
 
-    NSMutableString *irstring = [NSMutableString stringWithCapacity:data.count];
-    [data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
-        uint16_t interval = [obj shortValue];
-        if (idx == 0) {
-            [irstring appendFormat:@"%x", interval];
-        }
-        else {
-            [irstring appendFormat:@",%x", interval];
-        }
-    }];
-
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST"
                                                                          path:@"/apps/one/icons/"
-                                                                   parameters:@{@"irdata":irstring,
-                                                                                @"irfreq":@38}
+                                                                   parameters:nil
                                                     constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:UIImagePNGRepresentation(image)
-                                    name:@"icon"
-                                fileName:@"icon.png"
-                                mimeType:@"image/png"];
+                                                        [formData appendPartWithFileData:UIImagePNGRepresentation(image)
+                                                                                    name:@"icon"
+                                                                                fileName:@"icon.png"
+                                                                                mimeType:@"image/png"];
+                                                        NSString *json = [SRSignals sharedInstance].signals.JSONRepresentation;
+                                                        NSData *data = [NSData dataWithBytes:[json UTF8String]
+                                                                                      length:[json lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
+                                                        [formData appendPartWithFileData:data
+                                                                                    name:@"irsignals"
+                                                                                fileName:@"irsignals.json"
+                                                                                mimeType:@"application/json"];
     }];
 
     AFJSONRequestOperation *operation =

@@ -29,24 +29,23 @@
 - (void)testExample
 {
     NSString *name = @"エアコンオン";
-    NSUInteger frequency = 38;
+    NSNumber *frequency = @38;
     NSArray *data = @[ @100, @100, @100, @100 ];
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:1374803718];
+    NSNumber *date = @1374803718;
     NSString *uuidString = @"ED572663-3FAA-4258-8126-5ADD908048CE";
 
-    IRSignal *signal = [[IRSignal alloc] init];
-    signal.name = name;
-    signal.frequency = frequency;
-    signal.data = data;
-    signal.receivedDate = date;
-    IRPeripheral *peripheral = [[IRPeripheral alloc] init];
-    CFUUIDRef uuid = CFUUIDCreateFromString(nil, (CFStringRef)uuidString);
-    peripheral.UUID = uuid;
-    signal.peripheral = peripheral;
+    NSDictionary *signalDictionary = @{
+                                       @"name":name,
+                                       @"frequency":frequency,
+                                       @"data":data,
+                                       @"receivedDate":date,
+                                       @"uuid":uuidString,
+                                       };
+    IRSignal *signal = [[IRSignal alloc] initWithDictionary:signalDictionary];
     IRSignals *signals = [[IRSignals alloc] init];
     [signals addSignalsObject:signal];
 
-    NSString *json = [signals jsonRepresentation];
+    NSString *json = [signals JSONRepresentation];
     NSLog(@"json string: %@", json);
 
     NSString *escapedString = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
@@ -68,7 +67,7 @@
                              @"name":name,
                              @"frequency":[NSNumber numberWithUnsignedInteger:38],
                              @"data":data,
-                             @"receivedDate":[NSNumber numberWithDouble:[date timeIntervalSince1970]],
+                             @"receivedDate":date,
                              @"uuid":uuidString };
     for (NSString *key in expected.allKeys) {
         STAssertEqualObjects(parsedSignals[0][key], expected[key],
