@@ -15,6 +15,7 @@
 @property (nonatomic) BOOL updatedInBackground;
 
 + (instancetype) sharedInstance;
+- (void)save;
 - (void)sendSequentially;
 
 @end

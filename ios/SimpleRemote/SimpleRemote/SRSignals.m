@@ -45,6 +45,15 @@
     _signals = signals;
 }
 
+- (void)save {
+    LOG_CURRENT_METHOD;
+
+    NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+    [d setObject:_signals.data
+          forKey:@"signals"];
+    [d synchronize];
+}
+
 - (void)sendSequentially {
     LOG_CURRENT_METHOD;
     [_signals sendSequentially];

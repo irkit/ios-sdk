@@ -42,7 +42,7 @@
                                   usingBlock:^(NSNotification *note) {
                                       IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
                                       [[SRSignals sharedInstance].signals addSignalsObject:signal];
-                                      [_self saveSignals];
+                                      [[SRSignals sharedInstance] save];
     }];
     // show view controller when another peripheral is found
     _peripheralObserver = [[NSNotificationCenter defaultCenter]
@@ -70,6 +70,7 @@
                                          LOG( @"didBecomeActive" );
                                          if ([SRSignals sharedInstance].updatedInBackground) {
                                              [SRSignals sharedInstance].updatedInBackground = NO;
+                                             [SRSignals sharedInstance].signals.delegate = self;
                                              [_self.tableView reloadData];
                                          }
                                      }];
@@ -111,13 +112,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
-}
-
-- (void)saveSignals {
-    NSUserDefaults *d2 = [NSUserDefaults standardUserDefaults];
-    [d2 setObject:[SRSignals sharedInstance].signals.data
-           forKey:@"signals"];
-    [d2 synchronize];
 }
 
 #pragma mark - UI events
@@ -174,10 +168,10 @@
               didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
     // we're gonna show new signals even without using IRNewSignalViewController used
-//    if ([info[IRViewControllerResultType] isEqual: IRViewControllerResultTypeDone]) {
-//        [_signals addSignalsObject:info[IRViewControllerResultSignal]];
-//        [_signals save];
-//    }
+    if ([info[IRViewControllerResultType] isEqual: IRViewControllerResultTypeDone]) {
+        [[SRSignals sharedInstance].signals addSignalsObject:info[IRViewControllerResultSignal]];
+        [[SRSignals sharedInstance] save];
+    }
     [self dismissViewControllerAnimated:YES completion:^{
         LOG(@"dismissed");
     }];
@@ -311,7 +305,7 @@
                 }];
                 [sheet addButtonWithTitle:@"Remove" handler:^{
                     [[SRSignals sharedInstance].signals removeSignalsObject:signal];
-                    [self saveSignals];
+                    [[SRSignals sharedInstance] save];
                     LOG( @"removed: %@", signal );
                 }];
                 [sheet setCancelButtonWithTitle:nil handler:^{
