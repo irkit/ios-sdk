@@ -94,6 +94,7 @@
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    
     switch (section) {
         case 0:
             return @"Peripherals";
@@ -147,6 +148,7 @@
             }
             break;
     }
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Light" size:16];
     return cell;
 }
 
@@ -164,7 +166,9 @@
                 // pressed Add New Peripheral cell
                 IRNewPeripheralViewController *c = [[IRNewPeripheralViewController alloc] init];
                 c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-                [self presentViewController:c animated:YES completion:^{
+                [self presentViewController:c
+                                   animated:YES
+                                 completion:^{
                     LOG( @"presented" );
                 }];
                 return;

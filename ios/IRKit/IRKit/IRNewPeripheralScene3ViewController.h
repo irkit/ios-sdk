@@ -13,6 +13,7 @@
 @interface IRNewPeripheralScene3ViewController : UIViewController<UITextFieldDelegate>
 
 @property (nonatomic, assign) id<IRNewPeripheralScene3ViewControllerDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
 

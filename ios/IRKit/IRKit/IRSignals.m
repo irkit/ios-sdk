@@ -40,7 +40,8 @@
 }
 
 - (void)loadFromData: (NSData*)data {
-    NSMutableSet *set = (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSMutableSet *set = data ? (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data]
+                             : nil;
     if ( set ) {
         _signals = set;
     }
@@ -69,8 +70,7 @@
 }
 
 - (NSEnumerator*)enumeratorOfSignals {
-    // TODO sort using receivedDate
-    return _signals.objectEnumerator;
+    return [_signals.allValues sortedArrayUsingSelector:@selector(compareByReceivedDate:)].objectEnumerator;
 }
 
 - (IRSignal*)memberOfSignals:(IRSignal *)object {
@@ -135,7 +135,7 @@
     if (cell == nil) {
         cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
     }
-    cell.signal = [self objectAtIndex: indexPath.row];
+    [cell inflateFromSignal:[self objectAtIndex:indexPath.row]];
     return cell;
 }
 

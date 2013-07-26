@@ -12,8 +12,6 @@
 @interface IRNewPeripheralViewController ()
 
 @property (nonatomic) UINavigationController *navController;
-@property (nonatomic) id observer1;
-@property (nonatomic) id observer2;
 
 @end
 
@@ -25,7 +23,11 @@
     CGRect bounds = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:bounds];
 
-    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] init];
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] initWithNibName:@"IRNewPeripheralScene1ViewController.xib"
+                                                                                                       bundle:resources];
     first.delegate = self;
     
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
@@ -46,50 +48,18 @@
     // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
     // prevent showing the weird 20px empty zone on top of navigationbar
     // when presented in caller's viewDidLoad
-    [self.navigationController setNavigationBarHidden:YES];
-    [self.navigationController setNavigationBarHidden:NO];
-    
-    _observer1 = [[NSNotificationCenter defaultCenter]
-                 addObserverForName:IRKitDidConnectPeripheralNotification
-                             object:nil
-                              queue:[NSOperationQueue mainQueue]
-                         usingBlock:^(NSNotification *note) {
-                             LOG( @"new irkit connected");
-                             IRNewPeripheralScene2ViewController *c =
-                             [[IRNewPeripheralScene2ViewController alloc] init];
-                             c.delegate = self;
-                             [self.navigationController pushViewController:c
-                                                                  animated:YES];
-                 }];
-    
-    _observer2 = [[NSNotificationCenter defaultCenter]
-                 addObserverForName:IRKitDidAuthorizePeripheralNotification
-                             object:nil
-                              queue:[NSOperationQueue mainQueue]
-                         usingBlock:^(NSNotification *note) {
-                             LOG( @"irkit authorized");
-                             IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] init];
-                             c.delegate = self;
-                             [self.navigationController pushViewController:c
-                                                                  animated:YES];
-                 }];
-
+    [_navController setNavigationBarHidden:YES];
+    [_navController setNavigationBarHidden:NO];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver: _observer1];
-    [[NSNotificationCenter defaultCenter] removeObserver: _observer2];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
-}
-
-- (void) dealloc {
-    LOG_CURRENT_METHOD;
 }
 
 #pragma mark - UI events
@@ -103,21 +73,23 @@
 
 #pragma mark - IRNewPeripheralScene1ViewControllerDelegate
 
-- (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
                                  didFinishWithInfo:@{
                         IRViewControllerResultType: IRViewControllerResultTypeCancelled
-         }];
+         }];    
     }
     // shouldnt happen
 }
 
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
 
-- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -131,7 +103,8 @@
 
 #pragma mark - IRNewPeripheralScene3ViewControllerDelegate
 
-- (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {

@@ -1,0 +1,29 @@
+msc {
+    # entities
+    user, peripheral, central, irreceiver;
+
+    # space
+    |||;
+
+    user note central [label = "Successfully authenticated"];
+
+    user -> central [label = "Select IR signal to send"];
+
+    peripheral <- central [label = "Connect if disconnected"];
+
+    peripheral <= central [label = "Write 'IR Data' offset = '0' value = '...'"];
+    peripheral >> central [label = "ack"];
+    peripheral <= central [label = "Write 'IR Data' offset = '...' value = '...'"];
+    peripheral >> central [label = "ack"];
+    peripheral <= central [label = "Write 'IR Data' offset = '...' value = '...'"];
+    peripheral >> central [label = "ack"];
+
+    peripheral <= central [label = "Write 'IR Control Point' value = '0 - Send IR Data'"];
+    peripheral >> central [label = "ack"];
+
+    peripheral -> irreceiver [label = "Send IR signal"];
+
+    irreceiver note irreceiver [label = "Action"];
+
+    peripheral <- central [label = "Disconnect after 1 sec\n(user,central might want to send signals in series)"];
+}

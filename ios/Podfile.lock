@@ -1,12 +1,15 @@
 PODS:
+  - AFNetworking (1.3.1)
   - BlocksKit (1.8.2):
     - libffi
   - libffi (3.0.13)
 
 DEPENDENCIES:
+  - AFNetworking (~> 1.3.1)
   - BlocksKit
 
 SPEC CHECKSUMS:
+  AFNetworking: 9ec8aafb9269236a7630bd8d9838ce2ba30fa2a0
   BlocksKit: 7396526b0816734103f6133fbb1a520c8b04e80c
   libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
 

@@ -16,6 +16,11 @@
 
 @property (nonatomic, copy) void (^writeResponseBlock)(NSError *error);
 @property (nonatomic) IRWriteOperationQueue *writeQueue;
+@property (nonatomic) CBCentralManager *manager;
+@property (nonatomic) CBPeripheral *peripheral;
+@property (nonatomic) BOOL shouldReadIRData;
+@property (nonatomic) BOOL shouldRefreshDeviceInformation;
+@property (nonatomic) BOOL wantsToConnect;
 
 @end
 
@@ -27,11 +32,26 @@
     if ( ! self ) {
         return nil;
     }
+    _writeQueue       = nil;
+    _peripheral       = nil;
+    _shouldReadIRData = NO;
+
+    // only read device information on app startup
+    // we won't release this object, so initializing with YES will do
+    _shouldRefreshDeviceInformation = YES;
+    _wantsToConnect   = NO;
+
+    _UUID             = nil;
+    _customizedName   = nil;
     _foundDate        = [NSDate date];
     _receivedCount    = IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN; // on memory should be enough
     _authorized       = NO;
-    _shouldReadIRData = NO;
-    _writeQueue       = nil;
+
+    _manufacturerName = nil;
+    _modelName        = nil;
+    _hardwareRevision = nil;
+    _firmwareRevision = nil;
+    _softwareRevision = nil;
     return self;
 }
 
@@ -45,17 +65,13 @@
                        : NO;
 }
 
-- (void)connect {
-    LOG_CURRENT_METHOD;
-
-    _wantsToConnect = YES;
-    [[IRKit sharedInstance] retrieveKnownPeripherals];
+- (void)setManager:(CBCentralManager*)manager {
+    _manager = manager;
 }
 
 - (void)setPeripheral:(CBPeripheral *)peripheral {
-    // LOG_CURRENT_METHOD;
-    
     _peripheral = peripheral;
+    _UUID       = _peripheral.UUID;
 
     if ( ! _writeQueue ) {
         _writeQueue = [[IRWriteOperationQueue alloc] init];
@@ -67,10 +83,140 @@
     return [self.foundDate compare: otherPeripheral.foundDate];
 }
 
-- (void) writeData: (NSData*)value
- forCharacteristicWithUUID: (CBUUID*)characteristicUUID
-         ofServiceWithUUID: (CBUUID*)serviceUUID
-                completion: (void (^)(NSError *error))block {
+- (void)didDiscoverWithAdvertisementData:(NSDictionary *)advertisementData
+                                    RSSI:(NSNumber *)rssi {
+    LOG_CURRENT_METHOD;
+
+    NSData *data = advertisementData[CBAdvertisementDataManufacturerDataKey];
+    uint8_t receivedCount = 0;
+    if (data) {
+        [data getBytes:&receivedCount
+                 range:(NSRange){0,1}];
+    }
+    LOG( @"peripheral: %@ receivedCount: %d", _peripheral, receivedCount );
+
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+
+    // connect when:
+    // * app in foreground and not authorized = we need to connect to receive auth c12c's indication
+    // * app in foreground and peripheral's received count has changed = peripheral should have received IR data, we're gonna read it
+    // * we're in background and retainConnectionInBackground is YES
+    if ( (state == UIApplicationStateActive) && ! _authorized ) {
+        [self connect];
+    }
+    else if ( (state == UIApplicationStateActive) &&
+             (_receivedCount != IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN) &&
+             (_receivedCount != (uint16_t)receivedCount) ) {
+        _shouldReadIRData = YES;
+        [self connect];
+    }
+    else if ( [IRKit sharedInstance].retainConnectionInBackground &&
+             (state != UIApplicationStateActive) ) {
+        [self connect];
+    }
+    _receivedCount = receivedCount;
+}
+
+- (void) didRetrieve {
+    LOG_CURRENT_METHOD;
+    if (_wantsToConnect) {
+        _wantsToConnect = NO;
+        [self connect];
+    }
+}
+
+- (void) didConnect {
+    LOG_CURRENT_METHOD;
+    
+    if (! [self canReadAllCharacteristics]) {
+        [_peripheral discoverServices:nil];
+        return;
+    }
+    [self didBecomeReady];
+}
+
+- (void) disconnect {
+    [_writeQueue setSuspended: YES];
+
+    if ([IRKit sharedInstance].retainConnectionInBackground && _authorized) {
+        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+        if (state == UIApplicationStateBackground ||
+            state == UIApplicationStateInactive) {
+            // don't disconnect in the background
+            LOG( @"dont disconnect in the background" );
+            return;
+        }
+    }
+    LOG( @"will disconnect" );
+    [_manager cancelPeripheralConnection: _peripheral];
+}
+
+- (void) didDisconnect {
+    LOG_CURRENT_METHOD;
+    
+    [_writeQueue setSuspended: YES];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidDisconnectPeripheralNotification
+                                                        object:self
+                                                      userInfo:nil];
+}
+
+- (void) didBecomeReady {
+    LOG_CURRENT_METHOD;
+
+    [_writeQueue setSuspended: ! self.isReady];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidConnectPeripheralNotification
+                                                        object:self
+                                                      userInfo:nil];
+    
+    CBCharacteristic *auth =
+        [IRHelper findCharacteristicInPeripheral:_peripheral
+                                      withCBUUID:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID
+                             inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+    [_peripheral setNotifyValue:YES
+              forCharacteristic:auth];
+    
+    CBCharacteristic *unread =
+        [IRHelper findCharacteristicInPeripheral:_peripheral
+                                      withCBUUID:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID
+                             inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+    LOG( @"registering for notifications on unread status" );
+    [_peripheral setNotifyValue:YES
+              forCharacteristic:unread];
+
+    // when uninstalled and re-installed after _authorized is YES
+    // _authorized is initialized to NO,
+    // so we try to read it, and peripheral responds with YES
+    LOG( @"are we authorized?" );
+    [_peripheral readValueForCharacteristic:auth];
+    
+    if ( _authorized && _shouldReadIRData ) {
+        LOG( @"read IR data" );
+        _shouldReadIRData = NO;
+        CBCharacteristic *irdata =
+            [IRHelper findCharacteristicInPeripheral:_peripheral
+                                          withCBUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
+                                 inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+        [_peripheral readValueForCharacteristic:irdata];
+    }
+    
+    if (_shouldRefreshDeviceInformation) {
+        // org.bluetooth.service.device_information
+        CBService *deviceInformation
+            = [IRHelper findServiceInPeripheral:_peripheral
+                                       withUUID:IRKIT_SERVICE_DEVICE_INFORMATION];
+        for (CBCharacteristic *characteristic in deviceInformation.characteristics) {
+            [_peripheral readValueForCharacteristic:characteristic];
+        }
+        _shouldRefreshDeviceInformation = NO;
+    }
+}
+
+- (void) writeValueInBackground:(NSData *)value
+      forCharacteristicWithUUID:(CBUUID *)characteristicUUID
+              ofServiceWithUUID:(CBUUID *)serviceUUID
+                     completion:(void (^)(NSError *))block {
     LOG( @"service: %@ c12c: %@ value: %@", serviceUUID, characteristicUUID, value );
     [self restartDisconnectTimer];
     
@@ -98,6 +244,51 @@
     [_writeQueue addOperation:op];
 }
 
+- (BOOL) writeValue:(NSData *)value
+forCharacteristicWithUUID:(CBUUID *)characteristicUUID
+  ofServiceWithUUID:(CBUUID *)serviceUUID {
+    LOG_CURRENT_METHOD;
+    
+    CBCharacteristic *c12c = [IRHelper findCharacteristicInPeripheral:_peripheral
+                                                           withCBUUID:characteristicUUID
+                                                  inServiceWithCBUUID:serviceUUID];
+    if (! c12c) {
+        return NO;
+    }
+    LOG( @"wrote to service: %@ c12c: %@ data: %@", serviceUUID, characteristicUUID, value );
+    [_peripheral writeValue:value
+          forCharacteristic:c12c
+                       type:CBCharacteristicWriteWithResponse];
+    return YES;
+}
+
+- (NSString*) modelNameAndRevision {
+    LOG_CURRENT_METHOD;
+    if ( ! _modelName || ! _hardwareRevision || ! _firmwareRevision || ! _softwareRevision ) {
+        return @"unknown";
+    }
+    return [@[_modelName, _hardwareRevision, _firmwareRevision, _softwareRevision] componentsJoinedByString:@"/"];
+}
+
+#pragma mark - Private methods
+
+- (void)connect {
+    LOG_CURRENT_METHOD;
+
+    if (! _peripheral) {
+        _wantsToConnect = YES;
+        [_manager retrievePeripherals:@[ (__bridge_transfer id)_UUID ]];
+        return;
+    }
+    if (_peripheral.isConnected) {
+        return;
+    }
+    [_manager connectPeripheral:_peripheral
+                        options:@{
+        CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
+     }];
+}
+
 - (void) cancelDisconnectTimer {
     LOG_CURRENT_METHOD;
     
@@ -108,27 +299,12 @@
     LOG_CURRENT_METHOD;
     
     [self cancelDisconnectTimer];
-
+    
     // disconnect after interval
     // regarding that we might want to continuously write to this peripheral
     [self performSelector:@selector(disconnect)
                withObject:nil
                afterDelay:5.];
-}
-
-- (void) didDisconnect {
-    LOG_CURRENT_METHOD;
-    
-    [_writeQueue setSuspended: YES];
-}
-
-#pragma mark - Private methods
-
-- (void) disconnect {
-    LOG_CURRENT_METHOD;
-
-    [_writeQueue setSuspended: YES];
-    [[IRKit sharedInstance] disconnectPeripheral: self];
 }
 
 - (BOOL) canReadAllCharacteristics {
@@ -174,24 +350,6 @@ didDiscoverServices:(NSError *)error
         // discover characterstics for all services (just interested now)
         [peripheral discoverCharacteristics:IRKIT_CHARACTERISTICS
                                  forService:service];
-        
-        //        // Device Information Service
-        //        if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
-        //        {
-        //            [peripheral discoverCharacteristics:nil forService:service];
-        //        }
-        //
-        //        // GAP (Generic Access Profile) for Device Name
-        //        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
-        //        {
-        //            [peripheral discoverCharacteristics:nil forService:service];
-        //        }
-        //
-        //        // GATT (Generic Attribute Profile)
-        //        if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAttributeProfileString]] )
-        //        {
-        //            [peripheral discoverCharacteristics:nil forService:service];
-        //        }
     }
 }
 
@@ -205,68 +363,17 @@ didDiscoverCharacteristicsForService:(CBService *)service
 {
     LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
     [self restartDisconnectTimer];
-
-    [_writeQueue setSuspended: ! self.isReady];
-
+    
     for (CBCharacteristic *characteristic in service.characteristics)
     {
         LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",
             characteristic, characteristic.UUID, characteristic.value, characteristic.descriptors, NSStringFromCBCharacteristicProperty(characteristic.properties), characteristic.isNotifying, characteristic.isBroadcasted );
     }
-    
-    if ([service.UUID isEqual:IRKIT_SERVICE_UUID]) {
-        for (CBCharacteristic *characteristic in service.characteristics) {
-            if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID]) {
-                // when uninstalled and re-installed after _authorized is YES
-                // _authorized is initialized to NO,
-                // so we try to read it, and peripheral responds with YES
-                LOG( @"are we authorized?" );
-                [peripheral setNotifyValue:YES
-                         forCharacteristic:characteristic];
-                [peripheral readValueForCharacteristic:characteristic];
-            }
-            else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
-                if ( _authorized && _shouldReadIRData ) {
-                    LOG( @"read IR data" );
-                    _shouldReadIRData = NO;
-                    [peripheral readValueForCharacteristic:characteristic];
-                }
-            }
-            else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
-                LOG( @"registering for notifications on unread status" );
-                [peripheral setNotifyValue:YES
-                         forCharacteristic:characteristic];
-            }
-        }
+
+    if ([IRHelper CBUUID:service.UUID
+         isEqualToCBUUID:IRKIT_SERVICE_UUID]) {
+        [self didBecomeReady];
     }
-    
-    //    if ( [service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]] )
-    //    {
-    //        for (CBCharacteristic *characteristic in service.characteristics)
-    //        {
-    //            /* Read device name */
-    //            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]])
-    //            {
-    //                [peripheral readValueForCharacteristic:characteristic];
-    //                LOG(@"Found a Device Name Characteristic, RSSI: %@", peripheral.RSSI);
-    //            }
-    //        }
-    //    }
-    //
-    //    // org.bluetooth.service.device_information
-    //    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]])
-    //    {
-    //        for (CBCharacteristic *characteristic in service.characteristics)
-    //        {
-    //            // Read manufacturer name
-    //            // 2a29: org.bluetooth.characteristic.manufacturer_name_string
-    //            if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]])
-    //            {
-    //                [peripheral readValueForCharacteristic:characteristic];
-    //                LOG(@"Found a Device Manufacturer Name Characteristic");
-    //            }
-    //        }
-    //    }
 }
 
 /*
@@ -296,11 +403,10 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         if ( _authorized != authorized ) {
             // authorized state changed
             _authorized = authorized;
-            [[IRKit sharedInstance].peripherals save];
+            [[IRKit sharedInstance] save];
             if ( _authorized ) {
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:IRKitDidAuthorizePeripheralNotification
-                 object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidAuthorizePeripheralNotification
+                                                                    object:self];
             }
         }
 
@@ -322,21 +428,42 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             IRSignal *signal = [[IRSignal alloc] initWithData: value];
             signal.peripheral = self;
             
-            [[NSNotificationCenter defaultCenter]
-                postNotificationName:IRKitDidReceiveSignalNotification
-                              object:self
-                            userInfo:@{IRKitSignalUserInfoKey: signal}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidReceiveSignalNotification
+                                                                object:self
+                                                              userInfo:@{IRKitSignalUserInfoKey: signal}];
         }
     }
-    
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
-        NSString * deviceName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Device Name = %@", deviceName);
-    }
+
+    BOOL shouldSave = NO;
     // 2a29: org.bluetooth.characteristic.manufacturer_name_string
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]]) {
-        NSString* manufacturer = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Manufacturer Name = %@", manufacturer);
+    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MANUFACTURER_NAME_UUID]) {
+        shouldSave = YES;
+        _manufacturerName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Manufacturer Name = %@", _manufacturerName);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MODEL_NAME_UUID]) {
+        shouldSave = YES;
+        _modelName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Model Name = %@", _modelName);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_HARDWARE_REVISION_UUID]) {
+        shouldSave = YES;
+        _hardwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Hardware Revision = %@", _hardwareRevision);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_FIRMWARE_REVISION_UUID]) {
+        shouldSave = YES;
+        _firmwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Firmware Revision = %@", _firmwareRevision);
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_SOFTWARE_REVISION_UUID]) {
+        shouldSave = YES;
+        _softwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+        LOG(@"Software Revision = %@", _softwareRevision);
+    }
+
+    if (shouldSave) {
+        [[IRKit sharedInstance] save];
     }
 }
 
@@ -354,25 +481,44 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
+    [coder encodeObject:[IRHelper stringFromCFUUID:_UUID]
+                 forKey:@"u"];
     [coder encodeObject:_customizedName forKey:@"c"];
     [coder encodeObject:_foundDate      forKey:@"f"];
     [coder encodeObject:[NSNumber numberWithBool:_authorized] forKey:@"a"];
+
+    // d: Device information
+    [coder encodeObject:_manufacturerName forKey:@"dm"];
+    [coder encodeObject:_modelName        forKey:@"do"];
+    [coder encodeObject:_hardwareRevision forKey:@"dh"];
+    [coder encodeObject:_firmwareRevision forKey:@"df"];
+    [coder encodeObject:_softwareRevision forKey:@"ds"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
     self = [self init];
-    if (self) {
-        _customizedName = [coder decodeObjectForKey:@"c"];
-        _foundDate      = [coder decodeObjectForKey:@"f"];
-        _authorized     = [[coder decodeObjectForKey:@"a"] boolValue];
-        _peripheral     = nil;
-        
-        if ( ! _customizedName ) {
-            _customizedName = @"unknown";
-        }
-        if ( ! _foundDate ) {
-            _foundDate = [NSDate date];
-        }
+    if (! self) {
+        return nil;
+    }
+    NSString *u       = [coder decodeObjectForKey:@"u"];
+    _UUID             = CFUUIDCreateFromString(nil, (CFStringRef)u);
+    _customizedName   = [coder decodeObjectForKey:@"c"];
+    _foundDate        = [coder decodeObjectForKey:@"f"];
+    _authorized       = [[coder decodeObjectForKey:@"a"] boolValue];
+    
+    _manufacturerName = [coder decodeObjectForKey:@"dm"];
+    _modelName        = [coder decodeObjectForKey:@"do"];
+    _hardwareRevision = [coder decodeObjectForKey:@"dh"];
+    _firmwareRevision = [coder decodeObjectForKey:@"df"];
+    _softwareRevision = [coder decodeObjectForKey:@"ds"];
+    
+    _peripheral       = nil;
+    
+    if ( ! _customizedName ) {
+        _customizedName = @"unknown";
+    }
+    if ( ! _foundDate ) {
+        _foundDate = [NSDate date];
     }
     return self;
 }

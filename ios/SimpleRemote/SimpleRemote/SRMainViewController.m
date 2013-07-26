@@ -8,6 +8,7 @@
 
 #import "SRMainViewController.h"
 #import <BlocksKit/BlocksKit.h>
+#import "SRHelper.h"
 
 @interface SRMainViewController ()
 
@@ -15,6 +16,7 @@
 @property (nonatomic) id signalObserver;
 @property (nonatomic) id peripheralObserver;
 @property (nonatomic) BOOL showingNewPeripheralViewController;
+@property (nonatomic) BOOL cancelled;
 
 @end
 
@@ -55,15 +57,26 @@
                                            return;
                                        }
                                        IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
-                                       UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:c];
                                        c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-                                       [self presentViewController:nav
+                                       [self presentViewController:c
                                                           animated:YES
                                                         completion:^{
                                            LOG( @"presented" );
                                            _showingNewPeripheralViewController = YES;
                                        }];
                                    } ];
+
+    // customize left bar button
+    UIBarButtonItem *left = self.navigationItem.leftBarButtonItem;
+    UIImage *bgImage = [UIImage imageNamed:@"icn_actionbar_menu.png"];
+    UIImage *bgImageReal = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(28, 24, 0, 0)];
+
+    [left setBackgroundImage:bgImageReal
+                    forState:UIControlStateNormal
+                  barMetrics:UIBarMetricsDefault];
+    [left setBackgroundVerticalPositionAdjustment:5. forBarMetrics:UIBarMetricsDefault];
+
+    _cancelled = NO;
 }
 
 - (void)dealloc {
@@ -76,10 +89,15 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:YES];
 
-    if ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0) {
+    // temp
+    _cancelled = YES;
+    
+    if (! _cancelled && ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0)) {
         IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
         c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-        [self presentViewController:c animated:YES completion:^{
+        [self presentViewController:c
+                           animated:YES
+                         completion:^{
             LOG( @"presented" );
             _showingNewPeripheralViewController = YES;
         }];
@@ -110,9 +128,24 @@
     
     IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
     c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
-    [self presentViewController:c animated:YES completion:^{
+    [self presentViewController:c
+                       animated:YES
+                     completion:^{
         LOG( @"presented" );
     }];
+}
+
+- (IBAction)createIconPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+
+//    [SRHelper uploadIcon: nil
+//              withIRData: nil
+//              withIRFreq: 38
+//       completionHandler: ^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
+//           LOG( @"response: %@, json: %@, error: %@", response, json, error);
+//           [[UIApplication sharedApplication] openURL: json[@"Icon"][@"Url"]];
+//       }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -126,7 +159,11 @@
                   didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
  
-    [self dismissViewControllerAnimated:YES completion:^{
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        _cancelled = YES;
+    }
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
         LOG(@"dismissed");
         _showingNewPeripheralViewController = NO;
     }];
@@ -191,27 +228,16 @@
             if (_signals.countOfSignals <= indexPath.row) {
                 // last line is always "+ Add New Signal"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
-                if (cell == nil) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                  reuseIdentifier:@"NewSignalCell"];
-                }
-                cell.textLabel.text = @"+ Add New Signal";
                 break;
             }
             cell = [_signals tableView:tableView
                  cellForRowAtIndexPath: indexPath];
             break;
         case 1:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"SelectImageCell"];
             break;
         case 2:
         default:
-            cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                              reuseIdentifier:@"NewSignalCell"];
-            }
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.text = @"Go!";
             break;
     }
     return cell;
@@ -226,16 +252,16 @@
             return [_signals tableView:tableView
                  numberOfRowsInSection:section] + 1;
         case 1:
-            return 0;
+            return 1;
         case 2:
         default:
-            return 1;
+            return 0;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     LOG_CURRENT_METHOD;
-    return 3;
+    return 2;
 }
 
 #pragma mark - UITableViewDelegate
@@ -251,6 +277,7 @@
             return [_signals tableView: tableView
                heightForRowAtIndexPath: indexPath];
         case 1:
+            return 80;
         case 2:
         default:
             return 44;
@@ -269,8 +296,9 @@
                     // pressed Add New Signal cell
                     IRNewSignalViewController *c = [[IRNewSignalViewController alloc] init];
                     c.delegate = (id<IRNewSignalViewControllerDelegate>)self;
-                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:c];
-                    [self presentViewController:nav animated:YES completion:^{
+                    [self presentViewController:c
+                                       animated:YES
+                                     completion:^{
                         LOG( @"presented" );
                     }];
                     return;
@@ -294,11 +322,6 @@
             }
             break;
         case 1:
-        case 2:
-            {
-                NSURL *url = [NSURL URLWithString: @"http://www.google.com/"];
-                [[UIApplication sharedApplication] openURL: url];
-            }
             break;
         default:
             break;
@@ -309,53 +332,34 @@
     LOG_CURRENT_METHOD;
     switch (section) {
         case 0:
-            return 60.;
+            return 40;
         case 1:
-            return 110.;
-        case 2:
+            return 40;
         default:
-            return 60.;
+            break;
     }
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    LOG_CURRENT_METHOD;
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     LOG_CURRENT_METHOD;
-    float offsetLeft = 20.;
-    UIView *view = [[UIView alloc] initWithFrame:(CGRect){0.,0.,320.,50.}];
-    UILabel *label = [[UILabel alloc] initWithFrame:(CGRect){ offsetLeft, 0., 320.-offsetLeft,50.}];
-    label.backgroundColor = [UIColor clearColor];
-    label.textColor = [UIColor whiteColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:32];
     switch (section) {
         case 0:
-            label.text = @"1 Select Signal";
-            break;
         case 1:
-            label.text = @"2 Select Icon Image";
-            break;
         case 2:
+        {
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SRMainTableHeaderViews" owner:self options:nil];
+            return [topLevelObjects objectAtIndex:section];
+        }
         default:
-            label.text = @"3 Create App Icon";
             break;
     }
-    [view addSubview:label];
-
-    if (section == 1) {
-        UIImage *image = [UIImage imageNamed: @"icon.png"];
-        UIButton *button = [[UIButton alloc] init];
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        button.frame = (CGRect){ (view.frame.size.width - image.size.width)/2.,
-                                  50,
-                                  image.size.width,
-                                  image.size.height };
-        [button addEventHandler:^(id sender) {
-            LOG( @"tapped" );
-            // TODO show icon selector
-        } forControlEvents:UIControlEventTouchUpInside];
-        [view addSubview:button];
-    }
-
-    return view;
+    return nil;
 }
 
 @end

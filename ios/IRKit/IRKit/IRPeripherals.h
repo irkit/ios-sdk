@@ -12,6 +12,7 @@
 
 @interface IRPeripherals : NSObject<UITableViewDelegate,UITableViewDataSource>
 
+- (id)initWithManager: (CBCentralManager*) manager;
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSArray*) knownPeripheralUUIDs;
 - (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral;

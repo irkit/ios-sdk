@@ -11,65 +11,22 @@
 
 @interface IRNewPeripheralScene3ViewController ()
 
-@property (nonatomic) UILabel *label;
-@property (nonatomic) UITextField *textField;
-
 @end
 
 @implementation IRNewPeripheralScene3ViewController
 
-- (void)loadView {
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
-
-    CGRect frame = [[UIScreen mainScreen] bounds];
-    LOG(@"frame: %@", NSStringFromCGRect(frame));
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-
-    // image
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/scene3.png"]];
-    imageView.frame = frame;
-    [view addSubview: imageView];
-
-    // label
-    _label = [[UILabel alloc] init];
-    _label.textAlignment = NSTextAlignmentCenter;
-    _label.opaque        = NO;
-    _label.textColor       = [UIColor whiteColor];
-    _label.backgroundColor = [UIColor clearColor];
-    _label.adjustsFontSizeToFitWidth = YES;
-    frame.origin.x = 0;
-    frame.origin.y = 50;
-    frame.size.height = 30;
-    LOG(@"label.frame: %@", NSStringFromCGRect(frame));
-    _label.frame = frame;
-    [view addSubview:_label];
-    
-    // input
-    _textField = [[UITextField alloc] init];
-    _textField.placeholder = @"IRKitの名前";
-    _textField.textColor   = [UIColor blackColor];
-    _textField.textAlignment = NSTextAlignmentLeft;
-    _textField.adjustsFontSizeToFitWidth = YES;
-    _textField.borderStyle = UITextBorderStyleLine;
-    _textField.backgroundColor = [UIColor whiteColor];
-    _textField.returnKeyType = UIReturnKeyDone;
-    _textField.delegate = self;
-    frame.origin.x = 10;
-    frame.origin.y = 130;
-    frame.size.width = 300;
-    frame.size.height = 30;
-    _textField.frame = frame;
-    LOG(@"textField.frame: %@", NSStringFromCGRect(frame));
-    [view addSubview:_textField];
-
-    self.view = view;
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-
-    _label.text = @"IRKitデバイスを認識しました!!! このIRKitに名前をつけてください";
 }
 
 - (void) viewWillAppear:(BOOL)animated {

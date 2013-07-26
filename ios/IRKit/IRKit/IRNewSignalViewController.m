@@ -12,7 +12,7 @@
 
 @interface IRNewSignalViewController ()
 
-@property (nonatomic) UILabel *label;
+@property (nonatomic) UINavigationController *navController;
 
 @end
 
@@ -20,38 +20,26 @@
 
 - (void)loadView {
     LOG_CURRENT_METHOD;
-
-    CGRect frame = [[UIScreen mainScreen] bounds];
-    LOG(@"frame: %@", NSStringFromCGRect(frame));
-    UIView *view = [[UIView alloc] initWithFrame:frame];
     
-    // image
-    UIImageView *imageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"IRKitResources.bundle/newsignal.png"]];
-    imageView.frame = frame;
-    [view addSubview: imageView];
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    UIView *view = [[UIView alloc] initWithFrame:bounds];
 
-    // label
-    _label = [[UILabel alloc] init];
-    _label.textAlignment = NSTextAlignmentCenter;
-    _label.opaque        = NO;
-    _label.textColor       = [UIColor whiteColor];
-    _label.backgroundColor = [UIColor clearColor];
-    _label.adjustsFontSizeToFitWidth = YES;
-    frame.origin.x = 0;
-    frame.origin.y = frame.size.height / 2 - 50;
-    frame.size.height = 100;
-    LOG(@"label.frame: %@", NSStringFromCGRect(frame));
-    _label.frame = frame;
-    [view addSubview:_label];
-
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    IRNewSignalScene1ViewController *first = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
+                                                                                               bundle:resources];
+    first.delegate = self;
+    
+    _navController = [[UINavigationController alloc] initWithRootViewController:first];
+    [view addSubview:_navController.view];
+    
     self.view = view;
 }
 
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-
-    _label.text = @"リモコンをIRKitに向けて、リモコンのボタンを押してください";
     
     __weak IRNewSignalViewController *_self = self;
     [[NSNotificationCenter defaultCenter]
@@ -75,11 +63,11 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
-    self.title = @"Receive Remote";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-         initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                              target:self
-                              action:@selector(cancelButtonPressed:)];
+    // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
+    // prevent showing the weird 20px empty zone on top of navigationbar
+    // when presented in caller's viewDidLoad
+    [_navController setNavigationBarHidden:YES];
+    [_navController setNavigationBarHidden:NO];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -96,13 +84,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)cancelButtonPressed:(id)sender {
+#pragma mark - IRNewSignalScene1ViewControllerDelegate
+
+- (void)scene1ViewController:(IRNewSignalScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     
-    [self.delegate newSignalViewController:self
-                         didFinishWithInfo:@{
-           IRViewControllerResultType: IRViewControllerResultTypeCancelled
-     }];
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        [self.delegate newSignalViewController:self
+                             didFinishWithInfo:@{
+                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
+         }];
+    }
+    // shouldnt happen
 }
 
 @end

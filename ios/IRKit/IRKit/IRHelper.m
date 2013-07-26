@@ -11,6 +11,8 @@
 #import "IRHelper.h"
 #import <CommonCrypto/CommonDigest.h>
 
+#define LOG_DISABLED 1
+
 @implementation IRHelper
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block {
@@ -55,9 +57,21 @@
 
 #pragma mark - CoreBluetooth related
 
++ (CBService*)findServiceInPeripheral:(CBPeripheral*)peripheral withUUID:(CBUUID*)serviceUUID {
+    LOG_CURRENT_METHOD;
+
+    for (CBService *service in peripheral.services) {
+        if (! [IRHelper CBUUID:service.UUID isEqualToCBUUID:serviceUUID]) {
+            continue;
+        }
+        return service;
+    }
+    return nil;
+}
+
 + (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid {
     LOG_CURRENT_METHOD;
-  
+    
     for (CBService *service in peripheral.services) {
         for (CBCharacteristic *c12c in service.characteristics) {
             if ([IRHelper CBUUID:c12c.UUID isEqualToCBUUID:uuid]) {
@@ -68,6 +82,27 @@
     return nil;
 }
 
++ (CBCharacteristic*)findCharacteristicInService:(CBService*)service
+                                      withCBUUID:(CBUUID*)characteristicUUID {
+    LOG_CURRENT_METHOD;
+    for (CBCharacteristic *c12c in service.characteristics) {
+        if (! [IRHelper CBUUID:c12c.UUID isEqualToCBUUID:characteristicUUID]) {
+            continue;
+        }
+        return c12c;
+    }
+    return nil;
+}
+
++ (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral
+                                         withCBUUID:(CBUUID*)characteristicUUID
+                                inServiceWithCBUUID:(CBUUID*)serviceUUID {
+    LOG_CURRENT_METHOD;
+    
+    CBService *service = [self findServiceInPeripheral:peripheral withUUID:serviceUUID];
+    return [self findCharacteristicInService:service withCBUUID:characteristicUUID];
+}
+
 + (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic withCBUUID:(CBUUID*)uuid {
     LOG_CURRENT_METHOD;
     
@@ -75,14 +110,31 @@
     if ( ! service ) {
         return nil;
     }
-    for (CBCharacteristic *neighborCharacteristic in service.characteristics)
-    {
-        if ([IRHelper CBUUID:neighborCharacteristic.UUID isEqualToCBUUID:uuid])
-        {
-            return neighborCharacteristic;
-        }
-    }
-    return nil;
+    return [self findCharacteristicInService:service withCBUUID:uuid];
+}
+
+#pragma mark - Network related
+
++ (void)loadImage:(NSString*)url
+completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler {
+    LOG_CURRENT_METHOD;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
+                                             cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[[NSOperationQueue alloc] init]
+                           completionHandler:^(NSURLResponse *res, NSData *data, NSError *error) {
+                               UIImage *ret;
+                               if (! error) {
+                                   ret = [UIImage imageWithData:data];
+                               }
+                               if (! handler) {
+                                   return;
+                               }
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   handler((NSHTTPURLResponse*)res,ret,error);
+                               });
+                           }];
 }
 
 @end

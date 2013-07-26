@@ -72,23 +72,23 @@
 - (void)writeIRDataWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
     
-    [self.peripheral writeData:[self signalAsNSData]
-     forCharacteristicWithUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
-             ofServiceWithUUID:IRKIT_SERVICE_UUID
-                    completion:^(NSError *error) {
-                        block(error);
-                    }];
+    [self.peripheral writeValueInBackground:[self signalAsNSData]
+                  forCharacteristicWithUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
+                          ofServiceWithUUID:IRKIT_SERVICE_UUID
+                                 completion:^(NSError *error) {
+                                     block(error);
+                                 }];
 }
 
 - (void)writeControlPointWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
     
-    [self.peripheral writeData: [self controlPointSendValue]
-     forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
-             ofServiceWithUUID: IRKIT_SERVICE_UUID
-                    completion: ^(NSError *error) {
-                        block(error);
-                    }];
+    [self.peripheral writeValueInBackground: [self controlPointSendValue]
+                  forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
+                          ofServiceWithUUID: IRKIT_SERVICE_UUID
+                                 completion: ^(NSError *error) {
+                                     block(error);
+                                 }];
 }
 
 #pragma mark - Private methods
@@ -99,6 +99,7 @@
         return nil;
     }
     // uint16_t value for each NSArray entry
+    // signal data is always Little-Endian
     NSMutableData *ret = [NSMutableData dataWithCapacity: _data.count * 2];
     [_data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
         uint16_t interval = [obj shortValue];
@@ -143,7 +144,7 @@
     LOG_CURRENT_METHOD;
 
     _uuid = _uuid ? _uuid
-                  : [IRHelper stringFromCFUUID:self.peripheral.peripheral.UUID];
+                  : [IRHelper stringFromCFUUID:self.peripheral.UUID];
     
     [coder encodeObject:_name         forKey:@"n"];
     [coder encodeObject:_data         forKey:@"d"];
