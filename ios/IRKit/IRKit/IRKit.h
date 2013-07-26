@@ -26,8 +26,6 @@
 - (void) startScan;
 - (void) stopScan;
 - (void) save;
-- (BOOL) canHandleOpenURL: (NSURL*)url;
-- (void) handleOpenURL: (NSURL*)url;
 
 @property (nonatomic) BOOL retainConnectionInBackground;
 

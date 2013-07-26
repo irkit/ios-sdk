@@ -53,6 +53,12 @@
 		C78E3A09179FA950009AA9AC /* icn_actionbar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A07179FA950009AA9AC /* icn_actionbar_menu@2x.png */; };
 		C79DE3CB176F27870088679E /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CA176F27870088679E /* IRKitResources.bundle */; };
 		C7A796CB178C4F4A00E15608 /* SRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */; };
+		C7BAB39E17A20DDA0031F33F /* SRURLQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB39D17A20DDA0031F33F /* SRURLQueryTests.m */; };
+		C7BAB3A117A21D8B0031F33F /* SRURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB3A017A21D8B0031F33F /* SRURLHandler.m */; };
+		C7BAB3A217A245610031F33F /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
+		C7BAB3A317A245870031F33F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB02317467D6800125BCB /* CoreBluetooth.framework */; };
+		C7BAB3A417A245EA0031F33F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
+		C7BAB3A717A2599A0031F33F /* SRSignals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB3A617A2599A0031F33F /* SRSignals.m */; };
 		C7C0DB8417825B9F00AECAC2 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C0DB8217825B9F00AECAC2 /* icon@2x.png */; };
 		C7C0DB8517825B9F00AECAC2 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C0DB8317825B9F00AECAC2 /* icon.png */; };
 		C7FAB00717462FC100125BCB /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
@@ -125,6 +131,12 @@
 		C79DE3CA176F27870088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7A796C9178C4F4A00E15608 /* SRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSettingsViewController.h; sourceTree = "<group>"; };
 		C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSettingsViewController.m; sourceTree = "<group>"; };
+		C7BAB39C17A20DDA0031F33F /* SRURLQueryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRURLQueryTests.h; sourceTree = "<group>"; };
+		C7BAB39D17A20DDA0031F33F /* SRURLQueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRURLQueryTests.m; sourceTree = "<group>"; };
+		C7BAB39F17A21D8B0031F33F /* SRURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRURLHandler.h; sourceTree = "<group>"; };
+		C7BAB3A017A21D8B0031F33F /* SRURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRURLHandler.m; sourceTree = "<group>"; };
+		C7BAB3A517A259990031F33F /* SRSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSignals.h; sourceTree = "<group>"; };
+		C7BAB3A617A2599A0031F33F /* SRSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSignals.m; sourceTree = "<group>"; };
 		C7C0DB8217825B9F00AECAC2 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		C7C0DB8317825B9F00AECAC2 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		C7FAB00617462FC100125BCB /* libIRKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIRKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +164,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7BAB3A417A245EA0031F33F /* CoreGraphics.framework in Frameworks */,
+				C7BAB3A317A245870031F33F /* CoreBluetooth.framework in Frameworks */,
+				C7BAB3A217A245610031F33F /* libIRKit.a in Frameworks */,
 				C76CFF7C17462E0800F972B7 /* SenTestingKit.framework in Frameworks */,
 				C76CFF7D17462E0800F972B7 /* UIKit.framework in Frameworks */,
 				C76CFF7E17462E0800F972B7 /* Foundation.framework in Frameworks */,
@@ -246,6 +261,10 @@
 				C70FC95917A16D7D00CDA14F /* SRSettingsTableHeaderViews.xib */,
 				C713AACD179E8636005AF8AE /* SRHelper.h */,
 				C713AACE179E8636005AF8AE /* SRHelper.m */,
+				C7BAB3A517A259990031F33F /* SRSignals.h */,
+				C7BAB3A617A2599A0031F33F /* SRSignals.m */,
+				C7BAB39F17A21D8B0031F33F /* SRURLHandler.h */,
+				C7BAB3A017A21D8B0031F33F /* SRURLHandler.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
 				C76CFF5B17462E0800F972B7 /* Supporting Files */,
 			);
@@ -270,6 +289,8 @@
 			children = (
 				C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */,
 				C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */,
+				C7BAB39C17A20DDA0031F33F /* SRURLQueryTests.h */,
+				C7BAB39D17A20DDA0031F33F /* SRURLQueryTests.m */,
 				C76CFF8217462E0800F972B7 /* Supporting Files */,
 			);
 			path = SimpleRemoteTests;
@@ -460,6 +481,8 @@
 				C7FAB00F17464ABA00125BCB /* Log.m in Sources */,
 				C7A796CB178C4F4A00E15608 /* SRSettingsViewController.m in Sources */,
 				C713AACF179E8636005AF8AE /* SRHelper.m in Sources */,
+				C7BAB3A117A21D8B0031F33F /* SRURLHandler.m in Sources */,
+				C7BAB3A717A2599A0031F33F /* SRSignals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */,
+				C7BAB39E17A20DDA0031F33F /* SRURLQueryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

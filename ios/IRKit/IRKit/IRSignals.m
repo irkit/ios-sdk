@@ -10,6 +10,7 @@
 #import "IRPersistentStore.h"
 #import "IRConst.h"
 #import "IRSignalCell.h"
+#import "IRHelper.h"
 
 @interface IRSignals ()
 
@@ -23,6 +24,7 @@
 - (id)init {
     self = [super init];
     if (! self) { return nil; }
+    _signals = [NSMutableDictionary dictionaryWithCapacity:0];
     
     return self;
 }
@@ -51,6 +53,28 @@
     LOG( @"loaded signals: %@", _signals );
 }
 
+- (NSString*)jsonRepresentation {
+    LOG_CURRENT_METHOD;
+
+    NSArray *signals = [IRHelper mapObjects:self.signals
+                                 usingBlock:(id)^(id obj, NSUInteger idx) {
+                                     return ((IRSignal*)obj).asDictionary;
+                                 }];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:signals
+                                                       options:0
+                                                         error:&error];
+    NSString *json = [[NSString alloc] initWithData:jsonData
+                                           encoding:NSUTF8StringEncoding];
+    return json;
+}
+
+- (void)sendSequentially {
+    LOG_CURRENT_METHOD;
+
+    // TODO
+}
+
 #pragma mark - Private methods
 
 - (NSInteger) indexOfSignal: (IRSignal*) signal {
@@ -62,7 +86,7 @@
 #pragma mark - Key Value Coding - Mutable Indexed Accessors
 
 - (NSArray*) signals {
-    return [_signals allValues];
+    return [_signals.allValues sortedArrayUsingSelector:@selector(compareByReceivedDate:)];
 }
 
 - (NSUInteger) countOfSignals {
@@ -70,7 +94,7 @@
 }
 
 - (NSEnumerator*)enumeratorOfSignals {
-    return [_signals.allValues sortedArrayUsingSelector:@selector(compareByReceivedDate:)].objectEnumerator;
+    return self.signals.objectEnumerator;
 }
 
 - (IRSignal*)memberOfSignals:(IRSignal *)object {
@@ -133,7 +157,13 @@
 
     IRSignalCell *cell = (IRSignalCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
     if (cell == nil) {
-        cell = [[IRSignalCell alloc] initWithReuseIdentifier:IRKitCellIdentifierSignal];
+        NSBundle *main = [NSBundle mainBundle];
+        NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                      ofType:@"bundle"]];
+        [tableView registerNib:[UINib nibWithNibName:@"IRSignalCell" bundle:resources]
+        forCellReuseIdentifier:IRKitCellIdentifierSignal];
+
+        cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
     }
     [cell inflateFromSignal:[self objectAtIndex:indexPath.row]];
     return cell;

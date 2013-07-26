@@ -12,12 +12,15 @@
 @interface IRSignal : NSObject
 
 - (id)initWithData: (NSData*) newData;
+- (id) initWithDictionary: (NSDictionary*) dictionary;
+- (NSDictionary*)asDictionary;
 - (NSComparisonResult) compareByReceivedDate: (IRSignal*) otherSignal;
-- (void)sendWithCompletion: (void (^)(NSError* error))block;
 - (NSString*) uniqueID;
+- (void)sendWithCompletion: (void (^)(NSError* error))block;
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSArray *data;
+@property (nonatomic) NSUInteger frequency; // kHz
 @property (nonatomic) NSDate *receivedDate;
 @property (nonatomic) IRPeripheral *peripheral;
 

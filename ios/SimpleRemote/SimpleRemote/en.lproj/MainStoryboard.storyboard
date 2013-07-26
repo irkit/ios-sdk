@@ -125,7 +125,7 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Create Remote Icon" id="6b8-Tm-3DT">
-                        <barButtonItem key="leftBarButtonItem" title="  " style="plain" id="BLq-qp-5e1">
+                        <barButtonItem key="leftBarButtonItem" id="BLq-qp-5e1">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kAv-x8-Yc1">
                                 <rect key="frame" x="5" y="5" width="44" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -358,7 +358,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Menu" id="na9-KN-KxO">
-                        <barButtonItem key="leftBarButtonItem" title=" " style="plain" id="fal-S9-7ug">
+                        <barButtonItem key="leftBarButtonItem" title=" " id="fal-S9-7ug">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3TG-fl-oxl">
                                 <rect key="frame" x="5" y="5" width="44" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

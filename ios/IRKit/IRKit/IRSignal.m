@@ -18,9 +18,16 @@
 
 @implementation IRSignal
 
+- (id)init {
+    self = [super init];
+    if ( ! self ) { return nil; }
+    _frequency = 38; // default
+    return self;
+}
+
 - (id) initWithData: (NSData*) newData {
     LOG_CURRENT_METHOD;
-    self = [super init];
+    self = [self init];
     if ( ! self ) { return nil; }
     
     // capacity = number of uint16_t in data = data / 2bytes
@@ -41,6 +48,31 @@
     
     _receivedDate = [NSDate date];
     return self;
+}
+
+- (id) initWithDictionary: (NSDictionary*) dictionary {
+    LOG_CURRENT_METHOD;
+    self = [self init];
+    if ( ! self ) { return nil; }
+
+    _name = dictionary[@"name"];
+    _data = dictionary[@"data"];
+    _frequency = [(NSNumber*)dictionary[@"frequency"] unsignedIntegerValue];
+    _receivedDate = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"receivedDate"] doubleValue]];
+    _uuid = dictionary[@"uuid"];
+
+    return self;
+}
+
+- (NSDictionary*)asDictionary {
+    LOG_CURRENT_METHOD;
+    return @{
+             @"name": _name,
+             @"data": _data,
+             @"frequency": [NSNumber numberWithUnsignedInteger:_frequency],
+             @"receivedDate": [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970],
+             @"uuid": [IRHelper stringFromCFUUID: self.peripheral.UUID],
+             };
 }
 
 - (NSComparisonResult) compareByReceivedDate: (IRSignal*) otherSignal {
@@ -69,9 +101,33 @@
     }];
 }
 
+#pragma mark - Accessors
+
+- (NSString*)name {
+    LOG_CURRENT_METHOD;
+    return _name ? _name : @"unknown name";
+}
+
+- (IRPeripheral*)peripheral {
+    LOG_CURRENT_METHOD;
+    if ( _peripheral ) {
+        return _peripheral;
+    }
+    if ( _uuid ) {
+        // we can't use [IRKit sharedInstance] inside our initWithCoder
+        // so we temporary save peripheral.UUID in _uuid
+        // and recover IRPeripheral afterwards (here)
+        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForUUID:_uuid];
+        return _peripheral;
+    }
+    return nil;
+}
+
+#pragma mark - Private methods
+
 - (void)writeIRDataWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
-    
+
     [self.peripheral writeValueInBackground:[self signalAsNSData]
                   forCharacteristicWithUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
                           ofServiceWithUUID:IRKIT_SERVICE_UUID
@@ -82,7 +138,7 @@
 
 - (void)writeControlPointWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
-    
+
     [self.peripheral writeValueInBackground: [self controlPointSendValue]
                   forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
                           ofServiceWithUUID: IRKIT_SERVICE_UUID
@@ -90,8 +146,6 @@
                                      block(error);
                                  }];
 }
-
-#pragma mark - Private methods
 
 - (NSData*) signalAsNSData {
     LOG_CURRENT_METHOD;
@@ -116,28 +170,6 @@
     return [NSData dataWithBytes:&value length:1];
 }
 
-#pragma mark - Accessors
-
-- (NSString*)name {
-    LOG_CURRENT_METHOD;
-    return _name ? _name : @"unknown name";
-}
-
-- (IRPeripheral*)peripheral {
-    LOG_CURRENT_METHOD;
-    if ( _peripheral ) {
-        return _peripheral;
-    }
-    if ( _uuid ) {
-        // we can't use [IRKit sharedInstance] inside our initWithCoder
-        // so we temporary save peripheral.UUID in _uuid
-        // and recover IRPeripheral afterwards (here)
-        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForUUID:_uuid];
-        return _peripheral;
-    }
-    return nil;
-}
-
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
@@ -148,6 +180,8 @@
     
     [coder encodeObject:_name         forKey:@"n"];
     [coder encodeObject:_data         forKey:@"d"];
+    [coder encodeObject:[NSNumber numberWithUnsignedInteger:_frequency]
+                 forKey:@"f"];
     [coder encodeObject:_receivedDate forKey:@"r"];
     [coder encodeObject:_uuid         forKey:@"u"];
 }
@@ -158,6 +192,7 @@
     if (self) {
         _name         = [coder decodeObjectForKey:@"n"];
         _data         = [coder decodeObjectForKey:@"d"];
+        _frequency    = [(NSNumber*)[coder decodeObjectForKey:@"f"] unsignedIntegerValue];
         _receivedDate = [coder decodeObjectForKey:@"r"];
         _uuid         = [coder decodeObjectForKey:@"u"];
         

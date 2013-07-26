@@ -8,6 +8,7 @@
 
 #import "SRAppDelegate.h"
 #import "SRHelper.h"
+#import "SRURLHandler.h"
 #import <IRKit/IRKit.h>
 
 @implementation SRAppDelegate
@@ -19,7 +20,7 @@
 
     NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
     if (url) {
-        return [[IRKit sharedInstance] canHandleOpenURL: url];
+        return [SRURLHandler canHandleOpenURL: url];
     }
 
     [[IRKit sharedInstance] startScan];
@@ -42,7 +43,7 @@
 
     NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
     if (url) {
-        return [[IRKit sharedInstance] canHandleOpenURL: url];
+        return [SRURLHandler canHandleOpenURL: url];
     }
 
     return YES;
@@ -51,8 +52,8 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     LOG( @"url: %@, sourceApplication: %@, annotation: %@", url, sourceApplication, annotation );
 
-    if ([[IRKit sharedInstance] canHandleOpenURL:url]) {
-        [[IRKit sharedInstance] handleOpenURL: url];
+    if ([SRURLHandler canHandleOpenURL:url]) {
+        [SRURLHandler handleOpenURL: url];
         return YES;
     }
     return NO;

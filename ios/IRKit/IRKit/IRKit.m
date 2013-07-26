@@ -64,17 +64,6 @@ static BOOL useCustomizedStyle;
     [_peripherals save];
 }
 
-- (BOOL) canHandleOpenURL: (NSURL*)url {
-    LOG( @"url: %@", url );
-    return YES;
-}
-
-- (void) handleOpenURL: (NSURL*)url {
-    LOG( @"url: %@", url );
-
-    
-}
-
 - (NSUInteger) numberOfAuthorizedPeripherals {
     LOG_CURRENT_METHOD;
     return _peripherals.countOfAuthorizedPeripherals;

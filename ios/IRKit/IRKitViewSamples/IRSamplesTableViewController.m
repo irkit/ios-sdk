@@ -43,7 +43,7 @@
     NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
                                                                   ofType:@"bundle"]];
     [self.tableView registerNib:[UINib nibWithNibName:@"IRSignalCell" bundle:resources]
-         forCellReuseIdentifier:@"IRSignalCell"];
+         forCellReuseIdentifier:IRKitCellIdentifierSignal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,7 +100,7 @@
             return [tableView dequeueReusableCellWithIdentifier:@"IRWeb"];
         case 5:
         {
-            IRSignalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IRSignalCell"];
+            IRSignalCell *cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
 
             unsigned short data[10] = { 100,100,100,100,100,100,100,100,100,100 };
             NSData *irdata = [NSData dataWithBytes:data length:10];
