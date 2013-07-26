@@ -1,4 +1,0 @@
-use mscgen
-http://www.mcternan.me.uk/mscgen/index.html
-
-mscgen -T png -i *.msc
