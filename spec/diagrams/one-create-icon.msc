@@ -1,0 +1,29 @@
+msc {
+    # entities
+    user, iphoneapp, safari, icon, server, peripheral;
+
+    # space
+    |||;
+
+    user -> iphoneapp [label = "Taps\n\"CREATE ICON\"\nbutton"];
+
+    iphoneapp -> server [label = "POST /apps/one/icons/\nmultipart/form-data\n* icon\n* query"];
+
+    server note server [label = "Stores:\n{ Icon.Id =>\n{ icon, query } }"];
+
+    iphoneapp << server [label = "{\"Icon\":{\"Id\":\"icon.id\",\"Url\":\"http://...\"}}"];
+
+    iphoneapp -> safari [label = "[[UIApplication sharedApplication] openURL: json.Icon.Url]"];
+    safari -> server [label = "GET /apps/one/icons/{icon.id}"];
+    safari << server [label = "302 to \"data:text/html;...\""];
+    safari note safari [label = "Show HTML with:\n* Icon\n* Guide to \"Bookmark This Page!\""];
+
+    user -> safari [label = "Taps \"Bookmark\""];
+    safari note icon [label = "Create icon"];
+
+    user -> icon [label = "Taps new icon"];
+    safari <- icon [label = "Open data:text/html;..."];
+    iphoneapp <- safari [label = "Open irkit-one://send?irsignals={query}"];
+    iphoneapp -> peripheral [label = "IR signal"];
+    peripheral note peripheral [label = "Send IR signal"];
+}

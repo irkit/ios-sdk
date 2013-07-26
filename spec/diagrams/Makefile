@@ -1,5 +1,5 @@
 
-OUT = connect.png learn-ir-signal.png send-ir-signal.png ir-state.png
+OUT = connect.png learn-ir-signal.png send-ir-signal.png ir-state.png one-create-icon.png
 
 all: $(OUT)
 
