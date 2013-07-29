@@ -34,8 +34,6 @@
     SRSignals *instance = [SRSignals sharedInstance];
     instance.signals = signals;
     [instance sendSequentially];
-
-    // TODO show in SRMainViewController
 }
 
 +(NSArray*)signalsDictionariesFromURL:(NSURL*)url {

@@ -42,11 +42,12 @@
                                                                                 fileName:@"icon.png"
                                                                                 mimeType:@"image/png"];
                                                         NSString *json = [SRSignals sharedInstance].signals.JSONRepresentation;
+                                                        json           = [NSString stringWithFormat:@"irsignals=%@", json];
                                                         NSData *data = [NSData dataWithBytes:[json UTF8String]
                                                                                       length:[json lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
                                                         [formData appendPartWithFileData:data
-                                                                                    name:@"irsignals"
-                                                                                fileName:@"irsignals.json"
+                                                                                    name:@"query"
+                                                                                fileName:@"query.json"
                                                                                 mimeType:@"application/json"];
     }];
 
