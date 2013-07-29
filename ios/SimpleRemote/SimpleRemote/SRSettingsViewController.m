@@ -212,6 +212,23 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG_CURRENT_METHOD;
+    switch (indexPath.section) {
+        case 0:
+        {
+            if ([IRKit sharedInstance].numberOfPeripherals <= indexPath.row) {
+                return 44.;
+            }
+            return [[IRKit sharedInstance].peripherals tableView:tableView
+                                         heightForRowAtIndexPath:indexPath];
+        }
+        default:
+            break;
+    }
+    return 44;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     LOG_CURRENT_METHOD;
     switch (section) {

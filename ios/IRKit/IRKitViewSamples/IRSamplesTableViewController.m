@@ -7,12 +7,15 @@
 //
 
 #import "IRSamplesTableViewController.h"
+#import "IRconst.h"
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRNewPeripheralScene3ViewController.h"
 #import "IRNewSignalScene1ViewController.h"
+#import "IRWebViewController.h"
 #import "IRSignal.h"
 #import "IRSignalCell.h"
+#import "IRPeripheralCell.h"
 
 @interface IRSamplesTableViewController ()
 
@@ -44,6 +47,8 @@
                                                                   ofType:@"bundle"]];
     [self.tableView registerNib:[UINib nibWithNibName:@"IRSignalCell" bundle:resources]
          forCellReuseIdentifier:IRKitCellIdentifierSignal];
+    [self.tableView registerNib:[UINib nibWithNibName:@"IRPeripheralCell" bundle:resources]
+         forCellReuseIdentifier:IRKitCellIdentifierPeripheral];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,7 +88,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,6 +114,14 @@
             [cell inflateFromSignal:signal];
             return cell;
         }
+        case 6:
+        {
+            IRPeripheralCell *cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
+            IRPeripheral *peripheral = [[IRPeripheral alloc] init];
+            peripheral.customizedName = @"my IRKit";
+            cell.peripheral = peripheral;
+            return cell;
+        }
         default:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
     }
@@ -118,8 +131,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 4:
+        case 5:
             return [IRSignalCell height];
+        case 6:
+            return [IRPeripheralCell height];
 
         default:
             return 44;

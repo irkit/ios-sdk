@@ -190,7 +190,13 @@
 
     IRPeripheralCell *cell = (IRPeripheralCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
     if (cell == nil) {
-        cell = [[IRPeripheralCell alloc] initWithReuseIdentifier:IRKitCellIdentifierPeripheral];
+        NSBundle *main = [NSBundle mainBundle];
+        NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                      ofType:@"bundle"]];
+        [tableView registerNib:[UINib nibWithNibName:@"IRPeripheralCell" bundle:resources]
+        forCellReuseIdentifier:IRKitCellIdentifierPeripheral];
+
+        cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
     }
     cell.peripheral = [self objectAtIndex: indexPath.row];
     return cell;

@@ -409,26 +409,6 @@
         <image name="icn_arrow.png" width="15" height="15"/>
         <image name="icon.png" width="57" height="57"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SRMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SRMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="createIconPressed:"/>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-            </relationships>
-        </class>
-        <class className="SRSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SRSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonTouched:"/>
-                <relationship kind="action" name="versionButtonTouched:"/>
-                <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

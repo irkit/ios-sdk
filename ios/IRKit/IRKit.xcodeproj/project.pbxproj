@@ -56,6 +56,8 @@
 		C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5688174A7AB200FFE5CB /* IRSignal.m */; };
 		C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5687174A7AB100FFE5CB /* IRSignals.h */; };
 		C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B568D174A7BC800FFE5CB /* IRSignalCell.m */; };
+		C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */; };
+		C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CFC8717A6671200870A1B /* QuartzCore.framework */; };
 		C7626F7F17A1079400D6D746 /* bg_light.png in Resources */ = {isa = PBXBuildFile; fileRef = C7626F7D17A1079400D6D746 /* bg_light.png */; };
 		C7626F8017A1079400D6D746 /* bg_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7626F7E17A1079400D6D746 /* bg_light@2x.png */; };
 		C7626F8217A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */; };
@@ -210,6 +212,8 @@
 		C75B5689174A7AB200FFE5CB /* IRSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignal.h; sourceTree = "<group>"; };
 		C75B568D174A7BC800FFE5CB /* IRSignalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalCell.m; sourceTree = "<group>"; };
 		C75B568E174A7BC800FFE5CB /* IRSignalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalCell.h; sourceTree = "<group>"; };
+		C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRPeripheralCell.xib; sourceTree = "<group>"; };
+		C75CFC8717A6671200870A1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C7626F7D17A1079400D6D746 /* bg_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_light.png; sourceTree = "<group>"; };
 		C7626F7E17A1079400D6D746 /* bg_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_light@2x.png"; sourceTree = "<group>"; };
 		C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRNewPeripheralScene2ViewController.xib; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */,
 				C735043217A030A60057D51B /* libIRKit.a in Frameworks */,
 				C735042F17A0304A0057D51B /* CoreBluetooth.framework in Frameworks */,
 				C735040E17A029C30057D51B /* UIKit.framework in Frameworks */,
@@ -395,6 +400,7 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C75CFC8717A6671200870A1B /* QuartzCore.framework */,
 				C79DE3B3176F20B50088679E /* UIKit.framework */,
 				C79DE3B1176F20A30088679E /* CoreGraphics.framework */,
 				C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */,
@@ -479,6 +485,7 @@
 				C7626F8717A10A6200D6D746 /* IRNewPeripheralScene3ViewController.xib */,
 				C7693F8017A1132400EC43FC /* IRNewSignalScene1ViewController.xib */,
 				C7693F8217A121E500EC43FC /* IRSignalCell.xib */,
+				C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -668,6 +675,7 @@
 				C7693F8317A121E500EC43FC /* IRSignalCell.xib in Resources */,
 				C7693F8617A12AF900EC43FC /* icn_arrow.png in Resources */,
 				C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */,
+				C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
