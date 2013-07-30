@@ -101,8 +101,14 @@
 
 - (void) didRetrieve {
     LOG_CURRENT_METHOD;
+
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+
     if (_wantsToConnect) {
         _wantsToConnect = NO;
+        [self connect];
+    }
+    else if ( state == UIApplicationStateActive ) {
         [self connect];
     }
 }
@@ -419,6 +425,14 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidReceiveSignalNotification
                                                                 object:self
                                                               userInfo:@{IRKitSignalUserInfoKey: signal}];
+        }
+    }
+    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
+        if (_authorized) {
+            CBCharacteristic *irdata = [IRHelper findCharacteristicInPeripheral:_peripheral
+                                                                     withCBUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
+                                                            inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+            [_peripheral readValueForCharacteristic:irdata];
         }
     }
 
