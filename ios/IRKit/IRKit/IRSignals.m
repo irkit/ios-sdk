@@ -126,14 +126,18 @@
     
     if (_delegate) {
         if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
-            [_delegate controller:self
-                  didChangeObject:object
-                      atIndexPath:nil
-                    forChangeType:IRAnimatingTypeInsert
-                     newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate controller:self
+                      didChangeObject:object
+                          atIndexPath:nil
+                        forChangeType:IRAnimatingTypeInsert
+                         newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            });
         }
         if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
-            [_delegate controllerDidChangeContent:self];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate controllerDidChangeContent:self];
+            });
         }
     }
 }
@@ -150,15 +154,19 @@
     
     if (_delegate) {
         if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
-            [_delegate controller:self
-                  didChangeObject:object
-                      atIndexPath:[NSIndexPath indexPathForRow:row
-                                                     inSection:0]
-                    forChangeType:IRAnimatingTypeDelete
-                     newIndexPath:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate controller:self
+                      didChangeObject:object
+                          atIndexPath:[NSIndexPath indexPathForRow:row
+                                                         inSection:0]
+                        forChangeType:IRAnimatingTypeDelete
+                         newIndexPath:nil];
+            });
         }
         if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
-            [_delegate controllerDidChangeContent:self];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate controllerDidChangeContent:self];
+            });
         }
     }
 }

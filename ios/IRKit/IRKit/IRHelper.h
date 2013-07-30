@@ -22,7 +22,8 @@
 + (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral
                                          withCBUUID:(CBUUID*)characteristicUUID
                                 inServiceWithCBUUID:(CBUUID*)serviceUUID;
-+ (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic withCBUUID:(CBUUID*)uuid;
++ (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic
+                                                            withCBUUID:(CBUUID*)uuid;
 + (void)loadImage:(NSString*)url
 completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler;
 

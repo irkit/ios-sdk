@@ -85,17 +85,24 @@
 - (void)sendWithCompletion: (void (^)(NSError* error))block {
     LOG_CURRENT_METHOD;
     [self writeIRDataWithCompletion: ^(NSError *error) {
-        if ( ! error ) {
-            [self writeControlPointWithCompletion: ^(NSError *error) {
-                if ( ! error ) {
-                    block(nil); // send succeeded!
-                    return;
-                }
+        if ( error ) {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 block(error);
-            }];
+            });
             return;
         }
-        block(error);
+        [self writeControlPointWithCompletion: ^(NSError *error) {
+            if (error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    block(error);
+                });
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(nil); // send succeeded!
+            });
+            return;
+        }];
     }];
 }
 

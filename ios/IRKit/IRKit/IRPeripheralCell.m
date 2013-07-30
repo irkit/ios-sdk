@@ -65,9 +65,11 @@
                        context:(void *)context {
     LOG( @"keyPath: %@", keyPath );
 
-    self.nameLabel.text = _peripheral.customizedName;
-    self.detailLabel.text = _peripheral.modelNameAndRevision;
-    [self setNeedsDisplay];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.nameLabel.text = _peripheral.customizedName;
+        self.detailLabel.text = _peripheral.modelNameAndRevision;
+        [self setNeedsDisplay];
+    });
 }
 
 @end

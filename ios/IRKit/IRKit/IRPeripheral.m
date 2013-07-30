@@ -14,7 +14,6 @@
 
 @interface IRPeripheral ()
 
-@property (nonatomic, copy) void (^writeResponseBlock)(NSError *error);
 @property (nonatomic) IRPeripheralWriteOperationQueue *writeQueue;
 @property (nonatomic) CBCentralManager *manager;
 @property (nonatomic) CBPeripheral *peripheral;
@@ -143,10 +142,12 @@
     LOG_CURRENT_METHOD;
     
     [_writeQueue setSuspended: YES];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidDisconnectPeripheralNotification
-                                                        object:self
-                                                      userInfo:nil];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidDisconnectPeripheralNotification
+                                                            object:self
+                                                          userInfo:nil];
+    });
 }
 
 - (void) writeValueInBackground:(NSData *)value
@@ -174,8 +175,9 @@
                                          forCharacteristicWithUUID:characteristicUUID
                                                  ofServiceWithUUID:serviceUUID
                                                         completion:^(NSError *error) {
-                                                        block(error);
-                                                    }];
+                                                            // runs in main thread
+                                                            block(error);
+                                                        }];
     [_writeQueue setSuspended: ! self.isReady];
     [_writeQueue addOperation:op];
 }
@@ -213,9 +215,11 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
 
     [_writeQueue setSuspended: ! self.isReady];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidConnectPeripheralNotification
-                                                        object:self
-                                                      userInfo:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidConnectPeripheralNotification
+                                                            object:self
+                                                          userInfo:nil];
+    });
 
     CBCharacteristic *auth =
     [IRHelper findCharacteristicInPeripheral:_peripheral
@@ -399,8 +403,10 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             _authorized = authorized;
             [[IRKit sharedInstance] save];
             if ( _authorized ) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidAuthorizePeripheralNotification
-                                                                    object:self];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidAuthorizePeripheralNotification
+                                                                        object:self];
+                });
             }
         }
 
@@ -421,10 +427,12 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             
             IRSignal *signal = [[IRSignal alloc] initWithData: value];
             signal.peripheral = self;
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidReceiveSignalNotification
-                                                                object:self
-                                                              userInfo:@{IRKitSignalUserInfoKey: signal}];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidReceiveSignalNotification
+                                                                    object:self
+                                                                  userInfo:@{IRKitSignalUserInfoKey: signal}];
+            });
         }
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {

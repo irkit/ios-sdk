@@ -49,7 +49,9 @@
         if (newValue && ([(NSNumber*)newValue unsignedIntegerValue]==0)) {
             [self removeObserver:self
                       forKeyPath:@"operationCount"];
-            _completion(_error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _completion(_error);
+            });
         }
     }
 }

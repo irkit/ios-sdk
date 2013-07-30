@@ -39,7 +39,7 @@ static BOOL useCustomizedStyle;
     if (! self) { return nil; }
 
     _manager = [[CBCentralManager alloc] initWithDelegate:self
-                                                    queue:nil];
+                                                    queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0) ];
 
     _peripherals = [[IRPeripherals alloc] initWithManager:_manager];
     _shouldScan  = NO;
