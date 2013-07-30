@@ -20,5 +20,7 @@ msc {
 
     user note central [label = "Successfully authenticated"];
 
-    peripheral <- central [label = "Disconnect"];
+    peripheral note central [label = "Stay connected while app is active"];
+
+    peripheral <- central [label = "Disconnect when app goes inactive"];
 }

@@ -6,17 +6,16 @@ msc {
     |||;
 
     user note central [label = "Successfully authenticated"];
-    peripheral note central [label = "Disconnected"];
-    peripheral -> central [label = "Advertising with AD Data:\nReceived IR count = 0\nin Manufacturer Specific Data"];
-    peripheral -> central [label = ""];
-    peripheral -> central [label = ""];
+
+    |||;
+
+    peripheral note central [label = "Always connected when app is active in foreground.\nOnly learns signals when app is in foreground."];
+
+    |||;
 
     user -> peripheral    [label = "Send IR signal"];
 
-    peripheral note peripheral [label = "Increment IR count"];
-    peripheral -> central [label = "Advertising with AD Data:\nReceived IR count = 1\nin Manufacturer Specific Data"];
-
-    peripheral <- central [label = "Connect"];
+    peripheral -> central [label = "Notify \"IR Unread Status\""];
 
     peripheral <= central [label = "Read 'IR Data' c12c"];
     peripheral >> central [label = "IR data"];
@@ -25,7 +24,7 @@ msc {
     peripheral <= central [label = "Read 'IR Data' c12c"];
     peripheral >> central [label = "IR data"];
 
-    central note central [label = "Successfully received\nIR signal"];
+    peripheral note central [label = "Stay connected while app is active"];
 
-    peripheral <- central [label = "Disconnect"];
+    peripheral <- central [label = "Disconnect when app goes inactive"];
 }
