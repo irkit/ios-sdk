@@ -16,6 +16,6 @@
 
 + (instancetype) sharedInstance;
 - (void)save;
-- (void)sendSequentially;
+- (void)sendSequentiallyWithCompletion:(void (^)(NSError *error))completion;
 
 @end

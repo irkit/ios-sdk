@@ -33,7 +33,9 @@
     IRSignals *signals = [self signalsFromURL:(NSURL*)url];
     SRSignals *instance = [SRSignals sharedInstance];
     instance.signals = signals;
-    [instance sendSequentially];
+    [instance sendSequentiallyWithCompletion:^(NSError *error) {
+        LOG( @"sent error: ", error );
+    }];
 }
 
 +(NSArray*)signalsDictionariesFromURL:(NSURL*)url {

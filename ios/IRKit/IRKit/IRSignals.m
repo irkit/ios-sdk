@@ -11,6 +11,7 @@
 #import "IRConst.h"
 #import "IRSignalCell.h"
 #import "IRHelper.h"
+#import "IRSignalSendOperationQueue.h"
 
 @interface IRSignals ()
 
@@ -69,10 +70,22 @@
     return json;
 }
 
-- (void)sendSequentially {
+- (void)sendSequentiallyWithCompletion:(void (^)(NSError *))completion {
     LOG_CURRENT_METHOD;
 
-    // TODO
+    IRSignalSendOperationQueue *q = [[IRSignalSendOperationQueue alloc] init];
+    q.completion = completion;
+
+    for (IRSignal *signal in self.signals) {
+        [q addOperationWithBlock:^{
+            [signal sendWithCompletion:^(NSError *error) {
+                if (error) {
+                    q.error = error;
+                    [q cancelAllOperations];
+                }
+            }];
+        }];
+    }
 }
 
 #pragma mark - Private methods

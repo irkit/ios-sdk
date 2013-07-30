@@ -6,13 +6,13 @@
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRWriteOperationQueue.h"
-#import "IRWriteOperation.h"
+#import "IRPeripheralWriteOperationQueue.h"
+#import "IRPeripheralWriteOperation.h"
 
-@interface IRWriteOperationQueue ()
+@interface IRPeripheralWriteOperationQueue ()
 @end
 
-@implementation IRWriteOperationQueue
+@implementation IRPeripheralWriteOperationQueue
 
 - (id) init {
     LOG_CURRENT_METHOD;
@@ -29,7 +29,7 @@
 - (void) didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
                                   error:(NSError *)error {
     LOG_CURRENT_METHOD;
-    IRWriteOperation *op = self.operations[0];
+    IRPeripheralWriteOperation *op = self.operations[0];
     if ( ! op ) {
         // inconsistent
         LOG( @"inconsistency..." );

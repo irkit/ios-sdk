@@ -6,11 +6,11 @@
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRWriteOperation.h"
+#import "IRPeripheralWriteOperation.h"
 #import "IRConst.h"
 #import "IRHelper.h"
 
-@interface IRWriteOperation ()
+@interface IRPeripheralWriteOperation ()
 
 @property BOOL isExecuting;
 @property BOOL isFinished;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation IRWriteOperation
+@implementation IRPeripheralWriteOperation
 
 - (void) start {
     LOG_CURRENT_METHOD;
@@ -72,13 +72,13 @@
     });
 }
 
-+ (IRWriteOperation*) operationToPeripheral:(IRPeripheral*) peripheral
++ (IRPeripheralWriteOperation*) operationToPeripheral:(IRPeripheral*) peripheral
                                    withData:(NSData*)data
                   forCharacteristicWithUUID:(CBUUID*)characteristicUUID
                           ofServiceWithUUID:(CBUUID*)serviceUUID
                                  completion:(void (^)(NSError *error))completion {
     LOG_CURRENT_METHOD;
-    IRWriteOperation *op = [[IRWriteOperation alloc] init];
+    IRPeripheralWriteOperation *op = [[IRPeripheralWriteOperation alloc] init];
     op.peripheral         = peripheral;
     op.data               = data;
     op.characteristicUUID = characteristicUUID;

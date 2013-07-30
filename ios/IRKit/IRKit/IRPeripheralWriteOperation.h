@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "IRPeripheral.h"
 
-@interface IRWriteOperation : NSOperation
+@interface IRPeripheralWriteOperation : NSOperation
 
 - (void) didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
                                   error:(NSError *)error;
 
-+ (IRWriteOperation*) operationToPeripheral:(IRPeripheral*)peripheral
++ (IRPeripheralWriteOperation*) operationToPeripheral:(IRPeripheral*)peripheral
                                    withData:(NSData*)data
                   forCharacteristicWithUUID:(CBUUID*)characteristicUUID
                           ofServiceWithUUID:(CBUUID*)serviceUUID

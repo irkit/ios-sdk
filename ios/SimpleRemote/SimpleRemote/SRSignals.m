@@ -54,9 +54,11 @@
     [d synchronize];
 }
 
-- (void)sendSequentially {
+- (void)sendSequentiallyWithCompletion:(void (^)(NSError *))completion {
     LOG_CURRENT_METHOD;
-    [_signals sendSequentially];
+    [_signals sendSequentiallyWithCompletion:^(NSError *error) {
+        LOG( @"sent error:", error );
+    }];
 }
 
 @end

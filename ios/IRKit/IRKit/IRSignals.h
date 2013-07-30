@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 - (NSData*)data;
 - (void)loadFromData: (NSData*)data;
 - (NSString*)JSONRepresentation;
-- (void)sendSequentially;
+- (void)sendSequentiallyWithCompletion:(void (^)(NSError *error))completion;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 

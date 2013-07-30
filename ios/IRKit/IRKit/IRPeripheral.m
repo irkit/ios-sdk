@@ -9,13 +9,13 @@
 #import "IRPeripheral.h"
 #import "IRKit.h"
 #import "IRHelper.h"
-#import "IRWriteOperationQueue.h"
-#import "IRWriteOperation.h"
+#import "IRPeripheralWriteOperationQueue.h"
+#import "IRPeripheralWriteOperation.h"
 
 @interface IRPeripheral ()
 
 @property (nonatomic, copy) void (^writeResponseBlock)(NSError *error);
-@property (nonatomic) IRWriteOperationQueue *writeQueue;
+@property (nonatomic) IRPeripheralWriteOperationQueue *writeQueue;
 @property (nonatomic) CBCentralManager *manager;
 @property (nonatomic) CBPeripheral *peripheral;
 @property (nonatomic) BOOL shouldReadIRData;
@@ -73,7 +73,7 @@
     _UUID       = _peripheral.UUID;
 
     if ( ! _writeQueue ) {
-        _writeQueue = [[IRWriteOperationQueue alloc] init];
+        _writeQueue = [[IRPeripheralWriteOperationQueue alloc] init];
     }
     [_writeQueue setSuspended: ! self.isReady];
 }
@@ -169,7 +169,7 @@
         [self connect];
     }
     
-    IRWriteOperation *op = [IRWriteOperation operationToPeripheral:self
+    IRPeripheralWriteOperation *op = [IRPeripheralWriteOperation operationToPeripheral:self
                                                           withData:value
                                          forCharacteristicWithUUID:characteristicUUID
                                                  ofServiceWithUUID:serviceUUID
