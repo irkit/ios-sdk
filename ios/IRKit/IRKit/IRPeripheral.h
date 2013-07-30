@@ -9,16 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
-// receivedCount is uint8_t and can't be 0xFFFF
-#define IRPERIPHERAL_RECEIVED_COUNT_UNKNOWN 0xFFFF
-
 @interface IRPeripheral : NSObject<CBPeripheralDelegate>
 
 // can be nil if peripheral is found but UUID isn't
 @property (nonatomic) CFUUIDRef UUID;
 @property (nonatomic, copy) NSString *customizedName;
 @property (nonatomic, copy) NSDate   *foundDate;
-@property (nonatomic) uint16_t receivedCount;
 @property (nonatomic) BOOL authorized;
 
 @property (nonatomic) NSString *manufacturerName;
@@ -34,6 +30,7 @@
                                      RSSI:(NSNumber*)rssi;
 - (void) didRetrieve;
 - (void) didConnect;
+- (void) disconnect;
 - (void) didDisconnect;
 
 - (void) writeValueInBackground: (NSData*)value
