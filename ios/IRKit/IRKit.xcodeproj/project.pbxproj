@@ -56,6 +56,12 @@
 		C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B568D174A7BC800FFE5CB /* IRSignalCell.m */; };
 		C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */; };
 		C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CFC8717A6671200870A1B /* QuartzCore.framework */; };
+		C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37E5174DF20300872C04 /* IRHelper.h */; };
+		C7603E8017A8BA4100A7AF1E /* icn_actionbar_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E7E17A8BA4100A7AF1E /* icn_actionbar_cancel.png */; };
+		C7603E8117A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E7F17A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png */; };
+		C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */; };
+		C7603E8717A8DC9200A7AF1E /* icn_actionbar_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */; };
+		C7603E8817A8DC9200A7AF1E /* icn_actionbar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */; };
 		C7626F7F17A1079400D6D746 /* bg_light.png in Resources */ = {isa = PBXBuildFile; fileRef = C7626F7D17A1079400D6D746 /* bg_light.png */; };
 		C7626F8017A1079400D6D746 /* bg_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7626F7E17A1079400D6D746 /* bg_light@2x.png */; };
 		C7626F8217A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */; };
@@ -127,6 +133,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */,
 				C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */,
 				C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */,
 				C7F7D754178CED2400C3CF0F /* IRPeripheralNameEditViewController.h in CopyFiles */,
@@ -209,6 +216,12 @@
 		C75B568E174A7BC800FFE5CB /* IRSignalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalCell.h; sourceTree = "<group>"; };
 		C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRPeripheralCell.xib; sourceTree = "<group>"; };
 		C75CFC8717A6671200870A1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C7603E7E17A8BA4100A7AF1E /* icn_actionbar_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_cancel.png; sourceTree = "<group>"; };
+		C7603E7F17A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_cancel@2x.png"; sourceTree = "<group>"; };
+		C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRViewCustomizer.h; sourceTree = "<group>"; };
+		C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRViewCustomizer.m; sourceTree = "<group>"; };
+		C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_back.png; sourceTree = "<group>"; };
+		C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_back@2x.png"; sourceTree = "<group>"; };
 		C7626F7D17A1079400D6D746 /* bg_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_light.png; sourceTree = "<group>"; };
 		C7626F7E17A1079400D6D746 /* bg_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_light@2x.png"; sourceTree = "<group>"; };
 		C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRNewPeripheralScene2ViewController.xib; sourceTree = "<group>"; };
@@ -457,6 +470,10 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */,
+				C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */,
+				C7603E7E17A8BA4100A7AF1E /* icn_actionbar_cancel.png */,
+				C7603E7F17A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png */,
 				C7693F8417A12AF900EC43FC /* icn_arrow.png */,
 				C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */,
 				C7626F8317A1086900D6D746 /* txt_tutorial_02.png */,
@@ -513,6 +530,8 @@
 			children = (
 				C73E37E0174B8EB100872C04 /* IRChartView.m */,
 				C73E37DF174B8EB100872C04 /* IRChartView.h */,
+				C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */,
+				C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -671,6 +690,10 @@
 				C7693F8617A12AF900EC43FC /* icn_arrow.png in Resources */,
 				C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */,
 				C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */,
+				C7603E8017A8BA4100A7AF1E /* icn_actionbar_cancel.png in Resources */,
+				C7603E8117A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png in Resources */,
+				C7603E8717A8DC9200A7AF1E /* icn_actionbar_back.png in Resources */,
+				C7603E8817A8DC9200A7AF1E /* icn_actionbar_back@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,6 +762,7 @@
 				C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */,
 				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
 				C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */,
+				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

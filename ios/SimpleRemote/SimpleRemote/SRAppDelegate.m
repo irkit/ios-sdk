@@ -27,7 +27,7 @@
     //[IRKit sharedInstance].retainConnectionInBackground = YES;
 
     // customize everything
-    [[UINavigationBar appearance] setBackgroundImage:[SRHelper imageWithColor:[UIColor colorWithRed:0x16/255. green:0x16/255. blue:0x1a/255. alpha:1.0]]
+    [[UINavigationBar appearance] setBackgroundImage:[IRHelper imageWithColor:[UIColor colorWithRed:0x16/255. green:0x16/255. blue:0x1a/255. alpha:1.0]]
                                        forBarMetrics:UIBarMetricsDefault];
 
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary: [[UINavigationBar appearance] titleTextAttributes]];

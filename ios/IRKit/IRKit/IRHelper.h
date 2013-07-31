@@ -13,6 +13,8 @@
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block;
 + (NSString*) sha1:(NSArray*) array;
++ (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)imageInResourceNamed:(NSString*)name;
 
 + (NSString*)stringFromCFUUID: (CFUUIDRef) uuid;
 + (BOOL)CBUUID: (CBUUID*)uuid1 isEqualToCBUUID: (CBUUID*)uuid2;

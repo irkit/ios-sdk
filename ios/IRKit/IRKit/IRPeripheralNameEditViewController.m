@@ -8,6 +8,7 @@
 
 #import "IRPeripheralNameEditViewController.h"
 #import "IRConst.h"
+#import "IRViewCustomizer.h"
 
 @interface IRPeripheralNameEditViewController ()
 
@@ -65,6 +66,8 @@
     [super viewDidLoad];
 
     _label.text = @"このボタンの名前を決めましょう";
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void) viewWillAppear:(BOOL)animated {

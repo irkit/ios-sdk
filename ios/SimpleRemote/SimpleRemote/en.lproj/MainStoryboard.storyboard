@@ -359,7 +359,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Menu" id="na9-KN-KxO">
                         <barButtonItem key="leftBarButtonItem" title=" " id="fal-S9-7ug">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3TG-fl-oxl">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3TG-fl-oxl" userLabel="Button -">
                                 <rect key="frame" x="5" y="5" width="44" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>

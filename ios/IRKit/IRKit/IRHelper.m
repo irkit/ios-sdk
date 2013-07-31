@@ -39,6 +39,30 @@
     return s;
 }
 
+#pragma mark - View related
+
++ (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return image;
+}
+
++ (UIImage *)imageInResourceNamed:(NSString*)name {
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    return [UIImage imageWithContentsOfFile:[resources pathForResource:name
+                                                                ofType:@"png"]];
+}
+
 #pragma mark - UUID related
 
 + (NSString*)stringFromCFUUID: (CFUUIDRef) uuid {
@@ -103,7 +127,8 @@
     return [self findCharacteristicInService:service withCBUUID:characteristicUUID];
 }
 
-+ (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic withCBUUID:(CBUUID*)uuid {
++ (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic
+                                                            withCBUUID:(CBUUID*)uuid {
     LOG_CURRENT_METHOD;
     
     CBService *service = characteristic.service;

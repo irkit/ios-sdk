@@ -9,6 +9,7 @@
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignal.h"
 #import "IRConst.h"
+#import "IRViewCustomizer.h"
 
 @interface IRNewSignalScene1ViewController ()
 
@@ -28,17 +29,19 @@
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
+
+    self.title = @"Receive Remote";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                             target:self
+                                             action:@selector(cancelButtonPressed:)];
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-
-    self.title = @"Receive Remote";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-         initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                              target:self
-                              action:@selector(cancelButtonPressed:)];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

@@ -8,6 +8,7 @@
 
 #import "IRNewPeripheralViewController.h"
 #import "IRKit.h"
+#import "IRViewCustomizer.h"
 
 @interface IRNewPeripheralViewController ()
 
@@ -39,6 +40,8 @@
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void) viewWillAppear:(BOOL)animated {

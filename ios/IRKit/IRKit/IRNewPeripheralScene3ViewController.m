@@ -8,6 +8,7 @@
 
 #import "IRNewPeripheralScene3ViewController.h"
 #import "IRConst.h"
+#import "IRViewCustomizer.h"
 
 @interface IRNewPeripheralScene3ViewController ()
 
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void) viewWillAppear:(BOOL)animated {

@@ -7,6 +7,7 @@
 //
 
 #import "IRWebViewController.h"
+#import "IRViewCustomizer.h"
 
 @interface IRWebViewController ()
 
@@ -44,7 +45,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                          target:self
+                                                                                          action:@selector(cancelButtonPressed:)];
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
+}
+
+- (void)cancelButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

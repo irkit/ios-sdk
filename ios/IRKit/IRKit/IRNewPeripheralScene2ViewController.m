@@ -9,6 +9,7 @@
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRNewPeripheralScene3ViewController.h"
 #import "IRConst.h"
+#import "IRViewCustomizer.h"
 
 @interface IRNewPeripheralScene2ViewController ()
 
@@ -33,17 +34,17 @@
     [super viewDidLoad];
 
     _label.text = @"IRKitデバイスのボタンを押してください";
+    self.title = @"Scene 2";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                          target:self
+                                                                                          action:@selector(cancelButtonPressed:)];
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-
-    self.title = @"Scene 2";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-         initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                              target:self
-                              action:@selector(cancelButtonPressed:)];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

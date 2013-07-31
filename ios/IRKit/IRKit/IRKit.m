@@ -10,6 +10,7 @@
 #import "IRFunc.h" // private
 #import "IRPeripheral.h"
 #import "IRHelper.h"
+#import "IRViewCustomizer.h"
 
 static BOOL useCustomizedStyle;
 
@@ -73,6 +74,7 @@ static BOOL useCustomizedStyle;
                                                                                  }
                                                                              }];
     _retainConnectionInBackground = NO;
+    [IRViewCustomizer sharedInstance]; // init
 
     return self;
 }

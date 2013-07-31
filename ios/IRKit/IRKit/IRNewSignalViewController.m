@@ -9,6 +9,7 @@
 #import "IRNewSignalViewController.h"
 #import "IRSignal.h"
 #import "IRConst.h"
+#import "IRViewCustomizer.h"
 
 @interface IRNewSignalViewController ()
 
@@ -57,6 +58,8 @@
                          }];
                     }
                 }];
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void) viewWillAppear:(BOOL)animated {

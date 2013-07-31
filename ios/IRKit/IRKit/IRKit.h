@@ -18,6 +18,7 @@
 #import "IRSignal.h"
 #import "IRSignalCell.h"
 #import "IRChartView.h"
+#import "IRHelper.h"
 
 @interface IRKit : NSObject<CBCentralManagerDelegate>
 

@@ -10,8 +10,6 @@
 
 @interface SRHelper : NSObject
 
-+ (UIImage *)imageWithColor:(UIColor *)color;
-
 + (void)createIRSignalsIcon:(UIImage *)image
           completionHandler:(void (^)(NSHTTPURLResponse *response, NSDictionary *json, NSError *error)) handler;
 
