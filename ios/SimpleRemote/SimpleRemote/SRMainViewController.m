@@ -31,6 +31,8 @@
 
     self.tableView.delegate   = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundView = nil;
+    self.tableView.separatorColor = [UIColor clearColor];
 
     [SRSignals sharedInstance].signals.delegate = self;
 
@@ -149,7 +151,7 @@
 - (void)newPeripheralViewController:(IRNewPeripheralViewController*)viewController
                   didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
- 
+
     if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
         _cancelled = YES;
     }
@@ -219,13 +221,19 @@
             if ([SRSignals sharedInstance].signals.countOfSignals <= indexPath.row) {
                 // last line is always "+ Add New Signal"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
+                cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
                 break;
             }
             cell = [[SRSignals sharedInstance].signals tableView:tableView
                  cellForRowAtIndexPath: indexPath];
+            cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+            cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
             break;
         case 1:
             cell = [tableView dequeueReusableCellWithIdentifier:@"SelectImageCell"];
+            cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+            cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
             break;
         case 2:
         default:
@@ -341,10 +349,14 @@
     LOG_CURRENT_METHOD;
     switch (section) {
         case 0:
+        {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Header1"];
+            return cell;
+        }
         case 1:
         {
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SRMainTableHeaderViews" owner:self options:nil];
-            return [topLevelObjects objectAtIndex:section];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Header2"];
+            return cell;
         }
         default:
             break;
