@@ -87,6 +87,7 @@
 
             viewController.navigationItem.rightBarButtonItem = item;
         }
+        viewController.view.backgroundColor = [IRViewCustomizer defaultViewBackgroundColor];
     };
 
 
@@ -107,6 +108,10 @@
 
 + (UIColor*) activeButtonBackgroundColor {
     return [UIColor colorWithRed:0x00/255. green:0xcc/255. blue:0xcc/255. alpha:1.0];
+}
+
++ (UIColor*) defaultViewBackgroundColor {
+    return [UIColor colorWithRed:0x16/255. green:0x16/255. blue:0x1a/255. alpha:1.0];
 }
 
 + (void)customizeCancelButton: (UIBarButtonItem*)original forViewController:(UIViewController*)viewController withImageNamed:(NSString*)name {

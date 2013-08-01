@@ -51,7 +51,7 @@
     [super viewWillDisappear:animated];
 }
 
-- (void) processTextField {
+- (IBAction) processTextField: (id)sender {
     LOG( @"text: %@", _textField.text );
 
     if (! [self isTextValid]) {
@@ -97,7 +97,7 @@
 - (void)doneButtonPressed:(id)selector
 {
     LOG(@"text: %@", self.textField.text);
-    [self processTextField];
+    [self processTextField:nil];
 }
 
 - (IBAction)editingChanged:(id)sender {
@@ -110,7 +110,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField
 {
-    [self processTextField];
+    [self processTextField:nil];
     return NO;
 }
 

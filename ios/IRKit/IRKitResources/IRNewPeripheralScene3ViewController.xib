@@ -231,6 +231,23 @@
 					</object>
 					<int key="connectionID">480</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">processTextField:</string>
+						<reference key="source" ref="573086846"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">19</int>
+					</object>
+					<int key="connectionID">481</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="573086846"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">482</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -452,7 +469,7 @@
 						<int key="objectID">386</int>
 						<reference key="object" ref="1027343858"/>
 						<array class="NSMutableArray" key="children">
-							<object class="IBNSLayoutConstraint" id="646744443">
+							<object class="IBNSLayoutConstraint" id="323810931">
 								<reference key="firstItem" ref="83659098"/>
 								<int key="firstAttribute">10</int>
 								<int key="relation">0</int>
@@ -560,7 +577,7 @@
 						<int key="objectID">438</int>
 						<reference key="object" ref="83659098"/>
 						<array class="NSMutableArray" key="children">
-							<object class="IBNSLayoutConstraint" id="762354582">
+							<object class="IBNSLayoutConstraint" id="620376906">
 								<reference key="firstItem" ref="573086846"/>
 								<int key="firstAttribute">3</int>
 								<int key="relation">0</int>
@@ -667,12 +684,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">478</int>
-						<reference key="object" ref="646744443"/>
+						<reference key="object" ref="323810931"/>
 						<reference key="parent" ref="1027343858"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">479</int>
-						<reference key="object" ref="762354582"/>
+						<reference key="object" ref="620376906"/>
 						<reference key="parent" ref="83659098"/>
 					</object>
 				</array>
@@ -702,7 +719,7 @@
 					<reference ref="924003478"/>
 					<reference ref="21097126"/>
 					<reference ref="343528100"/>
-					<reference ref="646744443"/>
+					<reference ref="323810931"/>
 				</array>
 				<boolean value="NO" key="386.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="394.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -719,7 +736,7 @@
 				<array class="NSMutableArray" key="438.IBViewMetadataConstraints">
 					<reference ref="1022698349"/>
 					<reference ref="690554079"/>
-					<reference ref="762354582"/>
+					<reference ref="620376906"/>
 				</array>
 				<boolean value="NO" key="438.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="447.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -744,7 +761,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">480</int>
+			<int key="maxID">482</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -752,13 +769,13 @@
 					<string key="className">IRNewPeripheralScene3ViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">editingChanged:</string>
+						<string key="NS.key.0">processTextField:</string>
 						<string key="NS.object.0">id</string>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">editingChanged:</string>
+						<string key="NS.key.0">processTextField:</string>
 						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">editingChanged:</string>
+							<string key="name">processTextField:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>
