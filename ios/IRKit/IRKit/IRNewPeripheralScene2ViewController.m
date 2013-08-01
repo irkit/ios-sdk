@@ -13,7 +13,6 @@
 
 @interface IRNewPeripheralScene2ViewController ()
 
-@property (nonatomic) UILabel *label;
 @property (nonatomic) id observer;
 
 @end
@@ -33,8 +32,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    _label.text = @"IRKitデバイスのボタンを押してください";
-    self.title = @"Scene 2";
+    self.title = @"Waiting for Pairing...";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];

@@ -15,7 +15,6 @@
 
 @interface IRNewPeripheralScene1ViewController ()
 
-@property (nonatomic) UILabel *label;
 @property (nonatomic) id observer;
 
 @end
@@ -35,8 +34,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    _label.text = @"IRKitデバイスを接続してください";
-    self.title = @"Scene 1";
+    self.title = @"Searching for IRKit...";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];

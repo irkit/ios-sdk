@@ -29,7 +29,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Scene 2";
+    self.title = @"Decide a name...";
     self.navigationItem.hidesBackButton    = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
