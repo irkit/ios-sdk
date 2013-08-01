@@ -8,6 +8,7 @@
 
 #import "IRViewCustomizer.h"
 #import "IRNewSignalScene1ViewController.h"
+#import "IRNewSignalScene2ViewController.h"
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRNewPeripheralScene3ViewController.h"
@@ -57,15 +58,49 @@
                                   forViewController:viewController
                                      withImageNamed:@"icn_actionbar_back"];
         }
+        else if ([viewController isKindOfClass:[IRNewPeripheralScene3ViewController class]] ||
+                 [viewController isKindOfClass:[IRNewSignalScene2ViewController class]]) {
+            // bar
+            UINavigationBar *bar = viewController.navigationController.navigationBar;
+            [IRViewCustomizer customizeNavigationBar:bar];
+
+            // custom done button
+            UIBarButtonItem *original = viewController.navigationItem.rightBarButtonItem;
+
+            UIImage *inactiveImage = [IRHelper imageWithColor:[IRViewCustomizer inactiveButtonBackgroundColor]];
+            UIImage *activeImage   = [IRHelper imageWithColor:[IRViewCustomizer activeButtonBackgroundColor]];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.titleLabel.text = @"Done";
+            button.titleLabel.textColor = [IRViewCustomizer fontColor];
+            [button setBackgroundImage:inactiveImage
+                              forState:UIControlStateDisabled];
+            [button setBackgroundImage:activeImage
+                              forState:UIControlStateNormal];
+            button.frame = (CGRect){ 0, 0, 45, 26 };
+            [button setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,0)]; // move the button **px right
+            [button addTarget:viewController
+                       action:original.action
+             forControlEvents:UIControlEventTouchUpInside];
+            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
+
+            viewController.navigationItem.rightBarButtonItem = item;
+        }
     };
 
 
     return self;
 }
 
-+ (void)leftBarButtonTouched:(id)sender {
-    LOG_CURRENT_METHOD;
-    
++ (UIColor*) fontColor {
+    return [UIColor whiteColor];
+}
+
++ (UIColor*) inactiveButtonBackgroundColor {
+    return [UIColor colorWithRed:0x2b/255. green:0x2d/255. blue:0x33/255. alpha:1.0];
+}
+
++ (UIColor*) activeButtonBackgroundColor {
+    return [UIColor colorWithRed:0x00/255. green:0xcc/255. blue:0xcc/255. alpha:1.0];
 }
 
 + (void)customizeCancelButton: (UIBarButtonItem*)original forViewController:(UIViewController*)viewController withImageNamed:(NSString*)name {

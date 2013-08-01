@@ -12,6 +12,7 @@
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRNewPeripheralScene3ViewController.h"
 #import "IRNewSignalScene1ViewController.h"
+#import "IRNewSignalScene2ViewController.h"
 #import "IRWebViewController.h"
 #import "IRSignal.h"
 #import "IRSignalCell.h"
@@ -67,8 +68,9 @@
 }
 
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
+#pragma mark - IRNewSignalScene2ViewControllerDelegate
 
-- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene2ViewController:(id)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -88,7 +90,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return 8;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,8 +104,10 @@
         case 3:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
         case 4:
-            return [tableView dequeueReusableCellWithIdentifier:@"IRWeb"];
+            return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene2"];
         case 5:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRWeb"];
+        case 6:
         {
             IRSignalCell *cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
 
@@ -114,7 +118,7 @@
             [cell inflateFromSignal:signal];
             return cell;
         }
-        case 6:
+        case 7:
         {
             IRPeripheralCell *cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
             IRPeripheral *peripheral = [[IRPeripheral alloc] init];
@@ -131,9 +135,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 5:
-            return [IRSignalCell height];
         case 6:
+            return [IRSignalCell height];
+        case 7:
             return [IRPeripheralCell height];
 
         default:
@@ -178,14 +182,23 @@
             break;
         case 3:
         {
-            IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
+        IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
+                                                                                               bundle:resources];
+        c.delegate = self;
+
+        [self.navigationController pushViewController:c animated:YES];
+        }
+            break;
+        case 4:
+        {
+            IRNewSignalScene2ViewController *c = [[IRNewSignalScene2ViewController alloc] initWithNibName:@"IRNewSignalScene2ViewController"
                                                                                                    bundle:resources];
             c.delegate = self;
 
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
-        case 4:
+        case 5:
         {
             IRWebViewController *c = [[IRWebViewController alloc] init];
             c.url = @"http://github.com/irkit/";

@@ -1,20 +1,20 @@
 //
-//  IRNewPeripheralScene3ViewController.m
+//  IRNewSignalScene2ViewController.m
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRNewPeripheralScene3ViewController.h"
+#import "IRNewSignalScene2ViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
 
-@interface IRNewPeripheralScene3ViewController ()
+@interface IRNewSignalScene2ViewController ()
 
 @end
 
-@implementation IRNewPeripheralScene3ViewController
+@implementation IRNewSignalScene2ViewController
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
@@ -29,12 +29,11 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Scene 3";
+    self.title = @"Scene 2";
     self.navigationItem.hidesBackButton    = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                              target:self
-                                              action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                           target:self
+                                                                                           action:@selector(doneButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
@@ -51,7 +50,7 @@
 
 - (void) processTextField {
     LOG( @"text: %@", _textField.text );
-    
+
     if (! _textField.text) {
         return;
     }
@@ -63,13 +62,13 @@
     NSUInteger matches = [regex numberOfMatchesInString:_textField.text
                                                 options:nil
                                                   range:NSMakeRange(0,_textField.text.length)];
-    
+
     if (matches > 0) {
         // empty or whitespace only
         return;
     }
-    
-    [self.delegate scene3ViewController:self
+
+    [self.delegate scene2ViewController:self
                       didFinishWithInfo:@{
         IRViewControllerResultType: IRViewControllerResultTypeDone,
         IRViewControllerResultText: _textField.text

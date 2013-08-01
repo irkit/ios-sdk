@@ -41,23 +41,6 @@
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-    
-    __weak IRNewSignalViewController *_self = self;
-    [[NSNotificationCenter defaultCenter]
-        addObserverForName:IRKitDidReceiveSignalNotification
-                    object:nil
-                     queue:nil
-                usingBlock:^(NSNotification *note) {
-                    IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
-                    if ([_delegate respondsToSelector:@selector(newSignalViewController:didFinishWithInfo:)]) {
-                        [_delegate performSelector:@selector(newSignalViewController:didFinishWithInfo:)
-                                        withObject:_self
-                                        withObject:@{
-                        IRViewControllerResultType: IRViewControllerResultTypeDone,
-                      IRViewControllerResultSignal: signal
-                         }];
-                    }
-                }];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
@@ -99,6 +82,25 @@
          }];
     }
     // shouldnt happen
+}
+
+#pragma mark - IRNewSignalScene2ViewControllerDelegate
+
+- (void)scene2ViewController:(IRNewSignalScene2ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
+        NSString *text = info[IRViewControllerResultText];
+        IRSignal *signal = info[IRViewControllerResultSignal];
+        signal.name = text;
+
+        [self.delegate newSignalViewController:self
+                             didFinishWithInfo:@{
+                    IRViewControllerResultType: IRViewControllerResultTypeDone,
+                  IRViewControllerResultSignal: signal
+         }];
+    }
 }
 
 @end

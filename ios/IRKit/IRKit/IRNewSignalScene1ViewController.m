@@ -10,8 +10,11 @@
 #import "IRSignal.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
+#import "IRNewSignalScene2ViewController.h"
 
 @interface IRNewSignalScene1ViewController ()
+
+@property (nonatomic) id observer;
 
 @end
 
@@ -44,9 +47,51 @@
     [super viewWillAppear:animated];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewDidAppear:animated];
+
+    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidReceiveSignalNotification
+                                                                  object:nil
+                                                                   queue:nil
+                                                              usingBlock:^(NSNotification *note) {
+                                                                  IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
+                                                                  [self didReceiveSignal:signal];
+
+
+                                                                  //                                                      if ([_delegate respondsToSelector:@selector(newSignalViewController:didFinishWithInfo:)]) {
+                                                                  //                                                          [_delegate performSelector:@selector(newSignalViewController:didFinishWithInfo:)
+                                                                  //                                                                          withObject:_self
+                                                                  //                                                                          withObject:@{
+                                                                  //                                                          IRViewControllerResultType: IRViewControllerResultTypeDone,
+                                                                  //                                                        IRViewControllerResultSignal: signal
+                                                                  //                                                           }];
+                                                                  //                                                      }
+                                                              }];
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+}
+
+- (void) didReceiveSignal: (IRSignal*)signal {
+    LOG_CURRENT_METHOD;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+
+    NSBundle *main = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    IRNewSignalScene2ViewController *c = [[IRNewSignalScene2ViewController alloc] initWithNibName:@"IRNewSignalScene2ViewController"
+                                                                                           bundle:resources];
+    c.delegate = self.delegate;
+    c.signal   = signal;
+    [self.navigationController pushViewController:c
+                                         animated:YES];
+
 }
 
 #pragma mark - UI events

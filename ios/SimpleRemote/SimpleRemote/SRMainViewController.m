@@ -13,7 +13,6 @@
 
 @interface SRMainViewController ()
 
-@property (nonatomic) id signalObserver;
 @property (nonatomic) id peripheralObserver;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) BOOL showingNewPeripheralViewController;
@@ -37,15 +36,6 @@
     [SRSignals sharedInstance].signals.delegate = self;
 
     __weak SRMainViewController *_self = self;
-    _signalObserver = [[NSNotificationCenter defaultCenter]
-                          addObserverForName:IRKitDidReceiveSignalNotification
-                                      object:nil
-                                       queue:nil
-                                  usingBlock:^(NSNotification *note) {
-                                      IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
-                                      [[SRSignals sharedInstance].signals addSignalsObject:signal];
-                                      [[SRSignals sharedInstance] save];
-    }];
     // show view controller when another peripheral is found
     _peripheralObserver = [[NSNotificationCenter defaultCenter]
                            addObserverForName:IRKitDidDiscoverUnauthorizedPeripheralNotification
@@ -82,7 +72,6 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [[NSNotificationCenter defaultCenter] removeObserver: _signalObserver];
     [[NSNotificationCenter defaultCenter] removeObserver: _peripheralObserver];
     [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
 }
