@@ -108,11 +108,6 @@
 
 #pragma mark - Accessors
 
-- (NSString*)name {
-    LOG_CURRENT_METHOD;
-    return _name ? _name : @"unknown name";
-}
-
 - (NSString*)peripheralUUID {
     if ( _peripheralUUID ) {
         return _peripheralUUID;
