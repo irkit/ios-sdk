@@ -39,6 +39,9 @@
                     forState:UIControlStateNormal];
     [_versionButton setTitle:version
                     forState:UIControlStateHighlighted];
+
+    self.tableView.backgroundView = nil;
+    self.tableView.separatorColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,19 +120,32 @@
             if ([IRKit sharedInstance].numberOfPeripherals <= indexPath.row) {
                 // last line is always "+ Add New Peripheral"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewPeripheralCell"];
+                cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
                 break;
             }
             cell = [[IRKit sharedInstance].peripherals tableView:tableView
                                            cellForRowAtIndexPath:indexPath];
+            cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+            cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
             break;
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    return [tableView dequeueReusableCellWithIdentifier:@"Help"];
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"Help"];
+                    cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                    return cell;
                 case 1:
-                    return [tableView dequeueReusableCellWithIdentifier:@"Opensource"];
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"Opensource"];
+                    cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                    return cell;
                 case 2:
-                    return [tableView dequeueReusableCellWithIdentifier:@"Buydevice"];
+                    cell = [tableView dequeueReusableCellWithIdentifier:@"Buydevice"];
+                    cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+                    return cell;
             }
             break;
     }
@@ -251,10 +267,14 @@
     LOG_CURRENT_METHOD;
     switch (section) {
         case 0:
+        {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsHeader1"];
+            return cell;
+        }
         case 1:
         {
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SRSettingsTableHeaderViews" owner:self options:nil];
-            return [topLevelObjects objectAtIndex:section];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsHeader2"];
+            return cell;
         }
         default:
             break;
