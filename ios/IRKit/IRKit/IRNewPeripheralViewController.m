@@ -112,7 +112,7 @@
     
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
         NSString *text = info[IRViewControllerResultText];
-        IRPeripheral *peripheral = [[IRKit sharedInstance].peripherals objectAtIndex:0];
+        IRPeripheral *peripheral = info[IRViewControllerResultPeripheral];
         peripheral.customizedName = text;
         [[IRKit sharedInstance] save];
 

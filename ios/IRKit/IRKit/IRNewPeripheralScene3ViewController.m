@@ -60,8 +60,9 @@
 
     [self.delegate scene3ViewController:self
                       didFinishWithInfo:@{
-        IRViewControllerResultType: IRViewControllerResultTypeDone,
-        IRViewControllerResultText: _textField.text
+             IRViewControllerResultType: IRViewControllerResultTypeDone,
+       IRViewControllerResultPeripheral: _peripheral,
+             IRViewControllerResultText: _textField.text,
      }];
 }
 

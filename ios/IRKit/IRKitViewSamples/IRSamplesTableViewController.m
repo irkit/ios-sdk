@@ -176,17 +176,19 @@
             IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] initWithNibName:@"IRNewPeripheralScene3ViewController"
                                                                                                            bundle:resources];
             c.delegate = self;
+            IRPeripheral *peripheral = [[IRPeripheral alloc] init];
+            c.peripheral = peripheral;
 
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
         case 3:
         {
-        IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
-                                                                                               bundle:resources];
-        c.delegate = self;
+            IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
+                                                                                                   bundle:resources];
+            c.delegate = self;
 
-        [self.navigationController pushViewController:c animated:YES];
+            [self.navigationController pushViewController:c animated:YES];
         }
             break;
         case 4:

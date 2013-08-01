@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IRPeripheral.h"
 
 @protocol IRNewPeripheralScene3ViewControllerDelegate;
 
 @interface IRNewPeripheralScene3ViewController : UIViewController<UITextFieldDelegate>
 
 @property (nonatomic, assign) id<IRNewPeripheralScene3ViewControllerDelegate> delegate;
+@property (nonatomic) IRPeripheral *peripheral;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 

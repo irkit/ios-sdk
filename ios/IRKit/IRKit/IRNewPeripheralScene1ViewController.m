@@ -86,6 +86,7 @@
         IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] initWithNibName:@"IRNewPeripheralScene3ViewController"
                                                                                                        bundle:resources];
         c.delegate = self.delegate;
+        c.peripheral = peripheral;
         [self.navigationController pushViewController:c
                                              animated:YES];
         return;
