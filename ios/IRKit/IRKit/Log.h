@@ -16,3 +16,9 @@ NSString *sp(NSString *format, ...);
 #  define LOG(...)
 #
 #endif
+
+#ifdef DEBUG
+# define ASSERT(A,B) NSAssert(A,B)
+#else
+# define ASSERT(A,B)
+#endif

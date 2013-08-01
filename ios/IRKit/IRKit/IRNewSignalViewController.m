@@ -81,7 +81,7 @@
                         IRViewControllerResultType: IRViewControllerResultTypeCancelled
          }];
     }
-    // shouldnt happen
+    ASSERT(1, @"non cancelled results should be handled elsewhere");
 }
 
 #pragma mark - IRNewSignalScene2ViewControllerDelegate
