@@ -1,20 +1,20 @@
 //
-//  IRNewSignalScene2ViewController.m
+//  IRSignalNameEditViewController.m
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "IRNewSignalScene2ViewController.h"
+#import "IRSignalNameEditViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
 
-@interface IRNewSignalScene2ViewController ()
+@interface IRSignalNameEditViewController ()
 
 @end
 
-@implementation IRNewSignalScene2ViewController
+@implementation IRSignalNameEditViewController
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;

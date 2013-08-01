@@ -62,9 +62,9 @@
 		C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */; };
 		C7603E8717A8DC9200A7AF1E /* icn_actionbar_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */; };
 		C7603E8817A8DC9200A7AF1E /* icn_actionbar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */; };
-		C7603E8B17A9FAE100A7AF1E /* IRNewSignalScene2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7603E8917A9FAE000A7AF1E /* IRNewSignalScene2ViewController.m */; };
-		C7603E8C17A9FED700A7AF1E /* IRNewSignalScene2ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7603E8A17A9FAE000A7AF1E /* IRNewSignalScene2ViewController.h */; };
-		C7603E8E17AA001E00A7AF1E /* IRNewSignalScene2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8D17AA001D00A7AF1E /* IRNewSignalScene2ViewController.xib */; };
+		C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7603E8917A9FAE000A7AF1E /* IRSignalNameEditViewController.m */; };
+		C7603E8C17A9FED700A7AF1E /* IRSignalNameEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */; };
+		C7603E8E17AA001E00A7AF1E /* IRSignalNameEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */; };
 		C7626F7F17A1079400D6D746 /* bg_light.png in Resources */ = {isa = PBXBuildFile; fileRef = C7626F7D17A1079400D6D746 /* bg_light.png */; };
 		C7626F8017A1079400D6D746 /* bg_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7626F7E17A1079400D6D746 /* bg_light@2x.png */; };
 		C7626F8217A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */; };
@@ -144,7 +144,7 @@
 			dstSubfolderSpec = 16;
 			files = (
 				C7A1351217AA621B00C8679B /* IRViewCustomizer.h in CopyFiles */,
-				C7603E8C17A9FED700A7AF1E /* IRNewSignalScene2ViewController.h in CopyFiles */,
+				C7603E8C17A9FED700A7AF1E /* IRSignalNameEditViewController.h in CopyFiles */,
 				C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */,
 				C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */,
 				C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */,
@@ -233,9 +233,9 @@
 		C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRViewCustomizer.m; sourceTree = "<group>"; };
 		C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_back.png; sourceTree = "<group>"; };
 		C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_back@2x.png"; sourceTree = "<group>"; };
-		C7603E8917A9FAE000A7AF1E /* IRNewSignalScene2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene2ViewController.m; sourceTree = "<group>"; };
-		C7603E8A17A9FAE000A7AF1E /* IRNewSignalScene2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene2ViewController.h; sourceTree = "<group>"; };
-		C7603E8D17AA001D00A7AF1E /* IRNewSignalScene2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRNewSignalScene2ViewController.xib; sourceTree = "<group>"; };
+		C7603E8917A9FAE000A7AF1E /* IRSignalNameEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalNameEditViewController.m; sourceTree = "<group>"; };
+		C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalNameEditViewController.h; sourceTree = "<group>"; };
+		C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRSignalNameEditViewController.xib; sourceTree = "<group>"; };
 		C7626F7D17A1079400D6D746 /* bg_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_light.png; sourceTree = "<group>"; };
 		C7626F7E17A1079400D6D746 /* bg_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_light@2x.png"; sourceTree = "<group>"; };
 		C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRNewPeripheralScene2ViewController.xib; sourceTree = "<group>"; };
@@ -524,7 +524,7 @@
 				C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */,
 				C7626F8717A10A6200D6D746 /* IRPeripheralNameEditViewController.xib */,
 				C7693F8017A1132400EC43FC /* IRNewSignalScene1ViewController.xib */,
-				C7603E8D17AA001D00A7AF1E /* IRNewSignalScene2ViewController.xib */,
+				C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */,
 				C7693F8217A121E500EC43FC /* IRSignalCell.xib */,
 				C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */,
 			);
@@ -538,8 +538,8 @@
 				C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */,
 				C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */,
 				C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */,
-				C7603E8917A9FAE000A7AF1E /* IRNewSignalScene2ViewController.m */,
-				C7603E8A17A9FAE000A7AF1E /* IRNewSignalScene2ViewController.h */,
+				C7603E8917A9FAE000A7AF1E /* IRSignalNameEditViewController.m */,
+				C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */,
 				C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */,
 				C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */,
 				C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */,
@@ -723,7 +723,7 @@
 				C7603E8117A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png in Resources */,
 				C7603E8717A8DC9200A7AF1E /* icn_actionbar_back.png in Resources */,
 				C7603E8817A8DC9200A7AF1E /* icn_actionbar_back@2x.png in Resources */,
-				C7603E8E17AA001E00A7AF1E /* IRNewSignalScene2ViewController.xib in Resources */,
+				C7603E8E17AA001E00A7AF1E /* IRSignalNameEditViewController.xib in Resources */,
 				C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */,
 				C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */,
 				C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */,
@@ -800,7 +800,7 @@
 				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
 				C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */,
 				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
-				C7603E8B17A9FAE100A7AF1E /* IRNewSignalScene2ViewController.m in Sources */,
+				C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

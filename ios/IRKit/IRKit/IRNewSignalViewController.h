@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "IRNewSignalScene1ViewController.h"
-#import "IRNewSignalScene2ViewController.h"
+#import "IRSignalNameEditViewController.h"
 
 // pre definition for delegate
 @protocol IRNewSignalViewControllerDelegate;
 
-@interface IRNewSignalViewController : UIViewController<IRNewSignalScene1ViewControllerDelegate,IRNewSignalScene2ViewControllerDelegate>
+@interface IRNewSignalViewController : UIViewController<IRNewSignalScene1ViewControllerDelegate,IRSignalNameEditViewControllerDelegate>
 
 @property (nonatomic, assign) id<IRNewSignalViewControllerDelegate> delegate;
 

@@ -21,7 +21,7 @@
 
 - (void)loadView {
     LOG_CURRENT_METHOD;
-    
+
     CGRect bounds = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:bounds];
 
@@ -31,10 +31,10 @@
     IRNewSignalScene1ViewController *first = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
                                                                                                bundle:resources];
     first.delegate = self;
-    
+
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
     [view addSubview:_navController.view];
-    
+
     self.view = view;
 }
 
@@ -74,7 +74,7 @@
 
 - (void)scene1ViewController:(IRNewSignalScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
-    
+
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newSignalViewController:self
                              didFinishWithInfo:@{
@@ -84,9 +84,9 @@
     ASSERT(1, @"non cancelled results should be handled elsewhere");
 }
 
-#pragma mark - IRNewSignalScene2ViewControllerDelegate
+#pragma mark - IRSignalNameEditViewControllerDelegate
 
-- (void)scene2ViewController:(IRNewSignalScene2ViewController *)viewController
+- (void)scene2ViewController:(IRSignalNameEditViewController *)viewController
            didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
 

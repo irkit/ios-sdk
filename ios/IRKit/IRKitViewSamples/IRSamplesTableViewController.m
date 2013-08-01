@@ -12,7 +12,7 @@
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRNewSignalScene1ViewController.h"
-#import "IRNewSignalScene2ViewController.h"
+#import "IRSignalNameEditViewController.h"
 #import "IRWebViewController.h"
 #import "IRSignal.h"
 #import "IRSignalCell.h"
@@ -68,7 +68,7 @@
 }
 
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
-#pragma mark - IRNewSignalScene2ViewControllerDelegate
+#pragma mark - IRSignalNameEditViewControllerDelegate
 
 - (void)scene2ViewController:(id)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
@@ -104,7 +104,7 @@
         case 3:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
         case 4:
-            return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene2"];
+            return [tableView dequeueReusableCellWithIdentifier:@"IRSignalNameEdit"];
         case 5:
             return [tableView dequeueReusableCellWithIdentifier:@"IRWeb"];
         case 6:
@@ -193,7 +193,7 @@
             break;
         case 4:
         {
-            IRNewSignalScene2ViewController *c = [[IRNewSignalScene2ViewController alloc] initWithNibName:@"IRNewSignalScene2ViewController"
+            IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName:@"IRSignalNameEditViewController"
                                                                                                    bundle:resources];
             c.delegate = self;
             unsigned short data[10] = { 100,100,100,100,100,100,100,100,100,100 };

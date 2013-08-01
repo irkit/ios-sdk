@@ -10,7 +10,7 @@
 #import "IRSignal.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
-#import "IRNewSignalScene2ViewController.h"
+#import "IRSignalNameEditViewController.h"
 
 @interface IRNewSignalScene1ViewController ()
 
@@ -33,7 +33,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Receive Remote";
+    self.title = @"Waiting for Signal ...";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                              target:self
@@ -57,16 +57,6 @@
                                                               usingBlock:^(NSNotification *note) {
                                                                   IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
                                                                   [self didReceiveSignal:signal];
-
-
-                                                                  //                                                      if ([_delegate respondsToSelector:@selector(newSignalViewController:didFinishWithInfo:)]) {
-                                                                  //                                                          [_delegate performSelector:@selector(newSignalViewController:didFinishWithInfo:)
-                                                                  //                                                                          withObject:_self
-                                                                  //                                                                          withObject:@{
-                                                                  //                                                          IRViewControllerResultType: IRViewControllerResultTypeDone,
-                                                                  //                                                        IRViewControllerResultSignal: signal
-                                                                  //                                                           }];
-                                                                  //                                                      }
                                                               }];
 }
 
@@ -85,7 +75,7 @@
     NSBundle *main = [NSBundle mainBundle];
     NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
                                                                   ofType:@"bundle"]];
-    IRNewSignalScene2ViewController *c = [[IRNewSignalScene2ViewController alloc] initWithNibName:@"IRNewSignalScene2ViewController"
+    IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName:@"IRSignalNameEditViewController"
                                                                                            bundle:resources];
     c.delegate = self.delegate;
     c.signal   = signal;

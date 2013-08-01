@@ -8,7 +8,7 @@
 
 #import "IRViewCustomizer.h"
 #import "IRNewSignalScene1ViewController.h"
-#import "IRNewSignalScene2ViewController.h"
+#import "IRSignalNameEditViewController.h"
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRPeripheralNameEditViewController.h"
@@ -59,7 +59,7 @@
                                      withImageNamed:@"icn_actionbar_back"];
         }
         else if ([viewController isKindOfClass:[IRPeripheralNameEditViewController class]] ||
-                 [viewController isKindOfClass:[IRNewSignalScene2ViewController class]]) {
+                 [viewController isKindOfClass:[IRSignalNameEditViewController class]]) {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
             [IRViewCustomizer customizeNavigationBar:bar];
