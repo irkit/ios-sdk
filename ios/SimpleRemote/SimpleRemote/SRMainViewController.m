@@ -125,8 +125,18 @@
     [SRHelper createIRSignalsIcon:[UIImage imageNamed:@"icon.png"]
                 completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
                     LOG( @"response: %@, json: %@, error: %@", response, json, error);
-                    NSURL *url = [NSURL URLWithString:json[@"Icon"][@"Url"]];
-                    [[UIApplication sharedApplication] openURL: url];
+                    if (error) {
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:error.localizedDescription
+                                                                            message:nil
+                                                                           delegate:nil
+                                                                  cancelButtonTitle:@"OK"
+                                                                  otherButtonTitles:nil];
+                        [alertView show];
+                    }
+                    else {
+                        NSURL *url = [NSURL URLWithString:json[@"Icon"][@"Url"]];
+                        [[UIApplication sharedApplication] openURL: url];
+                    }
                 }];
 }
 
