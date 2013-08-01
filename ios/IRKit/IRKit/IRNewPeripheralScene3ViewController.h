@@ -14,6 +14,7 @@
 
 @property (nonatomic, assign) id<IRNewPeripheralScene3ViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
 @end
 
