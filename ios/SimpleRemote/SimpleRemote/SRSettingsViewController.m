@@ -68,13 +68,14 @@
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
-- (void)peripheralNameEditViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info
-{
+- (void)scene3ViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
-    [self dismissViewControllerAnimated:YES
-                             completion:^{
-                                 LOG(@"dismissed");
-                             }];
+
+    [self.navigationController popViewControllerAnimated:YES];
+
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - IRNewPeripheralViewControllerDelegate
@@ -82,10 +83,8 @@
 - (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithInfo:(NSDictionary *)info
 {
     LOG( @"info: %@", info );
-    [self dismissViewControllerAnimated:YES
-                             completion:^{
-        LOG(@"dismissed");
-    }];
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -176,9 +175,13 @@
             IRPeripheral *peripheral = [[IRKit sharedInstance].peripherals objectAtIndex: indexPath.row];
             UIActionSheet *sheet = [UIActionSheet actionSheetWithTitle:@""];
             [sheet addButtonWithTitle:@"Edit Name" handler:^{
-                IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] init];
+                NSBundle *main = [NSBundle mainBundle];
+                NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                              ofType:@"bundle"]];
+                IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController"
+                                                                                                               bundle:resources];
+                c.delegate = self;
                 c.peripheral = peripheral;
-                c.delegate   = self;
                 [self.navigationController pushViewController:c
                                                      animated:YES];
             }];

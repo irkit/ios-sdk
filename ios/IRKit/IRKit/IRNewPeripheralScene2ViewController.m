@@ -7,7 +7,7 @@
 //
 
 #import "IRNewPeripheralScene2ViewController.h"
-#import "IRNewPeripheralScene3ViewController.h"
+#import "IRPeripheralNameEditViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
 
@@ -80,7 +80,7 @@
     NSBundle *main = [NSBundle mainBundle];
     NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
                                                                   ofType:@"bundle"]];
-    IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] initWithNibName:@"IRNewPeripheralScene3ViewController"
+    IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController"
                                                                                                    bundle:resources];
     c.delegate = self.delegate;
     c.peripheral = _peripheral;

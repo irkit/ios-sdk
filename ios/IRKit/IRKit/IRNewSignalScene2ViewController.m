@@ -42,6 +42,9 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
+    // set .signal before viewWillAppear
+    _textField.text = _signal.name;
+
     [self editingChanged:nil];
 }
 
@@ -56,6 +59,8 @@
     if (! [self isTextValid]) {
         return;
     }
+
+    _signal.name = _textField.text;
 
     [self.delegate scene2ViewController:self
                       didFinishWithInfo:@{

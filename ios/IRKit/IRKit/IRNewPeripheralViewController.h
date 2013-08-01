@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
-#import "IRNewPeripheralScene3ViewController.h"
+#import "IRPeripheralNameEditViewController.h"
 
 // pre definition for delegate
 @protocol IRNewPeripheralViewControllerDelegate;

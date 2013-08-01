@@ -10,7 +10,7 @@
 #import "IRconst.h"
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
-#import "IRNewPeripheralScene3ViewController.h"
+#import "IRPeripheralNameEditViewController.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRNewSignalScene2ViewController.h"
 #import "IRWebViewController.h"
@@ -39,7 +39,7 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
@@ -75,9 +75,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - IRNewPeripheralScene3ViewControllerDelegate
+#pragma mark - IRPeripheralNameEditViewControllerDelegate
 
-- (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene3ViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -100,7 +100,7 @@
         case 1:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewPeripheralScene2"];
         case 2:
-            return [tableView dequeueReusableCellWithIdentifier:@"IRNewPeripheralScene3"];
+            return [tableView dequeueReusableCellWithIdentifier:@"IRPeripheralNameEdit"];
         case 3:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
         case 4:
@@ -173,7 +173,7 @@
             break;
         case 2:
         {
-            IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] initWithNibName:@"IRNewPeripheralScene3ViewController"
+            IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController"
                                                                                                            bundle:resources];
             c.delegate = self;
             IRPeripheral *peripheral = [[IRPeripheral alloc] init];

@@ -11,7 +11,7 @@
 #import "IRNewSignalScene2ViewController.h"
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
-#import "IRNewPeripheralScene3ViewController.h"
+#import "IRPeripheralNameEditViewController.h"
 #import "IRWebViewController.h"
 #import "IRHelper.h"
 
@@ -33,7 +33,7 @@
     }
 
     _viewDidLoad = ^(UIViewController* viewController) {
-        
+
         if ([viewController isKindOfClass:[IRNewSignalScene1ViewController class]] ||
             [viewController isKindOfClass:[IRNewPeripheralScene1ViewController class]]) {
             // bar
@@ -58,7 +58,7 @@
                                   forViewController:viewController
                                      withImageNamed:@"icn_actionbar_back"];
         }
-        else if ([viewController isKindOfClass:[IRNewPeripheralScene3ViewController class]] ||
+        else if ([viewController isKindOfClass:[IRPeripheralNameEditViewController class]] ||
                  [viewController isKindOfClass:[IRNewSignalScene2ViewController class]]) {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;

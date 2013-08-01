@@ -91,9 +91,7 @@
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
-        NSString *text = info[IRViewControllerResultText];
         IRSignal *signal = info[IRViewControllerResultSignal];
-        signal.name = text;
 
         [self.delegate newSignalViewController:self
                              didFinishWithInfo:@{

@@ -8,7 +8,7 @@
 
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
-#import "IRNewPeripheralScene3ViewController.h"
+#import "IRPeripheralNameEditViewController.h"
 #import "IRConst.h"
 #import "IRPeripheral.h"
 #import "IRViewCustomizer.h"
@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
-    
+
     _label.text = @"IRKitデバイスを接続してください";
     self.title = @"Scene 1";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
@@ -83,7 +83,7 @@
         LOG( @"already authorized" );
         // skip to step3 if peripheral
         // remembers me
-        IRNewPeripheralScene3ViewController *c = [[IRNewPeripheralScene3ViewController alloc] initWithNibName:@"IRNewPeripheralScene3ViewController"
+        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController"
                                                                                                        bundle:resources];
         c.delegate = self.delegate;
         c.peripheral = peripheral;

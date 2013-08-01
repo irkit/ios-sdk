@@ -11,7 +11,6 @@
 #import "IRConst.h"
 #import "IRNewPeripheralViewController.h"
 #import "IRNewSignalViewController.h"
-#import "IRPeripheralNameEditViewController.h"
 #import "IRWebViewController.h"
 #import "IRPeripherals.h"
 #import "IRSignals.h"

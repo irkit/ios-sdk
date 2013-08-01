@@ -20,7 +20,7 @@
 
 - (void)loadView {
     LOG_CURRENT_METHOD;
-    
+
     CGRect bounds = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:bounds];
 
@@ -30,10 +30,10 @@
     IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] initWithNibName:@"IRNewPeripheralScene1ViewController"
                                                                                                        bundle:resources];
     first.delegate = self;
-    
+
     _navController = [[UINavigationController alloc] initWithRootViewController:first];
     [view addSubview:_navController.view];
-    
+
     self.view = view;
 }
 
@@ -47,7 +47,7 @@
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-    
+
     // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
     // prevent showing the weird 20px empty zone on top of navigationbar
     // when presented in caller's viewDidLoad
@@ -79,22 +79,7 @@
 - (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController
            didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
-    
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController:self
-                                 didFinishWithInfo:@{
-                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
-         }];    
-    }
-    // shouldnt happen
-}
 
-#pragma mark - IRNewPeripheralScene2ViewControllerDelegate
-
-- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController
-           didFinishWithInfo:(NSDictionary*)info {
-    LOG_CURRENT_METHOD;
-    
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
                                  didFinishWithInfo:@{
@@ -104,22 +89,33 @@
     // shouldnt happen
 }
 
-#pragma mark - IRNewPeripheralScene3ViewControllerDelegate
+#pragma mark - IRNewPeripheralScene2ViewControllerDelegate
 
-- (void)scene3ViewController:(IRNewPeripheralScene3ViewController *)viewController
+- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController
            didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
-    
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
-        NSString *text = info[IRViewControllerResultText];
-        IRPeripheral *peripheral = info[IRViewControllerResultPeripheral];
-        peripheral.customizedName = text;
-        [[IRKit sharedInstance] save];
 
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
                                  didFinishWithInfo:@{
-                IRViewControllerResultType: IRViewControllerResultTypeDone,
-                IRViewControllerResultPeripheral: peripheral
+                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
+         }];
+    }
+    // shouldnt happen
+}
+
+#pragma mark - IRPeripheralNameEditViewControllerDelegate
+
+- (void)scene3ViewController:(IRPeripheralNameEditViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
+        IRPeripheral *peripheral = info[IRViewControllerResultPeripheral];
+        [self.delegate newPeripheralViewController:self
+                                 didFinishWithInfo:@{
+                        IRViewControllerResultType: IRViewControllerResultTypeDone,
+                  IRViewControllerResultPeripheral: peripheral,
          }];
 
     }
