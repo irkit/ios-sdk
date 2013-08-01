@@ -17,7 +17,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uf6-Xc-BLC">
-                                    <color key="backgroundColor" red="1" green="0.29803921570000003" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.20000000000000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="5q6-aM-Vbd"/>
                                     </constraints>
@@ -361,6 +361,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Help" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9o0-KC-5GJ">
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="280" id="dbo-zI-ELv"/>
+                                                        <constraint firstAttribute="height" constant="44" id="fRe-zt-CWt"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.47843137250000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -371,7 +372,6 @@
                                             <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="9o0-KC-5GJ" firstAttribute="trailing" secondItem="05s-pA-KYA" secondAttribute="trailing" type="default" id="0uY-QP-zWX"/>
-                                                <constraint firstItem="9o0-KC-5GJ" firstAttribute="bottom" secondItem="05s-pA-KYA" secondAttribute="bottom" type="default" id="79T-HE-XrM"/>
                                                 <constraint firstItem="Bk8-SF-gP7" firstAttribute="leading" secondItem="05s-pA-KYA" secondAttribute="leading" constant="269" id="iE6-uh-eTy"/>
                                                 <constraint firstItem="Bk8-SF-gP7" firstAttribute="top" secondItem="05s-pA-KYA" secondAttribute="top" constant="14" id="naQ-k8-bPj"/>
                                                 <constraint firstItem="9o0-KC-5GJ" firstAttribute="top" secondItem="05s-pA-KYA" secondAttribute="top" type="default" id="swj-HL-RE7"/>
@@ -380,10 +380,11 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="05s-pA-KYA" firstAttribute="leading" secondItem="BGa-rB-4h5" secondAttribute="leading" constant="12" id="4Qm-m4-k4M"/>
-                                    <constraint firstItem="05s-pA-KYA" firstAttribute="bottom" secondItem="BGa-rB-4h5" secondAttribute="bottom" type="default" id="gx3-YT-5s8"/>
                                     <constraint firstItem="05s-pA-KYA" firstAttribute="centerX" secondItem="BGa-rB-4h5" secondAttribute="centerX" type="default" id="sKb-gn-tUK"/>
+                                    <constraint firstAttribute="bottom" secondItem="05s-pA-KYA" secondAttribute="bottom" constant="1" id="vz0-39-Enx"/>
                                     <constraint firstItem="05s-pA-KYA" firstAttribute="top" secondItem="BGa-rB-4h5" secondAttribute="top" type="default" id="xra-22-z0g"/>
                                 </constraints>
                             </tableViewCell>
@@ -398,6 +399,7 @@
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Open Source" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AmE-fb-Yhe">
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="234-X9-8UY"/>
                                                         <constraint firstAttribute="width" constant="280" id="9fj-kB-rKz"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
@@ -408,7 +410,6 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="AmE-fb-Yhe" firstAttribute="bottom" secondItem="rLz-ku-sSX" secondAttribute="bottom" type="default" id="0hE-Ad-qnC"/>
                                                 <constraint firstItem="1Cz-hE-806" firstAttribute="leading" secondItem="rLz-ku-sSX" secondAttribute="leading" constant="269" id="4Gk-6z-g30"/>
                                                 <constraint firstItem="AmE-fb-Yhe" firstAttribute="trailing" secondItem="rLz-ku-sSX" secondAttribute="trailing" type="default" id="JzW-gY-cxc"/>
                                                 <constraint firstItem="AmE-fb-Yhe" firstAttribute="top" secondItem="rLz-ku-sSX" secondAttribute="top" type="default" id="Tjn-9v-5Uh"/>
@@ -418,11 +419,12 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="rLz-ku-sSX" firstAttribute="top" secondItem="LNk-gf-Ygl" secondAttribute="top" type="default" id="1LI-0X-cX5"/>
                                     <constraint firstItem="rLz-ku-sSX" firstAttribute="leading" secondItem="LNk-gf-Ygl" secondAttribute="leading" constant="12" id="Uoa-kK-Ywh"/>
                                     <constraint firstItem="rLz-ku-sSX" firstAttribute="centerX" secondItem="LNk-gf-Ygl" secondAttribute="centerX" type="default" id="YNP-9t-omK"/>
-                                    <constraint firstItem="rLz-ku-sSX" firstAttribute="bottom" secondItem="LNk-gf-Ygl" secondAttribute="bottom" type="default" id="ftU-ne-stO"/>
+                                    <constraint firstAttribute="bottom" secondItem="rLz-ku-sSX" secondAttribute="bottom" constant="1" id="ddb-6I-Ahc"/>
                                 </constraints>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="Buydevice" rowHeight="44" id="7R2-tp-0tU">
@@ -436,6 +438,7 @@
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Buy Device" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKk-AE-tDb">
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="5iH-iu-3wm"/>
                                                         <constraint firstAttribute="width" constant="280" id="obR-O1-r0V"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
@@ -448,7 +451,6 @@
                                             <constraints>
                                                 <constraint firstItem="yKk-AE-tDb" firstAttribute="trailing" secondItem="hnE-gl-OQ3" secondAttribute="trailing" type="default" id="CHM-b9-Hyu"/>
                                                 <constraint firstItem="fmJ-jV-76B" firstAttribute="leading" secondItem="hnE-gl-OQ3" secondAttribute="leading" constant="269" id="KrT-oZ-rFm"/>
-                                                <constraint firstItem="yKk-AE-tDb" firstAttribute="bottom" secondItem="hnE-gl-OQ3" secondAttribute="bottom" type="default" id="O4I-XV-rSc"/>
                                                 <constraint firstItem="fmJ-jV-76B" firstAttribute="top" secondItem="hnE-gl-OQ3" secondAttribute="top" constant="14" id="WZE-l2-yP8"/>
                                                 <constraint firstItem="yKk-AE-tDb" firstAttribute="top" secondItem="hnE-gl-OQ3" secondAttribute="top" type="default" id="aAH-ia-Jej"/>
                                             </constraints>
@@ -456,10 +458,11 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="hnE-gl-OQ3" firstAttribute="top" secondItem="7R2-tp-0tU" secondAttribute="top" type="default" id="7FA-xE-w3z"/>
                                     <constraint firstItem="hnE-gl-OQ3" firstAttribute="leading" secondItem="7R2-tp-0tU" secondAttribute="leading" constant="12" id="7aF-kJ-Dcu"/>
-                                    <constraint firstItem="hnE-gl-OQ3" firstAttribute="bottom" secondItem="7R2-tp-0tU" secondAttribute="bottom" type="default" id="LRI-2n-DIK"/>
+                                    <constraint firstAttribute="bottom" secondItem="hnE-gl-OQ3" secondAttribute="bottom" constant="1" id="Isv-Sq-1x1"/>
                                     <constraint firstItem="hnE-gl-OQ3" firstAttribute="centerX" secondItem="7R2-tp-0tU" secondAttribute="centerX" type="default" id="rgo-uW-Ybq"/>
                                 </constraints>
                             </tableViewCell>
@@ -536,8 +539,6 @@
         <class className="SRSettingsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SRSettingsViewController.h"/>
             <relationships>
-                <relationship kind="action" name="cancelButtonTouched:"/>
-                <relationship kind="action" name="versionButtonTouched:"/>
                 <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
             </relationships>
         </class>
