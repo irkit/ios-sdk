@@ -41,6 +41,8 @@
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
+
+    [self editingChanged:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -51,28 +53,37 @@
 - (void) processTextField {
     LOG( @"text: %@", _textField.text );
 
-    if (! _textField.text) {
+    if (! [self isTextValid]) {
         return;
+    }
+
+    [self.delegate scene2ViewController:self
+                      didFinishWithInfo:@{
+             IRViewControllerResultType: IRViewControllerResultTypeDone,
+             IRViewControllerResultText: _textField.text,
+           IRViewControllerResultSignal: _signal,
+     }];
+}
+
+
+- (BOOL) isTextValid {
+    if (! _textField.text) {
+        return NO;
     }
 
     NSRegularExpression *regex = [NSRegularExpression
                                   regularExpressionWithPattern:@"^\s*$"
-                                                       options:nil
-                                                         error:nil];
+                                  options:nil
+                                  error:nil];
     NSUInteger matches = [regex numberOfMatchesInString:_textField.text
                                                 options:nil
                                                   range:NSMakeRange(0,_textField.text.length)];
 
     if (matches > 0) {
         // empty or whitespace only
-        return;
+        return NO;
     }
-
-    [self.delegate scene2ViewController:self
-                      didFinishWithInfo:@{
-        IRViewControllerResultType: IRViewControllerResultTypeDone,
-        IRViewControllerResultText: _textField.text
-     }];
+    return YES;
 }
 
 #pragma mark - UI events
@@ -88,6 +99,12 @@
 {
     LOG(@"text: %@", self.textField.text);
     [self processTextField];
+}
+
+- (IBAction)editingChanged:(id)sender {
+    BOOL valid = [self isTextValid];
+    self.navigationItem.rightBarButtonItem.enabled = valid;
+    self.textField.textColor = valid ? [IRViewCustomizer activeFontColor] : [IRViewCustomizer inactiveFontColor];
 }
 
 #pragma mark - UITextFieldDelegate

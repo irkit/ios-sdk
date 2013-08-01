@@ -194,6 +194,10 @@
             IRNewSignalScene2ViewController *c = [[IRNewSignalScene2ViewController alloc] initWithNibName:@"IRNewSignalScene2ViewController"
                                                                                                    bundle:resources];
             c.delegate = self;
+            unsigned short data[10] = { 100,100,100,100,100,100,100,100,100,100 };
+            NSData *irdata = [NSData dataWithBytes:data length:10];
+            IRSignal *signal = [[IRSignal alloc] initWithData: irdata];
+            c.signal = signal;
 
             [self.navigationController pushViewController:c animated:YES];
         }

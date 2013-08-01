@@ -67,16 +67,18 @@
             // custom done button
             UIBarButtonItem *original = viewController.navigationItem.rightBarButtonItem;
 
-            UIImage *inactiveImage = [IRHelper imageWithColor:[IRViewCustomizer inactiveButtonBackgroundColor]];
-            UIImage *activeImage   = [IRHelper imageWithColor:[IRViewCustomizer activeButtonBackgroundColor]];
+            UIImage *inactiveImage = [IRHelper imageInResourceNamed:@"btn_navibar_disable"];
+            UIImage *activeImage   = [IRHelper imageInResourceNamed:@"btn_navibar"];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.titleLabel.text = @"Done";
-            button.titleLabel.textColor = [IRViewCustomizer fontColor];
+            [button setTitle:@"Done" forState:UIControlStateNormal];
+            [button setTitleColor:[IRViewCustomizer activeFontColor] forState:UIControlStateNormal];
+            [button setTitleColor:[IRViewCustomizer inactiveFontColor] forState:UIControlStateDisabled];
+            button.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:12.];
             [button setBackgroundImage:inactiveImage
                               forState:UIControlStateDisabled];
             [button setBackgroundImage:activeImage
                               forState:UIControlStateNormal];
-            button.frame = (CGRect){ 0, 0, 45, 26 };
+            button.frame = (CGRect){ 0, 0, 45, 30 };
             [button setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,0)]; // move the button **px right
             [button addTarget:viewController
                        action:original.action
@@ -91,8 +93,12 @@
     return self;
 }
 
-+ (UIColor*) fontColor {
++ (UIColor*) activeFontColor {
     return [UIColor whiteColor];
+}
+
++ (UIColor*) inactiveFontColor {
+    return [UIColor colorWithRed:0x79/255. green:0x7a/255. blue:0x80/255. alpha:1.0];
 }
 
 + (UIColor*) inactiveButtonBackgroundColor {
