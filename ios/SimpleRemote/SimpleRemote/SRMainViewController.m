@@ -306,6 +306,24 @@
                 [sheet addButtonWithTitle:@"Test Send" handler:^{
                     [signal sendWithCompletion:^(NSError *error) {
                         LOG( @"sent: %@", error );
+                        if (error) {
+                            NSString *message;
+                            if ([error.domain isEqualToString:@"CBErrorDomain"] && (error.code == 0)) {
+                                // IRKit's AVR returns error attributesUserWriteResponse
+                                message = @"IRKit error, please restart app and try again";
+                            }
+                            else {
+                                // unknown
+                                message = error.description;
+                            }
+                            // TODO wrap this in IRKit
+                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:message
+                                                                                message:nil
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                            [alertView show];
+                        }
                     }];
                 }];
                 [sheet addButtonWithTitle:@"Remove" handler:^{
