@@ -10,13 +10,15 @@
 #import "AFNetworking.h"
 #import "SRSignals.h"
 
+#define SRURL_BASE @"http://getirkit.appspot.com"
+
 @implementation SRHelper
 
 + (void)createIRSignalsIcon:(UIImage *)image
           completionHandler:(void (^)(NSHTTPURLResponse *, NSDictionary *, NSError *))completion {
     LOG_CURRENT_METHOD;
 
-    NSURL *url = [NSURL URLWithString:@"http://localhost:8080"];
+    NSURL *url = [NSURL URLWithString:SRURL_BASE];
 
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST"
