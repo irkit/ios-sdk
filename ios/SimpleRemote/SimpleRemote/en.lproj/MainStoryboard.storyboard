@@ -326,6 +326,9 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OPZ-4K-VwF">
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="+ Add New Peripheral" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgu-4n-LBa">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="46" id="nbV-rI-YQ7"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                     <color key="textColor" red="0.47450980390000003" green="0.47843137250000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -333,20 +336,30 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="wgu-4n-LBa" firstAttribute="bottom" secondItem="OPZ-4K-VwF" secondAttribute="bottom" type="default" id="PxA-P2-eAa"/>
                                                 <constraint firstItem="wgu-4n-LBa" firstAttribute="top" secondItem="OPZ-4K-VwF" secondAttribute="top" type="default" id="S1Q-EN-G4P"/>
                                                 <constraint firstItem="wgu-4n-LBa" firstAttribute="leading" secondItem="OPZ-4K-VwF" secondAttribute="leading" type="default" id="iKe-jc-8kd"/>
                                                 <constraint firstItem="wgu-4n-LBa" firstAttribute="trailing" secondItem="OPZ-4K-VwF" secondAttribute="trailing" type="default" id="oUa-qM-lg6"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gU-Dg-i5b">
+                                            <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" type="user" id="BeX-ek-x6i"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.16862745098039217" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="OPZ-4K-VwF" firstAttribute="bottom" secondItem="LJm-bR-ebX" secondAttribute="bottom" type="user" id="1dV-2A-gYO"/>
-                                    <constraint firstItem="OPZ-4K-VwF" firstAttribute="top" secondItem="LJm-bR-ebX" secondAttribute="top" type="user" id="JU4-kK-Kzg"/>
-                                    <constraint firstItem="OPZ-4K-VwF" firstAttribute="leading" secondItem="LJm-bR-ebX" secondAttribute="leading" constant="12" type="user" id="LtE-g7-CtO"/>
-                                    <constraint firstAttribute="trailing" secondItem="OPZ-4K-VwF" secondAttribute="trailing" constant="12" type="user" id="QP4-BP-Uuq"/>
+                                    <constraint firstItem="0gU-Dg-i5b" firstAttribute="leading" secondItem="OPZ-4K-VwF" secondAttribute="leading" type="default" id="3eu-C8-NCu"/>
+                                    <constraint firstItem="OPZ-4K-VwF" firstAttribute="leading" secondItem="LJm-bR-ebX" secondAttribute="leading" constant="12" type="user" id="6ue-lA-4rA"/>
+                                    <constraint firstItem="OPZ-4K-VwF" firstAttribute="top" secondItem="LJm-bR-ebX" secondAttribute="top" type="user" id="Lup-Xi-BUT"/>
+                                    <constraint firstItem="0gU-Dg-i5b" firstAttribute="trailing" secondItem="OPZ-4K-VwF" secondAttribute="trailing" type="default" id="aSl-gZ-w13"/>
+                                    <constraint firstItem="OPZ-4K-VwF" firstAttribute="bottom" secondItem="LJm-bR-ebX" secondAttribute="bottom" type="default" id="cFJ-Nr-ug9"/>
+                                    <constraint firstItem="0gU-Dg-i5b" firstAttribute="bottom" secondItem="LJm-bR-ebX" secondAttribute="bottom" type="default" id="vgL-rh-yJR"/>
+                                    <constraint firstAttribute="trailing" secondItem="OPZ-4K-VwF" secondAttribute="trailing" constant="12" type="user" id="xCk-4b-ode"/>
                                 </constraints>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="Help" rowHeight="44" id="BGa-rB-4h5">
@@ -377,14 +390,24 @@
                                                 <constraint firstItem="Bk8-SF-gP7" firstAttribute="centerY" secondItem="05s-pA-KYA" secondAttribute="centerY" type="default" id="wdc-6y-jrO"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVL-IJ-shy">
+                                            <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" type="user" id="hSB-AX-tlb"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="UVL-IJ-shy" firstAttribute="bottom" secondItem="BGa-rB-4h5" secondAttribute="bottom" type="default" id="5nD-z5-d1U"/>
                                     <constraint firstAttribute="trailing" secondItem="05s-pA-KYA" secondAttribute="trailing" constant="12" type="user" id="ZI2-b1-v9J"/>
                                     <constraint firstItem="05s-pA-KYA" firstAttribute="leading" secondItem="BGa-rB-4h5" secondAttribute="leading" constant="12" type="user" id="bst-us-m9O"/>
-                                    <constraint firstAttribute="bottom" secondItem="05s-pA-KYA" secondAttribute="bottom" constant="1" id="vz0-39-Enx"/>
+                                    <constraint firstItem="05s-pA-KYA" firstAttribute="bottom" secondItem="BGa-rB-4h5" secondAttribute="bottom" type="default" id="cGT-Iv-SnT"/>
+                                    <constraint firstItem="UVL-IJ-shy" firstAttribute="leading" secondItem="05s-pA-KYA" secondAttribute="leading" type="default" id="gKG-T4-KVX"/>
+                                    <constraint firstItem="UVL-IJ-shy" firstAttribute="trailing" secondItem="05s-pA-KYA" secondAttribute="trailing" type="default" id="wh8-ad-f9q"/>
                                     <constraint firstItem="05s-pA-KYA" firstAttribute="top" secondItem="BGa-rB-4h5" secondAttribute="top" type="default" id="xra-22-z0g"/>
                                 </constraints>
                             </tableViewCell>
@@ -416,6 +439,13 @@
                                                 <constraint firstItem="AmE-fb-Yhe" firstAttribute="top" secondItem="rLz-ku-sSX" secondAttribute="top" type="default" id="Tjn-9v-5Uh"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ek7-j1-9hA">
+                                            <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" type="user" id="LE7-pn-a0L"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -423,8 +453,11 @@
                                 <constraints>
                                     <constraint firstItem="rLz-ku-sSX" firstAttribute="top" secondItem="LNk-gf-Ygl" secondAttribute="top" type="default" id="1LI-0X-cX5"/>
                                     <constraint firstItem="rLz-ku-sSX" firstAttribute="leading" secondItem="LNk-gf-Ygl" secondAttribute="leading" constant="12" type="user" id="Fyt-gE-P9Q"/>
-                                    <constraint firstAttribute="bottom" secondItem="rLz-ku-sSX" secondAttribute="bottom" constant="1" id="ddb-6I-Ahc"/>
+                                    <constraint firstItem="rLz-ku-sSX" firstAttribute="bottom" secondItem="LNk-gf-Ygl" secondAttribute="bottom" type="default" id="OGr-6N-DUy"/>
+                                    <constraint firstItem="ek7-j1-9hA" firstAttribute="trailing" secondItem="rLz-ku-sSX" secondAttribute="trailing" type="default" id="ctk-s4-FHV"/>
                                     <constraint firstAttribute="trailing" secondItem="rLz-ku-sSX" secondAttribute="trailing" constant="12" type="user" id="mPp-qs-2mV"/>
+                                    <constraint firstItem="ek7-j1-9hA" firstAttribute="bottom" secondItem="LNk-gf-Ygl" secondAttribute="bottom" type="default" id="uhb-h6-zAk"/>
+                                    <constraint firstItem="ek7-j1-9hA" firstAttribute="leading" secondItem="rLz-ku-sSX" secondAttribute="leading" type="default" id="zOa-jY-oyV"/>
                                 </constraints>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="Buydevice" rowHeight="44" id="7R2-tp-0tU">
@@ -453,6 +486,13 @@
                                                 <constraint firstItem="fmJ-jV-76B" firstAttribute="centerY" secondItem="yKk-AE-tDb" secondAttribute="centerY" type="default" id="fW1-hU-bbz"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5y-11-lp3">
+                                            <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" type="user" id="Pw6-fJ-VQ7"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -460,8 +500,11 @@
                                 <constraints>
                                     <constraint firstItem="hnE-gl-OQ3" firstAttribute="bottom" secondItem="7R2-tp-0tU" secondAttribute="bottom" type="default" id="5cl-iB-Wp9"/>
                                     <constraint firstItem="hnE-gl-OQ3" firstAttribute="top" secondItem="7R2-tp-0tU" secondAttribute="top" type="default" id="7FA-xE-w3z"/>
+                                    <constraint firstItem="U5y-11-lp3" firstAttribute="bottom" secondItem="7R2-tp-0tU" secondAttribute="bottom" type="default" id="7MQ-i7-B0q"/>
                                     <constraint firstAttribute="trailing" secondItem="hnE-gl-OQ3" secondAttribute="trailing" constant="12" type="user" id="JY9-1t-wLX"/>
+                                    <constraint firstItem="U5y-11-lp3" firstAttribute="trailing" secondItem="hnE-gl-OQ3" secondAttribute="trailing" type="default" id="Lz9-Ds-paO"/>
                                     <constraint firstItem="hnE-gl-OQ3" firstAttribute="leading" secondItem="7R2-tp-0tU" secondAttribute="leading" constant="12" type="user" id="dmh-Xm-js6"/>
+                                    <constraint firstItem="U5y-11-lp3" firstAttribute="leading" secondItem="hnE-gl-OQ3" secondAttribute="leading" type="default" id="si8-iO-q3N"/>
                                 </constraints>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SettingsHeader1" rowHeight="40" id="L42-S3-URR">
@@ -601,6 +644,7 @@
         <class className="SRSettingsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SRSettingsViewController.h"/>
             <relationships>
+                <relationship kind="action" name="cancelButtonTouched:"/>
                 <relationship kind="action" name="versionButtonTouched:"/>
                 <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
             </relationships>
