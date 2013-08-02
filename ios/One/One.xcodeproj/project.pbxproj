@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7155BBBEDD9A4019A91ACFAD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185857DF7F994520AB0E59D6 /* libPods.a */; };
-		C713AACF179E8636005AF8AE /* SRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C713AACE179E8636005AF8AE /* SRHelper.m */; };
+		C713AACF179E8636005AF8AE /* ONHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C713AACE179E8636005AF8AE /* ONHelper.m */; };
 		C73503F117A021070057D51B /* icn_actionbar_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503DD17A021060057D51B /* icn_actionbar_back.png */; };
 		C73503F217A021070057D51B /* icn_actionbar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503DE17A021060057D51B /* icn_actionbar_back@2x.png */; };
 		C73503F317A021070057D51B /* icn_actionbar_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503DF17A021060057D51B /* icn_actionbar_camera@2x.png */; };
@@ -34,29 +34,29 @@
 		C76CFF5917462E0800F972B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
 		C76CFF5F17462E0800F972B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF5D17462E0800F972B7 /* InfoPlist.strings */; };
 		C76CFF6117462E0800F972B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF6017462E0800F972B7 /* main.m */; };
-		C76CFF6517462E0800F972B7 /* SRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF6417462E0800F972B7 /* SRAppDelegate.m */; };
+		C76CFF6517462E0800F972B7 /* ONAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF6417462E0800F972B7 /* ONAppDelegate.m */; };
 		C76CFF6717462E0800F972B7 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6617462E0800F972B7 /* Default.png */; };
 		C76CFF6917462E0800F972B7 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6817462E0800F972B7 /* Default@2x.png */; };
 		C76CFF6B17462E0800F972B7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6A17462E0800F972B7 /* Default-568h@2x.png */; };
 		C76CFF6E17462E0800F972B7 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */; };
-		C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF7017462E0800F972B7 /* SRMainViewController.m */; };
+		C76CFF7117462E0800F972B7 /* ONMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF7017462E0800F972B7 /* ONMainViewController.m */; };
 		C76CFF7C17462E0800F972B7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF7B17462E0800F972B7 /* SenTestingKit.framework */; };
 		C76CFF7D17462E0800F972B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5417462E0800F972B7 /* UIKit.framework */; };
 		C76CFF7E17462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
 		C76CFF8617462E0800F972B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C76CFF8417462E0800F972B7 /* InfoPlist.strings */; };
-		C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */; };
+		C76CFF8917462E0800F972B7 /* ONTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CFF8817462E0800F972B7 /* ONTests.m */; };
 		C78E3A04179F9D9A009AA9AC /* icn_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A02179F9D9A009AA9AC /* icn_arrow.png */; };
 		C78E3A05179F9D9A009AA9AC /* icn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A03179F9D9A009AA9AC /* icn_arrow@2x.png */; };
 		C78E3A08179FA950009AA9AC /* icn_actionbar_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A06179FA950009AA9AC /* icn_actionbar_menu.png */; };
 		C78E3A09179FA950009AA9AC /* icn_actionbar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C78E3A07179FA950009AA9AC /* icn_actionbar_menu@2x.png */; };
 		C79DE3CB176F27870088679E /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3CA176F27870088679E /* IRKitResources.bundle */; };
-		C7A796CB178C4F4A00E15608 /* SRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */; };
-		C7BAB39E17A20DDA0031F33F /* SRURLQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB39D17A20DDA0031F33F /* SRURLQueryTests.m */; };
-		C7BAB3A117A21D8B0031F33F /* SRURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB3A017A21D8B0031F33F /* SRURLHandler.m */; };
+		C7A796CB178C4F4A00E15608 /* ONSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A796CA178C4F4A00E15608 /* ONSettingsViewController.m */; };
+		C7BAB39E17A20DDA0031F33F /* ONURLQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB39D17A20DDA0031F33F /* ONURLQueryTests.m */; };
+		C7BAB3A117A21D8B0031F33F /* ONURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB3A017A21D8B0031F33F /* ONURLHandler.m */; };
 		C7BAB3A217A245610031F33F /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
 		C7BAB3A317A245870031F33F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB02317467D6800125BCB /* CoreBluetooth.framework */; };
 		C7BAB3A417A245EA0031F33F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
-		C7BAB3A717A2599A0031F33F /* SRSignals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB3A617A2599A0031F33F /* SRSignals.m */; };
+		C7BAB3A717A2599A0031F33F /* ONSignals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB3A617A2599A0031F33F /* ONSignals.m */; };
 		C7BAB3A917A274200031F33F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7BAB3A817A274200031F33F /* SystemConfiguration.framework */; };
 		C7BAB3AB17A274380031F33F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7BAB3AA17A274380031F33F /* MobileCoreServices.framework */; };
 		C7C0DB8417825B9F00AECAC2 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C0DB8217825B9F00AECAC2 /* icon@2x.png */; };
@@ -72,14 +72,14 @@
 			containerPortal = C76CFF4917462E0800F972B7 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C76CFF5017462E0800F972B7;
-			remoteInfo = SimpleRemote;
+			remoteInfo = One;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		185857DF7F994520AB0E59D6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C713AACD179E8636005AF8AE /* SRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRHelper.h; sourceTree = "<group>"; };
-		C713AACE179E8636005AF8AE /* SRHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRHelper.m; sourceTree = "<group>"; };
+		C713AACD179E8636005AF8AE /* ONHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONHelper.h; sourceTree = "<group>"; };
+		C713AACE179E8636005AF8AE /* ONHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONHelper.m; sourceTree = "<group>"; };
 		C73503DD17A021060057D51B /* icn_actionbar_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_back.png; sourceTree = "<group>"; };
 		C73503DE17A021060057D51B /* icn_actionbar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_back@2x.png"; sourceTree = "<group>"; };
 		C73503DF17A021060057D51B /* icn_actionbar_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_camera@2x.png"; sourceTree = "<group>"; };
@@ -100,41 +100,41 @@
 		C73503EE17A021070057D51B /* icn_tabbar_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_tabbar_icon@2x.png"; sourceTree = "<group>"; };
 		C73503EF17A021070057D51B /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		C73503F017A021070057D51B /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
-		C76CFF5117462E0800F972B7 /* SimpleRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76CFF5117462E0800F972B7 /* One.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = One.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CFF5417462E0800F972B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C76CFF5617462E0800F972B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C76CFF5817462E0800F972B7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C76CFF5C17462E0800F972B7 /* SimpleRemote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleRemote-Info.plist"; sourceTree = "<group>"; };
+		C76CFF5C17462E0800F972B7 /* One-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "One-Info.plist"; sourceTree = "<group>"; };
 		C76CFF5E17462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C76CFF6017462E0800F972B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C76CFF6217462E0800F972B7 /* SimpleRemote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleRemote-Prefix.pch"; sourceTree = "<group>"; };
-		C76CFF6317462E0800F972B7 /* SRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRAppDelegate.h; sourceTree = "<group>"; };
-		C76CFF6417462E0800F972B7 /* SRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRAppDelegate.m; sourceTree = "<group>"; };
+		C76CFF6217462E0800F972B7 /* One-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "One-Prefix.pch"; sourceTree = "<group>"; };
+		C76CFF6317462E0800F972B7 /* ONAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ONAppDelegate.h; sourceTree = "<group>"; };
+		C76CFF6417462E0800F972B7 /* ONAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ONAppDelegate.m; sourceTree = "<group>"; };
 		C76CFF6617462E0800F972B7 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C76CFF6817462E0800F972B7 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		C76CFF6A17462E0800F972B7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C76CFF6D17462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		C76CFF6F17462E0800F972B7 /* SRMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SRMainViewController.h; sourceTree = "<group>"; };
-		C76CFF7017462E0800F972B7 /* SRMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRMainViewController.m; sourceTree = "<group>"; };
-		C76CFF7A17462E0800F972B7 /* SimpleRemoteTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleRemoteTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76CFF6F17462E0800F972B7 /* ONMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ONMainViewController.h; sourceTree = "<group>"; };
+		C76CFF7017462E0800F972B7 /* ONMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ONMainViewController.m; sourceTree = "<group>"; };
+		C76CFF7A17462E0800F972B7 /* OneTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OneTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CFF7B17462E0800F972B7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		C76CFF8317462E0800F972B7 /* SimpleRemoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SimpleRemoteTests-Info.plist"; sourceTree = "<group>"; };
+		C76CFF8317462E0800F972B7 /* OneTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OneTests-Info.plist"; sourceTree = "<group>"; };
 		C76CFF8517462E0800F972B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimpleRemoteTests.h; sourceTree = "<group>"; };
-		C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleRemoteTests.m; sourceTree = "<group>"; };
+		C76CFF8717462E0800F972B7 /* ONTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ONTests.h; sourceTree = "<group>"; };
+		C76CFF8817462E0800F972B7 /* ONTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ONTests.m; sourceTree = "<group>"; };
 		C78E3A02179F9D9A009AA9AC /* icn_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_arrow.png; sourceTree = "<group>"; };
 		C78E3A03179F9D9A009AA9AC /* icn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow@2x.png"; sourceTree = "<group>"; };
 		C78E3A06179FA950009AA9AC /* icn_actionbar_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_menu.png; sourceTree = "<group>"; };
 		C78E3A07179FA950009AA9AC /* icn_actionbar_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_menu@2x.png"; sourceTree = "<group>"; };
 		C79DE3CA176F27870088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7A796C9178C4F4A00E15608 /* SRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSettingsViewController.h; sourceTree = "<group>"; };
-		C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSettingsViewController.m; sourceTree = "<group>"; };
-		C7BAB39C17A20DDA0031F33F /* SRURLQueryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRURLQueryTests.h; sourceTree = "<group>"; };
-		C7BAB39D17A20DDA0031F33F /* SRURLQueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRURLQueryTests.m; sourceTree = "<group>"; };
-		C7BAB39F17A21D8B0031F33F /* SRURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRURLHandler.h; sourceTree = "<group>"; };
-		C7BAB3A017A21D8B0031F33F /* SRURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRURLHandler.m; sourceTree = "<group>"; };
-		C7BAB3A517A259990031F33F /* SRSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSignals.h; sourceTree = "<group>"; };
-		C7BAB3A617A2599A0031F33F /* SRSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSignals.m; sourceTree = "<group>"; };
+		C7A796C9178C4F4A00E15608 /* ONSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONSettingsViewController.h; sourceTree = "<group>"; };
+		C7A796CA178C4F4A00E15608 /* ONSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONSettingsViewController.m; sourceTree = "<group>"; };
+		C7BAB39C17A20DDA0031F33F /* ONURLQueryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONURLQueryTests.h; sourceTree = "<group>"; };
+		C7BAB39D17A20DDA0031F33F /* ONURLQueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONURLQueryTests.m; sourceTree = "<group>"; };
+		C7BAB39F17A21D8B0031F33F /* ONURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONURLHandler.h; sourceTree = "<group>"; };
+		C7BAB3A017A21D8B0031F33F /* ONURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONURLHandler.m; sourceTree = "<group>"; };
+		C7BAB3A517A259990031F33F /* ONSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONSignals.h; sourceTree = "<group>"; };
+		C7BAB3A617A2599A0031F33F /* ONSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONSignals.m; sourceTree = "<group>"; };
 		C7BAB3A817A274200031F33F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C7BAB3AA17A274380031F33F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C7C0DB8217825B9F00AECAC2 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -217,8 +217,8 @@
 		C76CFF4817462E0800F972B7 = {
 			isa = PBXGroup;
 			children = (
-				C76CFF5A17462E0800F972B7 /* SimpleRemote */,
-				C76CFF8117462E0800F972B7 /* SimpleRemoteTests */,
+				C76CFF5A17462E0800F972B7 /* One */,
+				C76CFF8117462E0800F972B7 /* OneTests */,
 				C76CFF5317462E0800F972B7 /* Frameworks */,
 				C76CFF5217462E0800F972B7 /* Products */,
 				F43C45BF1E2043DB92F41E70 /* Pods.xcconfig */,
@@ -228,8 +228,8 @@
 		C76CFF5217462E0800F972B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C76CFF5117462E0800F972B7 /* SimpleRemote.app */,
-				C76CFF7A17462E0800F972B7 /* SimpleRemoteTests.octest */,
+				C76CFF5117462E0800F972B7 /* One.app */,
+				C76CFF7A17462E0800F972B7 /* OneTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,26 +251,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C76CFF5A17462E0800F972B7 /* SimpleRemote */ = {
+		C76CFF5A17462E0800F972B7 /* One */ = {
 			isa = PBXGroup;
 			children = (
 				C735040517A021200057D51B /* Images */,
-				C76CFF6317462E0800F972B7 /* SRAppDelegate.h */,
-				C76CFF6417462E0800F972B7 /* SRAppDelegate.m */,
-				C76CFF6F17462E0800F972B7 /* SRMainViewController.h */,
-				C76CFF7017462E0800F972B7 /* SRMainViewController.m */,
-				C7A796C9178C4F4A00E15608 /* SRSettingsViewController.h */,
-				C7A796CA178C4F4A00E15608 /* SRSettingsViewController.m */,
-				C713AACD179E8636005AF8AE /* SRHelper.h */,
-				C713AACE179E8636005AF8AE /* SRHelper.m */,
-				C7BAB3A517A259990031F33F /* SRSignals.h */,
-				C7BAB3A617A2599A0031F33F /* SRSignals.m */,
-				C7BAB39F17A21D8B0031F33F /* SRURLHandler.h */,
-				C7BAB3A017A21D8B0031F33F /* SRURLHandler.m */,
+				C76CFF6317462E0800F972B7 /* ONAppDelegate.h */,
+				C76CFF6417462E0800F972B7 /* ONAppDelegate.m */,
+				C76CFF6F17462E0800F972B7 /* ONMainViewController.h */,
+				C76CFF7017462E0800F972B7 /* ONMainViewController.m */,
+				C7A796C9178C4F4A00E15608 /* ONSettingsViewController.h */,
+				C7A796CA178C4F4A00E15608 /* ONSettingsViewController.m */,
+				C713AACD179E8636005AF8AE /* ONHelper.h */,
+				C713AACE179E8636005AF8AE /* ONHelper.m */,
+				C7BAB3A517A259990031F33F /* ONSignals.h */,
+				C7BAB3A617A2599A0031F33F /* ONSignals.m */,
+				C7BAB39F17A21D8B0031F33F /* ONURLHandler.h */,
+				C7BAB3A017A21D8B0031F33F /* ONURLHandler.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
 				C76CFF5B17462E0800F972B7 /* Supporting Files */,
 			);
-			path = SimpleRemote;
+			name = One;
+			path = One;
 			sourceTree = "<group>";
 		};
 		C76CFF5B17462E0800F972B7 /* Supporting Files */ = {
@@ -278,30 +279,31 @@
 			children = (
 				C7FAB00E17464AB900125BCB /* Log.m */,
 				C7FAB00B1746481700125BCB /* Log.h */,
-				C76CFF5C17462E0800F972B7 /* SimpleRemote-Info.plist */,
+				C76CFF5C17462E0800F972B7 /* One-Info.plist */,
 				C76CFF5D17462E0800F972B7 /* InfoPlist.strings */,
 				C76CFF6017462E0800F972B7 /* main.m */,
-				C76CFF6217462E0800F972B7 /* SimpleRemote-Prefix.pch */,
+				C76CFF6217462E0800F972B7 /* One-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C76CFF8117462E0800F972B7 /* SimpleRemoteTests */ = {
+		C76CFF8117462E0800F972B7 /* OneTests */ = {
 			isa = PBXGroup;
 			children = (
-				C76CFF8717462E0800F972B7 /* SimpleRemoteTests.h */,
-				C76CFF8817462E0800F972B7 /* SimpleRemoteTests.m */,
-				C7BAB39C17A20DDA0031F33F /* SRURLQueryTests.h */,
-				C7BAB39D17A20DDA0031F33F /* SRURLQueryTests.m */,
+				C76CFF8717462E0800F972B7 /* ONTests.h */,
+				C76CFF8817462E0800F972B7 /* ONTests.m */,
+				C7BAB39C17A20DDA0031F33F /* ONURLQueryTests.h */,
+				C7BAB39D17A20DDA0031F33F /* ONURLQueryTests.m */,
 				C76CFF8217462E0800F972B7 /* Supporting Files */,
 			);
-			path = SimpleRemoteTests;
+			name = OneTests;
+			path = OneTests;
 			sourceTree = "<group>";
 		};
 		C76CFF8217462E0800F972B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C76CFF8317462E0800F972B7 /* SimpleRemoteTests-Info.plist */,
+				C76CFF8317462E0800F972B7 /* OneTests-Info.plist */,
 				C76CFF8417462E0800F972B7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -310,9 +312,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C76CFF5017462E0800F972B7 /* SimpleRemote */ = {
+		C76CFF5017462E0800F972B7 /* One */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C76CFF8C17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemote" */;
+			buildConfigurationList = C76CFF8C17462E0800F972B7 /* Build configuration list for PBXNativeTarget "One" */;
 			buildPhases = (
 				F7E382FE4DAE4B449260F45C /* Check Pods Manifest.lock */,
 				C76CFF4D17462E0800F972B7 /* Sources */,
@@ -324,14 +326,14 @@
 			);
 			dependencies = (
 			);
-			name = SimpleRemote;
-			productName = SimpleRemote;
-			productReference = C76CFF5117462E0800F972B7 /* SimpleRemote.app */;
+			name = One;
+			productName = One;
+			productReference = C76CFF5117462E0800F972B7 /* One.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C76CFF7917462E0800F972B7 /* SimpleRemoteTests */ = {
+		C76CFF7917462E0800F972B7 /* OneTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C76CFF8F17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemoteTests" */;
+			buildConfigurationList = C76CFF8F17462E0800F972B7 /* Build configuration list for PBXNativeTarget "OneTests" */;
 			buildPhases = (
 				C76CFF7517462E0800F972B7 /* Sources */,
 				C76CFF7617462E0800F972B7 /* Frameworks */,
@@ -343,9 +345,9 @@
 			dependencies = (
 				C76CFF8017462E0800F972B7 /* PBXTargetDependency */,
 			);
-			name = SimpleRemoteTests;
-			productName = SimpleRemoteTests;
-			productReference = C76CFF7A17462E0800F972B7 /* SimpleRemoteTests.octest */;
+			name = OneTests;
+			productName = OneTests;
+			productReference = C76CFF7A17462E0800F972B7 /* OneTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -358,7 +360,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "KAYAC Inc.";
 			};
-			buildConfigurationList = C76CFF4C17462E0800F972B7 /* Build configuration list for PBXProject "SimpleRemote" */;
+			buildConfigurationList = C76CFF4C17462E0800F972B7 /* Build configuration list for PBXProject "One" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -370,8 +372,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C76CFF5017462E0800F972B7 /* SimpleRemote */,
-				C76CFF7917462E0800F972B7 /* SimpleRemoteTests */,
+				C76CFF5017462E0800F972B7 /* One */,
+				C76CFF7917462E0800F972B7 /* OneTests */,
 			);
 		};
 /* End PBXProject section */
@@ -476,13 +478,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C76CFF6117462E0800F972B7 /* main.m in Sources */,
-				C76CFF6517462E0800F972B7 /* SRAppDelegate.m in Sources */,
-				C76CFF7117462E0800F972B7 /* SRMainViewController.m in Sources */,
+				C76CFF6517462E0800F972B7 /* ONAppDelegate.m in Sources */,
+				C76CFF7117462E0800F972B7 /* ONMainViewController.m in Sources */,
 				C7FAB00F17464ABA00125BCB /* Log.m in Sources */,
-				C7A796CB178C4F4A00E15608 /* SRSettingsViewController.m in Sources */,
-				C713AACF179E8636005AF8AE /* SRHelper.m in Sources */,
-				C7BAB3A117A21D8B0031F33F /* SRURLHandler.m in Sources */,
-				C7BAB3A717A2599A0031F33F /* SRSignals.m in Sources */,
+				C7A796CB178C4F4A00E15608 /* ONSettingsViewController.m in Sources */,
+				C713AACF179E8636005AF8AE /* ONHelper.m in Sources */,
+				C7BAB3A117A21D8B0031F33F /* ONURLHandler.m in Sources */,
+				C7BAB3A717A2599A0031F33F /* ONSignals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,8 +492,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C76CFF8917462E0800F972B7 /* SimpleRemoteTests.m in Sources */,
-				C7BAB39E17A20DDA0031F33F /* SRURLQueryTests.m in Sources */,
+				C76CFF8917462E0800F972B7 /* ONTests.m in Sources */,
+				C7BAB39E17A20DDA0031F33F /* ONURLQueryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +502,7 @@
 /* Begin PBXTargetDependency section */
 		C76CFF8017462E0800F972B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C76CFF5017462E0800F972B7 /* SimpleRemote */;
+			target = C76CFF5017462E0800F972B7 /* One */;
 			targetProxy = C76CFF7F17462E0800F972B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -594,10 +596,10 @@
 			baseConfigurationReference = F43C45BF1E2043DB92F41E70 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
-				INFOPLIST_FILE = "SimpleRemote/SimpleRemote-Info.plist";
+				GCC_PREFIX_HEADER = "One/One-Prefix.pch";
+				INFOPLIST_FILE = "One/One-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = One;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -607,10 +609,10 @@
 			baseConfigurationReference = F43C45BF1E2043DB92F41E70 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
-				INFOPLIST_FILE = "SimpleRemote/SimpleRemote-Info.plist";
+				GCC_PREFIX_HEADER = "One/One-Prefix.pch";
+				INFOPLIST_FILE = "One/One-Info.plist";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = One;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -618,15 +620,15 @@
 		C76CFF9017462E0800F972B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SimpleRemote.app/SimpleRemote";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/One.app/One";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
-				INFOPLIST_FILE = "SimpleRemoteTests/SimpleRemoteTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "One/One-Prefix.pch";
+				INFOPLIST_FILE = "OneTests/OneTests-Info.plist";
+				PRODUCT_NAME = OneTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -635,15 +637,15 @@
 		C76CFF9117462E0800F972B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SimpleRemote.app/SimpleRemote";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/One.app/One";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SimpleRemote/SimpleRemote-Prefix.pch";
-				INFOPLIST_FILE = "SimpleRemoteTests/SimpleRemoteTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "One/One-Prefix.pch";
+				INFOPLIST_FILE = "OneTests/OneTests-Info.plist";
+				PRODUCT_NAME = OneTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -652,7 +654,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C76CFF4C17462E0800F972B7 /* Build configuration list for PBXProject "SimpleRemote" */ = {
+		C76CFF4C17462E0800F972B7 /* Build configuration list for PBXProject "One" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C76CFF8A17462E0800F972B7 /* Debug */,
@@ -661,7 +663,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C76CFF8C17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemote" */ = {
+		C76CFF8C17462E0800F972B7 /* Build configuration list for PBXNativeTarget "One" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C76CFF8D17462E0800F972B7 /* Debug */,
@@ -670,7 +672,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C76CFF8F17462E0800F972B7 /* Build configuration list for PBXNativeTarget "SimpleRemoteTests" */ = {
+		C76CFF8F17462E0800F972B7 /* Build configuration list for PBXNativeTarget "OneTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C76CFF9017462E0800F972B7 /* Debug */,

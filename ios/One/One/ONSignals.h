@@ -1,6 +1,6 @@
 //
-//  SRSignals.h
-//  SimpleRemote
+//  ONSignals.h
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/07/26.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <IRKit/IRKit.h>
 
-@interface SRSignals : NSObject
+@interface ONSignals : NSObject
 
 @property (nonatomic) IRSignals *signals;
 @property (nonatomic) BOOL updatedInBackground;

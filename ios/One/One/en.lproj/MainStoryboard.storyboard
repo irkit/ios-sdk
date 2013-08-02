@@ -7,7 +7,7 @@
         <!--Main View Controller - Create Remote Icon-->
         <scene sceneID="ozj-dN-OH9">
             <objects>
-                <tableViewController id="oaV-El-VRv" customClass="SRMainViewController" sceneMemberID="viewController">
+                <tableViewController id="oaV-El-VRv" customClass="ONMainViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="JpI-Mm-1g0">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -282,7 +282,7 @@
         <!--Settings View Controller - Menu-->
         <scene sceneID="myw-3K-Erg">
             <objects>
-                <tableViewController id="dSW-Ph-HSd" customClass="SRSettingsViewController" sceneMemberID="viewController">
+                <tableViewController id="dSW-Ph-HSd" customClass="ONSettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="j76-PH-xvJ">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -633,21 +633,6 @@
     <classes>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SRMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SRMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="createIconPressed:"/>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-            </relationships>
-        </class>
-        <class className="SRSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SRSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelButtonTouched:"/>
-                <relationship kind="action" name="versionButtonTouched:"/>
-                <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
-            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -1,6 +1,6 @@
 //
-//  SRURLHandler.h
-//  SimpleRemote
+//  ONURLHandler.h
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/07/26.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <IRKit/IRKit.h>
 
-@interface SRURLHandler : NSObject
+@interface ONURLHandler : NSObject
 
 + (BOOL) canHandleOpenURL: (NSURL*)url;
 + (void) handleOpenURL: (NSURL*)url;

@@ -1,16 +1,16 @@
 //
-//  SRURLQueryTests.m
-//  SimpleRemote
+//  ONURLQueryTests.m
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/07/26.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRURLQueryTests.h"
-#import "SRURLHandler.h"
+#import "ONURLQueryTests.h"
+#import "ONURLHandler.h"
 #import <IRKit/IRKit.h>
 
-@implementation SRURLQueryTests
+@implementation ONURLQueryTests
 
 - (void)setUp
 {
@@ -58,10 +58,10 @@
     NSURL *url = [NSURL URLWithString:urlString];
     LOG( @"url: %@", url );
 
-    BOOL can = [SRURLHandler canHandleOpenURL:url];
+    BOOL can = [ONURLHandler canHandleOpenURL:url];
     STAssertTrue(can, @"canHandleOpenURL");
 
-    NSArray *parsedSignals = [SRURLHandler signalsDictionariesFromURL:url];
+    NSArray *parsedSignals = [ONURLHandler signalsDictionariesFromURL:url];
     LOG( @"parsedSignals: %@", parsedSignals );
     NSDictionary *expected = @{
                              @"name":name,

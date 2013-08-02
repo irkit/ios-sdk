@@ -1,17 +1,17 @@
 //
-//  SRMainViewController.m
-//  SimpleRemote
+//  ONMainViewController.m
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRMainViewController.h"
+#import "ONMainViewController.h"
 #import <BlocksKit/BlocksKit.h>
-#import "SRHelper.h"
-#import "SRSignals.h"
+#import "ONHelper.h"
+#import "ONSignals.h"
 
-@interface SRMainViewController ()
+@interface ONMainViewController ()
 
 @property (nonatomic) id peripheralObserver;
 @property (nonatomic) id becomeActiveObserver;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation SRMainViewController
+@implementation ONMainViewController
 
 - (void)viewDidLoad
 {
@@ -33,9 +33,9 @@
     self.tableView.backgroundView = nil;
     self.tableView.separatorColor = [UIColor clearColor];
 
-    [SRSignals sharedInstance].signals.delegate = self;
+    [ONSignals sharedInstance].signals.delegate = self;
 
-    __weak SRMainViewController *_self = self;
+    __weak ONMainViewController *_self = self;
     // show view controller when another peripheral is found
     _peripheralObserver = [[NSNotificationCenter defaultCenter]
                            addObserverForName:IRKitDidDiscoverUnauthorizedPeripheralNotification
@@ -60,9 +60,9 @@
                                           queue:nil
                                      usingBlock:^(NSNotification *note) {
                                          LOG( @"didBecomeActive" );
-                                         if ([SRSignals sharedInstance].updatedInBackground) {
-                                             [SRSignals sharedInstance].updatedInBackground = NO;
-                                             [SRSignals sharedInstance].signals.delegate = self;
+                                         if ([ONSignals sharedInstance].updatedInBackground) {
+                                             [ONSignals sharedInstance].updatedInBackground = NO;
+                                             [ONSignals sharedInstance].signals.delegate = self;
                                              [_self.tableView reloadData];
                                          }
                                      }];
@@ -109,7 +109,7 @@
 
 - (IBAction)settingsButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    
+
     IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
     c.delegate = (id<IRNewPeripheralViewControllerDelegate>)self;
     [self presentViewController:c
@@ -122,7 +122,7 @@
 - (IBAction)createIconPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
-    [SRHelper createIRSignalsIcon:[UIImage imageNamed:@"icon.png"]
+    [ONHelper createIRSignalsIcon:[UIImage imageNamed:@"icon.png"]
                 completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
                     LOG( @"response: %@, json: %@, error: %@", response, json, error);
                     if (error) {
@@ -168,8 +168,8 @@
     LOG( @"info: %@", info );
     // we're gonna show new signals even without using IRNewSignalViewController used
     if ([info[IRViewControllerResultType] isEqual: IRViewControllerResultTypeDone]) {
-        [[SRSignals sharedInstance].signals addSignalsObject:info[IRViewControllerResultSignal]];
-        [[SRSignals sharedInstance] save];
+        [[ONSignals sharedInstance].signals addSignalsObject:info[IRViewControllerResultSignal]];
+        [[ONSignals sharedInstance] save];
     }
     [self dismissViewControllerAnimated:YES completion:^{
         LOG(@"dismissed");
@@ -185,7 +185,7 @@
       newIndexPath:(NSIndexPath *)newIndexPath {
     LOG( @"object: %@ changeType: %d newIndexPath: %@", object, type, newIndexPath );
     UITableView *tableView = self.tableView;
-    
+
     switch(type) {
         case IRAnimatingTypeInsert:
             [tableView beginUpdates];
@@ -193,7 +193,7 @@
                              withRowAnimation:UITableViewRowAnimationFade];
             [tableView endUpdates];
             break;
-            
+
         case IRAnimatingTypeDelete:
             [tableView beginUpdates];
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
@@ -212,19 +212,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOG_CURRENT_METHOD;
-    
+
     UITableViewCell *cell;
-    
+
     switch (indexPath.section) {
         case 0:
-            if ([SRSignals sharedInstance].signals.countOfSignals <= indexPath.row) {
+            if ([ONSignals sharedInstance].signals.countOfSignals <= indexPath.row) {
                 // last line is always "+ Add New Signal"
                 cell = [tableView dequeueReusableCellWithIdentifier:@"NewSignalCell"];
                 cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
                 cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
                 break;
             }
-            cell = [[SRSignals sharedInstance].signals tableView:tableView
+            cell = [[ONSignals sharedInstance].signals tableView:tableView
                  cellForRowAtIndexPath: indexPath];
             cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
             cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
@@ -247,7 +247,7 @@
 
     switch (section) {
         case 0:
-            return [[SRSignals sharedInstance].signals tableView:tableView
+            return [[ONSignals sharedInstance].signals tableView:tableView
                                            numberOfRowsInSection:section] + 1;
         case 1:
             return 1;
@@ -269,10 +269,10 @@
     LOG_CURRENT_METHOD;
     switch (indexPath.section) {
         case 0:
-            if (indexPath.row >= [SRSignals sharedInstance].signals.countOfSignals) {
+            if (indexPath.row >= [ONSignals sharedInstance].signals.countOfSignals) {
                 return 44;
             }
-            return [[SRSignals sharedInstance].signals tableView: tableView
+            return [[ONSignals sharedInstance].signals tableView: tableView
                heightForRowAtIndexPath: indexPath];
         case 1:
             return 80;
@@ -290,7 +290,7 @@
     switch (indexPath.section) {
         case 0:
             {
-                if ([SRSignals sharedInstance].signals.countOfSignals <= indexPath.row) {
+                if ([ONSignals sharedInstance].signals.countOfSignals <= indexPath.row) {
                     // pressed Add New Signal cell
                     IRNewSignalViewController *c = [[IRNewSignalViewController alloc] init];
                     c.delegate = (id<IRNewSignalViewControllerDelegate>)self;
@@ -301,7 +301,7 @@
                     }];
                     return;
                 }
-                IRSignal *signal = [[SRSignals sharedInstance].signals objectAtIndex: indexPath.row];
+                IRSignal *signal = [[ONSignals sharedInstance].signals objectAtIndex: indexPath.row];
                 UIActionSheet *sheet = [UIActionSheet actionSheetWithTitle:@"Please select one."];
                 [sheet addButtonWithTitle:@"Test Send" handler:^{
                     [signal sendWithCompletion:^(NSError *error) {
@@ -327,8 +327,8 @@
                     }];
                 }];
                 [sheet addButtonWithTitle:@"Remove" handler:^{
-                    [[SRSignals sharedInstance].signals removeSignalsObject:signal];
-                    [[SRSignals sharedInstance] save];
+                    [[ONSignals sharedInstance].signals removeSignalsObject:signal];
+                    [[ONSignals sharedInstance] save];
                     LOG( @"removed: %@", signal );
                 }];
                 [sheet setCancelButtonWithTitle:nil handler:^{

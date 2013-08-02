@@ -1,6 +1,6 @@
 //
-//  SimpleRemoteTests.m
-//  SimpleRemoteTests
+//  OneTests.m
+//  OneTests
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
@@ -8,12 +8,12 @@
 //  Unit-Test Result Macro Reference
 //  see http://developer.apple.com/library/ios/#documentation/DeveloperTools/Conceptual/UnitTesting/AB-Unit-Test_Result_Macro_Reference/result_macro_reference.html#//apple_ref/doc/uid/TP40002143-CH9-SW1
 
-#import "SimpleRemoteTests.h"
-#import "SRHelper.h"
-#import "SRSignals.h"
+#import "ONTests.h"
+#import "ONHelper.h"
+#import "ONSignals.h"
 #import <IRKit/IRKit.h>
 
-@implementation SimpleRemoteTests {
+@implementation ONTests {
 BOOL _isFinished; // test finished
 }
 
@@ -52,9 +52,9 @@ BOOL _isFinished; // test finished
     IRSignal *signal = [[IRSignal alloc] initWithDictionary:signalDictionary];
     IRSignals *signals = [[IRSignals alloc] init];
     [signals addSignalsObject: signal];
-    [SRSignals sharedInstance].signals = signals;
+    [ONSignals sharedInstance].signals = signals;
 
-    [SRHelper createIRSignalsIcon:image
+    [ONHelper createIRSignalsIcon:image
                 completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
                    LOG(@"response: %@, image: %@, error: %@", response, json, error);
                    STAssertTrue(response.statusCode == 200, @"status code valid");

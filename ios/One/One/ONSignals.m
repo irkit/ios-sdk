@@ -1,20 +1,20 @@
 //
-//  SRSignals.m
-//  SimpleRemote
+//  ONSignals.m
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/07/26.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRSignals.h"
+#import "ONSignals.h"
 
-@implementation SRSignals
+@implementation ONSignals
 
 + (instancetype) sharedInstance {
-    static SRSignals* instance;
+    static ONSignals* instance;
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
-        instance = [[SRSignals alloc] init];
+        instance = [[ONSignals alloc] init];
     });
     return instance;
 }

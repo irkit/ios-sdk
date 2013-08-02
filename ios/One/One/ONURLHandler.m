@@ -1,15 +1,15 @@
 //
-//  SRURLHandler.m
-//  SimpleRemote
+//  ONURLHandler.m
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/07/26.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRURLHandler.h"
-#import "SRSignals.h"
+#import "ONURLHandler.h"
+#import "ONSignals.h"
 
-@implementation SRURLHandler
+@implementation ONURLHandler
 
 +(BOOL)canHandleOpenURL: (NSURL*)url {
     LOG_CURRENT_METHOD;
@@ -31,7 +31,7 @@
     LOG( @"url: ", [url absoluteString] );
 
     IRSignals *signals = [self signalsFromURL:(NSURL*)url];
-    SRSignals *instance = [SRSignals sharedInstance];
+    ONSignals *instance = [ONSignals sharedInstance];
     instance.signals = signals;
     [instance sendSequentiallyWithCompletion:^(NSError *error) {
         LOG( @"sent error: ", error );

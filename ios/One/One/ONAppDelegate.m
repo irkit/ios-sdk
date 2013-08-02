@@ -1,17 +1,17 @@
 //
-//  SRAppDelegate.m
-//  SimpleRemote
+//  ONAppDelegate.m
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/05/17.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRAppDelegate.h"
-#import "SRHelper.h"
-#import "SRURLHandler.h"
+#import "ONAppDelegate.h"
+#import "ONHelper.h"
+#import "ONURLHandler.h"
 #import <IRKit/IRKit.h>
 
-@implementation SRAppDelegate
+@implementation ONAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,7 +20,7 @@
 
     NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
     if (url) {
-        return [SRURLHandler canHandleOpenURL: url];
+        return [ONURLHandler canHandleOpenURL: url];
     }
 
     [[IRKit sharedInstance] startScan];
@@ -43,7 +43,7 @@
 
     NSURL *url = launchOptions[UIApplicationLaunchOptionsURLKey];
     if (url) {
-        return [SRURLHandler canHandleOpenURL: url];
+        return [ONURLHandler canHandleOpenURL: url];
     }
 
     return YES;
@@ -52,8 +52,8 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     LOG( @"url: %@, sourceApplication: %@, annotation: %@", url, sourceApplication, annotation );
 
-    if ([SRURLHandler canHandleOpenURL:url]) {
-        [SRURLHandler handleOpenURL: url];
+    if ([ONURLHandler canHandleOpenURL:url]) {
+        [ONURLHandler handleOpenURL: url];
         return YES;
     }
     return NO;
@@ -68,7 +68,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     LOG_CURRENT_METHOD;
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

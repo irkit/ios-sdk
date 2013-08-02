@@ -1,21 +1,21 @@
 //
-//  SRSettingsViewController.m
-//  SimpleRemote
+//  ONSettingsViewController.m
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/07/09.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRSettingsViewController.h"
+#import "ONSettingsViewController.h"
 #import <BlocksKit/BlocksKit.h>
 
 #define kAppStoreURLTemplate @"itms-apps://itunes.apple.com/app/id%@"
 
-@interface SRSettingsViewController ()
+@interface ONSettingsViewController ()
 
 @end
 
-@implementation SRSettingsViewController
+@implementation ONSettingsViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

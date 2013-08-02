@@ -1,24 +1,24 @@
 //
-//  SRHelper.m
-//  SimpleRemote
+//  ONHelper.m
+//  One
 //
 //  Created by Masakazu Ohtsuka on 2013/07/23.
 //  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
 //
 
-#import "SRHelper.h"
+#import "ONHelper.h"
 #import "AFNetworking.h"
-#import "SRSignals.h"
+#import "ONSignals.h"
 
-#define SRURL_BASE @"http://getirkit.appspot.com"
+#define ONURL_BASE @"http://getirkit.appspot.com"
 
-@implementation SRHelper
+@implementation ONHelper
 
 + (void)createIRSignalsIcon:(UIImage *)image
           completionHandler:(void (^)(NSHTTPURLResponse *, NSDictionary *, NSError *))completion {
     LOG_CURRENT_METHOD;
 
-    NSURL *url = [NSURL URLWithString:SRURL_BASE];
+    NSURL *url = [NSURL URLWithString:ONURL_BASE];
 
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST"
@@ -29,7 +29,7 @@
                                                                                     name:@"icon"
                                                                                 fileName:@"icon.png"
                                                                                 mimeType:@"image/png"];
-                                                        NSString *json = [SRSignals sharedInstance].signals.JSONRepresentation;
+                                                        NSString *json = [ONSignals sharedInstance].signals.JSONRepresentation;
                                                         json           = [NSString stringWithFormat:@"irsignals=%@", json];
                                                         NSData *data = [NSData dataWithBytes:[json UTF8String]
                                                                                       length:[json lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
