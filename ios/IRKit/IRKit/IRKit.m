@@ -140,7 +140,7 @@ static BOOL useCustomizedStyle;
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
-    // LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
+    LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
 
     [_peripherals addPeripheralsObject:peripheral]; // retain
     IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];

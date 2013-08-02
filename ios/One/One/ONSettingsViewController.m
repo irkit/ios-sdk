@@ -84,7 +84,10 @@
 {
     LOG( @"info: %@", info );
 
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 LOG( @"dismissed" );
+                             }];
 }
 
 #pragma mark - Table view data source
