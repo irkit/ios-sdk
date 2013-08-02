@@ -97,6 +97,9 @@
 		C7A9674E17A0FB5400D5DEBF /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A9674C17A0FB5400D5DEBF /* shadow@2x.png */; };
 		C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */; };
 		C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */; };
+		C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */; };
+		C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; };
+		C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; };
 		C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37DF174B8EB100872C04 /* IRChartView.h */; };
 		C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; };
 		C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */; };
@@ -143,6 +146,8 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */,
+				C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */,
 				C7A1351217AA621B00C8679B /* IRViewCustomizer.h in CopyFiles */,
 				C7603E8C17A9FED700A7AF1E /* IRSignalNameEditViewController.h in CopyFiles */,
 				C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */,
@@ -273,6 +278,8 @@
 		C7A9674C17A0FB5400D5DEBF /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
 		C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene1ViewController.h; sourceTree = "<group>"; };
 		C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene1ViewController.m; sourceTree = "<group>"; };
+		C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperation.m; sourceTree = "<group>"; };
+		C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSendOperation.h; sourceTree = "<group>"; };
 		C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralViewController.m; sourceTree = "<group>"; };
 		C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralViewController.h; sourceTree = "<group>"; };
 		C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene1ViewController.m; sourceTree = "<group>"; };
@@ -394,6 +401,8 @@
 			children = (
 				C7A66E8D17A7BB3A00EDE589 /* IRSignalSendOperationQueue.m */,
 				C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */,
+				C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */,
+				C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */,
 				C73CB4D917856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.m */,
 				C73CB4D817856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.h */,
 				C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */,
@@ -801,6 +810,7 @@
 				C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */,
 				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
 				C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */,
+				C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

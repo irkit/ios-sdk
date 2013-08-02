@@ -12,6 +12,7 @@
 #import "IRSignalCell.h"
 #import "IRHelper.h"
 #import "IRSignalSendOperationQueue.h"
+#import "IRSignalSendOperation.h"
 
 @interface IRSignals ()
 
@@ -77,14 +78,11 @@
     q.completion = completion;
 
     for (IRSignal *signal in self.signals) {
-        [q addOperationWithBlock:^{
-            [signal sendWithCompletion:^(NSError *error) {
-                if (error) {
-                    q.error = error;
-                    [q cancelAllOperations];
-                }
-            }];
-        }];
+        IRSignalSendOperation *op = [[IRSignalSendOperation alloc] initWithSignal:signal
+                                                                       completion:^(NSError *error) {
+                                                                           LOG(@"error: %@", error);
+                                                                       }];
+        [q addOperation:op];
     }
 }
 
