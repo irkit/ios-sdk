@@ -28,7 +28,7 @@
 }
 
 +(void)handleOpenURL:(NSURL *)url {
-    LOG_CURRENT_METHOD;
+    LOG( @"url: ", [url absoluteString] );
 
     IRSignals *signals = [self signalsFromURL:(NSURL*)url];
     SRSignals *instance = [SRSignals sharedInstance];
