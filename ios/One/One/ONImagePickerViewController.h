@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ONImagePickerViewControllerDelegate;
+
 @interface ONImagePickerViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
+
+@property (nonatomic, assign) id<ONImagePickerViewControllerDelegate> delegate;
+
+@end
+
+@protocol ONImagePickerViewControllerDelegate <NSObject>
+
+@required
+- (void)imagePickerViewController:(ONImagePickerViewController*)viewController
+                     didPickImage:(UIImage*)image;
 
 @end

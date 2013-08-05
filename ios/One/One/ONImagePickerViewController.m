@@ -49,8 +49,25 @@
 
 #pragma mark - UICollectionViewDelegate
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    LOG( @"selected: %@", indexPath );
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    LOG( @"highlighted: %@", indexPath );
+
+    ONIconCell *cell = (ONIconCell*)[collectionView viewWithTag:indexPath.row+1];
+    [UIView animateWithDuration:0.1
+                          delay:0
+                        options:(UIViewAnimationOptionAllowUserInteraction)
+                     animations:^{
+                         NSLog(@"animation start");
+                         cell.imageView.alpha = 0.5;
+                     }
+                     completion:^(BOOL finished){
+                         NSLog(@"animation end");
+                     }
+     ];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    LOG( @"unhighlighted: %@", indexPath );
 
     ONIconCell *cell = (ONIconCell*)[collectionView viewWithTag:indexPath.row+1];
     [UIView animateWithDuration:0.4
@@ -58,16 +75,20 @@
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
                          NSLog(@"animation start");
-                         //[cell setBackgroundColor:[UIColor colorWithRed: 180.0/255.0 green: 238.0/255.0 blue:180.0/255.0 alpha: 1.0]];
-                         cell.imageView.alpha = 0.5;
+                         cell.imageView.alpha = 1.0;
                      }
                      completion:^(BOOL finished){
                          NSLog(@"animation end");
-                         //[cell setBackgroundColor:[UIColor whiteColor]];
-                         cell.imageView.alpha = 1.0;
                      }
      ];
+}
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    LOG( @"selected: %@", indexPath );
+
+    ONIconCell *cell = (ONIconCell*)[collectionView viewWithTag:indexPath.row+1];
+    [self.delegate imagePickerViewController:self
+                                didPickImage:cell.imageView.image];
 }
 
 #pragma mark - UICollectionViewDataSource

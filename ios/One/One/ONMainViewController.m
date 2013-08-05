@@ -9,6 +9,9 @@
 #import "ONMainViewController.h"
 #import <BlocksKit/BlocksKit.h>
 #import "ONHelper.h"
+#import "ONImagePickerViewController.h"
+
+#define TAG_ICON_IMAGE 1
 
 @interface ONMainViewController ()
 
@@ -73,6 +76,39 @@
     [self.tableView reloadData];
 }
 
+- (UIImage*) selectedIconImage {
+    LOG_CURRENT_METHOD;
+
+    UIImageView *imageView = (UIImageView*)[self.view viewWithTag:TAG_ICON_IMAGE];
+    return imageView.image;
+}
+
+- (void) setSelectedIconImage: (UIImage*) image {
+    LOG_CURRENT_METHOD;
+
+    UIImageView *imageView = (UIImageView*)[self.view viewWithTag:TAG_ICON_IMAGE];
+    imageView.image = image;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"SelectImage"]) {
+        ONImagePickerViewController *vc = (ONImagePickerViewController*)segue.destinationViewController;
+        vc.delegate = self;
+    }
+}
+
+#pragma mark - ONImagePickerViewControllerDelegate
+
+- (void)imagePickerViewController:(ONImagePickerViewController *)viewController didPickImage:(UIImage *)image {
+    LOG_CURRENT_METHOD;
+
+    if (image) {
+        [self setSelectedIconImage:image];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - UI events
 
 - (IBAction)settingsButtonPressed:(id)sender {
@@ -90,7 +126,7 @@
 - (IBAction)createIconPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
-    [ONHelper createIcon:[UIImage imageNamed:@"icon.png"]
+    [ONHelper createIcon:self.selectedIconImage
               forSignals:_signals
        completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
            LOG( @"response: %@, json: %@, error: %@", response, json, error);

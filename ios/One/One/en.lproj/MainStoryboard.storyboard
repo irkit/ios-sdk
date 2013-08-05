@@ -75,11 +75,11 @@
                                     <constraint firstItem="eRp-Bt-3eg" firstAttribute="leading" secondItem="SdG-pm-nwD" secondAttribute="leading" constant="12" type="user" id="qPt-Re-jEQ"/>
                                 </constraints>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectImageCell" rowHeight="80" id="S69-GF-4kz">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectImageCell" rowHeight="80" id="S69-GF-4kz" customClass="ONImageSelectCell">
                                 <rect key="frame" x="0.0" y="91" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="0.0" width="280" height="79"/>
+                                    <rect key="frame" x="10" y="0.0" width="300" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMX-QE-JOL">
@@ -122,6 +122,7 @@
                                     <constraint firstItem="qMX-QE-JOL" firstAttribute="top" secondItem="S69-GF-4kz" secondAttribute="top" type="default" id="xdp-la-oNn"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="iconImageView" destination="xXe-zp-Kc2" id="k6q-VI-wjj"/>
                                     <segue destination="lKl-bb-PH2" kind="push" identifier="SelectImage" id="hJv-qV-6xr"/>
                                 </connections>
                             </tableViewCell>
@@ -633,18 +634,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ZA-gA-hH7"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJ5-mY-Pdc"/>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="leading" secondItem="QNT-vh-LZI" secondAttribute="leading" type="default" id="Nhd-nc-GjF"/>
-                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="trailing" secondItem="QNT-vh-LZI" secondAttribute="trailing" type="default" id="YLs-LE-XzM"/>
-                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="top" secondItem="QNT-vh-LZI" secondAttribute="top" type="default" id="paU-2W-1aH"/>
-                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="bottom" secondItem="QNT-vh-LZI" secondAttribute="bottom" type="default" id="ula-Hl-xGA"/>
+                                            <constraint firstItem="dJ5-mY-Pdc" firstAttribute="leading" secondItem="QNT-vh-LZI" secondAttribute="leading" type="default" id="aSz-Fz-5Ic"/>
+                                            <constraint firstItem="dJ5-mY-Pdc" firstAttribute="top" secondItem="QNT-vh-LZI" secondAttribute="top" type="default" id="eVg-hc-iGK"/>
+                                            <constraint firstItem="dJ5-mY-Pdc" firstAttribute="bottom" secondItem="QNT-vh-LZI" secondAttribute="bottom" type="default" id="u35-cZ-kn6"/>
+                                            <constraint firstItem="dJ5-mY-Pdc" firstAttribute="trailing" secondItem="QNT-vh-LZI" secondAttribute="trailing" type="default" id="zll-4f-bUh"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="imageView" destination="1ZA-gA-hH7" id="oqH-Hu-Ra3"/>
+                                            <outlet property="imageView" destination="dJ5-mY-Pdc" id="0zB-xq-GTN"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -655,7 +656,7 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MtK-ZQ-VEZ">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-1I-AXQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-1I-AXQ">
                                         <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="159" id="GKh-cb-668"/>
@@ -758,6 +759,59 @@
         <image name="icn_tabbar_icon_on.png" width="24" height="24"/>
         <image name="icon.png" width="57" height="57"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ONIconCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONIconCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="ONImagePickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONImagePickerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="albumButtonTouched:"/>
+                <relationship kind="action" name="iconButtonTouched:"/>
+                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="iconButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="ONImageSelectCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONImageSelectCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="iconImageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="ONMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="createIconPressed:"/>
+                <relationship kind="action" name="settingsButtonPressed:"/>
+            </relationships>
+        </class>
+        <class className="ONSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonTouched:"/>
+                <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

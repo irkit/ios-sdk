@@ -31,6 +31,7 @@
 		C735040417A021070057D51B /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503F017A021070057D51B /* shadow@2x.png */; };
 		C75AFB3017AF8B9B00F8A268 /* ONImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75AFB2F17AF8B9B00F8A268 /* ONImagePickerViewController.m */; };
 		C75AFB3317AF982700F8A268 /* ONIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75AFB3217AF982700F8A268 /* ONIconCell.m */; };
+		C75AFB3617AFB51300F8A268 /* ONImageSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75AFB3517AFB51300F8A268 /* ONImageSelectCell.m */; };
 		C76CFF5517462E0800F972B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5417462E0800F972B7 /* UIKit.framework */; };
 		C76CFF5717462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
 		C76CFF5917462E0800F972B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
@@ -105,6 +106,8 @@
 		C75AFB2F17AF8B9B00F8A268 /* ONImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONImagePickerViewController.m; sourceTree = "<group>"; };
 		C75AFB3117AF982700F8A268 /* ONIconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONIconCell.h; sourceTree = "<group>"; };
 		C75AFB3217AF982700F8A268 /* ONIconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONIconCell.m; sourceTree = "<group>"; };
+		C75AFB3417AFB51200F8A268 /* ONImageSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONImageSelectCell.h; sourceTree = "<group>"; };
+		C75AFB3517AFB51300F8A268 /* ONImageSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONImageSelectCell.m; sourceTree = "<group>"; };
 		C76CFF5117462E0800F972B7 /* One.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = One.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CFF5417462E0800F972B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C76CFF5617462E0800F972B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -270,6 +273,8 @@
 				C713AACE179E8636005AF8AE /* ONHelper.m */,
 				C7BAB39F17A21D8B0031F33F /* ONURLHandler.h */,
 				C7BAB3A017A21D8B0031F33F /* ONURLHandler.m */,
+				C75AFB3417AFB51200F8A268 /* ONImageSelectCell.h */,
+				C75AFB3517AFB51300F8A268 /* ONImageSelectCell.m */,
 				C75AFB3117AF982700F8A268 /* ONIconCell.h */,
 				C75AFB3217AF982700F8A268 /* ONIconCell.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
@@ -489,6 +494,7 @@
 				C7BAB3A117A21D8B0031F33F /* ONURLHandler.m in Sources */,
 				C75AFB3017AF8B9B00F8A268 /* ONImagePickerViewController.m in Sources */,
 				C75AFB3317AF982700F8A268 /* ONIconCell.m in Sources */,
+				C75AFB3617AFB51300F8A268 /* ONImageSelectCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
