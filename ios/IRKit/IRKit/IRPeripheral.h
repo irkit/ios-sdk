@@ -42,6 +42,7 @@ forCharacteristicWithUUID: (CBUUID*)characteristicUUID
   ofServiceWithUUID: (CBUUID*)serviceUUID;
 
 - (NSString*) modelNameAndRevision;
+- (NSString*) iconURL;
 
 - (void)setManager: (CBCentralManager*)manager;
 - (void)setPeripheral: (CBPeripheral*)peripheral;

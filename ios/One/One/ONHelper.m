@@ -9,8 +9,6 @@
 #import "ONHelper.h"
 #import "AFNetworking.h"
 
-#define ONURL_BASE @"http://getirkit.appspot.com"
-
 @implementation ONHelper
 
 + (void)createIcon:(UIImage *)image

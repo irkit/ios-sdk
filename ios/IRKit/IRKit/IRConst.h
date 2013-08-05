@@ -100,4 +100,8 @@
 #define IRKIT_ERROR_CODE_DISCONNECTED   2
 #define IRKIT_ERROR_CODE_C12C_NOT_FOUND 3
 
+#pragma mark - URLs
+
+#define ONURL_BASE @"http://getirkit.appspot.com"
+
 #endif

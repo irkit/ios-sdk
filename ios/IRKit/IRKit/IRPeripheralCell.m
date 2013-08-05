@@ -39,7 +39,7 @@
     self.detailLabel.text = peripheral.modelNameAndRevision;
 
     // load image from internet
-    NSString *url = @"http://getirkit.appspot.com/static/images/icon.png";
+    NSString *url = _peripheral.iconURL;
     [IRHelper loadImage:url completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
         if (error || (response.statusCode != 200) || ! image) {
             return;

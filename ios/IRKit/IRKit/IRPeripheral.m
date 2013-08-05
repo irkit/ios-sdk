@@ -11,6 +11,7 @@
 #import "IRHelper.h"
 #import "IRPeripheralWriteOperationQueue.h"
 #import "IRPeripheralWriteOperation.h"
+#import "IRConst.h"
 
 @interface IRPeripheral ()
 
@@ -206,6 +207,10 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
         return @"unknown";
     }
     return [@[_modelName, _hardwareRevision, _firmwareRevision, _softwareRevision] componentsJoinedByString:@"/"];
+}
+
+- (NSString*)iconURL {
+    return [NSString stringWithFormat:@"http://%@/static/images/model/%@.png", ONURL_BASE, _modelName || @"A" ];
 }
 
 #pragma mark - Private methods
