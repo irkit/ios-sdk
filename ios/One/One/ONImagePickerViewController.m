@@ -41,7 +41,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)iconButtonTouched:(id)sender {
+- (IBAction)backButtonTouched:(id)sender {
+    LOG_CURRENT_METHOD;
+    [self.delegate imagePickerViewController:self
+                                didPickImage:nil];
 }
 
 - (IBAction)albumButtonTouched:(id)sender {

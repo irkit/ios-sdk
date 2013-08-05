@@ -656,14 +656,14 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MtK-ZQ-VEZ">
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-1I-AXQ">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-1I-AXQ">
                                         <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="159" id="GKh-cb-668"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
-                                        <state key="normal" title=" Icon" image="icn_tabbar_icon.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title=" Icon" image="icn_tabbar_icon_on.png">
+                                            <color key="titleColor" red="0.21176470589999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="selected" image="icn_tabbar_icon_on.png">
@@ -700,7 +700,7 @@
                                 <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="GIZ-RE-Yvz" firstAttribute="trailing" secondItem="MtK-ZQ-VEZ" secondAttribute="trailing" type="default" id="0sd-EA-c8k"/>
-                                    <constraint firstItem="gXq-1I-AXQ" firstAttribute="leading" secondItem="MtK-ZQ-VEZ" secondAttribute="leading" type="default" id="BPR-uj-ArB"/>
+                                    <constraint firstItem="gXq-1I-AXQ" firstAttribute="leading" secondItem="MtK-ZQ-VEZ" secondAttribute="leading" constant="1" id="HlE-Pa-vk4"/>
                                     <constraint firstItem="GIZ-RE-Yvz" firstAttribute="top" secondItem="MtK-ZQ-VEZ" secondAttribute="top" type="default" id="KuN-Hm-yii"/>
                                     <constraint firstAttribute="height" constant="44" type="user" id="c1j-jB-Ujw"/>
                                     <constraint firstItem="gXq-1I-AXQ" firstAttribute="bottom" secondItem="MtK-ZQ-VEZ" secondAttribute="bottom" type="default" id="i8i-Ki-7de"/>
@@ -720,7 +720,25 @@
                             <constraint firstItem="MtK-ZQ-VEZ" firstAttribute="trailing" secondItem="11E-D2-K9R" secondAttribute="trailing" type="default" id="z7k-C8-X4W"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Select Image" id="GYP-Of-cSY"/>
+                    <navigationItem key="navigationItem" title="Select Image" id="GYP-Of-cSY">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="m6g-us-naE">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GdI-6c-XyY">
+                                <rect key="frame" x="5" y="10" width="35" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" image="icn_actionbar_back.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonTouched:" destination="lKl-bb-PH2" eventType="touchUpInside" id="gsz-5z-L0x"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="OZs-fu-4zb" id="YcZ-1t-WND"/>
@@ -750,12 +768,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icn_actionbar_back.png" width="24" height="24"/>
         <image name="icn_actionbar_cancel.png" width="24" height="24"/>
         <image name="icn_actionbar_menu.png" width="24" height="24"/>
         <image name="icn_arrow.png" width="15" height="15"/>
         <image name="icn_tabbar_album.png" width="24" height="24"/>
         <image name="icn_tabbar_album_on.png" width="24" height="24"/>
-        <image name="icn_tabbar_icon.png" width="24" height="24"/>
         <image name="icn_tabbar_icon_on.png" width="24" height="24"/>
         <image name="icon.png" width="57" height="57"/>
     </resources>
@@ -773,8 +791,6 @@
         <class className="ONImagePickerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONImagePickerViewController.h"/>
             <relationships>
-                <relationship kind="action" name="albumButtonTouched:"/>
-                <relationship kind="action" name="iconButtonTouched:"/>
                 <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="iconButton" candidateClass="UIButton"/>
             </relationships>
@@ -787,15 +803,12 @@
         </class>
         <class className="ONMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="createIconPressed:"/>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-            </relationships>
         </class>
         <class className="ONSettingsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONSettingsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancelButtonTouched:"/>
+                <relationship kind="action" name="versionButtonTouched:"/>
                 <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
             </relationships>
         </class>
@@ -807,9 +820,6 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
