@@ -35,6 +35,8 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSData*)data;
 - (void)loadFromData: (NSData*)data;
+- (void)loadFromStandardUserDefaultsKey:(NSString*)key;
+- (void)saveToStandardUserDefaultsWithKey:(NSString*)key;
 - (NSString*)JSONRepresentation;
 - (void)sendSequentiallyWithCompletion:(void (^)(NSError *error))completion;
 

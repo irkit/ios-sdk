@@ -55,6 +55,21 @@
     LOG( @"loaded signals: %@", _signals );
 }
 
+- (void)loadFromStandardUserDefaultsKey:(NSString*)key {
+    LOG( @"key: %@", key );
+    NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+    NSData *data = [d objectForKey: key];
+    [self loadFromData:data];
+}
+
+- (void)saveToStandardUserDefaultsWithKey:(NSString*)key {
+    LOG( @"key: %@", key );
+    NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+    [d setObject:self.data
+          forKey:key];
+    [d synchronize];
+}
+
 - (NSString*)JSONRepresentation {
     LOG_CURRENT_METHOD;
 

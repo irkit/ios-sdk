@@ -56,7 +56,6 @@
 		C7BAB3A217A245610031F33F /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB00617462FC100125BCB /* libIRKit.a */; };
 		C7BAB3A317A245870031F33F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB02317467D6800125BCB /* CoreBluetooth.framework */; };
 		C7BAB3A417A245EA0031F33F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
-		C7BAB3A717A2599A0031F33F /* ONSignals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BAB3A617A2599A0031F33F /* ONSignals.m */; };
 		C7BAB3A917A274200031F33F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7BAB3A817A274200031F33F /* SystemConfiguration.framework */; };
 		C7BAB3AB17A274380031F33F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7BAB3AA17A274380031F33F /* MobileCoreServices.framework */; };
 		C7C0DB8417825B9F00AECAC2 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7C0DB8217825B9F00AECAC2 /* icon@2x.png */; };
@@ -133,8 +132,6 @@
 		C7BAB39D17A20DDA0031F33F /* ONURLQueryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONURLQueryTests.m; sourceTree = "<group>"; };
 		C7BAB39F17A21D8B0031F33F /* ONURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONURLHandler.h; sourceTree = "<group>"; };
 		C7BAB3A017A21D8B0031F33F /* ONURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONURLHandler.m; sourceTree = "<group>"; };
-		C7BAB3A517A259990031F33F /* ONSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONSignals.h; sourceTree = "<group>"; };
-		C7BAB3A617A2599A0031F33F /* ONSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONSignals.m; sourceTree = "<group>"; };
 		C7BAB3A817A274200031F33F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C7BAB3AA17A274380031F33F /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		C7C0DB8217825B9F00AECAC2 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -263,14 +260,11 @@
 				C7A796CA178C4F4A00E15608 /* ONSettingsViewController.m */,
 				C713AACD179E8636005AF8AE /* ONHelper.h */,
 				C713AACE179E8636005AF8AE /* ONHelper.m */,
-				C7BAB3A517A259990031F33F /* ONSignals.h */,
-				C7BAB3A617A2599A0031F33F /* ONSignals.m */,
 				C7BAB39F17A21D8B0031F33F /* ONURLHandler.h */,
 				C7BAB3A017A21D8B0031F33F /* ONURLHandler.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
 				C76CFF5B17462E0800F972B7 /* Supporting Files */,
 			);
-			name = One;
 			path = One;
 			sourceTree = "<group>";
 		};
@@ -296,7 +290,6 @@
 				C7BAB39D17A20DDA0031F33F /* ONURLQueryTests.m */,
 				C76CFF8217462E0800F972B7 /* Supporting Files */,
 			);
-			name = OneTests;
 			path = OneTests;
 			sourceTree = "<group>";
 		};
@@ -484,7 +477,6 @@
 				C7A796CB178C4F4A00E15608 /* ONSettingsViewController.m in Sources */,
 				C713AACF179E8636005AF8AE /* ONHelper.m in Sources */,
 				C7BAB3A117A21D8B0031F33F /* ONURLHandler.m in Sources */,
-				C7BAB3A717A2599A0031F33F /* ONSignals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

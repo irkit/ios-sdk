@@ -7,7 +7,7 @@
 //
 
 #import "ONURLHandler.h"
-#import "ONSignals.h"
+#import "ONMainViewController.h"
 
 @implementation ONURLHandler
 
@@ -30,12 +30,17 @@
 +(void)handleOpenURL:(NSURL *)url {
     LOG( @"url: ", [url absoluteString] );
 
-    IRSignals *signals = [self signalsFromURL:(NSURL*)url];
-    ONSignals *instance = [ONSignals sharedInstance];
-    instance.signals = signals;
-    [instance sendSequentiallyWithCompletion:^(NSError *error) {
+    IRSignals *signals = [ self signalsFromURL:(NSURL*)url ];
+    [signals sendSequentiallyWithCompletion:^(NSError *error) {
         LOG( @"sent error: ", error );
     }];
+
+    // find ONMainVC and set signals
+    UIApplication *app = [UIApplication sharedApplication];
+    UIWindow *window = app.delegate.window;
+    UINavigationController *c = (UINavigationController*)window.rootViewController;
+    ONMainViewController *main = c.viewControllers[0];
+    main.signals = signals;
 }
 
 +(NSArray*)signalsDictionariesFromURL:(NSURL*)url {

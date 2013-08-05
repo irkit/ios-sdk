@@ -14,4 +14,6 @@
     UITableViewDelegate,
     IRAnimatingControllerDelegate>
 
+@property (nonatomic) IRSignals *signals;
+
 @end
