@@ -144,8 +144,17 @@ static BOOL useCustomizedStyle;
 
     [_peripherals addPeripheralsObject:peripheral]; // retain
     IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
-    [p didDiscoverWithAdvertisementData: advertisementData
-                                   RSSI: RSSI];
+    if (p) {
+        [p didDiscoverWithAdvertisementData: advertisementData
+                                       RSSI: RSSI];
+    }
+    else {
+        // we don't know it's UUID, let's connect and figure it out
+        [_manager connectPeripheral:peripheral
+                            options:@{
+            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
+         }];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central
@@ -172,6 +181,12 @@ didRetrievePeripherals:(NSArray *)peripherals {
 - (void)centralManager:(CBCentralManager *)central
   didConnectPeripheral:(CBPeripheral *)peripheral {
     LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
+
+    // when a new peripheral is discovered,
+    // we don't know it's UUID.
+    // connect without an IRPeripheral
+    // and get an IRPeripheral here
+    [_peripherals addPeripheralsObject:peripheral];
 
     IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
     [p didConnect];

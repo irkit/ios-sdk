@@ -16,7 +16,7 @@
 
 @property (nonatomic) IRPeripheralWriteOperationQueue *writeQueue;
 @property (nonatomic) CBCentralManager *manager;
-@property (nonatomic) CBPeripheral *peripheral;
+@property (nonatomic) CBPeripheral *peripheral; // hide from public
 @property (nonatomic) BOOL shouldReadIRData;
 @property (nonatomic) BOOL shouldRefreshDeviceInformation;
 @property (nonatomic) BOOL wantsToConnect;
