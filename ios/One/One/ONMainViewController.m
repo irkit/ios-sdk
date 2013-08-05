@@ -330,7 +330,7 @@
                 }];
                 [sheet addButtonWithTitle:@"Remove" handler:^{
                     [_signals removeSignalsObject:signal];
-                    [_signals saveToStandardUserDefaultsWithKey:@"irkit."];
+                    [_signals saveToStandardUserDefaultsWithKey:@"irkit.signals"];
                     LOG( @"removed: %@", signal );
                 }];
                 [sheet setCancelButtonWithTitle:nil handler:^{
