@@ -29,6 +29,8 @@
 		C735040217A021070057D51B /* icn_tabbar_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503EE17A021070057D51B /* icn_tabbar_icon@2x.png */; };
 		C735040317A021070057D51B /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503EF17A021070057D51B /* shadow.png */; };
 		C735040417A021070057D51B /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503F017A021070057D51B /* shadow@2x.png */; };
+		C75AFB3017AF8B9B00F8A268 /* ONImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C75AFB2F17AF8B9B00F8A268 /* ONImagePickerViewController.m */; };
+		C75AFB3317AF982700F8A268 /* ONIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75AFB3217AF982700F8A268 /* ONIconCell.m */; };
 		C76CFF5517462E0800F972B7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5417462E0800F972B7 /* UIKit.framework */; };
 		C76CFF5717462E0800F972B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5617462E0800F972B7 /* Foundation.framework */; };
 		C76CFF5917462E0800F972B7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C76CFF5817462E0800F972B7 /* CoreGraphics.framework */; };
@@ -99,6 +101,10 @@
 		C73503EE17A021070057D51B /* icn_tabbar_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_tabbar_icon@2x.png"; sourceTree = "<group>"; };
 		C73503EF17A021070057D51B /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		C73503F017A021070057D51B /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
+		C75AFB2E17AF8B9B00F8A268 /* ONImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONImagePickerViewController.h; sourceTree = "<group>"; };
+		C75AFB2F17AF8B9B00F8A268 /* ONImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONImagePickerViewController.m; sourceTree = "<group>"; };
+		C75AFB3117AF982700F8A268 /* ONIconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ONIconCell.h; sourceTree = "<group>"; };
+		C75AFB3217AF982700F8A268 /* ONIconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ONIconCell.m; sourceTree = "<group>"; };
 		C76CFF5117462E0800F972B7 /* One.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = One.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76CFF5417462E0800F972B7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C76CFF5617462E0800F972B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -258,10 +264,14 @@
 				C76CFF7017462E0800F972B7 /* ONMainViewController.m */,
 				C7A796C9178C4F4A00E15608 /* ONSettingsViewController.h */,
 				C7A796CA178C4F4A00E15608 /* ONSettingsViewController.m */,
+				C75AFB2E17AF8B9B00F8A268 /* ONImagePickerViewController.h */,
+				C75AFB2F17AF8B9B00F8A268 /* ONImagePickerViewController.m */,
 				C713AACD179E8636005AF8AE /* ONHelper.h */,
 				C713AACE179E8636005AF8AE /* ONHelper.m */,
 				C7BAB39F17A21D8B0031F33F /* ONURLHandler.h */,
 				C7BAB3A017A21D8B0031F33F /* ONURLHandler.m */,
+				C75AFB3117AF982700F8A268 /* ONIconCell.h */,
+				C75AFB3217AF982700F8A268 /* ONIconCell.m */,
 				C76CFF6C17462E0800F972B7 /* MainStoryboard.storyboard */,
 				C76CFF5B17462E0800F972B7 /* Supporting Files */,
 			);
@@ -477,6 +487,8 @@
 				C7A796CB178C4F4A00E15608 /* ONSettingsViewController.m in Sources */,
 				C713AACF179E8636005AF8AE /* ONHelper.m in Sources */,
 				C7BAB3A117A21D8B0031F33F /* ONURLHandler.m in Sources */,
+				C75AFB3017AF8B9B00F8A268 /* ONImagePickerViewController.m in Sources */,
+				C75AFB3317AF982700F8A268 /* ONIconCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

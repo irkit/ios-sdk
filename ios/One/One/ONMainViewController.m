@@ -46,6 +46,9 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:YES];
 
+    // temp!!!!!!!
+    _cancelled = YES;
+
     // show IRNewPeripheralViewController only once
     if (! _cancelled && ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0)) {
         IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];

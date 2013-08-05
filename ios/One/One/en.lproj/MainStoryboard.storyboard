@@ -75,11 +75,11 @@
                                     <constraint firstItem="eRp-Bt-3eg" firstAttribute="leading" secondItem="SdG-pm-nwD" secondAttribute="leading" constant="12" type="user" id="qPt-Re-jEQ"/>
                                 </constraints>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectImageCell" rowHeight="80" id="S69-GF-4kz">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SelectImageCell" rowHeight="80" id="S69-GF-4kz">
                                 <rect key="frame" x="0.0" y="91" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="0.0" width="300" height="79"/>
+                                    <rect key="frame" x="10" y="0.0" width="280" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMX-QE-JOL">
@@ -121,6 +121,9 @@
                                     <constraint firstItem="qMX-QE-JOL" firstAttribute="leading" secondItem="S69-GF-4kz" secondAttribute="leading" constant="12" type="user" id="rnv-p5-Vpm"/>
                                     <constraint firstItem="qMX-QE-JOL" firstAttribute="top" secondItem="S69-GF-4kz" secondAttribute="top" type="default" id="xdp-la-oNn"/>
                                 </constraints>
+                                <connections>
+                                    <segue destination="lKl-bb-PH2" kind="push" identifier="SelectImage" id="hJv-qV-6xr"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Header1" rowHeight="40" id="DvA-FQ-vSq">
                                 <rect key="frame" x="0.0" y="171" width="320" height="40"/>
@@ -606,6 +609,127 @@
             </objects>
             <point key="canvasLocation" x="652" y="867"/>
         </scene>
+        <!--Image Picker View Controller - Select Image-->
+        <scene sceneID="ZGm-pg-j3P">
+            <objects>
+                <viewController autoresizesArchivedViewToFullSize="NO" id="lKl-bb-PH2" customClass="ONImagePickerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="11E-D2-K9R">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OZs-fu-4zb">
+                                <inset key="scrollIndicatorInsets" minX="0.0" minY="44" maxX="0.0" maxY="0.0"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="zcn-87-xv5">
+                                    <size key="itemSize" width="56" height="56"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="16" minY="16" maxX="16" maxY="16"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IconCell" id="QNT-vh-LZI" customClass="ONIconCell">
+                                        <rect key="frame" x="16" y="16" width="56" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ZA-gA-hH7"/>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="leading" secondItem="QNT-vh-LZI" secondAttribute="leading" type="default" id="Nhd-nc-GjF"/>
+                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="trailing" secondItem="QNT-vh-LZI" secondAttribute="trailing" type="default" id="YLs-LE-XzM"/>
+                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="top" secondItem="QNT-vh-LZI" secondAttribute="top" type="default" id="paU-2W-1aH"/>
+                                            <constraint firstItem="1ZA-gA-hH7" firstAttribute="bottom" secondItem="QNT-vh-LZI" secondAttribute="bottom" type="default" id="ula-Hl-xGA"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="1ZA-gA-hH7" id="oqH-Hu-Ra3"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="lKl-bb-PH2" id="uOU-DU-o78"/>
+                                    <outlet property="delegate" destination="lKl-bb-PH2" id="68X-jp-SKb"/>
+                                </connections>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MtK-ZQ-VEZ">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXq-1I-AXQ">
+                                        <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="159" id="GKh-cb-668"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
+                                        <state key="normal" title=" Icon" image="icn_tabbar_icon.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="icn_tabbar_icon_on.png">
+                                            <color key="titleColor" red="0.21176470589999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted" image="icn_tabbar_icon_on.png">
+                                            <color key="titleColor" red="0.21176470589999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="iconButtonTouched:" destination="lKl-bb-PH2" eventType="touchUpInside" id="9wx-ti-n2L"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIZ-RE-Yvz">
+                                        <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="160" id="nUN-n6-z4B"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
+                                        <state key="normal" title=" Album" image="icn_tabbar_album.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" image="icn_tabbar_album_on.png">
+                                            <color key="titleColor" red="0.21176470589999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted" image="icn_tabbar_album_on.png">
+                                            <color key="titleColor" red="0.21176470589999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="albumButtonTouched:" destination="lKl-bb-PH2" eventType="touchUpInside" id="r27-ZO-bjE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="GIZ-RE-Yvz" firstAttribute="trailing" secondItem="MtK-ZQ-VEZ" secondAttribute="trailing" type="default" id="0sd-EA-c8k"/>
+                                    <constraint firstItem="gXq-1I-AXQ" firstAttribute="leading" secondItem="MtK-ZQ-VEZ" secondAttribute="leading" type="default" id="BPR-uj-ArB"/>
+                                    <constraint firstItem="GIZ-RE-Yvz" firstAttribute="top" secondItem="MtK-ZQ-VEZ" secondAttribute="top" type="default" id="KuN-Hm-yii"/>
+                                    <constraint firstAttribute="height" constant="44" type="user" id="c1j-jB-Ujw"/>
+                                    <constraint firstItem="gXq-1I-AXQ" firstAttribute="bottom" secondItem="MtK-ZQ-VEZ" secondAttribute="bottom" type="default" id="i8i-Ki-7de"/>
+                                    <constraint firstItem="gXq-1I-AXQ" firstAttribute="top" secondItem="MtK-ZQ-VEZ" secondAttribute="top" type="default" id="mtx-HN-ZBV"/>
+                                    <constraint firstItem="GIZ-RE-Yvz" firstAttribute="bottom" secondItem="MtK-ZQ-VEZ" secondAttribute="bottom" type="default" id="tw7-dl-26Q"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.086274509803921567" green="0.086274509803921567" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="OZs-fu-4zb" firstAttribute="trailing" secondItem="11E-D2-K9R" secondAttribute="trailing" type="default" id="E71-gY-KwY"/>
+                            <constraint firstItem="MtK-ZQ-VEZ" firstAttribute="leading" secondItem="11E-D2-K9R" secondAttribute="leading" type="default" id="W5Y-qe-bBf"/>
+                            <constraint firstAttribute="bottom" secondItem="OZs-fu-4zb" secondAttribute="bottom" constant="44" type="user" id="ZLy-lS-Wbd"/>
+                            <constraint firstItem="OZs-fu-4zb" firstAttribute="leading" secondItem="11E-D2-K9R" secondAttribute="leading" type="default" id="cPV-va-JvI"/>
+                            <constraint firstItem="OZs-fu-4zb" firstAttribute="top" secondItem="11E-D2-K9R" secondAttribute="top" constant="44" type="user" id="eFK-ne-BPN"/>
+                            <constraint firstItem="MtK-ZQ-VEZ" firstAttribute="bottom" secondItem="11E-D2-K9R" secondAttribute="bottom" type="user" id="mA7-qr-A9D"/>
+                            <constraint firstItem="MtK-ZQ-VEZ" firstAttribute="trailing" secondItem="11E-D2-K9R" secondAttribute="trailing" type="default" id="z7k-C8-X4W"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select Image" id="GYP-Of-cSY"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="blackOpaque" prompted="NO"/>
+                    <connections>
+                        <outlet property="collectionView" destination="OZs-fu-4zb" id="YcZ-1t-WND"/>
+                        <outlet property="iconButton" destination="gXq-1I-AXQ" id="SA0-3h-rE6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sjh-h0-Oak" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="652" y="1470"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="aUR-eY-w7e">
             <objects>
@@ -628,6 +752,10 @@
         <image name="icn_actionbar_cancel.png" width="24" height="24"/>
         <image name="icn_actionbar_menu.png" width="24" height="24"/>
         <image name="icn_arrow.png" width="15" height="15"/>
+        <image name="icn_tabbar_album.png" width="24" height="24"/>
+        <image name="icn_tabbar_album_on.png" width="24" height="24"/>
+        <image name="icn_tabbar_icon.png" width="24" height="24"/>
+        <image name="icn_tabbar_icon_on.png" width="24" height="24"/>
         <image name="icon.png" width="57" height="57"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
