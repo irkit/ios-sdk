@@ -13,7 +13,6 @@
 @interface ONMainViewController ()
 
 @property (nonatomic) id peripheralObserver;
-@property (nonatomic) BOOL showingNewPeripheralViewController;
 @property (nonatomic) BOOL cancelled;
 
 @end
@@ -30,26 +29,6 @@
     self.tableView.dataSource = self;
     self.tableView.backgroundView = nil;
     self.tableView.separatorColor = [UIColor clearColor];
-
-    // show view controller when another peripheral is found
-    __weak ONMainViewController *_self = self;
-    _peripheralObserver = [[NSNotificationCenter defaultCenter]
-                           addObserverForName:IRKitDidDiscoverUnauthorizedPeripheralNotification
-                                       object:nil
-                                        queue:nil
-                                   usingBlock:^(NSNotification *note) {
-                                       if (_self.showingNewPeripheralViewController) {
-                                           return;
-                                       }
-                                       IRNewPeripheralViewController* c = [[IRNewPeripheralViewController alloc] init];
-                                       c.delegate = (id<IRNewPeripheralViewControllerDelegate>)_self;
-                                       [_self presentViewController:c
-                                                          animated:YES
-                                                        completion:^{
-                                           LOG( @"presented" );
-                                           _self.showingNewPeripheralViewController = YES;
-                                       }];
-                                   } ];
 
     _cancelled = NO;
 
@@ -75,7 +54,6 @@
                            animated:YES
                          completion:^{
             LOG( @"presented" );
-            _showingNewPeripheralViewController = YES;
         }];
     }
 }
@@ -145,7 +123,6 @@
     [self dismissViewControllerAnimated:YES
                              completion:^{
         LOG(@"dismissed");
-        _showingNewPeripheralViewController = NO;
     }];
 }
 
@@ -166,6 +143,7 @@
 
 #pragma mark - IRAnimatingControllerDelegate
 
+// animation :)
 - (void)controller:(id)controller
    didChangeObject:(id)object
        atIndexPath:(NSIndexPath *)indexPath
