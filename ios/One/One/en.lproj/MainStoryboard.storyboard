@@ -721,7 +721,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Select Image" id="GYP-Of-cSY">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="m6g-us-naE">
+                        <barButtonItem key="leftBarButtonItem" id="m6g-us-naE">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GdI-6c-XyY">
                                 <rect key="frame" x="5" y="10" width="35" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -791,6 +791,8 @@
         <class className="ONImagePickerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONImagePickerViewController.h"/>
             <relationships>
+                <relationship kind="action" name="albumButtonTouched:"/>
+                <relationship kind="action" name="backButtonTouched:"/>
                 <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="iconButton" candidateClass="UIButton"/>
             </relationships>
@@ -803,12 +805,14 @@
         </class>
         <class className="ONMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="settingsButtonPressed:"/>
+            </relationships>
         </class>
         <class className="ONSettingsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONSettingsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancelButtonTouched:"/>
-                <relationship kind="action" name="versionButtonTouched:"/>
                 <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
             </relationships>
         </class>

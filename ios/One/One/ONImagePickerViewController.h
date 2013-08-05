@@ -10,7 +10,12 @@
 
 @protocol ONImagePickerViewControllerDelegate;
 
-@interface ONImagePickerViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface ONImagePickerViewController : UIViewController<
+    UICollectionViewDataSource,
+    UICollectionViewDelegate,
+    UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate
+>
 
 @property (nonatomic, assign) id<ONImagePickerViewControllerDelegate> delegate;
 

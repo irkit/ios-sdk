@@ -8,6 +8,7 @@
 
 #import "ONImagePickerViewController.h"
 #import "ONIconCell.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface ONImagePickerViewController ()
 
@@ -31,8 +32,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-    _iconButton.selected = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +47,34 @@
 }
 
 - (IBAction)albumButtonTouched:(id)sender {
+    LOG_CURRENT_METHOD;
+    UIImagePickerController *c = [[UIImagePickerController alloc] init];
+    c.delegate = self;
+    c.modalPresentationStyle = UIModalPresentationCurrentContext;
+    c.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    c.mediaTypes = @[(NSString*)kUTTypeImage];
+    c.allowsEditing = YES;
+    [self presentViewController:c
+                       animated:YES
+                     completion:^{
+                         LOG( @"presented" );
+                     }];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    LOG_CURRENT_METHOD;
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    [self.delegate imagePickerViewController:self
+                                didPickImage:editedImage];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    LOG_CURRENT_METHOD;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -60,11 +87,9 @@
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         NSLog(@"animation start");
                          cell.imageView.alpha = 0.5;
                      }
                      completion:^(BOOL finished){
-                         NSLog(@"animation end");
                      }
      ];
 }
@@ -77,11 +102,9 @@
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         NSLog(@"animation start");
                          cell.imageView.alpha = 1.0;
                      }
                      completion:^(BOOL finished){
-                         NSLog(@"animation end");
                      }
      ];
 }
