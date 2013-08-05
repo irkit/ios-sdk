@@ -35,9 +35,9 @@
 
     _cancelled = NO;
 
-    IRSignals *signals = [[IRSignals alloc] init];
-    self.signals = signals;
+    _signals = [[IRSignals alloc] init];
     [_signals loadFromStandardUserDefaultsKey:@"irkit.signals"];
+    _signals.delegate = self;
 }
 
 - (void)dealloc {
@@ -48,9 +48,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:YES];
-
-    // temp!!!!!!!
-    _cancelled = YES;
 
     // show IRNewPeripheralViewController only once
     if (! _cancelled && ([IRKit sharedInstance].numberOfAuthorizedPeripherals == 0)) {
