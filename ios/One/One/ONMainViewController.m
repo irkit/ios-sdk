@@ -119,6 +119,16 @@
 - (IBAction)createIconPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
+    if (! _signals.countOfSignals) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Add New Signal first!"
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+
     [ONHelper createIcon:self.selectedIconImage
               forSignals:_signals
        completionHandler:^(NSHTTPURLResponse *response, NSDictionary *json, NSError *error) {
