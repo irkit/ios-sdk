@@ -81,20 +81,23 @@
     return cell.iconImage;
 }
 
-- (void) setSelectedIconImage: (UIImage*) image {
+- (void) setSelectedIconImage: (UIImage*) image andName: (NSString*) name {
     LOG_CURRENT_METHOD;
 
     ONImageSelectCell *cell = (ONImageSelectCell*)[self.view viewWithTag:TAG_ICON_IMAGE_CELL];
     [cell setIconImage:image];
+    cell.iconName.text = name;
 }
 
 #pragma mark - ONImagePickerViewControllerDelegate
 
-- (void)imagePickerViewController:(ONImagePickerViewController *)viewController didPickImage:(UIImage *)image {
+- (void)imagePickerViewController:(ONImagePickerViewController *)viewController
+                     didPickImage:(UIImage *)image
+                         withName:(NSString *)name {
     LOG_CURRENT_METHOD;
 
     if (image) {
-        [self setSelectedIconImage:image];
+        [self setSelectedIconImage:image andName:name];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

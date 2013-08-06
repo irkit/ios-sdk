@@ -25,6 +25,7 @@
 
 @required
 - (void)imagePickerViewController:(ONImagePickerViewController*)viewController
-                     didPickImage:(UIImage*)image;
+                     didPickImage:(UIImage*)image
+                         withName:(NSString*)name;
 
 @end

@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (nonatomic) UIImage *iconImage;
+@property (weak, nonatomic) IBOutlet UILabel *iconName;
 
 @end

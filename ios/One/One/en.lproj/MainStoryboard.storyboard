@@ -104,7 +104,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="yik-X3-VT2" secondAttribute="trailing" constant="12" type="user" id="9Pi-94-Lek"/>
                                                 <constraint firstAttribute="centerY" secondItem="yik-X3-VT2" secondAttribute="centerY" type="user" id="Kdh-D2-Cry"/>
-                                                <constraint firstItem="f2n-Bl-CLY" firstAttribute="leading" secondItem="xXe-zp-Kc2" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="SMN-sm-eZB"/>
+                                                <constraint firstItem="f2n-Bl-CLY" firstAttribute="leading" secondItem="xXe-zp-Kc2" secondAttribute="trailing" constant="10" type="user" id="SMN-sm-eZB"/>
                                                 <constraint firstAttribute="centerY" secondItem="f2n-Bl-CLY" secondAttribute="centerY" type="user" id="anf-OR-HFC"/>
                                                 <constraint firstItem="f2n-Bl-CLY" firstAttribute="top" secondItem="qMX-QE-JOL" secondAttribute="top" type="default" id="dN3-Di-0ip"/>
                                                 <constraint firstAttribute="centerY" secondItem="xXe-zp-Kc2" secondAttribute="centerY" type="user" id="gRn-Wl-kAe"/>
@@ -123,6 +123,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="iconImageView" destination="xXe-zp-Kc2" id="k6q-VI-wjj"/>
+                                    <outlet property="iconName" destination="f2n-Bl-CLY" id="8al-pF-mb8"/>
                                     <segue destination="lKl-bb-PH2" kind="push" identifier="SelectImage" id="hJv-qV-6xr"/>
                                 </connections>
                             </tableViewCell>
@@ -777,6 +778,58 @@
         <image name="icn_tabbar_icon_on.png" width="24" height="24"/>
         <image name="icon.png" width="57" height="57"/>
     </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ONIconCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONIconCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="ONImagePickerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONImagePickerViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="albumButtonTouched:"/>
+                <relationship kind="action" name="backButtonTouched:"/>
+                <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="iconButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="ONImageSelectCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONImageSelectCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="iconImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="iconName" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="ONMainViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="createIconPressed:"/>
+                <relationship kind="action" name="settingsButtonPressed:"/>
+            </relationships>
+        </class>
+        <class className="ONSettingsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ONSettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelButtonTouched:"/>
+                <relationship kind="action" name="versionButtonTouched:"/>
+                <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

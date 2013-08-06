@@ -35,7 +35,8 @@
 - (IBAction)backButtonTouched:(id)sender {
     LOG_CURRENT_METHOD;
     [self.delegate imagePickerViewController:self
-                                didPickImage:nil];
+                                didPickImage:nil
+                                    withName:nil];
 }
 
 - (IBAction)albumButtonTouched:(id)sender {
@@ -61,7 +62,8 @@
 
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     [self.delegate imagePickerViewController:self
-                                didPickImage:editedImage];
+                                didPickImage:editedImage
+                                    withName:@"Original"];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -106,7 +108,8 @@
 
     ONIconCell *cell = (ONIconCell*)[collectionView viewWithTag:indexPath.row+1];
     [self.delegate imagePickerViewController:self
-                                didPickImage:cell.imageView.image];
+                                didPickImage:cell.imageView.image
+                                    withName:[self icons][ indexPath.row ][ 1 ]];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -120,7 +123,7 @@
     LOG_CURRENT_METHOD;
     ONIconCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IconCell"
                                                                  forIndexPath:indexPath];
-    NSString *name = [self icons][ indexPath.row ];
+    NSString *name = [self icons][ indexPath.row ][ 0 ];
     cell.imageView.image = [UIImage imageNamed: name];
     cell.imageView.layer.cornerRadius = 10.;
     cell.imageView.layer.masksToBounds = YES;
@@ -132,47 +135,47 @@
 
 - (NSArray*) icons {
     return @[
-             @"icon_power.png",
-             @"icon_tv.png",
-             @"icon_aircon.png",
-             @"icon_fan.png",
-             @"icon_light.png",
-             @"icon_time.png",
-             @"icon_eject.png",
-             @"icon_left_01.png",
-             @"icon_left_02.png",
-             @"icon_right_01.png",
-             @"icon_right_02.png",
-             @"icon_rewind.png",
-             @"icon_prev.png",
-             @"icon_pause.png",
-             @"icon_play.png",
-             @"icon_playpause.png",
-             @"icon_recording.png",
-             @"icon_stop.png",
-             @"icon_next.png",
-             @"icon_ff.png",
-             @"icon_top_01.png",
-             @"icon_top_02.png",
-             @"icon_up.png",
-             @"icon_bottom_01.png",
-             @"icon_bottom_02.png",
-             @"icon_down.png",
-             @"icon_pluss.png",
-             @"icon_minus.png",
-             @"icon_0.png",
-             @"icon_1.png",
-             @"icon_2.png",
-             @"icon_3.png",
-             @"icon_4.png",
-             @"icon_5.png",
-             @"icon_6.png",
-             @"icon_7.png",
-             @"icon_8.png",
-             @"icon_9.png",
-             @"icon_10.png",
-             @"icon_11.png",
-             @"icon_12.png",
+             @[ @"icon_power.png",     @"Power" ],
+             @[ @"icon_tv.png",        @"TV" ],
+             @[ @"icon_aircon.png",    @"Air" ],
+             @[ @"icon_fan.png",       @"Fan" ],
+             @[ @"icon_light.png",     @"Light" ],
+             @[ @"icon_time.png",      @"Time" ],
+             @[ @"icon_eject.png",     @"Eject" ],
+             @[ @"icon_left_01.png",   @"Left 1" ],
+             @[ @"icon_left_02.png",   @"Left 2" ],
+             @[ @"icon_right_01.png",  @"Right 1" ],
+             @[ @"icon_right_02.png",  @"Right 2" ],
+             @[ @"icon_rewind.png",    @"Rewind" ],
+             @[ @"icon_prev.png",      @"Prev" ],
+             @[ @"icon_play.png",      @"Play" ],
+             @[ @"icon_pause.png",     @"Pause" ],
+             @[ @"icon_playpause.png", @"Pause 2" ],
+             @[ @"icon_recording.png", @"Record" ],
+             @[ @"icon_stop.png",      @"Stop" ],
+             @[ @"icon_next.png",      @"Next" ],
+             @[ @"icon_ff.png",        @"FF" ],
+             @[ @"icon_top_01.png",    @"Up 1" ],
+             @[ @"icon_top_02.png",    @"Up 2" ],
+             @[ @"icon_up.png",        @"Up 3" ],
+             @[ @"icon_bottom_01.png", @"Down 1" ],
+             @[ @"icon_bottom_02.png", @"Down 2" ],
+             @[ @"icon_down.png",      @"Down 3" ],
+             @[ @"icon_pluss.png",     @"Plus" ],
+             @[ @"icon_minus.png",     @"Minus" ],
+             @[ @"icon_0.png",         @"0" ],
+             @[ @"icon_1.png",         @"1" ],
+             @[ @"icon_2.png",         @"2" ],
+             @[ @"icon_3.png",         @"3" ],
+             @[ @"icon_4.png",         @"4" ],
+             @[ @"icon_5.png",         @"5" ],
+             @[ @"icon_6.png",         @"6" ],
+             @[ @"icon_7.png",         @"7" ],
+             @[ @"icon_8.png",         @"8" ],
+             @[ @"icon_9.png",         @"9" ],
+             @[ @"icon_10.png",        @"10" ],
+             @[ @"icon_11.png",        @"11" ],
+             @[ @"icon_12.png",        @"12" ],
              ];
 }
 
