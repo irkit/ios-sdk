@@ -11,5 +11,6 @@
 @interface ONImageSelectCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (nonatomic) UIImage *iconImage;
 
 @end

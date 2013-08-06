@@ -10,8 +10,9 @@
 #import <BlocksKit/BlocksKit.h>
 #import "ONHelper.h"
 #import "ONImagePickerViewController.h"
+#import "ONImageSelectCell.h"
 
-#define TAG_ICON_IMAGE 1
+#define TAG_ICON_IMAGE_CELL 1
 
 @interface ONMainViewController ()
 
@@ -76,15 +77,15 @@
 - (UIImage*) selectedIconImage {
     LOG_CURRENT_METHOD;
 
-    UIImageView *imageView = (UIImageView*)[self.view viewWithTag:TAG_ICON_IMAGE];
-    return imageView.image;
+    ONImageSelectCell *cell = (ONImageSelectCell*)[self.view viewWithTag:TAG_ICON_IMAGE_CELL];
+    return cell.iconImage;
 }
 
 - (void) setSelectedIconImage: (UIImage*) image {
     LOG_CURRENT_METHOD;
 
-    UIImageView *imageView = (UIImageView*)[self.view viewWithTag:TAG_ICON_IMAGE];
-    imageView.image = image;
+    ONImageSelectCell *cell = (ONImageSelectCell*)[self.view viewWithTag:TAG_ICON_IMAGE_CELL];
+    [cell setIconImage:image];
 }
 
 #pragma mark - ONImagePickerViewControllerDelegate
@@ -234,6 +235,7 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"SelectImageCell"];
             cell.backgroundView = [[UIView alloc] initWithFrame:cell.bounds];
             cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.bounds];
+            cell.tag = TAG_ICON_IMAGE_CELL;
             break;
         case 2:
         default:
