@@ -11,7 +11,8 @@
 
 @interface IRPeripheral : NSObject<CBPeripheralDelegate>
 
-// can be nil if peripheral is found but UUID isn't
+// can be nil if CBPeripheral is found but UUID isn't,
+// or loaded from NSUserDefaults but CBPeripheral not retrieved yet.
 @property (nonatomic) CFUUIDRef UUID;
 @property (nonatomic, copy) NSString *customizedName;
 @property (nonatomic, copy) NSDate   *foundDate;

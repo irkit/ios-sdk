@@ -23,7 +23,7 @@
         return [ONURLHandler canHandleOpenURL: url];
     }
 
-    [[IRKit sharedInstance] startScan];
+    [IRKit sharedInstance]; // instantiate
     //[IRKit sharedInstance].retainConnectionInBackground = YES;
 
     // customize everything

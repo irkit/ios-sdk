@@ -136,7 +136,9 @@
         }
     }
     LOG( @"will disconnect" );
-    [_manager cancelPeripheralConnection: _peripheral];
+    if (_peripheral) {
+        [_manager cancelPeripheralConnection: _peripheral];
+    }
 }
 
 - (void) didDisconnect {
@@ -210,7 +212,7 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
 }
 
 - (NSString*)iconURL {
-    return [NSString stringWithFormat:@"http://%@/static/images/model/%@.png", ONURL_BASE, _modelName || @"A" ];
+    return [NSString stringWithFormat:@"%@/static/images/model/%@.png", ONURL_BASE, _modelName ? _modelName : @"A" ];
 }
 
 #pragma mark - Private methods

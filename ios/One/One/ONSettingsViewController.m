@@ -68,7 +68,8 @@
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
-- (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController
+             didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
 
     [self.navigationController popViewControllerAnimated:YES];

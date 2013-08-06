@@ -77,7 +77,8 @@
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
-- (void)scene3ViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController
+             didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated:YES];
 }

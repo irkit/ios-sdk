@@ -37,11 +37,18 @@
     self.view = view;
 }
 
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+    [[IRKit sharedInstance] stopScan];
+}
+
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
+
+    [[IRKit sharedInstance] startScan];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -102,8 +109,8 @@
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
-- (void)scene3ViewController:(IRPeripheralNameEditViewController *)viewController
-           didFinishWithInfo:(NSDictionary*)info {
+- (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController
+             didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {

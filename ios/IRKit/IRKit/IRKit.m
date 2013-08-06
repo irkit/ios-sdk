@@ -75,6 +75,7 @@ static BOOL useCustomizedStyle;
                                                                              }];
     _retainConnectionInBackground = NO;
     [IRViewCustomizer sharedInstance]; // init
+    [self retrieveKnownPeripherals];
 
     return self;
 }
@@ -202,8 +203,10 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 
     // hack
     // see http://stackoverflow.com/questions/9896562/what-exactly-can-corebluetooth-applications-do-whilst-in-the-background/17484051#17484051
-    [self stopScan];
-    [self startScan];
+    if (_retainConnectionInBackground) {
+        [self stopScan];
+        [self startScan];
+    }
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
