@@ -7,12 +7,14 @@
 //
 
 #import "MMAppDelegate.h"
+#import <IRKit/IRKit.h>
 
 @implementation MMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [IRKit sharedInstance];
     return YES;
 }
 							
