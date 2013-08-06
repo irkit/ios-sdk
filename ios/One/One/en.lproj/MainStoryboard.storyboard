@@ -86,7 +86,6 @@
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" text="Default" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2n-Bl-CLY">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="80" id="L8s-5b-bDq"/>
                                                         <constraint firstAttribute="width" constant="226" id="cSN-ou-yYQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
@@ -103,11 +102,12 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.16862745100000001" green="0.1764705882" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="f2n-Bl-CLY" firstAttribute="top" secondItem="qMX-QE-JOL" secondAttribute="top" constant="-1" id="9O4-LN-IrH"/>
                                                 <constraint firstAttribute="trailing" secondItem="yik-X3-VT2" secondAttribute="trailing" constant="12" type="user" id="9Pi-94-Lek"/>
-                                                <constraint firstItem="yik-X3-VT2" firstAttribute="centerY" secondItem="f2n-Bl-CLY" secondAttribute="centerY" type="default" id="BGH-4P-SgP"/>
+                                                <constraint firstAttribute="centerY" secondItem="yik-X3-VT2" secondAttribute="centerY" type="user" id="Kdh-D2-Cry"/>
                                                 <constraint firstItem="f2n-Bl-CLY" firstAttribute="leading" secondItem="xXe-zp-Kc2" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="SMN-sm-eZB"/>
-                                                <constraint firstItem="xXe-zp-Kc2" firstAttribute="centerY" secondItem="yik-X3-VT2" secondAttribute="centerY" type="user" id="ZGO-sO-BPO"/>
+                                                <constraint firstAttribute="centerY" secondItem="f2n-Bl-CLY" secondAttribute="centerY" type="user" id="anf-OR-HFC"/>
+                                                <constraint firstItem="f2n-Bl-CLY" firstAttribute="top" secondItem="qMX-QE-JOL" secondAttribute="top" type="default" id="dN3-Di-0ip"/>
+                                                <constraint firstAttribute="centerY" secondItem="xXe-zp-Kc2" secondAttribute="centerY" type="user" id="gRn-Wl-kAe"/>
                                                 <constraint firstItem="xXe-zp-Kc2" firstAttribute="leading" secondItem="qMX-QE-JOL" secondAttribute="leading" constant="13" id="t4f-X4-CIn"/>
                                             </constraints>
                                         </view>
@@ -117,9 +117,9 @@
                                 <color key="backgroundColor" red="0.16862745098039217" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="qMX-QE-JOL" secondAttribute="trailing" constant="12" type="user" id="JZa-72-9x2"/>
-                                    <constraint firstItem="qMX-QE-JOL" firstAttribute="bottom" secondItem="S69-GF-4kz" secondAttribute="bottom" type="default" id="mqg-2x-XcH"/>
+                                    <constraint firstItem="qMX-QE-JOL" firstAttribute="top" secondItem="S69-GF-4kz" secondAttribute="top" type="default" id="Lpg-mB-sZQ"/>
+                                    <constraint firstAttribute="centerY" secondItem="qMX-QE-JOL" secondAttribute="centerY" type="user" id="qh6-X3-3Jd"/>
                                     <constraint firstItem="qMX-QE-JOL" firstAttribute="leading" secondItem="S69-GF-4kz" secondAttribute="leading" constant="12" type="user" id="rnv-p5-Vpm"/>
-                                    <constraint firstItem="qMX-QE-JOL" firstAttribute="top" secondItem="S69-GF-4kz" secondAttribute="top" type="default" id="xdp-la-oNn"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="iconImageView" destination="xXe-zp-Kc2" id="k6q-VI-wjj"/>
@@ -555,7 +555,7 @@
                                 </constraints>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="SettingsHeader2" rowHeight="16" id="nqW-cG-VAb">
-                                <rect key="frame" x="0.0" y="263" width="320" height="16"/>
+                                <rect key="frame" x="0.0" y="263" width="320" height="17"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="10" y="0.0" width="300" height="15"/>
@@ -791,8 +791,6 @@
         <class className="ONImagePickerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONImagePickerViewController.h"/>
             <relationships>
-                <relationship kind="action" name="albumButtonTouched:"/>
-                <relationship kind="action" name="backButtonTouched:"/>
                 <relationship kind="outlet" name="collectionView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="iconButton" candidateClass="UIButton"/>
             </relationships>
@@ -805,14 +803,12 @@
         </class>
         <class className="ONMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-            </relationships>
         </class>
         <class className="ONSettingsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ONSettingsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cancelButtonTouched:"/>
+                <relationship kind="action" name="versionButtonTouched:"/>
                 <relationship kind="outlet" name="versionButton" candidateClass="UIButton"/>
             </relationships>
         </class>
