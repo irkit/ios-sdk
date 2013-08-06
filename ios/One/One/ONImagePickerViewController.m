@@ -9,6 +9,7 @@
 #import "ONImagePickerViewController.h"
 #import "ONIconCell.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface ONImagePickerViewController ()
 
@@ -19,15 +20,6 @@
 
 @implementation ONImagePickerViewController
 
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//}
-//
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -121,16 +113,42 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     LOG_CURRENT_METHOD;
-    return 4;
+    return [self icons].count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
     ONIconCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"IconCell"
                                                                  forIndexPath:indexPath];
-    cell.imageView.image = [UIImage imageNamed: @"icon.png"];
+    NSString *name = [self icons][ indexPath.row ];
+    cell.imageView.image = [UIImage imageNamed: name];
+    cell.imageView.layer.cornerRadius = 10.;
+    cell.imageView.layer.masksToBounds = YES;
     cell.tag = indexPath.row + 1;
     return cell;
+}
+
+#pragma mark -
+
+- (NSArray*) icons {
+    return @[
+                @"icon_tv.png",
+                @"icon_time.png",
+                @"icon_stop.png",
+                @"icon_rewind.png",
+                @"icon_recording.png",
+                @"icon_prev.png",
+                @"icon_power.png",
+                @"icon_playpause.png",
+                @"icon_play.png",
+                @"icon_pause.png",
+                @"icon_next.png",
+                @"icon_light.png",
+                @"icon_ff.png",
+                @"icon_fan.png",
+                @"icon_eject.png",
+                @"icon_aircon.png",
+             ];
 }
 
 @end
