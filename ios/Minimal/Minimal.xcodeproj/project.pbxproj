@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7332E6717B11C3F0070CF56 /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C758146D17B0ACDB00927E12 /* IRKitResources.bundle */; };
 		C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144817B0AB9200927E12 /* UIKit.framework */; };
 		C758144B17B0AB9200927E12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144A17B0AB9200927E12 /* Foundation.framework */; };
 		C758144D17B0AB9200927E12 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144C17B0AB9200927E12 /* CoreGraphics.framework */; };
@@ -179,6 +180,7 @@
 				C758145D17B0AB9200927E12 /* Default@2x.png in Resources */,
 				C758145F17B0AB9200927E12 /* Default-568h@2x.png in Resources */,
 				C758146217B0AB9200927E12 /* MainStoryboard.storyboard in Resources */,
+				C7332E6717B11C3F0070CF56 /* IRKitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +325,7 @@
 				C758146A17B0AB9200927E12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
