@@ -23,6 +23,11 @@
                                                                          path:@"/apps/one/icons/"
                                                                    parameters:nil
                                                     constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+                                                        NSString *title = ((IRSignal*)[signals objectAtIndex:0]).name;
+                                                        NSData *titleData = [NSData dataWithBytes:[title UTF8String]
+                                                                                           length:[title lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
+                                                        [formData appendPartWithFormData:titleData
+                                                                                    name:@"title"];
                                                         [formData appendPartWithFileData:UIImagePNGRepresentation(image)
                                                                                     name:@"icon"
                                                                                 fileName:@"icon.png"

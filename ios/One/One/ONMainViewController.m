@@ -87,14 +87,6 @@
     imageView.image = image;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"SelectImage"]) {
-        ONImagePickerViewController *vc = (ONImagePickerViewController*)segue.destinationViewController;
-        vc.delegate = self;
-    }
-}
-
 #pragma mark - ONImagePickerViewControllerDelegate
 
 - (void)imagePickerViewController:(ONImagePickerViewController *)viewController didPickImage:(UIImage *)image {
@@ -145,6 +137,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"SelectImage"]) {
+        ONImagePickerViewController *vc = (ONImagePickerViewController*)segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
 
 #pragma mark - IRNewPeripheralViewControllerDelegate
