@@ -13,6 +13,7 @@
 @interface IRNewPeripheralViewController ()
 
 @property (nonatomic) UINavigationController *navController;
+@property (nonatomic) id becomeActiveObserver;
 
 @end
 
@@ -40,6 +41,7 @@
 - (void)dealloc {
     LOG_CURRENT_METHOD;
     [[IRKit sharedInstance] stopScan];
+    [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
 }
 
 - (void)viewDidLoad {
@@ -49,6 +51,14 @@
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
     [[IRKit sharedInstance] startScan];
+
+    _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
+                                                                              object:nil
+                                                                               queue:[NSOperationQueue mainQueue]
+                                                                          usingBlock:^(NSNotification *note) {
+                                                                              LOG( @"became active" );
+                                                                              [[IRKit sharedInstance] startScan];
+                                                                          }];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

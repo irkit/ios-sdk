@@ -19,7 +19,6 @@ static BOOL useCustomizedStyle;
 @property (nonatomic) CBCentralManager* manager;
 @property (nonatomic) BOOL shouldScan;
 @property (nonatomic) id terminateObserver;
-@property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) id enterBackgroundObserver;
 
 @end
@@ -53,14 +52,6 @@ static BOOL useCustomizedStyle;
                                                                            LOG( @"terminating" );
                                                                            [_self save];
                                                                        }];
-    _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
-                                                                              object:nil
-                                                                               queue:[NSOperationQueue mainQueue]
-                                                                          usingBlock:^(NSNotification *note) {
-                                                                              LOG( @"became active" );
-                                                                              _shouldScan = YES;
-                                                                              [_self centralManagerDidUpdateState:_self.manager];
-                                                                          }];
     _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
                                                                                  object:nil
                                                                                   queue:[NSOperationQueue mainQueue]
@@ -83,7 +74,6 @@ static BOOL useCustomizedStyle;
 - (void)dealloc {
     LOG_CURRENT_METHOD;
     [[NSNotificationCenter defaultCenter] removeObserver:_terminateObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];
 }
 
@@ -214,8 +204,6 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 
     if (_shouldScan && (central.state == CBCentralManagerStatePoweredOn)) {
         _shouldScan = NO;
-
-        [self retrieveKnownPeripherals];
         [self startScan];
     }
 }
