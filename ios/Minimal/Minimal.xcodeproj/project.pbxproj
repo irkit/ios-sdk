@@ -67,7 +67,6 @@
 		C758143C17B0AB9200927E12 = {
 			isa = PBXGroup;
 			children = (
-				C758147217B0AE2600927E12 /* CoreBluetooth.framework */,
 				C758144E17B0AB9200927E12 /* Minimal */,
 				C758144717B0AB9200927E12 /* Frameworks */,
 				C758144617B0AB9200927E12 /* Products */,
@@ -85,8 +84,9 @@
 		C758144717B0AB9200927E12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C758146D17B0ACDB00927E12 /* IRKitResources.bundle */,
 				C758146B17B0ACA100927E12 /* libIRKit.a */,
+				C758146D17B0ACDB00927E12 /* IRKitResources.bundle */,
+				C758147217B0AE2600927E12 /* CoreBluetooth.framework */,
 				C758144817B0AB9200927E12 /* UIKit.framework */,
 				C758144A17B0AB9200927E12 /* Foundation.framework */,
 				C758144C17B0AB9200927E12 /* CoreGraphics.framework */,
@@ -99,9 +99,9 @@
 			children = (
 				C758145717B0AB9200927E12 /* MMAppDelegate.h */,
 				C758145817B0AB9200927E12 /* MMAppDelegate.m */,
-				C758146017B0AB9200927E12 /* MainStoryboard.storyboard */,
 				C758146317B0AB9200927E12 /* MMViewController.h */,
 				C758146417B0AB9200927E12 /* MMViewController.m */,
+				C758146017B0AB9200927E12 /* MainStoryboard.storyboard */,
 				C758144F17B0AB9200927E12 /* Supporting Files */,
 			);
 			path = Minimal;
