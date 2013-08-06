@@ -68,7 +68,7 @@
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
-- (void)scene3ViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG( @"info: %@", info );
 
     [self.navigationController popViewControllerAnimated:YES];
@@ -80,9 +80,9 @@
 
 #pragma mark - IRNewPeripheralViewControllerDelegate
 
-- (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithInfo:(NSDictionary *)info
-{
-    LOG( @"info: %@", info );
+- (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController
+            didFinishWithPeripheral:(IRPeripheral *)peripheral {
+    LOG( @"peripheral: %@", peripheral );
 
     [self dismissViewControllerAnimated:YES
                              completion:^{

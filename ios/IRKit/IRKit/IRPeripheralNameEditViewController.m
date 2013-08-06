@@ -32,10 +32,9 @@
 
     self.title = @"Decide a name...";
     self.navigationItem.hidesBackButton    = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                              target:self
-                                              action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                           target:self
+                                                                                           action:@selector(doneButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
@@ -65,11 +64,11 @@
     _peripheral.customizedName = _textField.text;
     [[IRKit sharedInstance] save];
 
-    [self.delegate scene3ViewController:self
-                      didFinishWithInfo:@{
-             IRViewControllerResultType: IRViewControllerResultTypeDone,
-       IRViewControllerResultPeripheral: _peripheral,
-             IRViewControllerResultText: _textField.text,
+    [self.delegate nameEditViewController:self
+                        didFinishWithInfo:@{
+               IRViewControllerResultType: IRViewControllerResultTypeDone,
+         IRViewControllerResultPeripheral: _peripheral,
+               IRViewControllerResultText: _textField.text,
      }];
 }
 

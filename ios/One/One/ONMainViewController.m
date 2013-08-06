@@ -150,10 +150,8 @@
 #pragma mark - IRNewPeripheralViewControllerDelegate
 
 - (void)newPeripheralViewController:(IRNewPeripheralViewController*)viewController
-                  didFinishWithInfo:(NSDictionary*)info {
-    LOG( @"info: %@", info );
-
-    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+            didFinishWithPeripheral:(IRPeripheral *)peripheral {
+    if (! peripheral) {
         _cancelled = YES;
     }
     [self dismissViewControllerAnimated:YES
@@ -165,11 +163,12 @@
 #pragma mark - IRNewSignalViewControllerDelegate
 
 - (void)newSignalViewController:(IRNewSignalViewController *)viewController
-              didFinishWithInfo:(NSDictionary*)info {
-    LOG( @"info: %@", info );
+            didFinishWithSignal:(IRSignal*)signal {
+    LOG( @"signal: %@", signal );
 
-    if ([info[IRViewControllerResultType] isEqual: IRViewControllerResultTypeDone]) {
-        [_signals addSignalsObject:info[IRViewControllerResultSignal]];
+    if (signal) {
+        // signal is nil if cancelled
+        [_signals addSignalsObject:signal];
         [_signals saveToStandardUserDefaultsWithKey:@"irkit.signals"];
     }
     [self dismissViewControllerAnimated:YES completion:^{

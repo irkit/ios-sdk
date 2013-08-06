@@ -25,6 +25,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)newPeripheralViewController:(IRNewPeripheralViewController*)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)newPeripheralViewController:(IRNewPeripheralViewController*)viewController didFinishWithPeripheral:(IRPeripheral*)peripheral;
 
 @end

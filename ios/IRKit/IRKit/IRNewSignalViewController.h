@@ -24,6 +24,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)newSignalViewController:(IRNewSignalViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)newSignalViewController:(IRNewSignalViewController *)viewController didFinishWithSignal:(IRSignal*)signal;
 
 @end

@@ -82,11 +82,9 @@
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
-                                 didFinishWithInfo:@{
-                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
-         }];
+                           didFinishWithPeripheral:nil];
     }
-    // shouldnt happen
+    ASSERT(1, @"non cancelled results should be handled elsewhere");
 }
 
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
@@ -97,11 +95,9 @@
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
-                                 didFinishWithInfo:@{
-                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
-         }];
+                           didFinishWithPeripheral:nil];
     }
-    // shouldnt happen
+    ASSERT(1, @"non cancelled results should be handled elsewhere");
 }
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
@@ -113,11 +109,7 @@
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
         IRPeripheral *peripheral = info[IRViewControllerResultPeripheral];
         [self.delegate newPeripheralViewController:self
-                                 didFinishWithInfo:@{
-                        IRViewControllerResultType: IRViewControllerResultTypeDone,
-                  IRViewControllerResultPeripheral: peripheral,
-         }];
-
+                           didFinishWithPeripheral:peripheral];
     }
 }
 

@@ -77,9 +77,7 @@
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newSignalViewController:self
-                             didFinishWithInfo:@{
-                        IRViewControllerResultType: IRViewControllerResultTypeCancelled
-         }];
+                           didFinishWithSignal:nil];
     }
     ASSERT(1, @"non cancelled results should be handled elsewhere");
 }
@@ -94,10 +92,7 @@
         IRSignal *signal = info[IRViewControllerResultSignal];
 
         [self.delegate newSignalViewController:self
-                             didFinishWithInfo:@{
-                    IRViewControllerResultType: IRViewControllerResultTypeDone,
-                  IRViewControllerResultSignal: signal
-         }];
+                           didFinishWithSignal:signal];
     }
 }
 
