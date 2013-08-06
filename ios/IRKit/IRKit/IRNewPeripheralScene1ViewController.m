@@ -10,8 +10,10 @@
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRConst.h"
+#import "IRPeripherals.h"
 #import "IRPeripheral.h"
 #import "IRViewCustomizer.h"
+#import "IRKit.h"
 
 @interface IRNewPeripheralScene1ViewController ()
 
@@ -51,7 +53,6 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
 
-    // TODO what if already connected?
     _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidConnectPeripheralNotification
                                                                   object:nil
                                                                    queue:[NSOperationQueue mainQueue]
@@ -59,6 +60,15 @@
                                                                   LOG( @"new irkit connected");
                                                                   [self didConnectPeripheral: note.object];
                                                               }];
+
+    IRPeripherals *peripherals = [IRKit sharedInstance].peripherals;
+    for (IRPeripheral *peripheral in peripherals.peripherals) {
+        if (peripheral.isReady && ! peripheral.authorized) {
+            // user might have already connected their peripheral
+            [self didConnectPeripheral:peripheral];
+            return;
+        }
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
