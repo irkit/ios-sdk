@@ -1,11 +1,3 @@
-//
-//  ONURLQueryTests.m
-//  One
-//
-//  Created by Masakazu Ohtsuka on 2013/07/26.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "ONURLQueryTests.h"
 #import "ONURLHandler.h"
 #import <IRKit/IRKit.h>

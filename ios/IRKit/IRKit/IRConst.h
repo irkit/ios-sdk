@@ -1,11 +1,3 @@
-//
-//  IRConst.h
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2013/05/18.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #ifndef IRKit_IRConst_h
 #define IRKit_IRConst_h
 

@@ -1,11 +1,3 @@
-//
-//  MMAppDelegate.m
-//  Minimal
-//
-//  Created by Masakazu Ohtsuka on 2013/08/06.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "MMAppDelegate.h"
 #import <IRKit/IRKit.h>
 

@@ -1,11 +1,3 @@
-//
-//  IRViewCustomizer.m
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2013/07/31.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "IRViewCustomizer.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignalNameEditViewController.h"

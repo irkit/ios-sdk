@@ -1,10 +1,3 @@
-//
-//  IRHelper.m
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2013/05/23.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
 //  our SDK does not pollute global namespace or objects
 //  only classes prefixed with IR*
 
@@ -26,7 +19,7 @@
 // array of short values
 + (NSString*) sha1:(NSArray*) array {
     unsigned char digest[CC_SHA1_DIGEST_LENGTH];
-    
+
     CC_SHA1_CTX ctx;
     CC_SHA1_Init(&ctx);
     for (size_t i = 0; i < array.count; i++) {
@@ -34,7 +27,7 @@
         CC_SHA1_Update(&ctx, &val, sizeof(uint16_t));
     }
     CC_SHA1_Final(digest, &ctx);
-    
+
     NSString *s = [NSString stringWithFormat: @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",digest[0], digest[1], digest[2], digest[3], digest[4], digest[5], digest[6], digest[7], digest[8], digest[9], digest[10], digest[11], digest[12], digest[13], digest[14], digest[15], digest[16], digest[17], digest[18], digest[19]];
     return s;
 }
@@ -95,7 +88,7 @@
 
 + (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid {
     LOG_CURRENT_METHOD;
-    
+
     for (CBService *service in peripheral.services) {
         for (CBCharacteristic *c12c in service.characteristics) {
             if ([IRHelper CBUUID:c12c.UUID isEqualToCBUUID:uuid]) {
@@ -122,7 +115,7 @@
                                          withCBUUID:(CBUUID*)characteristicUUID
                                 inServiceWithCBUUID:(CBUUID*)serviceUUID {
     LOG_CURRENT_METHOD;
-    
+
     CBService *service = [self findServiceInPeripheral:peripheral withUUID:serviceUUID];
     return [self findCharacteristicInService:service withCBUUID:characteristicUUID];
 }
@@ -130,7 +123,7 @@
 + (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic
                                                             withCBUUID:(CBUUID*)uuid {
     LOG_CURRENT_METHOD;
-    
+
     CBService *service = characteristic.service;
     if ( ! service ) {
         return nil;
@@ -143,7 +136,7 @@
 + (void)loadImage:(NSString*)url
 completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler {
     LOG_CURRENT_METHOD;
-    
+
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.];
     [NSURLConnection sendAsynchronousRequest:request

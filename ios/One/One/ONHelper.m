@@ -1,11 +1,3 @@
-//
-//  ONHelper.m
-//  One
-//
-//  Created by Masakazu Ohtsuka on 2013/07/23.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "ONHelper.h"
 #import "AFNetworking.h"
 

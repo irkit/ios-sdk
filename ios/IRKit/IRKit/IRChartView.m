@@ -1,11 +1,3 @@
-//
-//  IRChartView.m
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2013/05/21.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "IRChartView.h"
 
 #define LOG_DISABLED 1

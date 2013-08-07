@@ -1,11 +1,3 @@
-//
-//  IRPersistentStore.m
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2013/05/23.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "IRPersistentStore.h"
 
 #define IR_NSUSERDEFAULTS_PREFIX @"ir"

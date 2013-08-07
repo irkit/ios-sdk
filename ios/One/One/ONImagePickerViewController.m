@@ -1,11 +1,3 @@
-//
-//  ONImagePickerViewController.m
-//  One
-//
-//  Created by Masakazu Ohtsuka on 2013/08/05.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "ONImagePickerViewController.h"
 #import "ONIconCell.h"
 #import <MobileCoreServices/MobileCoreServices.h>

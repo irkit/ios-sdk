@@ -1,11 +1,3 @@
-//
-//  ONURLHandler.m
-//  One
-//
-//  Created by Masakazu Ohtsuka on 2013/07/26.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "ONURLHandler.h"
 #import "ONMainViewController.h"
 

@@ -1,11 +1,3 @@
-//
-//  IRSignalNameEditViewController.m
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2013/05/17.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "IRSignalNameEditViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
