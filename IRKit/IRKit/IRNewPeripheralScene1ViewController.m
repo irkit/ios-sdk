@@ -86,7 +86,7 @@
         // remembers me
         IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController"
                                                                                                        bundle:resources];
-        c.delegate = self.delegate;
+        c.delegate = (id<IRPeripheralNameEditViewControllerDelegate>)self.delegate;
         c.peripheral = peripheral;
         [self.navigationController pushViewController:c
                                              animated:YES];
@@ -95,7 +95,7 @@
     IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName:@"IRNewPeripheralScene2ViewController"
                                                                                                        bundle:resources];
     c.peripheral = peripheral;
-    c.delegate = self.delegate;
+    c.delegate = (id<IRNewPeripheralScene2ViewControllerDelegate>)self.delegate;
     [self.navigationController pushViewController:c
                                          animated:YES];
 

@@ -73,7 +73,7 @@
                                                                   ofType:@"bundle"]];
     IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController"
                                                                                                    bundle:resources];
-    c.delegate = self.delegate;
+    c.delegate = (id<IRPeripheralNameEditViewControllerDelegate>)self.delegate;
     c.peripheral = _peripheral;
     [self.navigationController pushViewController:c
                                          animated:YES];

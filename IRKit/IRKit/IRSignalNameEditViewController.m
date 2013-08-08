@@ -70,7 +70,7 @@
     }
 
     NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:@"^\s*$"
+                                  regularExpressionWithPattern:@"^\\s*$"
                                   options:nil
                                   error:nil];
     NSUInteger matches = [regex numberOfMatchesInString:_textField.text

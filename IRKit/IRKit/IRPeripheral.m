@@ -315,9 +315,9 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
             continue;
         }
         for (CBCharacteristic *c12c in service.characteristics) {
-            for (CBCharacteristic *expected_c12c in IRKIT_CHARACTERISTICS) {
+            for (CBUUID *expectedUUID in IRKIT_CHARACTERISTICS) {
                 if ([IRHelper CBUUID:c12c.UUID
-                     isEqualToCBUUID:expected_c12c]) {
+                     isEqualToCBUUID:expectedUUID]) {
                     found ++;
                 }
             }

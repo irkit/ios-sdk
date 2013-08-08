@@ -70,7 +70,7 @@
                                                                   ofType:@"bundle"]];
     IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName:@"IRSignalNameEditViewController"
                                                                                            bundle:resources];
-    c.delegate = self.delegate;
+    c.delegate = (id<IRSignalNameEditViewControllerDelegate>)self.delegate;
     c.signal   = signal;
     [self.navigationController pushViewController:c
                                          animated:YES];

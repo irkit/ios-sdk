@@ -8,7 +8,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *receivedDateLabel;
 @property (weak, nonatomic) IBOutlet IRChartView *signalChartView;
 
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 + (CGFloat)height;
 - (void)inflateFromSignal:(IRSignal*)signal;
 

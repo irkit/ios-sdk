@@ -10,7 +10,7 @@
 @interface IRSignals ()
 
 // IRSignal.uniqueID => IRSignal
-@property (nonatomic, strong) NSMutableDictionary* signals;
+@property (nonatomic, strong) NSMutableDictionary* signalsByUniqueID;
 
 @end
 
@@ -19,7 +19,7 @@
 - (id)init {
     self = [super init];
     if (! self) { return nil; }
-    _signals = [NSMutableDictionary dictionaryWithCapacity:0];
+    _signalsByUniqueID = [NSMutableDictionary dictionaryWithCapacity:0];
     
     return self;
 }
@@ -27,25 +27,25 @@
 - (id)objectAtIndex:(NSUInteger)index {
     LOG( @"index: %d", index);
     
-    NSArray* keys = [_signals keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)];
+    NSArray* keys = [_signalsByUniqueID keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)];
     NSString* key = [keys objectAtIndex: index];
-    return _signals[key];
+    return _signalsByUniqueID[key];
 }
 
 - (NSData*)data {
-    return [NSKeyedArchiver archivedDataWithRootObject:_signals];
+    return [NSKeyedArchiver archivedDataWithRootObject:_signalsByUniqueID];
 }
 
 - (void)loadFromData: (NSData*)data {
-    NSMutableSet *set = data ? (NSMutableSet*)[NSKeyedUnarchiver unarchiveObjectWithData:data]
-                             : nil;
-    if ( set ) {
-        _signals = set;
+    NSMutableDictionary *dic = data ? (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data]
+                                    : nil;
+    if ( dic ) {
+        _signalsByUniqueID = dic;
     }
     else {
-        _signals = [[NSMutableDictionary alloc] init];
+        _signalsByUniqueID = [[NSMutableDictionary alloc] init];
     }
-    LOG( @"loaded signals: %@", _signals );
+    LOG( @"loaded signals: %@", _signalsByUniqueID );
 }
 
 - (void)loadFromStandardUserDefaultsKey:(NSString*)key {
@@ -99,17 +99,17 @@
 - (NSInteger) indexOfSignal: (IRSignal*) signal {
     LOG_CURRENT_METHOD;
 
-    return [[_signals keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)] indexOfObject:signal.uniqueID];
+    return [[_signalsByUniqueID keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)] indexOfObject:signal.uniqueID];
 }
 
 #pragma mark - Key Value Coding - Mutable Indexed Accessors
 
 - (NSArray*) signals {
-    return [_signals.allValues sortedArrayUsingSelector:@selector(compareByReceivedDate:)];
+    return [_signalsByUniqueID.allValues sortedArrayUsingSelector:@selector(compareByReceivedDate:)];
 }
 
 - (NSUInteger) countOfSignals {
-    return _signals.count;
+    return _signalsByUniqueID.count;
 }
 
 - (NSEnumerator*)enumeratorOfSignals {
@@ -119,7 +119,7 @@
 - (IRSignal*)memberOfSignals:(IRSignal *)object {
     LOG_CURRENT_METHOD;
     
-    return _signals[object.uniqueID];
+    return _signalsByUniqueID[object.uniqueID];
 }
 
 - (void)addSignalsObject:(IRSignal *)object {
@@ -128,7 +128,7 @@
         return;
     }
     
-    _signals[object.uniqueID] = object;
+    _signalsByUniqueID[object.uniqueID] = object;
     
     if (_delegate) {
         if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
@@ -156,7 +156,7 @@
             LOG( @"something weird happened" );
         }
     }
-    [_signals removeObjectForKey:object.uniqueID];
+    [_signalsByUniqueID removeObjectForKey:object.uniqueID];
     
     if (_delegate) {
         if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
