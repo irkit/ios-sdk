@@ -80,6 +80,7 @@
 		C77150F21772D635004F9FE3 /* IRSignalCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B568E174A7BC800FFE5CB /* IRSignalCell.h */; };
 		C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; };
 		C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */; };
+		C776CC4017B3A3C500E1824D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
 		C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */; };
 		C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350317AA5D3A00C8679B /* icn_signal.png */; };
 		C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350617AA5D7300C8679B /* icn_device@2x.png */; };
@@ -298,6 +299,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C776CC4017B3A3C500E1824D /* CoreGraphics.framework in Frameworks */,
 				C71D90AE17978B2E00CEC73F /* UIKit.framework in Frameworks */,
 				C71D90AD17978B1700CEC73F /* libIRKit.a in Frameworks */,
 				C71D90A71797809200CEC73F /* SenTestingKit.framework in Frameworks */,

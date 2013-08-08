@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRSamplesTableViewController.h"
 #import "IRconst.h"
 #import "IRNewPeripheralScene1ViewController.h"
