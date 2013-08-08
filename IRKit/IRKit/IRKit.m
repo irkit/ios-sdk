@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRKit.h"
 #import "IRFunc.h" // private
 #import "IRPeripheral.h"

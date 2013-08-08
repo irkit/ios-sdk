@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRPeripheralWriteOperation.h"
 #import "IRConst.h"
 #import "IRHelper.h"

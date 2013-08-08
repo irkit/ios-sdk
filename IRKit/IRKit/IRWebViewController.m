@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRWebViewController.h"
 #import "IRViewCustomizer.h"
 

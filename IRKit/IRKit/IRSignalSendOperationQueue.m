@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRSignalSendOperationQueue.h"
 #import "IRPeripheralWriteOperation.h"
 

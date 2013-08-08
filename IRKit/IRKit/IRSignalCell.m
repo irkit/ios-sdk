@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRSignalCell.h"
 #import "IRChartView.h"
 

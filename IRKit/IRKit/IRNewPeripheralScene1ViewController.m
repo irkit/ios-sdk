@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRPeripheralNameEditViewController.h"

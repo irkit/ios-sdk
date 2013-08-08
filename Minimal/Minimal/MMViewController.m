@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "MMViewController.h"
 
 @interface MMViewController ()

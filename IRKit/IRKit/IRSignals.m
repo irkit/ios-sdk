@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRSignals.h"
 #import "IRPersistentStore.h"
 #import "IRConst.h"

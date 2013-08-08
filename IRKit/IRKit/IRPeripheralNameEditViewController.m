@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"

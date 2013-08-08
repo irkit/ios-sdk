@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRChartView.h"
 
 #define LOG_DISABLED 1

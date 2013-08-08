@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRPeripherals.h"
 #import "IRPersistentStore.h"
 #import "IRHelper.h"

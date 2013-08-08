@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRPersistentStore.h"
 
 #define IR_NSUSERDEFAULTS_PREFIX @"ir"

@@ -1,4 +1,6 @@
+#import "Log.h"
 #import "IRFunc.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 NSString *NSStringFromCBCentralManagerState(CBCentralManagerState state)
 {

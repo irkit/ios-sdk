@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRSignal.h"
 #import "IRHelper.h"
 #import "IRKit.h"

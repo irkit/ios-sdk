@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignal.h"
 #import "IRConst.h"

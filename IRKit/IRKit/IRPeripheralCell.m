@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRPeripheralCell.h"
 #import "IRHelper.h"
 #import <QuartzCore/QuartzCore.h>

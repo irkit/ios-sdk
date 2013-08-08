@@ -1,5 +1,5 @@
 // IRPeripheral stores additional info related to CBPeripheral
-
+#import <CoreBluetooth/CoreBluetooth.h>
 #import <Foundation/Foundation.h>
 
 @interface IRPeripheral : NSObject<CBPeripheralDelegate>

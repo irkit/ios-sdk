@@ -1,3 +1,4 @@
+#import "Log.h"
 #import "IRNewPeripheralViewController.h"
 #import "IRKit.h"
 #import "IRViewCustomizer.h"
