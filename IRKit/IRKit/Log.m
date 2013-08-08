@@ -1,6 +1,6 @@
 #import "Log.h"
 
-NSString *sp(NSString *format, ...)
+NSString *_IRLog(NSString *format, ...)
 {
     va_list args;
     va_start(args, format);

@@ -1,15 +1,15 @@
 #import <Foundation/Foundation.h>
 
-NSString *sp(NSString *format, ...);
+NSString *_IRLog(NSString *format, ...);
 
-// define 1 if you want logging disabled only in that .m file
-#define LOG_DISABLED 0
+// '#define LOG_DISABLED 1' before '#import "Log.h"' in .m file to disable logging only in that file
+#ifndef LOG_DISABLED
+# define LOG_DISABLED 0
+#endif
 
-// can't help using runtime "if" (wanna use "#if")
-// but to place "#import 'Log.h'" in *.pch file and not in each .m files...
-#if defined(FORCE_LOG) || defined(DEBUG)
-# define LOG_CURRENT_METHOD if (! LOG_DISABLED) NSLog(@"%s#%d", __PRETTY_FUNCTION__, __LINE__)
-# define LOG(...)           if (! LOG_DISABLED) NSLog(@"%s#%d %@", __PRETTY_FUNCTION__, __LINE__, sp(__VA_ARGS__))
+#if (defined(IRKIT_DEBUG) && ! LOG_DISABLED)
+# define LOG_CURRENT_METHOD NSLog(@"%s#%d", __PRETTY_FUNCTION__, __LINE__)
+# define LOG(...)           NSLog(@"%s#%d %@", __PRETTY_FUNCTION__, __LINE__, _IRLog(__VA_ARGS__))
 #
 #else
 #  define LOG_CURRENT_METHOD 
@@ -17,7 +17,7 @@ NSString *sp(NSString *format, ...);
 #
 #endif
 
-#ifdef DEBUG
+#ifdef IRKIT_DEBUG
 # define ASSERT(A,B) NSAssert(A,B)
 #else
 # define ASSERT(A,B)

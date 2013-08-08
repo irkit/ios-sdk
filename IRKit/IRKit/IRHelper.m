@@ -1,11 +1,10 @@
 //  our SDK does not pollute global namespace or objects
 //  only classes prefixed with IR*
 
+#define LOG_DISABLED 1
 #import "Log.h"
 #import "IRHelper.h"
 #import <CommonCrypto/CommonDigest.h>
-
-#define LOG_DISABLED 1
 
 @implementation IRHelper
 

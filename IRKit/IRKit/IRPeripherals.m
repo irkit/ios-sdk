@@ -5,8 +5,6 @@
 #import "IRConst.h"
 #import "IRPeripheralCell.h"
 
-// #define LOG_DISABLED 1
-
 @interface IRPeripherals ()
 
 // just to retain a CBPeripheral without an UUID

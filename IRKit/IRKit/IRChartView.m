@@ -1,7 +1,6 @@
+#define LOG_DISABLED 1
 #import "Log.h"
 #import "IRChartView.h"
-
-#define LOG_DISABLED 1
 
 #define MARGIN_TOP    10.
 #define PADDING_BOTTOM 10.
