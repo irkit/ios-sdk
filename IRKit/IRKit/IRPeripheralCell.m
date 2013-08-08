@@ -26,6 +26,11 @@
 - (void)setPeripheral:(IRPeripheral *)peripheral {
     LOG( @"peripheral: %@", peripheral);
 
+    if (_peripheral) {
+        // don't double addObserver, nor removeObserver before addObserver
+        [_peripheral removeObserver:self
+                         forKeyPath:@"peripheral"];
+    }
     _peripheral = peripheral;
     
     self.nameLabel.text = peripheral.customizedName;

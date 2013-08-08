@@ -27,6 +27,8 @@
 
 - (void) dealloc {
     LOG_CURRENT_METHOD;
+    [self removeObserver:self
+              forKeyPath:@"operationCount"];
 }
 
 #pragma mark - KVO
