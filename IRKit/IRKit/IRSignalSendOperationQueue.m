@@ -3,6 +3,9 @@
 #import "IRPeripheralWriteOperation.h"
 
 @interface IRSignalSendOperationQueue ()
+
+@property (nonatomic) BOOL didRemoveObserver;
+
 @end
 
 @implementation IRSignalSendOperationQueue
@@ -27,8 +30,10 @@
 
 - (void) dealloc {
     LOG_CURRENT_METHOD;
-    [self removeObserver:self
-              forKeyPath:@"operationCount"];
+    if (! _didRemoveObserver) {
+        [self removeObserver:self
+                  forKeyPath:@"operationCount"];
+    }
 }
 
 #pragma mark - KVO
@@ -42,6 +47,7 @@
     if ([keyPath isEqualToString:@"operationCount"]) {
         NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
         if (newValue && ([(NSNumber*)newValue unsignedIntegerValue]==0)) {
+            _didRemoveObserver = YES;
             [self removeObserver:self
                       forKeyPath:@"operationCount"];
             dispatch_async(dispatch_get_main_queue(), ^{
