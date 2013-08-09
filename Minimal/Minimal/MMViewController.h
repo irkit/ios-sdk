@@ -1,10 +1,9 @@
 #import <UIKit/UIKit.h>
 #import <IRKit/IRKit.h>
 
-@interface MMViewController : UIViewController<IRNewPeripheralViewControllerDelegate, IRNewSignalViewControllerDelegate>
+@interface MMViewController : UITableViewController<IRNewPeripheralViewControllerDelegate, IRNewSignalViewControllerDelegate>
 
-@property (nonatomic) NSMutableArray *signals; // of IRSignal
-
+@property (nonatomic) IRSignals *signals;
 @property (nonatomic) IRPeripheral *peripheral;
 
 @end

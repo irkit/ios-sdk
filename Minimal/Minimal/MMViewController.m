@@ -3,8 +3,6 @@
 
 @interface MMViewController ()
 
-@property (nonatomic) NSUInteger signalIndex;
-
 @end
 
 @implementation MMViewController
@@ -13,12 +11,11 @@
 {
     [super viewDidLoad];
 
-    _signals = [NSMutableArray arrayWithObjects:[NSNull null], [NSNull null], [NSNull null], nil];
+    _signals = [[IRSignals alloc] init];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = _signals;
 
-    // buttons has tags 1,2,3 respectively
-    [(UIButton*)[self.view viewWithTag:1] setTitle: @"Unset" forState:UIControlStateNormal];
-    [(UIButton*)[self.view viewWithTag:2] setTitle: @"Unset" forState:UIControlStateNormal];
-    [(UIButton*)[self.view viewWithTag:3] setTitle: @"Unset" forState:UIControlStateNormal];
+    self.view.backgroundColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,12 +39,7 @@
     }
 }
 
-- (IBAction)buttonTouched:(id)sender {
-    LOG_CURRENT_METHOD;
-
-    _signalIndex = ((UIView*)sender).tag - 1;
-    
-    IRSignal *signal = _signals[ _signalIndex ];
+- (IBAction)addButtonTouched:(id)sender {
     if (! _peripheral) {
         IRNewPeripheralViewController *vc = [[IRNewPeripheralViewController alloc] init];
         vc.delegate = self;
@@ -57,7 +49,7 @@
                              LOG(@"presented");
                          }];
     }
-    else if ([signal isEqual:[NSNull null]]) {
+    else {
         IRNewSignalViewController *vc = [[IRNewSignalViewController alloc] init];
         vc.delegate = self;
         [self presentViewController:vc
@@ -65,11 +57,6 @@
                          completion:^{
                              LOG(@"presented");
                          }];
-    }
-    else {
-        [signal sendWithCompletion:^(NSError *error) {
-            LOG(@"sent error: %@", error);
-        }];
     }
 }
 
@@ -95,16 +82,30 @@
     LOG( @"signal: %@", signal );
 
     if (signal) {
-        [_signals replaceObjectAtIndex:_signalIndex
-                            withObject:signal];
-        UIButton *button = (UIButton*)[self.view viewWithTag:(_signalIndex + 1)];
-        [button setTitle:signal.name
-                forState:UIControlStateNormal];
+        [_signals addSignalsObject:signal];
+        [self.tableView reloadData];
     }
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  LOG(@"dismissed");
                              }];
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [IRSignalCell height];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    LOG(@"indexPath: %@", indexPath);
+    [tableView deselectRowAtIndexPath:indexPath
+                             animated:YES];
+
+    IRSignal *signal = [_signals objectAtIndex:indexPath.row];
+    [signal sendWithCompletion:^(NSError *error) {
+        LOG(@"sent error: %@", error);
+    }];
 }
 
 @end
