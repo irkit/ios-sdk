@@ -12,6 +12,7 @@ static BOOL useCustomizedStyle;
 @property (nonatomic) CBCentralManager* manager;
 @property (nonatomic) BOOL shouldScan;
 @property (nonatomic) id terminateObserver;
+@property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) id enterBackgroundObserver;
 
 @end
@@ -45,12 +46,19 @@ static BOOL useCustomizedStyle;
                                                                            LOG( @"terminating" );
                                                                            [_self save];
                                                                        }];
+    _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
+                                                                              object:nil
+                                                                               queue:[NSOperationQueue mainQueue]
+                                                                          usingBlock:^(NSNotification *note) {
+                                                                              LOG( @"became active" );
+                                                                              [_self retrieveKnownPeripherals];
+                                                                          }];
     _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
                                                                                  object:nil
                                                                                   queue:[NSOperationQueue mainQueue]
                                                                              usingBlock:^(NSNotification *note) {
                                                                                  LOG( @"entered background" );
-                                                                                 if (_retainConnectionInBackground) {
+                                                                                 if (_self.retainConnectionInBackground) {
                                                                                      return;
                                                                                  }
                                                                                  for (IRPeripheral* p in _self.peripherals.peripherals) {
@@ -67,6 +75,7 @@ static BOOL useCustomizedStyle;
 - (void)dealloc {
     LOG_CURRENT_METHOD;
     [[NSNotificationCenter defaultCenter] removeObserver:_terminateObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];
 }
 
