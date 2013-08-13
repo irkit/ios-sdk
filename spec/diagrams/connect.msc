@@ -11,12 +11,26 @@ msc {
     peripheral <= central [label = "Connect, fetch services, characteristics"];
     peripheral >> central [label = "..."];
 
-    peripheral <= central [label = "Read 'IR Authentication Status' c12c"];
-    peripheral >> central [label = "0 - Unauthorized"];
+    peripheral <= central [label = "Read 'Authentication Status' c12c"];
+    peripheral >> central [label = "0 - Unauthenticated"];
 
-    user -> peripheral [label = "Presses auth button"];
-    peripheral => central [label = "Indicate 'IR Authentication Status' c12c = 1"];
-    peripheral << central [label = "Indication response"];
+    central note central [label = "Show guide to move central close to peripheral"];
+
+    central note central [label = "Periodically read 'Authentication Status' c12c"];
+
+    peripheral <= central [label = "Read 'Authentication Status' c12c"];
+    peripheral note peripheral [label = "RSSI is low"];
+    peripheral >> central [label = "0 - Unauthenticated"];
+
+    peripheral <= central [label = "Read 'Authentication Status' c12c"];
+    peripheral note peripheral [label = "RSSI is low"];
+    peripheral >> central [label = "0 - Unauthenticated"];
+
+    user note central [label = "User moves central towards peripheral"];
+
+    peripheral <= central [label = "Read 'Authentication Status' c12c"];
+    peripheral note peripheral [label = "RSSI is high"];
+    peripheral >> central [label = "1 - Authenticated"];
 
     user note central [label = "Successfully authenticated"];
 
