@@ -10,7 +10,7 @@ static BOOL useCustomizedStyle;
 @interface IRKit ()
 
 @property (nonatomic) CBCentralManager* manager;
-@property (nonatomic) BOOL shouldScan;
+@property (nonatomic) BOOL isScanning;
 @property (nonatomic) id terminateObserver;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) id enterBackgroundObserver;
@@ -36,7 +36,7 @@ static BOOL useCustomizedStyle;
                                                     queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0) ];
 
     _peripherals = [[IRPeripherals alloc] initWithManager:_manager];
-    _shouldScan  = NO;
+    _isScanning  = NO;
 
     __weak IRKit *_self = self;
     _terminateObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillTerminateNotification
@@ -96,7 +96,8 @@ static BOOL useCustomizedStyle;
 
 - (void) startScan {
     LOG_CURRENT_METHOD;
-    
+    _isScanning = YES;
+
     if (_manager.state == CBCentralManagerStatePoweredOn) {
         // we want duplicates:
         // peripheral updates receivedCount in adv packet when receiving IR data
@@ -104,14 +105,11 @@ static BOOL useCustomizedStyle;
                                          options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES
          }];
     }
-    else {
-        _shouldScan = YES; // starts scanning when powered on
-    }
 }
 
 - (void) stopScan {
     LOG_CURRENT_METHOD;
-    _shouldScan = NO;
+    _isScanning = NO;
     [_manager stopScan];
 }
 
@@ -204,8 +202,7 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     LOG( @"state: %@", NSStringFromCBCentralManagerState([central state]));
 
-    if (_shouldScan && (central.state == CBCentralManagerStatePoweredOn)) {
-        _shouldScan = NO;
+    if (_isScanning && (central.state == CBCentralManagerStatePoweredOn)) {
         [self startScan];
     }
 }
