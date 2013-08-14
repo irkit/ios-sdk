@@ -6,6 +6,9 @@
 #import "IRPeripheralWriteOperation.h"
 #import "IRConst.h"
 
+// read auth characteristic every 0.5sec
+#define IRPERIPHERAL_AUTH_POLLING_INTERVAL 0.5
+
 @interface IRPeripheral ()
 
 @property (nonatomic) IRPeripheralWriteOperationQueue *writeQueue;
@@ -14,6 +17,7 @@
 @property (nonatomic) BOOL shouldReadIRData;
 @property (nonatomic) BOOL shouldRefreshDeviceInformation;
 @property (nonatomic) BOOL wantsToConnect;
+@property (nonatomic) BOOL isPollingAuthC12C;
 
 @end
 
@@ -32,7 +36,8 @@
     // only read device information on app startup
     // we won't release this object, so initializing with YES will do
     _shouldRefreshDeviceInformation = YES;
-    _wantsToConnect   = NO;
+    _wantsToConnect    = NO;
+    _isPollingAuthC12C = NO;
 
     _UUID             = nil;
     _customizedName   = nil;
@@ -225,10 +230,36 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
 
 - (void)startAuthPolling {
     LOG_CURRENT_METHOD;
+
+    if (! [NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self startAuthPolling];
+        });
+    }
+
+    _isPollingAuthC12C = YES;
+
+    [self cancelAuthPollingTimer];
+
+    CBCharacteristic *auth =
+    [IRHelper findCharacteristicInPeripheral:_peripheral
+                                  withCBUUID:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID
+                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+    [_peripheral readValueForCharacteristic:auth];
 }
 
 - (void)stopAuthPolling {
     LOG_CURRENT_METHOD;
+
+    if (! [NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self stopAuthPolling];
+        });
+    }
+
+    [self cancelAuthPollingTimer];
+
+    _isPollingAuthC12C = NO;
 }
 
 #pragma mark - Private methods
@@ -302,16 +333,18 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
      }];
 }
 
-- (void) cancelDisconnectTimer {
+// should call only in main thread
+// because performSelector:withObject:afterDelay: is called in main thread
+- (void) cancelAuthPollingTimer {
     LOG_CURRENT_METHOD;
 
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(startAuthPolling)
+                                               object:nil];
 }
 
 - (void) startDisconnectTimerIfBackground {
     LOG_CURRENT_METHOD;
-
-    [self cancelDisconnectTimer];
 
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     if ( state == UIApplicationStateActive ) {
@@ -319,10 +352,15 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
     }
     else {
         // disconnect after interval
-        // regarding that we might want to continuously write to this peripheral
-        [self performSelector:@selector(disconnect)
-                   withObject:nil
-                   afterDelay:5.];
+        // to not disconnect while continuously writing to this peripheral
+        dispatch_async(dispatch_get_main_queue(),^{
+            [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                                     selector:@selector(disconnect)
+                                                       object:nil];
+            [self performSelector:@selector(disconnect)
+                       withObject:nil
+                       afterDelay:5.];
+        });
     }
 }
 
@@ -431,11 +469,15 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             }
         }
 
-        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-        if ( (state == UIApplicationStateActive) &&
-             ! authorized ) {
-            // retain connection while waiting for user to press auth switch
-            [self cancelDisconnectTimer];
+        if (_isPollingAuthC12C && ! authorized) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // we don't manage this thread,
+                // it might stop occasionally without calling this selector
+                // so make sure it runs after delay in main thread
+                [self performSelector:@selector(startAuthPolling)
+                           withObject:nil
+                           afterDelay:IRPERIPHERAL_AUTH_POLLING_INTERVAL];
+            });
         }
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
@@ -498,6 +540,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     }
 }
 
+// TODO check if it's the same characteristic we wrote
 - (void)peripheral:(CBPeripheral *)peripheral
 didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error
