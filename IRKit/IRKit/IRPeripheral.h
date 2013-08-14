@@ -34,11 +34,16 @@
 - (BOOL) writeValue: (NSData*)value
 forCharacteristicWithUUID: (CBUUID*)characteristicUUID
   ofServiceWithUUID: (CBUUID*)serviceUUID;
+- (BOOL) readCharacteristicWithUUID:(CBUUID *)characteristicUUID
+                  ofServiceWithUUID:(CBUUID *)serviceUUID;
 
 - (NSString*) modelNameAndRevision;
 - (NSString*) iconURL;
 
 - (void)setManager: (CBCentralManager*)manager;
 - (void)setPeripheral: (CBPeripheral*)peripheral;
+
+- (void)startAuthPolling;
+- (void)stopAuthPolling;
 
 @end

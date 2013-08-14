@@ -108,7 +108,7 @@
 
 - (void) didConnect {
     LOG_CURRENT_METHOD;
-    
+
     if (! [self canReadAllCharacteristics]) {
         [_peripheral discoverServices:nil];
         return;
@@ -136,7 +136,7 @@
 
 - (void) didDisconnect {
     LOG_CURRENT_METHOD;
-    
+
     [_writeQueue setSuspended: YES];
 
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -152,7 +152,7 @@
                      completion:(void (^)(NSError *))block {
     LOG( @"service: %@ c12c: %@ value: %@", serviceUUID, characteristicUUID, value );
     [self startDisconnectTimerIfBackground];
-    
+
     NSError *error;
     if ( ! _writeQueue || ! _peripheral ) {
         error = [NSError errorWithDomain:IRKIT_ERROR_DOMAIN
@@ -161,11 +161,11 @@
         block(error);
         return;
     }
-    
+
     if ( ! _peripheral.isConnected ) {
         [self connect];
     }
-    
+
     IRPeripheralWriteOperation *op = [IRPeripheralWriteOperation operationToPeripheral:self
                                                           withData:value
                                          forCharacteristicWithUUID:characteristicUUID
@@ -182,7 +182,7 @@
 forCharacteristicWithUUID:(CBUUID *)characteristicUUID
   ofServiceWithUUID:(CBUUID *)serviceUUID {
     LOG_CURRENT_METHOD;
-    
+
     CBCharacteristic *c12c = [IRHelper findCharacteristicInPeripheral:_peripheral
                                                            withCBUUID:characteristicUUID
                                                   inServiceWithCBUUID:serviceUUID];
@@ -193,6 +193,21 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
     [_peripheral writeValue:value
           forCharacteristic:c12c
                        type:CBCharacteristicWriteWithResponse];
+    return YES;
+}
+
+- (BOOL) readCharacteristicWithUUID:(CBUUID *)characteristicUUID
+                  ofServiceWithUUID:(CBUUID *)serviceUUID {
+    LOG_CURRENT_METHOD;
+
+    CBCharacteristic *c12c = [IRHelper findCharacteristicInPeripheral:_peripheral
+                                                           withCBUUID:characteristicUUID
+                                                  inServiceWithCBUUID:serviceUUID];
+    if (! c12c) {
+        return NO;
+    }
+    LOG( @"reading service: %@ c12c: %@", serviceUUID, characteristicUUID );
+    [_peripheral readValueForCharacteristic:c12c];
     return YES;
 }
 
@@ -208,6 +223,14 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
     return [NSString stringWithFormat:@"%@/static/images/model/%@.png", ONURL_BASE, _modelName ? _modelName : @"A" ];
 }
 
+- (void)startAuthPolling {
+    LOG_CURRENT_METHOD;
+}
+
+- (void)stopAuthPolling {
+    LOG_CURRENT_METHOD;
+}
+
 #pragma mark - Private methods
 
 - (void) didBecomeReady {
@@ -221,13 +244,6 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
                                                           userInfo:nil];
     });
 
-    CBCharacteristic *auth =
-    [IRHelper findCharacteristicInPeripheral:_peripheral
-                                  withCBUUID:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID
-                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
-    [_peripheral setNotifyValue:YES
-              forCharacteristic:auth];
-
     CBCharacteristic *unread =
     [IRHelper findCharacteristicInPeripheral:_peripheral
                                   withCBUUID:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID
@@ -235,6 +251,11 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
     LOG( @"registering for notifications on unread status" );
     [_peripheral setNotifyValue:YES
               forCharacteristic:unread];
+
+    CBCharacteristic *auth =
+    [IRHelper findCharacteristicInPeripheral:_peripheral
+                                  withCBUUID:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID
+                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
 
     // when uninstalled and re-installed after _authorized is YES
     // _authorized is initialized to NO,
@@ -283,7 +304,7 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
 
 - (void) cancelDisconnectTimer {
     LOG_CURRENT_METHOD;
-    
+
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
@@ -307,7 +328,7 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
 
 - (BOOL) canReadAllCharacteristics {
     LOG_CURRENT_METHOD;
-    
+
     int found = 0;
     for (CBService *service in _peripheral.services) {
         if (! [IRHelper CBUUID:service.UUID
@@ -344,7 +365,7 @@ didDiscoverServices:(NSError *)error
     for (CBService *service in peripheral.services)
     {
         LOG(@"service: %@ UUID: %@", service, service.UUID);
-        
+
         // discover characterstics for all services (just interested now)
         [peripheral discoverCharacteristics:IRKIT_CHARACTERISTICS
                                  forService:service];
@@ -361,7 +382,7 @@ didDiscoverCharacteristicsForService:(CBService *)service
 {
     LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
     [self startDisconnectTimerIfBackground];
-    
+
     for (CBCharacteristic *characteristic in service.characteristics)
     {
         LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",
@@ -388,11 +409,11 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         // TODO error handling
         return;
     }
-    
+
     // disconnect when authorized
     // we connect only when we need to
-    
-    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHORIZATION_UUID]) {
+
+    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
         NSData *value = characteristic.value;
         unsigned char authorized = 0;
         [value getBytes:&authorized length:1];
@@ -420,11 +441,11 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
         NSData *value = characteristic.value;
         LOG( @"value.length: %d", value.length );
-        
+
         if (value.length > 1) {
             // can be 0
             // length: 1 should be invalid ir data
-            
+
             IRSignal *signal = [[IRSignal alloc] initWithData: value];
             signal.peripheral = self;
 
@@ -515,15 +536,15 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     _customizedName   = [coder decodeObjectForKey:@"c"];
     _foundDate        = [coder decodeObjectForKey:@"f"];
     _authorized       = [[coder decodeObjectForKey:@"a"] boolValue];
-    
+
     _manufacturerName = [coder decodeObjectForKey:@"dm"];
     _modelName        = [coder decodeObjectForKey:@"do"];
     _hardwareRevision = [coder decodeObjectForKey:@"dh"];
     _firmwareRevision = [coder decodeObjectForKey:@"df"];
     _softwareRevision = [coder decodeObjectForKey:@"ds"];
-    
+
     _peripheral       = nil;
-    
+
     if ( ! _customizedName ) {
         _customizedName = @"unknown";
     }

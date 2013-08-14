@@ -7,6 +7,7 @@
 @interface IRNewPeripheralScene2ViewController ()
 
 @property (nonatomic) id observer;
+@property (nonatomic) BOOL didAlreadyAuthorize;
 
 @end
 
@@ -17,6 +18,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _didAlreadyAuthorize = NO;
     }
     return self;
 }
@@ -42,11 +44,6 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
 
-    if (_peripheral.authorized) {
-        [self didAuthorize];
-        return;
-    }
-    // TODO what if authorized here? synchronize?
     _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidAuthorizePeripheralNotification
                                                                   object:nil
                                                                    queue:[NSOperationQueue mainQueue]
@@ -54,6 +51,11 @@
                                                                   LOG( @"irkit authorized");
                                                                   [self didAuthorize];
                                                               }];
+    if (_peripheral.authorized) {
+        [self didAuthorize];
+        return;
+    }
+    [_peripheral startAuthPolling];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -65,6 +67,12 @@
 
 - (void) didAuthorize {
     LOG_CURRENT_METHOD;
+
+    if (_didAlreadyAuthorize) {
+        return;
+    }
+    _didAlreadyAuthorize = YES;
+    [_peripheral stopAuthPolling];
 
     [[NSNotificationCenter defaultCenter] removeObserver:_observer];
 
