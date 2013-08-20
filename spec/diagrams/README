@@ -2,10 +2,3 @@ use mscgen
 http://www.mcternan.me.uk/mscgen/index.html
 
 mscgen -T png -i *.msc
-
----
-
-use graphviz
-http://www.graphviz.org/pdf/dotguide.pdf
-
-dot -Tpng in.gv -o out.png
