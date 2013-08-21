@@ -84,9 +84,9 @@ static BOOL useCustomizedStyle;
     [_peripherals save];
 }
 
-- (NSUInteger) numberOfAuthorizedPeripherals {
+- (NSUInteger) numberOfAuthenticatedPeripherals {
     LOG_CURRENT_METHOD;
-    return _peripherals.countOfAuthorizedPeripherals;
+    return _peripherals.countOfAuthenticatedPeripherals;
 }
 
 - (NSUInteger) numberOfPeripherals {
@@ -117,7 +117,7 @@ static BOOL useCustomizedStyle;
 
 - (void) retrieveKnownPeripherals {
     LOG_CURRENT_METHOD;
-    
+
     NSArray *knownPeripherals = [_peripherals knownPeripheralUUIDs];
     if ([knownPeripherals count]) {
         LOG( @"retrieve: %@", knownPeripherals );

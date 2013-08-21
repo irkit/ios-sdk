@@ -42,7 +42,7 @@
     _UUID             = nil;
     _customizedName   = nil;
     _foundDate        = [NSDate date];
-    _authorized       = NO;
+    _authenticated       = NO;
 
     _manufacturerName = nil;
     _modelName        = nil;
@@ -124,7 +124,7 @@
 - (void) disconnect {
     [_writeQueue setSuspended: YES];
 
-    if ([IRKit sharedInstance].retainConnectionInBackground && _authorized) {
+    if ([IRKit sharedInstance].retainConnectionInBackground && _authenticated) {
         UIApplicationState state = [[UIApplication sharedApplication] applicationState];
         if (state == UIApplicationStateBackground ||
             state == UIApplicationStateInactive) {
@@ -288,13 +288,13 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
                                   withCBUUID:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID
                          inServiceWithCBUUID:IRKIT_SERVICE_UUID];
 
-    // when uninstalled and re-installed after _authorized is YES
-    // _authorized is initialized to NO,
+    // when uninstalled and re-installed after _authenticated is YES
+    // _authenticated is initialized to NO,
     // so we try to read it, and peripheral responds with YES
-    LOG( @"are we authorized?" );
+    LOG( @"are we authenticated?" );
     [_peripheral readValueForCharacteristic:auth];
 
-    if ( _authorized && _shouldReadIRData ) {
+    if ( _authenticated && _shouldReadIRData ) {
         LOG( @"read IR data" );
         _shouldReadIRData = NO;
         CBCharacteristic *irdata =
@@ -448,28 +448,28 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         return;
     }
 
-    // disconnect when authorized
+    // disconnect when authenticated
     // we connect only when we need to
 
     if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
         NSData *value = characteristic.value;
-        unsigned char authorized = 0;
-        [value getBytes:&authorized length:1];
-        LOG( @"authorized: %d", authorized );
+        unsigned char authenticated = 0;
+        [value getBytes:&authenticated length:1];
+        LOG( @"authenticated: %d", authenticated );
 
-        if ( _authorized != authorized ) {
-            // authorized state changed
-            _authorized = authorized;
+        if ( _authenticated != authenticated ) {
+            // authenticated state changed
+            _authenticated = authenticated;
             [[IRKit sharedInstance] save];
-            if ( _authorized ) {
+            if ( _authenticated ) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidAuthorizePeripheralNotification
+                    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidAuthenticatePeripheralNotification
                                                                         object:self];
                 });
             }
         }
 
-        if (_isPollingAuthC12C && ! authorized) {
+        if (_isPollingAuthC12C && ! authenticated) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 // we don't manage this thread,
                 // it might stop occasionally without calling this selector
@@ -499,7 +499,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
         }
     }
     else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
-        if (_authorized) {
+        if (_authenticated) {
             CBCharacteristic *irdata = [IRHelper findCharacteristicInPeripheral:_peripheral
                                                                      withCBUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
                                                             inServiceWithCBUUID:IRKIT_SERVICE_UUID];
@@ -559,7 +559,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
                  forKey:@"u"];
     [coder encodeObject:_customizedName forKey:@"c"];
     [coder encodeObject:_foundDate      forKey:@"f"];
-    [coder encodeObject:[NSNumber numberWithBool:_authorized] forKey:@"a"];
+    [coder encodeObject:[NSNumber numberWithBool:_authenticated] forKey:@"a"];
 
     // d: Device information
     [coder encodeObject:_manufacturerName forKey:@"dm"];
@@ -578,7 +578,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     _UUID             = CFUUIDCreateFromString(nil, (CFStringRef)u);
     _customizedName   = [coder decodeObjectForKey:@"c"];
     _foundDate        = [coder decodeObjectForKey:@"f"];
-    _authorized       = [[coder decodeObjectForKey:@"a"] boolValue];
+    _authenticated    = [[coder decodeObjectForKey:@"a"] boolValue];
 
     _manufacturerName = [coder decodeObjectForKey:@"dm"];
     _modelName        = [coder decodeObjectForKey:@"do"];

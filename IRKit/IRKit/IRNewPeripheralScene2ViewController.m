@@ -7,7 +7,7 @@
 @interface IRNewPeripheralScene2ViewController ()
 
 @property (nonatomic) id observer;
-@property (nonatomic) BOOL didAlreadyAuthorize;
+@property (nonatomic) BOOL didAlreadyAuthenticate;
 
 @end
 
@@ -18,7 +18,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _didAlreadyAuthorize = NO;
+        _didAlreadyAuthenticate = NO;
     }
     return self;
 }
@@ -44,15 +44,15 @@
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
 
-    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidAuthorizePeripheralNotification
+    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidAuthenticatePeripheralNotification
                                                                   object:nil
                                                                    queue:[NSOperationQueue mainQueue]
                                                               usingBlock:^(NSNotification *note) {
-                                                                  LOG( @"irkit authorized");
-                                                                  [self didAuthorize];
+                                                                  LOG( @"irkit authenticated");
+                                                                  [self didAuthenticate];
                                                               }];
-    if (_peripheral.authorized) {
-        [self didAuthorize];
+    if (_peripheral.authenticated) {
+        [self didAuthenticate];
         return;
     }
     [_peripheral startAuthPolling];
@@ -65,13 +65,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_observer];
 }
 
-- (void) didAuthorize {
+- (void) didAuthenticate {
     LOG_CURRENT_METHOD;
 
-    if (_didAlreadyAuthorize) {
+    if (_didAlreadyAuthenticate) {
         return;
     }
-    _didAlreadyAuthorize = YES;
+    _didAlreadyAuthenticate = YES;
     [_peripheral stopAuthPolling];
 
     [[NSNotificationCenter defaultCenter] removeObserver:_observer];

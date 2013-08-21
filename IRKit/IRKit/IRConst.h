@@ -58,11 +58,11 @@
 
 #pragma mark - NSNotification names
 
-// discovered unauthorized peripheral
-#define IRKitDidDiscoverUnauthorizedPeripheralNotification @"IRKit::DiscoveredUnauthorized"
+// discovered unauthenticated peripheral
+#define IRKitDidDiscoverUnauthenticatedPeripheralNotification @"IRKit::DiscoveredUnauthenticated"
 
-// user authorized peripheral for the 1st time
-#define IRKitDidAuthorizePeripheralNotification            @"IRKit::Authorized"
+// user authenticated peripheral for the 1st time
+#define IRKitDidAuthenticatePeripheralNotification            @"IRKit::Authenticated"
 
 // connected to peripheral and ready to send
 #define IRKitDidConnectPeripheralNotification              @"IRKit::DidConnect"

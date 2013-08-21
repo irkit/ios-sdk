@@ -9,7 +9,7 @@
 @property (nonatomic) CFUUIDRef UUID;
 @property (nonatomic, copy) NSString *customizedName;
 @property (nonatomic, copy) NSDate   *foundDate;
-@property (nonatomic) BOOL authorized;
+@property (nonatomic) BOOL authenticated;
 
 @property (nonatomic) NSString *manufacturerName;
 @property (nonatomic) NSString *modelName;

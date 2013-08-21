@@ -56,7 +56,7 @@
 
     IRPeripherals *peripherals = [IRKit sharedInstance].peripherals;
     for (IRPeripheral *peripheral in peripherals.peripherals) {
-        if (peripheral.isReady && ! peripheral.authorized) {
+        if (peripheral.isReady && ! peripheral.authenticated) {
             // user might have already connected their peripheral
             [self didConnectPeripheral:peripheral];
             return;
@@ -80,8 +80,8 @@
     NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
                                                                   ofType:@"bundle"]];
 
-    if (peripheral.authorized) {
-        LOG( @"already authorized" );
+    if (peripheral.authenticated) {
+        LOG( @"already authenticated" );
         // skip to step3 if peripheral
         // remembers me
         IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController"

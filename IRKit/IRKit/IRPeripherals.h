@@ -10,7 +10,7 @@
 - (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral;
 - (IRPeripheral*)IRPeripheralForUUID: (NSString*)uuid;
 - (void) save;
-- (NSUInteger) countOfAuthorizedPeripherals;
+- (NSUInteger) countOfAuthenticatedPeripherals;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 

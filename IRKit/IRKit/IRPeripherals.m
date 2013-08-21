@@ -73,10 +73,10 @@
     [IRPersistentStore synchronize];
 }
 
-- (NSUInteger) countOfAuthorizedPeripherals {
+- (NSUInteger) countOfAuthenticatedPeripherals {
     LOG_CURRENT_METHOD;
     return [[[_irperipheralForUUID allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return [(IRPeripheral*)evaluatedObject authorized];
+            return [(IRPeripheral*)evaluatedObject authenticated];
         }]
     ] count];
 }
@@ -93,11 +93,11 @@
     if ( ! _irperipheralForUUID ) {
         _irperipheralForUUID = [[NSMutableDictionary alloc] init];
     }
-    
+
     for (IRPeripheral* peripheral in [_irperipheralForUUID allValues]) {
         [peripheral setManager:_manager];
     }
-    
+
     LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
 }
 

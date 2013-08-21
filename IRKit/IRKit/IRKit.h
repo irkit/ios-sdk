@@ -30,7 +30,7 @@
 // this might interrupt other apps to connect.
 @property (nonatomic) BOOL retainConnectionInBackground;
 
-@property (nonatomic, readonly) NSUInteger numberOfAuthorizedPeripherals;
+@property (nonatomic, readonly) NSUInteger numberOfAuthenticatedPeripherals;
 @property (nonatomic, readonly) NSUInteger numberOfPeripherals;
 @property (nonatomic) IRPeripherals *peripherals;
 
