@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C714891117C46D8E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714891017C46D8E00713890 /* libstdc++.dylib */; };
 		C7332E6717B11C3F0070CF56 /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C758146D17B0ACDB00927E12 /* IRKitResources.bundle */; };
 		C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144817B0AB9200927E12 /* UIKit.framework */; };
 		C758144B17B0AB9200927E12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144A17B0AB9200927E12 /* Foundation.framework */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C714891017C46D8E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C758144517B0AB9200927E12 /* Minimal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minimal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C758144817B0AB9200927E12 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C758144A17B0AB9200927E12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C714891117C46D8E00713890 /* libstdc++.dylib in Frameworks */,
 				C758147317B0AE2600927E12 /* CoreBluetooth.framework in Frameworks */,
 				C758146C17B0ACA100927E12 /* libIRKit.a in Frameworks */,
 				C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */,
@@ -84,6 +87,7 @@
 		C758144717B0AB9200927E12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C714891017C46D8E00713890 /* libstdc++.dylib */,
 				C758146B17B0ACA100927E12 /* libIRKit.a */,
 				C758146D17B0ACDB00927E12 /* IRKitResources.bundle */,
 				C758147217B0AE2600927E12 /* CoreBluetooth.framework */,

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C714890D17C46CD600713890 /* IRPackerWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */; };
+		C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714890E17C46D6E00713890 /* libstdc++.dylib */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
 		C71D909F17977D2200CEC73F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C71D909D17977D2200CEC73F /* InfoPlist.strings */; };
 		C71D90A617977D6A00CEC73F /* IRKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D90A417977D6A00CEC73F /* IRKitTests.m */; };
@@ -110,6 +112,8 @@
 		C7EF92E417797DCE00D07D81 /* IRPeripheralNameEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */; };
 		C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */; };
 		C7EF92E617797DCE00D07D81 /* IRNewPeripheralScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */; };
+		C7F70B6E17C45E18008DDB35 /* IrPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C7F70B6C17C45E18008DDB35 /* IrPacker.cpp */; };
+		C7F70B7117C46237008DDB35 /* IRPackerWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F70B7017C46237008DDB35 /* IRPackerWrapper.mm */; };
 		C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */; };
 		C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */; };
 		C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
@@ -147,6 +151,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C714890D17C46CD600713890 /* IRPackerWrapper.h in CopyFiles */,
 				C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */,
 				C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */,
 				C7A1351217AA621B00C8679B /* IRViewCustomizer.h in CopyFiles */,
@@ -173,6 +178,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C71D909817977D2200CEC73F /* IRKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71D909C17977D2200CEC73F /* IRKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitTests-Info.plist"; sourceTree = "<group>"; };
 		C71D909E17977D2200CEC73F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -286,6 +292,11 @@
 		C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene1ViewController.m; sourceTree = "<group>"; };
 		C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene1ViewController.h; sourceTree = "<group>"; };
 		C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C7DE4C4D17C4ADA20097F257 /* IrPackerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrPackerConfig.h; sourceTree = "<group>"; };
+		C7F70B6C17C45E18008DDB35 /* IrPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrPacker.cpp; sourceTree = "<group>"; };
+		C7F70B6D17C45E18008DDB35 /* IrPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrPacker.h; sourceTree = "<group>"; };
+		C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPackerWrapper.h; sourceTree = "<group>"; };
+		C7F70B7017C46237008DDB35 /* IRPackerWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IRPackerWrapper.mm; sourceTree = "<group>"; };
 		C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWebViewController.h; sourceTree = "<group>"; };
 		C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWebViewController.m; sourceTree = "<group>"; };
 		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -324,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */,
 				C7FAB01F17467A5400125BCB /* CoreBluetooth.framework in Frameworks */,
 				C752D70217462C7B008B644A /* Foundation.framework in Frameworks */,
 			);
@@ -339,6 +351,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C70241DE17C3805900B8ACED /* packer */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE4C4D17C4ADA20097F257 /* IrPackerConfig.h */,
+				C7F70B6C17C45E18008DDB35 /* IrPacker.cpp */,
+				C7F70B6D17C45E18008DDB35 /* IrPacker.h */,
+				C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */,
+				C7F70B7017C46237008DDB35 /* IRPackerWrapper.mm */,
+			);
+			name = packer;
+			sourceTree = "<group>";
+		};
 		C71D909A17977D2200CEC73F /* IRKitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,6 +463,7 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C714890E17C46D6E00713890 /* libstdc++.dylib */,
 				C75CFC8717A6671200870A1B /* QuartzCore.framework */,
 				C79DE3B3176F20B50088679E /* UIKit.framework */,
 				C79DE3B1176F20A30088679E /* CoreGraphics.framework */,
@@ -453,6 +478,7 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C70241DE17C3805900B8ACED /* packer */,
 				C73CB4DB17856CD100B3F2C0 /* operation */,
 				C7C7A308176EFC7300C9A62F /* viewcontrollers */,
 				C727D2291754FBC20006810C /* cells */,
@@ -813,6 +839,8 @@
 				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
 				C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */,
 				C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */,
+				C7F70B6E17C45E18008DDB35 /* IrPacker.cpp in Sources */,
+				C7F70B7117C46237008DDB35 /* IRPackerWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -934,7 +962,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -975,7 +1003,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
