@@ -10,6 +10,7 @@
 #import "IRSignal.h"
 #import "IRSignalCell.h"
 #import "IRPeripheralCell.h"
+#import "IRMorsePlayerViewController.h"
 
 @interface IRSamplesTableViewController ()
 
@@ -84,7 +85,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return 9;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,6 +121,8 @@
             cell.peripheral = peripheral;
             return cell;
         }
+        case 8:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
         default:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
     }
@@ -203,6 +206,13 @@
             IRWebViewController *c = [[IRWebViewController alloc] init];
             c.url = @"http://github.com/irkit/";
             c.title = @"github.com/irkit";
+            [self.navigationController pushViewController:c animated:YES];
+        }
+        case 8:
+        {
+//            IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] init];
+            UIStoryboard *sb = [[UIApplication sharedApplication].keyWindow.rootViewController storyboard];
+            UIViewController *c = [sb instantiateViewControllerWithIdentifier:@"IRMorsePlayerViewController"];
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
