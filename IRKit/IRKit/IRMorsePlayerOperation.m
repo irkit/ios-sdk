@@ -16,7 +16,7 @@
 @property BOOL isFinished;
 
 @property (nonatomic) NSString *string;
-@property (nonatomic) NSNumber *wps;
+@property (nonatomic) NSNumber *wpm;
 @property (nonatomic) NSMutableArray *sequence; // array of 0:off 1:on
 @property (nonatomic) int nextIndex;
 @property (nonatomic) NSTimer *timer;
@@ -111,7 +111,7 @@ static NSDictionary *asciiToMorse;
 }
 
 + (IRMorsePlayerOperation*) playMorseFromString:(NSString*)input
-                                  withWordSpeed:(NSNumber*)wps {
+                                  withWordSpeed:(NSNumber*)wpm {
     LOG_CURRENT_METHOD;
 
     // validation
@@ -127,7 +127,7 @@ static NSDictionary *asciiToMorse;
     }
     IRMorsePlayerOperation *op = [[IRMorsePlayerOperation alloc] init];
     op.string = input;
-    op.wps = wps;
+    op.wpm = wpm;
 
     return op;
 }
@@ -170,8 +170,9 @@ static NSDictionary *asciiToMorse;
 - (NSTimer*) newTimer {
     LOG_CURRENT_METHOD;
 
+    // see http://en.wikipedia.org/wiki/Morse_code
     // unit time, or dot duration, in milliseconds
-    float unitTime = 1200 / _wps.floatValue;
+    float unitTime = 1200 / _wpm.floatValue;
     NSTimer *timer = [NSTimer timerWithTimeInterval:unitTime / 1000.
                                              target:self
                                            selector:@selector(timerFired:)

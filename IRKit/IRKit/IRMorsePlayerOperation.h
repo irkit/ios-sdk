@@ -11,6 +11,6 @@
 @interface IRMorsePlayerOperation : NSOperation
 
 + (IRMorsePlayerOperation*) playMorseFromString:(NSString*)input
-                                  withWordSpeed:(NSNumber*)wps;
+                                  withWordSpeed:(NSNumber*)wpm;
 
 @end
