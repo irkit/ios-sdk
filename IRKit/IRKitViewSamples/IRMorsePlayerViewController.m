@@ -15,7 +15,8 @@
 
 @property (nonatomic) IRMorsePlayerOperationQueue *player;
 
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UITextField *wpmField;
+@property (weak, nonatomic) IBOutlet UITextField *messageField;
 
 @end
 
@@ -28,18 +29,23 @@
 }
 
 - (void) processTextField: (id) sender {
-    LOG(@"text: %@", _textField.text);
+    if (sender == _messageField) {
+        NSString *message = _messageField.text;
+        LOG(@"text: %@", message);
 
-    [_player addOperation: [IRMorsePlayerOperation playMorseFromString:_textField.text
-                                                         withWordSpeed:@13]];
-    _textField.text = @"";
+        NSNumber *wpm = [[[NSNumberFormatter alloc] init] numberFromString: _wpmField.text];
+        LOG(@"wpm: %@", wpm);
+
+        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
+                                                             withWordSpeed:wpm]];
+    }
 }
 
 #pragma mark - UITextField
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
     LOG_CURRENT_METHOD;
-    [self processTextField:nil];
+    [self processTextField:textField];
     return NO;
 }
 
