@@ -98,6 +98,7 @@
 		C7A9674A17A0F9DD00D5DEBF /* img_device_usb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A9674817A0F9DD00D5DEBF /* img_device_usb@2x.png */; };
 		C7A9674D17A0FB5400D5DEBF /* shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A9674B17A0FB5400D5DEBF /* shadow.png */; };
 		C7A9674E17A0FB5400D5DEBF /* shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A9674C17A0FB5400D5DEBF /* shadow@2x.png */; };
+		C7AB0525180ADD40007288EB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7AB0524180ADD40007288EB /* AudioToolbox.framework */; };
 		C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */; };
 		C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */; };
 		C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */; };
@@ -290,6 +291,8 @@
 		C7A9674817A0F9DD00D5DEBF /* img_device_usb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_device_usb@2x.png"; sourceTree = "<group>"; };
 		C7A9674B17A0FB5400D5DEBF /* shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shadow.png; sourceTree = "<group>"; };
 		C7A9674C17A0FB5400D5DEBF /* shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shadow@2x.png"; sourceTree = "<group>"; };
+		C7AB0522180ADCEA007288EB /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		C7AB0524180ADD40007288EB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene1ViewController.h; sourceTree = "<group>"; };
 		C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene1ViewController.m; sourceTree = "<group>"; };
 		C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperation.m; sourceTree = "<group>"; };
@@ -338,6 +341,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7AB0525180ADD40007288EB /* AudioToolbox.framework in Frameworks */,
 				C7D0561118041E4F00660217 /* AVFoundation.framework in Frameworks */,
 				C7B741BA1803FA41005802A7 /* libc++.dylib in Frameworks */,
 				C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */,
@@ -488,6 +492,8 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7AB0524180ADD40007288EB /* AudioToolbox.framework */,
+				C7AB0522180ADCEA007288EB /* AudioUnit.framework */,
 				C7D0560F18041E3F00660217 /* AVFoundation.framework */,
 				C7B741B81803FA22005802A7 /* libc++.dylib */,
 				C714890E17C46D6E00713890 /* libstdc++.dylib */,
@@ -712,7 +718,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IR;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = C752D6F917462C7B008B644A /* Build configuration list for PBXProject "IRKit" */;
@@ -1026,7 +1032,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wall";
 			};
