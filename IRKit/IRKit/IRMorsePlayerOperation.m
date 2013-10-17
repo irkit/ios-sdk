@@ -19,6 +19,13 @@
 #define NUM_CHANNELS        2
 #define SAMPLE_RATE         44100
 #define ERROR_HERE(status) do {if (status) fprintf(stderr, "ERROR %d [%s:%u]\n", (int)status, __func__, __LINE__);}while(0);
+#define ASSERT_OR_RETURN(status) \
+ if (status) { \
+  NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
+  LOG( @"status: %ld error: %@", status, error ); \
+  return; \
+ }
+
 #define LONGEST_CHARACTER_LENGTH 7 // $
 #define SOUND_SILENCE      0
 #define SOUND_SINE         1
@@ -226,25 +233,15 @@ static NSDictionary *asciiToMorse;
 
 //    AUGraph graph;
     AUNode morsePlayerNode;
-    AUNode outputNode;
+    AUNode converterNode;
 	AUNode filterNode;
+    AUNode outputNode;
     AudioStreamBasicDescription desc;
 	OSStatus result = noErr;
 
     // create a new AUGraph
 	result = NewAUGraph(&_graph);
-    if (result) { printf("NewAUGraph result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-
-    // output unit
-	AudioComponentDescription outputDescription;// output_desc(kAudioUnitType_Output, kAudioUnitSubType_RemoteIO, kAudioUnitManufacturer_Apple);
-    outputDescription.componentType         = kAudioUnitType_Output;
-	outputDescription.componentSubType      = kAudioUnitSubType_RemoteIO;
-	outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-	outputDescription.componentFlags        = 0;
-	outputDescription.componentFlagsMask    = 0;
-    // CAShowComponentDescription(&output_desc);
-    result = AUGraphAddNode (_graph, &outputDescription, &outputNode);
-    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+    ASSERT_OR_RETURN(result);
 
     // morse player unit
     AudioComponentDescription morsePlayerDescription;
@@ -254,43 +251,61 @@ static NSDictionary *asciiToMorse;
     morsePlayerDescription.componentFlags        = 0;
     morsePlayerDescription.componentFlagsMask    = 0;
     result = AUGraphAddNode(_graph, &morsePlayerDescription, &morsePlayerNode);
-    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+    ASSERT_OR_RETURN(result);
 
-//    // low pass filter unit
-//    AudioComponentDescription filterDescription;
-//    filterDescription.componentType         = kAudioUnitType_Effect;
-//    filterDescription.componentSubType      = kAudioUnitSubType_LowPassFilter;
-//    filterDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-//    filterDescription.componentFlags        = 0;
-//    filterDescription.componentFlagsMask    = 0;
-//    result = AUGraphAddNode(_graph, &filterDescription, &filterNode);
-//    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+    // converter unit
+    AudioComponentDescription converterDescription;
+    converterDescription.componentType         = kAudioUnitType_FormatConverter;
+    converterDescription.componentSubType      = kAudioUnitSubType_AUConverter;
+    converterDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    converterDescription.componentFlags        = 0;
+    converterDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode(_graph, &converterDescription, &converterNode);
+    ASSERT_OR_RETURN(result);
 
-//	result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, filterNode, 0);
-//    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
-//
-//	result = AUGraphConnectNodeInput(_graph, filterNode, 0, outputNode, 0);
-//    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
-	result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, outputNode, 0);
-    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+    // low pass filter unit
+    AudioComponentDescription filterDescription;
+    filterDescription.componentType         = kAudioUnitType_Effect;
+    filterDescription.componentSubType      = kAudioUnitSubType_LowPassFilter;
+    filterDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    filterDescription.componentFlags        = 0;
+    filterDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode(_graph, &filterDescription, &filterNode);
+    ASSERT_OR_RETURN(result);
 
-    // open the graph AudioUnits are open but not initialized (no resource allocation occurs here)
+    // output unit
+	AudioComponentDescription outputDescription;// output_desc(kAudioUnitType_Output, kAudioUnitSubType_RemoteIO, kAudioUnitManufacturer_Apple);
+    outputDescription.componentType         = kAudioUnitType_Output;
+	outputDescription.componentSubType      = kAudioUnitSubType_RemoteIO;
+	outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+	outputDescription.componentFlags        = 0;
+	outputDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode (_graph, &outputDescription, &outputNode);
+    ASSERT_OR_RETURN(result);
+
+    // morse -> converter -> low pass -> output
+
+	result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, converterNode, 0);
+    ASSERT_OR_RETURN(result);
+
+	result = AUGraphConnectNodeInput(_graph, converterNode, 0, filterNode, 0);
+    ASSERT_OR_RETURN(result);
+
+	result = AUGraphConnectNodeInput(_graph, filterNode, 0, outputNode, 0);
+    ASSERT_OR_RETURN(result);
+
 	result = AUGraphOpen(_graph);
-    if (result) {
-        LOG( @"result: %lu %4.4s", result, (char*)&result );
-        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
-        LOG( @"error: %@", error );
-        return;
-    }
+    ASSERT_OR_RETURN(result);
 
-    //    AudioUnit morsePlayerUnit;
-    //    result = AUGraphNodeInfo(_graph, morsePlayerNode, NULL, &morsePlayerUnit);
-    AudioUnit morsePlayerUnit;
+    AudioUnit morsePlayerUnit, filterUnit, converterUnit;
     result = AUGraphNodeInfo(_graph, morsePlayerNode, NULL, &morsePlayerUnit);
+    ASSERT_OR_RETURN(result);
 
-//    UInt32 flag = 1;
-//	status = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, OUTPUT_BUS, &flag, sizeof(flag));
-//    ERROR_HERE(status);
+    result = AUGraphNodeInfo(_graph, filterNode, NULL, &filterUnit);
+    ASSERT_OR_RETURN(result);
+
+    result = AUGraphNodeInfo(_graph, converterNode, NULL, &converterUnit);
+    ASSERT_OR_RETURN(result);
 
 	AudioStreamBasicDescription audioFormat;
 	audioFormat.mSampleRate         = SAMPLE_RATE;
@@ -302,13 +317,42 @@ static NSDictionary *asciiToMorse;
 	audioFormat.mBytesPerPacket     = 4;
 	audioFormat.mBytesPerFrame      = 4;
 
-	result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, OUTPUT_BUS, &audioFormat, sizeof(audioFormat));
-    if (result) {
-        LOG( @"result: %lu %4.4s", result, (char*)&result );
-        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
-        LOG( @"error: %@", error );
-        return;
-    }
+	result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+	result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+	result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+    size_t size = sizeof(audioFormat);
+    result = AudioUnitGetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, &size);
+    ASSERT_OR_RETURN(result);
+
+	result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+    result = AudioUnitSetParameter(filterUnit, kAudioUnitScope_Global, 0, kLowPassParam_CutoffFrequency, 1000.f, 0);
+    ASSERT_OR_RETURN(result);
+
+
+    // mFormatFlags: 41
+    // kAudioFormatFlagIsNonInterleaved | kAudioFormatFlagIsPacked | kAudioFormatFlagIsFloat
+
+//    size_t bytesPerSample           = sizeof (float); //float is 4 bytes
+//    audioFormat.mSampleRate         = SAMPLE_RATE;
+//	audioFormat.mFormatID           = kAudioFormatLinearPCM;
+//	audioFormat.mFormatFlags        = kAudioFormatFlagIsFloat;
+//	audioFormat.mFramesPerPacket    = 1;
+//	audioFormat.mChannelsPerFrame   = NUM_CHANNELS;
+//	audioFormat.mBitsPerChannel     = 8 * bytesPerSample;
+//	audioFormat.mBytesPerPacket     = bytesPerSample;
+//	audioFormat.mBytesPerFrame      = bytesPerSample;
+//
+//    result = AudioUnitSetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
+//    ASSERT_OR_RETURN(result);
+
 
     //    if (!status) {
     //        status = AudioUnitAddRenderNotify(audioUnit, audioUnitCallback, (__bridge void *)self);
@@ -319,7 +363,7 @@ static NSDictionary *asciiToMorse;
 	callbackStruct.inputProcRefCon = (__bridge void *)(self);
 
     result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
-    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+    ASSERT_OR_RETURN(result);
 
 //	result = AUGraphNodeInfo(graph, mixerNode, NULL, &mMixer);
 //    if (result) { printf("AUGraphNodeInfo result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
@@ -370,9 +414,7 @@ static NSDictionary *asciiToMorse;
 
     // now that we've set everything up we can initialize the graph, this will also validate the connections
 	result = AUGraphInitialize(_graph);
-    if (result) { printf("result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-    
-//    CAShow(mGraph);
+    ASSERT_OR_RETURN(result);
 
 }
 
