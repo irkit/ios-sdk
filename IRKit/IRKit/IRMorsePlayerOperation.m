@@ -8,7 +8,25 @@
 
 #import "Log.h"
 #import "IRMorsePlayerOperation.h"
+@import AudioToolbox;
+@import AudioUnit;
 @import AVFoundation;
+
+#define OUTPUT_BUS          0
+#define SAMPLE_RATE         44100
+#define ASSERT_OR_RETURN(status) \
+ if (status) { \
+  NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
+  LOG( @"status: %ld error: %@", status, error ); \
+  return; \
+ }
+
+#define LONGEST_CHARACTER_LENGTH 7 // $
+#define SOUND_SILENCE      0
+#define SOUND_SINE         1
+#define POST_SILENCE_TIME  30
+#define FREQ_SINE          523.8
+#define FREQ_CUTOFF        600.
 
 @interface IRMorsePlayerOperation ()
 
@@ -17,14 +35,18 @@
 
 @property (nonatomic) NSString *string;
 @property (nonatomic) NSNumber *wpm;
-@property (nonatomic) NSMutableArray *sequence; // array of 0:off 1:on
-@property (nonatomic) int nextIndex;
-@property (nonatomic) NSTimer *timer;
-@property (nonatomic) AVAudioPlayer *player;
+@property (nonatomic) SineWave *producer;
 
 @end
 
-@implementation IRMorsePlayerOperation
+@implementation IRMorsePlayerOperation {
+    AUGraph _graph;
+    bool *_sequence;
+    int _sequenceCount;
+    int _nextIndex;
+    int _remainingSamplesOfIndex;
+    size_t _samplesPerUnit;
+}
 
 static NSDictionary *asciiToMorse;
 
@@ -85,7 +107,7 @@ static NSDictionary *asciiToMorse;
                      @"-": @"100001",
                      @"_": @"001101",
                      @"\"":@"010010",
-                     @"$": @"0001001",
+                     @"$": @"0001001", // longest
                      @"@": @"011010"
     };
 }
@@ -93,29 +115,21 @@ static NSDictionary *asciiToMorse;
 - (void) start {
     LOG_CURRENT_METHOD;
 
+    _producer = [[SineWave alloc] init];
+
     self.isExecuting = YES;
     self.isFinished  = NO;
 
     [self parseAsciiStringIntoSequence];
 
-    _player = [self newPlayer];
-
-    _timer = [self newTimer];
-    [[NSRunLoop currentRunLoop] addTimer:_timer
-                                 forMode:NSDefaultRunLoopMode];
-
-    [self timerFired:nil];
-
-    do {
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-    } while (!_isFinished);
+    [self initializeAUGraph];
+    [self play];
 }
 
 + (IRMorsePlayerOperation*) playMorseFromString:(NSString*)input
                                   withWordSpeed:(NSNumber*)wpm {
     LOG_CURRENT_METHOD;
 
-    // validation
     if ( ! input ) {
         return nil;
     }
@@ -140,8 +154,14 @@ static NSDictionary *asciiToMorse;
 }
 
 - (void) parseAsciiStringIntoSequence {
-    _sequence = @[].mutableCopy;
+    // each character can be as long as
+    // * 7 dah (dah = 3 dit)
+    // * 7 symbol interval (symbol interval = 1 dit)
+    // * 1 letter space (= 2 dit)
+    // + word space (= 4 dit)
+    _sequence = malloc(_string.length * (LONGEST_CHARACTER_LENGTH * 4 + 2) + 4);
 
+    int sequenceIndex = 0;
     for (int i=0; i<_string.length; i++) {
         unichar character = [_string characterAtIndex:i];
         NSString *morseCode = asciiToMorse[ [[NSString stringWithFormat:@"%c",character] uppercaseString]];
@@ -149,84 +169,285 @@ static NSDictionary *asciiToMorse;
             unichar shortOrLong = [morseCode characterAtIndex:j];
             if ( shortOrLong == '0' ) {
                 // short
-                [_sequence addObject:@1]; // 1: on
+                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
             }
             else if (shortOrLong == '1' ) {
                 // long
-                [_sequence addObjectsFromArray:@[ @1, @1, @1 ]];
+                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
+                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
+                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
             }
 
             // symbol space
-            [_sequence addObject:@0]; // 0: off
+            _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
         }
         // letter space
-        [_sequence addObjectsFromArray:@[ @0, @0 ]];
+        _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
+        _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
     }
     // word space
-    [_sequence addObjectsFromArray:@[ @0, @0, @0, @0 ]];
+    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
+    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
+    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
+    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
 
+    _sequenceCount = sequenceIndex;
     _nextIndex = 0;
-}
-
-- (NSTimer*) newTimer {
-    LOG_CURRENT_METHOD;
-
-    // see http://en.wikipedia.org/wiki/Morse_code
     // unit time, or dot duration, in milliseconds
-    float unitTime = 1200 / _wpm.floatValue;
-    NSTimer *timer = [NSTimer timerWithTimeInterval:unitTime / 1000.
-                                             target:self
-                                           selector:@selector(timerFired:)
-                                           userInfo:nil
-                                            repeats:YES];
-    return timer;
+    double unitTime = 1200. / _wpm.floatValue;
+    _samplesPerUnit = (size_t)( (double)(SAMPLE_RATE) * unitTime / 1000. );
+    _remainingSamplesOfIndex = _samplesPerUnit;
 }
 
-- (AVAudioPlayer*) newPlayer {
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
-    NSString *path = [resources pathForResource:@"sin_1000Hz_0dB_1s"
-                                         ofType:@"aiff"];
-    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path]
-                                                     error:nil];
-    player.numberOfLoops = -1; // infinite
-    [player prepareToPlay];
-    return player;
+- (void) initializeAUGraph {
+    printf("initialize\n");
+
+    NSError *error = nil;
+    AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
+    [sessionInstance setPreferredSampleRate:SAMPLE_RATE error:&error];
+    if (error) { LOG( @"error: %@", error ); return; }
+
+    [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
+    if (error) { LOG( @"error: %@", error ); return; }
+
+//    // add interruption handler
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(handleInterruption:)
+//                                                 name:AVAudioSessionInterruptionNotification
+//                                               object:sessionInstance];
+//
+//    // we don't do anything special in the route change notification
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(handleRouteChange:)
+//                                                 name:AVAudioSessionRouteChangeNotification
+//                                               object:sessionInstance];
+
+    [sessionInstance setActive:YES error:&error];
+
+    AUNode morsePlayerNode;
+    AUNode converterNode;
+    AUNode filterNode;
+    AUNode outputNode;
+    OSStatus result = noErr;
+
+    // create a new AUGraph
+    result = NewAUGraph(&_graph);
+    ASSERT_OR_RETURN(result);
+
+    // morse player unit
+    AudioComponentDescription morsePlayerDescription;
+    morsePlayerDescription.componentType         = kAudioUnitType_Mixer;
+    morsePlayerDescription.componentSubType      = kAudioUnitSubType_MultiChannelMixer;
+    morsePlayerDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    morsePlayerDescription.componentFlags        = 0;
+    morsePlayerDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode(_graph, &morsePlayerDescription, &morsePlayerNode);
+    ASSERT_OR_RETURN(result);
+
+    // converter unit
+    AudioComponentDescription converterDescription;
+    converterDescription.componentType         = kAudioUnitType_FormatConverter;
+    converterDescription.componentSubType      = kAudioUnitSubType_AUConverter;
+    converterDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    converterDescription.componentFlags        = 0;
+    converterDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode(_graph, &converterDescription, &converterNode);
+    ASSERT_OR_RETURN(result);
+
+    // low pass filter unit
+    AudioComponentDescription filterDescription;
+    filterDescription.componentType         = kAudioUnitType_Effect;
+    filterDescription.componentSubType      = kAudioUnitSubType_LowPassFilter;
+    filterDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    filterDescription.componentFlags        = 0;
+    filterDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode(_graph, &filterDescription, &filterNode);
+    ASSERT_OR_RETURN(result);
+
+    // output unit
+    AudioComponentDescription outputDescription;// output_desc(kAudioUnitType_Output, kAudioUnitSubType_RemoteIO, kAudioUnitManufacturer_Apple);
+    outputDescription.componentType         = kAudioUnitType_Output;
+    outputDescription.componentSubType      = kAudioUnitSubType_RemoteIO;
+    outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    outputDescription.componentFlags        = 0;
+    outputDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode (_graph, &outputDescription, &outputNode);
+    ASSERT_OR_RETURN(result);
+
+    // morse -> converter -> low pass -> output
+
+    result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, converterNode, 0);
+    ASSERT_OR_RETURN(result);
+
+    result = AUGraphConnectNodeInput(_graph, converterNode, 0, filterNode, 0);
+    ASSERT_OR_RETURN(result);
+
+    result = AUGraphConnectNodeInput(_graph, filterNode, 0, outputNode, 0);
+    ASSERT_OR_RETURN(result);
+
+    result = AUGraphOpen(_graph);
+    ASSERT_OR_RETURN(result);
+
+    AudioUnit morsePlayerUnit, filterUnit, converterUnit;
+    result = AUGraphNodeInfo(_graph, morsePlayerNode, NULL, &morsePlayerUnit);
+    ASSERT_OR_RETURN(result);
+
+    result = AUGraphNodeInfo(_graph, filterNode, NULL, &filterUnit);
+    ASSERT_OR_RETURN(result);
+
+    result = AUGraphNodeInfo(_graph, converterNode, NULL, &converterUnit);
+    ASSERT_OR_RETURN(result);
+
+    AudioStreamBasicDescription audioFormat;
+    size_t bytesPerSample = sizeof (Sample);
+    audioFormat.mSampleRate         = SAMPLE_RATE;
+    audioFormat.mFormatID           = kAudioFormatLinearPCM;
+    audioFormat.mFormatFlags        = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+    audioFormat.mFramesPerPacket    = 1;
+    audioFormat.mChannelsPerFrame   = 1; // MONO
+    audioFormat.mBitsPerChannel     = bytesPerSample * 8;
+    audioFormat.mBytesPerPacket     = bytesPerSample;
+    audioFormat.mBytesPerFrame      = bytesPerSample;
+
+    // stream formats
+
+    result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+    result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+    result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+    // mFormatFlags: 41
+    // kAudioFormatFlagIsNonInterleaved | kAudioFormatFlagIsPacked | kAudioFormatFlagIsFloat
+    size_t size = sizeof(audioFormat);
+    result = AudioUnitGetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, &size);
+    ASSERT_OR_RETURN(result);
+
+    result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
+    ASSERT_OR_RETURN(result);
+
+    // others
+
+    result = AudioUnitSetParameter(filterUnit, kAudioUnitScope_Global, 0, kLowPassParam_CutoffFrequency, FREQ_CUTOFF, 0);
+    ASSERT_OR_RETURN(result);
+
+    AURenderCallbackStruct callbackStruct;
+    callbackStruct.inputProc       = audioUnitCallback;
+    callbackStruct.inputProcRefCon = (__bridge void *)(self);
+
+    result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
+    ASSERT_OR_RETURN(result);
+
+    result = AUGraphInitialize(_graph);
+    ASSERT_OR_RETURN(result);
 }
 
-- (void) timerFired: (NSTimer*) timer {
-    // LOG_CURRENT_METHOD;
+- (void) play {
+    OSStatus result = AUGraphStart(_graph);
+    if (result) { printf("AUGraphStart result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
 
-    NSNumber *onOrOff = _sequence[ _nextIndex ];
-    if (onOrOff == @0) {
-        // off
-        LOG( @"off" );
-        [_player pause];
-        _player.currentTime = 0.1;
-    }
-    else {
-        // on
-        LOG( @"on" );
-        if ( ! _player.playing ) {
-            [_player play];
+}
+
+OSStatus
+audioUnitCallback(void                        *inRefCon,
+                  AudioUnitRenderActionFlags  *ioActionFlags,
+                  const AudioTimeStamp        *inTimeStamp,
+                  UInt32                       inBusNumber,
+                  UInt32                       inNumberFrames,
+                  AudioBufferList             *ioData)
+{
+    IRMorsePlayerOperation *self = (__bridge IRMorsePlayerOperation*)inRefCon;
+    return [self audioUnitCallback:ioActionFlags
+                         timestamp:inTimeStamp
+                         busNumber:inBusNumber
+                      numberFrames:inNumberFrames
+                              data:ioData];
+}
+
+- (OSStatus) audioUnitCallback:(AudioUnitRenderActionFlags *)ioActionFlags
+                     timestamp:(const AudioTimeStamp       *)inTimeStamp
+                     busNumber:(UInt32                      )inBusNumber
+                  numberFrames:(UInt32                      )inNumberFrames
+                          data:(AudioBufferList            *)ioData
+{
+    static bool lastSampleSilence = YES;
+    static int shouldFinishCounter = POST_SILENCE_TIME;
+    bool hasSamples = NO;
+
+    if ( ! _sequence ) { return noErr; }
+
+    // we use Monoral
+    // mNumberBuffers is 1 anyway
+    Sample * samples     = (Sample*)ioData->mBuffers[0].mData;
+    size_t samplesToFill = ioData->mBuffers[0].mDataByteSize / sizeof(Sample);
+
+    while ( samplesToFill && (_nextIndex != _sequenceCount) ) {
+        hasSamples = YES;
+        shouldFinishCounter = POST_SILENCE_TIME; // reset
+
+        size_t nextSamples;
+        if (samplesToFill > _remainingSamplesOfIndex) {
+            nextSamples = _remainingSamplesOfIndex;
+        }
+        else {
+            nextSamples = samplesToFill;
+        }
+
+        bool sound = _sequence[ _nextIndex ];
+        if (sound == SOUND_SILENCE) {
+            lastSampleSilence = YES;
+
+            // silence
+            for (size_t n = 0; n < nextSamples; n ++) {
+                samples[n] = 0;
+            }
+        }
+        else {
+            // sine wave
+            [_producer produceSamples:samples size:nextSamples];
+        }
+
+        _remainingSamplesOfIndex -= nextSamples;
+        samplesToFill            -= nextSamples;
+        samples                  += nextSamples;
+
+        if (_remainingSamplesOfIndex == 0) {
+            _nextIndex ++;
+            _remainingSamplesOfIndex = _samplesPerUnit;
         }
     }
 
-    _nextIndex ++;
-    if (_nextIndex == _sequence.count) {
+    if (! hasSamples && (shouldFinishCounter > 0)) {
+        // fill silence after morse for some time
+        shouldFinishCounter --;
+        for (size_t n = 0; n < samplesToFill; n ++) {
+            samples[n] = 0;
+        }
+    }
+
+    if (shouldFinishCounter == 0) {
         [self finish];
     }
+    return noErr;
 }
 
 - (void) finish {
     LOG_CURRENT_METHOD;
 
-    [_player stop];
-    [_timer invalidate];
+    AUGraphStop(_graph);
+
+    free(_sequence); _sequence = 0;
 
     self.isExecuting = NO;
     self.isFinished  = YES;
+}
+
+- (void) dealloc {
+    LOG_CURRENT_METHOD;
+    DisposeAUGraph(_graph);
 }
 
 #pragma mark - KVO
@@ -242,6 +463,63 @@ static NSDictionary *asciiToMorse;
 - (BOOL)isConcurrent
 {
     return NO;
+}
+
+@end
+
+// thanks to http://goodliffe.blogspot.jp/2010_11_01_archive.html
+// equation looks like that from http://www.musicdsp.org/pdf/musicdsp.pdf 's fast sine calculation
+@implementation SineWave {
+    int32_t c; ///< The coefficient in the resonant filter
+    Sample s1; ///< The previous output sample
+    Sample s2; ///< The output sample before last
+    float  frequency;
+    Sample peak;
+    float  sampleRate;
+}
+
+// The scaling factor to apply after multiplication by the
+// coefficient
+static const int32_t scale = (1<<29);
+
+#pragma mark - Public
+
+- (id) init {
+    if ((self = [super init])) {
+        sampleRate = SAMPLE_RATE;
+        peak       = 0x7fff;
+        frequency  = FREQ_SINE;
+        [self setUp];
+    }
+    return self;
+}
+
+- (void) produceSamples:(Sample *)audioBuffer size:(size_t)size {
+#ifdef DEBUG
+    fprintf(stderr, ".");
+#endif
+
+    for (size_t n = 0; n < size; n ++) {
+        audioBuffer[n] = [self nextSample];
+    }
+}
+
+#pragma mark - Private
+
+- (void) setUp {
+    double step = 2.0 * M_PI * frequency / sampleRate;
+
+    c  = (2 * cos(step) * scale);
+    s1 = (peak * sin(-step));
+    s2 = (peak * sin(-2.0*step));
+}
+
+- (Sample) nextSample {
+    int64_t temp = (int64_t)c * (int64_t)s1;
+    Sample result = (temp/scale) - s2;
+    s2 = s1;
+    s1 = result;
+    return result;
 }
 
 @end
