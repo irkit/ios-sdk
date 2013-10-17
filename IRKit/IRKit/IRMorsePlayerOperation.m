@@ -12,13 +12,9 @@
 @import AudioUnit;
 @import AVFoundation;
 
-//#import "CAStreamBasicDescription.h"
-//#import "CAComponentDescription.h"
-
 #define OUTPUT_BUS          0
 #define NUM_CHANNELS        2
 #define SAMPLE_RATE         44100
-#define ERROR_HERE(status) do {if (status) fprintf(stderr, "ERROR %d [%s:%u]\n", (int)status, __func__, __LINE__);}while(0);
 #define ASSERT_OR_RETURN(status) \
  if (status) { \
   NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
@@ -29,7 +25,7 @@
 #define LONGEST_CHARACTER_LENGTH 7 // $
 #define SOUND_SILENCE      0
 #define SOUND_SINE         1
-#define SOUND_SINE_FADEOUT 2
+#define POST_SILENCE_TIME  30
 
 @interface IRMorsePlayerOperation ()
 
@@ -43,9 +39,8 @@
 @end
 
 @implementation IRMorsePlayerOperation {
-//    AudioComponentInstance audioUnit;
     AUGraph _graph;
-    uint8_t *_sequence;
+    bool *_sequence;
     int _sequenceCount;
     int _nextIndex;
     int _remainingSamplesOfIndex;
@@ -127,7 +122,6 @@ static NSDictionary *asciiToMorse;
     [self parseAsciiStringIntoSequence];
 
     [self initializeAUGraph];
-//    [self preparePlayer];
     [self play];
 }
 
@@ -135,7 +129,6 @@ static NSDictionary *asciiToMorse;
                                   withWordSpeed:(NSNumber*)wpm {
     LOG_CURRENT_METHOD;
 
-    // validation
     if ( ! input ) {
         return nil;
     }
@@ -149,7 +142,6 @@ static NSDictionary *asciiToMorse;
     IRMorsePlayerOperation *op = [[IRMorsePlayerOperation alloc] init];
     op.string = input;
     op.wpm = wpm;
-    op.wpm = @5; // debugging
 
     return op;
 }
@@ -176,13 +168,13 @@ static NSDictionary *asciiToMorse;
             unichar shortOrLong = [morseCode characterAtIndex:j];
             if ( shortOrLong == '0' ) {
                 // short
-                _sequence[ sequenceIndex ++ ] = SOUND_SINE_FADEOUT;
+                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
             }
             else if (shortOrLong == '1' ) {
                 // long
                 _sequence[ sequenceIndex ++ ] = SOUND_SINE;
                 _sequence[ sequenceIndex ++ ] = SOUND_SINE;
-                _sequence[ sequenceIndex ++ ] = SOUND_SINE_FADEOUT;
+                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
             }
 
             // symbol space
@@ -231,12 +223,10 @@ static NSDictionary *asciiToMorse;
 
     [sessionInstance setActive:YES error:&error];
 
-//    AUGraph graph;
     AUNode morsePlayerNode;
     AUNode converterNode;
 	AUNode filterNode;
     AUNode outputNode;
-    AudioStreamBasicDescription desc;
 	OSStatus result = noErr;
 
     // create a new AUGraph
@@ -317,6 +307,8 @@ static NSDictionary *asciiToMorse;
 	audioFormat.mBytesPerPacket     = 4;
 	audioFormat.mBytesPerFrame      = 4;
 
+    // stream formats
+
 	result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
     ASSERT_OR_RETURN(result);
 
@@ -326,6 +318,8 @@ static NSDictionary *asciiToMorse;
 	result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
     ASSERT_OR_RETURN(result);
 
+    // mFormatFlags: 41
+    // kAudioFormatFlagIsNonInterleaved | kAudioFormatFlagIsPacked | kAudioFormatFlagIsFloat
     size_t size = sizeof(audioFormat);
     result = AudioUnitGetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, &size);
     ASSERT_OR_RETURN(result);
@@ -333,30 +327,10 @@ static NSDictionary *asciiToMorse;
 	result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
     ASSERT_OR_RETURN(result);
 
+    // others
+
     result = AudioUnitSetParameter(filterUnit, kAudioUnitScope_Global, 0, kLowPassParam_CutoffFrequency, 1000.f, 0);
     ASSERT_OR_RETURN(result);
-
-
-    // mFormatFlags: 41
-    // kAudioFormatFlagIsNonInterleaved | kAudioFormatFlagIsPacked | kAudioFormatFlagIsFloat
-
-//    size_t bytesPerSample           = sizeof (float); //float is 4 bytes
-//    audioFormat.mSampleRate         = SAMPLE_RATE;
-//	audioFormat.mFormatID           = kAudioFormatLinearPCM;
-//	audioFormat.mFormatFlags        = kAudioFormatFlagIsFloat;
-//	audioFormat.mFramesPerPacket    = 1;
-//	audioFormat.mChannelsPerFrame   = NUM_CHANNELS;
-//	audioFormat.mBitsPerChannel     = 8 * bytesPerSample;
-//	audioFormat.mBytesPerPacket     = bytesPerSample;
-//	audioFormat.mBytesPerFrame      = bytesPerSample;
-//
-//    result = AudioUnitSetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
-//    ASSERT_OR_RETURN(result);
-
-
-    //    if (!status) {
-    //        status = AudioUnitAddRenderNotify(audioUnit, audioUnitCallback, (__bridge void *)self);
-    //    }
 
 	AURenderCallbackStruct callbackStruct;
 	callbackStruct.inputProc       = audioUnitCallback;
@@ -365,57 +339,8 @@ static NSDictionary *asciiToMorse;
     result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
     ASSERT_OR_RETURN(result);
 
-//	result = AUGraphNodeInfo(graph, mixerNode, NULL, &mMixer);
-//    if (result) { printf("AUGraphNodeInfo result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-//
-//		// setup render callback struct
-//		AURenderCallbackStruct rcbs;
-//		rcbs.inputProc = &renderInput;
-//		rcbs.inputProcRefCon = mSoundBuffer;
-//
-//        printf("set kAudioUnitProperty_SetRenderCallback\n");
-//
-//        // Set a callback for the specified node's specified input
-//        result = AUGraphSetNodeInputCallback(mGraph, mixerNode, i, &rcbs);
-//		// equivalent to AudioUnitSetProperty(mMixer, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, i, &rcbs, sizeof(rcbs));
-//        if (result) { printf("AUGraphSetNodeInputCallback result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-//
-//        // set input stream format to what we want
-//        printf("get kAudioUnitProperty_StreamFormat\n");
-//
-//        size = sizeof(desc);
-//		result = AudioUnitGetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, i, &desc, &size);
-//        if (result) { printf("AudioUnitGetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-//
-//		desc.ChangeNumberChannels(2, false);
-//		desc.mSampleRate = kGraphSampleRate;
-//
-//		printf("set kAudioUnitProperty_StreamFormat\n");
-//
-//		result = AudioUnitSetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, i, &desc, sizeof(desc));
-//        if (result) { printf("AudioUnitSetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-//	}
-//
-//	// set output stream format to what we want
-//    printf("get kAudioUnitProperty_StreamFormat\n");
-//
-//    result = AudioUnitGetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, &size);
-//    if (result) { printf("AudioUnitGetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-//
-//	desc.ChangeNumberChannels(2, false);
-//	desc.mSampleRate = kGraphSampleRate;
-//
-//    printf("set kAudioUnitProperty_StreamFormat\n");
-//
-//	result = AudioUnitSetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, sizeof(desc));
-//    if (result) { printf("AudioUnitSetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-//
-//    printf("AUGraphInitialize\n");
-
-    // now that we've set everything up we can initialize the graph, this will also validate the connections
 	result = AUGraphInitialize(_graph);
     ASSERT_OR_RETURN(result);
-
 }
 
 - (void) play {
@@ -423,61 +348,6 @@ static NSDictionary *asciiToMorse;
     if (result) { printf("AUGraphStart result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
 
 }
-
-//- (void) preparePlayer {
-//    LOG_CURRENT_METHOD;
-//    OSStatus status = noErr;
-//
-//	AudioComponentDescription desc;
-//	desc.componentType          = kAudioUnitType_Output;
-//	desc.componentSubType       = kAudioUnitSubType_RemoteIO;
-//	desc.componentFlags         = 0;
-//	desc.componentFlagsMask     = 0;
-//	desc.componentManufacturer  = kAudioUnitManufacturer_Apple;
-//
-//	AudioComponent outputComponent = AudioComponentFindNext(NULL, &desc);
-//
-//	status = AudioComponentInstanceNew(outputComponent, &audioUnit);
-//    ERROR_HERE(status);
-//
-//	UInt32 flag = 1;
-//	status = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, OUTPUT_BUS, &flag, sizeof(flag));
-//    ERROR_HERE(status);
-//
-//	AudioStreamBasicDescription audioFormat;
-//	audioFormat.mSampleRate         = SAMPLE_RATE;
-//	audioFormat.mFormatID           = kAudioFormatLinearPCM;
-//	audioFormat.mFormatFlags        = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-//	audioFormat.mFramesPerPacket    = 1;
-//	audioFormat.mChannelsPerFrame   = NUM_CHANNELS;
-//	audioFormat.mBitsPerChannel     = 16;
-//	audioFormat.mBytesPerPacket     = 4;
-//	audioFormat.mBytesPerFrame      = 4;
-//
-//	status = AudioUnitSetProperty(audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, OUTPUT_BUS, &audioFormat, sizeof(audioFormat));
-//    ERROR_HERE(status);
-//
-////    if (!status) {
-////        status = AudioUnitAddRenderNotify(audioUnit, audioUnitCallback, (__bridge void *)self);
-////    }
-//
-//	AURenderCallbackStruct callbackStruct;
-//	callbackStruct.inputProc       = audioUnitCallback;
-//	callbackStruct.inputProcRefCon = (__bridge void *)(self);
-//
-//    if (!status) {
-//        status = AudioUnitSetProperty(audioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
-//        ERROR_HERE(status);
-//    }
-//
-////    if (!status) {
-////        status = AudioUnitInitialize(audioUnit);
-////        ERROR_HERE(status);
-////    }
-//
-////	status = AudioOutputUnitStart(audioUnit);
-////    ERROR_HERE(status);
-//}
 
 OSStatus
 audioUnitCallback(void                        *inRefCon,
@@ -502,9 +372,8 @@ audioUnitCallback(void                        *inRefCon,
                           data:(AudioBufferList            *)ioData
 {
     static bool lastSampleSilence = YES;
-    static int shouldFinishCounter = 10;
+    static int shouldFinishCounter = POST_SILENCE_TIME;
     bool hasSamples = NO;
-    // LOG( @"flags:%u", *ioActionFlags );
 
     if ( ! _sequence ) { return noErr; }
 
@@ -514,7 +383,7 @@ audioUnitCallback(void                        *inRefCon,
 
         while ( samplesToFill && (_nextIndex != _sequenceCount) ) {
             hasSamples = YES;
-            shouldFinishCounter = 10; // reset
+            shouldFinishCounter = POST_SILENCE_TIME; // reset
 
             size_t nextSamples;
             if (samplesToFill > _remainingSamplesOfIndex) {
@@ -524,7 +393,7 @@ audioUnitCallback(void                        *inRefCon,
                 nextSamples = samplesToFill;
             }
 
-            uint8_t sound = _sequence[ _nextIndex ];
+            bool sound = _sequence[ _nextIndex ];
             if (sound == SOUND_SILENCE) {
                 lastSampleSilence = YES;
 
@@ -536,26 +405,8 @@ audioUnitCallback(void                        *inRefCon,
                 }
             }
             else {
-                if (lastSampleSilence) {
-                    [_producer setSampleRate:SAMPLE_RATE];
-                    lastSampleSilence = NO;
-                }
-
                 // sine wave
                 [_producer produceSamples:samples size:nextSamples];
-            }
-            if (sound == SOUND_SINE_FADEOUT) {
-                // post process fadeout
-//                size_t fadeOutSamplesCount = _samplesPerUnit / 100;
-                size_t fadeOutSamplesCount = 3;
-                for (size_t n = 0; n < fadeOutSamplesCount; n++) {
-                    float fadeOutGain = (float)n / (float)fadeOutSamplesCount;
-                    Sample value = samples[(nextSamples - n -1) * NUM_CHANNELS];
-                    value        = (Sample)( (float)value * fadeOutGain );
-                    for (int c = 0; c < NUM_CHANNELS; c ++) {
-                        samples[(nextSamples - n - 1) * NUM_CHANNELS + c] = value;
-                    }
-                }
             }
 
             _remainingSamplesOfIndex -= nextSamples;
@@ -588,14 +439,7 @@ audioUnitCallback(void                        *inRefCon,
 - (void) finish {
     LOG_CURRENT_METHOD;
 
-    // TODO how to avoid this? ERROR:     233: Someone is deleting an AudioConverter while it is in use.
-
-//    AudioOutputUnitStop(audioUnit);
-//    AudioUnitUninitialize(audioUnit);
-//    AudioComponentInstanceDispose(audioUnit);
-//    audioUnit = nil;
     AUGraphStop(_graph);
-    // DisposeAUGraph(_graph);
 
     free(_sequence); _sequence = 0;
 
@@ -625,45 +469,37 @@ audioUnitCallback(void                        *inRefCon,
 
 @end
 
+// thanks to http://goodliffe.blogspot.jp/2010_11_01_archive.html
+// equation looks like that from http://www.musicdsp.org/pdf/musicdsp.pdf 's fast sine calculation
 @implementation SineWave {
     int32_t c; ///< The coefficient in the resonant filter
     Sample s1; ///< The previous output sample
     Sample s2; ///< The output sample before last
+    float  frequency;
+    Sample peak;
+    float  sampleRate;
 }
 
-/// The scaling factor to apply after multiplication by the
-/// coefficient
+// The scaling factor to apply after multiplication by the
+// coefficient
 static const int32_t scale = (1<<29);
 
 #pragma mark - Public
 
 - (id) init {
     if ((self = [super init])) {
-        _sampleRate = 44100;
-        _peak       = 0x7fff;
-        _frequency  = 523.8;
+        sampleRate = SAMPLE_RATE;
+        peak       = 0x7fff;
+        frequency  = 523.8;
         [self setUp];
     }
     return self;
 }
 
-- (void) setSampleRate:(float)newSampleRate {
-    _sampleRate = newSampleRate;
-    [self setUp];
-}
-
-- (void) setPeakLevel:(Sample)newPeak {
-    _peak = newPeak;
-    [self setUp];
-}
-
-- (void) setFrequency:(float)newFrequency {
-    _frequency = newFrequency;
-    [self setUp];
-}
-
 - (void) produceSamples:(Sample *)audioBuffer size:(size_t)size {
+#ifdef DEBUG
     fprintf(stderr, ".");
+#endif
 
     for (size_t n = 0; n < size; n ++) {
         Sample next = [self nextSample];
@@ -676,11 +512,11 @@ static const int32_t scale = (1<<29);
 #pragma mark - Private
 
 - (void) setUp {
-    double step = 2.0 * M_PI * _frequency / _sampleRate;
+    double step = 2.0 * M_PI * frequency / sampleRate;
 
     c  = (2 * cos(step) * scale);
-    s1 = (_peak * sin(-step));
-    s2 = (_peak * sin(-2.0*step));
+    s1 = (peak * sin(-step));
+    s2 = (peak * sin(-2.0*step));
 }
 
 - (Sample) nextSample {

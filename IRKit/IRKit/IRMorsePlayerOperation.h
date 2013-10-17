@@ -18,15 +18,11 @@ typedef SInt16 Sample;
 
 @end
 
-/// Simple AudioProducer that produces a sine wave
+// Simple AudioProducer that produces a sine wave
 @interface SineWave : NSObject
 
-@property (nonatomic, setter=setFrequency:)  float  frequency;
-@property (nonatomic, setter=setPeak:)       Sample peak;
-@property (nonatomic, setter=setSampleRate:) float  sampleRate;
-
-/// Fills a buffer with "size" samples.
-/// The buffer should be filled in with interleaved stereo samples.
+// Fills a buffer with "size" samples.
+// The buffer should be filled in with interleaved stereo samples.
 - (void) produceSamples:(Sample *)audioBuffer size:(size_t)size;
 
 @end
