@@ -13,7 +13,6 @@
 @import AVFoundation;
 
 #define OUTPUT_BUS          0
-#define NUM_CHANNELS        2
 #define SAMPLE_RATE         44100
 #define ASSERT_OR_RETURN(status) \
  if (status) { \
@@ -26,6 +25,8 @@
 #define SOUND_SILENCE      0
 #define SOUND_SINE         1
 #define POST_SILENCE_TIME  30
+#define FREQ_SINE          523.8
+#define FREQ_CUTOFF        600.
 
 @interface IRMorsePlayerOperation ()
 
@@ -225,12 +226,12 @@ static NSDictionary *asciiToMorse;
 
     AUNode morsePlayerNode;
     AUNode converterNode;
-	AUNode filterNode;
+    AUNode filterNode;
     AUNode outputNode;
-	OSStatus result = noErr;
+    OSStatus result = noErr;
 
     // create a new AUGraph
-	result = NewAUGraph(&_graph);
+    result = NewAUGraph(&_graph);
     ASSERT_OR_RETURN(result);
 
     // morse player unit
@@ -264,27 +265,27 @@ static NSDictionary *asciiToMorse;
     ASSERT_OR_RETURN(result);
 
     // output unit
-	AudioComponentDescription outputDescription;// output_desc(kAudioUnitType_Output, kAudioUnitSubType_RemoteIO, kAudioUnitManufacturer_Apple);
+    AudioComponentDescription outputDescription;// output_desc(kAudioUnitType_Output, kAudioUnitSubType_RemoteIO, kAudioUnitManufacturer_Apple);
     outputDescription.componentType         = kAudioUnitType_Output;
-	outputDescription.componentSubType      = kAudioUnitSubType_RemoteIO;
-	outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-	outputDescription.componentFlags        = 0;
-	outputDescription.componentFlagsMask    = 0;
+    outputDescription.componentSubType      = kAudioUnitSubType_RemoteIO;
+    outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    outputDescription.componentFlags        = 0;
+    outputDescription.componentFlagsMask    = 0;
     result = AUGraphAddNode (_graph, &outputDescription, &outputNode);
     ASSERT_OR_RETURN(result);
 
     // morse -> converter -> low pass -> output
 
-	result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, converterNode, 0);
+    result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, converterNode, 0);
     ASSERT_OR_RETURN(result);
 
-	result = AUGraphConnectNodeInput(_graph, converterNode, 0, filterNode, 0);
+    result = AUGraphConnectNodeInput(_graph, converterNode, 0, filterNode, 0);
     ASSERT_OR_RETURN(result);
 
-	result = AUGraphConnectNodeInput(_graph, filterNode, 0, outputNode, 0);
+    result = AUGraphConnectNodeInput(_graph, filterNode, 0, outputNode, 0);
     ASSERT_OR_RETURN(result);
 
-	result = AUGraphOpen(_graph);
+    result = AUGraphOpen(_graph);
     ASSERT_OR_RETURN(result);
 
     AudioUnit morsePlayerUnit, filterUnit, converterUnit;
@@ -297,25 +298,26 @@ static NSDictionary *asciiToMorse;
     result = AUGraphNodeInfo(_graph, converterNode, NULL, &converterUnit);
     ASSERT_OR_RETURN(result);
 
-	AudioStreamBasicDescription audioFormat;
-	audioFormat.mSampleRate         = SAMPLE_RATE;
-	audioFormat.mFormatID           = kAudioFormatLinearPCM;
-	audioFormat.mFormatFlags        = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-	audioFormat.mFramesPerPacket    = 1;
-	audioFormat.mChannelsPerFrame   = NUM_CHANNELS;
-	audioFormat.mBitsPerChannel     = 16;
-	audioFormat.mBytesPerPacket     = 4;
-	audioFormat.mBytesPerFrame      = 4;
+    AudioStreamBasicDescription audioFormat;
+    size_t bytesPerSample = sizeof (Sample);
+    audioFormat.mSampleRate         = SAMPLE_RATE;
+    audioFormat.mFormatID           = kAudioFormatLinearPCM;
+    audioFormat.mFormatFlags        = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+    audioFormat.mFramesPerPacket    = 1;
+    audioFormat.mChannelsPerFrame   = 1; // MONO
+    audioFormat.mBitsPerChannel     = bytesPerSample * 8;
+    audioFormat.mBytesPerPacket     = bytesPerSample;
+    audioFormat.mBytesPerFrame      = bytesPerSample;
 
     // stream formats
 
-	result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
+    result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
     ASSERT_OR_RETURN(result);
 
-	result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
+    result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
     ASSERT_OR_RETURN(result);
 
-	result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
+    result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, sizeof(audioFormat));
     ASSERT_OR_RETURN(result);
 
     // mFormatFlags: 41
@@ -324,22 +326,22 @@ static NSDictionary *asciiToMorse;
     result = AudioUnitGetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, &size);
     ASSERT_OR_RETURN(result);
 
-	result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
+    result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
     ASSERT_OR_RETURN(result);
 
     // others
 
-    result = AudioUnitSetParameter(filterUnit, kAudioUnitScope_Global, 0, kLowPassParam_CutoffFrequency, 1000.f, 0);
+    result = AudioUnitSetParameter(filterUnit, kAudioUnitScope_Global, 0, kLowPassParam_CutoffFrequency, FREQ_CUTOFF, 0);
     ASSERT_OR_RETURN(result);
 
-	AURenderCallbackStruct callbackStruct;
-	callbackStruct.inputProc       = audioUnitCallback;
-	callbackStruct.inputProcRefCon = (__bridge void *)(self);
+    AURenderCallbackStruct callbackStruct;
+    callbackStruct.inputProc       = audioUnitCallback;
+    callbackStruct.inputProcRefCon = (__bridge void *)(self);
 
     result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
     ASSERT_OR_RETURN(result);
 
-	result = AUGraphInitialize(_graph);
+    result = AUGraphInitialize(_graph);
     ASSERT_OR_RETURN(result);
 }
 
@@ -377,56 +379,52 @@ audioUnitCallback(void                        *inRefCon,
 
     if ( ! _sequence ) { return noErr; }
 
-    for(UInt32 i = 0; i < ioData->mNumberBuffers; i++) {
-        Sample * samples     = (Sample*)ioData->mBuffers[i].mData;
-        size_t samplesToFill = ioData->mBuffers[i].mDataByteSize / sizeof(Sample) / NUM_CHANNELS;
+    // we use Monoral
+    // mNumberBuffers is 1 anyway
+    Sample * samples     = (Sample*)ioData->mBuffers[0].mData;
+    size_t samplesToFill = ioData->mBuffers[0].mDataByteSize / sizeof(Sample);
 
-        while ( samplesToFill && (_nextIndex != _sequenceCount) ) {
-            hasSamples = YES;
-            shouldFinishCounter = POST_SILENCE_TIME; // reset
+    while ( samplesToFill && (_nextIndex != _sequenceCount) ) {
+        hasSamples = YES;
+        shouldFinishCounter = POST_SILENCE_TIME; // reset
 
-            size_t nextSamples;
-            if (samplesToFill > _remainingSamplesOfIndex) {
-                nextSamples = _remainingSamplesOfIndex;
-            }
-            else {
-                nextSamples = samplesToFill;
-            }
-
-            bool sound = _sequence[ _nextIndex ];
-            if (sound == SOUND_SILENCE) {
-                lastSampleSilence = YES;
-
-                // silence
-                for (size_t n = 0; n < nextSamples; n ++) {
-                    for (int c = 0; c < NUM_CHANNELS; c ++) {
-                        samples[n * NUM_CHANNELS + c] = 0;
-                    }
-                }
-            }
-            else {
-                // sine wave
-                [_producer produceSamples:samples size:nextSamples];
-            }
-
-            _remainingSamplesOfIndex -= nextSamples;
-            samplesToFill            -= nextSamples;
-            samples                  += nextSamples;
-
-            if (_remainingSamplesOfIndex == 0) {
-                _nextIndex ++;
-                _remainingSamplesOfIndex = _samplesPerUnit;
-            }
+        size_t nextSamples;
+        if (samplesToFill > _remainingSamplesOfIndex) {
+            nextSamples = _remainingSamplesOfIndex;
+        }
+        else {
+            nextSamples = samplesToFill;
         }
 
-        if (! hasSamples && (shouldFinishCounter > 0)) {
-            // fill silence after morse for some time
-            shouldFinishCounter --;
-            for (size_t n = 0; n < samplesToFill; n ++) {
-                for (int c = 0; c < NUM_CHANNELS; c ++) {
-                    samples[n * NUM_CHANNELS + c] = 0;
-                }
+        bool sound = _sequence[ _nextIndex ];
+        if (sound == SOUND_SILENCE) {
+            lastSampleSilence = YES;
+
+            // silence
+            for (size_t n = 0; n < nextSamples; n ++) {
+                samples[n] = 0;
             }
+        }
+        else {
+            // sine wave
+            [_producer produceSamples:samples size:nextSamples];
+        }
+
+        _remainingSamplesOfIndex -= nextSamples;
+        samplesToFill            -= nextSamples;
+        samples                  += nextSamples;
+
+        if (_remainingSamplesOfIndex == 0) {
+            _nextIndex ++;
+            _remainingSamplesOfIndex = _samplesPerUnit;
+        }
+    }
+
+    if (! hasSamples && (shouldFinishCounter > 0)) {
+        // fill silence after morse for some time
+        shouldFinishCounter --;
+        for (size_t n = 0; n < samplesToFill; n ++) {
+            samples[n] = 0;
         }
     }
 
@@ -490,7 +488,7 @@ static const int32_t scale = (1<<29);
     if ((self = [super init])) {
         sampleRate = SAMPLE_RATE;
         peak       = 0x7fff;
-        frequency  = 523.8;
+        frequency  = FREQ_SINE;
         [self setUp];
     }
     return self;
@@ -502,10 +500,7 @@ static const int32_t scale = (1<<29);
 #endif
 
     for (size_t n = 0; n < size; n ++) {
-        Sample next = [self nextSample];
-        for (int c = 0; c < NUM_CHANNELS; c ++) {
-            audioBuffer[n * NUM_CHANNELS + c] = next;
-        }
+        audioBuffer[n] = [self nextSample];
     }
 }
 
