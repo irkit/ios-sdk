@@ -511,6 +511,7 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C7C14F19180FEA070025B865 /* dependencies */,
 				C70241DE17C3805900B8ACED /* packer */,
 				C73CB4DB17856CD100B3F2C0 /* operation */,
 				C7C7A308176EFC7300C9A62F /* viewcontrollers */,
@@ -600,6 +601,13 @@
 				C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		C7C14F19180FEA070025B865 /* dependencies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = dependencies;
 			sourceTree = "<group>";
 		};
 		C7C7A308176EFC7300C9A62F /* viewcontrollers */ = {

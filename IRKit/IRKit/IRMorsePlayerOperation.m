@@ -10,6 +10,10 @@
 #import "IRMorsePlayerOperation.h"
 @import AudioToolbox;
 @import AudioUnit;
+@import AVFoundation;
+
+//#import "CAStreamBasicDescription.h"
+//#import "CAComponentDescription.h"
 
 #define OUTPUT_BUS          0
 #define NUM_CHANNELS        2
@@ -32,7 +36,8 @@
 @end
 
 @implementation IRMorsePlayerOperation {
-    AudioComponentInstance audioUnit;
+//    AudioComponentInstance audioUnit;
+    AUGraph _graph;
     uint8_t *_sequence;
     int _sequenceCount;
     int _nextIndex;
@@ -114,7 +119,9 @@ static NSDictionary *asciiToMorse;
 
     [self parseAsciiStringIntoSequence];
 
-    [self preparePlayer];
+    [self initializeAUGraph];
+//    [self preparePlayer];
+    [self play];
 }
 
 + (IRMorsePlayerOperation*) playMorseFromString:(NSString*)input
@@ -192,25 +199,98 @@ static NSDictionary *asciiToMorse;
     _remainingSamplesOfIndex = _samplesPerUnit;
 }
 
-- (void) preparePlayer {
-    LOG_CURRENT_METHOD;
-    OSStatus status = noErr;
+- (void) initializeAUGraph {
+    printf("initialize\n");
 
-	AudioComponentDescription desc;
-	desc.componentType          = kAudioUnitType_Output;
-	desc.componentSubType       = kAudioUnitSubType_RemoteIO;
-	desc.componentFlags         = 0;
-	desc.componentFlagsMask     = 0;
-	desc.componentManufacturer  = kAudioUnitManufacturer_Apple;
+    NSError *error = nil;
+    AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
+    [sessionInstance setPreferredSampleRate:SAMPLE_RATE error:&error];
+    if (error) { LOG( @"error: %@", error ); return; }
 
-	AudioComponent outputComponent = AudioComponentFindNext(NULL, &desc);
+    [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
+    if (error) { LOG( @"error: %@", error ); return; }
 
-	status = AudioComponentInstanceNew(outputComponent, &audioUnit);
-    ERROR_HERE(status);
+//    // add interruption handler
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(handleInterruption:)
+//                                                 name:AVAudioSessionInterruptionNotification
+//                                               object:sessionInstance];
+//
+//    // we don't do anything special in the route change notification
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(handleRouteChange:)
+//                                                 name:AVAudioSessionRouteChangeNotification
+//                                               object:sessionInstance];
 
-	UInt32 flag = 1;
-	status = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, OUTPUT_BUS, &flag, sizeof(flag));
-    ERROR_HERE(status);
+    [sessionInstance setActive:YES error:&error];
+
+//    AUGraph graph;
+    AUNode morsePlayerNode;
+    AUNode outputNode;
+	AUNode filterNode;
+    AudioStreamBasicDescription desc;
+	OSStatus result = noErr;
+
+    // create a new AUGraph
+	result = NewAUGraph(&_graph);
+    if (result) { printf("NewAUGraph result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+
+    // output unit
+	AudioComponentDescription outputDescription;// output_desc(kAudioUnitType_Output, kAudioUnitSubType_RemoteIO, kAudioUnitManufacturer_Apple);
+    outputDescription.componentType         = kAudioUnitType_Output;
+	outputDescription.componentSubType      = kAudioUnitSubType_RemoteIO;
+	outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+	outputDescription.componentFlags        = 0;
+	outputDescription.componentFlagsMask    = 0;
+    // CAShowComponentDescription(&output_desc);
+    result = AUGraphAddNode (_graph, &outputDescription, &outputNode);
+    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+
+    // morse player unit
+    AudioComponentDescription morsePlayerDescription;
+    morsePlayerDescription.componentType         = kAudioUnitType_Mixer;
+    morsePlayerDescription.componentSubType      = kAudioUnitSubType_MultiChannelMixer;
+    morsePlayerDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+    morsePlayerDescription.componentFlags        = 0;
+    morsePlayerDescription.componentFlagsMask    = 0;
+    result = AUGraphAddNode(_graph, &morsePlayerDescription, &morsePlayerNode);
+    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+
+//    // low pass filter unit
+//    AudioComponentDescription filterDescription;
+//    filterDescription.componentType         = kAudioUnitType_Effect;
+//    filterDescription.componentSubType      = kAudioUnitSubType_LowPassFilter;
+//    filterDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
+//    filterDescription.componentFlags        = 0;
+//    filterDescription.componentFlagsMask    = 0;
+//    result = AUGraphAddNode(_graph, &filterDescription, &filterNode);
+//    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+
+//	result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, filterNode, 0);
+//    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+//
+//	result = AUGraphConnectNodeInput(_graph, filterNode, 0, outputNode, 0);
+//    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+	result = AUGraphConnectNodeInput(_graph, morsePlayerNode, 0, outputNode, 0);
+    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
+
+    // open the graph AudioUnits are open but not initialized (no resource allocation occurs here)
+	result = AUGraphOpen(_graph);
+    if (result) {
+        LOG( @"result: %lu %4.4s", result, (char*)&result );
+        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
+        LOG( @"error: %@", error );
+        return;
+    }
+
+    //    AudioUnit morsePlayerUnit;
+    //    result = AUGraphNodeInfo(_graph, morsePlayerNode, NULL, &morsePlayerUnit);
+    AudioUnit morsePlayerUnit;
+    result = AUGraphNodeInfo(_graph, morsePlayerNode, NULL, &morsePlayerUnit);
+
+//    UInt32 flag = 1;
+//	status = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, OUTPUT_BUS, &flag, sizeof(flag));
+//    ERROR_HERE(status);
 
 	AudioStreamBasicDescription audioFormat;
 	audioFormat.mSampleRate         = SAMPLE_RATE;
@@ -222,30 +302,140 @@ static NSDictionary *asciiToMorse;
 	audioFormat.mBytesPerPacket     = 4;
 	audioFormat.mBytesPerFrame      = 4;
 
-	status = AudioUnitSetProperty(audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, OUTPUT_BUS, &audioFormat, sizeof(audioFormat));
-    ERROR_HERE(status);
+	result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, OUTPUT_BUS, &audioFormat, sizeof(audioFormat));
+    if (result) {
+        LOG( @"result: %lu %4.4s", result, (char*)&result );
+        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
+        LOG( @"error: %@", error );
+        return;
+    }
 
-//    if (!status) {
-//        status = AudioUnitAddRenderNotify(audioUnit, audioUnitCallback, (__bridge void *)self);
-//    }
+    //    if (!status) {
+    //        status = AudioUnitAddRenderNotify(audioUnit, audioUnitCallback, (__bridge void *)self);
+    //    }
 
 	AURenderCallbackStruct callbackStruct;
 	callbackStruct.inputProc       = audioUnitCallback;
 	callbackStruct.inputProcRefCon = (__bridge void *)(self);
 
-    if (!status) {
-        status = AudioUnitSetProperty(audioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
-        ERROR_HERE(status);
-    }
+    result = AudioUnitSetProperty(morsePlayerUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
+    if (result) { LOG( @"result: %lu %4.4s", result, (char*)&result ); return; }
 
-    if (!status) {
-        status = AudioUnitInitialize(audioUnit);
-        ERROR_HERE(status);
-    }
+//	result = AUGraphNodeInfo(graph, mixerNode, NULL, &mMixer);
+//    if (result) { printf("AUGraphNodeInfo result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+//
+//		// setup render callback struct
+//		AURenderCallbackStruct rcbs;
+//		rcbs.inputProc = &renderInput;
+//		rcbs.inputProcRefCon = mSoundBuffer;
+//
+//        printf("set kAudioUnitProperty_SetRenderCallback\n");
+//
+//        // Set a callback for the specified node's specified input
+//        result = AUGraphSetNodeInputCallback(mGraph, mixerNode, i, &rcbs);
+//		// equivalent to AudioUnitSetProperty(mMixer, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Input, i, &rcbs, sizeof(rcbs));
+//        if (result) { printf("AUGraphSetNodeInputCallback result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+//
+//        // set input stream format to what we want
+//        printf("get kAudioUnitProperty_StreamFormat\n");
+//
+//        size = sizeof(desc);
+//		result = AudioUnitGetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, i, &desc, &size);
+//        if (result) { printf("AudioUnitGetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+//
+//		desc.ChangeNumberChannels(2, false);
+//		desc.mSampleRate = kGraphSampleRate;
+//
+//		printf("set kAudioUnitProperty_StreamFormat\n");
+//
+//		result = AudioUnitSetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, i, &desc, sizeof(desc));
+//        if (result) { printf("AudioUnitSetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+//	}
+//
+//	// set output stream format to what we want
+//    printf("get kAudioUnitProperty_StreamFormat\n");
+//
+//    result = AudioUnitGetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, &size);
+//    if (result) { printf("AudioUnitGetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+//
+//	desc.ChangeNumberChannels(2, false);
+//	desc.mSampleRate = kGraphSampleRate;
+//
+//    printf("set kAudioUnitProperty_StreamFormat\n");
+//
+//	result = AudioUnitSetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, sizeof(desc));
+//    if (result) { printf("AudioUnitSetProperty result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+//
+//    printf("AUGraphInitialize\n");
 
-	status = AudioOutputUnitStart(audioUnit);
-    ERROR_HERE(status);
+    // now that we've set everything up we can initialize the graph, this will also validate the connections
+	result = AUGraphInitialize(_graph);
+    if (result) { printf("result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+    
+//    CAShow(mGraph);
+
 }
+
+- (void) play {
+    OSStatus result = AUGraphStart(_graph);
+    if (result) { printf("AUGraphStart result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
+
+}
+
+//- (void) preparePlayer {
+//    LOG_CURRENT_METHOD;
+//    OSStatus status = noErr;
+//
+//	AudioComponentDescription desc;
+//	desc.componentType          = kAudioUnitType_Output;
+//	desc.componentSubType       = kAudioUnitSubType_RemoteIO;
+//	desc.componentFlags         = 0;
+//	desc.componentFlagsMask     = 0;
+//	desc.componentManufacturer  = kAudioUnitManufacturer_Apple;
+//
+//	AudioComponent outputComponent = AudioComponentFindNext(NULL, &desc);
+//
+//	status = AudioComponentInstanceNew(outputComponent, &audioUnit);
+//    ERROR_HERE(status);
+//
+//	UInt32 flag = 1;
+//	status = AudioUnitSetProperty(audioUnit, kAudioOutputUnitProperty_EnableIO, kAudioUnitScope_Output, OUTPUT_BUS, &flag, sizeof(flag));
+//    ERROR_HERE(status);
+//
+//	AudioStreamBasicDescription audioFormat;
+//	audioFormat.mSampleRate         = SAMPLE_RATE;
+//	audioFormat.mFormatID           = kAudioFormatLinearPCM;
+//	audioFormat.mFormatFlags        = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
+//	audioFormat.mFramesPerPacket    = 1;
+//	audioFormat.mChannelsPerFrame   = NUM_CHANNELS;
+//	audioFormat.mBitsPerChannel     = 16;
+//	audioFormat.mBytesPerPacket     = 4;
+//	audioFormat.mBytesPerFrame      = 4;
+//
+//	status = AudioUnitSetProperty(audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, OUTPUT_BUS, &audioFormat, sizeof(audioFormat));
+//    ERROR_HERE(status);
+//
+////    if (!status) {
+////        status = AudioUnitAddRenderNotify(audioUnit, audioUnitCallback, (__bridge void *)self);
+////    }
+//
+//	AURenderCallbackStruct callbackStruct;
+//	callbackStruct.inputProc       = audioUnitCallback;
+//	callbackStruct.inputProcRefCon = (__bridge void *)(self);
+//
+//    if (!status) {
+//        status = AudioUnitSetProperty(audioUnit, kAudioUnitProperty_SetRenderCallback, kAudioUnitScope_Global, OUTPUT_BUS, &callbackStruct, sizeof(callbackStruct));
+//        ERROR_HERE(status);
+//    }
+//
+////    if (!status) {
+////        status = AudioUnitInitialize(audioUnit);
+////        ERROR_HERE(status);
+////    }
+//
+////	status = AudioOutputUnitStart(audioUnit);
+////    ERROR_HERE(status);
+//}
 
 OSStatus
 audioUnitCallback(void                        *inRefCon,
@@ -358,15 +548,22 @@ audioUnitCallback(void                        *inRefCon,
 
     // TODO how to avoid this? ERROR:     233: Someone is deleting an AudioConverter while it is in use.
 
-    AudioOutputUnitStop(audioUnit);
-    AudioUnitUninitialize(audioUnit);
-    AudioComponentInstanceDispose(audioUnit);
-    audioUnit = nil;
+//    AudioOutputUnitStop(audioUnit);
+//    AudioUnitUninitialize(audioUnit);
+//    AudioComponentInstanceDispose(audioUnit);
+//    audioUnit = nil;
+    AUGraphStop(_graph);
+    // DisposeAUGraph(_graph);
 
     free(_sequence); _sequence = 0;
 
     self.isExecuting = NO;
     self.isFinished  = YES;
+}
+
+- (void) dealloc {
+    LOG_CURRENT_METHOD;
+    DisposeAUGraph(_graph);
 }
 
 #pragma mark - KVO
