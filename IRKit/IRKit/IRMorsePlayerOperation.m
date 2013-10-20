@@ -17,7 +17,7 @@
 #define ASSERT_OR_RETURN(status) \
  if (status) { \
   NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
-  LOG( @"status: %ld error: %@", status, error ); \
+  LOG( @"status: %ld error: %@", status, e ); \
   return; \
  }
 
@@ -200,8 +200,6 @@ static NSDictionary *asciiToMorse;
 }
 
 - (void) initializeAUGraph {
-    printf("initialize\n");
-
     NSError *error = nil;
     AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
     [sessionInstance setPreferredSampleRate:SAMPLE_RATE error:&error];
@@ -222,6 +220,18 @@ static NSDictionary *asciiToMorse;
 //                                                 name:AVAudioSessionRouteChangeNotification
 //                                               object:sessionInstance];
 
+
+
+
+
+
+
+
+
+
+
+
+    
     [sessionInstance setActive:YES error:&error];
 
     AUNode morsePlayerNode;
@@ -265,7 +275,7 @@ static NSDictionary *asciiToMorse;
     ASSERT_OR_RETURN(result);
 
     // output unit
-    AudioComponentDescription outputDescription;// output_desc(kAudioUnitType_Output, kAudioUnitSubType_RemoteIO, kAudioUnitManufacturer_Apple);
+    AudioComponentDescription outputDescription;
     outputDescription.componentType         = kAudioUnitType_Output;
     outputDescription.componentSubType      = kAudioUnitSubType_RemoteIO;
     outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
@@ -347,8 +357,7 @@ static NSDictionary *asciiToMorse;
 
 - (void) play {
     OSStatus result = AUGraphStart(_graph);
-    if (result) { printf("AUGraphStart result %ld %08lX %4.4s\n", result, result, (char*)&result); return; }
-
+    ASSERT_OR_RETURN(result);
 }
 
 OSStatus
