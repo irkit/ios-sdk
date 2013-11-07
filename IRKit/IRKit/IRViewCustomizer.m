@@ -126,6 +126,8 @@
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary: [[UINavigationBar appearance] titleTextAttributes]];
     [attributes setObject:[UIFont fontWithName:@"Avenir-Light" size:20.]
                    forKey:UITextAttributeFont ];
+    [attributes setObject:[UIColor whiteColor]
+                   forKey:UITextAttributeTextColor];
     [bar setTitleTextAttributes: attributes];
 }
 

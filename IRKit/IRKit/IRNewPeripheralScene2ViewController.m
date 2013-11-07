@@ -33,6 +33,7 @@
                                                                                           action:@selector(cancelButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
