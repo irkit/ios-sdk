@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IREditCell"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="IREditCell" id="322" customClass="IREditCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="322" id="9SA-eN-Zg9">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XP-iL-ZOs">
+                        <rect key="frame" x="15" y="18" width="42" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Network Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUk-16-mgL">
+                        <rect key="frame" x="113" y="20" width="100" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="lUk-16-mgL" secondAttribute="centerY" id="CI4-3p-eCJ"/>
+                    <constraint firstItem="lUk-16-mgL" firstAttribute="leading" secondItem="9SA-eN-Zg9" secondAttribute="leading" constant="113" id="Kl6-8T-0qh"/>
+                    <constraint firstItem="7XP-iL-ZOs" firstAttribute="leading" secondItem="9SA-eN-Zg9" secondAttribute="leading" constant="15" id="gmM-lm-Ypr"/>
+                    <constraint firstAttribute="centerY" secondItem="7XP-iL-ZOs" secondAttribute="centerY" id="imO-cH-K8k"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="editTextField" destination="lUk-16-mgL" id="HLD-eP-U4O"/>
+                <outlet property="titleLabel" destination="7XP-iL-ZOs" id="RdW-YL-rFX"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

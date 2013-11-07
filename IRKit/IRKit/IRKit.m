@@ -5,6 +5,9 @@
 #import "IRHelper.h"
 #import "IRViewCustomizer.h"
 
+#import "IRWifiEditViewController.h"
+#import "IREditCell.h"
+
 static BOOL useCustomizedStyle;
 
 @interface IRKit ()
@@ -68,6 +71,10 @@ static BOOL useCustomizedStyle;
     _retainConnectionInBackground = NO;
     [IRViewCustomizer sharedInstance]; // init
     [self retrieveKnownPeripherals];
+
+    // temp
+    [IRWifiEditViewController class];
+    [IREditCell class];
 
     return self;
 }

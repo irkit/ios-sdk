@@ -75,6 +75,7 @@
 
 #define IRKitCellIdentifierSignal                          @"IRSignalCell"
 #define IRKitCellIdentifierPeripheral                      @"IRPeripheralCell"
+#define IRKitCellIdentifierEdit                            @"IREditCell"
 
 #pragma mark - IR*ViewControllerDelegate
 

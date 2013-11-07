@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */; };
+		C701BEBF182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */; };
+		C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEC1182BA72C00C31F4B /* IRKeys.m */; };
 		C714890D17C46CD600713890 /* IRPackerWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */; };
 		C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714890E17C46D6E00713890 /* libstdc++.dylib */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
@@ -83,6 +86,10 @@
 		C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; };
 		C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */; };
 		C776CC4017B3A3C500E1824D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
+		C78F6FE1182B8134002AAC7B /* IRWifiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */; };
+		C78F6FE4182B8347002AAC7B /* IRWifiEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78F6FE3182B8347002AAC7B /* IRWifiEditViewController.xib */; };
+		C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78F6FE5182B8D89002AAC7B /* IREditCell.xib */; };
+		C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F6FE7182B8E77002AAC7B /* IREditCell.m */; };
 		C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */; };
 		C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350317AA5D3A00C8679B /* icn_signal.png */; };
 		C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350617AA5D7300C8679B /* icn_device@2x.png */; };
@@ -186,6 +193,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRWifiSecuritySelectViewController.xib; sourceTree = "<group>"; };
+		C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWifiSecuritySelectViewController.m; sourceTree = "<group>"; };
+		C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWifiSecuritySelectViewController.h; sourceTree = "<group>"; };
+		C701BEC0182BA72C00C31F4B /* IRKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRKeys.h; sourceTree = "<group>"; };
+		C701BEC1182BA72C00C31F4B /* IRKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRKeys.m; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C71D909817977D2200CEC73F /* IRKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71D909C17977D2200CEC73F /* IRKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitTests-Info.plist"; sourceTree = "<group>"; };
@@ -272,6 +284,12 @@
 		C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralNameEditViewController.h; sourceTree = "<group>"; };
 		C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalViewController.m; sourceTree = "<group>"; };
 		C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalViewController.h; sourceTree = "<group>"; };
+		C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWifiEditViewController.m; sourceTree = "<group>"; };
+		C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWifiEditViewController.h; sourceTree = "<group>"; };
+		C78F6FE3182B8347002AAC7B /* IRWifiEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRWifiEditViewController.xib; sourceTree = "<group>"; };
+		C78F6FE5182B8D89002AAC7B /* IREditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IREditCell.xib; sourceTree = "<group>"; };
+		C78F6FE7182B8E77002AAC7B /* IREditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IREditCell.m; sourceTree = "<group>"; };
+		C78F6FE8182B8E77002AAC7B /* IREditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IREditCell.h; sourceTree = "<group>"; };
 		C79DE3B1176F20A30088679E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C79DE3B3176F20B50088679E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C79DE3B9176F25260088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -410,6 +428,8 @@
 		C727D2291754FBC20006810C /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				C78F6FE7182B8E77002AAC7B /* IREditCell.m */,
+				C78F6FE8182B8E77002AAC7B /* IREditCell.h */,
 				C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */,
 				C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */,
 				C75B568D174A7BC800FFE5CB /* IRSignalCell.m */,
@@ -532,6 +552,8 @@
 				C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */,
 				C73E37E5174DF20300872C04 /* IRHelper.h */,
 				C73E37E6174DF20300872C04 /* IRHelper.m */,
+				C701BEC0182BA72C00C31F4B /* IRKeys.h */,
+				C701BEC1182BA72C00C31F4B /* IRKeys.m */,
 				C752D70617462C7B008B644A /* IRKit.h */,
 				C752D70817462C7B008B644A /* IRKit.m */,
 				C752D70417462C7B008B644A /* Supporting Files */,
@@ -592,6 +614,8 @@
 				C73503D217A020CB0057D51B /* tutorial_powerup@2x.png */,
 				C73503D317A020CB0057D51B /* tutorial_remote.png */,
 				C73503D417A020CB0057D51B /* tutorial_remote@2x.png */,
+				C78F6FE3182B8347002AAC7B /* IRWifiEditViewController.xib */,
+				C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */,
 				C7A9674517A0F8B100D5DEBF /* IRNewPeripheralScene1ViewController.xib */,
 				C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */,
 				C7626F8717A10A6200D6D746 /* IRPeripheralNameEditViewController.xib */,
@@ -599,6 +623,7 @@
 				C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */,
 				C7693F8217A121E500EC43FC /* IRSignalCell.xib */,
 				C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */,
+				C78F6FE5182B8D89002AAC7B /* IREditCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -629,6 +654,10 @@
 				C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */,
 				C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */,
 				C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */,
+				C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */,
+				C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */,
+				C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */,
+				C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */,
 			);
 			name = viewcontrollers;
 			sourceTree = "<group>";
@@ -775,6 +804,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */,
 				C73503D517A020CB0057D51B /* bg_graph.png in Resources */,
 				C73503D617A020CB0057D51B /* bg_graph@2x.png in Resources */,
 				C73503D717A020CB0057D51B /* tutorial_pairing.png in Resources */,
@@ -788,6 +818,7 @@
 				C7A9674A17A0F9DD00D5DEBF /* img_device_usb@2x.png in Resources */,
 				C7A9674D17A0FB5400D5DEBF /* shadow.png in Resources */,
 				C7A9674E17A0FB5400D5DEBF /* shadow@2x.png in Resources */,
+				C78F6FE4182B8347002AAC7B /* IRWifiEditViewController.xib in Resources */,
 				C7626F7F17A1079400D6D746 /* bg_light.png in Resources */,
 				C7626F8017A1079400D6D746 /* bg_light@2x.png in Resources */,
 				C7626F8217A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib in Resources */,
@@ -801,6 +832,7 @@
 				C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */,
 				C7603E8017A8BA4100A7AF1E /* icn_actionbar_cancel.png in Resources */,
 				C7603E8117A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png in Resources */,
+				C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */,
 				C7603E8717A8DC9200A7AF1E /* icn_actionbar_back.png in Resources */,
 				C7603E8817A8DC9200A7AF1E /* icn_actionbar_back@2x.png in Resources */,
 				C7B741C518041AF5005802A7 /* sin_1000Hz_0dB_1s.aiff in Resources */,
@@ -859,18 +891,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C701BEBF182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m in Sources */,
 				C752D70917462C7B008B644A /* IRKit.m in Sources */,
 				C7FAB02217467CBF00125BCB /* Log.m in Sources */,
 				C7554F1E1749D84C00BDF920 /* IRFunc.m in Sources */,
 				C7554F321749E65B00BDF920 /* IRPeripheral.m in Sources */,
 				C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */,
 				C75B5682174A405B00FFE5CB /* IRPeripheralCell.m in Sources */,
+				C78F6FE1182B8134002AAC7B /* IRWifiEditViewController.m in Sources */,
 				C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */,
 				C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */,
 				C7B741BD1803FB61005802A7 /* IRMorsePlayerOperationQueue.m in Sources */,
 				C75B568F174A7BC800FFE5CB /* IRSignalCell.m in Sources */,
 				C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */,
 				C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */,
+				C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */,
 				C73E37E7174DF20300872C04 /* IRHelper.m in Sources */,
 				C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */,
 				C7C7A30E176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m in Sources */,
@@ -878,6 +913,7 @@
 				C77150EF17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m in Sources */,
 				C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */,
 				C73CB4D717856B5C00B3F2C0 /* IRPeripheralWriteOperation.m in Sources */,
+				C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */,
 				C73CB4DA17856CC200B3F2C0 /* IRPeripheralWriteOperationQueue.m in Sources */,
 				C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */,
 				C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */,

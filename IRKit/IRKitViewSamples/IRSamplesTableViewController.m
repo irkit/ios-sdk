@@ -11,6 +11,7 @@
 #import "IRSignalCell.h"
 #import "IRPeripheralCell.h"
 #import "IRMorsePlayerViewController.h"
+#import "IRWifiEditViewController.h"
 
 @interface IRSamplesTableViewController ()
 
@@ -83,7 +84,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return 10;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,6 +121,8 @@
             return cell;
         }
         case 8:
+            return [tableView dequeueReusableCellWithIdentifier:@"IRWifiEdit"];
+        case 9:
             return [tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
         default:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
@@ -206,9 +209,16 @@
             c.title = @"github.com/irkit";
             [self.navigationController pushViewController:c animated:YES];
         }
+            break;
         case 8:
         {
-//            IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] init];
+            IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName:@"IRWifiEditViewController" bundle:resources];
+            c.delegate = self;
+            [self.navigationController pushViewController:c animated:YES];
+        }
+            break;
+        case 9:
+        {
             UIStoryboard *sb = [[UIApplication sharedApplication].keyWindow.rootViewController storyboard];
             UIViewController *c = [sb instantiateViewControllerWithIdentifier:@"IRMorsePlayerViewController"];
             [self.navigationController pushViewController:c animated:YES];
