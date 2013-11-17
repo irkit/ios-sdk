@@ -85,32 +85,22 @@
             });
             return;
         }
-        [self writeControlPointWithCompletion: ^(NSError *error) {
-            if (error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    block(error);
-                });
-                return;
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                block(nil); // send succeeded!
-            });
-            return;
-        }];
+//        [self writeControlPointWithCompletion: ^(NSError *error) {
+//            if (error) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    block(error);
+//                });
+//                return;
+//            }
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                block(nil); // send succeeded!
+//            });
+//            return;
+//        }];
     }];
 }
 
 #pragma mark - Accessors
-
-- (NSString*)peripheralUUID {
-    if ( _peripheralUUID ) {
-        return _peripheralUUID;
-    }
-    if ( _peripheral ) {
-        return _peripheralUUID = [IRHelper stringFromCFUUID: _peripheral.UUID];
-    }
-    return nil;
-}
 
 - (IRPeripheral*)peripheral {
     LOG_CURRENT_METHOD;
@@ -121,7 +111,7 @@
         // we can't use [IRKit sharedInstance] inside our initWithCoder
         // so we temporary save peripheral.UUID in _uuid
         // and recover IRPeripheral afterwards (here)
-        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForUUID:_peripheralUUID];
+//        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForUUID:_peripheralUUID];
         return _peripheral;
     }
     return nil;
@@ -132,23 +122,12 @@
 - (void)writeIRDataWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
 
-    [self.peripheral writeValueInBackground:[self packedSignalAsNSData]
-                  forCharacteristicWithUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
-                          ofServiceWithUUID:IRKIT_SERVICE_UUID
-                                 completion:^(NSError *error) {
-                                     block(error);
-                                 }];
-}
-
-- (void)writeControlPointWithCompletion: (void (^)(NSError *error))block {
-    LOG_CURRENT_METHOD;
-
-    [self.peripheral writeValueInBackground: [self controlPointSendValue]
-                  forCharacteristicWithUUID: IRKIT_CHARACTERISTIC_CONTROL_POINT_UUID
-                          ofServiceWithUUID: IRKIT_SERVICE_UUID
-                                 completion: ^(NSError *error) {
-                                     block(error);
-                                 }];
+//    [self.peripheral writeValueInBackground:[self packedSignalAsNSData]
+//                  forCharacteristicWithUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
+//                          ofServiceWithUUID:IRKIT_SERVICE_UUID
+//                                 completion:^(NSError *error) {
+//                                     block(error);
+//                                 }];
 }
 
 - (NSData*) signalAsNSData {

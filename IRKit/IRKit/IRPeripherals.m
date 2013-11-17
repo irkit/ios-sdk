@@ -13,23 +13,32 @@
 // CBPeripheral.UUID => IRPeripheral
 @property (nonatomic) NSMutableDictionary* irperipheralForUUID;
 
-@property (nonatomic) CBCentralManager* manager;
+//@property (nonatomic) CBCentralManager* manager;
 
 @end
 
 @implementation IRPeripherals
 
-- (id)initWithManager: (CBCentralManager*) manager {
+- (instancetype) init {
     self = [self init];
     if (! self) { return nil; }
 
-    _manager = manager;
-    _unknownPeripherals = [[NSMutableSet alloc] init];
-    [self load];
+
 
     return self;
 }
 
+//- (id)initWithManager: (CBCentralManager*) manager {
+//    self = [self init];
+//    if (! self) { return nil; }
+//
+//    _manager = manager;
+//    _unknownPeripherals = [[NSMutableSet alloc] init];
+//    [self load];
+//
+//    return self;
+//}
+//
 - (id)objectAtIndex:(NSUInteger)index {
     LOG( @"index: %d", index);
 
@@ -47,15 +56,15 @@
                      }];
 }
 
-- (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral {
-    LOG_CURRENT_METHOD;
-    if ( ! peripheral.UUID ) {
-        return nil;
-    }
-    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-    return _irperipheralForUUID[uuidKey];
-}
-
+//- (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral {
+//    LOG_CURRENT_METHOD;
+//    if ( ! peripheral.UUID ) {
+//        return nil;
+//    }
+//    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
+//    return _irperipheralForUUID[uuidKey];
+//}
+//
 - (IRPeripheral*)IRPeripheralForUUID: (NSString*)uuid {
     LOG_CURRENT_METHOD;
     if ( ! uuid ) {
@@ -94,10 +103,6 @@
         _irperipheralForUUID = [[NSMutableDictionary alloc] init];
     }
 
-    for (IRPeripheral* peripheral in [_irperipheralForUUID allValues]) {
-        [peripheral setManager:_manager];
-    }
-
     LOG( @"_irperipheralForUUID: %@", _irperipheralForUUID );
 }
 
@@ -121,58 +126,58 @@
     return [_irperipheralForUUID.allValues sortedArrayUsingSelector:@selector(compareByFirstFoundDate:)].objectEnumerator;
 }
 
-- (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)peripheral {
-    LOG_CURRENT_METHOD;
-
-    if (!peripheral.UUID) {
-        return nil;
-    }
-    NSString *uuid = [IRHelper stringFromCFUUID:peripheral.UUID];
-    return _irperipheralForUUID[uuid];
-}
-
-// -add<Key>Object:
-- (void)addPeripheralsObject:(CBPeripheral*) peripheral {
-    LOG( @"peripheral: %@", peripheral );
-
-    //    if ( ! peripheral.UUID || ! peripheral.name ) {
-    if ( ! peripheral.UUID ) {
-        // just to retain while 1st connect attempt
-        [_unknownPeripherals addObject:peripheral];
-        return;
-    }
-    // we got it's UUID, so don't need to retain peripheral in _unknownPeripherals anymore, we'll retain it in _irperipheralForUUID
-    [_unknownPeripherals removeObject:peripheral];
-
-    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-
-    IRPeripheral *p = _irperipheralForUUID[uuidKey];
-    if (p) {
-        // found known but disconnected peripheral
-        [p setPeripheral: peripheral];
-        peripheral.delegate = p;
-    }
-    else {
-        p                   = [[IRPeripheral alloc] init];
-        [p setManager: _manager];
-        [p setPeripheral: peripheral];
-        p.customizedName    = peripheral.name; // defaults to original name
-        peripheral.delegate = p;
-        _irperipheralForUUID[uuidKey] = p;
-        [self save];
-    }
-}
-
-- (void)removePeripheralsObject: (CBPeripheral*) peripheral {
-    LOG( @"peripheral: %@", peripheral );
-
-    if ( ! peripheral.UUID ) {
-        [_unknownPeripherals removeObject:peripheral];
-        return;
-    }
-    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-    [_irperipheralForUUID removeObjectForKey:uuidKey];
-}
+//- (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)peripheral {
+//    LOG_CURRENT_METHOD;
+//
+//    if (!peripheral.UUID) {
+//        return nil;
+//    }
+//    NSString *uuid = [IRHelper stringFromCFUUID:peripheral.UUID];
+//    return _irperipheralForUUID[uuid];
+//}
+//
+//// -add<Key>Object:
+//- (void)addPeripheralsObject:(CBPeripheral*) peripheral {
+//    LOG( @"peripheral: %@", peripheral );
+//
+//    //    if ( ! peripheral.UUID || ! peripheral.name ) {
+//    if ( ! peripheral.UUID ) {
+//        // just to retain while 1st connect attempt
+//        [_unknownPeripherals addObject:peripheral];
+//        return;
+//    }
+//    // we got it's UUID, so don't need to retain peripheral in _unknownPeripherals anymore, we'll retain it in _irperipheralForUUID
+//    [_unknownPeripherals removeObject:peripheral];
+//
+//    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
+//
+//    IRPeripheral *p = _irperipheralForUUID[uuidKey];
+//    if (p) {
+//        // found known but disconnected peripheral
+//        [p setPeripheral: peripheral];
+//        peripheral.delegate = p;
+//    }
+//    else {
+//        p                   = [[IRPeripheral alloc] init];
+//        [p setManager: _manager];
+//        [p setPeripheral: peripheral];
+//        p.customizedName    = peripheral.name; // defaults to original name
+//        peripheral.delegate = p;
+//        _irperipheralForUUID[uuidKey] = p;
+//        [self save];
+//    }
+//}
+//
+//- (void)removePeripheralsObject: (CBPeripheral*) peripheral {
+//    LOG( @"peripheral: %@", peripheral );
+//
+//    if ( ! peripheral.UUID ) {
+//        [_unknownPeripherals removeObject:peripheral];
+//        return;
+//    }
+//    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
+//    [_irperipheralForUUID removeObjectForKey:uuidKey];
+//}
 
 #pragma mark - UITableViewDataSource
 

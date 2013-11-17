@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import <CoreBluetooth/CoreBluetooth.h>
 #import <UIKit/UIKit.h>
 
 @interface IRHelper : NSObject
@@ -9,16 +8,6 @@
 + (UIImage *)imageWithColor:(UIColor *)color;
 + (UIImage *)imageInResourceNamed:(NSString*)name;
 
-+ (NSString*)stringFromCFUUID: (CFUUIDRef) uuid;
-+ (BOOL)CBUUID: (CBUUID*)uuid1 isEqualToCBUUID: (CBUUID*)uuid2;
-
-+ (CBService*)findServiceInPeripheral:(CBPeripheral*)peripheral withUUID:(CBUUID*)serviceUUID;
-+ (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid;
-+ (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral
-                                         withCBUUID:(CBUUID*)characteristicUUID
-                                inServiceWithCBUUID:(CBUUID*)serviceUUID;
-+ (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic
-                                                            withCBUUID:(CBUUID*)uuid;
 + (void)loadImage:(NSString*)url
 completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler;
 

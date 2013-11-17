@@ -19,17 +19,17 @@
     return self;
 }
 
-- (void) didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
-                                  error:(NSError *)error {
-    LOG_CURRENT_METHOD;
-    IRPeripheralWriteOperation *op = self.operations[0];
-    if ( ! op ) {
-        // inconsistent
-        LOG( @"inconsistency..." );
-    }
-    [op didWriteValueForCharacteristic:characteristic
-                                 error:error];
-}
+//- (void) didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
+//                                  error:(NSError *)error {
+//    LOG_CURRENT_METHOD;
+//    IRPeripheralWriteOperation *op = self.operations[0];
+//    if ( ! op ) {
+//        // inconsistent
+//        LOG( @"inconsistency..." );
+//    }
+//    [op didWriteValueForCharacteristic:characteristic
+//                                 error:error];
+//}
 
 #pragma mark - Private methods
 
