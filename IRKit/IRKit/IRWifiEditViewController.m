@@ -5,8 +5,14 @@
 #import "IRKit.h"
 #import "IREditCell.h"
 #import "IRWifiSecuritySelectViewController.h"
+#import "IRKeys.h"
+
+#define TAG_SSID_CELL     1
+#define TAG_PASSWORD_CELL 2
 
 @interface IRWifiEditViewController ()
+
+@property (nonatomic) IRKeys* keys;
 
 @end
 
@@ -16,7 +22,8 @@
     LOG_CURRENT_METHOD;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        _keys = [[IRKeys alloc] init];
+        // TODO load from keychain for sane defaults
     }
     return self;
 }
@@ -55,43 +62,25 @@
     [super viewWillDisappear:animated];
 }
 
-- (IBAction) processTextField: (id)sender {
-//    LOG( @"text: %@", _textField.text );
+- (BOOL) processForm {
+    IREditCell* ssidCell = (IREditCell*)[self.view viewWithTag:TAG_SSID_CELL];
+    NSString* ssid = ssidCell.editTextField.text;
+    LOG( @"ssid: %@", ssid );
 
-//    if (! [self isTextValid]) {
-//        return;
-//    }
+    IREditCell* passwordCell = (IREditCell*)[self.view viewWithTag:TAG_PASSWORD_CELL];
+    NSString* password = passwordCell.editTextField.text;
+    LOG( @"password: %@", password );
 
-//    _peripheral.customizedName = _textField.text;
-    [[IRKit sharedInstance] save];
+    if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
+        return false;
+    }
 
-//    [self.delegate nameEditViewController:self
-//                        didFinishWithInfo:@{
-//               IRViewControllerResultType: IRViewControllerResultTypeDone,
-//         IRViewControllerResultPeripheral: _peripheral,
-//               IRViewControllerResultText: _textField.text,
-//     }];
+    [self.delegate wifiEditViewController:self
+                        didFinishWithInfo:@{
+               IRViewControllerResultType: IRViewControllerResultTypeDone,
+               IRViewControllerResultKeys: _keys,
+     }];
 }
-
-//- (BOOL) isTextValid {
-//    if (! _textField.text) {
-//        return NO;
-//    }
-//
-//    NSRegularExpression *regex = [NSRegularExpression
-//                                  regularExpressionWithPattern:@"^\\s*$"
-//                                  options:nil
-//                                  error:nil];
-//    NSUInteger matches = [regex numberOfMatchesInString:_textField.text
-//                                                options:nil
-//                                                  range:NSMakeRange(0,_textField.text.length)];
-//
-//    if (matches > 0) {
-//        // empty or whitespace only
-//        return NO;
-//    }
-//    return YES;
-//}
 
 #pragma mark - UI events
 
@@ -102,10 +91,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)doneButtonPressed:(id)selector
-{
-//    LOG(@"text: %@", self.textField.text);
-    [self processTextField:nil];
+- (void)doneButtonPressed:(id)selector {
+    LOG_CURRENT_METHOD;
+    [self processForm];
 }
 
 - (IBAction)editingChanged:(id)sender {
@@ -116,9 +104,13 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField*)textField
-{
-    [self processTextField:nil];
+- (BOOL)textFieldShouldReturn:(UITextField*)textField {
+    LOG_CURRENT_METHOD;
+    if (textField.tag == TAG_PASSWORD_CELL) {
+        if ([self processForm]) {
+            return YES;
+        }
+    }
     return NO;
 }
 
@@ -134,6 +126,8 @@
             cell.titleLabel.text = @"Name";
             cell.editTextField.delegate = self;
             cell.editTextField.placeholder = @"Network Name";
+            cell.editTextField.text = _keys.ssid;
+            cell.tag = TAG_SSID_CELL;
             return cell;
         }
         case 1:
@@ -146,7 +140,7 @@
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"IRKitWifiEditSecurityCell"];
                 }
                 cell.textLabel.text = @"Security";
-                cell.detailTextLabel.text = @"WPA2";
+                cell.detailTextLabel.text = _keys.securityTypeString;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
             }
@@ -156,6 +150,9 @@
                 cell.titleLabel.text = @"Password";
                 cell.editTextField.delegate = self;
                 cell.editTextField.placeholder = @"Password";
+                cell.editTextField.text = _keys.password;
+                cell.editTextField.returnKeyType = UIReturnKeyDone;
+                cell.tag = TAG_PASSWORD_CELL;
                 return cell;
             }
         }
@@ -192,14 +189,21 @@
         NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources" ofType:@"bundle"]];
         IRWifiSecuritySelectViewController *c = [[IRWifiSecuritySelectViewController alloc] initWithNibName:@"IRWifiSecuritySelectViewController" bundle:resources];
         c.delegate = self;
+        c.selectedSecurityType = _keys.security;
         [self.navigationController pushViewController:c animated:YES];
     }
 }
 
 #pragma mark - IRWifiSecuritySelectViewControllerDelegate
 
-- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(uint8_t)securityType {
+- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(enum IRSecurityType)securityType {
     LOG_CURRENT_METHOD;
+    _keys.security = securityType;
+
+    NSArray *indexPaths = @[[NSIndexPath indexPathForRow:0 inSection:1]];
+    [_tableView beginUpdates];
+    [_tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    [_tableView endUpdates];
 }
 
 @end

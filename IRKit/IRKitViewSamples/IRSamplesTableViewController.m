@@ -76,6 +76,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - IRWifiEditViewControllerDelegate
+
+- (void)wifiEditViewController:(IRWifiEditViewController *)viewController
+             didFinishWithInfo:(NSDictionary*)info {
+    LOG(@"info: ", info);
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

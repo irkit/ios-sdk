@@ -1,12 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "IRPeripheral.h"
-
-NS_ENUM( uint8_t, IRSecurityType ) {
-    IRSecurityTypeNone = 0,
-    IRSecurityTypeWEP  = 2,
-    IRSecurityTypeWPA  = 4,
-    IRSecurityTypeWPA2 = 8,
-};
+#import "IRKeys.h"
 
 @protocol IRWifiSecuritySelectViewControllerDelegate;
 
@@ -21,6 +15,6 @@ NS_ENUM( uint8_t, IRSecurityType ) {
 @protocol IRWifiSecuritySelectViewControllerDelegate <NSObject>
 @required
 
-- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(uint8_t)securityType;
+- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(enum IRSecurityType)securityType;
 
 @end

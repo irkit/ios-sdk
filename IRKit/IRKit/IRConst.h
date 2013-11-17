@@ -85,6 +85,7 @@
 #define IRViewControllerResultPeripheral     @"peripheral"
 #define IRViewControllerResultSignal         @"signal"
 #define IRViewControllerResultText           @"text"
+#define IRViewControllerResultKeys           @"keys"
 
 #pragma mark - Errors
 

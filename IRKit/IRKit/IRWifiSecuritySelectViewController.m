@@ -100,20 +100,8 @@
                                       reuseIdentifier:@"IRWifiSecuritySelectCell"];
     }
 
-    switch (indexPath.row) {
-        case 0:
-            cell.textLabel.text = @"None";
-            break;
-        case 1:
-            cell.textLabel.text = @"WEP";
-            break;
-        case 2:
-            cell.textLabel.text = @"WPA";
-            break;
-        case 3:
-            cell.textLabel.text = @"WPA2";
-            break;
-    }
+    enum IRSecurityType security = [self securityTypeForRow:indexPath.row];
+    cell.textLabel.text = [IRKeys securityTypeStringOf:security];
 
     if ([self securityTypeForRow:indexPath.row] == _selectedSecurityType) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

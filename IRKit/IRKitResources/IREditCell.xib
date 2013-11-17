@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IREditCell"/>
@@ -22,13 +22,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Network Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lUk-16-mgL">
-                        <rect key="frame" x="113" y="20" width="100" height="17"/>
+                        <rect key="frame" x="113" y="20" width="187" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="lUk-16-mgL" secondAttribute="trailing" constant="20" symbolic="YES" id="571-QM-Jkj"/>
                     <constraint firstAttribute="centerY" secondItem="lUk-16-mgL" secondAttribute="centerY" id="CI4-3p-eCJ"/>
                     <constraint firstItem="lUk-16-mgL" firstAttribute="leading" secondItem="9SA-eN-Zg9" secondAttribute="leading" constant="113" id="Kl6-8T-0qh"/>
                     <constraint firstItem="7XP-iL-ZOs" firstAttribute="leading" secondItem="9SA-eN-Zg9" secondAttribute="leading" constant="15" id="gmM-lm-Ypr"/>
