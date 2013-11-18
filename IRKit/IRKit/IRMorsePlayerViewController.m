@@ -1,15 +1,15 @@
 #import "Log.h"
-#import "IRNewPeripheralScene1ViewController.h"
+#import "IRMorsePlayerViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
 #import "IRKit.h"
 #import "IRWifiEditViewController.h"
 
-@interface IRNewPeripheralScene1ViewController ()
+@interface IRMorsePlayerViewController ()
 
 @end
 
-@implementation IRNewPeripheralScene1ViewController
+@implementation IRMorsePlayerViewController
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
@@ -24,13 +24,10 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Power up IRKit";
+    self.title = @"Transferring Wifi credentials";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self
-                                                                                           action:@selector(doneButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
@@ -61,17 +58,14 @@
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene1ViewController:self
-                      didFinishWithInfo:@{
+    [self.delegate morsePlayerViewController:self
+                           didFinishWithInfo:@{
            IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }
-- (void)doneButtonPressed:(id)sender {
+
+- (IBAction)startButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene1ViewController:self
-                      didFinishWithInfo:@{
-            IRViewControllerResultType: IRViewControllerResultTypeDone
-    }];
 }
 
 @end

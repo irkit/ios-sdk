@@ -6,6 +6,7 @@
 #import "IREditCell.h"
 #import "IRWifiSecuritySelectViewController.h"
 #import "IRKeys.h"
+#import "IRHelper.h"
 
 #define TAG_SSID_CELL     1
 #define TAG_PASSWORD_CELL 2
@@ -40,10 +41,7 @@
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
-    [self.tableView registerNib:[UINib nibWithNibName:@"IREditCell" bundle:resources]
+    [self.tableView registerNib:[UINib nibWithNibName:@"IREditCell" bundle:[IRHelper resources]]
          forCellReuseIdentifier:IRKitCellIdentifierEdit];
 }
 

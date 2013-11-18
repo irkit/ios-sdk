@@ -34,6 +34,13 @@
 
 #pragma mark - View related
 
++ (NSBundle*) resources {
+    NSBundle *main      = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    return resources;
+}
+
 + (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -49,11 +56,8 @@
 }
 
 + (UIImage *)imageInResourceNamed:(NSString*)name {
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
-    return [UIImage imageWithContentsOfFile:[resources pathForResource:name
-                                                                ofType:@"png"]];
+    return [UIImage imageWithContentsOfFile:[[self resources] pathForResource:name
+                                                                       ofType:@"png"]];
 }
 
 #pragma mark - Network related
