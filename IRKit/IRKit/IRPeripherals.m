@@ -20,7 +20,7 @@
 @implementation IRPeripherals
 
 - (instancetype) init {
-    self = [self init];
+    self = [super init];
     if (! self) { return nil; }
 
 
