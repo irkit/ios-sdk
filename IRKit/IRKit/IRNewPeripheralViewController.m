@@ -3,11 +3,13 @@
 #import "IRViewCustomizer.h"
 #import "IRHelper.h"
 #import "IRConst.h"
+#import "IRKeys.h"
 
 @interface IRNewPeripheralViewController ()
 
 @property (nonatomic) UINavigationController *navController;
 @property (nonatomic) id becomeActiveObserver;
+@property (nonatomic) IRKeys *keys;
 
 @end
 
@@ -110,7 +112,7 @@
         return;
     }
 
-    IRKeys *keys = info[ IRViewControllerResultKeys ];
+    _keys = info[ IRViewControllerResultKeys ];
     IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName:@"IRNewPeripheralScene2ViewController" bundle:[IRHelper resources]];
     c.delegate = self;
     [self.navController pushViewController:c animated:YES];
@@ -131,6 +133,7 @@
     IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController"
                                                                                    bundle:[IRHelper resources]];
     c.delegate = self;
+    c.keys     = _keys;
     [self.navController pushViewController:c animated:YES];
 }
 

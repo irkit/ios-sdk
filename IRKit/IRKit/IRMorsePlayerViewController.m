@@ -2,10 +2,16 @@
 #import "IRMorsePlayerViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
-#import "IRKit.h"
 #import "IRWifiEditViewController.h"
+#import "IRMorsePlayerOperationQueue.h"
+#import "IRMorsePlayerOperation.h"
+#import "IRHTTPClient.h"
+
+#define MORSE_WPM 100
 
 @interface IRMorsePlayerViewController ()
+
+@property (nonatomic) IRMorsePlayerOperationQueue *player;
 
 @end
 
@@ -16,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _player = [[IRMorsePlayerOperationQueue alloc] init];
     }
     return self;
 }
@@ -66,6 +73,23 @@
 
 - (IBAction)startButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
+
+    [IRHTTPClient createKeysWithCompletion: ^(NSArray *keys, NSError *error) {
+        if (error) {
+            // TODO alert
+            return;
+        }
+        [_keys setKeys:keys];
+
+        NSString *message = [_keys morseStringRepresentation];
+        LOG(@"text: %@", message);
+
+        NSNumber *wpm = [NSNumber numberWithInt:MORSE_WPM];
+        LOG(@"wpm: %@", wpm);
+
+        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
+                                                             withWordSpeed:wpm]];
+    }];
 }
 
 @end

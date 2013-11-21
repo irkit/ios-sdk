@@ -34,7 +34,6 @@
     [super viewDidLoad];
 
     self.title = @"Join Wifi Network";
-    // self.navigationItem.hidesBackButton    = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonPressed:)];
@@ -72,6 +71,10 @@
     if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
         return false;
     }
+
+    _keys.ssid     = ssid;
+    _keys.password = password;
+    // _keys.security is set in delegate method
 
     [self.delegate wifiEditViewController:self
                         didFinishWithInfo:@{

@@ -1,10 +1,12 @@
 #import <UIKit/UIKit.h>
+#import "IRKeys.h"
 
 @protocol IRMorsePlayerViewControllerDelegate;
 
 @interface IRMorsePlayerViewController : UIViewController
 
 @property (nonatomic, assign) id<IRMorsePlayerViewControllerDelegate> delegate;
+@property (nonatomic) IRKeys *keys;
 
 @end
 
