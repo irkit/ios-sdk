@@ -12,8 +12,8 @@
 @interface IRPeripheral ()
 
 @property (nonatomic) IRPeripheralWriteOperationQueue *writeQueue;
-@property (nonatomic) CBCentralManager *manager;
-@property (nonatomic) CBPeripheral *peripheral; // hide from public
+//@property (nonatomic) CBCentralManager *manager;
+//@property (nonatomic) CBPeripheral *peripheral; // hide from public
 @property (nonatomic) BOOL shouldReadIRData;
 @property (nonatomic) BOOL shouldRefreshDeviceInformation;
 @property (nonatomic) BOOL wantsToConnect;
@@ -30,7 +30,7 @@
         return nil;
     }
     _writeQueue       = nil;
-    _peripheral       = nil;
+//    _peripheral       = nil;
     _shouldReadIRData = NO;
 
     // only read device information on app startup
@@ -58,23 +58,23 @@
 
 - (BOOL)isReady {
     // TODO use state on iOS7
-    return _peripheral ? _peripheral.isConnected && [self canReadAllCharacteristics]
-                       : NO;
+//    return _peripheral ? _peripheral.isConnected && [self canReadAllCharacteristics]
+//                       : NO;
 }
 
-- (void)setManager:(CBCentralManager*)manager {
-    _manager = manager;
-}
+//- (void)setManager:(CBCentralManager*)manager {
+//    _manager = manager;
+//}
 
-- (void)setPeripheral:(CBPeripheral *)peripheral {
-    _peripheral = peripheral;
-    _UUID       = _peripheral.UUID;
-
-    if ( ! _writeQueue ) {
-        _writeQueue = [[IRPeripheralWriteOperationQueue alloc] init];
-    }
-    [_writeQueue setSuspended: ! self.isReady];
-}
+//- (void)setPeripheral:(CBPeripheral *)peripheral {
+//    _peripheral = peripheral;
+//    _UUID       = _peripheral.UUID;
+//
+//    if ( ! _writeQueue ) {
+//        _writeQueue = [[IRPeripheralWriteOperationQueue alloc] init];
+//    }
+//    [_writeQueue setSuspended: ! self.isReady];
+//}
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
     return [self.foundDate compare: otherPeripheral.foundDate];
@@ -82,7 +82,7 @@
 
 - (void)didDiscoverWithAdvertisementData:(NSDictionary *)advertisementData
                                     RSSI:(NSNumber *)rssi {
-    LOG( @"peripheral: %@", _peripheral );
+//    LOG( @"peripheral: %@", _peripheral );
 
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
 
@@ -90,9 +90,6 @@
     // * app in foreground
     // * we're in background and retainConnectionInBackground is YES
     if ( state == UIApplicationStateActive ) {
-        [self connect];
-    }
-    else if ( [IRKit sharedInstance].retainConnectionInBackground ) {
         [self connect];
     }
 }
@@ -111,34 +108,6 @@
     }
 }
 
-- (void) didConnect {
-    LOG_CURRENT_METHOD;
-
-    if (! [self canReadAllCharacteristics]) {
-        [_peripheral discoverServices:nil];
-        return;
-    }
-    [self didBecomeReady];
-}
-
-- (void) disconnect {
-    [_writeQueue setSuspended: YES];
-
-    if ([IRKit sharedInstance].retainConnectionInBackground && _authenticated) {
-        UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-        if (state == UIApplicationStateBackground ||
-            state == UIApplicationStateInactive) {
-            // don't disconnect in the background
-            LOG( @"dont disconnect in the background" );
-            return;
-        }
-    }
-    LOG( @"will disconnect" );
-    if (_peripheral) {
-        [_manager cancelPeripheralConnection: _peripheral];
-    }
-}
-
 - (void) didDisconnect {
     LOG_CURRENT_METHOD;
 
@@ -151,70 +120,37 @@
     });
 }
 
-- (void) writeValueInBackground:(NSData *)value
-      forCharacteristicWithUUID:(CBUUID *)characteristicUUID
-              ofServiceWithUUID:(CBUUID *)serviceUUID
-                     completion:(void (^)(NSError *))block {
-    LOG( @"service: %@ c12c: %@ value: %@", serviceUUID, characteristicUUID, value );
-    [self startDisconnectTimerIfBackground];
-
-    NSError *error;
-    if ( ! _writeQueue || ! _peripheral ) {
-        error = [NSError errorWithDomain:IRKIT_ERROR_DOMAIN
-                                    code:IRKIT_ERROR_CODE_NOT_READY
-                                userInfo:nil];
-        block(error);
-        return;
-    }
-
-    if ( ! _peripheral.isConnected ) {
-        [self connect];
-    }
-
-    IRPeripheralWriteOperation *op = [IRPeripheralWriteOperation operationToPeripheral:self
-                                                          withData:value
-                                         forCharacteristicWithUUID:characteristicUUID
-                                                 ofServiceWithUUID:serviceUUID
-                                                        completion:^(NSError *error) {
-                                                            // runs in main thread
-                                                            block(error);
-                                                        }];
-    [_writeQueue setSuspended: ! self.isReady];
-    [_writeQueue addOperation:op];
-}
-
-- (BOOL) writeValue:(NSData *)value
-forCharacteristicWithUUID:(CBUUID *)characteristicUUID
-  ofServiceWithUUID:(CBUUID *)serviceUUID {
-    LOG_CURRENT_METHOD;
-
-    CBCharacteristic *c12c = [IRHelper findCharacteristicInPeripheral:_peripheral
-                                                           withCBUUID:characteristicUUID
-                                                  inServiceWithCBUUID:serviceUUID];
-    if (! c12c) {
-        return NO;
-    }
-    LOG( @"wrote to service: %@ c12c: %@ data: %@", serviceUUID, characteristicUUID, value );
-    [_peripheral writeValue:value
-          forCharacteristic:c12c
-                       type:CBCharacteristicWriteWithResponse];
-    return YES;
-}
-
-- (BOOL) readCharacteristicWithUUID:(CBUUID *)characteristicUUID
-                  ofServiceWithUUID:(CBUUID *)serviceUUID {
-    LOG_CURRENT_METHOD;
-
-    CBCharacteristic *c12c = [IRHelper findCharacteristicInPeripheral:_peripheral
-                                                           withCBUUID:characteristicUUID
-                                                  inServiceWithCBUUID:serviceUUID];
-    if (! c12c) {
-        return NO;
-    }
-    LOG( @"reading service: %@ c12c: %@", serviceUUID, characteristicUUID );
-    [_peripheral readValueForCharacteristic:c12c];
-    return YES;
-}
+//- (void) writeValueInBackground:(NSData *)value
+//      forCharacteristicWithUUID:(CBUUID *)characteristicUUID
+//              ofServiceWithUUID:(CBUUID *)serviceUUID
+//                     completion:(void (^)(NSError *))block {
+//    LOG( @"service: %@ c12c: %@ value: %@", serviceUUID, characteristicUUID, value );
+//    [self startDisconnectTimerIfBackground];
+//
+//    NSError *error;
+//    if ( ! _writeQueue || ! _peripheral ) {
+//        error = [NSError errorWithDomain:IRKIT_ERROR_DOMAIN
+//                                    code:IRKIT_ERROR_CODE_NOT_READY
+//                                userInfo:nil];
+//        block(error);
+//        return;
+//    }
+//
+//    if ( ! _peripheral.isConnected ) {
+//        [self connect];
+//    }
+//
+//    IRPeripheralWriteOperation *op = [IRPeripheralWriteOperation operationToPeripheral:self
+//                                                          withData:value
+//                                         forCharacteristicWithUUID:characteristicUUID
+//                                                 ofServiceWithUUID:serviceUUID
+//                                                        completion:^(NSError *error) {
+//                                                            // runs in main thread
+//                                                            block(error);
+//                                                        }];
+//    [_writeQueue setSuspended: ! self.isReady];
+//    [_writeQueue addOperation:op];
+//}
 
 - (NSString*) modelNameAndRevision {
     LOG_CURRENT_METHOD;
@@ -241,11 +177,11 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
 
     [self cancelAuthPollingTimer];
 
-    CBCharacteristic *auth =
-    [IRHelper findCharacteristicInPeripheral:_peripheral
-                                  withCBUUID:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID
-                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
-    [_peripheral readValueForCharacteristic:auth];
+//    CBCharacteristic *auth =
+//    [IRHelper findCharacteristicInPeripheral:_peripheral
+//                                  withCBUUID:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID
+//                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+//    [_peripheral readValueForCharacteristic:auth];
 }
 
 - (void)stopAuthPolling {
@@ -275,62 +211,62 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
                                                           userInfo:nil];
     });
 
-    CBCharacteristic *unread =
-    [IRHelper findCharacteristicInPeripheral:_peripheral
-                                  withCBUUID:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID
-                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
-    LOG( @"registering for notifications on unread status" );
-    [_peripheral setNotifyValue:YES
-              forCharacteristic:unread];
-
-    CBCharacteristic *auth =
-    [IRHelper findCharacteristicInPeripheral:_peripheral
-                                  withCBUUID:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID
-                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+//    CBCharacteristic *unread =
+//    [IRHelper findCharacteristicInPeripheral:_peripheral
+//                                  withCBUUID:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID
+//                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+//    LOG( @"registering for notifications on unread status" );
+//    [_peripheral setNotifyValue:YES
+//              forCharacteristic:unread];
+//
+//    CBCharacteristic *auth =
+//    [IRHelper findCharacteristicInPeripheral:_peripheral
+//                                  withCBUUID:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID
+//                         inServiceWithCBUUID:IRKIT_SERVICE_UUID];
 
     // when uninstalled and re-installed after _authenticated is YES
     // _authenticated is initialized to NO,
     // so we try to read it, and peripheral responds with YES
-    LOG( @"are we authenticated?" );
-    [_peripheral readValueForCharacteristic:auth];
-
-    if ( _authenticated && _shouldReadIRData ) {
-        LOG( @"read IR data" );
-        _shouldReadIRData = NO;
-        CBCharacteristic *irdata =
-        [IRHelper findCharacteristicInPeripheral:_peripheral
-                                      withCBUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
-                             inServiceWithCBUUID:IRKIT_SERVICE_UUID];
-        [_peripheral readValueForCharacteristic:irdata];
-    }
-
-    if (_shouldRefreshDeviceInformation) {
-        // org.bluetooth.service.device_information
-        CBService *deviceInformation
-        = [IRHelper findServiceInPeripheral:_peripheral
-                                   withUUID:IRKIT_SERVICE_DEVICE_INFORMATION];
-        for (CBCharacteristic *characteristic in deviceInformation.characteristics) {
-            [_peripheral readValueForCharacteristic:characteristic];
-        }
-        _shouldRefreshDeviceInformation = NO;
-    }
+//    LOG( @"are we authenticated?" );
+//    [_peripheral readValueForCharacteristic:auth];
+//
+//    if ( _authenticated && _shouldReadIRData ) {
+//        LOG( @"read IR data" );
+//        _shouldReadIRData = NO;
+//        CBCharacteristic *irdata =
+//        [IRHelper findCharacteristicInPeripheral:_peripheral
+//                                      withCBUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
+//                             inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+//        [_peripheral readValueForCharacteristic:irdata];
+//    }
+//
+//    if (_shouldRefreshDeviceInformation) {
+//        // org.bluetooth.service.device_information
+//        CBService *deviceInformation
+//        = [IRHelper findServiceInPeripheral:_peripheral
+//                                   withUUID:IRKIT_SERVICE_DEVICE_INFORMATION];
+//        for (CBCharacteristic *characteristic in deviceInformation.characteristics) {
+//            [_peripheral readValueForCharacteristic:characteristic];
+//        }
+//        _shouldRefreshDeviceInformation = NO;
+//    }
 }
 
 - (void)connect {
     LOG_CURRENT_METHOD;
 
-    if (! _peripheral) {
-        _wantsToConnect = YES;
-        [_manager retrievePeripherals:@[ (__bridge_transfer id)_UUID ]];
-        return;
-    }
-    if (_peripheral.isConnected) {
-        return;
-    }
-    [_manager connectPeripheral:_peripheral
-                        options:@{
-        CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
-     }];
+//    if (! _peripheral) {
+//        _wantsToConnect = YES;
+//        [_manager retrievePeripherals:@[ (__bridge_transfer id)_UUID ]];
+//        return;
+//    }
+//    if (_peripheral.isConnected) {
+//        return;
+//    }
+//    [_manager connectPeripheral:_peripheral
+//                        options:@{
+//        CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
+//     }];
 }
 
 // should call only in main thread
@@ -364,199 +300,132 @@ forCharacteristicWithUUID:(CBUUID *)characteristicUUID
     }
 }
 
-- (BOOL) canReadAllCharacteristics {
-    LOG_CURRENT_METHOD;
-
-    int found = 0;
-    for (CBService *service in _peripheral.services) {
-        if (! [IRHelper CBUUID:service.UUID
-               isEqualToCBUUID:IRKIT_SERVICE_UUID] ) {
-            continue;
-        }
-        for (CBCharacteristic *c12c in service.characteristics) {
-            for (CBUUID *expectedUUID in IRKIT_CHARACTERISTICS) {
-                if ([IRHelper CBUUID:c12c.UUID
-                     isEqualToCBUUID:expectedUUID]) {
-                    found ++;
-                }
-            }
-        }
-    }
-    if ( found >= [IRKIT_CHARACTERISTICS count]) {
-        return YES;
-    }
-    return NO;
-}
-
 #pragma mark - CBPeripheralDelegate
-
-/*
- Invoked upon completion of a -[discoverServices:] request.
- Discover available characteristics on interested services
- */
-- (void) peripheral:(CBPeripheral *)peripheral
-didDiscoverServices:(NSError *)error
-{
-    LOG( @"peripheral: %@ error: %@", peripheral, error);
-    [self startDisconnectTimerIfBackground];
-
-    for (CBService *service in peripheral.services)
-    {
-        LOG(@"service: %@ UUID: %@", service, service.UUID);
-
-        // discover characterstics for all services (just interested now)
-        [peripheral discoverCharacteristics:IRKIT_CHARACTERISTICS
-                                 forService:service];
-    }
-}
-
-/*
- Invoked upon completion of a -[discoverCharacteristics:forService:] request.
- Perform appropriate operations on interested characteristics
- */
-- (void) peripheral:(CBPeripheral *)peripheral
-didDiscoverCharacteristicsForService:(CBService *)service
-              error:(NSError *)error
-{
-    LOG( @"peripheral: %@ service: %@ error: %@", peripheral, service, error);
-    [self startDisconnectTimerIfBackground];
-
-    for (CBCharacteristic *characteristic in service.characteristics)
-    {
-        LOG( @"characteristic: %@, UUID: %@, value: %@, descriptors: %@, properties: %@, isNotifying: %d, isBroadcasted: %d",
-            characteristic, characteristic.UUID, characteristic.value, characteristic.descriptors, NSStringFromCBCharacteristicProperty(characteristic.properties), characteristic.isNotifying, characteristic.isBroadcasted );
-    }
-
-    if ([IRHelper CBUUID:service.UUID
-         isEqualToCBUUID:IRKIT_SERVICE_UUID]) {
-        [self didBecomeReady];
-    }
-}
 
 /*
  Invoked upon completion of a -[readValueForCharacteristic:] request or on the reception of a notification/indication.
  */
-- (void) peripheral:(CBPeripheral *)aPeripheral
-didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
-              error:(NSError *)error
-{
-    LOG( @"peripheral: %@ charactristic: %@ UUID: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.UUID, characteristic.value, error);
-    [self startDisconnectTimerIfBackground];
-
-    if (error) {
-        // TODO error handling
-        return;
-    }
-
-    // disconnect when authenticated
-    // we connect only when we need to
-
-    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
-        NSData *value = characteristic.value;
-        unsigned char authenticated = 0;
-        [value getBytes:&authenticated length:1];
-        LOG( @"authenticated: %d", authenticated );
-
-        if ( _authenticated != authenticated ) {
-            // authenticated state changed
-            _authenticated = authenticated;
-            [[IRKit sharedInstance] save];
-            if ( _authenticated ) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidAuthenticatePeripheralNotification
-                                                                        object:self];
-                });
-            }
-        }
-
-        if (_isPollingAuthC12C && ! authenticated) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // we don't manage this thread,
-                // it might stop occasionally without calling this selector
-                // so make sure it runs after delay in main thread
-                [self performSelector:@selector(startAuthPolling)
-                           withObject:nil
-                           afterDelay:IRPERIPHERAL_AUTH_POLLING_INTERVAL];
-            });
-        }
-    }
-    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
-        NSData *value = characteristic.value;
-        LOG( @"value.length: %d", value.length );
-
-        if (value.length > 1) {
-            // can be 0
-            // length: 1 should be invalid ir data
-
-            IRSignal *signal = [[IRSignal alloc] initWithData: value];
-            signal.peripheral = self;
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidReceiveSignalNotification
-                                                                    object:self
-                                                                  userInfo:@{IRKitSignalUserInfoKey: signal}];
-            });
-        }
-    }
-    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
-        if (_authenticated) {
-            CBCharacteristic *irdata = [IRHelper findCharacteristicInPeripheral:_peripheral
-                                                                     withCBUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
-                                                            inServiceWithCBUUID:IRKIT_SERVICE_UUID];
-            [_peripheral readValueForCharacteristic:irdata];
-        }
-    }
-
-    BOOL shouldSave = NO;
-    // 2a29: org.bluetooth.characteristic.manufacturer_name_string
-    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MANUFACTURER_NAME_UUID]) {
-        shouldSave = YES;
-        _manufacturerName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Manufacturer Name = %@", _manufacturerName);
-    }
-    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MODEL_NAME_UUID]) {
-        shouldSave = YES;
-        _modelName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Model Name = %@", _modelName);
-    }
-    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_HARDWARE_REVISION_UUID]) {
-        shouldSave = YES;
-        _hardwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Hardware Revision = %@", _hardwareRevision);
-    }
-    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_FIRMWARE_REVISION_UUID]) {
-        shouldSave = YES;
-        _firmwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Firmware Revision = %@", _firmwareRevision);
-    }
-    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_SOFTWARE_REVISION_UUID]) {
-        shouldSave = YES;
-        _softwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-        LOG(@"Software Revision = %@", _softwareRevision);
-    }
-
-    if (shouldSave) {
-        [[IRKit sharedInstance] save];
-    }
-}
+//- (void) peripheral:(CBPeripheral *)aPeripheral
+//didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
+//              error:(NSError *)error
+//{
+//    LOG( @"peripheral: %@ charactristic: %@ UUID: %@ value: %@ error: %@", aPeripheral, characteristic, characteristic.UUID, characteristic.value, error);
+//    [self startDisconnectTimerIfBackground];
+//
+//    if (error) {
+//        // TODO error handling
+//        return;
+//    }
+//
+//    // disconnect when authenticated
+//    // we connect only when we need to
+//
+//    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_AUTHENTICATION_UUID]) {
+//        NSData *value = characteristic.value;
+//        unsigned char authenticated = 0;
+//        [value getBytes:&authenticated length:1];
+//        LOG( @"authenticated: %d", authenticated );
+//
+//        if ( _authenticated != authenticated ) {
+//            // authenticated state changed
+//            _authenticated = authenticated;
+//            [[IRKit sharedInstance] save];
+//            if ( _authenticated ) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidAuthenticatePeripheralNotification
+//                                                                        object:self];
+//                });
+//            }
+//        }
+//
+//        if (_isPollingAuthC12C && ! authenticated) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                // we don't manage this thread,
+//                // it might stop occasionally without calling this selector
+//                // so make sure it runs after delay in main thread
+//                [self performSelector:@selector(startAuthPolling)
+//                           withObject:nil
+//                           afterDelay:IRPERIPHERAL_AUTH_POLLING_INTERVAL];
+//            });
+//        }
+//    }
+//    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_IR_DATA_UUID]) {
+//        NSData *value = characteristic.value;
+//        LOG( @"value.length: %d", value.length );
+//
+//        if (value.length > 1) {
+//            // can be 0
+//            // length: 1 should be invalid ir data
+//
+//            IRSignal *signal = [[IRSignal alloc] initWithData: value];
+//            signal.peripheral = self;
+//
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidReceiveSignalNotification
+//                                                                    object:self
+//                                                                  userInfo:@{IRKitSignalUserInfoKey: signal}];
+//            });
+//        }
+//    }
+//    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_UNREAD_STATUS_UUID]) {
+//        if (_authenticated) {
+//            CBCharacteristic *irdata = [IRHelper findCharacteristicInPeripheral:_peripheral
+//                                                                     withCBUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
+//                                                            inServiceWithCBUUID:IRKIT_SERVICE_UUID];
+//            [_peripheral readValueForCharacteristic:irdata];
+//        }
+//    }
+//
+//    BOOL shouldSave = NO;
+//    // 2a29: org.bluetooth.characteristic.manufacturer_name_string
+//    if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MANUFACTURER_NAME_UUID]) {
+//        shouldSave = YES;
+//        _manufacturerName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+//        LOG(@"Manufacturer Name = %@", _manufacturerName);
+//    }
+//    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_MODEL_NAME_UUID]) {
+//        shouldSave = YES;
+//        _modelName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+//        LOG(@"Model Name = %@", _modelName);
+//    }
+//    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_HARDWARE_REVISION_UUID]) {
+//        shouldSave = YES;
+//        _hardwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+//        LOG(@"Hardware Revision = %@", _hardwareRevision);
+//    }
+//    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_FIRMWARE_REVISION_UUID]) {
+//        shouldSave = YES;
+//        _firmwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+//        LOG(@"Firmware Revision = %@", _firmwareRevision);
+//    }
+//    else if ([characteristic.UUID isEqual:IRKIT_CHARACTERISTIC_SOFTWARE_REVISION_UUID]) {
+//        shouldSave = YES;
+//        _softwareRevision = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+//        LOG(@"Software Revision = %@", _softwareRevision);
+//    }
+//
+//    if (shouldSave) {
+//        [[IRKit sharedInstance] save];
+//    }
+//}
 
 // TODO check if it's the same characteristic we wrote
-- (void)peripheral:(CBPeripheral *)peripheral
-didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
-             error:(NSError *)error
-{
-    LOG( @"peripheral: %@ charactristic: %@ UUID: %@ error: %@", peripheral, characteristic, characteristic.UUID, error);
-    [self startDisconnectTimerIfBackground];
-
-    [_writeQueue didWriteValueForCharacteristic:characteristic
-                                          error:error];
-}
+//- (void)peripheral:(CBPeripheral *)peripheral
+//didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
+//             error:(NSError *)error
+//{
+//    LOG( @"peripheral: %@ charactristic: %@ UUID: %@ error: %@", peripheral, characteristic, characteristic.UUID, error);
+//    [self startDisconnectTimerIfBackground];
+//
+//    [_writeQueue didWriteValueForCharacteristic:characteristic
+//                                          error:error];
+//}
 
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
-    [coder encodeObject:[IRHelper stringFromCFUUID:_UUID]
-                 forKey:@"u"];
+//    [coder encodeObject:[IRHelper stringFromCFUUID:_UUID]
+//                 forKey:@"u"];
     [coder encodeObject:_customizedName forKey:@"c"];
     [coder encodeObject:_foundDate      forKey:@"f"];
     [coder encodeObject:[NSNumber numberWithBool:_authenticated] forKey:@"a"];
@@ -586,7 +455,7 @@ didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
     _firmwareRevision = [coder decodeObjectForKey:@"df"];
     _softwareRevision = [coder decodeObjectForKey:@"ds"];
 
-    _peripheral       = nil;
+//    _peripheral       = nil;
 
     if ( ! _customizedName ) {
         _customizedName = @"unknown";

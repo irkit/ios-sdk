@@ -6,6 +6,7 @@
 #import "IREditCell.h"
 #import "IRWifiSecuritySelectViewController.h"
 #import "IRKeys.h"
+#import "IRHelper.h"
 
 #define TAG_SSID_CELL     1
 #define TAG_PASSWORD_CELL 2
@@ -33,17 +34,13 @@
     [super viewDidLoad];
 
     self.title = @"Join Wifi Network";
-    // self.navigationItem.hidesBackButton    = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
-    [self.tableView registerNib:[UINib nibWithNibName:@"IREditCell" bundle:resources]
+    [self.tableView registerNib:[UINib nibWithNibName:@"IREditCell" bundle:[IRHelper resources]]
          forCellReuseIdentifier:IRKitCellIdentifierEdit];
 }
 
@@ -74,6 +71,10 @@
     if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
         return false;
     }
+
+    _keys.ssid     = ssid;
+    _keys.password = password;
+    // _keys.security is set in delegate method
 
     [self.delegate wifiEditViewController:self
                         didFinishWithInfo:@{

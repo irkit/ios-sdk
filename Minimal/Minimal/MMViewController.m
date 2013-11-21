@@ -28,7 +28,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    if (! _peripheral) {
+    static bool did_show = false;
+    if (! _peripheral && ! did_show) {
         IRNewPeripheralViewController *vc = [[IRNewPeripheralViewController alloc] init];
         vc.delegate = self;
         [self presentViewController:vc
@@ -36,6 +37,7 @@
                          completion:^{
                              LOG(@"presented");
                          }];
+        did_show = true;
     }
 }
 

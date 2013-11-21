@@ -34,6 +34,13 @@
 
 #pragma mark - View related
 
++ (NSBundle*) resources {
+    NSBundle *main      = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+                                                                  ofType:@"bundle"]];
+    return resources;
+}
+
 + (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -49,86 +56,8 @@
 }
 
 + (UIImage *)imageInResourceNamed:(NSString*)name {
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
-    return [UIImage imageWithContentsOfFile:[resources pathForResource:name
-                                                                ofType:@"png"]];
-}
-
-#pragma mark - UUID related
-
-+ (NSString*)stringFromCFUUID: (CFUUIDRef) uuid {
-    if ( ! uuid ) {
-        return nil;
-    }
-    CFStringRef string = CFUUIDCreateString(NULL, uuid);
-    return (__bridge_transfer NSString *)string;
-}
-
-// CBUUID isEqual only compares pointer
-// isEqual is fine if both uuids resides in the same thread
-+ (BOOL)CBUUID: (CBUUID*)uuid1 isEqualToCBUUID: (CBUUID*)uuid2 {
-    return [uuid1.data isEqualToData:uuid2.data];
-}
-
-#pragma mark - CoreBluetooth related
-
-+ (CBService*)findServiceInPeripheral:(CBPeripheral*)peripheral withUUID:(CBUUID*)serviceUUID {
-    LOG_CURRENT_METHOD;
-
-    for (CBService *service in peripheral.services) {
-        if (! [IRHelper CBUUID:service.UUID isEqualToCBUUID:serviceUUID]) {
-            continue;
-        }
-        return service;
-    }
-    return nil;
-}
-
-+ (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral withCBUUID:(CBUUID*)uuid {
-    LOG_CURRENT_METHOD;
-
-    for (CBService *service in peripheral.services) {
-        for (CBCharacteristic *c12c in service.characteristics) {
-            if ([IRHelper CBUUID:c12c.UUID isEqualToCBUUID:uuid]) {
-                return c12c;
-            }
-        }
-    }
-    return nil;
-}
-
-+ (CBCharacteristic*)findCharacteristicInService:(CBService*)service
-                                      withCBUUID:(CBUUID*)characteristicUUID {
-    LOG_CURRENT_METHOD;
-    for (CBCharacteristic *c12c in service.characteristics) {
-        if (! [IRHelper CBUUID:c12c.UUID isEqualToCBUUID:characteristicUUID]) {
-            continue;
-        }
-        return c12c;
-    }
-    return nil;
-}
-
-+ (CBCharacteristic*)findCharacteristicInPeripheral:(CBPeripheral*)peripheral
-                                         withCBUUID:(CBUUID*)characteristicUUID
-                                inServiceWithCBUUID:(CBUUID*)serviceUUID {
-    LOG_CURRENT_METHOD;
-
-    CBService *service = [self findServiceInPeripheral:peripheral withUUID:serviceUUID];
-    return [self findCharacteristicInService:service withCBUUID:characteristicUUID];
-}
-
-+ (CBCharacteristic*)findCharacteristicInSameServiceWithCharacteristic:(CBCharacteristic*)characteristic
-                                                            withCBUUID:(CBUUID*)uuid {
-    LOG_CURRENT_METHOD;
-
-    CBService *service = characteristic.service;
-    if ( ! service ) {
-        return nil;
-    }
-    return [self findCharacteristicInService:service withCBUUID:uuid];
+    return [UIImage imageWithContentsOfFile:[[self resources] pathForResource:name
+                                                                       ofType:@"png"]];
 }
 
 #pragma mark - Network related

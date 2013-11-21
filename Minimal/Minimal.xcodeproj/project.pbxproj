@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		C714891117C46D8E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714891017C46D8E00713890 /* libstdc++.dylib */; };
 		C7332E6717B11C3F0070CF56 /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C758146D17B0ACDB00927E12 /* IRKitResources.bundle */; };
+		C7549C15183AEF7C0011215C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7549C0E183AEEB30011215C /* AudioToolbox.framework */; };
+		C7549C16183AEF9E0011215C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7549C12183AEF3B0011215C /* AVFoundation.framework */; };
+		C7549C1A183AF6670011215C /* icn_actionbar_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = C7549C18183AF6670011215C /* icn_actionbar_menu.png */; };
+		C7549C1B183AF6670011215C /* icn_actionbar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7549C19183AF6670011215C /* icn_actionbar_menu@2x.png */; };
 		C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144817B0AB9200927E12 /* UIKit.framework */; };
 		C758144B17B0AB9200927E12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144A17B0AB9200927E12 /* Foundation.framework */; };
 		C758144D17B0AB9200927E12 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144C17B0AB9200927E12 /* CoreGraphics.framework */; };
@@ -22,11 +26,15 @@
 		C758146517B0AB9200927E12 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C758146417B0AB9200927E12 /* MMViewController.m */; };
 		C758146C17B0ACA100927E12 /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C758146B17B0ACA100927E12 /* libIRKit.a */; };
 		C758147117B0ADCC00927E12 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C758146F17B0ADCC00927E12 /* Log.m */; };
-		C758147317B0AE2600927E12 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758147217B0AE2600927E12 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C714891017C46D8E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		C7549C0E183AEEB30011215C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C7549C0F183AEEB30011215C /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		C7549C12183AEF3B0011215C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C7549C18183AF6670011215C /* icn_actionbar_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icn_actionbar_menu.png; path = Resources/icn_actionbar_menu.png; sourceTree = "<group>"; };
+		C7549C19183AF6670011215C /* icn_actionbar_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icn_actionbar_menu@2x.png"; path = "Resources/icn_actionbar_menu@2x.png"; sourceTree = "<group>"; };
 		C758144517B0AB9200927E12 /* Minimal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minimal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C758144817B0AB9200927E12 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C758144A17B0AB9200927E12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,7 +55,6 @@
 		C758146D17B0ACDB00927E12 /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C758146F17B0ADCC00927E12 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		C758147017B0ADCC00927E12 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
-		C758147217B0AE2600927E12 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +62,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7549C16183AEF9E0011215C /* AVFoundation.framework in Frameworks */,
+				C7549C15183AEF7C0011215C /* AudioToolbox.framework in Frameworks */,
 				C714891117C46D8E00713890 /* libstdc++.dylib in Frameworks */,
-				C758147317B0AE2600927E12 /* CoreBluetooth.framework in Frameworks */,
 				C758146C17B0ACA100927E12 /* libIRKit.a in Frameworks */,
 				C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */,
 				C758144B17B0AB9200927E12 /* Foundation.framework in Frameworks */,
@@ -67,10 +75,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7549C17183AF5F30011215C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C7549C18183AF6670011215C /* icn_actionbar_menu.png */,
+				C7549C19183AF6670011215C /* icn_actionbar_menu@2x.png */,
+			);
+			name = Resources;
+			path = Minimal;
+			sourceTree = "<group>";
+		};
 		C758143C17B0AB9200927E12 = {
 			isa = PBXGroup;
 			children = (
 				C758144E17B0AB9200927E12 /* Minimal */,
+				C7549C17183AF5F30011215C /* Resources */,
 				C758144717B0AB9200927E12 /* Frameworks */,
 				C758144617B0AB9200927E12 /* Products */,
 			);
@@ -87,10 +106,12 @@
 		C758144717B0AB9200927E12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7549C12183AEF3B0011215C /* AVFoundation.framework */,
+				C7549C0E183AEEB30011215C /* AudioToolbox.framework */,
+				C7549C0F183AEEB30011215C /* AudioUnit.framework */,
 				C714891017C46D8E00713890 /* libstdc++.dylib */,
 				C758146B17B0ACA100927E12 /* libIRKit.a */,
 				C758146D17B0ACDB00927E12 /* IRKitResources.bundle */,
-				C758147217B0AE2600927E12 /* CoreBluetooth.framework */,
 				C758144817B0AB9200927E12 /* UIKit.framework */,
 				C758144A17B0AB9200927E12 /* Foundation.framework */,
 				C758144C17B0AB9200927E12 /* CoreGraphics.framework */,
@@ -181,9 +202,11 @@
 			files = (
 				C758145317B0AB9200927E12 /* InfoPlist.strings in Resources */,
 				C758145B17B0AB9200927E12 /* Default.png in Resources */,
+				C7549C1A183AF6670011215C /* icn_actionbar_menu.png in Resources */,
 				C758145D17B0AB9200927E12 /* Default@2x.png in Resources */,
 				C758145F17B0AB9200927E12 /* Default-568h@2x.png in Resources */,
 				C758146217B0AB9200927E12 /* MainStoryboard.storyboard in Resources */,
+				C7549C1B183AF6670011215C /* icn_actionbar_menu@2x.png in Resources */,
 				C7332E6717B11C3F0070CF56 /* IRKitResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +309,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";
 				INFOPLIST_FILE = "Minimal/Minimal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -298,6 +322,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";
 				INFOPLIST_FILE = "Minimal/Minimal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

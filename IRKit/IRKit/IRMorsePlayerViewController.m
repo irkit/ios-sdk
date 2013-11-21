@@ -1,21 +1,28 @@
 #import "Log.h"
-#import "IRNewPeripheralScene1ViewController.h"
+#import "IRMorsePlayerViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
-#import "IRKit.h"
 #import "IRWifiEditViewController.h"
+#import "IRMorsePlayerOperationQueue.h"
+#import "IRMorsePlayerOperation.h"
+#import "IRHTTPClient.h"
 
-@interface IRNewPeripheralScene1ViewController ()
+#define MORSE_WPM 100
+
+@interface IRMorsePlayerViewController ()
+
+@property (nonatomic) IRMorsePlayerOperationQueue *player;
 
 @end
 
-@implementation IRNewPeripheralScene1ViewController
+@implementation IRMorsePlayerViewController
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _player = [[IRMorsePlayerOperationQueue alloc] init];
     }
     return self;
 }
@@ -24,13 +31,10 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Power up IRKit";
+    self.title = @"Transferring Wifi credentials";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self
-                                                                                           action:@selector(doneButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
@@ -61,16 +65,30 @@
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene1ViewController:self
-                      didFinishWithInfo:@{
+    [self.delegate morsePlayerViewController:self
+                           didFinishWithInfo:@{
            IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }
-- (void)doneButtonPressed:(id)sender {
+
+- (IBAction)startButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene1ViewController:self
-                      didFinishWithInfo:@{
-            IRViewControllerResultType: IRViewControllerResultTypeDone
+
+    [IRHTTPClient createKeysWithCompletion: ^(NSArray *keys, NSError *error) {
+        if (error) {
+            // TODO alert
+            return;
+        }
+        [_keys setKeys:keys];
+
+        NSString *message = [_keys morseStringRepresentation];
+        LOG(@"text: %@", message);
+
+        NSNumber *wpm = [NSNumber numberWithInt:MORSE_WPM];
+        LOG(@"wpm: %@", wpm);
+
+        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
+                                                             withWordSpeed:wpm]];
     }];
 }
 

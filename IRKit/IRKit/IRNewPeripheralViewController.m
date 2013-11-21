@@ -1,12 +1,15 @@
 #import "Log.h"
 #import "IRNewPeripheralViewController.h"
-#import "IRKit.h"
 #import "IRViewCustomizer.h"
+#import "IRHelper.h"
+#import "IRConst.h"
+#import "IRKeys.h"
 
 @interface IRNewPeripheralViewController ()
 
 @property (nonatomic) UINavigationController *navController;
 @property (nonatomic) id becomeActiveObserver;
+@property (nonatomic) IRKeys *keys;
 
 @end
 
@@ -33,7 +36,6 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [[IRKit sharedInstance] stopScan];
     [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
 }
 
@@ -43,14 +45,11 @@
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
-    [[IRKit sharedInstance] startScan];
-
     _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
                                                                               object:nil
                                                                                queue:[NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
                                                                               LOG( @"became active" );
-                                                                              [[IRKit sharedInstance] startScan];
                                                                           }];
 }
 
@@ -93,8 +92,30 @@
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
                            didFinishWithPeripheral:nil];
+        return;
     }
-    ASSERT(1, @"non cancelled results should be handled elsewhere");
+
+    IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName:@"IRWifiEditViewController"
+                                                                             bundle:[IRHelper resources]];
+    c.delegate = self;
+    [self.navController pushViewController:c animated:YES];
+}
+
+#pragma mark - IRWifiEditViewControllerDelegate
+
+- (void)wifiEditViewController:(IRWifiEditViewController *)viewController didFinishWithInfo:(NSDictionary *)info {
+    LOG_CURRENT_METHOD;
+
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController:self
+                           didFinishWithPeripheral:nil];
+        return;
+    }
+
+    _keys = info[ IRViewControllerResultKeys ];
+    IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName:@"IRNewPeripheralScene2ViewController" bundle:[IRHelper resources]];
+    c.delegate = self;
+    [self.navController pushViewController:c animated:YES];
 }
 
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
@@ -106,8 +127,28 @@
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newPeripheralViewController:self
                            didFinishWithPeripheral:nil];
+        return;
     }
-    ASSERT(1, @"non cancelled results should be handled elsewhere");
+
+    IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController"
+                                                                                   bundle:[IRHelper resources]];
+    c.delegate = self;
+    c.keys     = _keys;
+    [self.navController pushViewController:c animated:YES];
+}
+
+#pragma mark - IRMorsePlayerViewController
+
+- (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController
+                didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+
+    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController:self
+                           didFinishWithPeripheral:nil];
+        return;
+    }
+    ASSERT(1, @"non cancelled results should not happen");
 }
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate

@@ -1,8 +1,7 @@
-// IRPeripheral stores additional info related to CBPeripheral
-#import <CoreBluetooth/CoreBluetooth.h>
+// IRPeripheral is a IRKit device representation
 #import <Foundation/Foundation.h>
 
-@interface IRPeripheral : NSObject<CBPeripheralDelegate>
+@interface IRPeripheral : NSObject
 
 // can be nil if CBPeripheral is found but UUID isn't,
 // or loaded from NSUserDefaults but CBPeripheral not retrieved yet.
@@ -27,21 +26,21 @@
 - (void) disconnect;
 - (void) didDisconnect;
 
-- (void) writeValueInBackground: (NSData*)value
-      forCharacteristicWithUUID: (CBUUID*)characteristicUUID
-              ofServiceWithUUID: (CBUUID*)serviceUUID
-                     completion: (void (^)(NSError *error))block;
-- (BOOL) writeValue: (NSData*)value
-forCharacteristicWithUUID: (CBUUID*)characteristicUUID
-  ofServiceWithUUID: (CBUUID*)serviceUUID;
-- (BOOL) readCharacteristicWithUUID:(CBUUID *)characteristicUUID
-                  ofServiceWithUUID:(CBUUID *)serviceUUID;
+//- (void) writeValueInBackground: (NSData*)value
+//      forCharacteristicWithUUID: (CBUUID*)characteristicUUID
+//              ofServiceWithUUID: (CBUUID*)serviceUUID
+//                     completion: (void (^)(NSError *error))block;
+//- (BOOL) writeValue: (NSData*)value
+//forCharacteristicWithUUID: (CBUUID*)characteristicUUID
+//  ofServiceWithUUID: (CBUUID*)serviceUUID;
+//- (BOOL) readCharacteristicWithUUID:(CBUUID *)characteristicUUID
+//                  ofServiceWithUUID:(CBUUID *)serviceUUID;
 
 - (NSString*) modelNameAndRevision;
 - (NSString*) iconURL;
 
-- (void)setManager: (CBCentralManager*)manager;
-- (void)setPeripheral: (CBPeripheral*)peripheral;
+//- (void)setManager: (CBCentralManager*)manager;
+//- (void)setPeripheral: (CBPeripheral*)peripheral;
 
 - (void)startAuthPolling;
 - (void)stopAuthPolling;

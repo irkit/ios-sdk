@@ -1,5 +1,5 @@
 //
-//  IRMorsePlayerViewController.m
+//  IRMorseTesterViewController.m
 //  IRKit
 //
 //  Created by Masakazu Ohtsuka on 2013/10/08.
@@ -7,11 +7,11 @@
 //
 
 #import "Log.h"
-#import "IRMorsePlayerViewController.h"
+#import "IRMorseTesterViewController.h"
 #import "IRMorsePlayerOperation.h"
 #import "IRMorsePlayerOperationQueue.h"
 
-@interface IRMorsePlayerViewController ()
+@interface IRMorseTesterViewController ()
 
 @property (nonatomic) IRMorsePlayerOperationQueue *player;
 
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation IRMorsePlayerViewController
+@implementation IRMorseTesterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

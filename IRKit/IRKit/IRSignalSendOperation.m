@@ -10,8 +10,8 @@
 
 @property (nonatomic) IRPeripheral *peripheral;
 @property (nonatomic) NSData *data;
-@property (nonatomic) CBUUID *characteristicUUID;
-@property (nonatomic) CBUUID *serviceUUID;
+//@property (nonatomic) CBUUID *characteristicUUID;
+//@property (nonatomic) CBUUID *serviceUUID;
 @property (nonatomic, copy) void (^completion)(NSError *error);
 
 @end
