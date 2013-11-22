@@ -41,12 +41,6 @@
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-
-    // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
-    // prevent showing the weird 20px empty zone on top of navigationbar
-    // when presented in caller's viewDidLoad
-//    [_navController setNavigationBarHidden:YES];
-//    [_navController setNavigationBarHidden:NO];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

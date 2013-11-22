@@ -101,6 +101,7 @@
 		C78F6FE4182B8347002AAC7B /* IRWifiEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78F6FE3182B8347002AAC7B /* IRWifiEditViewController.xib */; };
 		C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78F6FE5182B8D89002AAC7B /* IREditCell.xib */; };
 		C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F6FE7182B8E77002AAC7B /* IREditCell.m */; };
+		C79C5949183F5E49002136CD /* IRSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = C79C5948183F5E49002136CD /* IRSearcher.m */; };
 		C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */; };
 		C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350317AA5D3A00C8679B /* icn_signal.png */; };
 		C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350617AA5D7300C8679B /* icn_device@2x.png */; };
@@ -313,6 +314,8 @@
 		C78F6FE5182B8D89002AAC7B /* IREditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IREditCell.xib; sourceTree = "<group>"; };
 		C78F6FE7182B8E77002AAC7B /* IREditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IREditCell.m; sourceTree = "<group>"; };
 		C78F6FE8182B8E77002AAC7B /* IREditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IREditCell.h; sourceTree = "<group>"; };
+		C79C5947183F5E49002136CD /* IRSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSearcher.h; sourceTree = "<group>"; };
+		C79C5948183F5E49002136CD /* IRSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSearcher.m; sourceTree = "<group>"; };
 		C79DE3B1176F20A30088679E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C79DE3B3176F20B50088679E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C79DE3B9176F25260088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -583,9 +586,11 @@
 				C752D70817462C7B008B644A /* IRKit.m */,
 				C703E826183DFA6900B8446C /* IRHTTPClient.h */,
 				C703E827183DFA6900B8446C /* IRHTTPClient.m */,
-				C752D70417462C7B008B644A /* Supporting Files */,
 				C703E829183E0DD900B8446C /* CRC8.c */,
 				C703E82B183E0DF600B8446C /* CRC8.h */,
+				C79C5947183F5E49002136CD /* IRSearcher.h */,
+				C79C5948183F5E49002136CD /* IRSearcher.m */,
+				C752D70417462C7B008B644A /* Supporting Files */,
 			);
 			path = IRKit;
 			sourceTree = "<group>";
@@ -967,6 +972,7 @@
 				C7554F321749E65B00BDF920 /* IRPeripheral.m in Sources */,
 				C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */,
 				C75B5682174A405B00FFE5CB /* IRPeripheralCell.m in Sources */,
+				C79C5949183F5E49002136CD /* IRSearcher.m in Sources */,
 				C78F6FE1182B8134002AAC7B /* IRWifiEditViewController.m in Sources */,
 				C703E828183DFA6900B8446C /* IRHTTPClient.m in Sources */,
 				C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */,

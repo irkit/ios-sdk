@@ -4,12 +4,14 @@
 #import "IRHelper.h"
 #import "IRConst.h"
 #import "IRKeys.h"
+#import "IRSearcher.h"
 
 @interface IRNewPeripheralViewController ()
 
 @property (nonatomic) UINavigationController *navController;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) IRKeys *keys;
+@property (nonatomic) IRSearcher *searcher;
 
 @end
 
@@ -37,6 +39,7 @@
 - (void)dealloc {
     LOG_CURRENT_METHOD;
     [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
+    [_searcher stop];
 }
 
 - (void)viewDidLoad {
@@ -51,17 +54,13 @@
                                                                           usingBlock:^(NSNotification *note) {
                                                                               LOG( @"became active" );
                                                                           }];
+    _searcher = [[IRSearcher alloc] init];
+    [_searcher start];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-
-    // hack http://stackoverflow.com/questions/5183834/uinavigationcontroller-within-viewcontroller-gap-at-top-of-view
-    // prevent showing the weird 20px empty zone on top of navigationbar
-    // when presented in caller's viewDidLoad
-//    [_navController setNavigationBarHidden:YES];
-//    [_navController setNavigationBarHidden:NO];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
