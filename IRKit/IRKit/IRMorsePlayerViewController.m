@@ -89,18 +89,22 @@
 
         [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
                                                              withWordSpeed:wpm]];
+        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
+                                                             withWordSpeed:wpm]];
         [_player addOperationWithBlock:^{
-            // retry
-            [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
-                                                                 withWordSpeed:wpm]];
+            // when 2 rounds of morse ended without success,
+            // we fail with an alert
+            // TODO
+            [IRHTTPClient cancelWaitForDoor];
         }];
 
         [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.mykey
                               completion: ^(NSError* error) {
-            [_player cancelAllOperations];
-            if (error) {
-                // TODO alert
-            }
+                                  LOG(@"completion: %@", error);
+                                  [_player cancelAllOperations];
+                                  if (error) {
+                                      // TODO alert
+                                  }
         }];
     }];
 }

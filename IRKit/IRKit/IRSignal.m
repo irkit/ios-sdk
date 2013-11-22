@@ -167,12 +167,6 @@
     return ret;
 }
 
-- (NSData*) controlPointSendValue {
-    LOG_CURRENT_METHOD;
-    uint8_t value = IRKIT_CONTROL_POINT_VALUE_SEND;
-    return [NSData dataWithBytes:&value length:1];
-}
-
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {

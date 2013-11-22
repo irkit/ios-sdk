@@ -9,6 +9,10 @@
 #import "Log.h"
 #import "IRHTTPClient.h"
 #import "IRHelper.h"
+#import "ISHTTPOperation/ISHTTPOperation.h"
+#import "IRConst.h"
+
+#define DEFAULT_TIMEOUT 25. // heroku timeout
 
 @implementation IRHTTPClient
 
@@ -29,23 +33,45 @@
     }];
 }
 
-+ (void)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSError *error))completion {
++ (void)waitForDoorWithKey: (NSString*)key
+                completion: (void (^)(NSError*))completion {
+    LOG_CURRENT_METHOD;
+
     [self post:@"/door"
-    withParams:@{ key: key }
+    withParams:@{ @"key": key }
 targetNetwork:IRHTTPClientNetworkInternet
-    completion:^(NSHTTPURLResponse *res, NSData *data, NSError *error) {
+    completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         if (res && res.statusCode) {
             switch (res.statusCode) {
                 case 200:
                     completion(nil);
                     break;
                 case 408:
-
+                    // retry
+                    [self waitForDoorWithKey: key
+                                  completion: completion];
                 default:
                     break;
             }
+            return;
         }
+        if (error) {
+            completion(error);
+            return;
+        }
+        NSInteger code = (res && res.statusCode) ? res.statusCode
+                                                 : IRKitHTTPStatusCodeUnknown;
+        NSError* retError = [NSError errorWithDomain:IRKitErrorDomainHTTP
+                                                code:code
+                                            userInfo:nil];
+        completion(retError);
     }];
+}
+
++ (void)cancelWaitForDoor {
+    LOG_CURRENT_METHOD;
+
+    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/door"];
 }
 
 #pragma mark - Private
@@ -53,47 +79,47 @@ targetNetwork:IRHTTPClientNetworkInternet
 + (void)post: (NSString*)path
   withParams: (NSDictionary*) params
 targetNetwork: (enum IRHTTPClientNetwork)network
-  completion: (void (^)(NSHTTPURLResponse *res, NSData* data, NSError *error))completion {
+  completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
     LOG_CURRENT_METHOD;
 
     NSURL *url = [NSURL URLWithString:path relativeToURL:[self base]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    request.URL = url;
-    request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-    request.timeoutInterval = 60.;
+    request.URL             = url;
+    request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
+    request.timeoutInterval = DEFAULT_TIMEOUT;
 
-    NSData *data = [self URLEncode:params];
+    NSData *data = [self dataOfURLEncodedDictionary:params];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *res, NSData *data, NSError *error) {
-                               if (! completion) {
-                                   return;
-                               }
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   completion((NSHTTPURLResponse*)res,data,error);
-                               });
-                           }];
+    [ISHTTPOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+        if (! completion) {
+            return;
+        }
+        // ISHTTPOperation calls our handler in main queue
+        completion(response, object, error);
+    }];
 }
 
-+ (NSData *)URLEncode: (NSDictionary*)params {
++ (NSData *)dataOfURLEncodedDictionary: (NSDictionary*)params {
     if ( ! params ) {
         return nil;
     }
     NSString *body = [[IRHelper mapObjects:params.allKeys
                                usingBlock:^id(id key, NSUInteger idx) {
-                                   return [NSString stringWithFormat:@"%@=%@", key, params[key]];
+                                   return [NSString stringWithFormat:@"%@=%@", key, [self URLEscapeString:params[key]]];
                                }] componentsJoinedByString:@"&"];
-    NSString *escaped = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                              (__bridge CFStringRef)body,
-                                                                                              NULL,
-                                                                                              (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
-                                                                                              kCFStringEncodingUTF8);
-    return [escaped dataUsingEncoding:NSUTF8StringEncoding];
+    return [body dataUsingEncoding:NSUTF8StringEncoding];
+}
+
++ (NSString*)URLEscapeString: (NSString*)string {
+    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                 (__bridge CFStringRef)string,
+                                                                                 NULL,
+                                                                                 (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
+                                                                                 kCFStringEncodingUTF8);
 }
 
 @end

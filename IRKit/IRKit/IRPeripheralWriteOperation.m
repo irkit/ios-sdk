@@ -28,7 +28,7 @@
         // should be connected when started
         dispatch_async( dispatch_get_main_queue(),
                        ^{
-                           NSError *error = [NSError errorWithDomain:IRKIT_ERROR_DOMAIN
+                           NSError *error = [NSError errorWithDomain:IRKitErrorDomain
                                                                 code:IRKIT_ERROR_CODE_DISCONNECTED
                                                             userInfo:nil];
                            _completion( error );
