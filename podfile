@@ -1,0 +1,5 @@
+platform :ios, "7.0"
+pod 'ISHTTPOperation', '~> 1.1.0'
+workspace 'IRKit'
+xcodeproj 'IRKit/IRKit'
+link_with ['IRKit', 'Minimal']

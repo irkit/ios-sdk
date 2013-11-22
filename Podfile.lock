@@ -1,0 +1,10 @@
+PODS:
+  - ISHTTPOperation (1.1.0)
+
+DEPENDENCIES:
+  - ISHTTPOperation (~> 1.1.0)
+
+SPEC CHECKSUMS:
+  ISHTTPOperation: a6c80ecc70ddb92fdd7f9dfa290dead9b74eafa2
+
+COCOAPODS: 0.28.0
