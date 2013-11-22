@@ -89,6 +89,19 @@
 
         [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
                                                              withWordSpeed:wpm]];
+        [_player addOperationWithBlock:^{
+            // retry
+            [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
+                                                                 withWordSpeed:wpm]];
+        }];
+
+        [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.mykey
+                              completion: ^(NSError* error) {
+            [_player cancelAllOperations];
+            if (error) {
+                // TODO alert
+            }
+        }];
     }];
 }
 

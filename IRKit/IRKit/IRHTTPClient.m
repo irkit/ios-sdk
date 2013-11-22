@@ -29,10 +29,31 @@
     }];
 }
 
++ (void)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSError *error))completion {
+    [self post:@"/door"
+    withParams:@{ key: key }
+targetNetwork:IRHTTPClientNetworkInternet
+    completion:^(NSHTTPURLResponse *res, NSData *data, NSError *error) {
+        if (res && res.statusCode) {
+            switch (res.statusCode) {
+                case 200:
+                    completion(nil);
+                    break;
+                case 408:
+
+                default:
+                    break;
+            }
+        }
+    }];
+}
+
+#pragma mark - Private
+
 + (void)post: (NSString*)path
   withParams: (NSDictionary*) params
 targetNetwork: (enum IRHTTPClientNetwork)network
-  completion: (void (^)(NSURLResponse *res, NSData* data, NSError *error))completion {
+  completion: (void (^)(NSHTTPURLResponse *res, NSData* data, NSError *error))completion {
     LOG_CURRENT_METHOD;
 
     NSURL *url = [NSURL URLWithString:path relativeToURL:[self base]];
@@ -54,7 +75,7 @@ targetNetwork: (enum IRHTTPClientNetwork)network
                                    return;
                                }
                                dispatch_async(dispatch_get_main_queue(), ^{
-                                   completion(res,data,error);
+                                   completion((NSHTTPURLResponse*)res,data,error);
                                });
                            }];
 }

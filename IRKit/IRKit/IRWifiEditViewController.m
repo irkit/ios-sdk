@@ -8,8 +8,9 @@
 #import "IRKeys.h"
 #import "IRHelper.h"
 
-#define TAG_SSID_CELL     1
-#define TAG_PASSWORD_CELL 2
+#define TAG_SSID_CELL          1
+#define TAG_PASSWORD_CELL      2
+#define TAG_PASSWORD_TEXTFIELD 3
 
 @interface IRWifiEditViewController ()
 
@@ -81,6 +82,7 @@
                IRViewControllerResultType: IRViewControllerResultTypeDone,
                IRViewControllerResultKeys: _keys,
      }];
+    return YES;
 }
 
 #pragma mark - UI events
@@ -107,7 +109,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
     LOG_CURRENT_METHOD;
-    if (textField.tag == TAG_PASSWORD_CELL) {
+    if (textField.tag == TAG_PASSWORD_TEXTFIELD) {
         if ([self processForm]) {
             return YES;
         }
@@ -153,6 +155,7 @@
                 cell.editTextField.placeholder = @"Password";
                 cell.editTextField.text = _keys.password;
                 cell.editTextField.returnKeyType = UIReturnKeyDone;
+                cell.editTextField.tag = TAG_PASSWORD_TEXTFIELD;
                 cell.tag = TAG_PASSWORD_CELL;
                 return cell;
             }

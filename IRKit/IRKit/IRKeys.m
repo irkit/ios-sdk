@@ -20,8 +20,8 @@
 // see H.4.1 of IEEE 802.11
 #define MAX_WIFI_PASSWORD_LENGTH 63
 
-// it's an UUID
-#define MAX_KEY_LENGTH           36
+// it's an UUID (without '-')
+#define MAX_KEY_LENGTH           32
 
 struct KeysCRCed
 {
@@ -75,13 +75,12 @@ struct KeysCRCed
     NSString *security    = [self securityStringRepresentation];
     NSString *ssidHex     = [self ssidStringRepresentation];
     NSString *passwordHex = [self passwordStringRepresentation];
-    NSString *keyHex      = [self pairedkeyStringRepresentation];
-    
+
     struct KeysCRCed crced;
     memset( &crced, 0, sizeof(struct KeysCRCed) );
     strncpy( crced.ssid,     [_ssid UTF8String],      strnlen([_ssid UTF8String],33));
     strncpy( crced.password, [_password UTF8String],  strnlen([_password UTF8String],64));
-    strncpy( crced.temp_key, [_pairedkey UTF8String], strnlen([_pairedkey UTF8String], 37));
+    strncpy( crced.temp_key, [_pairedkey UTF8String], strnlen([_pairedkey UTF8String], 33));
     crced.wifi_is_set     = true;
     crced.wifi_was_valid  = false;
     crced.security        = _security;
@@ -92,7 +91,7 @@ struct KeysCRCed
         security,
         ssidHex,
         passwordHex,
-        keyHex,
+        _pairedkey,
         crcHex,
     ];
     return [components componentsJoinedByString:@"/"];
@@ -137,17 +136,6 @@ struct KeysCRCed
     // passwords should be limited to 63bytes
     NSMutableString *ret = @"".mutableCopy;
     for (int i=0; i<strnlen(utf8,64); i++) {
-        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i]]];
-    }
-    return ret;
-}
-
-- (NSString*) pairedkeyStringRepresentation {
-    const char *utf8 = [_pairedkey UTF8String];
-
-    // keys should be limited to 36bytes
-    NSMutableString *ret = @"".mutableCopy;
-    for (int i=0; i<strnlen(utf8,37); i++) {
         [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i]]];
     }
     return ret;
