@@ -19,8 +19,8 @@
 - (void) stopScan;
 - (void) save;
 
-@property (nonatomic, readonly) NSUInteger numberOfAuthenticatedPeripherals;
-@property (nonatomic, readonly) NSUInteger numberOfPeripherals;
+@property (nonatomic, readonly) NSUInteger countOfReadyPeripherals;
+@property (nonatomic, readonly) NSUInteger countOfPeripherals;
 @property (nonatomic) IRPeripherals *peripherals;
 
 @end

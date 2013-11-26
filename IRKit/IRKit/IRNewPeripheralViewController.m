@@ -5,6 +5,7 @@
 #import "IRConst.h"
 #import "IRKeys.h"
 #import "IRSearcher.h"
+#import "IRKit.h"
 
 @interface IRNewPeripheralViewController ()
 
@@ -55,6 +56,7 @@
                                                                               LOG( @"became active" );
                                                                           }];
     _searcher = [[IRSearcher alloc] init];
+    _searcher.delegate = self;
     [_searcher start];
 }
 
@@ -160,6 +162,17 @@
         IRPeripheral *peripheral = info[IRViewControllerResultPeripheral];
         [self.delegate newPeripheralViewController:self
                            didFinishWithPeripheral:peripheral];
+    }
+}
+
+#pragma mark - IRSearcherDelegate
+
+- (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService*)service {
+    LOG( @"service: %@", service );
+    NSString *shortname = [service.hostName componentsSeparatedByString:@"."][ 0 ];
+    if ( ! [[IRKit sharedInstance].peripherals isKnownName:shortname]) {
+        [[IRKit sharedInstance].peripherals registerPeripheralWithName:shortname];
+
     }
 }
 

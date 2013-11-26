@@ -35,9 +35,6 @@ static BOOL useCustomizedStyle;
     self = [super init];
     if (! self) { return nil; }
 
-//    _manager = [[CBCentralManager alloc] initWithDelegate:self
-//                                                    queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0) ];
-
     _peripherals = [[IRPeripherals alloc] init];
     _isScanning  = NO;
 
@@ -55,15 +52,15 @@ static BOOL useCustomizedStyle;
                                                                           usingBlock:^(NSNotification *note) {
                                                                               LOG( @"became active" );
                                                                           }];
-    _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
-                                                                                 object:nil
-                                                                                  queue:[NSOperationQueue mainQueue]
-                                                                             usingBlock:^(NSNotification *note) {
-                                                                                 LOG( @"entered background" );
-                                                                                 for (IRPeripheral* p in _self.peripherals.peripherals) {
-                                                                                     [p disconnect];
-                                                                                 }
-                                                                             }];
+//    _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
+//                                                                                 object:nil
+//                                                                                  queue:[NSOperationQueue mainQueue]
+//                                                                             usingBlock:^(NSNotification *note) {
+//                                                                                 LOG( @"entered background" );
+//                                                                                 for (IRPeripheral* p in _self.peripherals.peripherals) {
+//                                                                                     [p disconnect];
+//                                                                                 }
+//                                                                             }];
     [IRViewCustomizer sharedInstance]; // init
 
     // temp
@@ -85,9 +82,9 @@ static BOOL useCustomizedStyle;
     [_peripherals save];
 }
 
-- (NSUInteger) numberOfAuthenticatedPeripherals {
+- (NSUInteger) countOfReadyPeripherals {
     LOG_CURRENT_METHOD;
-    return _peripherals.countOfAuthenticatedPeripherals;
+    return _peripherals.countOfReadyPeripherals;
 }
 
 - (NSUInteger) numberOfPeripherals {

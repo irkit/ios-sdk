@@ -53,6 +53,7 @@
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+    [IRHTTPClient cancelWaitForDoor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,7 +75,7 @@
 - (IBAction)startButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
-    [IRHTTPClient createKeysWithCompletion: ^(NSArray *keys, NSError *error) {
+    [IRHTTPClient createKeysWithCompletion: ^(NSHTTPURLResponse *res, NSArray *keys, NSError *error) {
         if (error) {
             // TODO alert
             return;
@@ -91,21 +92,23 @@
                                                              withWordSpeed:wpm]];
         [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
                                                              withWordSpeed:wpm]];
+        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
+                                                             withWordSpeed:wpm]];
         [_player addOperationWithBlock:^{
-            // when 2 rounds of morse ended without success,
+            // when 3 rounds of morse ended without success,
             // we fail with an alert
             // TODO
             [IRHTTPClient cancelWaitForDoor];
         }];
 
         [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.mykey
-                              completion: ^(NSError* error) {
+                              completion: ^(NSHTTPURLResponse* res, NSError* error) {
                                   LOG(@"completion: %@", error);
                                   [_player cancelAllOperations];
                                   if (error) {
                                       // TODO alert
                                   }
-        }];
+                              }];
     }];
 }
 

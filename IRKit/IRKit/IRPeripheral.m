@@ -12,12 +12,9 @@
 @interface IRPeripheral ()
 
 @property (nonatomic) IRPeripheralWriteOperationQueue *writeQueue;
-//@property (nonatomic) CBCentralManager *manager;
-//@property (nonatomic) CBPeripheral *peripheral; // hide from public
 @property (nonatomic) BOOL shouldReadIRData;
 @property (nonatomic) BOOL shouldRefreshDeviceInformation;
 @property (nonatomic) BOOL wantsToConnect;
-@property (nonatomic) BOOL isPollingAuthC12C;
 
 @end
 
@@ -30,25 +27,18 @@
         return nil;
     }
     _writeQueue       = nil;
-//    _peripheral       = nil;
-    _shouldReadIRData = NO;
 
-    // only read device information on app startup
-    // we won't release this object, so initializing with YES will do
-    _shouldRefreshDeviceInformation = YES;
-    _wantsToConnect    = NO;
-    _isPollingAuthC12C = NO;
-
-    _UUID             = nil;
+    _name             = nil;
     _customizedName   = nil;
     _foundDate        = [NSDate date];
-    _authenticated       = NO;
+    _key              = nil;
 
-    _manufacturerName = nil;
+    // from HTTP response Server header
+    // eg: "Server: IRKit/1.3.0.73.ge6e8514"
+    // "IRKit" is modelName
+    // "1.3.0.73.ge6e8514" is version
     _modelName        = nil;
-    _hardwareRevision = nil;
-    _firmwareRevision = nil;
-    _softwareRevision = nil;
+    _version          = nil;
     return self;
 }
 
@@ -57,9 +47,7 @@
 }
 
 - (BOOL)isReady {
-    // TODO use state on iOS7
-//    return _peripheral ? _peripheral.isConnected && [self canReadAllCharacteristics]
-//                       : NO;
+    return _key ? YES : NO;
 }
 
 //- (void)setManager:(CBCentralManager*)manager {
@@ -154,14 +142,14 @@
 
 - (NSString*) modelNameAndRevision {
     LOG_CURRENT_METHOD;
-    if ( ! _modelName || ! _hardwareRevision || ! _firmwareRevision || ! _softwareRevision ) {
+    if ( ! _modelName || ! _version ) {
         return @"unknown";
     }
-    return [@[_modelName, _hardwareRevision, _firmwareRevision, _softwareRevision] componentsJoinedByString:@"/"];
+    return [@[_modelName, _version] componentsJoinedByString:@"/"];
 }
 
 - (NSString*)iconURL {
-    return [NSString stringWithFormat:@"%@/static/images/model/%@.png", ONURL_BASE, _modelName ? _modelName : @"A" ];
+    return [NSString stringWithFormat:@"%@/static/images/model/%@.png", ONURL_BASE, _modelName ? _modelName : @"IRKit" ];
 }
 
 - (void)startAuthPolling {
@@ -173,7 +161,7 @@
         });
     }
 
-    _isPollingAuthC12C = YES;
+//    _isPollingAuthC12C = YES;
 
     [self cancelAuthPollingTimer];
 
@@ -195,7 +183,7 @@
 
     [self cancelAuthPollingTimer];
 
-    _isPollingAuthC12C = NO;
+//    _isPollingAuthC12C = NO;
 }
 
 #pragma mark - Private methods
@@ -424,18 +412,12 @@
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
-//    [coder encodeObject:[IRHelper stringFromCFUUID:_UUID]
-//                 forKey:@"u"];
-    [coder encodeObject:_customizedName forKey:@"c"];
-    [coder encodeObject:_foundDate      forKey:@"f"];
-    [coder encodeObject:[NSNumber numberWithBool:_authenticated] forKey:@"a"];
-
-    // d: Device information
-    [coder encodeObject:_manufacturerName forKey:@"dm"];
-    [coder encodeObject:_modelName        forKey:@"do"];
-    [coder encodeObject:_hardwareRevision forKey:@"dh"];
-    [coder encodeObject:_firmwareRevision forKey:@"df"];
-    [coder encodeObject:_softwareRevision forKey:@"ds"];
+    [coder encodeObject:_name           forKey:@"name"];
+    [coder encodeObject:_customizedName forKey:@"customizedName"];
+    [coder encodeObject:_foundDate      forKey:@"foundDate"];
+    [coder encodeObject:_key            forKey:@"key"];
+    [coder encodeObject:_modelName      forKey:@"modelName"];
+    [coder encodeObject:_version        forKey:@"version"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
@@ -443,26 +425,12 @@
     if (! self) {
         return nil;
     }
-    NSString *u       = [coder decodeObjectForKey:@"u"];
-    _UUID             = CFUUIDCreateFromString(nil, (CFStringRef)u);
-    _customizedName   = [coder decodeObjectForKey:@"c"];
-    _foundDate        = [coder decodeObjectForKey:@"f"];
-    _authenticated    = [[coder decodeObjectForKey:@"a"] boolValue];
-
-    _manufacturerName = [coder decodeObjectForKey:@"dm"];
-    _modelName        = [coder decodeObjectForKey:@"do"];
-    _hardwareRevision = [coder decodeObjectForKey:@"dh"];
-    _firmwareRevision = [coder decodeObjectForKey:@"df"];
-    _softwareRevision = [coder decodeObjectForKey:@"ds"];
-
-//    _peripheral       = nil;
-
-    if ( ! _customizedName ) {
-        _customizedName = @"unknown";
-    }
-    if ( ! _foundDate ) {
-        _foundDate = [NSDate date];
-    }
+    _name   = [coder decodeObjectForKey:@"name"];
+    _customizedName   = [coder decodeObjectForKey:@"customizedName"];
+    _foundDate        = [coder decodeObjectForKey:@"foundDate"];
+    _key              = [coder decodeObjectForKey:@"key"];
+    _modelName        = [coder decodeObjectForKey:@"modelName"];
+    _version          = [coder decodeObjectForKey:@"version"];
     return self;
 }
 

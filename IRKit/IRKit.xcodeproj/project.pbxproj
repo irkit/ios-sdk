@@ -15,6 +15,7 @@
 		C703E82A183E0DD900B8446C /* CRC8.c in Sources */ = {isa = PBXBuildFile; fileRef = C703E829183E0DD900B8446C /* CRC8.c */; };
 		C714890D17C46CD600713890 /* IRPackerWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */; };
 		C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714890E17C46D6E00713890 /* libstdc++.dylib */; };
+		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
 		C71D909F17977D2200CEC73F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C71D909D17977D2200CEC73F /* InfoPlist.strings */; };
 		C71D90A617977D6A00CEC73F /* IRKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D90A417977D6A00CEC73F /* IRKitTests.m */; };
@@ -176,6 +177,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */,
 				C763C6BD1839B6FF00D1D155 /* IRMorsePlayerViewController.h in CopyFiles */,
 				C763C6B51839ACEC00D1D155 /* IRKeys.h in CopyFiles */,
 				C763C6B41839ACDE00D1D155 /* IRWifiSecuritySelectViewController.h in CopyFiles */,

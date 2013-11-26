@@ -17,24 +17,24 @@
 @implementation IRHTTPClient
 
 + (NSURL*)base {
-    return [NSURL URLWithString:@"http://wifi-morse-setup.herokuapp.com"];
+    return [NSURL URLWithString:@"http://api.getirkit.com"];
 }
 
-+ (void)createKeysWithCompletion: (void (^)(NSArray *keys, NSError *error))completion {
++ (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSArray *keys, NSError *error))completion {
     [self post:@"/keys"
     withParams:nil
  targetNetwork:IRHTTPClientNetworkInternet
     completion:^(NSURLResponse *res, NSData *data, NSError *error) {
         if (error) {
-            return completion( nil, error );
+            return completion( (NSHTTPURLResponse*)res, nil, error );
         }
         NSArray *object = [NSJSONSerialization JSONObjectWithData:data options:nil error:&error];
-        return completion( object, error );
+        return completion( (NSHTTPURLResponse*)res, object, error );
     }];
 }
 
 + (void)waitForDoorWithKey: (NSString*)key
-                completion: (void (^)(NSError*))completion {
+                completion: (void (^)(NSHTTPURLResponse *res, NSError*))completion {
     LOG_CURRENT_METHOD;
 
     [self post:@"/door"
@@ -44,7 +44,7 @@ targetNetwork:IRHTTPClientNetworkInternet
         if (res && res.statusCode) {
             switch (res.statusCode) {
                 case 200:
-                    completion(nil);
+                    completion(res, nil);
                     break;
                 case 408:
                     // retry
@@ -56,7 +56,7 @@ targetNetwork:IRHTTPClientNetworkInternet
             return;
         }
         if (error) {
-            completion(error);
+            completion(res, error);
             return;
         }
         NSInteger code = (res && res.statusCode) ? res.statusCode
@@ -64,7 +64,7 @@ targetNetwork:IRHTTPClientNetworkInternet
         NSError* retError = [NSError errorWithDomain:IRKitErrorDomainHTTP
                                                 code:code
                                             userInfo:nil];
-        completion(retError);
+        completion(res, retError);
     }];
 }
 

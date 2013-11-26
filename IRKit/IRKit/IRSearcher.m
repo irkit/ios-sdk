@@ -32,12 +32,6 @@
 
 - (void) start {
     [_browser searchForServicesOfType:@"_irkit._tcp" inDomain:@""];
-
-//    NSNetService *service = [[NSNetService alloc] initWithDomain:@"local."
-//                                                            type:@"_irkit._tcp"
-//                                                            name:@"irkit99"];
-//    [_services addObject:service];
-//    [self resolveServices];
 }
 
 - (void) stop {
@@ -73,35 +67,9 @@
 
     LOG( @"hostName: %@", sender.hostName);
 
-//    NSDictionary* dict = [[NSNetService dictionaryFromTXTRecordData:[sender TXTRecordData]] retain];
-//	NSString *host = [sender hostName];
-//
-//	NSString* portStr = @"";
-//
-//	// Note that [NSNetService port:] returns an NSInteger in host byte order
-//	NSInteger port = [sender port];
-//	if (port != 0 && port != 80)
-//        portStr = [[NSString alloc] initWithFormat:@":%d",port];
-//
-//	NSString* path = [self copyStringFromTXTDict:dict which:@"path"];
-//	if (!path || [path length]==0) {
-//        [path release];
-//        path = [[NSString alloc] initWithString:@"/"];
-//	} else if (![[path substringToIndex:1] isEqual:@"/"]) {
-//        NSString *tempPath = [[NSString alloc] initWithFormat:@"/%@",path];
-//        [path release];
-//        path = tempPath;
-//	}
-//
-//	NSString* string = [[NSString alloc] initWithFormat:@"http://%@%@%@%@%@%@%@",
-//                        user?user:@"",
-//                        pass?@":":@"",
-//                        pass?pass:@"",
-//                        (user||pass)?@"@":@"",
-//                        host,
-//                        portStr,
-//                        path];
-
+    if (_delegate) {
+        [_delegate searcher:self didResolveService:sender];
+    }
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
