@@ -6,6 +6,7 @@
 #import "IRMorsePlayerOperationQueue.h"
 #import "IRMorsePlayerOperation.h"
 #import "IRHTTPClient.h"
+#import "IRKit.h"
 
 #define MORSE_WPM 100
 
@@ -102,11 +103,19 @@
         }];
 
         [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.mykey
-                              completion: ^(NSHTTPURLResponse* res, NSError* error) {
-                                  LOG(@"completion: %@", error);
+                              completion: ^(NSHTTPURLResponse* res, id object, NSError* error) {
+                                  LOG(@"res: %@, error: %@", res, error);
                                   [_player cancelAllOperations];
                                   if (error) {
                                       // TODO alert
+                                      return;
+                                  }
+
+                                  NSString *shortname = object[ @"name" ];
+                                  if ( ! [[IRKit sharedInstance].peripherals isKnownName:shortname]) {
+                                      IRPeripheral *p = [[IRKit sharedInstance].peripherals registerPeripheralWithName:shortname];
+                                      p.key = _keys.mykey;
+                                      [[IRKit sharedInstance].peripherals save];
                                   }
                               }];
     }];

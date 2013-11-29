@@ -75,7 +75,6 @@
     IRPeripheral *peripheral = [[IRPeripheral alloc] init];
     peripheral.name = hostname;
     _irperipheralForName[ hostname ] = peripheral;
-    [self save];
     return peripheral;
 }
 

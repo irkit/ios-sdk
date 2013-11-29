@@ -173,6 +173,9 @@
     if ( ! [[IRKit sharedInstance].peripherals isKnownName:shortname]) {
         [[IRKit sharedInstance].peripherals registerPeripheralWithName:shortname];
 
+        // TODO
+        
+        [[IRKit sharedInstance].peripherals save];
     }
 }
 

@@ -17,7 +17,7 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 
 + (NSURL*)base;
 + (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSArray *keys, NSError *error))completion;
-+ (void)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSHTTPURLResponse *res, NSError *error))completion;
++ (void)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion;
 + (void)cancelWaitForDoor;
 
 @end

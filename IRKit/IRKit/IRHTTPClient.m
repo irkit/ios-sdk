@@ -34,17 +34,17 @@
 }
 
 + (void)waitForDoorWithKey: (NSString*)key
-                completion: (void (^)(NSHTTPURLResponse *res, NSError*))completion {
-    LOG_CURRENT_METHOD;
-
+                completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
     [self post:@"/door"
     withParams:@{ @"key": key }
 targetNetwork:IRHTTPClientNetworkInternet
     completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        LOG( @"res: %@, object: %@, error: %@", res, object, error );
+
         if (res && res.statusCode) {
             switch (res.statusCode) {
                 case 200:
-                    completion(res, nil);
+                    completion(res, object, nil);
                     break;
                 case 408:
                     // retry
@@ -55,8 +55,14 @@ targetNetwork:IRHTTPClientNetworkInternet
             }
             return;
         }
+        if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
+            // timeout -> retry
+            [self waitForDoorWithKey:key
+                          completion:completion];
+            return;
+        }
         if (error) {
-            completion(res, error);
+            completion(res, object, error);
             return;
         }
         NSInteger code = (res && res.statusCode) ? res.statusCode
@@ -64,7 +70,7 @@ targetNetwork:IRHTTPClientNetworkInternet
         NSError* retError = [NSError errorWithDomain:IRKitErrorDomainHTTP
                                                 code:code
                                             userInfo:nil];
-        completion(res, retError);
+        completion(res, object, retError);
     }];
 }
 
