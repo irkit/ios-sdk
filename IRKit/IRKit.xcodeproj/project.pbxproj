@@ -13,7 +13,6 @@
 		C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEC1182BA72C00C31F4B /* IRKeys.m */; };
 		C703E828183DFA6900B8446C /* IRHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C703E827183DFA6900B8446C /* IRHTTPClient.m */; };
 		C703E82A183E0DD900B8446C /* CRC8.c in Sources */ = {isa = PBXBuildFile; fileRef = C703E829183E0DD900B8446C /* CRC8.c */; };
-		C714890D17C46CD600713890 /* IRPackerWrapper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */; };
 		C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714890E17C46D6E00713890 /* libstdc++.dylib */; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
@@ -139,8 +138,6 @@
 		C7EF92E417797DCE00D07D81 /* IRPeripheralNameEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */; };
 		C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */; };
 		C7EF92E617797DCE00D07D81 /* IRNewPeripheralScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */; };
-		C7F70B6E17C45E18008DDB35 /* IrPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C7F70B6C17C45E18008DDB35 /* IrPacker.cpp */; };
-		C7F70B7117C46237008DDB35 /* IRPackerWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F70B7017C46237008DDB35 /* IRPackerWrapper.mm */; };
 		C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */; };
 		C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
@@ -182,7 +179,6 @@
 				C763C6B51839ACEC00D1D155 /* IRKeys.h in CopyFiles */,
 				C763C6B41839ACDE00D1D155 /* IRWifiSecuritySelectViewController.h in CopyFiles */,
 				C763C6B31839ACC500D1D155 /* IRWifiEditViewController.h in CopyFiles */,
-				C714890D17C46CD600713890 /* IRPackerWrapper.h in CopyFiles */,
 				C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */,
 				C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */,
 				C7A1351217AA621B00C8679B /* IRViewCustomizer.h in CopyFiles */,
@@ -357,11 +353,6 @@
 		C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene1ViewController.h; sourceTree = "<group>"; };
 		C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C7D0560F18041E3F00660217 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		C7DE4C4D17C4ADA20097F257 /* IrPackerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrPackerConfig.h; sourceTree = "<group>"; };
-		C7F70B6C17C45E18008DDB35 /* IrPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IrPacker.cpp; sourceTree = "<group>"; };
-		C7F70B6D17C45E18008DDB35 /* IrPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrPacker.h; sourceTree = "<group>"; };
-		C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPackerWrapper.h; sourceTree = "<group>"; };
-		C7F70B7017C46237008DDB35 /* IRPackerWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IRPackerWrapper.mm; sourceTree = "<group>"; };
 		C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWebViewController.h; sourceTree = "<group>"; };
 		C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWebViewController.m; sourceTree = "<group>"; };
 		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -420,18 +411,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C70241DE17C3805900B8ACED /* packer */ = {
-			isa = PBXGroup;
-			children = (
-				C7DE4C4D17C4ADA20097F257 /* IrPackerConfig.h */,
-				C7F70B6C17C45E18008DDB35 /* IrPacker.cpp */,
-				C7F70B6D17C45E18008DDB35 /* IrPacker.h */,
-				C7F70B6F17C46237008DDB35 /* IRPackerWrapper.h */,
-				C7F70B7017C46237008DDB35 /* IRPackerWrapper.mm */,
-			);
-			name = packer;
-			sourceTree = "<group>";
-		};
 		C71D909A17977D2200CEC73F /* IRKitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,7 +541,6 @@
 			isa = PBXGroup;
 			children = (
 				C7C14F19180FEA070025B865 /* dependencies */,
-				C70241DE17C3805900B8ACED /* packer */,
 				C73CB4DB17856CD100B3F2C0 /* operation */,
 				C7C7A308176EFC7300C9A62F /* viewcontrollers */,
 				C727D2291754FBC20006810C /* cells */,
@@ -1002,8 +980,6 @@
 				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
 				C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */,
 				C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */,
-				C7F70B6E17C45E18008DDB35 /* IrPacker.cpp in Sources */,
-				C7F70B7117C46237008DDB35 /* IRPackerWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

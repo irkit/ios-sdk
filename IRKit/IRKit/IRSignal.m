@@ -2,7 +2,6 @@
 #import "IRSignal.h"
 #import "IRHelper.h"
 #import "IRKit.h"
-#import "IRPackerWrapper.h"
 
 @interface IRSignal ()
 @end
@@ -130,42 +129,22 @@
 //                                 }];
 }
 
-- (NSData*) signalAsNSData {
-    LOG_CURRENT_METHOD;
-    if ( ! _data.count ) {
-        return nil;
-    }
-    // uint16_t value for each NSArray entry
-    // signal data is always Little-Endian
-    NSMutableData *ret = [NSMutableData dataWithCapacity: _data.count * 2];
-    [_data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
-        uint16_t interval = [obj shortValue];
-        [ret appendData: [NSData dataWithBytes:&interval
-                                        length:2]];
-    }];
-    LOG( @" ret: %@", ret);
-    return ret;
-}
-
-- (NSData*) packedSignalAsNSData {
-    LOG_CURRENT_METHOD;
-    if ( ! _data.count ) {
-        return nil;
-    }
-    // uint16_t value for each NSArray entry
-    // signal data is always Little-Endian
-    NSMutableData *data = [NSMutableData dataWithCapacity: _data.count * 2];
-    [_data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
-        uint16_t interval = [obj shortValue];
-        [data appendData: [NSData dataWithBytes:&interval
-                                         length:2]];
-    }];
-    uint8_t packed[512] = { 0 };
-    IRPackerWrapper *packer = [[IRPackerWrapper alloc] init];
-    NSData *ret = [packer packData:data];
-    LOG( @" ret: %@", ret);
-    return ret;
-}
+//- (NSData*) signalAsNSData {
+//    LOG_CURRENT_METHOD;
+//    if ( ! _data.count ) {
+//        return nil;
+//    }
+//    // uint16_t value for each NSArray entry
+//    // signal data is always Little-Endian
+//    NSMutableData *ret = [NSMutableData dataWithCapacity: _data.count * 2];
+//    [_data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
+//        uint16_t interval = [obj shortValue];
+//        [ret appendData: [NSData dataWithBytes:&interval
+//                                        length:2]];
+//    }];
+//    LOG( @" ret: %@", ret);
+//    return ret;
+//}
 
 #pragma mark - NSKeyedArchiving
 
