@@ -68,7 +68,7 @@ struct KeysCRCed
     return 1;
 }
 
-// [0248]/#{SSID}/#{Password}/#{Key}/#{CRC}
+// [0248]/#{SSID}/#{Password}/#{Key}///////#{CRC}
 - (NSString*) morseStringRepresentation {
     LOG_CURRENT_METHOD;
 
@@ -92,6 +92,12 @@ struct KeysCRCed
         ssidHex,
         passwordHex,
         _pairedkey,
+        @"", // reserved1
+        @"", // reserved2
+        @"", // reserved3
+        @"", // reserved4
+        @"", // reserved5
+        @"", // reserved6
         crcHex,
     ];
     return [components componentsJoinedByString:@"/"];
