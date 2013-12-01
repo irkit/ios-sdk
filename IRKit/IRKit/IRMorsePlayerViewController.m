@@ -7,12 +7,14 @@
 #import "IRMorsePlayerOperation.h"
 #import "IRHTTPClient.h"
 #import "IRKit.h"
+#import "MediaPlayer/MPVolumeView.h"
 
 #define MORSE_WPM 100
 
 @interface IRMorsePlayerViewController ()
 
 @property (nonatomic) IRMorsePlayerOperationQueue *player;
+@property (weak, nonatomic) IBOutlet MPVolumeView *volumeView;
 
 @end
 
@@ -24,6 +26,7 @@
     if (self) {
         // Custom initialization
         _player = [[IRMorsePlayerOperationQueue alloc] init];
+        _volumeView.showsRouteButton = false;
     }
     return self;
 }
