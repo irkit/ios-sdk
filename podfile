@@ -2,4 +2,4 @@ platform :ios, "7.0"
 pod 'ISHTTPOperation', '~> 1.1.0'
 workspace 'IRKit'
 xcodeproj 'Minimal/Minimal'
-link_with ['Minimal']
+link_with ['Minimal','IRKitViewSamples']

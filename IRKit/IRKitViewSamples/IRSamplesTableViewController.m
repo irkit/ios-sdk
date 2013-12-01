@@ -226,8 +226,8 @@
             break;
         case 9:
         {
-            UIStoryboard *sb = [[UIApplication sharedApplication].keyWindow.rootViewController storyboard];
-            UIViewController *c = [sb instantiateViewControllerWithIdentifier:@"IRMorsePlayerViewController"];
+            IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
+            c.delegate = self;
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
