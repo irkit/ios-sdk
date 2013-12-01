@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.resources = "IRKit/IRKitResources/*"
   s.frameworks = 'Foundation', 'QuartzCore', 'CoreGraphics', 'UIKit', 'CoreBluetooth'
   s.requires_arc = true
-  s.dependency   = 'ISHTTPOperation'
+  s.dependency 'ISHTTPOperation', '~> 1.1.0'
 end

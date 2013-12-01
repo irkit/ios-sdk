@@ -162,6 +162,7 @@
         }
         }
     }
+    return nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -175,6 +176,7 @@
         case 1:
             return 2;
     }
+    return 0;
 }
 
 #pragma mark - UITableViewDelegate
