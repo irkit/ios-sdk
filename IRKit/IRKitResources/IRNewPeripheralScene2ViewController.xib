@@ -15,55 +15,70 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="sidebyside.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="57">
-                    <rect key="frame" x="0.0" y="121" width="320" height="325"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_prepare.png" translatesAutoresizingMaskIntoConstraints="NO" id="57">
+                    <rect key="frame" x="0.0" y="164" width="320" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="Ag1-oZ-fgB"/>
-                        <constraint firstAttribute="height" constant="325" id="Iz5-gy-MvN"/>
+                        <constraint firstAttribute="height" constant="240" id="Iz5-gy-MvN"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Put iOS device next to IRKit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="138">
-                    <rect key="frame" x="20" y="47" width="280" height="74"/>
+                    <rect key="frame" x="20" y="90" width="280" height="74"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="280" id="cl0-Nq-JJZ"/>
                         <constraint firstAttribute="height" constant="74" id="pZe-68-47p"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kln-H0-Byk">
-                    <rect key="frame" x="40" y="454" width="240" height="50"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hro-ef-BRm">
+                    <rect key="frame" x="0.0" y="498" width="320" height="70"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kln-H0-Byk">
+                            <rect key="frame" x="12" y="12" width="296" height="46"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Done" image="icn_check.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="-1" eventType="touchUpInside" id="rOD-JT-hX8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="HyT-0c-7CV"/>
-                        <constraint firstAttribute="height" constant="50" id="jb2-Ir-FSX"/>
+                        <constraint firstItem="kln-H0-Byk" firstAttribute="top" secondItem="hro-ef-BRm" secondAttribute="top" constant="12" id="CMd-vB-J7q"/>
+                        <constraint firstItem="kln-H0-Byk" firstAttribute="leading" secondItem="hro-ef-BRm" secondAttribute="leading" constant="12" id="D1f-cJ-iNb"/>
+                        <constraint firstAttribute="width" constant="320" id="G1d-XC-5nK"/>
+                        <constraint firstAttribute="trailing" secondItem="kln-H0-Byk" secondAttribute="trailing" constant="12" id="Mvk-qL-Jub"/>
+                        <constraint firstAttribute="height" constant="70" id="Was-Pa-Or9"/>
+                        <constraint firstAttribute="bottom" secondItem="kln-H0-Byk" secondAttribute="bottom" constant="12" id="pOq-FU-DmX"/>
                     </constraints>
-                    <state key="normal" title="Done">
-                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="doneButtonPressed:" destination="-1" eventType="touchUpInside" id="rOD-JT-hX8"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="hro-ef-BRm" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="5Qt-gB-7eF"/>
                 <constraint firstItem="57" firstAttribute="top" secondItem="138" secondAttribute="bottom" id="8Ba-EN-nmM"/>
-                <constraint firstItem="kln-H0-Byk" firstAttribute="top" secondItem="57" secondAttribute="bottom" constant="8" symbolic="YES" id="AkH-XT-7Vk"/>
                 <constraint firstAttribute="centerX" secondItem="138" secondAttribute="centerX" id="Jyn-iF-JYg"/>
+                <constraint firstAttribute="bottom" secondItem="hro-ef-BRm" secondAttribute="bottom" id="MvU-ZP-GD1"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="Rb0-F0-5MX"/>
-                <constraint firstAttribute="centerX" secondItem="kln-H0-Byk" secondAttribute="centerX" id="qu3-DC-Vvo"/>
                 <constraint firstAttribute="centerY" secondItem="57" secondAttribute="centerY" id="sDL-7X-JNV"/>
+                <constraint firstAttribute="trailing" secondItem="hro-ef-BRm" secondAttribute="trailing" id="tC1-6T-vW6"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
-        <image name="sidebyside.jpg" width="640" height="629"/>
+        <image name="icn_check.png" width="24" height="24"/>
+        <image name="img_prepare.png" width="320" height="240"/>
     </resources>
 </document>

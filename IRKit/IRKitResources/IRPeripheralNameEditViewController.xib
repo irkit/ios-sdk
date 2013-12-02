@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icn_device.png" translatesAutoresizingMaskIntoConstraints="NO" id="166">
-                    <rect key="frame" x="13" y="66" width="36" height="36"/>
+                    <rect key="frame" x="13" y="84" width="36" height="36"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="36" id="qaX-zD-TLq"/>
@@ -26,70 +26,59 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Give IRKit a name" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="239" translatesAutoresizingMaskIntoConstraints="NO" id="175">
-                    <rect key="frame" x="61" y="73" width="239" height="22"/>
+                    <rect key="frame" x="61" y="91" width="239" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="Kx6-aY-lga"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="386">
-                    <rect key="frame" x="12" y="122" width="296" height="50"/>
+                    <rect key="frame" x="0.0" y="140" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="438">
-                            <rect key="frame" x="1" y="1" width="294" height="48"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ex: Living, Bedroom, ..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="414">
+                            <rect key="frame" x="6" y="1" width="284" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ex: Living, Bedroom, ..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="414">
-                                    <rect key="frame" x="10" y="1" width="284" height="48"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="427"/>
-                                    </constraints>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                    <connections>
-                                        <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="480"/>
-                                        <action selector="processTextField:" destination="-1" eventType="editingDidEnd" id="481"/>
-                                        <outlet property="delegate" destination="-1" id="482"/>
-                                    </connections>
-                                </textField>
-                            </subviews>
-                            <color key="backgroundColor" red="0.086274509799999996" green="0.086274509799999996" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="414" firstAttribute="trailing" secondItem="438" secondAttribute="trailing" id="452"/>
-                                <constraint firstItem="414" firstAttribute="leading" secondItem="438" secondAttribute="leading" constant="10" id="453"/>
-                                <constraint firstItem="414" firstAttribute="top" secondItem="438" secondAttribute="top" constant="1" id="479"/>
-                                <constraint firstAttribute="bottom" secondItem="414" secondAttribute="bottom" constant="-1" id="tVk-vE-lcc"/>
+                                <constraint firstAttribute="height" constant="48" id="427"/>
                             </constraints>
-                        </view>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <connections>
+                                <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="480"/>
+                                <action selector="processTextField:" destination="-1" eventType="editingDidEnd" id="481"/>
+                                <outlet property="delegate" destination="-1" id="482"/>
+                            </connections>
+                        </textField>
                     </subviews>
-                    <color key="backgroundColor" red="0.47450980390000003" green="0.47843137250000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="438" secondAttribute="trailing" constant="1" id="447"/>
-                        <constraint firstItem="438" firstAttribute="leading" secondItem="386" secondAttribute="leading" constant="1" id="448"/>
-                        <constraint firstAttribute="bottom" secondItem="438" secondAttribute="bottom" constant="1" id="449"/>
-                        <constraint firstItem="438" firstAttribute="centerY" secondItem="386" secondAttribute="centerY" id="478"/>
                         <constraint firstAttribute="height" constant="50" id="0nC-ZU-4Ej"/>
+                        <constraint firstItem="414" firstAttribute="leading" secondItem="386" secondAttribute="leading" constant="6" id="CXh-0s-YnQ"/>
+                        <constraint firstAttribute="bottom" secondItem="414" secondAttribute="bottom" constant="1" id="HMS-ir-rxv"/>
+                        <constraint firstAttribute="trailing" secondItem="414" secondAttribute="trailing" constant="30" id="ZH6-jr-V8E"/>
+                        <constraint firstItem="414" firstAttribute="top" secondItem="386" secondAttribute="top" constant="1" id="cAB-th-dAT"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="166" firstAttribute="leading" secondItem="74" secondAttribute="leading" constant="13" id="312"/>
-                <constraint firstItem="386" firstAttribute="leading" secondItem="74" secondAttribute="leading" constant="12" id="394"/>
+                <constraint firstItem="386" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="394"/>
                 <constraint firstItem="386" firstAttribute="centerX" secondItem="74" secondAttribute="centerX" id="437"/>
-                <constraint firstItem="166" firstAttribute="top" secondItem="74" secondAttribute="top" constant="66" id="IIr-cg-AJx"/>
+                <constraint firstItem="166" firstAttribute="top" secondItem="74" secondAttribute="top" constant="84" id="IIr-cg-AJx"/>
                 <constraint firstItem="175" firstAttribute="centerY" secondItem="166" secondAttribute="centerY" id="Lee-KE-gXv"/>
                 <constraint firstItem="386" firstAttribute="top" secondItem="166" secondAttribute="bottom" constant="20" id="ReR-ay-ngS"/>
                 <constraint firstItem="175" firstAttribute="leading" secondItem="166" secondAttribute="trailing" constant="12" id="SoZ-ne-X8u"/>
                 <constraint firstAttribute="trailing" secondItem="175" secondAttribute="trailing" constant="20" symbolic="YES" id="WbA-bl-1La"/>
             </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

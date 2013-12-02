@@ -37,7 +37,7 @@ IRKit</string>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="7" secondAttribute="centerY" constant="40" id="1eM-lI-Z99"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="3il-X0-dwb"/>

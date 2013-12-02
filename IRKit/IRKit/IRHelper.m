@@ -56,8 +56,15 @@
 }
 
 + (UIImage *)imageInResourceNamed:(NSString*)name {
-    return [UIImage imageWithContentsOfFile:[[self resources] pathForResource:name
-                                                                       ofType:@"png"]];
+    NSBundle *bundle = [self resources];
+    NSString *path2x = [bundle pathForResource:[NSString stringWithFormat:@"%@@2x",name]
+                                        ofType:@"png"];
+    UIImage *ret = [UIImage imageWithContentsOfFile:path2x];
+    if (! ret) {
+        ret = [UIImage imageWithContentsOfFile:[bundle pathForResource:name
+                                                                ofType:@"png"]];
+    }
+    return ret;
 }
 
 #pragma mark - Network related

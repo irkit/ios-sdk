@@ -12,6 +12,7 @@
 
 + (instancetype) sharedInstance;
 
++ (UIColor*) textColor;
 + (UIColor*) activeFontColor;
 + (UIColor*) inactiveFontColor;
 

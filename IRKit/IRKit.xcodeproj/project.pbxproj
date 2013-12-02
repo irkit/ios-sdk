@@ -12,6 +12,13 @@
 		C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEC1182BA72C00C31F4B /* IRKeys.m */; };
 		C703E828183DFA6900B8446C /* IRHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C703E827183DFA6900B8446C /* IRHTTPClient.m */; };
 		C703E82A183E0DD900B8446C /* CRC8.c in Sources */ = {isa = PBXBuildFile; fileRef = C703E829183E0DD900B8446C /* CRC8.c */; };
+		C707ECCF184C7C6E00AC5F0B /* icn_navibar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECC9184C7C6D00AC5F0B /* icn_navibar_menu@2x.png */; };
+		C707ECD0184C7C6E00AC5F0B /* icn_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCA184C7C6D00AC5F0B /* icn_check@2x.png */; };
+		C707ECD1184C7C6E00AC5F0B /* icn_navibar_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCB184C7C6D00AC5F0B /* icn_navibar_add@2x.png */; };
+		C707ECD2184C7C6E00AC5F0B /* icn_navibar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */; };
+		C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */; };
+		C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */; };
+		C707ECD6184C84CE00AC5F0B /* img_prepare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD5184C84CE00AC5F0B /* img_prepare@2x.png */; };
 		C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714890E17C46D6E00713890 /* libstdc++.dylib */; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
@@ -21,8 +28,6 @@
 		C71D90AA1797862300CEC73F /* IRHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D90A91797862300CEC73F /* IRHelperTests.m */; };
 		C71D90AD17978B1700CEC73F /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C71D90AE17978B2E00CEC73F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
-		C73503D517A020CB0057D51B /* bg_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503CD17A020CB0057D51B /* bg_graph.png */; };
-		C73503D617A020CB0057D51B /* bg_graph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503CE17A020CB0057D51B /* bg_graph@2x.png */; };
 		C73503D717A020CB0057D51B /* tutorial_pairing.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503CF17A020CB0057D51B /* tutorial_pairing.png */; };
 		C73503D817A020CB0057D51B /* tutorial_pairing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D017A020CB0057D51B /* tutorial_pairing@2x.png */; };
 		C73503D917A020CB0057D51B /* tutorial_powerup.png in Resources */ = {isa = PBXBuildFile; fileRef = C73503D117A020CB0057D51B /* tutorial_powerup.png */; };
@@ -64,11 +69,7 @@
 		C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */; };
 		C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CFC8717A6671200870A1B /* QuartzCore.framework */; };
 		C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37E5174DF20300872C04 /* IRHelper.h */; };
-		C7603E8017A8BA4100A7AF1E /* icn_actionbar_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E7E17A8BA4100A7AF1E /* icn_actionbar_cancel.png */; };
-		C7603E8117A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E7F17A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png */; };
 		C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */; };
-		C7603E8717A8DC9200A7AF1E /* icn_actionbar_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */; };
-		C7603E8817A8DC9200A7AF1E /* icn_actionbar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */; };
 		C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7603E8917A9FAE000A7AF1E /* IRSignalNameEditViewController.m */; };
 		C7603E8C17A9FED700A7AF1E /* IRSignalNameEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */; };
 		C7603E8E17AA001E00A7AF1E /* IRSignalNameEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */; };
@@ -105,11 +106,6 @@
 		C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */; };
 		C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350317AA5D3A00C8679B /* icn_signal.png */; };
 		C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350617AA5D7300C8679B /* icn_device@2x.png */; };
-		C7A1350917AA5D7300C8679B /* icn_device.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350717AA5D7300C8679B /* icn_device.png */; };
-		C7A1350E17AA5DC300C8679B /* btn_navibar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350A17AA5DC300C8679B /* btn_navibar@2x.png */; };
-		C7A1350F17AA5DC300C8679B /* btn_navibar.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350B17AA5DC300C8679B /* btn_navibar.png */; };
-		C7A1351017AA5DC300C8679B /* btn_navibar_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350C17AA5DC300C8679B /* btn_navibar_disable@2x.png */; };
-		C7A1351117AA5DC300C8679B /* btn_navibar_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350D17AA5DC300C8679B /* btn_navibar_disable.png */; };
 		C7A1351217AA621B00C8679B /* IRViewCustomizer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */; };
 		C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A66E8D17A7BB3A00EDE589 /* IRSignalSendOperationQueue.m */; };
 		C7A9674617A0F8B100D5DEBF /* IRNewPeripheralScene1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7A9674517A0F8B100D5DEBF /* IRNewPeripheralScene1ViewController.xib */; };
@@ -127,7 +123,6 @@
 		C7B741BD1803FB61005802A7 /* IRMorsePlayerOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BC1803FB61005802A7 /* IRMorsePlayerOperationQueue.m */; };
 		C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */; };
 		C7B741C31803FD5D005802A7 /* IRMorseTesterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741C21803FD5D005802A7 /* IRMorseTesterViewController.m */; };
-		C7B741C518041AF5005802A7 /* sin_1000Hz_0dB_1s.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C7B741C418041AF5005802A7 /* sin_1000Hz_0dB_1s.aiff */; };
 		C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37DF174B8EB100872C04 /* IRChartView.h */; };
 		C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; };
 		C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */; };
@@ -215,6 +210,13 @@
 		C703E827183DFA6900B8446C /* IRHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHTTPClient.m; sourceTree = "<group>"; };
 		C703E829183E0DD900B8446C /* CRC8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CRC8.c; sourceTree = "<group>"; };
 		C703E82B183E0DF600B8446C /* CRC8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRC8.h; sourceTree = "<group>"; };
+		C707ECC9184C7C6D00AC5F0B /* icn_navibar_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_menu@2x.png"; sourceTree = "<group>"; };
+		C707ECCA184C7C6D00AC5F0B /* icn_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_check@2x.png"; sourceTree = "<group>"; };
+		C707ECCB184C7C6D00AC5F0B /* icn_navibar_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_add@2x.png"; sourceTree = "<group>"; };
+		C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_back@2x.png"; sourceTree = "<group>"; };
+		C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_cancel@2x.png"; sourceTree = "<group>"; };
+		C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_camera@2x.png"; sourceTree = "<group>"; };
+		C707ECD5184C84CE00AC5F0B /* img_prepare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_prepare@2x.png"; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C71D909817977D2200CEC73F /* IRKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71D909C17977D2200CEC73F /* IRKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitTests-Info.plist"; sourceTree = "<group>"; };
@@ -223,8 +225,6 @@
 		C71D90A517977D6A00CEC73F /* IRKitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRKitTests.h; sourceTree = "<group>"; };
 		C71D90A81797862300CEC73F /* IRHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelperTests.h; sourceTree = "<group>"; };
 		C71D90A91797862300CEC73F /* IRHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHelperTests.m; sourceTree = "<group>"; };
-		C73503CD17A020CB0057D51B /* bg_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_graph.png; sourceTree = "<group>"; };
-		C73503CE17A020CB0057D51B /* bg_graph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_graph@2x.png"; sourceTree = "<group>"; };
 		C73503CF17A020CB0057D51B /* tutorial_pairing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_pairing.png; sourceTree = "<group>"; };
 		C73503D017A020CB0057D51B /* tutorial_pairing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tutorial_pairing@2x.png"; sourceTree = "<group>"; };
 		C73503D117A020CB0057D51B /* tutorial_powerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial_powerup.png; sourceTree = "<group>"; };
@@ -276,12 +276,8 @@
 		C75B568E174A7BC800FFE5CB /* IRSignalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalCell.h; sourceTree = "<group>"; };
 		C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRPeripheralCell.xib; sourceTree = "<group>"; };
 		C75CFC8717A6671200870A1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C7603E7E17A8BA4100A7AF1E /* icn_actionbar_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_cancel.png; sourceTree = "<group>"; };
-		C7603E7F17A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_cancel@2x.png"; sourceTree = "<group>"; };
 		C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRViewCustomizer.h; sourceTree = "<group>"; };
 		C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRViewCustomizer.m; sourceTree = "<group>"; };
-		C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_actionbar_back.png; sourceTree = "<group>"; };
-		C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_actionbar_back@2x.png"; sourceTree = "<group>"; };
 		C7603E8917A9FAE000A7AF1E /* IRSignalNameEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalNameEditViewController.m; sourceTree = "<group>"; };
 		C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalNameEditViewController.h; sourceTree = "<group>"; };
 		C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRSignalNameEditViewController.xib; sourceTree = "<group>"; };
@@ -306,7 +302,7 @@
 		C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralNameEditViewController.h; sourceTree = "<group>"; };
 		C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalViewController.m; sourceTree = "<group>"; };
 		C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalViewController.h; sourceTree = "<group>"; };
-		C7756777184B23A100C6D4DB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		C7756777184B23A100C6D4DB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWifiEditViewController.m; sourceTree = "<group>"; };
 		C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWifiEditViewController.h; sourceTree = "<group>"; };
 		C78F6FE3182B8347002AAC7B /* IRWifiEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRWifiEditViewController.xib; sourceTree = "<group>"; };
@@ -322,11 +318,6 @@
 		C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_signal@2x.png"; sourceTree = "<group>"; };
 		C7A1350317AA5D3A00C8679B /* icn_signal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_signal.png; sourceTree = "<group>"; };
 		C7A1350617AA5D7300C8679B /* icn_device@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_device@2x.png"; sourceTree = "<group>"; };
-		C7A1350717AA5D7300C8679B /* icn_device.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_device.png; sourceTree = "<group>"; };
-		C7A1350A17AA5DC300C8679B /* btn_navibar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_navibar@2x.png"; sourceTree = "<group>"; };
-		C7A1350B17AA5DC300C8679B /* btn_navibar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_navibar.png; sourceTree = "<group>"; };
-		C7A1350C17AA5DC300C8679B /* btn_navibar_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_navibar_disable@2x.png"; sourceTree = "<group>"; };
-		C7A1350D17AA5DC300C8679B /* btn_navibar_disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_navibar_disable.png; sourceTree = "<group>"; };
 		C7A66E8D17A7BB3A00EDE589 /* IRSignalSendOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperationQueue.m; sourceTree = "<group>"; };
 		C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSendOperationQueue.h; sourceTree = "<group>"; };
 		C7A9674517A0F8B100D5DEBF /* IRNewPeripheralScene1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRNewPeripheralScene1ViewController.xib; sourceTree = "<group>"; };
@@ -347,7 +338,6 @@
 		C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRMorsePlayerOperation.m; sourceTree = "<group>"; };
 		C7B741C11803FD5D005802A7 /* IRMorseTesterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRMorseTesterViewController.h; sourceTree = "<group>"; };
 		C7B741C21803FD5D005802A7 /* IRMorseTesterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRMorseTesterViewController.m; sourceTree = "<group>"; };
-		C7B741C418041AF5005802A7 /* sin_1000Hz_0dB_1s.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = sin_1000Hz_0dB_1s.aiff; sourceTree = "<group>"; };
 		C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralViewController.m; sourceTree = "<group>"; };
 		C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralViewController.h; sourceTree = "<group>"; };
 		C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene1ViewController.m; sourceTree = "<group>"; };
@@ -599,50 +589,45 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C763C6BE1839BE4300D1D155 /* sidebyside.jpg */,
+				C707ECD5184C84CE00AC5F0B /* img_prepare@2x.png */,
 				C763C6BB1839B51200D1D155 /* morse.jpg */,
-				C7B741C418041AF5005802A7 /* sin_1000Hz_0dB_1s.aiff */,
-				C7A1350A17AA5DC300C8679B /* btn_navibar@2x.png */,
-				C7A1350B17AA5DC300C8679B /* btn_navibar.png */,
-				C7A1350C17AA5DC300C8679B /* btn_navibar_disable@2x.png */,
-				C7A1350D17AA5DC300C8679B /* btn_navibar_disable.png */,
-				C7A1350617AA5D7300C8679B /* icn_device@2x.png */,
-				C7A1350717AA5D7300C8679B /* icn_device.png */,
-				C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */,
-				C7A1350317AA5D3A00C8679B /* icn_signal.png */,
-				C7603E8517A8DC9100A7AF1E /* icn_actionbar_back.png */,
-				C7603E8617A8DC9100A7AF1E /* icn_actionbar_back@2x.png */,
-				C7603E7E17A8BA4100A7AF1E /* icn_actionbar_cancel.png */,
-				C7603E7F17A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png */,
-				C7693F8417A12AF900EC43FC /* icn_arrow.png */,
-				C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */,
-				C7626F8317A1086900D6D746 /* txt_tutorial_02.png */,
-				C7626F8417A1086900D6D746 /* txt_tutorial_02@2x.png */,
+				C763C6BE1839BE4300D1D155 /* sidebyside.jpg */,
 				C7626F7D17A1079400D6D746 /* bg_light.png */,
 				C7626F7E17A1079400D6D746 /* bg_light@2x.png */,
-				C7A9674B17A0FB5400D5DEBF /* shadow.png */,
-				C7A9674C17A0FB5400D5DEBF /* shadow@2x.png */,
+				C7693F8417A12AF900EC43FC /* icn_arrow.png */,
+				C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */,
+				C707ECCA184C7C6D00AC5F0B /* icn_check@2x.png */,
+				C7A1350617AA5D7300C8679B /* icn_device@2x.png */,
+				C707ECCB184C7C6D00AC5F0B /* icn_navibar_add@2x.png */,
+				C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */,
+				C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */,
+				C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */,
+				C707ECC9184C7C6D00AC5F0B /* icn_navibar_menu@2x.png */,
+				C7A1350317AA5D3A00C8679B /* icn_signal.png */,
+				C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */,
 				C7A9674717A0F9DD00D5DEBF /* img_device_usb.png */,
 				C7A9674817A0F9DD00D5DEBF /* img_device_usb@2x.png */,
-				C73503CD17A020CB0057D51B /* bg_graph.png */,
-				C73503CE17A020CB0057D51B /* bg_graph@2x.png */,
+				C7A9674B17A0FB5400D5DEBF /* shadow.png */,
+				C7A9674C17A0FB5400D5DEBF /* shadow@2x.png */,
 				C73503CF17A020CB0057D51B /* tutorial_pairing.png */,
 				C73503D017A020CB0057D51B /* tutorial_pairing@2x.png */,
 				C73503D117A020CB0057D51B /* tutorial_powerup.png */,
 				C73503D217A020CB0057D51B /* tutorial_powerup@2x.png */,
 				C73503D317A020CB0057D51B /* tutorial_remote.png */,
 				C73503D417A020CB0057D51B /* tutorial_remote@2x.png */,
+				C7626F8317A1086900D6D746 /* txt_tutorial_02.png */,
+				C7626F8417A1086900D6D746 /* txt_tutorial_02@2x.png */,
+				C78F6FE5182B8D89002AAC7B /* IREditCell.xib */,
+				C763C6B91839B02400D1D155 /* IRMorsePlayerViewController.xib */,
 				C7A9674517A0F8B100D5DEBF /* IRNewPeripheralScene1ViewController.xib */,
+				C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */,
+				C7693F8017A1132400EC43FC /* IRNewSignalScene1ViewController.xib */,
+				C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */,
+				C7626F8717A10A6200D6D746 /* IRPeripheralNameEditViewController.xib */,
+				C7693F8217A121E500EC43FC /* IRSignalCell.xib */,
+				C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */,
 				C78F6FE3182B8347002AAC7B /* IRWifiEditViewController.xib */,
 				C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */,
-				C7626F8117A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib */,
-				C763C6B91839B02400D1D155 /* IRMorsePlayerViewController.xib */,
-				C7626F8717A10A6200D6D746 /* IRPeripheralNameEditViewController.xib */,
-				C7693F8017A1132400EC43FC /* IRNewSignalScene1ViewController.xib */,
-				C7603E8D17AA001D00A7AF1E /* IRSignalNameEditViewController.xib */,
-				C7693F8217A121E500EC43FC /* IRSignalCell.xib */,
-				C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */,
-				C78F6FE5182B8D89002AAC7B /* IREditCell.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -826,12 +811,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */,
-				C73503D517A020CB0057D51B /* bg_graph.png in Resources */,
-				C73503D617A020CB0057D51B /* bg_graph@2x.png in Resources */,
 				C73503D717A020CB0057D51B /* tutorial_pairing.png in Resources */,
+				C707ECCF184C7C6E00AC5F0B /* icn_navibar_menu@2x.png in Resources */,
 				C73503D817A020CB0057D51B /* tutorial_pairing@2x.png in Resources */,
 				C73503D917A020CB0057D51B /* tutorial_powerup.png in Resources */,
+				C707ECD1184C7C6E00AC5F0B /* icn_navibar_add@2x.png in Resources */,
 				C73503DA17A020CB0057D51B /* tutorial_powerup@2x.png in Resources */,
+				C707ECD2184C7C6E00AC5F0B /* icn_navibar_back@2x.png in Resources */,
+				C707ECD6184C84CE00AC5F0B /* img_prepare@2x.png in Resources */,
 				C73503DB17A020CB0057D51B /* tutorial_remote.png in Resources */,
 				C73503DC17A020CB0057D51B /* tutorial_remote@2x.png in Resources */,
 				C7A9674617A0F8B100D5DEBF /* IRNewPeripheralScene1ViewController.xib in Resources */,
@@ -842,33 +829,26 @@
 				C78F6FE4182B8347002AAC7B /* IRWifiEditViewController.xib in Resources */,
 				C7626F7F17A1079400D6D746 /* bg_light.png in Resources */,
 				C7626F8017A1079400D6D746 /* bg_light@2x.png in Resources */,
+				C707ECD0184C7C6E00AC5F0B /* icn_check@2x.png in Resources */,
 				C7626F8217A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib in Resources */,
 				C7626F8517A1086900D6D746 /* txt_tutorial_02.png in Resources */,
 				C7626F8617A1086900D6D746 /* txt_tutorial_02@2x.png in Resources */,
 				C7626F8817A10A6200D6D746 /* IRPeripheralNameEditViewController.xib in Resources */,
+				C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */,
 				C7693F8117A1132400EC43FC /* IRNewSignalScene1ViewController.xib in Resources */,
 				C763C6BF1839BE4300D1D155 /* sidebyside.jpg in Resources */,
 				C7693F8317A121E500EC43FC /* IRSignalCell.xib in Resources */,
 				C7693F8617A12AF900EC43FC /* icn_arrow.png in Resources */,
 				C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */,
 				C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */,
-				C7603E8017A8BA4100A7AF1E /* icn_actionbar_cancel.png in Resources */,
-				C7603E8117A8BA4100A7AF1E /* icn_actionbar_cancel@2x.png in Resources */,
 				C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */,
-				C7603E8717A8DC9200A7AF1E /* icn_actionbar_back.png in Resources */,
-				C7603E8817A8DC9200A7AF1E /* icn_actionbar_back@2x.png in Resources */,
-				C7B741C518041AF5005802A7 /* sin_1000Hz_0dB_1s.aiff in Resources */,
 				C7603E8E17AA001E00A7AF1E /* IRSignalNameEditViewController.xib in Resources */,
 				C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */,
 				C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */,
+				C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */,
 				C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */,
 				C763C6BC1839B51200D1D155 /* morse.jpg in Resources */,
-				C7A1350917AA5D7300C8679B /* icn_device.png in Resources */,
-				C7A1350E17AA5DC300C8679B /* btn_navibar@2x.png in Resources */,
-				C7A1350F17AA5DC300C8679B /* btn_navibar.png in Resources */,
 				C763C6BA1839B02400D1D155 /* IRMorsePlayerViewController.xib in Resources */,
-				C7A1351017AA5DC300C8679B /* btn_navibar_disable@2x.png in Resources */,
-				C7A1351117AA5DC300C8679B /* btn_navibar_disable.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
