@@ -130,6 +130,7 @@
 		C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */; };
 		C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
+		C7FFC7C8184CCE790007B178 /* IRHTTPJSONOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,6 +338,8 @@
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		C7FAB0251746889000125BCB /* IRConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRConst.h; sourceTree = "<group>"; };
+		C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHTTPJSONOperation.h; sourceTree = "<group>"; };
+		C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHTTPJSONOperation.m; sourceTree = "<group>"; };
 		EDE78220530748578E6887AD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -465,6 +468,8 @@
 				C7B741BB1803FB61005802A7 /* IRMorsePlayerOperationQueue.h */,
 				C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */,
 				C7B741BE1803FB7A005802A7 /* IRMorsePlayerOperation.h */,
+				C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */,
+				C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */,
 			);
 			name = operation;
 			sourceTree = "<group>";
@@ -905,6 +910,7 @@
 				C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */,
 				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
 				C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */,
+				C7FFC7C8184CCE790007B178 /* IRHTTPJSONOperation.m in Sources */,
 				C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

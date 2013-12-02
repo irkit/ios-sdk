@@ -11,6 +11,7 @@
 #import "IRHelper.h"
 #import "ISHTTPOperation/ISHTTPOperation.h"
 #import "IRConst.h"
+#import "IRHTTPJSONOperation.h"
 
 #define DEFAULT_TIMEOUT 25. // heroku timeout
 
@@ -24,12 +25,8 @@
     [self post:@"/keys"
     withParams:nil
  targetNetwork:IRHTTPClientNetworkInternet
-    completion:^(NSURLResponse *res, NSData *data, NSError *error) {
-        if (error) {
-            return completion( (NSHTTPURLResponse*)res, nil, error );
-        }
-        NSArray *object = [NSJSONSerialization JSONObjectWithData:data options:nil error:&error];
-        return completion( (NSHTTPURLResponse*)res, object, error );
+    completion:^(NSURLResponse *res, id data, NSError *error) {
+        return completion((NSHTTPURLResponse*)res, data, error);
     }];
 }
 
@@ -48,6 +45,7 @@ targetNetwork:IRHTTPClientNetworkInternet
                     break;
                 case 408:
                     // retry
+                    LOG( @"retrying" );
                     [self waitForDoorWithKey: key
                                   completion: completion];
                 default:
@@ -57,6 +55,7 @@ targetNetwork:IRHTTPClientNetworkInternet
         }
         if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
             // timeout -> retry
+            LOG( @"retrying" );
             [self waitForDoorWithKey:key
                           completion:completion];
             return;
@@ -65,6 +64,7 @@ targetNetwork:IRHTTPClientNetworkInternet
             completion(res, object, error);
             return;
         }
+        // error object nil but error
         NSInteger code = (res && res.statusCode) ? res.statusCode
                                                  : IRKitHTTPStatusCodeUnknown;
         NSError* retError = [NSError errorWithDomain:IRKitErrorDomainHTTP
@@ -100,7 +100,7 @@ targetNetwork: (enum IRHTTPClientNetwork)network
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
 
-    [ISHTTPOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+    [IRHTTPJSONOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
         if (! completion) {
             return;
         }
