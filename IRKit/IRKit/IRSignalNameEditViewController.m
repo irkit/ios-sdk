@@ -102,7 +102,7 @@
 - (IBAction)editingChanged:(id)sender {
     BOOL valid = [self isTextValid];
     self.navigationItem.rightBarButtonItem.enabled = valid;
-    self.textField.textColor = valid ? [IRViewCustomizer activeFontColor] : [IRViewCustomizer inactiveFontColor];
+    self.textField.textColor = valid ? [IRViewCustomizer textColor] : [IRViewCustomizer inactiveFontColor];
 }
 
 #pragma mark - UITextFieldDelegate

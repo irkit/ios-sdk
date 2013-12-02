@@ -2,7 +2,6 @@
 #import "IRSignals.h"
 #import "IRPersistentStore.h"
 #import "IRConst.h"
-#import "IRSignalCell.h"
 #import "IRHelper.h"
 #import "IRSignalSendOperationQueue.h"
 #import "IRSignalSendOperation.h"
@@ -175,37 +174,6 @@
             });
         }
     }
-}
-
-#pragma mark - UITableViewDataSource
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LOG( @"indexPath.row: %d", indexPath.row);
-
-    IRSignalCell *cell = (IRSignalCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
-    if (cell == nil) {
-        NSBundle *main = [NSBundle mainBundle];
-        NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                      ofType:@"bundle"]];
-        [tableView registerNib:[UINib nibWithNibName:@"IRSignalCell" bundle:resources]
-        forCellReuseIdentifier:IRKitCellIdentifierSignal];
-
-        cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
-    }
-    [cell inflateFromSignal:[self objectAtIndex:indexPath.row]];
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    LOG_CURRENT_METHOD;
-    return self.countOfSignals;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LOG_CURRENT_METHOD;
-    return [IRSignalCell height];
 }
 
 @end

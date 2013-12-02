@@ -15,25 +15,26 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="tutorial_remote.png" translatesAutoresizingMaskIntoConstraints="NO" id="166">
-                    <rect key="frame" x="60" y="139" width="200" height="290"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_remote.png" translatesAutoresizingMaskIntoConstraints="NO" id="166">
+                    <rect key="frame" x="0.0" y="142" width="320" height="285"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="36l-P1-RER"/>
-                        <constraint firstAttribute="height" constant="290" id="oWj-nC-0uB"/>
+                        <constraint firstAttribute="width" constant="320" id="36l-P1-RER"/>
+                        <constraint firstAttribute="height" constant="285" id="oWj-nC-0uB"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="166" firstAttribute="centerX" secondItem="74" secondAttribute="centerX" id="319"/>
                 <constraint firstAttribute="centerY" secondItem="166" secondAttribute="centerY" id="BXd-RK-st7"/>
             </constraints>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
-        <image name="tutorial_remote.png" width="200" height="290"/>
+        <image name="img_remote.png" width="320" height="285"/>
     </resources>
 </document>

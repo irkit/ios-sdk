@@ -6,7 +6,6 @@
 #import "IRPeripherals.h"
 #import "IRSignals.h"
 #import "IRSignal.h"
-#import "IRSignalCell.h"
 #import "IRChartView.h"
 #import "IRHelper.h"
 #import "IRViewCustomizer.h"

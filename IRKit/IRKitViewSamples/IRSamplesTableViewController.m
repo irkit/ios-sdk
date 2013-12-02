@@ -8,7 +8,6 @@
 #import "IRSignalNameEditViewController.h"
 #import "IRWebViewController.h"
 #import "IRSignal.h"
-#import "IRSignalCell.h"
 #import "IRPeripheralCell.h"
 #import "IRMorsePlayerViewController.h"
 #import "IRWifiEditViewController.h"
@@ -83,6 +82,13 @@
     LOG(@"info: ", info);
 }
 
+#pragma mark - IRMorsePlayerViewControllerDelegate
+
+- (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -91,7 +97,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 9;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -110,26 +116,15 @@
             return [tableView dequeueReusableCellWithIdentifier:@"IRWeb"];
         case 6:
         {
-            IRSignalCell *cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierSignal];
-
-            unsigned short data[10] = { 100,100,100,100,100,100,100,100,100,100 };
-            NSData *irdata = [NSData dataWithBytes:data length:10];
-            IRSignal *signal = [[IRSignal alloc] initWithData: irdata];
-
-            [cell inflateFromSignal:signal];
-            return cell;
-        }
-        case 7:
-        {
             IRPeripheralCell *cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
             IRPeripheral *peripheral = [[IRPeripheral alloc] init];
             peripheral.customizedName = @"my IRKit";
             cell.peripheral = peripheral;
             return cell;
         }
-        case 8:
+        case 7:
             return [tableView dequeueReusableCellWithIdentifier:@"IRWifiEdit"];
-        case 9:
+        case 8:
             return [tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
         default:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
@@ -141,8 +136,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 6:
-            return [IRSignalCell height];
-        case 7:
             return [IRPeripheralCell height];
 
         default:
@@ -217,14 +210,14 @@
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
-        case 8:
+        case 7:
         {
             IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName:@"IRWifiEditViewController" bundle:resources];
             c.delegate = self;
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
-        case 9:
+        case 8:
         {
             IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
             c.delegate = self;

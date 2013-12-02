@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icn_signal.png" translatesAutoresizingMaskIntoConstraints="NO" id="328">
-                    <rect key="frame" x="13" y="66" width="36" height="36"/>
+                    <rect key="frame" x="13" y="84" width="36" height="36"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="cgn-CX-W5i"/>
@@ -25,70 +25,52 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Give signal a name" lineBreakMode="tailTruncation" numberOfLines="2" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="239" translatesAutoresizingMaskIntoConstraints="NO" id="327">
-                    <rect key="frame" x="61" y="73" width="239" height="22"/>
+                    <rect key="frame" x="61" y="91" width="239" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="Rc8-Z3-apm"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="319">
-                    <rect key="frame" x="12" y="122" width="296" height="50"/>
+                    <rect key="frame" x="0.0" y="140" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="333">
-                            <rect key="frame" x="1" y="1" width="294" height="48"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ex: Living, Bedroom, ..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="338">
+                            <rect key="frame" x="6" y="1" width="284" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ex: Living, Bedroom, ..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="338">
-                                    <rect key="frame" x="10" y="1" width="284" height="48"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="48" id="27L-G3-j3C"/>
-                                    </constraints>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                    <connections>
-                                        <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="348"/>
-                                        <action selector="processTextField:" destination="-1" eventType="editingDidEnd" id="349"/>
-                                        <outlet property="delegate" destination="-1" id="350"/>
-                                    </connections>
-                                </textField>
-                            </subviews>
-                            <color key="backgroundColor" red="0.086274509799999996" green="0.086274509799999996" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstItem="338" firstAttribute="trailing" secondItem="333" secondAttribute="trailing" id="339"/>
-                                <constraint firstItem="338" firstAttribute="leading" secondItem="333" secondAttribute="leading" constant="10" id="340"/>
-                                <constraint firstItem="338" firstAttribute="top" secondItem="333" secondAttribute="top" constant="1" id="346"/>
-                            </constraints>
-                        </view>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <connections>
+                                <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="348"/>
+                                <action selector="processTextField:" destination="-1" eventType="editingDidEnd" id="349"/>
+                                <outlet property="delegate" destination="-1" id="350"/>
+                            </connections>
+                        </textField>
                     </subviews>
-                    <color key="backgroundColor" red="0.47450980390000003" green="0.47843137250000001" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="333" secondAttribute="trailing" constant="1" id="335"/>
-                        <constraint firstItem="333" firstAttribute="leading" secondItem="319" secondAttribute="leading" constant="1" id="336"/>
-                        <constraint firstAttribute="bottom" secondItem="333" secondAttribute="bottom" constant="1" id="337"/>
-                        <constraint firstItem="333" firstAttribute="centerY" secondItem="319" secondAttribute="centerY" id="347"/>
-                        <constraint firstAttribute="centerX" secondItem="333" secondAttribute="centerX" id="Ho2-vz-pLf"/>
+                        <constraint firstItem="338" firstAttribute="leading" secondItem="319" secondAttribute="leading" constant="6" id="79g-fH-BUg"/>
+                        <constraint firstAttribute="bottom" secondItem="338" secondAttribute="bottom" constant="1" id="DPi-k8-Cvg"/>
+                        <constraint firstAttribute="trailing" secondItem="338" secondAttribute="trailing" constant="30" id="PDe-JS-Dz9"/>
+                        <constraint firstItem="338" firstAttribute="top" secondItem="319" secondAttribute="top" constant="1" id="XPf-a8-6Ch"/>
                         <constraint firstAttribute="height" constant="50" id="aFQ-Ag-bUA"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="328" firstAttribute="top" secondItem="318" secondAttribute="top" constant="66" id="320"/>
+                <constraint firstItem="328" firstAttribute="top" secondItem="318" secondAttribute="top" constant="84" id="320"/>
                 <constraint firstItem="328" firstAttribute="leading" secondItem="318" secondAttribute="leading" constant="13" id="321"/>
-                <constraint firstItem="319" firstAttribute="leading" secondItem="318" secondAttribute="leading" constant="12" id="324"/>
+                <constraint firstItem="319" firstAttribute="leading" secondItem="318" secondAttribute="leading" id="324"/>
                 <constraint firstItem="319" firstAttribute="centerX" secondItem="318" secondAttribute="centerX" id="326"/>
                 <constraint firstItem="319" firstAttribute="top" secondItem="328" secondAttribute="bottom" constant="20" id="WEn-8N-Y7k"/>
                 <constraint firstItem="327" firstAttribute="leading" secondItem="328" secondAttribute="trailing" constant="12" id="fyX-Dq-oxh"/>
                 <constraint firstItem="327" firstAttribute="centerY" secondItem="328" secondAttribute="centerY" id="ugJ-kh-pOi"/>
                 <constraint firstAttribute="trailing" secondItem="327" secondAttribute="trailing" constant="20" symbolic="YES" id="ugh-tU-Bkq"/>
             </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

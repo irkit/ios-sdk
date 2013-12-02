@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 
 @end
 
-@interface IRSignals : NSObject<UITableViewDataSource,UITableViewDelegate>
+@interface IRSignals : NSObject
 
 @property (nonatomic, assign) id<IRAnimatingControllerDelegate> delegate;
 - (id)objectAtIndex:(NSUInteger)index;
