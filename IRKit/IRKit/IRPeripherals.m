@@ -38,7 +38,7 @@
     if ( ! name ) {
         return nil;
     }
-    return _irperipheralForName[name];
+    return _irperipheralForName[name.lowercaseString];
 }
 
 - (void) save {
@@ -60,7 +60,7 @@
 
 - (BOOL) isKnownName: (NSString*) hostname {
     LOG( @"hostname: %@", hostname );
-    return _irperipheralForName[ hostname ] ? YES : NO;
+    return _irperipheralForName[ hostname.lowercaseString ] ? YES : NO;
 }
 
 - (IRPeripheral*)registerPeripheralWithName: (NSString*)hostname {
@@ -69,6 +69,11 @@
     peripheral.name = hostname;
     [self addPeripheralsObject:peripheral];
     return peripheral;
+}
+
+- (void)waitForSignalWithCompletion:(void (^)(IRSignal*))completion {
+    LOG_CURRENT_METHOD;
+    
 }
 
 #pragma mark - Private methods
@@ -120,8 +125,9 @@
 }
 
 - (IRPeripheral*)memberOfPeripherals:(IRPeripheral *)object {
+    NSString *lowercased = object.name.lowercaseString;
     for (IRPeripheral *p in self.peripherals) {
-        if ([p.name isEqualToString:object.name]) {
+        if ([p.name.lowercaseString isEqualToString:lowercased]) {
             return p;
         }
     }
@@ -137,13 +143,13 @@
         return;
     }
 
-    _irperipheralForName[peripheral.name] = peripheral;
+    _irperipheralForName[peripheral.name.lowercaseString] = peripheral;
 }
 
 - (void)removePeripheralsObject: (IRPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
 
-    [_irperipheralForName removeObjectForKey:peripheral.name];
+    [_irperipheralForName removeObjectForKey:peripheral.name.lowercaseString];
 }
 
 #pragma mark - UITableViewDataSource

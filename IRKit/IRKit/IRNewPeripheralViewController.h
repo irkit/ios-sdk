@@ -11,7 +11,8 @@
 @interface IRNewPeripheralViewController : UIViewController<
 IRNewPeripheralScene1ViewControllerDelegate,
 IRWifiEditViewControllerDelegate,
-IRMorsePlayerViewControllerDelegate>
+IRMorsePlayerViewControllerDelegate,
+IRPeripheralNameEditViewControllerDelegate>
 
 @property (nonatomic, assign) id<IRNewPeripheralViewControllerDelegate> delegate;
 

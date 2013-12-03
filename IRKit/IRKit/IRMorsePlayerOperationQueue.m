@@ -8,14 +8,13 @@
 
 #import "Log.h"
 #import "IRMorsePlayerOperationQueue.h"
-#import "IRMorsePlayerOperation.h"
 
 @interface IRMorsePlayerOperationQueue ()
 @end
 
 @implementation IRMorsePlayerOperationQueue
 
-- (id) init {
+- (instancetype) init {
     LOG_CURRENT_METHOD;
     self = [super init];
     if ( ! self ) {

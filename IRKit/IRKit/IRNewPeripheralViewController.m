@@ -146,7 +146,14 @@
                            didFinishWithPeripheral:nil];
         return;
     }
-    ASSERT(1, @"non cancelled results should not happen");
+
+    IRPeripheral *p = info[IRViewControllerResultPeripheral];
+    if (p) {
+        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController" bundle:[IRHelper resources]];
+        c.delegate = self;
+        c.peripheral = p;
+        [self.navController pushViewController:c animated:YES];
+    }
 }
 
 #pragma mark - IRPeripheralNameEditViewControllerDelegate

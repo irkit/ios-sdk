@@ -191,9 +191,7 @@
         [cell.editTextField becomeFirstResponder];
     }
     else {
-        NSBundle *main = [NSBundle mainBundle];
-        NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources" ofType:@"bundle"]];
-        IRWifiSecuritySelectViewController *c = [[IRWifiSecuritySelectViewController alloc] initWithNibName:@"IRWifiSecuritySelectViewController" bundle:resources];
+        IRWifiSecuritySelectViewController *c = [[IRWifiSecuritySelectViewController alloc] initWithNibName:@"IRWifiSecuritySelectViewController" bundle:[IRHelper resources]];
         c.delegate = self;
         c.selectedSecurityType = _keys.security;
         [self.navigationController pushViewController:c animated:YES];

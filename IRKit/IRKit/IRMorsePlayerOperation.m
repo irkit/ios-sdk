@@ -105,6 +105,12 @@ static NSDictionary *asciiToMorse;
     [self play];
 }
 
+- (void) cancel {
+    LOG_CURRENT_METHOD;
+
+    [self finish];
+}
+
 + (IRMorsePlayerOperation*) playMorseFromString:(NSString*)input
                                   withWordSpeed:(NSNumber*)wpm {
     LOG_CURRENT_METHOD;

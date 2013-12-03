@@ -17,7 +17,32 @@
 #define LONGPOLL_TIMEOUT 25. // heroku timeout
 #define DEFAULT_TIMEOUT 5. // short REST like requests
 
+@interface IRHTTPClient ()
+
+@property (nonatomic) NSURLRequest *longPollRequest;
+
+typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *error);
+@property (nonatomic, copy) ResponseHandlerBlock longPollDidFinish;
+
+@end
+
 @implementation IRHTTPClient
+
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+}
+
+- (IRHTTPClient*)startPollingRequest {
+    [IRHTTPJSONOperation sendRequest:self.longPollRequest
+                            handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+                                if (self.longPollDidFinish(response, object, error)) {
+                                    return;
+                                }
+                                [self startPollingRequest];
+                            }];
+}
+
+#pragma mark - Class methods
 
 + (NSURL*)base {
     return [NSURL URLWithString:@"http://api.getirkit.com"];
@@ -109,43 +134,46 @@
             }];
 }
 
-+ (void)waitForDoorWithKey: (NSString*)key
-                completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
-    [self postInternet:@"/door"
-            withParams:@{ @"key": key }
-       timeoutInterval:LONGPOLL_TIMEOUT
-            completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
++ (IRHTTPClient*)waitForDoorWithKey: (NSString*)key
+                         completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
+    NSURLRequest *req = [self makePOSTInternetRequestToPath:@"/door"
+                                                 withParams:@{ @"key": key }
+                                            timeoutInterval:LONGPOLL_TIMEOUT];
+    IRHTTPClient *client = [[IRHTTPClient alloc] init];
+    client.longPollRequest = req;
+    client.longPollDidFinish = (ResponseHandlerBlock)^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG( @"res: %@, object: %@, error: %@", res, object, error );
 
         if (res && res.statusCode) {
             switch (res.statusCode) {
                 case 200:
                     completion(res, object, nil);
-                    break;
+                    return YES; // stop long polling
                 case 408:
                     // retry
-                    LOG( @"retrying" );
-                    [self waitForDoorWithKey: key
-                                  completion: completion];
+                    return NO;
                 default:
                     break;
             }
-            return;
+            // TODO sleep exponentially if unexpected error?
+            // retry
+            return NO;
         }
         if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
             // timeout -> retry
             LOG( @"retrying" );
-            [self waitForDoorWithKey:key
-                          completion:completion];
-            return;
+            return NO;
         }
         if (error) {
             completion(res, object, error);
-            return;
+            return YES; // stop if unexpected error
         }
         // error object nil but error
         completion(res, object, [self errorFromResponse:res]);
-    }];
+        return YES;
+    };
+    [client startPollingRequest];
+    return client;
 }
 
 + (void)cancelWaitForDoor {
@@ -162,6 +190,22 @@
           completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
     LOG_CURRENT_METHOD;
 
+    NSURLRequest *req = [self makePOSTInternetRequestToPath:path
+                                                 withParams:params
+                                            timeoutInterval:timeout];
+
+    [IRHTTPJSONOperation sendRequest:req handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+        if (! completion) {
+            return;
+        }
+        // ISHTTPOperation calls our handler in main queue
+        completion(response, object, error);
+    }];
+}
+
++ (NSURLRequest*)makePOSTInternetRequestToPath: (NSString*)path
+                                    withParams: (NSDictionary*)params
+                               timeoutInterval: (NSTimeInterval)timeout {
     NSURL *url = [NSURL URLWithString:path relativeToURL:[self base]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL             = url;
@@ -174,13 +218,7 @@
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
 
-    [IRHTTPJSONOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
-        if (! completion) {
-            return;
-        }
-        // ISHTTPOperation calls our handler in main queue
-        completion(response, object, error);
-    }];
+    return request;
 }
 
 + (void)getLocal: (NSString*)path
@@ -189,6 +227,21 @@
       completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
     LOG_CURRENT_METHOD;
 
+    NSURLRequest *req = [self makeGETLocalRequestToPath:path
+                                             withParams:params
+                                               hostname:hostname];
+    [IRHTTPJSONOperation sendRequest:req handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+        if (! completion) {
+            return;
+        }
+        // ISHTTPOperation calls our handler in main queue
+        completion(response, object, error);
+    }];
+}
+
++ (NSURLRequest*)makeGETLocalRequestToPath: (NSString*)path
+                                withParams: (NSDictionary*)params
+                                  hostname: (NSString*)hostname {
     NSString *query = [self stringOfURLEncodedDictionary:params];
     NSString *urlString;
     if (query) {
@@ -203,8 +256,20 @@
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
     request.timeoutInterval = DEFAULT_TIMEOUT;
     [request setHTTPMethod:@"GET"];
+    return request;
+}
 
-    [IRHTTPJSONOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
++ (void)postLocal: (NSString*)path
+       withParams: (NSDictionary*) params
+         hostname: (NSString*)hostname
+       completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
+    LOG_CURRENT_METHOD;
+
+    NSURLRequest *req = [self makePOSTLocalRequestToPath:path
+                                              withParams:params
+                                                hostname:hostname];
+
+    [IRHTTPJSONOperation sendRequest:req handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
         if (! completion) {
             return;
         }
@@ -213,11 +278,9 @@
     }];
 }
 
-+ (void)postLocal: (NSString*)path
-       withParams: (NSDictionary*) params
-         hostname: (NSString*)hostname
-       completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
-    LOG_CURRENT_METHOD;
++ (NSURLRequest*)makePOSTLocalRequestToPath: (NSString*)path
+                                 withParams: (NSDictionary*)params
+                                   hostname: (NSString*)hostname {
 
     NSURL *base = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@.local", hostname]];
     NSURL *url  = [NSURL URLWithString:path relativeToURL:base];
@@ -231,14 +294,7 @@
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
-
-    [IRHTTPJSONOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
-        if (! completion) {
-            return;
-        }
-        // ISHTTPOperation calls our handler in main queue
-        completion(response, object, error);
-    }];
+    return request;
 }
 
 + (NSString*)stringOfURLEncodedDictionary: (NSDictionary*)params {

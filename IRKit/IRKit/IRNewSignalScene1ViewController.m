@@ -4,6 +4,8 @@
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
 #import "IRSignalNameEditViewController.h"
+#import "IRHTTPClient.h"
+#import "IRKit.h"
 
 @interface IRNewSignalScene1ViewController ()
 
@@ -38,19 +40,16 @@
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
+
+    // TODO
+//    [[IRKit sharedInstance].peripherals waitForSignalWithCompletion:^(IRSignal *signal) {
+//        [self didReceiveSignal:signal];
+//    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
-
-    _observer = [[NSNotificationCenter defaultCenter] addObserverForName:IRKitDidReceiveSignalNotification
-                                                                  object:nil
-                                                                   queue:nil
-                                                              usingBlock:^(NSNotification *note) {
-                                                                  IRSignal* signal = note.userInfo[IRKitSignalUserInfoKey];
-                                                                  [self didReceiveSignal:signal];
-                                                              }];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

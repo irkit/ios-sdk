@@ -22,7 +22,7 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 + (void)getMessageFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *message, NSError *error))completion;
 + (void)getKeyFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSString *key, NSError *error))completion;
 + (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSArray *keys, NSError *error))completion;
-+ (void)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion;
++ (IRHTTPClient*)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion;
 + (void)cancelWaitForDoor;
 
 @end

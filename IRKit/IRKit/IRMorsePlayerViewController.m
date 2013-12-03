@@ -15,6 +15,10 @@
 
 @property (nonatomic) IRMorsePlayerOperationQueue *player;
 @property (weak, nonatomic) IBOutlet MPVolumeView *volumeView;
+@property (nonatomic) BOOL playing;
+
+@property (nonatomic, copy) NSString *morseMessage;
+@property (nonatomic) IRHTTPClient *doorWaiter;
 
 @end
 
@@ -27,6 +31,7 @@
         // Custom initialization
         _player = [[IRMorsePlayerOperationQueue alloc] init];
         _volumeView.showsRouteButton = false;
+        _playing = false;
     }
     return self;
 }
@@ -57,7 +62,6 @@
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
-    [IRHTTPClient cancelWaitForDoor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,10 +70,64 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Private
+
+- (void)startPlaying {
+    LOG_CURRENT_METHOD;
+
+    _playing = true;
+
+    _morseMessage = [_keys morseStringRepresentation];
+    LOG(@"morseMessage: %@", _morseMessage);
+
+    [_player addObserver:self
+              forKeyPath:@"operationCount"
+                 options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                 context:nil];
+    // fire key value observer
+    [self observeValueForKeyPath:@"operationCount"
+                        ofObject:nil
+                          change:@{ NSKeyValueChangeNewKey: @0 }
+                         context:nil];
+}
+
+- (void)stopPlaying {
+    LOG_CURRENT_METHOD;
+
+    [IRHTTPClient cancelWaitForDoor];
+    _doorWaiter = nil;
+
+    [_player removeObserver:self
+                 forKeyPath:@"operationCount"];
+    [_player cancelAllOperations];
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    LOG( @"keyPath: %@", keyPath );
+
+    if ([keyPath isEqualToString:@"operationCount"]) {
+        NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
+        if (newValue &&
+            ([(NSNumber*)newValue unsignedIntegerValue]==0)) {
+            [_player addOperation: [IRMorsePlayerOperation playMorseFromString:_morseMessage
+                                                                 withWordSpeed:[NSNumber numberWithInt:MORSE_WPM]]];
+        }
+    }
+
+}
+
 #pragma mark - UI events
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
+
+    [self stopPlaying];
+
     [self.delegate morsePlayerViewController:self
                            didFinishWithInfo:@{
            IRViewControllerResultType: IRViewControllerResultTypeCancelled
@@ -86,44 +144,37 @@
         }
         [_keys setKeys:keys];
 
-        NSString *message = [_keys morseStringRepresentation];
-        LOG(@"text: %@", message);
+        [self startPlaying];
 
-        NSNumber *wpm = [NSNumber numberWithInt:MORSE_WPM];
-        LOG(@"wpm: %@", wpm);
+        _doorWaiter =
+            [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.mykey
+                                  completion: ^(NSHTTPURLResponse* res, id object, NSError* error) {
+                                      LOG(@"res: %@, error: %@", res, error);
 
-        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
-                                                             withWordSpeed:wpm]];
-        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
-                                                             withWordSpeed:wpm]];
-        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
-                                                             withWordSpeed:wpm]];
-        [_player addOperationWithBlock:^{
-            // when 3 rounds of morse ended without success,
-            // we fail with an alert
-            // TODO
-            [IRHTTPClient cancelWaitForDoor];
-        }];
+                                      [self stopPlaying];
 
-        [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.mykey
-                              completion: ^(NSHTTPURLResponse* res, id object, NSError* error) {
-                                  LOG(@"res: %@, error: %@", res, error);
-                                  [_player cancelAllOperations];
-                                  if (error) {
-                                      // TODO alert
-                                      return;
-                                  }
+                                      if (error) {
+                                          // TODO alert
+                                          return;
+                                      }
 
-                                  NSString *shortname = object[ @"name" ];
-                                  IRKit *i = [IRKit sharedInstance];
-                                  if ( ! [i.peripherals isKnownName:shortname]) {
-                                      IRPeripheral *p = [i.peripherals registerPeripheralWithName:shortname];
-                                      p.key = _keys.mykey;
-                                      [i.peripherals save];
-                                      [p getModelNameAndVersionWithCompletion:^{
+                                      NSString *shortname = object[ @"name" ];
+                                      IRKit *i = [IRKit sharedInstance];
+                                      IRPeripheral *p = [i.peripherals IRPeripheralForName:shortname];
+                                      if ( ! p ) {
+                                          p = [i.peripherals registerPeripheralWithName:shortname];
+                                          p.key = _keys.mykey;
                                           [i.peripherals save];
-                                      }];
-                                  }
+                                          [p getModelNameAndVersionWithCompletion:^{
+                                              [i.peripherals save];
+                                          }];
+                                      }
+
+                                      [self.delegate morsePlayerViewController:self
+                                                             didFinishWithInfo:@{
+                                                                                 IRViewControllerResultType: IRViewControllerResultTypeDone,
+                                                                                 IRViewControllerResultPeripheral:p
+                                                                                 }];
                               }];
     }];
 }
