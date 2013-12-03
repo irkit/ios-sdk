@@ -4,6 +4,7 @@
 #import "IRHelper.h"
 #import "IRConst.h"
 #import "IRPeripheralCell.h"
+#import "IRHTTPClient.h"
 
 @interface IRPeripherals ()
 
@@ -18,8 +19,9 @@
     self = [super init];
     if (! self) { return nil; }
 
-    _irperipheralForName = @{}.mutableCopy;
-
+    [self load];
+    [self check];
+    
     return self;
 }
 
@@ -85,13 +87,25 @@
 
     NSData* data = [IRPersistentStore objectForKey: @"peripherals"];
 
-    _irperipheralForName = data ? (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data]
+    _irperipheralForName = data ? [[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy]
                                 : nil;
     if ( ! _irperipheralForName ) {
-        _irperipheralForName = [[NSMutableDictionary alloc] init];
+        _irperipheralForName = @{}.mutableCopy;
     }
 
     LOG( @"_irperipheralForUUID: %@", _irperipheralForName );
+}
+
+- (void) check {
+    LOG_CURRENT_METHOD;
+
+    for (IRPeripheral *p in self.peripherals) {
+        if (! [p isReady]) {
+            [p getKeyWithCompletion:^{
+                [self save];
+            }];
+        }
+    }
 }
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors

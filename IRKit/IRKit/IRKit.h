@@ -9,13 +9,14 @@
 #import "IRChartView.h"
 #import "IRHelper.h"
 #import "IRViewCustomizer.h"
+#import "IRSearcher.h"
 
-@interface IRKit : NSObject
+@interface IRKit : NSObject<IRSearcherDelegate>
 
 + (IRKit*) sharedInstance;
 
-- (void) startScan;
-- (void) stopScan;
+- (void) startSearch;
+- (void) stopSearch;
 - (void) save;
 
 @property (nonatomic, readonly) NSUInteger countOfReadyPeripherals;

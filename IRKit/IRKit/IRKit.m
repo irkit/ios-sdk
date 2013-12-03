@@ -13,10 +13,16 @@ static BOOL useCustomizedStyle;
 @interface IRKit ()
 
 //@property (nonatomic) CBCentralManager* manager;
-@property (nonatomic) BOOL isScanning;
 @property (nonatomic) id terminateObserver;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) id enterBackgroundObserver;
+@property (nonatomic) NSTimer *stopSearchTimer;
+
+// don't search for IRKit device after stopSearch was called (from IRNewPeripheralVC, mainly)
+// cleared on enter background
+// we don't want to see timing problems of which (POST /door response or Bonjour) is faster to detect online IRKit
+// prioritize POST /door response, and stop searching Bonjour in IRNewPeripheralVC
+@property (nonatomic) BOOL stopCalled;
 
 @end
 
@@ -36,7 +42,6 @@ static BOOL useCustomizedStyle;
     if (! self) { return nil; }
 
     _peripherals = [[IRPeripherals alloc] init];
-    _isScanning  = NO;
 
     __weak IRKit *_self = self;
     _terminateObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillTerminateNotification
@@ -51,17 +56,23 @@ static BOOL useCustomizedStyle;
                                                                                queue:[NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
                                                                               LOG( @"became active" );
+                                                                              // if opened in the middle of NewPeripheralVC
+                                                                              // it might have called stopSearch
+                                                                              if (! _stopCalled) {
+                                                                                  [self startSearch];
+                                                                              }
                                                                           }];
-//    _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
-//                                                                                 object:nil
-//                                                                                  queue:[NSOperationQueue mainQueue]
-//                                                                             usingBlock:^(NSNotification *note) {
-//                                                                                 LOG( @"entered background" );
-//                                                                                 for (IRPeripheral* p in _self.peripherals.peripherals) {
-//                                                                                     [p disconnect];
-//                                                                                 }
-//                                                                             }];
+    _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
+                                                                                 object:nil
+                                                                                  queue:[NSOperationQueue mainQueue]
+                                                                             usingBlock:^(NSNotification *note) {
+                                                                                 LOG( @"entered background" );
+                                                                                 _stopCalled = false;
+                                                                             }];
     [IRViewCustomizer sharedInstance]; // init
+
+    _stopCalled = false;
+    [self startSearch];
 
     // temp
     [IRWifiEditViewController class];
@@ -72,6 +83,7 @@ static BOOL useCustomizedStyle;
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
+    [[IRSearcher sharedInstance] stop];
     [[NSNotificationCenter defaultCenter] removeObserver:_terminateObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];
@@ -92,100 +104,42 @@ static BOOL useCustomizedStyle;
     return _peripherals.countOfPeripherals;
 }
 
-- (void) startScan {
+// start searching for the first 30 seconds,
+// if no new IRKit device found, stop then
+- (void) startSearch {
     LOG_CURRENT_METHOD;
-    _isScanning = YES;
-
-//    if (_manager.state == CBCentralManagerStatePoweredOn) {
-//        // we want duplicates:
-//        // peripheral updates receivedCount in adv packet when receiving IR data
-//        [_manager scanForPeripheralsWithServices:@[ IRKIT_SERVICE_UUID ]
-//                                         options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES
-//         }];
-//    }
+    [IRSearcher sharedInstance].delegate = self;
+    [[IRSearcher sharedInstance] start];
+    _stopSearchTimer = [NSTimer scheduledTimerWithTimeInterval:30.
+                                                        target:self
+                                                      selector:@selector(stopSearch)
+                                                      userInfo:NULL
+                                                       repeats:NO];
 }
 
-- (void) stopScan {
+- (void) stopSearch {
     LOG_CURRENT_METHOD;
-    _isScanning = NO;
-//    [_manager stopScan];
+    _stopCalled = YES;
+    [_stopSearchTimer invalidate];
+    _stopSearchTimer = nil;
+
+    [[IRSearcher sharedInstance] stop];
 }
 
 #pragma mark - Private
 
-#pragma mark - CBCentralManagerDelegate
+#pragma mark - IRSearcherDelegate
 
-//- (void)centralManager:(CBCentralManager *)central
-// didDiscoverPeripheral:(CBPeripheral *)peripheral
-//     advertisementData:(NSDictionary *)advertisementData
-//                  RSSI:(NSNumber *)RSSI {
-//    LOG( @"peripheral: %@ advertisementData: %@ RSSI: %@", peripheral, advertisementData, RSSI );
-//
-//    [_peripherals addPeripheralsObject:peripheral]; // retain
-//    IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
-//    if (p) {
-//        [p didDiscoverWithAdvertisementData: advertisementData
-//                                       RSSI: RSSI];
-//    }
-//    else {
-//        // we don't know it's UUID, let's connect and figure it out
-//        [_manager connectPeripheral:peripheral
-//                            options:@{
-//            CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
-//         }];
-//    }
-//}
-//
-//- (void)centralManager:(CBCentralManager *)central
-//didFailToConnectPeripheral:(CBPeripheral *)peripheral
-//                 error:(NSError *)error {
-//    LOG(@"peripheral: %@", peripheral);
-//
-//}
-//
-///*
-// Invoked when the central manager retrieves the list of known peripherals.
-// */
-//- (void)centralManager:(CBCentralManager *)central
-//didRetrievePeripherals:(NSArray *)peripherals {
-//    LOG( @"peripherals: %@", peripherals);
-//
-//    for (CBPeripheral *peripheral in peripherals) {
-//        [_peripherals addPeripheralsObject:peripheral]; // retain
-//        IRPeripheral* p = [_peripherals IRPeripheralForPeripheral:peripheral];
-//        [p didRetrieve];
-//    }
-//}
-//
-//- (void)centralManager:(CBCentralManager *)central
-//  didConnectPeripheral:(CBPeripheral *)peripheral {
-//    LOG( @"peripheral: %@, RSSI: %@", peripheral, peripheral.RSSI );
-//
-//    // when a new peripheral is discovered,
-//    // we don't know it's UUID.
-//    // connect without an IRPeripheral
-//    // and get an IRPeripheral here
-//    [_peripherals addPeripheralsObject:peripheral];
-//
-//    IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
-//    [p didConnect];
-//}
-//
-//- (void)centralManager:(CBCentralManager *)central
-//didDisconnectPeripheral:(CBPeripheral *)peripheral
-//                 error:(NSError *)error {
-//    LOG( @"peripheral: %@ error: %@", peripheral, error);
-//
-//    IRPeripheral *p = [_peripherals IRPeripheralForPeripheral:peripheral];
-//    [p didDisconnect];
-//}
-//
-//- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-//    LOG( @"state: %@", NSStringFromCBCentralManagerState([central state]));
-//
-//    if (_isScanning && (central.state == CBCentralManagerStatePoweredOn)) {
-//        [self startScan];
-//    }
-//}
+- (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService*)service {
+    LOG( @"service: %@", service );
+    NSString *shortname = [service.hostName componentsSeparatedByString:@"."][ 0 ];
+    if ( ! [_peripherals isKnownName:shortname]) {
+        IRPeripheral *p = [_peripherals registerPeripheralWithName:shortname];
+        [_peripherals save];
+        [p getKeyWithCompletion:^{
+            [_peripherals save];
+        }];
+    }
+}
 
 @end

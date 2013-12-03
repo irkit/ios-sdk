@@ -12,8 +12,10 @@
 #import "ISHTTPOperation/ISHTTPOperation.h"
 #import "IRConst.h"
 #import "IRHTTPJSONOperation.h"
+#import "Reachability.h"
 
-#define DEFAULT_TIMEOUT 25. // heroku timeout
+#define LONGPOLL_TIMEOUT 25. // heroku timeout
+#define DEFAULT_TIMEOUT 5. // short REST like requests
 
 @implementation IRHTTPClient
 
@@ -21,21 +23,75 @@
     return [NSURL URLWithString:@"http://api.getirkit.com"];
 }
 
-+ (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSArray *keys, NSError *error))completion {
-    [self post:@"/keys"
-    withParams:nil
- targetNetwork:IRHTTPClientNetworkInternet
-    completion:^(NSURLResponse *res, id data, NSError *error) {
-        return completion((NSHTTPURLResponse*)res, data, error);
+// from HTTP response Server header
+// eg: "Server: IRKit/1.3.0.73.ge6e8514"
+// "IRKit" is modelName
+// "1.3.0.73.ge6e8514" is version
++ (NSDictionary*)hostInfoFromResponse: (NSHTTPURLResponse*)res {
+    NSString* server = res.allHeaderFields[ @"Server" ];
+    if (! server) {
+        return nil;
+    }
+    NSArray* tmp = [server componentsSeparatedByString:@"/"];
+    if (tmp.count != 2) {
+        return nil;
+    }
+    return @{ @"modelName": tmp[ 0 ], @"version": tmp[ 1 ] };
+}
+
++ (void)postSignal:(IRSignal *)signal withCompletion:(void (^)(NSError *))completion {
+    NSMutableDictionary *payload = @{}.mutableCopy;
+    payload[ @"freq" ] = [NSNumber numberWithUnsignedInteger:signal.frequency];
+    payload[ @"data" ] = signal.data;
+    if (! signal.peripheral.isInLocalNetwork) {
+        payload[ @"key" ] = signal.peripheral.key;
+    }
+
+    [self postLocal:@"/messages"
+         withParams:payload
+           hostname:signal.hostname
+         completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+
+         }];
+}
+
++ (void)getMessageFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse* res, NSDictionary* message, NSError* error))completion {
+    [self getLocal:@"/messages"
+        withParams:nil
+          hostname:hostname
+     completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+         completion(res, object, error);
+     }];
+}
+
++ (void)getKeyFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse*, NSString*, NSError*))completion {
+    [self postLocal:@"/keys"
+         withParams:nil
+           hostname:hostname
+    completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        return completion(res,
+                          object ? object[ @"key" ] : nil,
+                          error);
     }];
+}
+
++ (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSArray *keys, NSError *error))completion {
+    [self postInternet:@"/keys"
+            withParams:nil
+       timeoutInterval:DEFAULT_TIMEOUT
+            completion:^(NSURLResponse *res, id data, NSError *error) {
+                return completion((NSHTTPURLResponse*)res,
+                                  data ? data[ @"keys" ] : nil,
+                                  error);
+            }];
 }
 
 + (void)waitForDoorWithKey: (NSString*)key
                 completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
-    [self post:@"/door"
-    withParams:@{ @"key": key }
-targetNetwork:IRHTTPClientNetworkInternet
-    completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+    [self postInternet:@"/door"
+            withParams:@{ @"key": key }
+       timeoutInterval:LONGPOLL_TIMEOUT
+            completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG( @"res: %@, object: %@, error: %@", res, object, error );
 
         if (res && res.statusCode) {
@@ -82,19 +138,19 @@ targetNetwork:IRHTTPClientNetworkInternet
 
 #pragma mark - Private
 
-+ (void)post: (NSString*)path
-  withParams: (NSDictionary*) params
-targetNetwork: (enum IRHTTPClientNetwork)network
-  completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
++ (void)postInternet: (NSString*)path
+          withParams: (NSDictionary*) params
+     timeoutInterval: (NSTimeInterval) timeout
+          completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
     LOG_CURRENT_METHOD;
 
     NSURL *url = [NSURL URLWithString:path relativeToURL:[self base]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL             = url;
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
-    request.timeoutInterval = DEFAULT_TIMEOUT;
+    request.timeoutInterval = timeout;
 
-    NSData *data = [self dataOfURLEncodedDictionary:params];
+    NSData *data = [[self stringOfURLEncodedDictionary:params] dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
@@ -109,15 +165,73 @@ targetNetwork: (enum IRHTTPClientNetwork)network
     }];
 }
 
-+ (NSData *)dataOfURLEncodedDictionary: (NSDictionary*)params {
++ (void)getLocal: (NSString*)path
+      withParams: (NSDictionary*) params
+        hostname: (NSString*)hostname
+      completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
+    LOG_CURRENT_METHOD;
+
+    NSString *query = [self stringOfURLEncodedDictionary:params];
+    NSString *urlString;
+    if (query) {
+        urlString = [NSString stringWithFormat:@"http://%@.local/%@?%@", hostname, path, query];
+    }
+    else {
+        urlString = [NSString stringWithFormat:@"http://%@.local/%@", hostname, path];
+    }
+    NSURL *url  = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL             = url;
+    request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
+    request.timeoutInterval = DEFAULT_TIMEOUT;
+    [request setHTTPMethod:@"GET"];
+
+    [IRHTTPJSONOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+        if (! completion) {
+            return;
+        }
+        // ISHTTPOperation calls our handler in main queue
+        completion(response, object, error);
+    }];
+}
+
++ (void)postLocal: (NSString*)path
+       withParams: (NSDictionary*) params
+         hostname: (NSString*)hostname
+       completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
+    LOG_CURRENT_METHOD;
+
+    NSURL *base = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@.local", hostname]];
+    NSURL *url  = [NSURL URLWithString:path relativeToURL:base];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL             = url;
+    request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
+    request.timeoutInterval = DEFAULT_TIMEOUT;
+
+    NSData *data = [[self stringOfURLEncodedDictionary:params] dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:data];
+
+    [IRHTTPJSONOperation sendRequest:request handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+        if (! completion) {
+            return;
+        }
+        // ISHTTPOperation calls our handler in main queue
+        completion(response, object, error);
+    }];
+}
+
++ (NSString*)stringOfURLEncodedDictionary: (NSDictionary*)params {
     if ( ! params ) {
         return nil;
     }
     NSString *body = [[IRHelper mapObjects:params.allKeys
-                               usingBlock:^id(id key, NSUInteger idx) {
-                                   return [NSString stringWithFormat:@"%@=%@", key, [self URLEscapeString:params[key]]];
-                               }] componentsJoinedByString:@"&"];
-    return [body dataUsingEncoding:NSUTF8StringEncoding];
+                                usingBlock:^id(id key, NSUInteger idx) {
+                                    return [NSString stringWithFormat:@"%@=%@", key, [self URLEscapeString:params[key]]];
+                                }] componentsJoinedByString:@"&"];
+    return body;
 }
 
 + (NSString*)URLEscapeString: (NSString*)string {

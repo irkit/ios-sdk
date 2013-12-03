@@ -15,31 +15,6 @@
     return self;
 }
 
-- (id) initWithData: (NSData*) newData {
-    LOG_CURRENT_METHOD;
-    self = [self init];
-    if ( ! self ) { return nil; }
-    
-    // capacity = number of uint16_t in data = data / 2bytes
-    NSMutableArray* data_ = [NSMutableArray arrayWithCapacity:newData.length/2];
-    
-    // uint16_t value is the number of ticks between falling/rising edges of irdata
-    NSUInteger location = 0;
-    while (location < newData.length) {
-        uint16_t interval;
-        [newData getBytes: &interval range: (NSRange){.location=location,
-                                                      .length=2}];
-        location += 2;
-        [data_ addObject: [NSNumber numberWithUnsignedShort:interval]];
-    }
-    _data = data_;
-    
-    LOG( @"data: %@", _data);
-    
-    _receivedDate = [NSDate date];
-    return self;
-}
-
 - (id) initWithDictionary: (NSDictionary*) dictionary {
     LOG_CURRENT_METHOD;
     self = [self init];
@@ -48,9 +23,9 @@
     _name = dictionary[@"name"];
     _data = dictionary[@"data"];
     _frequency = [(NSNumber*)dictionary[@"frequency"] unsignedIntegerValue];
-    // receivedDate arrives as a NSNumber
+    // receivedDate arrives as a NSNumber of epoch time
     _receivedDate = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"receivedDate"] doubleValue]];
-    _peripheralUUID = dictionary[@"uuid"];
+    _hostname = dictionary[@"hostname"];
 
     return self;
 }
@@ -62,7 +37,7 @@
              @"data": _data,
              @"frequency": [NSNumber numberWithUnsignedInteger:_frequency],
              @"receivedDate": [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970],
-             @"uuid": self.peripheralUUID,
+             @"hostname": _hostname,
              };
 }
 
@@ -70,33 +45,11 @@
     return [otherSignal.receivedDate compare: _receivedDate];
 }
 
-- (NSString*) uniqueID {
+- (void)sendWithCompletion: (void (^)(NSError *error))block {
     LOG_CURRENT_METHOD;
-    return [IRHelper sha1: _data];
-}
 
-- (void)sendWithCompletion: (void (^)(NSError* error))block {
-    LOG_CURRENT_METHOD;
-    [self writeIRDataWithCompletion: ^(NSError *error) {
-        if ( error ) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                block(error);
-            });
-            return;
-        }
-//        [self writeControlPointWithCompletion: ^(NSError *error) {
-//            if (error) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    block(error);
-//                });
-//                return;
-//            }
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                block(nil); // send succeeded!
-//            });
-//            return;
-//        }];
-    }];
+    [IRHTTPClient postSignal:self
+              withCompletion:block];
 }
 
 #pragma mark - Accessors
@@ -106,11 +59,11 @@
     if ( _peripheral ) {
         return _peripheral;
     }
-    if ( _peripheralUUID ) {
-        // we can't use [IRKit sharedInstance] inside our initWithCoder
-        // so we temporary save peripheral.UUID in _uuid
+    if ( _hostname ) {
+        // we can't use [IRKit sharedInstance] inside our initWithCoder (circular call)
+        // so we temporary save peripheral.name in _hostname
         // and recover IRPeripheral afterwards (here)
-//        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForUUID:_peripheralUUID];
+        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForName:_hostname];
         return _peripheral;
     }
     return nil;

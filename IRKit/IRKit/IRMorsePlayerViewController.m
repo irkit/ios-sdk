@@ -115,10 +115,14 @@
                                   }
 
                                   NSString *shortname = object[ @"name" ];
-                                  if ( ! [[IRKit sharedInstance].peripherals isKnownName:shortname]) {
-                                      IRPeripheral *p = [[IRKit sharedInstance].peripherals registerPeripheralWithName:shortname];
+                                  IRKit *i = [IRKit sharedInstance];
+                                  if ( ! [i.peripherals isKnownName:shortname]) {
+                                      IRPeripheral *p = [i.peripherals registerPeripheralWithName:shortname];
                                       p.key = _keys.mykey;
-                                      [[IRKit sharedInstance].peripherals save];
+                                      [i.peripherals save];
+                                      [p getModelNameAndVersionWithCompletion:^{
+                                          [i.peripherals save];
+                                      }];
                                   }
                               }];
     }];

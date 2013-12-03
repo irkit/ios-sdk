@@ -18,6 +18,15 @@
 
 @implementation IRSearcher
 
++ (instancetype)sharedInstance {
+    static IRSearcher *queue = nil;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        queue = [[IRSearcher alloc] init];
+    });
+    return queue;
+}
+
 - (instancetype) init {
     self = [super init];
     if (! self) { return nil; }

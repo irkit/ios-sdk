@@ -12,6 +12,8 @@
 @property (nonatomic, copy) NSString *version;
 
 - (BOOL) isReady;
+- (void)getKeyWithCompletion:(void (^)())successfulCompletion;
+- (void)getModelNameAndVersionWithCompletion:(void (^)())successfulCompletion;
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 
 - (NSString*) iconURL;

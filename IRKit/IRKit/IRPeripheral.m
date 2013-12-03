@@ -5,6 +5,7 @@
 #import "IRPeripheralWriteOperationQueue.h"
 #import "IRPeripheralWriteOperation.h"
 #import "IRConst.h"
+#import "IRHTTPClient.h"
 
 // read auth characteristic every 0.5sec
 #define IRPERIPHERAL_AUTH_POLLING_INTERVAL 0.5
@@ -50,50 +51,40 @@
     return _key ? YES : NO;
 }
 
-//- (void)setManager:(CBCentralManager*)manager {
-//    _manager = manager;
-//}
+- (void)getKeyWithCompletion:(void (^)())successfulCompletion {
+    LOG_CURRENT_METHOD;
 
-//- (void)setPeripheral:(CBPeripheral *)peripheral {
-//    _peripheral = peripheral;
-//    _UUID       = _peripheral.UUID;
-//
-//    if ( ! _writeQueue ) {
-//        _writeQueue = [[IRPeripheralWriteOperationQueue alloc] init];
-//    }
-//    [_writeQueue setSuspended: ! self.isReady];
-//}
+    [IRHTTPClient getKeyFromHost:_name withCompletion:^(NSHTTPURLResponse *res, NSString* key, NSError *err) {
+        LOG( @"res: %@, key: %@, err: %@", res, key, err );
+        if (key) {
+            _key = key;
+            NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res];
+            if (hostInfo) {
+                _modelName = hostInfo[ @"modelName" ];
+                _version   = hostInfo[ @"version" ];
+            }
+            successfulCompletion();
+        }
+    }];
+}
+
+- (void)getModelNameAndVersionWithCompletion:(void (^)())successfulCompletion {
+    LOG_CURRENT_METHOD;
+
+    // GET /message only to see Server header
+    [IRHTTPClient getMessageFromHost:_name
+                      withCompletion:^(NSHTTPURLResponse *res, NSDictionary *message, NSError *error) {
+                          NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res];
+                          if (hostInfo) {
+                              _modelName = hostInfo[ @"modelName" ];
+                              _version   = hostInfo[ @"version" ];
+                          }
+                          successfulCompletion();
+                      }];
+}
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
     return [self.foundDate compare: otherPeripheral.foundDate];
-}
-
-- (void)didDiscoverWithAdvertisementData:(NSDictionary *)advertisementData
-                                    RSSI:(NSNumber *)rssi {
-//    LOG( @"peripheral: %@", _peripheral );
-
-    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-
-    // connect when:
-    // * app in foreground
-    // * we're in background and retainConnectionInBackground is YES
-    if ( state == UIApplicationStateActive ) {
-        [self connect];
-    }
-}
-
-- (void) didRetrieve {
-    LOG_CURRENT_METHOD;
-
-    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-
-    if (_wantsToConnect) {
-        _wantsToConnect = NO;
-        [self connect];
-    }
-    else if ( state == UIApplicationStateActive ) {
-        [self connect];
-    }
 }
 
 - (void) didDisconnect {

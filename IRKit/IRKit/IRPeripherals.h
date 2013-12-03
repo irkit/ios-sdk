@@ -8,7 +8,7 @@
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSArray*) knownPeripheralUUIDs;
 //- (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral;
-//- (IRPeripheral*)IRPeripheralForUUID: (NSString*)uuid;
+- (IRPeripheral*)IRPeripheralForName: (NSString*)name;
 - (void) save;
 - (NSUInteger) countOfReadyPeripherals;
 - (BOOL) isKnownName: (NSString*)hostname;

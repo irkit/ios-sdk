@@ -3,7 +3,6 @@
 
 @interface IRSignal : NSObject
 
-- (id)initWithData: (NSData*) newData;
 - (id) initWithDictionary: (NSDictionary*) dictionary;
 - (NSDictionary*)asDictionary;
 - (NSComparisonResult) compareByReceivedDate: (IRSignal*) otherSignal;
@@ -16,6 +15,6 @@
 @property (nonatomic) NSDate *receivedDate;
 @property (nonatomic) IRPeripheral *peripheral;
 
-@property (nonatomic) NSString* peripheralUUID;
+@property (nonatomic, copy) NSString* hostname;
 
 @end

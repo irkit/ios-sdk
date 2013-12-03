@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IRSignal.h"
 
 NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
     IRHTTPClientNetworkLocal    = 0,
@@ -16,8 +17,12 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 @interface IRHTTPClient : NSObject
 
 + (NSURL*)base;
++ (NSDictionary*)hostInfoFromResponse: (NSHTTPURLResponse*)res;
++ (void)postSignal: (IRSignal*)signal withCompletion: (void (^)(NSError *error))completion;
++ (void)getMessageFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *message, NSError *error))completion;
++ (void)getKeyFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSString *key, NSError *error))completion;
 + (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSArray *keys, NSError *error))completion;
-+ (void)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion;
++ (void)waitForDoorWithKey: (NSString*)key completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion;
 + (void)cancelWaitForDoor;
 
 @end
