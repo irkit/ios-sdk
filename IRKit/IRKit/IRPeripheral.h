@@ -11,7 +11,10 @@
 @property (nonatomic, copy) NSString *modelName;
 @property (nonatomic, copy) NSString *version;
 
-- (BOOL) isReady;
+@property (nonatomic) BOOL canResolve;
+
+- (BOOL) hasKey;
+- (BOOL) isReachableViaWifi;
 - (void)getKeyWithCompletion:(void (^)())successfulCompletion;
 - (void)getModelNameAndVersionWithCompletion:(void (^)())successfulCompletion;
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;

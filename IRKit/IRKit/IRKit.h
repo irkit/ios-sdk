@@ -13,7 +13,7 @@
 
 @interface IRKit : NSObject<IRSearcherDelegate>
 
-+ (IRKit*) sharedInstance;
++ (instancetype) sharedInstance;
 
 - (void) startSearch;
 - (void) stopSearch;

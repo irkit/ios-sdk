@@ -21,7 +21,7 @@
 
     [self load];
     [self check];
-    
+
     return self;
 }
 
@@ -31,15 +31,6 @@
     NSArray* keys = [_irperipheralForName keysSortedByValueUsingSelector:@selector(compareByFirstFoundDate:)];
     NSString* key = [keys objectAtIndex: index];
     return _irperipheralForName[key];
-}
-
-// returns NSArray of CFUUIDs
-- (NSArray*) knownPeripheralUUIDs {
-    LOG_CURRENT_METHOD;
-    return [IRHelper mapObjects:[_irperipheralForName allKeys]
-                     usingBlock:(id)^(id obj, NSUInteger idx) {
-                         return (__bridge_transfer id)(CFUUIDCreateFromString(NULL, (CFStringRef)obj));
-                     }];
 }
 
 - (IRPeripheral*)IRPeripheralForName: (NSString*)name {
@@ -62,7 +53,7 @@
 - (NSUInteger) countOfReadyPeripherals {
     LOG_CURRENT_METHOD;
     return [[[_irperipheralForName allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return [(IRPeripheral*)evaluatedObject isReady];
+            return [(IRPeripheral*)evaluatedObject hasKey];
         }]
     ] count];
 }
@@ -76,7 +67,7 @@
     LOG( @"hostname: %@", hostname );
     IRPeripheral *peripheral = [[IRPeripheral alloc] init];
     peripheral.name = hostname;
-    _irperipheralForName[ hostname ] = peripheral;
+    [self addPeripheralsObject:peripheral];
     return peripheral;
 }
 
@@ -93,14 +84,14 @@
         _irperipheralForName = @{}.mutableCopy;
     }
 
-    LOG( @"_irperipheralForUUID: %@", _irperipheralForName );
+    LOG( @"_irperipheralForName: %@", _irperipheralForName );
 }
 
 - (void) check {
     LOG_CURRENT_METHOD;
 
     for (IRPeripheral *p in self.peripherals) {
-        if (! [p isReady]) {
+        if (! [p hasKey]) {
             [p getKeyWithCompletion:^{
                 [self save];
             }];
@@ -128,48 +119,32 @@
     return [_irperipheralForName.allValues sortedArrayUsingSelector:@selector(compareByFirstFoundDate:)].objectEnumerator;
 }
 
-//// -add<Key>Object:
-//- (void)addPeripheralsObject:(CBPeripheral*) peripheral {
-//    LOG( @"peripheral: %@", peripheral );
-//
-//    //    if ( ! peripheral.UUID || ! peripheral.name ) {
-//    if ( ! peripheral.UUID ) {
-//        // just to retain while 1st connect attempt
-//        [_unknownPeripherals addObject:peripheral];
-//        return;
-//    }
-//    // we got it's UUID, so don't need to retain peripheral in _unknownPeripherals anymore, we'll retain it in _irperipheralForUUID
-//    [_unknownPeripherals removeObject:peripheral];
-//
-//    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-//
-//    IRPeripheral *p = _irperipheralForUUID[uuidKey];
-//    if (p) {
-//        // found known but disconnected peripheral
-//        [p setPeripheral: peripheral];
-//        peripheral.delegate = p;
-//    }
-//    else {
-//        p                   = [[IRPeripheral alloc] init];
-//        [p setManager: _manager];
-//        [p setPeripheral: peripheral];
-//        p.customizedName    = peripheral.name; // defaults to original name
-//        peripheral.delegate = p;
-//        _irperipheralForUUID[uuidKey] = p;
-//        [self save];
-//    }
-//}
-//
-//- (void)removePeripheralsObject: (CBPeripheral*) peripheral {
-//    LOG( @"peripheral: %@", peripheral );
-//
-//    if ( ! peripheral.UUID ) {
-//        [_unknownPeripherals removeObject:peripheral];
-//        return;
-//    }
-//    NSString *uuidKey = [IRHelper stringFromCFUUID:peripheral.UUID];
-//    [_irperipheralForUUID removeObjectForKey:uuidKey];
-//}
+- (IRPeripheral*)memberOfPeripherals:(IRPeripheral *)object {
+    for (IRPeripheral *p in self.peripherals) {
+        if ([p.name isEqualToString:object.name]) {
+            return p;
+        }
+    }
+    return nil;
+}
+
+// -add<Key>Object:
+- (void)addPeripheralsObject:(IRPeripheral*) peripheral {
+    LOG( @"peripheral: %@", peripheral );
+
+    if ( ! peripheral.name ) {
+        // can't add a peripheral without a name
+        return;
+    }
+
+    _irperipheralForName[peripheral.name] = peripheral;
+}
+
+- (void)removePeripheralsObject: (IRPeripheral*) peripheral {
+    LOG( @"peripheral: %@", peripheral );
+
+    [_irperipheralForName removeObjectForKey:peripheral.name];
+}
 
 #pragma mark - UITableViewDataSource
 

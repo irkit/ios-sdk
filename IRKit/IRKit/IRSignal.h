@@ -15,6 +15,4 @@
 @property (nonatomic) NSDate *receivedDate;
 @property (nonatomic) IRPeripheral *peripheral;
 
-@property (nonatomic, copy) NSString* hostname;
-
 @end

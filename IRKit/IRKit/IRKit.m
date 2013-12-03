@@ -28,7 +28,7 @@ static BOOL useCustomizedStyle;
 
 @implementation IRKit
 
-+ (id) sharedInstance {
++ (instancetype) sharedInstance {
     static IRKit* instance;
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
@@ -37,7 +37,7 @@ static BOOL useCustomizedStyle;
     return instance;
 }
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (! self) { return nil; }
 
@@ -109,7 +109,7 @@ static BOOL useCustomizedStyle;
 - (void) startSearch {
     LOG_CURRENT_METHOD;
     [IRSearcher sharedInstance].delegate = self;
-    [[IRSearcher sharedInstance] start];
+    [[IRSearcher sharedInstance] startSearching];
     _stopSearchTimer = [NSTimer scheduledTimerWithTimeInterval:30.
                                                         target:self
                                                       selector:@selector(stopSearch)

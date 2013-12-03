@@ -39,7 +39,7 @@
     return self;
 }
 
-- (void) start {
+- (void) startSearching {
     [_browser searchForServicesOfType:@"_irkit._tcp" inDomain:@""];
 }
 

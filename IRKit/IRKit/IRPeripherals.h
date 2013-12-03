@@ -4,10 +4,7 @@
 
 @interface IRPeripherals : NSObject<UITableViewDelegate,UITableViewDataSource>
 
-//- (id)initWithManager: (CBCentralManager*) manager;
 - (id)objectAtIndex:(NSUInteger)index;
-- (NSArray*) knownPeripheralUUIDs;
-//- (IRPeripheral*)IRPeripheralForPeripheral: (CBPeripheral*)peripheral;
 - (IRPeripheral*)IRPeripheralForName: (NSString*)name;
 - (void) save;
 - (NSUInteger) countOfReadyPeripherals;
@@ -19,8 +16,8 @@
 - (NSArray*) peripherals;
 - (NSUInteger) countOfPeripherals;
 - (NSEnumerator *)enumeratorOfPeripherals;
-//- (CBPeripheral*)memberOfPeripherals:(CBPeripheral *)object;
-//- (void)addPeripheralsObject:(CBPeripheral*) peripheral;
-//- (void)removePeripheralsObject: (CBPeripheral*) peripheral;
+- (void)addPeripheralsObject:(IRPeripheral*) peripheral;
+- (void)removePeripheralsObject: (IRPeripheral*) peripheral;
+- (IRPeripheral*)memberOfPeripherals:(IRPeripheral *)object;
 
 @end

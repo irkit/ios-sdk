@@ -39,20 +39,43 @@
     return @{ @"modelName": tmp[ 0 ], @"version": tmp[ 1 ] };
 }
 
++ (NSError*)errorFromResponse: (NSHTTPURLResponse*)res {
+    // error object nil but error
+    NSInteger code = (res && res.statusCode) ? res.statusCode
+                                             : IRKitHTTPStatusCodeUnknown;
+    return [NSError errorWithDomain:IRKitErrorDomainHTTP
+                               code:code
+                           userInfo:nil];
+}
+
 + (void)postSignal:(IRSignal *)signal withCompletion:(void (^)(NSError *))completion {
     NSMutableDictionary *payload = @{}.mutableCopy;
     payload[ @"freq" ] = [NSNumber numberWithUnsignedInteger:signal.frequency];
     payload[ @"data" ] = signal.data;
-    if (! signal.peripheral.isInLocalNetwork) {
-        payload[ @"key" ] = signal.peripheral.key;
+
+    if (signal.peripheral.isReachableViaWifi) {
+        [self postLocal:@"/messages"
+             withParams:payload
+               hostname:signal.peripheral.name
+             completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+                 if (res && res.statusCode == 200) {
+                     return completion( nil );
+                 }
+                 return completion( [self errorFromResponse:res] );
+             }];
     }
-
-    [self postLocal:@"/messages"
-         withParams:payload
-           hostname:signal.hostname
-         completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-
-         }];
+    else {
+        payload[ @"key" ] = signal.peripheral.key;
+        [self postInternet:@"/messages"
+                withParams:payload
+           timeoutInterval:DEFAULT_TIMEOUT
+                completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+                    if (res && res.statusCode == 200) {
+                        return completion( nil );
+                    }
+                    return completion( [self errorFromResponse:res] );
+                }];
+    }
 }
 
 + (void)getMessageFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse* res, NSDictionary* message, NSError* error))completion {
@@ -121,12 +144,7 @@
             return;
         }
         // error object nil but error
-        NSInteger code = (res && res.statusCode) ? res.statusCode
-                                                 : IRKitHTTPStatusCodeUnknown;
-        NSError* retError = [NSError errorWithDomain:IRKitErrorDomainHTTP
-                                                code:code
-                                            userInfo:nil];
-        completion(res, object, retError);
+        completion(res, object, [self errorFromResponse:res]);
     }];
 }
 

@@ -15,7 +15,7 @@
 @property (nonatomic, weak) id<IRSearcherDelegate> delegate;
 
 + (instancetype) sharedInstance;
-- (void) start;
+- (void) startSearching;
 - (void) stop;
 
 @end

@@ -24,7 +24,7 @@
     self.isExecuting = YES;
     self.isFinished  = NO;
 
-    if ( ! _peripheral.isReady ) {
+    if ( ! _peripheral.hasKey ) {
         // should be connected when started
         dispatch_async( dispatch_get_main_queue(),
                        ^{

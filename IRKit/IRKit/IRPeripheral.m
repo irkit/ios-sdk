@@ -6,6 +6,7 @@
 #import "IRPeripheralWriteOperation.h"
 #import "IRConst.h"
 #import "IRHTTPClient.h"
+#import "Reachability.h"
 
 // read auth characteristic every 0.5sec
 #define IRPERIPHERAL_AUTH_POLLING_INTERVAL 0.5
@@ -16,6 +17,7 @@
 @property (nonatomic) BOOL shouldReadIRData;
 @property (nonatomic) BOOL shouldRefreshDeviceInformation;
 @property (nonatomic) BOOL wantsToConnect;
+@property (nonatomic) Reachability* reachability;
 
 @end
 
@@ -40,6 +42,9 @@
     // "1.3.0.73.ge6e8514" is version
     _modelName        = nil;
     _version          = nil;
+
+    _canResolve       = false;
+
     return self;
 }
 
@@ -47,8 +52,19 @@
     LOG_CURRENT_METHOD;
 }
 
-- (BOOL)isReady {
+- (BOOL)hasKey {
     return _key ? YES : NO;
+}
+
+- (void)setName:(NSString *)name {
+    LOG_CURRENT_METHOD;
+    _name = name;
+
+    [self startReachability];
+}
+
+- (BOOL)isReachableViaWifi {
+    return _reachability.isReachableViaWiFi;
 }
 
 - (void)getKeyWithCompletion:(void (^)())successfulCompletion {
@@ -179,10 +195,23 @@
 
 #pragma mark - Private methods
 
+- (void) startReachability {
+    LOG_CURRENT_METHOD;
+
+    if (_name) {
+        if (_reachability) {
+            [_reachability stopNotifier];
+        }
+        _reachability = [Reachability reachabilityWithHostname:_name];
+        // we start notifying but don't observe on notifications
+        [_reachability startNotifier];
+    }
+}
+
 - (void) didBecomeReady {
     LOG_CURRENT_METHOD;
 
-    [_writeQueue setSuspended: ! self.isReady];
+    [_writeQueue setSuspended: ! self.hasKey];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:IRKitDidConnectPeripheralNotification
@@ -231,22 +260,6 @@
 //    }
 }
 
-- (void)connect {
-    LOG_CURRENT_METHOD;
-
-//    if (! _peripheral) {
-//        _wantsToConnect = YES;
-//        [_manager retrievePeripherals:@[ (__bridge_transfer id)_UUID ]];
-//        return;
-//    }
-//    if (_peripheral.isConnected) {
-//        return;
-//    }
-//    [_manager connectPeripheral:_peripheral
-//                        options:@{
-//        CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES
-//     }];
-}
 
 // should call only in main thread
 // because performSelector:withObject:afterDelay: is called in main thread
@@ -412,16 +425,20 @@
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
+    LOG_CURRENT_METHOD;
     self = [self init];
     if (! self) {
         return nil;
     }
-    _name   = [coder decodeObjectForKey:@"name"];
+    _name             = [coder decodeObjectForKey:@"name"];
     _customizedName   = [coder decodeObjectForKey:@"customizedName"];
     _foundDate        = [coder decodeObjectForKey:@"foundDate"];
     _key              = [coder decodeObjectForKey:@"key"];
     _modelName        = [coder decodeObjectForKey:@"modelName"];
     _version          = [coder decodeObjectForKey:@"version"];
+
+    [self startReachability];
+
     return self;
 }
 

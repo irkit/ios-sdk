@@ -2,8 +2,12 @@
 #import "IRSignal.h"
 #import "IRHelper.h"
 #import "IRKit.h"
+#import "IRHTTPClient.h"
 
 @interface IRSignal ()
+
+@property (nonatomic, copy) NSString* hostname;
+
 @end
 
 @implementation IRSignal
@@ -45,11 +49,11 @@
     return [otherSignal.receivedDate compare: _receivedDate];
 }
 
-- (void)sendWithCompletion: (void (^)(NSError *error))block {
+- (void)sendWithCompletion: (void (^)(NSError *error))completion {
     LOG_CURRENT_METHOD;
 
     [IRHTTPClient postSignal:self
-              withCompletion:block];
+              withCompletion:completion];
 }
 
 #pragma mark - Accessors
@@ -71,33 +75,6 @@
 
 #pragma mark - Private methods
 
-- (void)writeIRDataWithCompletion: (void (^)(NSError *error))block {
-    LOG_CURRENT_METHOD;
-
-//    [self.peripheral writeValueInBackground:[self packedSignalAsNSData]
-//                  forCharacteristicWithUUID:IRKIT_CHARACTERISTIC_IR_DATA_UUID
-//                          ofServiceWithUUID:IRKIT_SERVICE_UUID
-//                                 completion:^(NSError *error) {
-//                                     block(error);
-//                                 }];
-}
-
-//- (NSData*) signalAsNSData {
-//    LOG_CURRENT_METHOD;
-//    if ( ! _data.count ) {
-//        return nil;
-//    }
-//    // uint16_t value for each NSArray entry
-//    // signal data is always Little-Endian
-//    NSMutableData *ret = [NSMutableData dataWithCapacity: _data.count * 2];
-//    [_data enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
-//        uint16_t interval = [obj shortValue];
-//        [ret appendData: [NSData dataWithBytes:&interval
-//                                        length:2]];
-//    }];
-//    LOG( @" ret: %@", ret);
-//    return ret;
-//}
 
 #pragma mark - NSKeyedArchiving
 
@@ -109,8 +86,7 @@
     [coder encodeObject:[NSNumber numberWithUnsignedInteger:_frequency]
                  forKey:@"f"];
     [coder encodeObject:_receivedDate forKey:@"r"];
-    [coder encodeObject:self.peripheralUUID
-                 forKey:@"u"];
+    [coder encodeObject:_hostname     forKey:@"h"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
@@ -121,7 +97,7 @@
         _data         = [coder decodeObjectForKey:@"d"];
         _frequency    = [(NSNumber*)[coder decodeObjectForKey:@"f"] unsignedIntegerValue];
         _receivedDate = [coder decodeObjectForKey:@"r"];
-        _peripheralUUID = [coder decodeObjectForKey:@"u"];
+        _hostname     = [coder decodeObjectForKey:@"h"];
         
         if ( ! _name ) {
             _name = @"unknown";
