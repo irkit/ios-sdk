@@ -181,6 +181,12 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             }
             // TODO sleep exponentially if unexpected error?
         }
+        if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
+            // timeout -> retry
+            LOG( @"retrying" );
+            // return NO;
+            return YES; // for debug only, we should ignore this (it might happen too often...)
+        }
         if (! error) {
             // custom error
             error = [self errorFromResponse:res];
@@ -319,7 +325,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL             = url;
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
-    request.timeoutInterval = DEFAULT_TIMEOUT;
+    request.timeoutInterval = LONGPOLL_TIMEOUT;
     [request setHTTPMethod:@"GET"];
     return request;
 }

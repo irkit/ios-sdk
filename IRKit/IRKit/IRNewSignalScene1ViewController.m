@@ -22,6 +22,10 @@
     return self;
 }
 
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+}
+
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
@@ -58,6 +62,8 @@
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+
+    [[IRKit sharedInstance].peripherals stopWaitingForSignal];
 }
 
 - (void) didReceiveSignal: (IRSignal*)signal {

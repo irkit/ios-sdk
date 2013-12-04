@@ -12,6 +12,7 @@
 - (BOOL) isKnownName: (NSString*)hostname;
 - (IRPeripheral*)registerPeripheralWithName: (NSString*)hostname;
 - (void)waitForSignalWithCompletion:(void (^)(IRSignal *signal, NSError *error))completion;
+- (void)stopWaitingForSignal;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 
