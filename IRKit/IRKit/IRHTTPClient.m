@@ -15,7 +15,7 @@
 #import "Reachability.h"
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
-#define DEFAULT_TIMEOUT                5. // short REST like requests
+#define DEFAULT_TIMEOUT               10. // short REST like requests
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
 
 @interface IRHTTPClient ()
@@ -41,6 +41,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 #pragma mark - Private
 
 - (void)startPollingRequest {
+    LOG_CURRENT_METHOD;
     [IRHTTPJSONOperation sendRequest:self.longPollRequest
                             handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
                                 if (! self.longPollRequest) {
@@ -156,6 +157,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 + (IRHTTPClient*)waitForSignalFromHost: (NSString*)hostname
                         withCompletion: (void (^)(NSHTTPURLResponse* res, id object, NSError* error))completion {
+    LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makeGETLocalRequestToPath:@"/messages"
                                              withParams:nil
                                                hostname:hostname];
@@ -192,6 +194,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 + (IRHTTPClient*)waitForDoorWithKey: (NSString*)key
                          completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
+    LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makePOSTInternetRequestToPath:@"/door"
                                                  withParams:@{ @"key": key }
                                             timeoutInterval:LONGPOLL_TIMEOUT];

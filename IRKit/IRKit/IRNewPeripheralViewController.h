@@ -4,6 +4,7 @@
 #import "IRWifiEditViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRMorsePlayerViewController.h"
+#import "IRSearcher.h"
 
 // pre definition for delegate
 @protocol IRNewPeripheralViewControllerDelegate;
@@ -12,7 +13,9 @@
 IRNewPeripheralScene1ViewControllerDelegate,
 IRWifiEditViewControllerDelegate,
 IRMorsePlayerViewControllerDelegate,
-IRPeripheralNameEditViewControllerDelegate>
+IRPeripheralNameEditViewControllerDelegate,
+IRSearcherDelegate,
+UIAlertViewDelegate>
 
 @property (nonatomic, weak) id<IRNewPeripheralViewControllerDelegate> delegate;
 
