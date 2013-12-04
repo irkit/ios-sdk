@@ -9,8 +9,6 @@
 
 @interface IRNewSignalScene1ViewController ()
 
-@property (nonatomic) id observer;
-
 @end
 
 @implementation IRNewSignalScene1ViewController
@@ -22,6 +20,10 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
 }
 
 - (void)viewDidLoad {
@@ -41,10 +43,15 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
-    // TODO
-//    [[IRKit sharedInstance].peripherals waitForSignalWithCompletion:^(IRSignal *signal) {
-//        [self didReceiveSignal:signal];
-//    }];
+    [[IRKit sharedInstance].peripherals waitForSignalWithCompletion:^(IRSignal *signal, NSError *error) {
+        if (signal) {
+            [self didReceiveSignal:signal];
+        }
+        else {
+            // TODO alert error
+            [self cancelButtonPressed:nil];
+        }
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -56,19 +63,14 @@
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 
-    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
+    [[IRKit sharedInstance].peripherals stopWaitingForSignal];
 }
 
 - (void) didReceiveSignal: (IRSignal*)signal {
     LOG_CURRENT_METHOD;
 
-    [[NSNotificationCenter defaultCenter] removeObserver:_observer];
-
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
     IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName:@"IRSignalNameEditViewController"
-                                                                                           bundle:resources];
+                                                                                         bundle:[IRHelper resources]];
     c.delegate = (id<IRSignalNameEditViewControllerDelegate>)self.delegate;
     c.signal   = signal;
     [self.navigationController pushViewController:c

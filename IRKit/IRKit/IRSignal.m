@@ -15,7 +15,7 @@
 - (id)init {
     self = [super init];
     if ( ! self ) { return nil; }
-    _frequency = 38; // default
+    _frequency = @38; // default
     return self;
 }
 
@@ -24,12 +24,33 @@
     self = [self init];
     if ( ! self ) { return nil; }
 
-    _name = dictionary[@"name"];
-    _data = dictionary[@"data"];
-    _frequency = [(NSNumber*)dictionary[@"frequency"] unsignedIntegerValue];
+    _name   = dictionary[@"name"];
+    _data   = dictionary[@"data"];
+    _format = dictionary[@"format"];
+
+    // either name is fine
+    _frequency = dictionary[@"freq"];
+    if (! _frequency) {
+        _frequency = dictionary[@"frequency"];
+    }
+
     // receivedDate arrives as a NSNumber of epoch time
     _receivedDate = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"receivedDate"] doubleValue]];
+
     _hostname = dictionary[@"hostname"];
+
+    return self;
+}
+
+- (id) initWithDictionary: (NSDictionary*) dictionary fromHostname:(NSString*)hostname {
+    LOG_CURRENT_METHOD;
+    self = [self initWithDictionary:dictionary];
+    if ( ! self ) { return nil; }
+
+    if ( ! _receivedDate ) {
+        _receivedDate = [NSDate date];
+    }
+    _hostname = hostname;
 
     return self;
 }
@@ -37,11 +58,12 @@
 - (NSDictionary*)asDictionary {
     LOG_CURRENT_METHOD;
     return @{
-             @"name": _name,
-             @"data": _data,
-             @"frequency": [NSNumber numberWithUnsignedInteger:_frequency],
+             @"name":         _name,
+             @"data":         _data,
+             @"format":       _format,
+             @"frequency":    _frequency,
              @"receivedDate": [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970],
-             @"hostname": _hostname,
+             @"hostname":     _hostname,
              };
 }
 
@@ -83,8 +105,8 @@
 
     [coder encodeObject:_name         forKey:@"n"];
     [coder encodeObject:_data         forKey:@"d"];
-    [coder encodeObject:[NSNumber numberWithUnsignedInteger:_frequency]
-                 forKey:@"f"];
+    [coder encodeObject:_format       forKey:@"fo"];
+    [coder encodeObject:_frequency    forKey:@"f"];
     [coder encodeObject:_receivedDate forKey:@"r"];
     [coder encodeObject:_hostname     forKey:@"h"];
 }
@@ -95,7 +117,8 @@
     if (self) {
         _name         = [coder decodeObjectForKey:@"n"];
         _data         = [coder decodeObjectForKey:@"d"];
-        _frequency    = [(NSNumber*)[coder decodeObjectForKey:@"f"] unsignedIntegerValue];
+        _format       = [coder decodeObjectForKey:@"fo"];
+        _frequency    = [coder decodeObjectForKey:@"f"];
         _receivedDate = [coder decodeObjectForKey:@"r"];
         _hostname     = [coder decodeObjectForKey:@"h"];
         

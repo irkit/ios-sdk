@@ -94,8 +94,8 @@
 - (void)stopPlaying {
     LOG_CURRENT_METHOD;
 
+    [_doorWaiter cancel];
     [IRHTTPClient cancelWaitForDoor];
-    _doorWaiter = nil;
 
     [_player removeObserver:self
                  forKeyPath:@"operationCount"];
@@ -158,11 +158,11 @@
                                           return;
                                       }
 
-                                      NSString *shortname = object[ @"name" ];
+                                      NSString *name = object[ @"name" ];
                                       IRKit *i = [IRKit sharedInstance];
-                                      IRPeripheral *p = [i.peripherals IRPeripheralForName:shortname];
+                                      IRPeripheral *p = [i.peripherals IRPeripheralForName:name];
                                       if ( ! p ) {
-                                          p = [i.peripherals registerPeripheralWithName:shortname];
+                                          p = [i.peripherals registerPeripheralWithName:name];
                                           p.key = _keys.mykey;
                                           [i.peripherals save];
                                           [p getModelNameAndVersionWithCompletion:^{

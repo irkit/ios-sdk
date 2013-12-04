@@ -14,12 +14,14 @@
 #import "IRHTTPJSONOperation.h"
 #import "Reachability.h"
 
-#define LONGPOLL_TIMEOUT 25. // heroku timeout
-#define DEFAULT_TIMEOUT 5. // short REST like requests
+#define LONGPOLL_TIMEOUT              25. // heroku timeout
+#define DEFAULT_TIMEOUT               10. // short REST like requests
+#define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
 
 @interface IRHTTPClient ()
 
 @property (nonatomic) NSURLRequest *longPollRequest;
+@property (nonatomic) NSTimeInterval longPollInterval;
 
 typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *error);
 @property (nonatomic, copy) ResponseHandlerBlock longPollDidFinish;
@@ -32,13 +34,32 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     LOG_CURRENT_METHOD;
 }
 
-- (IRHTTPClient*)startPollingRequest {
+- (void)cancel {
+    self.longPollRequest = nil;
+}
+
+#pragma mark - Private
+
+- (void)startPollingRequest {
+    LOG_CURRENT_METHOD;
     [IRHTTPJSONOperation sendRequest:self.longPollRequest
                             handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+                                if (! self.longPollRequest) {
+                                    // cancelled
+                                    return;
+                                }
                                 if (self.longPollDidFinish(response, object, error)) {
                                     return;
                                 }
-                                [self startPollingRequest];
+                                if (self.longPollInterval > 0) {
+                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, self.longPollInterval * NSEC_PER_SEC),
+                                                   dispatch_get_current_queue(), ^{
+                                                       [self startPollingRequest];
+                                                   });
+                                }
+                                else {
+                                    [self startPollingRequest];
+                                }
                             }];
 }
 
@@ -75,7 +96,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 + (void)postSignal:(IRSignal *)signal withCompletion:(void (^)(NSError *))completion {
     NSMutableDictionary *payload = @{}.mutableCopy;
-    payload[ @"freq" ] = [NSNumber numberWithUnsignedInteger:signal.frequency];
+    payload[ @"freq" ] = signal.frequency;
     payload[ @"data" ] = signal.data;
 
     if (signal.peripheral.isReachableViaWifi) {
@@ -134,8 +155,52 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             }];
 }
 
++ (IRHTTPClient*)waitForSignalFromHost: (NSString*)hostname
+                        withCompletion: (void (^)(NSHTTPURLResponse* res, id object, NSError* error))completion {
+    LOG_CURRENT_METHOD;
+    NSURLRequest *req = [self makeGETLocalRequestToPath:@"/messages"
+                                             withParams:nil
+                                               hostname:hostname];
+    IRHTTPClient *client = [[IRHTTPClient alloc] init];
+    client.longPollRequest = req;
+    client.longPollInterval = GETMESSAGES_LONGPOLL_INTERVAL;
+    client.longPollDidFinish = (ResponseHandlerBlock)^(NSHTTPURLResponse *res, id object, NSError *error) {
+        LOG( @"res: %@, object: %@, error: %@", res, object, error );
+
+        if (res && res.statusCode) {
+            switch (res.statusCode) {
+                case 200:
+                    if (object) {
+                        completion(res, object, nil);
+                        return YES;
+                    }
+                    // else, retry
+                    return NO;
+                default:
+                    break;
+            }
+            // TODO sleep exponentially if unexpected error?
+        }
+        if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
+            // timeout -> retry
+            LOG( @"retrying" );
+            // return NO;
+            return YES; // for debug only, we should ignore this (it might happen too often...)
+        }
+        if (! error) {
+            // custom error
+            error = [self errorFromResponse:res];
+        }
+        completion(res, object, error);
+        return YES; // stop if unexpected error
+    };
+    [client startPollingRequest];
+    return client;
+}
+
 + (IRHTTPClient*)waitForDoorWithKey: (NSString*)key
                          completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
+    LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makePOSTInternetRequestToPath:@"/door"
                                                  withParams:@{ @"key": key }
                                             timeoutInterval:LONGPOLL_TIMEOUT];
@@ -174,6 +239,12 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     };
     [client startPollingRequest];
     return client;
+}
+
++ (void)cancelWaitForSignal {
+    LOG_CURRENT_METHOD;
+
+    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/messages"];
 }
 
 + (void)cancelWaitForDoor {
@@ -245,16 +316,16 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     NSString *query = [self stringOfURLEncodedDictionary:params];
     NSString *urlString;
     if (query) {
-        urlString = [NSString stringWithFormat:@"http://%@.local/%@?%@", hostname, path, query];
+        urlString = [NSString stringWithFormat:@"http://%@.local%@?%@", hostname, path, query];
     }
     else {
-        urlString = [NSString stringWithFormat:@"http://%@.local/%@", hostname, path];
+        urlString = [NSString stringWithFormat:@"http://%@.local%@", hostname, path];
     }
     NSURL *url  = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL             = url;
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
-    request.timeoutInterval = DEFAULT_TIMEOUT;
+    request.timeoutInterval = LONGPOLL_TIMEOUT;
     [request setHTTPMethod:@"GET"];
     return request;
 }

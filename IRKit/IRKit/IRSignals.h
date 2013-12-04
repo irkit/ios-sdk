@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 
 @interface IRSignals : NSObject
 
-@property (nonatomic, assign) id<IRAnimatingControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRAnimatingControllerDelegate> delegate;
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSData*)data;
 - (void)loadFromData: (NSData*)data;

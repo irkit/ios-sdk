@@ -5,7 +5,7 @@
 
 @interface IRNewSignalScene1ViewController : UIViewController
 
-@property (nonatomic, assign) id<IRNewSignalScene1ViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRNewSignalScene1ViewControllerDelegate> delegate;
 
 @end
 
