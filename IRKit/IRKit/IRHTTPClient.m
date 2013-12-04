@@ -95,7 +95,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 + (void)postSignal:(IRSignal *)signal withCompletion:(void (^)(NSError *))completion {
     NSMutableDictionary *payload = @{}.mutableCopy;
-    payload[ @"freq" ] = [NSNumber numberWithUnsignedInteger:signal.frequency];
+    payload[ @"freq" ] = signal.frequency;
     payload[ @"data" ] = signal.data;
 
     if (signal.peripheral.isReachableViaWifi) {

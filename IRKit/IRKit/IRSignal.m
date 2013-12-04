@@ -15,7 +15,7 @@
 - (id)init {
     self = [super init];
     if ( ! self ) { return nil; }
-    _frequency = 38; // default
+    _frequency = @38; // default
     return self;
 }
 
@@ -29,9 +29,9 @@
     _format = dictionary[@"format"];
 
     // either name is fine
-    _frequency = [(NSNumber*)dictionary[@"freq"] unsignedIntegerValue];
+    _frequency = dictionary[@"freq"];
     if (! _frequency) {
-        [(NSNumber*)dictionary[@"frequency"] unsignedIntegerValue];
+        _frequency = dictionary[@"frequency"];
     }
 
     // receivedDate arrives as a NSNumber of epoch time
@@ -61,7 +61,7 @@
              @"name":         _name,
              @"data":         _data,
              @"format":       _format,
-             @"frequency":    [NSNumber numberWithUnsignedInteger:_frequency],
+             @"frequency":    _frequency,
              @"receivedDate": [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970],
              @"hostname":     _hostname,
              };
@@ -106,8 +106,7 @@
     [coder encodeObject:_name         forKey:@"n"];
     [coder encodeObject:_data         forKey:@"d"];
     [coder encodeObject:_format       forKey:@"fo"];
-    [coder encodeObject:[NSNumber numberWithUnsignedInteger:_frequency]
-                 forKey:@"f"];
+    [coder encodeObject:_frequency    forKey:@"f"];
     [coder encodeObject:_receivedDate forKey:@"r"];
     [coder encodeObject:_hostname     forKey:@"h"];
 }
@@ -119,7 +118,7 @@
         _name         = [coder decodeObjectForKey:@"n"];
         _data         = [coder decodeObjectForKey:@"d"];
         _format       = [coder decodeObjectForKey:@"fo"];
-        _frequency    = [(NSNumber*)[coder decodeObjectForKey:@"f"] unsignedIntegerValue];
+        _frequency    = [coder decodeObjectForKey:@"f"];
         _receivedDate = [coder decodeObjectForKey:@"r"];
         _hostname     = [coder decodeObjectForKey:@"h"];
         
