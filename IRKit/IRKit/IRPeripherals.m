@@ -10,6 +10,7 @@
 
 // NSNetService.hostName => IRPeripheral
 @property (nonatomic) NSMutableDictionary* irperipheralForName;
+@property (nonatomic) NSArray* signalWaitingClients;
 
 @end
 
@@ -66,14 +67,43 @@
 - (IRPeripheral*)registerPeripheralWithName: (NSString*)hostname {
     LOG( @"hostname: %@", hostname );
     IRPeripheral *peripheral = [[IRPeripheral alloc] init];
-    peripheral.name = hostname;
+    peripheral.name           = hostname;
+    peripheral.customizedName = hostname;
     [self addPeripheralsObject:peripheral];
     return peripheral;
 }
 
-- (void)waitForSignalWithCompletion:(void (^)(IRSignal*))completion {
+- (void)waitForSignalWithCompletion:(void (^)(IRSignal *signal, NSError *error))completion {
     LOG_CURRENT_METHOD;
-    
+
+    NSMutableArray *clients = @[].mutableCopy;
+    for (IRPeripheral *p in self.peripherals) {
+        IRHTTPClient *client = [IRHTTPClient waitForSignalFromHost:p.name withCompletion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+            [self stopWaitingForSignal];
+            if (error) {
+                // TODO alert
+                completion(nil, error);
+                return;
+            }
+            if (object) {
+                IRSignal *signal = [[IRSignal alloc] initWithDictionary:object];
+                completion(signal, nil);
+                return;
+            }
+            ASSERT(0, @"should always return error or signal");
+        }];
+        [clients addObject:client];
+    }
+    _signalWaitingClients = clients;
+}
+
+- (void)stopWaitingForSignal {
+    LOG_CURRENT_METHOD;
+
+    for (IRHTTPClient *client in _signalWaitingClients) {
+        [client cancel];
+    }
+    [IRHTTPClient cancelWaitForSignal];
 }
 
 #pragma mark - Private methods

@@ -41,10 +41,9 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
-    // TODO
-//    [[IRKit sharedInstance].peripherals waitForSignalWithCompletion:^(IRSignal *signal) {
-//        [self didReceiveSignal:signal];
-//    }];
+    [[IRKit sharedInstance].peripherals waitForSignalWithCompletion:^(IRSignal *signal, NSError *error) {
+        [self didReceiveSignal:signal];
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated {

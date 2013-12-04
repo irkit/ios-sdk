@@ -132,9 +132,9 @@ static BOOL useCustomizedStyle;
 
 - (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService*)service {
     LOG( @"service: %@", service );
-    NSString *shortname = [service.hostName componentsSeparatedByString:@"."][ 0 ];
-    if ( ! [_peripherals isKnownName:shortname]) {
-        IRPeripheral *p = [_peripherals registerPeripheralWithName:shortname];
+    NSString *name = [service.hostName componentsSeparatedByString:@"."][ 0 ];
+    if ( ! [_peripherals isKnownName:name]) {
+        IRPeripheral *p = [_peripherals registerPeripheralWithName:name];
         [_peripherals save];
         [p getKeyWithCompletion:^{
             [_peripherals save];

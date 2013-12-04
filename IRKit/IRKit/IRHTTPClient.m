@@ -14,12 +14,14 @@
 #import "IRHTTPJSONOperation.h"
 #import "Reachability.h"
 
-#define LONGPOLL_TIMEOUT 25. // heroku timeout
-#define DEFAULT_TIMEOUT 5. // short REST like requests
+#define LONGPOLL_TIMEOUT              25. // heroku timeout
+#define DEFAULT_TIMEOUT                5. // short REST like requests
+#define GETMESSAGES_LONGPOLL_INTERVAL  0.3 // don't ab agains IRKit
 
 @interface IRHTTPClient ()
 
 @property (nonatomic) NSURLRequest *longPollRequest;
+@property (nonatomic) NSTimeInterval longPollInterval;
 
 typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *error);
 @property (nonatomic, copy) ResponseHandlerBlock longPollDidFinish;
@@ -32,13 +34,31 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     LOG_CURRENT_METHOD;
 }
 
+- (void)cancel {
+    self.longPollRequest = nil;
+}
+
+#pragma mark - Private
+
 - (IRHTTPClient*)startPollingRequest {
     [IRHTTPJSONOperation sendRequest:self.longPollRequest
                             handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+                                if (! self.longPollRequest) {
+                                    // cancelled
+                                    return;
+                                }
                                 if (self.longPollDidFinish(response, object, error)) {
                                     return;
                                 }
-                                [self startPollingRequest];
+                                if (self.longPollInterval > 0) {
+                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, self.longPollInterval * NSEC_PER_SEC),
+                                                   dispatch_get_current_queue(), ^{
+                                                       [self startPollingRequest];
+                                                   });
+                                }
+                                else {
+                                    [self startPollingRequest];
+                                }
                             }];
 }
 
@@ -134,6 +154,42 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             }];
 }
 
++ (IRHTTPClient*)waitForSignalFromHost: (NSString*)hostname
+                        withCompletion: (void (^)(NSHTTPURLResponse* res, id object, NSError* error))completion {
+    NSURLRequest *req = [self makeGETLocalRequestToPath:@"/messages"
+                                             withParams:nil
+                                               hostname:hostname];
+    IRHTTPClient *client = [[IRHTTPClient alloc] init];
+    client.longPollRequest = req;
+    client.longPollInterval = GETMESSAGES_LONGPOLL_INTERVAL;
+    client.longPollDidFinish = (ResponseHandlerBlock)^(NSHTTPURLResponse *res, id object, NSError *error) {
+        LOG( @"res: %@, object: %@, error: %@", res, object, error );
+
+        if (error) {
+            completion(res, object, error);
+            return YES; // stop if unexpected error
+        }
+        if (res && res.statusCode) {
+            switch (res.statusCode) {
+                case 200:
+                    if (object) {
+                        completion(res, object, nil);
+                        return YES;
+                    }
+                    // else, retry
+                    break;
+                default:
+                    break;
+            }
+            // TODO sleep exponentially if unexpected error?
+        }
+        // retry
+        return NO;
+    };
+    [client startPollingRequest];
+    return client;
+}
+
 + (IRHTTPClient*)waitForDoorWithKey: (NSString*)key
                          completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
     NSURLRequest *req = [self makePOSTInternetRequestToPath:@"/door"
@@ -174,6 +230,12 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     };
     [client startPollingRequest];
     return client;
+}
+
++ (void)cancelWaitForSignal {
+    LOG_CURRENT_METHOD;
+
+    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/messages"];
 }
 
 + (void)cancelWaitForDoor {

@@ -33,7 +33,7 @@
     }
     _peripheral = peripheral;
     
-    self.nameLabel.text = peripheral.customizedName;
+    self.nameLabel.text   = peripheral.customizedName;
     self.detailLabel.text = peripheral.modelNameAndRevision;
 
     // load image from internet

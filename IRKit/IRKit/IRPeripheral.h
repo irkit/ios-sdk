@@ -11,12 +11,11 @@
 @property (nonatomic, copy) NSString *modelName;
 @property (nonatomic, copy) NSString *version;
 
-@property (nonatomic) BOOL canResolve;
-
 - (BOOL) hasKey;
+- (void) setName:(NSString *)name;
 - (BOOL) isReachableViaWifi;
-- (void)getKeyWithCompletion:(void (^)())successfulCompletion;
-- (void)getModelNameAndVersionWithCompletion:(void (^)())successfulCompletion;
+- (void) getKeyWithCompletion:(void (^)())successfulCompletion;
+- (void) getModelNameAndVersionWithCompletion:(void (^)())successfulCompletion;
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
 
 - (NSString*) iconURL;

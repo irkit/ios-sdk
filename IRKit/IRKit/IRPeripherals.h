@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "IRPeripheral.h"
+#import "IRSignal.h"
 
 @interface IRPeripherals : NSObject<UITableViewDelegate,UITableViewDataSource>
 
@@ -10,6 +11,7 @@
 - (NSUInteger) countOfReadyPeripherals;
 - (BOOL) isKnownName: (NSString*)hostname;
 - (IRPeripheral*)registerPeripheralWithName: (NSString*)hostname;
+- (void)waitForSignalWithCompletion:(void (^)(IRSignal *signal, NSError *error))completion;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 
