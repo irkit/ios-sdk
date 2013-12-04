@@ -6,7 +6,7 @@
 
 @interface IRWifiEditViewController : UIViewController<UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, IRWifiSecuritySelectViewControllerDelegate>
 
-@property (nonatomic, assign) id<IRWifiEditViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRWifiEditViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 

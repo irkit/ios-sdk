@@ -4,7 +4,7 @@
 
 @interface IRNewPeripheralScene1ViewController : UIViewController
 
-@property (nonatomic, assign) id<IRNewPeripheralScene1ViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRNewPeripheralScene1ViewControllerDelegate> delegate;
 
 @end
 

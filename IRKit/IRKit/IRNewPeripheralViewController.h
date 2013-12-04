@@ -14,7 +14,7 @@ IRWifiEditViewControllerDelegate,
 IRMorsePlayerViewControllerDelegate,
 IRPeripheralNameEditViewControllerDelegate>
 
-@property (nonatomic, assign) id<IRNewPeripheralViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRNewPeripheralViewControllerDelegate> delegate;
 
 @end
 

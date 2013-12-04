@@ -5,7 +5,7 @@
 
 @interface IRSignalNameEditViewController : UIViewController<UITextFieldDelegate>
 
-@property (nonatomic, assign) id<IRSignalNameEditViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRSignalNameEditViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (nonatomic) IRSignal *signal;
 

@@ -5,7 +5,7 @@
 
 @interface IRMorsePlayerViewController : UIViewController
 
-@property (nonatomic, assign) id<IRMorsePlayerViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRMorsePlayerViewControllerDelegate> delegate;
 @property (nonatomic) IRKeys *keys;
 
 @end

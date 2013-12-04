@@ -5,7 +5,7 @@
 
 @interface IRPeripheralNameEditViewController : UIViewController<UITextFieldDelegate>
 
-@property (nonatomic, assign) id<IRPeripheralNameEditViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRPeripheralNameEditViewControllerDelegate> delegate;
 @property (nonatomic) IRPeripheral *peripheral;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;

@@ -16,7 +16,7 @@
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT                5. // short REST like requests
-#define GETMESSAGES_LONGPOLL_INTERVAL  0.3 // don't ab agains IRKit
+#define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
 
 @interface IRHTTPClient ()
 
@@ -40,7 +40,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 #pragma mark - Private
 
-- (IRHTTPClient*)startPollingRequest {
+- (void)startPollingRequest {
     [IRHTTPJSONOperation sendRequest:self.longPollRequest
                             handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
                                 if (! self.longPollRequest) {
@@ -165,10 +165,6 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     client.longPollDidFinish = (ResponseHandlerBlock)^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG( @"res: %@, object: %@, error: %@", res, object, error );
 
-        if (error) {
-            completion(res, object, error);
-            return YES; // stop if unexpected error
-        }
         if (res && res.statusCode) {
             switch (res.statusCode) {
                 case 200:
@@ -177,14 +173,18 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                         return YES;
                     }
                     // else, retry
-                    break;
+                    return NO;
                 default:
                     break;
             }
             // TODO sleep exponentially if unexpected error?
         }
-        // retry
-        return NO;
+        if (! error) {
+            // custom error
+            error = [self errorFromResponse:res];
+        }
+        completion(res, object, error);
+        return YES; // stop if unexpected error
     };
     [client startPollingRequest];
     return client;
@@ -307,10 +307,10 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     NSString *query = [self stringOfURLEncodedDictionary:params];
     NSString *urlString;
     if (query) {
-        urlString = [NSString stringWithFormat:@"http://%@.local/%@?%@", hostname, path, query];
+        urlString = [NSString stringWithFormat:@"http://%@.local%@?%@", hostname, path, query];
     }
     else {
-        urlString = [NSString stringWithFormat:@"http://%@.local/%@", hostname, path];
+        urlString = [NSString stringWithFormat:@"http://%@.local%@", hostname, path];
     }
     NSURL *url  = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

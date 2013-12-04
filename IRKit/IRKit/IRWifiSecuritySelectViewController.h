@@ -6,7 +6,7 @@
 
 @interface IRWifiSecuritySelectViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, assign) id<IRWifiSecuritySelectViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRWifiSecuritySelectViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) enum IRSecurityType selectedSecurityType;
 

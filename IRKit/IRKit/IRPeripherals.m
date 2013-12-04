@@ -86,7 +86,7 @@
                 return;
             }
             if (object) {
-                IRSignal *signal = [[IRSignal alloc] initWithDictionary:object];
+                IRSignal *signal = [[IRSignal alloc] initWithDictionary:object fromHostname:p.name];
                 completion(signal, nil);
                 return;
             }
@@ -104,6 +104,7 @@
         [client cancel];
     }
     [IRHTTPClient cancelWaitForSignal];
+    _signalWaitingClients = nil;
 }
 
 #pragma mark - Private methods
