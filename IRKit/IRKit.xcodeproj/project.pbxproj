@@ -64,6 +64,8 @@
 		C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5686174A7AB100FFE5CB /* IRSignals.m */; };
 		C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5688174A7AB200FFE5CB /* IRSignal.m */; };
 		C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5687174A7AB100FFE5CB /* IRSignals.h */; };
+		C75CF062185061180086ED4F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CF061185061180086ED4F /* SystemConfiguration.framework */; };
+		C75CF064185062600086ED4F /* img_powerup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C75CF063185062600086ED4F /* img_powerup@2x.png */; };
 		C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */; };
 		C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CFC8717A6671200870A1B /* QuartzCore.framework */; };
 		C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37E5174DF20300872C04 /* IRHelper.h */; };
@@ -265,6 +267,8 @@
 		C75B5687174A7AB100FFE5CB /* IRSignals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignals.h; sourceTree = "<group>"; };
 		C75B5688174A7AB200FFE5CB /* IRSignal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignal.m; sourceTree = "<group>"; };
 		C75B5689174A7AB200FFE5CB /* IRSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignal.h; sourceTree = "<group>"; };
+		C75CF061185061180086ED4F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C75CF063185062600086ED4F /* img_powerup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_powerup@2x.png"; sourceTree = "<group>"; };
 		C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRPeripheralCell.xib; sourceTree = "<group>"; };
 		C75CFC8717A6671200870A1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRViewCustomizer.h; sourceTree = "<group>"; };
@@ -360,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75CF062185061180086ED4F /* SystemConfiguration.framework in Frameworks */,
 				C7756778184B23A100C6D4DB /* libPods.a in Frameworks */,
 				C7AB0525180ADD40007288EB /* AudioToolbox.framework in Frameworks */,
 				C7D0561118041E4F00660217 /* AVFoundation.framework in Frameworks */,
@@ -501,6 +506,7 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C75CF061185061180086ED4F /* SystemConfiguration.framework */,
 				C7756777184B23A100C6D4DB /* libPods.a */,
 				C7AB0524180ADD40007288EB /* AudioToolbox.framework */,
 				C7AB0522180ADCEA007288EB /* AudioUnit.framework */,
@@ -579,6 +585,7 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C75CF063185062600086ED4F /* img_powerup@2x.png */,
 				C707ECD7184C8EB400AC5F0B /* img_remote@2x.png */,
 				C707ECD5184C84CE00AC5F0B /* img_prepare@2x.png */,
 				C763C6BB1839B51200D1D155 /* morse.jpg */,
@@ -805,6 +812,7 @@
 				C73503DA17A020CB0057D51B /* tutorial_powerup@2x.png in Resources */,
 				C707ECD2184C7C6E00AC5F0B /* icn_navibar_back@2x.png in Resources */,
 				C707ECD6184C84CE00AC5F0B /* img_prepare@2x.png in Resources */,
+				C75CF064185062600086ED4F /* img_powerup@2x.png in Resources */,
 				C7A9674617A0F8B100D5DEBF /* IRNewPeripheralScene1ViewController.xib in Resources */,
 				C7A9674D17A0FB5400D5DEBF /* shadow.png in Resources */,
 				C7A9674E17A0FB5400D5DEBF /* shadow@2x.png in Resources */,

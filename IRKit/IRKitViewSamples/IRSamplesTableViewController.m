@@ -196,7 +196,11 @@
             c.delegate = self;
             unsigned short data[10] = { 100,100,100,100,100,100,100,100,100,100 };
             NSData *irdata = [NSData dataWithBytes:data length:10];
-            IRSignal *signal = [[IRSignal alloc] initWithData: irdata];
+            IRSignal *signal = [[IRSignal alloc] initWithDictionary:@{
+                                                                      @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
+                                                                      @"format": @"raw",
+                                                                      @"freq": @38,
+                                                                      }];
             c.signal = signal;
 
             [self.navigationController pushViewController:c animated:YES];
