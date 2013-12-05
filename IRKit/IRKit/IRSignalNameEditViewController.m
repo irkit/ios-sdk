@@ -55,8 +55,8 @@
 
     _signal.name = _textField.text;
 
-    [self.delegate scene2ViewController:self
-                      didFinishWithInfo:@{
+    [self.delegate signalNameEditViewController:self
+                              didFinishWithInfo:@{
              IRViewControllerResultType: IRViewControllerResultTypeDone,
              IRViewControllerResultText: _textField.text,
            IRViewControllerResultSignal: _signal,
@@ -93,8 +93,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)doneButtonPressed:(id)selector
-{
+- (void)doneButtonPressed:(id)selector {
     LOG(@"text: %@", self.textField.text);
     [self processTextField:nil];
 }
@@ -107,8 +106,7 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField*)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField*)textField {
     [self processTextField:nil];
     return NO;
 }

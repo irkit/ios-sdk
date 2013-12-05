@@ -59,7 +59,8 @@
 
 #pragma mark - IRNewSignalScene1ViewControllerDelegate
 
-- (void)scene1ViewController:(IRNewSignalScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)scene1ViewController:(IRNewSignalScene1ViewController *)viewController
+           didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -71,8 +72,8 @@
 
 #pragma mark - IRSignalNameEditViewControllerDelegate
 
-- (void)scene2ViewController:(IRSignalNameEditViewController *)viewController
-           didFinishWithInfo:(NSDictionary*)info {
+- (void)signalNameEditViewController:(IRSignalNameEditViewController *)viewController
+                   didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {

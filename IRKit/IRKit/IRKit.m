@@ -64,7 +64,6 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [[IRSearcher sharedInstance] stop];
     [[NSNotificationCenter defaultCenter] removeObserver:_terminateObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];

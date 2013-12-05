@@ -81,7 +81,11 @@
         IRHTTPClient *client = [IRHTTPClient waitForSignalFromHost:p.name withCompletion:^(NSHTTPURLResponse *res, id object, NSError *error) {
             [self stopWaitingForSignal];
             if (error) {
-                // TODO alert
+                [[[UIAlertView alloc] initWithTitle:@"Error"
+                                            message:@""
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
                 completion(nil, error);
                 return;
             }

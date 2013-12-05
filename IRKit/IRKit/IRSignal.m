@@ -101,8 +101,6 @@
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
-    LOG_CURRENT_METHOD;
-
     [coder encodeObject:_name         forKey:@"n"];
     [coder encodeObject:_data         forKey:@"d"];
     [coder encodeObject:_format       forKey:@"fo"];
@@ -112,7 +110,6 @@
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
-    LOG_CURRENT_METHOD;
     self = [super init];
     if (self) {
         _name         = [coder decodeObjectForKey:@"n"];

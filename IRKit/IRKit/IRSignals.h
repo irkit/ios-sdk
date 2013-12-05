@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 - (IRSignal*)objectInSignalsAtIndex:(NSUInteger)index;
 - (IRSignal*)memberOfSignals:(IRSignal *)object;
 - (void)addSignalsObject:(IRSignal *)object;
+- (void)insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index;
 - (void)removeSignalsObject:(IRSignal *)object;
 
 @end

@@ -15,6 +15,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)scene2ViewController:(IRSignalNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)signalNameEditViewController:(IRSignalNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
 
 @end

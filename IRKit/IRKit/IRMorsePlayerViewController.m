@@ -104,6 +104,7 @@
     [_doorWaiter cancel];
     [IRHTTPClient cancelWaitForDoor];
 
+    [_player setSuspended:YES];
     [_player cancelAllOperations];
 }
 
