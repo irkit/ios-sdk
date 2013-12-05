@@ -66,7 +66,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 #pragma mark - Class methods
 
 + (NSURL*)base {
-    return [NSURL URLWithString:@"http://api.getirkit.com"];
+    return [NSURL URLWithString:APIENDPOINT_BASE];
 }
 
 // from HTTP response Server header

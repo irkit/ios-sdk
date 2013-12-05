@@ -44,6 +44,7 @@
 
 #pragma mark - URLs
 
-#define ONURL_BASE @"http://getirkit.appspot.com"
+#define STATICENDPOINT_BASE @"http://getirkit.com"
+#define APIENDPOINT_BASE @"http://api.getirkit.com"
 
 #endif

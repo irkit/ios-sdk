@@ -73,4 +73,10 @@
     }];
 }
 
+- (IBAction)buyButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+    NSString *url = [NSString stringWithFormat:@"%@/store", APIENDPOINT_BASE];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
 @end

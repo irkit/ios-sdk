@@ -108,7 +108,7 @@
 }
 
 - (NSString*)iconURL {
-    return [NSString stringWithFormat:@"%@/static/images/model/%@.png", ONURL_BASE, _modelName ? _modelName : @"IRKit" ];
+    return [NSString stringWithFormat:@"%@/static/images/model/%@.png", STATICENDPOINT_BASE, _modelName ? _modelName : @"IRKit" ];
 }
 
 #pragma mark - Private methods

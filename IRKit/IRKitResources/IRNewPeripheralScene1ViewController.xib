@@ -45,20 +45,62 @@
                     <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sI7-6u-aWJ">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FgO-kv-blt">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUU-7e-4ed">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="320" id="m3x-6N-l1Z"/>
+                                <constraint firstAttribute="height" constant="44" id="n4p-i8-aYZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                            <state key="normal" title="Buy IRKit on Amazon                                        ">
+                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="buyButtonPressed:" destination="-1" eventType="touchUpInside" id="Q5X-0M-WgH"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="TcD-ae-oeX">
+                            <rect key="frame" x="295" y="14" width="15" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="nUU-7e-4ed" firstAttribute="leading" secondItem="sI7-6u-aWJ" secondAttribute="leading" id="B9M-Ao-OoB"/>
+                        <constraint firstAttribute="width" constant="320" id="BYt-P3-Hff"/>
+                        <constraint firstAttribute="height" constant="44" id="Q6P-Qm-h06"/>
+                        <constraint firstAttribute="centerY" secondItem="TcD-ae-oeX" secondAttribute="centerY" id="e6j-Bs-BtT"/>
+                        <constraint firstItem="TcD-ae-oeX" firstAttribute="leading" secondItem="nUU-7e-4ed" secondAttribute="trailing" constant="-25" id="e9g-hp-dDn"/>
+                        <constraint firstAttribute="centerY" secondItem="nUU-7e-4ed" secondAttribute="centerY" id="h8U-oC-O0T"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="57" firstAttribute="top" secondItem="12" secondAttribute="bottom" constant="-14" id="0FH-ar-AHd"/>
                 <constraint firstItem="N0I-xf-e06" firstAttribute="top" secondItem="57" secondAttribute="bottom" constant="-65" id="0ba-AK-Xuc"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="3il-X0-dwb"/>
+                <constraint firstAttribute="centerX" secondItem="sI7-6u-aWJ" secondAttribute="centerX" id="5TB-ep-zwL"/>
                 <constraint firstItem="N0I-xf-e06" firstAttribute="leading" secondItem="57" secondAttribute="trailing" constant="-290" id="avx-uo-twC"/>
                 <constraint firstItem="12" firstAttribute="top" secondItem="74" secondAttribute="top" constant="48" id="bPE-5L-uTN"/>
+                <constraint firstAttribute="bottom" secondItem="sI7-6u-aWJ" secondAttribute="bottom" id="qse-Ym-Dql"/>
                 <constraint firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="wZm-3B-tbP"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
+        <image name="icn_arrow.png" width="15" height="15"/>
         <image name="img_powerup.png" width="320" height="273"/>
     </resources>
 </document>
