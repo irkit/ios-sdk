@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_prepare.png" translatesAutoresizingMaskIntoConstraints="NO" id="57">
-                    <rect key="frame" x="0.0" y="164" width="320" height="240"/>
+                    <rect key="frame" x="0.0" y="105" width="320" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="Ag1-oZ-fgB"/>
@@ -24,13 +24,13 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Put iOS device next to IRKit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="138">
-                    <rect key="frame" x="0.0" y="58" width="320" height="105"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="SZm-ET-q66"/>
                         <constraint firstAttribute="height" constant="105" id="ooQ-5L-Lv5"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="32"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
                     <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -44,7 +44,7 @@
                             <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Done" image="icn_check.png">
+                            <state key="normal" title=" Done" image="icn_check2.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -66,19 +66,18 @@
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="hro-ef-BRm" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="5Qt-gB-7eF"/>
-                <constraint firstItem="57" firstAttribute="top" secondItem="138" secondAttribute="bottom" constant="1" id="8Ba-EN-nmM"/>
                 <constraint firstAttribute="centerX" secondItem="138" secondAttribute="centerX" id="Jyn-iF-JYg"/>
                 <constraint firstAttribute="bottom" secondItem="hro-ef-BRm" secondAttribute="bottom" id="MvU-ZP-GD1"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="Rb0-F0-5MX"/>
-                <constraint firstAttribute="centerY" secondItem="57" secondAttribute="centerY" id="sDL-7X-JNV"/>
+                <constraint firstItem="57" firstAttribute="top" secondItem="138" secondAttribute="bottom" id="g8c-os-JtZ"/>
+                <constraint firstItem="138" firstAttribute="top" secondItem="74" secondAttribute="top" id="gFt-me-SL1"/>
                 <constraint firstAttribute="trailing" secondItem="hro-ef-BRm" secondAttribute="trailing" id="tC1-6T-vW6"/>
             </constraints>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
-        <image name="icn_check.png" width="24" height="24"/>
+        <image name="icn_check2.png" width="24" height="24"/>
         <image name="img_prepare.png" width="320" height="240"/>
     </resources>
 </document>

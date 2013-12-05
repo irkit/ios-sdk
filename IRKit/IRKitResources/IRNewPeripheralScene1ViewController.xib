@@ -16,18 +16,18 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Power Up your IRKit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="12">
-                    <rect key="frame" x="0.0" y="73" width="320" height="88"/>
+                    <rect key="frame" x="0.0" y="48" width="320" height="88"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="88" id="Fi3-3u-yIf"/>
                         <constraint firstAttribute="width" constant="320" id="qfw-kp-GBf"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="32"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
                     <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_powerup.png" translatesAutoresizingMaskIntoConstraints="NO" id="57">
-                    <rect key="frame" x="0.0" y="147" width="320" height="274"/>
+                    <rect key="frame" x="0.0" y="122" width="320" height="274"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="274" id="SZT-Ru-x9Y"/>
@@ -35,13 +35,13 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Connect USB Micro-B" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="N0I-xf-e06">
-                    <rect key="frame" x="30" y="356" width="120" height="88"/>
+                    <rect key="frame" x="30" y="331" width="120" height="88"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="0yM-AI-iGx"/>
                         <constraint firstAttribute="height" constant="88" id="wvX-V7-C5G"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -50,9 +50,9 @@
             <constraints>
                 <constraint firstItem="57" firstAttribute="top" secondItem="12" secondAttribute="bottom" constant="-14" id="0FH-ar-AHd"/>
                 <constraint firstItem="N0I-xf-e06" firstAttribute="top" secondItem="57" secondAttribute="bottom" constant="-65" id="0ba-AK-Xuc"/>
-                <constraint firstAttribute="centerY" secondItem="57" secondAttribute="centerY" id="1IT-kc-kif"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="3il-X0-dwb"/>
                 <constraint firstItem="N0I-xf-e06" firstAttribute="leading" secondItem="57" secondAttribute="trailing" constant="-290" id="avx-uo-twC"/>
+                <constraint firstItem="12" firstAttribute="top" secondItem="74" secondAttribute="top" constant="48" id="bPE-5L-uTN"/>
                 <constraint firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="wZm-3B-tbP"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

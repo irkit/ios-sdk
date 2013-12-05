@@ -13,13 +13,12 @@
 		C703E828183DFA6900B8446C /* IRHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C703E827183DFA6900B8446C /* IRHTTPClient.m */; };
 		C703E82A183E0DD900B8446C /* CRC8.c in Sources */ = {isa = PBXBuildFile; fileRef = C703E829183E0DD900B8446C /* CRC8.c */; };
 		C707ECCF184C7C6E00AC5F0B /* icn_navibar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECC9184C7C6D00AC5F0B /* icn_navibar_menu@2x.png */; };
-		C707ECD0184C7C6E00AC5F0B /* icn_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCA184C7C6D00AC5F0B /* icn_check@2x.png */; };
+		C707ECD0184C7C6E00AC5F0B /* icn_check2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCA184C7C6D00AC5F0B /* icn_check2@2x.png */; };
 		C707ECD1184C7C6E00AC5F0B /* icn_navibar_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCB184C7C6D00AC5F0B /* icn_navibar_add@2x.png */; };
 		C707ECD2184C7C6E00AC5F0B /* icn_navibar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */; };
 		C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */; };
 		C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */; };
 		C707ECD6184C84CE00AC5F0B /* img_prepare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD5184C84CE00AC5F0B /* img_prepare@2x.png */; };
-		C707ECD8184C8EB400AC5F0B /* img_remote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD7184C8EB400AC5F0B /* img_remote@2x.png */; };
 		C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714890E17C46D6E00713890 /* libstdc++.dylib */; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
@@ -113,6 +112,7 @@
 		C7AB0525180ADD40007288EB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7AB0524180ADD40007288EB /* AudioToolbox.framework */; };
 		C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */; };
 		C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */; };
+		C7AC32121850A64200BB190D /* img_remote2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7AC32111850A64200BB190D /* img_remote2@2x.png */; };
 		C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */; };
 		C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; };
 		C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; };
@@ -208,13 +208,12 @@
 		C703E829183E0DD900B8446C /* CRC8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CRC8.c; sourceTree = "<group>"; };
 		C703E82B183E0DF600B8446C /* CRC8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRC8.h; sourceTree = "<group>"; };
 		C707ECC9184C7C6D00AC5F0B /* icn_navibar_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_menu@2x.png"; sourceTree = "<group>"; };
-		C707ECCA184C7C6D00AC5F0B /* icn_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_check@2x.png"; sourceTree = "<group>"; };
+		C707ECCA184C7C6D00AC5F0B /* icn_check2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_check2@2x.png"; sourceTree = "<group>"; };
 		C707ECCB184C7C6D00AC5F0B /* icn_navibar_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_add@2x.png"; sourceTree = "<group>"; };
 		C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_back@2x.png"; sourceTree = "<group>"; };
 		C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_cancel@2x.png"; sourceTree = "<group>"; };
 		C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_camera@2x.png"; sourceTree = "<group>"; };
 		C707ECD5184C84CE00AC5F0B /* img_prepare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_prepare@2x.png"; sourceTree = "<group>"; };
-		C707ECD7184C8EB400AC5F0B /* img_remote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_remote@2x.png"; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C71D909817977D2200CEC73F /* IRKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71D909C17977D2200CEC73F /* IRKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitTests-Info.plist"; sourceTree = "<group>"; };
@@ -323,6 +322,7 @@
 		C7AB0524180ADD40007288EB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene1ViewController.h; sourceTree = "<group>"; };
 		C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene1ViewController.m; sourceTree = "<group>"; };
+		C7AC32111850A64200BB190D /* img_remote2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_remote2@2x.png"; sourceTree = "<group>"; };
 		C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperation.m; sourceTree = "<group>"; };
 		C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSendOperation.h; sourceTree = "<group>"; };
 		C7B741B81803FA22005802A7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -589,8 +589,8 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7AC32111850A64200BB190D /* img_remote2@2x.png */,
 				C75CF063185062600086ED4F /* img_powerup@2x.png */,
-				C707ECD7184C8EB400AC5F0B /* img_remote@2x.png */,
 				C707ECD5184C84CE00AC5F0B /* img_prepare@2x.png */,
 				C763C6BB1839B51200D1D155 /* morse.jpg */,
 				C763C6BE1839BE4300D1D155 /* sidebyside.jpg */,
@@ -598,7 +598,7 @@
 				C7626F7E17A1079400D6D746 /* bg_light@2x.png */,
 				C7693F8417A12AF900EC43FC /* icn_arrow.png */,
 				C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */,
-				C707ECCA184C7C6D00AC5F0B /* icn_check@2x.png */,
+				C707ECCA184C7C6D00AC5F0B /* icn_check2@2x.png */,
 				C7A1350617AA5D7300C8679B /* icn_device@2x.png */,
 				C707ECCB184C7C6D00AC5F0B /* icn_navibar_add@2x.png */,
 				C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */,
@@ -823,7 +823,7 @@
 				C78F6FE4182B8347002AAC7B /* IRWifiEditViewController.xib in Resources */,
 				C7626F7F17A1079400D6D746 /* bg_light.png in Resources */,
 				C7626F8017A1079400D6D746 /* bg_light@2x.png in Resources */,
-				C707ECD0184C7C6E00AC5F0B /* icn_check@2x.png in Resources */,
+				C707ECD0184C7C6E00AC5F0B /* icn_check2@2x.png in Resources */,
 				C7626F8217A107FE00D6D746 /* IRNewPeripheralScene2ViewController.xib in Resources */,
 				C7626F8517A1086900D6D746 /* txt_tutorial_02.png in Resources */,
 				C7626F8617A1086900D6D746 /* txt_tutorial_02@2x.png in Resources */,
@@ -841,7 +841,7 @@
 				C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */,
 				C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */,
 				C763C6BC1839B51200D1D155 /* morse.jpg in Resources */,
-				C707ECD8184C8EB400AC5F0B /* img_remote@2x.png in Resources */,
+				C7AC32121850A64200BB190D /* img_remote2@2x.png in Resources */,
 				C763C6BA1839B02400D1D155 /* IRMorsePlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

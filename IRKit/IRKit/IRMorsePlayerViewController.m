@@ -55,7 +55,6 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];

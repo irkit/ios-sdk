@@ -15,26 +15,63 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_remote.png" translatesAutoresizingMaskIntoConstraints="NO" id="166">
-                    <rect key="frame" x="0.0" y="142" width="320" height="285"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_remote2.png" translatesAutoresizingMaskIntoConstraints="NO" id="RE2-dM-Lke">
+                    <rect key="frame" x="0.0" y="169" width="320" height="230"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="320" id="36l-P1-RER"/>
-                        <constraint firstAttribute="height" constant="285" id="oWj-nC-0uB"/>
+                        <constraint firstAttribute="width" constant="320" id="YKw-o4-l09"/>
+                        <constraint firstAttribute="height" constant="230" id="h0v-sc-HZm"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IRKit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LjL-Lc-lqj">
+                    <rect key="frame" x="0.0" y="124" width="320" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="0q5-qE-Yj3"/>
+                        <constraint firstAttribute="width" constant="320" id="pZv-xB-CzC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plain Old Remote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCh-y0-pCo">
+                    <rect key="frame" x="0.0" y="386" width="320" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="ZVa-Ui-MNV"/>
+                        <constraint firstAttribute="width" constant="320" id="ka8-h5-DzL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aim your plain old remote at IRKit and press a button" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="cI0-RD-WbM">
+                    <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="bS6-Bj-fZL"/>
+                        <constraint firstAttribute="width" constant="320" id="i0Q-zY-weF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="166" firstAttribute="centerX" secondItem="74" secondAttribute="centerX" id="319"/>
-                <constraint firstAttribute="centerY" secondItem="166" secondAttribute="centerY" id="BXd-RK-st7"/>
+                <constraint firstItem="oCh-y0-pCo" firstAttribute="top" secondItem="RE2-dM-Lke" secondAttribute="bottom" constant="-13" id="30W-3N-3IB"/>
+                <constraint firstAttribute="centerX" secondItem="cI0-RD-WbM" secondAttribute="centerX" id="DPB-XJ-KbL"/>
+                <constraint firstAttribute="centerY" secondItem="RE2-dM-Lke" secondAttribute="centerY" id="PfZ-ap-x1R"/>
+                <constraint firstItem="RE2-dM-Lke" firstAttribute="top" secondItem="LjL-Lc-lqj" secondAttribute="bottom" constant="-15" id="UK7-9F-F4X"/>
+                <constraint firstAttribute="centerX" secondItem="RE2-dM-Lke" secondAttribute="centerX" id="bKf-XP-U03"/>
+                <constraint firstAttribute="centerX" secondItem="LjL-Lc-lqj" secondAttribute="centerX" id="bRu-6Q-BsQ"/>
+                <constraint firstAttribute="centerX" secondItem="oCh-y0-pCo" secondAttribute="centerX" id="eDm-DY-xYF"/>
+                <constraint firstAttribute="bottom" secondItem="cI0-RD-WbM" secondAttribute="bottom" id="eKo-5q-JYa"/>
             </constraints>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
-        <image name="img_remote.png" width="320" height="285"/>
+        <image name="img_remote2.png" width="320" height="230"/>
     </resources>
 </document>

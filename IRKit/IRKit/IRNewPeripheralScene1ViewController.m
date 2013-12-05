@@ -31,7 +31,6 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonPressed:)];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 }

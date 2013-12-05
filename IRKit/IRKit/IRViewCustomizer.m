@@ -25,6 +25,7 @@
     }
 
     _viewDidLoad = ^(UIViewController* viewController) {
+        viewController.edgesForExtendedLayout = UIRectEdgeNone;
 
         if ([viewController isKindOfClass:[IRNewSignalScene1ViewController class]] ||
             [viewController isKindOfClass:[IRNewPeripheralScene1ViewController class]]) {
@@ -129,8 +130,9 @@
 }
 
 + (void)customizeNavigationBar: (UINavigationBar*)bar {
-//    [bar setBackgroundImage:[IRHelper imageWithColor:[UIColor colorWithRed:0x16/255. green:0x16/255. blue:0x1a/255. alpha:1.0]]
-//              forBarMetrics:UIBarMetricsDefault];
+    bar.barTintColor = [UIColor whiteColor];
+    bar.tintColor = [self activeFontColor];
+    // bar.translucent = NO; // if we don't want transparency
 
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary: [[UINavigationBar appearance] titleTextAttributes]];
     [attributes setObject:[UIFont fontWithName:@"HelveticaNeue-Light" size:20.]
