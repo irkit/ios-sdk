@@ -32,8 +32,19 @@
         _player = [[IRMorsePlayerOperationQueue alloc] init];
         _volumeView.showsRouteButton = false;
         _playing = false;
+
+        [_player addObserver:self
+                  forKeyPath:@"operationCount"
+                     options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                     context:nil];
     }
     return self;
+}
+
+- (void) dealloc {
+    LOG_CURRENT_METHOD;
+    [_player removeObserver:self
+                 forKeyPath:@"operationCount"];
 }
 
 - (void)viewDidLoad {
@@ -44,6 +55,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
@@ -80,10 +92,6 @@
     _morseMessage = [_keys morseStringRepresentation];
     LOG(@"morseMessage: %@", _morseMessage);
 
-    [_player addObserver:self
-              forKeyPath:@"operationCount"
-                 options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
-                 context:nil];
     // fire key value observer
     [self observeValueForKeyPath:@"operationCount"
                         ofObject:nil
@@ -97,8 +105,6 @@
     [_doorWaiter cancel];
     [IRHTTPClient cancelWaitForDoor];
 
-    [_player removeObserver:self
-                 forKeyPath:@"operationCount"];
     [_player cancelAllOperations];
 }
 

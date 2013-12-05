@@ -23,14 +23,14 @@
                         <constraint firstAttribute="height" constant="240" id="Iz5-gy-MvN"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Put iOS device next to IRKit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="138">
-                    <rect key="frame" x="20" y="90" width="280" height="74"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Put iOS device next to IRKit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="138">
+                    <rect key="frame" x="0.0" y="58" width="320" height="105"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="280" id="cl0-Nq-JJZ"/>
-                        <constraint firstAttribute="height" constant="74" id="pZe-68-47p"/>
+                        <constraint firstAttribute="width" constant="320" id="SZm-ET-q66"/>
+                        <constraint firstAttribute="height" constant="105" id="ooQ-5L-Lv5"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="32"/>
                     <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -66,7 +66,7 @@
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="hro-ef-BRm" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="5Qt-gB-7eF"/>
-                <constraint firstItem="57" firstAttribute="top" secondItem="138" secondAttribute="bottom" id="8Ba-EN-nmM"/>
+                <constraint firstItem="57" firstAttribute="top" secondItem="138" secondAttribute="bottom" constant="1" id="8Ba-EN-nmM"/>
                 <constraint firstAttribute="centerX" secondItem="138" secondAttribute="centerX" id="Jyn-iF-JYg"/>
                 <constraint firstAttribute="bottom" secondItem="hro-ef-BRm" secondAttribute="bottom" id="MvU-ZP-GD1"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="Rb0-F0-5MX"/>

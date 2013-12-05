@@ -16,47 +16,81 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="morse.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qhT-Lz-kuu">
-                    <rect key="frame" x="0.0" y="158" width="320" height="252"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_prepare.png" translatesAutoresizingMaskIntoConstraints="NO" id="75I-xP-EJA">
+                    <rect key="frame" x="0.0" y="164" width="320" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="320" id="Wvl-Qv-RC0"/>
-                        <constraint firstAttribute="height" constant="252" id="onj-oL-D0d"/>
+                        <constraint firstAttribute="width" constant="320" id="Z5u-aJ-LQZ"/>
+                        <constraint firstAttribute="height" constant="240" id="tdW-gI-BoQ"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEG-CM-5ve">
-                    <rect key="frame" x="40" y="418" width="240" height="50"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Volume Up  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="laK-A4-rN4">
+                    <rect key="frame" x="0.0" y="58" width="320" height="105"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="byR-8K-xvo"/>
-                        <constraint firstAttribute="width" constant="240" id="ua5-7b-1uL"/>
+                        <constraint firstAttribute="width" constant="320" id="Q1j-Ci-Fa4"/>
+                        <constraint firstAttribute="height" constant="105" id="nNc-pX-4An"/>
                     </constraints>
-                    <state key="normal" title="Start">
-                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="startButtonPressed:" destination="-1" eventType="touchUpInside" id="lvF-gO-hBR"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2I-eo-h4L" customClass="MPVolumeView">
-                    <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="32"/>
+                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2I-eo-h4L" customClass="MPVolumeView">
+                    <rect key="frame" x="60" y="124" width="200" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="tintColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="GRN-2M-Luz"/>
+                        <constraint firstAttribute="width" constant="200" id="sxv-3u-dlM"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WD0-F1-zgM">
+                    <rect key="frame" x="0.0" y="498" width="320" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDQ-VL-QGc">
+                            <rect key="frame" x="12" y="12" width="296" height="46"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Start" image="icn_check.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="startButtonPressed:" destination="-1" eventType="touchUpInside" id="dKB-Di-1ny"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="xDQ-VL-QGc" secondAttribute="bottom" constant="12" id="6Za-vd-O7I"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="GRy-Yg-yen"/>
+                        <constraint firstAttribute="height" constant="70" id="Q9M-de-O7H"/>
+                        <constraint firstItem="xDQ-VL-QGc" firstAttribute="leading" secondItem="WD0-F1-zgM" secondAttribute="leading" constant="12" id="Qbb-6X-Vo6"/>
+                        <constraint firstAttribute="width" constant="320" id="ZX4-gf-pax"/>
+                        <constraint firstAttribute="trailing" secondItem="xDQ-VL-QGc" secondAttribute="trailing" constant="12" id="grK-jc-M5R"/>
+                        <constraint firstItem="xDQ-VL-QGc" firstAttribute="top" secondItem="WD0-F1-zgM" secondAttribute="top" constant="12" id="p59-8B-h1A"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="wEG-CM-5ve" firstAttribute="top" secondItem="qhT-Lz-kuu" secondAttribute="bottom" constant="8" symbolic="YES" id="ZVA-lD-3pS"/>
-                <constraint firstAttribute="centerY" secondItem="qhT-Lz-kuu" secondAttribute="centerY" id="hEg-e7-1wb"/>
-                <constraint firstAttribute="centerX" secondItem="qhT-Lz-kuu" secondAttribute="centerX" id="mRC-By-LUn"/>
-                <constraint firstAttribute="centerX" secondItem="wEG-CM-5ve" secondAttribute="centerX" id="y56-5B-WzT"/>
+                <constraint firstAttribute="centerX" secondItem="laK-A4-rN4" secondAttribute="centerX" id="6Uv-N3-sd1"/>
+                <constraint firstAttribute="centerX" secondItem="k2I-eo-h4L" secondAttribute="centerX" id="Aum-P1-bFb"/>
+                <constraint firstAttribute="centerX" secondItem="75I-xP-EJA" secondAttribute="centerX" id="JrE-hd-4PJ"/>
+                <constraint firstAttribute="centerX" secondItem="WD0-F1-zgM" secondAttribute="centerX" id="UkP-7S-vdd"/>
+                <constraint firstAttribute="bottom" secondItem="WD0-F1-zgM" secondAttribute="bottom" id="YCA-mx-5Hp"/>
+                <constraint firstAttribute="centerY" secondItem="75I-xP-EJA" secondAttribute="centerY" id="l7Q-xX-Dat"/>
+                <constraint firstItem="75I-xP-EJA" firstAttribute="top" secondItem="laK-A4-rN4" secondAttribute="bottom" constant="1" id="wAh-lG-6S0"/>
+                <constraint firstItem="75I-xP-EJA" firstAttribute="top" secondItem="k2I-eo-h4L" secondAttribute="bottom" constant="-20" id="xKH-3s-IXD"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
-        <image name="morse.jpg" width="1000" height="787"/>
+        <image name="icn_check.png" width="24" height="24"/>
+        <image name="img_prepare.png" width="320" height="240"/>
     </resources>
 </document>

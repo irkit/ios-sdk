@@ -66,6 +66,7 @@
 		C75B568C174A7B1F00FFE5CB /* IRSignals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5687174A7AB100FFE5CB /* IRSignals.h */; };
 		C75CF062185061180086ED4F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CF061185061180086ED4F /* SystemConfiguration.framework */; };
 		C75CF064185062600086ED4F /* img_powerup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C75CF063185062600086ED4F /* img_powerup@2x.png */; };
+		C75CF06618506D7E0086ED4F /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CF06518506D7E0086ED4F /* MediaPlayer.framework */; };
 		C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */; };
 		C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CFC8717A6671200870A1B /* QuartzCore.framework */; };
 		C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37E5174DF20300872C04 /* IRHelper.h */; };
@@ -269,6 +270,7 @@
 		C75B5689174A7AB200FFE5CB /* IRSignal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignal.h; sourceTree = "<group>"; };
 		C75CF061185061180086ED4F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C75CF063185062600086ED4F /* img_powerup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_powerup@2x.png"; sourceTree = "<group>"; };
+		C75CF06518506D7E0086ED4F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		C75CFC8517A65E1C00870A1B /* IRPeripheralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRPeripheralCell.xib; sourceTree = "<group>"; };
 		C75CFC8717A6671200870A1B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRViewCustomizer.h; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75CF06618506D7E0086ED4F /* MediaPlayer.framework in Frameworks */,
 				C75CF062185061180086ED4F /* SystemConfiguration.framework in Frameworks */,
 				C7756778184B23A100C6D4DB /* libPods.a in Frameworks */,
 				C7AB0525180ADD40007288EB /* AudioToolbox.framework in Frameworks */,
@@ -506,6 +509,7 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C75CF06518506D7E0086ED4F /* MediaPlayer.framework */,
 				C75CF061185061180086ED4F /* SystemConfiguration.framework */,
 				C7756777184B23A100C6D4DB /* libPods.a */,
 				C7AB0524180ADD40007288EB /* AudioToolbox.framework */,
