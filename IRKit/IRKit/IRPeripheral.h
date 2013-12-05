@@ -13,6 +13,7 @@
 
 - (BOOL) hasKey;
 - (void) setName:(NSString *)name;
+- (NSString*) hostname;
 - (BOOL) isReachableViaWifi;
 - (void) getKeyWithCompletion:(void (^)())successfulCompletion;
 - (void) getModelNameAndVersionWithCompletion:(void (^)())successfulCompletion;

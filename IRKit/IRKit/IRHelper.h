@@ -4,7 +4,6 @@
 @interface IRHelper : NSObject
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block;
-+ (NSString*)sha1:(NSArray*) array;
 + (NSBundle*)resources;
 + (UIImage *)imageWithColor:(UIColor *)color;
 + (UIImage *)imageInResourceNamed:(NSString*)name;

@@ -55,6 +55,10 @@
     [self startReachability];
 }
 
+- (NSString*) hostname {
+    return [NSString stringWithFormat:@"%@.local", _name];
+}
+
 - (BOOL)isReachableViaWifi {
     return _reachability.isReachableViaWiFi;
 }
@@ -116,7 +120,7 @@
         if (_reachability) {
             [_reachability stopNotifier];
         }
-        _reachability = [Reachability reachabilityWithHostname:_name];
+        _reachability = [Reachability reachabilityWithHostname:self.hostname];
         // we start notifying but don't observe on notifications
         [_reachability startNotifier];
     }

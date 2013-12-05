@@ -34,7 +34,7 @@
     _peripheral = peripheral;
     
     self.nameLabel.text   = peripheral.customizedName;
-    self.detailLabel.text = peripheral.modelNameAndRevision;
+    self.detailLabel.text = self.detailLabelText;
 
     // load image from internet
     NSString *url = _peripheral.iconURL;
@@ -51,6 +51,10 @@
                      context:NULL];
 }
 
+- (NSString*)detailLabelText {
+    return [NSString stringWithFormat:@"%@ %@", _peripheral.hostname, _peripheral.modelNameAndRevision];
+}
+
 + (CGFloat)height {
     return 58;
 }
@@ -65,7 +69,7 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         self.nameLabel.text = _peripheral.customizedName;
-        self.detailLabel.text = _peripheral.modelNameAndRevision;
+        self.detailLabel.text = self.detailLabelText;
         [self setNeedsDisplay];
     });
 }

@@ -8,8 +8,7 @@
 
 @interface IRSignals ()
 
-// IRSignal.uniqueID => IRSignal
-@property (nonatomic, strong) NSMutableDictionary* signalsByUniqueID;
+@property (nonatomic) NSMutableArray* signals;
 
 @end
 
@@ -18,33 +17,25 @@
 - (id)init {
     self = [super init];
     if (! self) { return nil; }
-    _signalsByUniqueID = [NSMutableDictionary dictionaryWithCapacity:0];
+    _signals = [NSMutableArray arrayWithCapacity:0];
     
     return self;
 }
 
-- (id)objectAtIndex:(NSUInteger)index {
-    LOG( @"index: %d", index);
-    
-    NSArray* keys = [_signalsByUniqueID keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)];
-    NSString* key = [keys objectAtIndex: index];
-    return _signalsByUniqueID[key];
-}
-
 - (NSData*)data {
-    return [NSKeyedArchiver archivedDataWithRootObject:_signalsByUniqueID];
+    return [NSKeyedArchiver archivedDataWithRootObject:_signals];
 }
 
 - (void)loadFromData: (NSData*)data {
-    NSMutableDictionary *dic = data ? (NSMutableDictionary*)[NSKeyedUnarchiver unarchiveObjectWithData:data]
-                                    : nil;
-    if ( dic ) {
-        _signalsByUniqueID = dic;
+    NSMutableArray *array = data ? ((NSArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data]).mutableCopy
+                                 : nil;
+    if ( array ) {
+        _signals = array;
     }
     else {
-        _signalsByUniqueID = [[NSMutableDictionary alloc] init];
+        _signals = [[NSMutableArray alloc] init];
     }
-    LOG( @"loaded signals: %@", _signalsByUniqueID );
+    LOG( @"loaded signals: %@", _signals );
 }
 
 - (void)loadFromStandardUserDefaultsKey:(NSString*)key {
@@ -93,87 +84,82 @@
     }
 }
 
+- (id)objectAtIndex:(NSUInteger)index {
+    LOG( @"index: %d", index);
+    return _signals[ index ];
+}
+
 #pragma mark - Private methods
 
-- (NSInteger) indexOfSignal: (IRSignal*) signal {
+- (NSUInteger) indexOfSignal: (IRSignal*) signal {
     LOG_CURRENT_METHOD;
 
-    return [[_signalsByUniqueID keysSortedByValueUsingSelector:@selector(compareByReceivedDate:)] indexOfObject:signal.uniqueID];
+    return [_signals indexOfObject:signal];
 }
 
 #pragma mark - Key Value Coding - Mutable Indexed Accessors
 
 - (NSArray*) signals {
-    return [_signalsByUniqueID.allValues sortedArrayUsingSelector:@selector(compareByReceivedDate:)];
+    return _signals;
 }
 
 - (NSUInteger) countOfSignals {
-    return _signalsByUniqueID.count;
+    return [_signals count];
 }
 
-- (NSEnumerator*)enumeratorOfSignals {
-    return self.signals.objectEnumerator;
-}
-
-- (IRSignal*)memberOfSignals:(IRSignal *)object {
-    LOG_CURRENT_METHOD;
-    
-    return _signalsByUniqueID[object.uniqueID];
+- (IRSignal*)objectInSignalsAtIndex:(NSUInteger)index {
+    return _signals[ index ];
 }
 
 - (void)addSignalsObject:(IRSignal *)object {
 
-    if ( [self memberOfSignals:object] ) {
-        return;
-    }
-    
-    _signalsByUniqueID[object.uniqueID] = object;
-    
-    if (_delegate) {
-        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_delegate controller:self
-                      didChangeObject:object
-                          atIndexPath:nil
-                        forChangeType:IRAnimatingTypeInsert
-                         newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            });
-        }
-        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_delegate controllerDidChangeContent:self];
-            });
-        }
-    }
+    [_signals addObject:object];
+
+    // TODO enable after tested
+//    if (_delegate) {
+//        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [_delegate controller:self
+//                      didChangeObject:object
+//                          atIndexPath:nil
+//                        forChangeType:IRAnimatingTypeInsert
+//                         newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//            });
+//        }
+//        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [_delegate controllerDidChangeContent:self];
+//            });
+//        }
+//    }
 }
 
-- (void)removeSignalsObject:(IRSignal *)object {
-    NSInteger row;
-    if (_delegate) {
-        row = [self indexOfSignal: object];
-        if (row == NSNotFound) {
-            LOG( @"something weird happened" );
-        }
-    }
-    [_signalsByUniqueID removeObjectForKey:object.uniqueID];
-    
-    if (_delegate) {
-        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_delegate controller:self
-                      didChangeObject:object
-                          atIndexPath:[NSIndexPath indexPathForRow:row
-                                                         inSection:0]
-                        forChangeType:IRAnimatingTypeDelete
-                         newIndexPath:nil];
-            });
-        }
-        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_delegate controllerDidChangeContent:self];
-            });
-        }
-    }
+- (void)insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index {
+    [_signals insertObject:object atIndex:index];
+}
+
+- (void)removeObjectFromSignalsAtIndex:(NSUInteger)index {
+    IRSignal *object = [self objectInSignalsAtIndex:index];
+
+    [_signals removeObjectAtIndex:index];
+
+//    if (_delegate) {
+//        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [_delegate controller:self
+//                      didChangeObject:object
+//                          atIndexPath:[NSIndexPath indexPathForRow:index
+//                                                         inSection:0]
+//                        forChangeType:IRAnimatingTypeDelete
+//                         newIndexPath:nil];
+//            });
+//        }
+//        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [_delegate controllerDidChangeContent:self];
+//            });
+//        }
+//    }
 }
 
 @end

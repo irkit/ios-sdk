@@ -7,7 +7,6 @@
 - (id) initWithDictionary: (NSDictionary*) dictionary fromHostname:(NSString*)hostname;
 - (NSDictionary*)asDictionary;
 - (NSComparisonResult) compareByReceivedDate: (IRSignal*) otherSignal;
-- (NSString*) uniqueID;
 - (void)sendWithCompletion: (void (^)(NSError* error))block;
 
 @property (nonatomic, copy) NSString *name;
