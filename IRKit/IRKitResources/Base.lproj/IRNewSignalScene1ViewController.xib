@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
@@ -15,16 +15,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_remote2.png" translatesAutoresizingMaskIntoConstraints="NO" id="RE2-dM-Lke">
-                    <rect key="frame" x="0.0" y="169" width="320" height="230"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_remote3.png" translatesAutoresizingMaskIntoConstraints="NO" id="RE2-dM-Lke">
+                    <rect key="frame" x="0.0" y="142" width="320" height="225"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="YKw-o4-l09"/>
-                        <constraint firstAttribute="height" constant="230" id="h0v-sc-HZm"/>
+                        <constraint firstAttribute="height" constant="225" id="h0v-sc-HZm"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IRKit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LjL-Lc-lqj">
-                    <rect key="frame" x="0.0" y="124" width="320" height="60"/>
+                    <rect key="frame" x="0.0" y="97" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="0q5-qE-Yj3"/>
@@ -35,7 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plain Old Remote" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCh-y0-pCo">
-                    <rect key="frame" x="0.0" y="386" width="320" height="60"/>
+                    <rect key="frame" x="0.0" y="354" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="ZVa-Ui-MNV"/>
@@ -61,7 +61,7 @@
             <constraints>
                 <constraint firstItem="oCh-y0-pCo" firstAttribute="top" secondItem="RE2-dM-Lke" secondAttribute="bottom" constant="-13" id="30W-3N-3IB"/>
                 <constraint firstAttribute="centerX" secondItem="cI0-RD-WbM" secondAttribute="centerX" id="DPB-XJ-KbL"/>
-                <constraint firstAttribute="centerY" secondItem="RE2-dM-Lke" secondAttribute="centerY" id="PfZ-ap-x1R"/>
+                <constraint firstAttribute="centerY" secondItem="RE2-dM-Lke" secondAttribute="centerY" constant="30" id="PfZ-ap-x1R"/>
                 <constraint firstItem="RE2-dM-Lke" firstAttribute="top" secondItem="LjL-Lc-lqj" secondAttribute="bottom" constant="-15" id="UK7-9F-F4X"/>
                 <constraint firstAttribute="centerX" secondItem="RE2-dM-Lke" secondAttribute="centerX" id="bKf-XP-U03"/>
                 <constraint firstAttribute="centerX" secondItem="LjL-Lc-lqj" secondAttribute="centerX" id="bRu-6Q-BsQ"/>
@@ -72,6 +72,6 @@
         </view>
     </objects>
     <resources>
-        <image name="img_remote2.png" width="320" height="230"/>
+        <image name="img_remote3.png" width="320" height="225"/>
     </resources>
 </document>

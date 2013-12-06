@@ -19,7 +19,6 @@
 		C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */; };
 		C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */; };
 		C707ECD6184C84CE00AC5F0B /* img_prepare3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */; };
-		C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714890E17C46D6E00713890 /* libstdc++.dylib */; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
 		C71D909F17977D2200CEC73F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C71D909D17977D2200CEC73F /* InfoPlist.strings */; };
@@ -28,6 +27,7 @@
 		C71D90AA1797862300CEC73F /* IRHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D90A91797862300CEC73F /* IRHelperTests.m */; };
 		C71D90AD17978B1700CEC73F /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C71D90AE17978B2E00CEC73F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
+		C721651D18521C80000BD43D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C721651B18521C80000BD43D /* Localizable.strings */; };
 		C735040E17A029C30057D51B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
 		C735040F17A029C30057D51B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
 		C735041017A029C30057D51B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
@@ -209,6 +209,7 @@
 		C71D90A517977D6A00CEC73F /* IRKitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRKitTests.h; sourceTree = "<group>"; };
 		C71D90A81797862300CEC73F /* IRHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelperTests.h; sourceTree = "<group>"; };
 		C71D90A91797862300CEC73F /* IRHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHelperTests.m; sourceTree = "<group>"; };
+		C721651C18521C80000BD43D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C735040D17A029C30057D51B /* IRKitViewSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRKitViewSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C735041317A029C30057D51B /* IRKitViewSamples-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitViewSamples-Info.plist"; sourceTree = "<group>"; };
 		C735041517A029C40057D51B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -267,7 +268,7 @@
 		C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralNameEditViewController.h; sourceTree = "<group>"; };
 		C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalViewController.m; sourceTree = "<group>"; };
 		C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalViewController.h; sourceTree = "<group>"; };
-		C7756777184B23A100C6D4DB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		C7756777184B23A100C6D4DB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../Debug-iphonesimulator/libPods.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWifiEditViewController.m; sourceTree = "<group>"; };
 		C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWifiEditViewController.h; sourceTree = "<group>"; };
 		C78F6FE5182B8D89002AAC7B /* IREditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IREditCell.xib; sourceTree = "<group>"; };
@@ -304,13 +305,13 @@
 		C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene1ViewController.h; sourceTree = "<group>"; };
 		C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		C7D0560F18041E3F00660217 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		C7E4E332185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/IRNewPeripheralScene1ViewController.xib; sourceTree = "<group>"; };
-		C7E4E333185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/IRWifiEditViewController.xib; sourceTree = "<group>"; };
-		C7E4E334185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/IRNewPeripheralScene2ViewController.xib; sourceTree = "<group>"; };
-		C7E4E335185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/IRMorsePlayerViewController.xib; sourceTree = "<group>"; };
-		C7E4E336185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/IRPeripheralNameEditViewController.xib; sourceTree = "<group>"; };
-		C7E4E337185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/IRNewSignalScene1ViewController.xib; sourceTree = "<group>"; };
-		C7E4E338185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/IRSignalNameEditViewController.xib; sourceTree = "<group>"; };
+		C7E4E332185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRNewPeripheralScene1ViewController.xib; sourceTree = "<group>"; };
+		C7E4E333185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRWifiEditViewController.xib; sourceTree = "<group>"; };
+		C7E4E334185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRNewPeripheralScene2ViewController.xib; sourceTree = "<group>"; };
+		C7E4E335185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRMorsePlayerViewController.xib; sourceTree = "<group>"; };
+		C7E4E336185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRPeripheralNameEditViewController.xib; sourceTree = "<group>"; };
+		C7E4E337185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRNewSignalScene1ViewController.xib; sourceTree = "<group>"; };
+		C7E4E338185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRSignalNameEditViewController.xib; sourceTree = "<group>"; };
 		C7E4E339185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C7E4E33A185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRNewPeripheralScene1ViewController.strings; sourceTree = "<group>"; };
 		C7E4E33B185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRWifiEditViewController.strings; sourceTree = "<group>"; };
@@ -330,7 +331,6 @@
 		C7FAB0251746889000125BCB /* IRConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRConst.h; sourceTree = "<group>"; };
 		C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHTTPJSONOperation.h; sourceTree = "<group>"; };
 		C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHTTPJSONOperation.m; sourceTree = "<group>"; };
-		EDE78220530748578E6887AD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,7 +369,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C714890F17C46D6E00713890 /* libstdc++.dylib in Frameworks */,
 				C752D70217462C7B008B644A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,7 +507,6 @@
 				C752D70117462C7B008B644A /* Foundation.framework */,
 				C752D71017462C7B008B644A /* SenTestingKit.framework */,
 				C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */,
-				EDE78220530748578E6887AD /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -573,6 +571,7 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C721651B18521C80000BD43D /* Localizable.strings */,
 				C7AC32111850A64200BB190D /* img_remote3@2x.png */,
 				C75CF063185062600086ED4F /* img_powerup3@2x.png */,
 				C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */,
@@ -793,6 +792,7 @@
 				C7E4E32918520CA300EC864E /* IRPeripheralNameEditViewController.xib in Resources */,
 				C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */,
 				C7E4E32618520C9D00EC864E /* IRNewSignalScene1ViewController.xib in Resources */,
+				C721651D18521C80000BD43D /* Localizable.strings in Resources */,
 				C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */,
 				C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */,
 				C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */,
@@ -922,6 +922,14 @@
 				C7E4E342185210C900EC864E /* ja */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C721651B18521C80000BD43D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C721651C18521C80000BD43D /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		C735041417A029C40057D51B /* InfoPlist.strings */ = {
@@ -1104,9 +1112,11 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				ONLY_ACTIVE_ARCH = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
@@ -1141,9 +1151,11 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;

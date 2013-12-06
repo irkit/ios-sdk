@@ -5,6 +5,10 @@
 #import "Log.h"
 #import "IRHelper.h"
 
+NSString *IRLocalizedString(NSString* key, NSString* comment) {
+    return [[IRHelper resources] localizedStringForKey:key value:key table:nil];
+}
+
 @implementation IRHelper
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block {

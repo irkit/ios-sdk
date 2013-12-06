@@ -73,6 +73,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - IRSignalNameEditViewControllerDelegate
+
+- (void)signalNameEditViewController:(IRSignalNameEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
+    LOG_CURRENT_METHOD;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 #pragma mark - IRWifiEditViewControllerDelegate
 
 - (void)wifiEditViewController:(IRWifiEditViewController *)viewController

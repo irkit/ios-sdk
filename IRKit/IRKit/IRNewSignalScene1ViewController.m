@@ -30,7 +30,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Waiting for Signal ...";
+    self.title = IRLocalizedString(@"Waiting for Signal ...",@"title of IRNewSignalScene1");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                              target:self

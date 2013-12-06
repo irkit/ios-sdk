@@ -23,7 +23,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Decide a name...";
+    self.title = IRLocalizedString(@"Give a name",@"title of IRPeripheralNameEdit");
     self.navigationItem.hidesBackButton    = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self

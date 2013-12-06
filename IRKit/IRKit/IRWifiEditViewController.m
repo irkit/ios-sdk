@@ -34,7 +34,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Join Wifi Network";
+    self.title = IRLocalizedString(@"Join Wifi Network", @"title of IRWifiEdit");
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonPressed:)];
@@ -48,9 +48,6 @@
 - (void) viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
-
-    // set .peripheral before viewWillAppear
-//    _textField.text = _peripheral.customizedName;
 
     [self editingChanged:nil];
 }
@@ -74,7 +71,7 @@
     }
 
     if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
-        [[[UIAlertView alloc] initWithTitle:@"Password Invalid"
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Password Invalid", @"")
                                     message:nil
                                    delegate:nil
                           cancelButtonTitle:@"OK"
@@ -136,9 +133,9 @@
         case 0:
         {
             IREditCell *cell = (IREditCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierEdit];
-            cell.titleLabel.text = @"Name";
+            cell.titleLabel.text = IRLocalizedString(@"Name",@"wifi network name");
             cell.editTextField.delegate = self;
-            cell.editTextField.placeholder = @"Network Name";
+            cell.editTextField.placeholder = IRLocalizedString(@"Network Name",@"wifi network name placeholder");
             cell.editTextField.text = _keys.ssid;
             cell.tag = TAG_SSID_CELL;
             return cell;
@@ -152,7 +149,7 @@
                 if (cell == nil) {
                     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"IRKitWifiEditSecurityCell"];
                 }
-                cell.textLabel.text = @"Security";
+                cell.textLabel.text = IRLocalizedString(@"Security",@"security level");
                 cell.detailTextLabel.text = _keys.securityTypeString;
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
@@ -160,9 +157,9 @@
             case 1:
             {
                 IREditCell *cell = (IREditCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierEdit];
-                cell.titleLabel.text = @"Password";
+                cell.titleLabel.text = IRLocalizedString(@"Password",@"wifi password");
                 cell.editTextField.delegate = self;
-                cell.editTextField.placeholder = @"Password";
+                cell.editTextField.placeholder = @"";
                 cell.editTextField.text = _keys.password;
                 cell.editTextField.returnKeyType = UIReturnKeyDone;
                 cell.editTextField.tag = TAG_PASSWORD_TEXTFIELD;

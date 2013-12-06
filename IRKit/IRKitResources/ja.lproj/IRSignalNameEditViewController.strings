@@ -1,6 +1,6 @@
 
 /* Class = "IBUILabel"; text = "Give signal a name"; ObjectID = "327"; */
-"327.text" = "Give signal a name";
+"327.text" = "ボタンに名前をつけてください";
 
 /* Class = "IBUITextField"; placeholder = "ex: Living, Bedroom, ..."; ObjectID = "338"; */
-"338.placeholder" = "ex: Living, Bedroom, ...";
+"338.placeholder" = "ex: 電源オン,音量UP, ...";

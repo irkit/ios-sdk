@@ -1,6 +1,9 @@
 
-/* Class = "IBUILabel"; text = "Volume Up  "; ObjectID = "laK-A4-rN4"; */
-"laK-A4-rN4.text" = "Volume Up  ";
+/* Class = "IBUILabel"; text = "Volume Up
+ "; ObjectID = "laK-A4-rN4"; */
+"laK-A4-rN4.text" = "音量を最大にしてください
+ ";
 
 /* Class = "IBUIButton"; normalTitle = " Start"; ObjectID = "xDQ-VL-QGc"; */
 "xDQ-VL-QGc.normalTitle" = " Start";
+

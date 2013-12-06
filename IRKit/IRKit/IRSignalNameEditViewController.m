@@ -2,6 +2,7 @@
 #import "IRSignalNameEditViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
+#import "IRHelper.h"
 
 @interface IRSignalNameEditViewController ()
 
@@ -22,7 +23,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Decide a name...";
+    self.title = IRLocalizedString(@"Give a name",@"title of IRSignalNameEdit");
     self.navigationItem.hidesBackButton    = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self

@@ -1,6 +1,6 @@
 
 /* Class = "IBUILabel"; text = "Give IRKit a name"; ObjectID = "175"; */
-"175.text" = "Give IRKit a name";
+"175.text" = "IRKitに名前をつけてください";
 
 /* Class = "IBUITextField"; placeholder = "ex: Living, Bedroom, ..."; ObjectID = "414"; */
-"414.placeholder" = "ex: Living, Bedroom, ...";
+"414.placeholder" = "ex: リビング,寝室, ...";

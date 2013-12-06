@@ -1,9 +1,14 @@
 
-/* Class = "IBUILabel"; text = "Power Up your IRKit"; ObjectID = "12"; */
-"12.text" = "Power Up your IRKit";
+/* Class = "IBUILabel"; text = "Power Up your
+IRKit"; ObjectID = "12"; */
+"12.text" = "IRKitの電源を
+入れましょう";
 
-/* Class = "IBUILabel"; text = "Connect USB Micro-B"; ObjectID = "N0I-xf-e06"; */
-"N0I-xf-e06.text" = "Connect USB Micro-B";
+/* Class = "IBUILabel"; text = "Connect
+USB Micro-B"; ObjectID = "N0I-xf-e06"; */
+"N0I-xf-e06.text" = "USB Micro-B
+ケーブルを
+つないでください";
 
 /* Class = "IBUIButton"; normalTitle = "    Buy IRKit on Amazon"; ObjectID = "nUU-7e-4ed"; */
-"nUU-7e-4ed.normalTitle" = "    Buy IRKit on Amazon";
+"nUU-7e-4ed.normalTitle" = "    AmazonでIRKitを買う";

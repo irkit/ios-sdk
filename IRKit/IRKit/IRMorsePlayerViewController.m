@@ -63,7 +63,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Transferring Wifi credentials";
+    self.title = IRLocalizedString(@"WiFi Morse Setup",@"title of IRMorsePlayer");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];

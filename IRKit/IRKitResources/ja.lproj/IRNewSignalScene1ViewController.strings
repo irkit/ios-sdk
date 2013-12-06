@@ -2,8 +2,10 @@
 /* Class = "IBUILabel"; text = "IRKit"; ObjectID = "LjL-Lc-lqj"; */
 "LjL-Lc-lqj.text" = "IRKit";
 
-/* Class = "IBUILabel"; text = "Aim your plain old remote at IRKit and press a button"; ObjectID = "cI0-RD-WbM"; */
-"cI0-RD-WbM.text" = "Aim your plain old remote at IRKit and press a button";
+/* Class = "IBUILabel"; text = "Aim your plain old remote at IRKit
+and press a button"; ObjectID = "cI0-RD-WbM"; */
+"cI0-RD-WbM.text" = "ふつうのリモコンをIRKitに
+向けてボタンを押してください";
 
 /* Class = "IBUILabel"; text = "Plain Old Remote"; ObjectID = "oCh-y0-pCo"; */
-"oCh-y0-pCo.text" = "Plain Old Remote";
+"oCh-y0-pCo.text" = "ふつうのリモコン";

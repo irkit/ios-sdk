@@ -2,6 +2,7 @@
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
+#import "IRHelper.h"
 
 @interface IRNewPeripheralScene2ViewController ()
 
@@ -21,7 +22,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = @"Prepare for Morse";
+    self.title = IRLocalizedString(@"Prepare for Morse",@"title of IRNewPeripheralScene2");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];

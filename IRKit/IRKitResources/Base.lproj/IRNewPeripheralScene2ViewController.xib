@@ -15,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_prepare.png" translatesAutoresizingMaskIntoConstraints="NO" id="57">
-                    <rect key="frame" x="0.0" y="105" width="320" height="240"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_prepare3.png" translatesAutoresizingMaskIntoConstraints="NO" id="57">
+                    <rect key="frame" x="0.0" y="164" width="320" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="Ag1-oZ-fgB"/>
@@ -24,11 +24,11 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Put iOS device next to IRKit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="138">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                    <rect key="frame" x="0.0" y="73" width="320" height="88"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="SZm-ET-q66"/>
-                        <constraint firstAttribute="height" constant="105" id="ooQ-5L-Lv5"/>
+                        <constraint firstAttribute="height" constant="88" id="zQC-Yl-0ON"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
                     <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -69,8 +69,8 @@
                 <constraint firstAttribute="centerX" secondItem="138" secondAttribute="centerX" id="Jyn-iF-JYg"/>
                 <constraint firstAttribute="bottom" secondItem="hro-ef-BRm" secondAttribute="bottom" id="MvU-ZP-GD1"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="Rb0-F0-5MX"/>
-                <constraint firstItem="57" firstAttribute="top" secondItem="138" secondAttribute="bottom" id="g8c-os-JtZ"/>
-                <constraint firstItem="138" firstAttribute="top" secondItem="74" secondAttribute="top" id="gFt-me-SL1"/>
+                <constraint firstItem="57" firstAttribute="top" secondItem="138" secondAttribute="bottom" constant="3" id="ZBS-Gh-ckQ"/>
+                <constraint firstAttribute="centerY" secondItem="57" secondAttribute="centerY" id="plg-rq-CRv"/>
                 <constraint firstAttribute="trailing" secondItem="hro-ef-BRm" secondAttribute="trailing" id="tC1-6T-vW6"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -78,6 +78,6 @@
     </objects>
     <resources>
         <image name="icn_check2.png" width="24" height="24"/>
-        <image name="img_prepare.png" width="320" height="240"/>
+        <image name="img_prepare3.png" width="320" height="225"/>
     </resources>
 </document>
