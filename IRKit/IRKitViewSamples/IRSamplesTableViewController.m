@@ -77,7 +77,10 @@
 
 - (void)wifiEditViewController:(IRWifiEditViewController *)viewController
              didFinishWithInfo:(NSDictionary*)info {
-    LOG(@"info: ", info);
+    LOG(@"info: %@", info);
+    IRKeys *key = info[IRViewControllerResultKeys];
+    [key setKeys:@[@"A",@"B"]];
+    LOG(@"morse: %@", key.morseStringRepresentation);
 }
 
 #pragma mark - IRMorsePlayerViewControllerDelegate

@@ -1,0 +1,9 @@
+
+/* Class = "IBUILabel"; text = "Power Up your IRKit"; ObjectID = "12"; */
+"12.text" = "Power Up your IRKit";
+
+/* Class = "IBUILabel"; text = "Connect USB Micro-B"; ObjectID = "N0I-xf-e06"; */
+"N0I-xf-e06.text" = "Connect USB Micro-B";
+
+/* Class = "IBUIButton"; normalTitle = "    Buy IRKit on Amazon"; ObjectID = "nUU-7e-4ed"; */
+"nUU-7e-4ed.normalTitle" = "    Buy IRKit on Amazon";

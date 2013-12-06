@@ -5,6 +5,7 @@
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block;
 + (NSBundle*)resources;
++ (UIFont*)fontWithSize:(CGFloat)size;
 + (UIImage *)imageWithColor:(UIColor *)color;
 + (UIImage *)imageInResourceNamed:(NSString*)name;
 

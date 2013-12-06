@@ -1,0 +1,6 @@
+
+/* Class = "IBUILabel"; text = "Give IRKit a name"; ObjectID = "175"; */
+"175.text" = "Give IRKit a name";
+
+/* Class = "IBUITextField"; placeholder = "ex: Living, Bedroom, ..."; ObjectID = "414"; */
+"414.placeholder" = "ex: Living, Bedroom, ...";

@@ -1,11 +1,3 @@
-//
-//  IRMorsePlayerOperation.m
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2013/10/08.
-//  Copyright (c) 2013年 KAYAC Inc. All rights reserved.
-//
-
 #import "Log.h"
 #import "IRMorsePlayerOperation.h"
 @import AudioToolbox;

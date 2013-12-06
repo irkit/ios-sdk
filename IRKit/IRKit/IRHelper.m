@@ -24,6 +24,16 @@
     return resources;
 }
 
++ (UIFont*)fontWithSize:(CGFloat)size {
+    NSString *lang = [[NSLocale preferredLanguages] objectAtIndex:0];
+    if ([lang isEqualToString:@"ja"]) {
+        return [UIFont fontWithName:@"HiraKakuProN-W3" size:size];
+    }
+    else {
+        return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
+    }
+}
+
 + (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);

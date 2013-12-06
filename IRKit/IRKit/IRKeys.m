@@ -135,18 +135,33 @@ struct KeysCRCed
     // ssids should be limited to 32bytes
     NSMutableString *ret = @"".mutableCopy;
     for (int i=0; i<strnlen(utf8,33); i++) {
-        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i]]];
+        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }
 
+// if security type is WEP,
+// IRKit(GS1011MIPS) expects HEX representation of passwords,
+// and we transfer it's HEX representation,
+// so it's double ASCII -> HEX transformed.
+// WEP ASCII passwords can be 5 or 13 letters
 - (NSString*) passwordStringRepresentation {
     const char *utf8 = [_password UTF8String];
 
     // passwords should be limited to 63bytes
     NSMutableString *ret = @"".mutableCopy;
     for (int i=0; i<strnlen(utf8,64); i++) {
-        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i]]];
+        if ( (_security == IRSecurityTypeWEP) &&
+             ((_password.length == 5) ||
+              (_password.length == 13)) ) {
+            NSString *letter = [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF];
+            const char *hex = [letter UTF8String];
+            [ret appendString: [NSString stringWithFormat:@"%02x", hex[0] & 0xFF]];
+            [ret appendString: [NSString stringWithFormat:@"%02x", hex[1] & 0xFF]];
+        }
+        else {
+            [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+        }
     }
     return ret;
 }

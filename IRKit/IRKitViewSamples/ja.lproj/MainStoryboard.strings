@@ -1,0 +1,36 @@
+
+/* Class = "IBUILabel"; text = "IRNewPeripheralScene1"; ObjectID = "1R9-va-7Ru"; */
+"1R9-va-7Ru.text" = "IRNewPeripheralScene1";
+
+/* Class = "IBUILabel"; text = "words per minute"; ObjectID = "8yK-pC-NUm"; */
+"8yK-pC-NUm.text" = "words per minute";
+
+/* Class = "IBUILabel"; text = "IRWifiEdit"; ObjectID = "GFg-hH-QIv"; */
+"GFg-hH-QIv.text" = "IRWifiEdit";
+
+/* Class = "IBUILabel"; text = "IRNewPeripheralScene2"; ObjectID = "H7p-z1-pdE"; */
+"H7p-z1-pdE.text" = "IRNewPeripheralScene2";
+
+/* Class = "IBUILabel"; text = "message"; ObjectID = "cxq-yd-1ny"; */
+"cxq-yd-1ny.text" = "message";
+
+/* Class = "IBUITextField"; text = "100"; ObjectID = "hok-7z-a8w"; */
+"hok-7z-a8w.text" = "100";
+
+/* Class = "IBUILabel"; text = "IRNewSignalScene1"; ObjectID = "k2E-JS-TMm"; */
+"k2E-JS-TMm.text" = "IRNewSignalScene1";
+
+/* Class = "IBUILabel"; text = "IRWeb"; ObjectID = "mIp-am-dei"; */
+"mIp-am-dei.text" = "IRWeb";
+
+/* Class = "IBUILabel"; text = "IRPeripheralNameEdit"; ObjectID = "o66-9G-039"; */
+"o66-9G-039.text" = "IRPeripheralNameEdit";
+
+/* Class = "IBUILabel"; text = "IRMorse"; ObjectID = "t3t-Ri-PLE"; */
+"t3t-Ri-PLE.text" = "IRMorse";
+
+/* Class = "IBUINavigationItem"; title = "Root View Controller"; ObjectID = "toA-xw-K4B"; */
+"toA-xw-K4B.title" = "Root View Controller";
+
+/* Class = "IBUILabel"; text = "IRSignalNameEdit"; ObjectID = "y9D-p3-C2j"; */
+"y9D-p3-C2j.text" = "IRSignalNameEdit";

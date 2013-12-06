@@ -1,0 +1,6 @@
+
+/* Class = "IBUILabel"; text = "Give signal a name"; ObjectID = "327"; */
+"327.text" = "Give signal a name";
+
+/* Class = "IBUITextField"; placeholder = "ex: Living, Bedroom, ..."; ObjectID = "338"; */
+"338.placeholder" = "ex: Living, Bedroom, ...";

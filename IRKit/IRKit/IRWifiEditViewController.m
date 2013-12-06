@@ -69,6 +69,10 @@
     NSString* password = passwordCell.editTextField.text;
     LOG( @"password: %@", password );
 
+    if (! ssid.length) {
+        return false;
+    }
+
     if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
         [[[UIAlertView alloc] initWithTitle:@"Password Invalid"
                                     message:nil
