@@ -11,6 +11,7 @@
 #import "IRPeripheralCell.h"
 #import "IRMorsePlayerViewController.h"
 #import "IRWifiEditViewController.h"
+#import "IRHelper.h"
 
 @interface IRSamplesTableViewController ()
 

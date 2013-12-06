@@ -7,15 +7,18 @@
 #import "IRMorsePlayerOperation.h"
 #import "IRHTTPClient.h"
 #import "IRKit.h"
-#import "MediaPlayer/MPVolumeView.h"
+@import MediaPlayer;
+@import AudioToolbox;
 
 #define MORSE_WPM 100
 
 @interface IRMorsePlayerViewController ()
 
-@property (nonatomic) IRMorsePlayerOperationQueue *player;
+@property (strong, nonatomic) IBOutlet UIView *startButtonBox;
 @property (weak, nonatomic) IBOutlet MPVolumeView *volumeView;
+@property (nonatomic) IRMorsePlayerOperationQueue *player;
 @property (nonatomic) BOOL playing;
+@property (nonatomic) BOOL shownStartButtonView;
 
 @property (nonatomic, copy) NSString *morseMessage;
 @property (nonatomic) IRHTTPClient *doorWaiter;
@@ -30,13 +33,19 @@
     if (self) {
         // Custom initialization
         _player = [[IRMorsePlayerOperationQueue alloc] init];
-        _volumeView.showsRouteButton = false;
+
         _playing = false;
+        _shownStartButtonView = false;
 
         [_player addObserver:self
                   forKeyPath:@"operationCount"
                      options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                      context:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(volumeChanged:)
+                                                     name:@"AVSystemController_SystemVolumeDidChangeNotification"
+                                                   object:nil];
     }
     return self;
 }
@@ -45,6 +54,9 @@
     LOG_CURRENT_METHOD;
     [_player removeObserver:self
                  forKeyPath:@"operationCount"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    AudioSessionSetActive(false);
 }
 
 - (void)viewDidLoad {
@@ -57,7 +69,17 @@
                                                                                           action:@selector(cancelButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+
+    _volumeView.showsRouteButton = false;
+
+    // hide it initially
+    _startButtonBox.hidden = YES;
+
+    AudioSessionInitialize(NULL, NULL, NULL, NULL);
+    UInt32 category = kAudioSessionCategory_AmbientSound;
+    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+    AudioSessionSetActive(true);
+    [self updateStartButtonViewWithVolume:[[MPMusicPlayerController applicationMusicPlayer] volume]];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -108,6 +130,14 @@
     [_player cancelAllOperations];
 }
 
+#pragma mark - NSNotification
+
+- (void)volumeChanged:(NSNotification *)notification {
+    float volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
+    LOG( @"volume: %f", volume );
+    [self updateStartButtonViewWithVolume:volume];
+}
+
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -129,6 +159,22 @@
 
 #pragma mark - UI events
 
+- (void)updateStartButtonViewWithVolume:(float)volume {
+    LOG( @"volume: %f", volume );
+    if ( ! _shownStartButtonView && (volume == 1.0)) {
+        _shownStartButtonView = YES;
+        _startButtonBox.hidden = NO;
+        CGRect original = _startButtonBox.frame;
+        CGRect frame = _startButtonBox.frame;
+        frame.origin.y += 70;
+        _startButtonBox.frame = frame;
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             _startButtonBox.frame = original;
+                         }];
+    }
+}
+
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
@@ -142,6 +188,8 @@
 
 - (IBAction)startButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
+
+    AudioSessionSetActive(false);
 
     [IRHTTPClient createKeysWithCompletion: ^(NSHTTPURLResponse *res, NSArray *keys, NSError *error) {
         if (error) {

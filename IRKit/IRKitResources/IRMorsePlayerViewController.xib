@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IRMorsePlayerViewController">
             <connections>
+                <outlet property="startButtonBox" destination="WD0-F1-zgM" id="jp8-mm-iAU"/>
                 <outlet property="view" destination="74" id="104"/>
                 <outlet property="volumeView" destination="k2I-eo-h4L" id="frS-rJ-z8O"/>
             </connections>
@@ -65,7 +66,6 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="xDQ-VL-QGc" secondAttribute="bottom" constant="12" id="6Za-vd-O7I"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="GRy-Yg-yen"/>
                         <constraint firstAttribute="height" constant="70" id="Q9M-de-O7H"/>
                         <constraint firstItem="xDQ-VL-QGc" firstAttribute="leading" secondItem="WD0-F1-zgM" secondAttribute="leading" constant="12" id="Qbb-6X-Vo6"/>
                         <constraint firstAttribute="width" constant="320" id="ZX4-gf-pax"/>
