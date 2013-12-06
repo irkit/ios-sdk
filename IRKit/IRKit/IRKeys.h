@@ -11,7 +11,6 @@
 NS_ENUM( uint8_t, IRSecurityType ) {
     IRSecurityTypeNone = 0,
     IRSecurityTypeWEP  = 2,
-    IRSecurityTypeWPA  = 4,
     IRSecurityTypeWPA2 = 8,
 };
 

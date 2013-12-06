@@ -40,9 +40,6 @@
             ret = IRSecurityTypeWEP;
             break;
         case 2:
-            ret = IRSecurityTypeWPA;
-            break;
-        case 3:
             ret = IRSecurityTypeWPA2;
             break;
     }
@@ -58,11 +55,8 @@
         case IRSecurityTypeWEP:
             ret = 1;
             break;
-        case IRSecurityTypeWPA:
-            ret = 2;
-            break;
         case IRSecurityTypeWPA2:
-            ret = 3;
+            ret = 2;
             break;
     }
     return ret;
@@ -117,7 +111,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 3;
 }
 
 #pragma mark - UITableViewDelegate

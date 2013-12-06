@@ -8,7 +8,7 @@
 
 #import "Log.h"
 #import "IRKeys.h"
-#include "CRC8.h"
+#import "CRC8.h"
 
 #define MORSE_DELIMITER @"/"
 
@@ -55,11 +55,9 @@ struct KeysCRCed
             return @"None";
         case IRSecurityTypeWEP:
             return @"WEP";
-        case IRSecurityTypeWPA:
-            return @"WPA";
         case IRSecurityTypeWPA2:
         default:
-            return @"WPA2";
+            return @"WPA/WPA2";
     }
 }
 
@@ -117,8 +115,6 @@ struct KeysCRCed
             return @"0";
         case IRSecurityTypeWEP:
             return @"2";
-        case IRSecurityTypeWPA:
-            return @"4";
         case IRSecurityTypeWPA2:
         default:
             return @"8";
