@@ -44,7 +44,6 @@
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
                                 <action selector="editingChanged:" destination="-1" eventType="editingChanged" id="348"/>
-                                <action selector="processTextField:" destination="-1" eventType="editingDidEnd" id="349"/>
                                 <outlet property="delegate" destination="-1" id="350"/>
                             </connections>
                         </textField>

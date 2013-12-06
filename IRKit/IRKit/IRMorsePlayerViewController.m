@@ -169,12 +169,12 @@
                                       IRPeripheral *p = [i.peripherals IRPeripheralForName:name];
                                       if ( ! p ) {
                                           p = [i.peripherals registerPeripheralWithName:name];
-                                          p.key = _keys.mykey;
-                                          [i.peripherals save];
-                                          [p getModelNameAndVersionWithCompletion:^{
-                                              [i.peripherals save];
-                                          }];
                                       }
+                                      p.key = _keys.mykey;
+                                      [i.peripherals save];
+                                      [p getModelNameAndVersionWithCompletion:^{
+                                          [i.peripherals save];
+                                      }];
 
                                       [self.delegate morsePlayerViewController:self
                                                              didFinishWithInfo:@{

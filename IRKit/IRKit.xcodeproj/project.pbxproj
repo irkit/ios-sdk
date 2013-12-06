@@ -1122,6 +1122,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A92507FB75A49B8B9640873 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/IRKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRKit/IRKit-Prefix.pch";
@@ -1135,6 +1136,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A92507FB75A49B8B9640873 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/IRKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRKit/IRKit-Prefix.pch";

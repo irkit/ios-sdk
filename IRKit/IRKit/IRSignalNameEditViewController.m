@@ -46,7 +46,7 @@
     [super viewWillDisappear:animated];
 }
 
-- (IBAction) processTextField: (id)sender {
+- (void) processTextField: (id)sender {
     LOG( @"text: %@", _textField.text );
 
     if (! [self isTextValid]) {
