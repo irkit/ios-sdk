@@ -70,6 +70,12 @@
     LOG( @"password: %@", password );
 
     if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
+        [[[UIAlertView alloc] initWithTitle:@"Password Invalid"
+                                    message:nil
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+        [passwordCell becomeFirstResponder];
         return false;
     }
 
@@ -156,6 +162,7 @@
                 cell.editTextField.text = _keys.password;
                 cell.editTextField.returnKeyType = UIReturnKeyDone;
                 cell.editTextField.tag = TAG_PASSWORD_TEXTFIELD;
+                cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
                 cell.tag = TAG_PASSWORD_CELL;
                 return cell;
             }

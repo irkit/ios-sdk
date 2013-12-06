@@ -62,8 +62,16 @@ struct KeysCRCed
 }
 
 + (BOOL) isPassword:(NSString*)password validForSecurityType:(enum IRSecurityType)securityType {
-    // TODO
-    return 1;
+    if (securityType == IRSecurityTypeWEP) {
+        NSUInteger length = password.length;
+        // WEP passwords can only be 5 or 13 in ASCII, 10 or 26 in HEX
+        if (length == 5 || length == 13 || length == 10 || length == 26) {
+            // TODO invalidate if length is valid for ASCII but password is HEX or vise versa
+            return YES;
+        }
+        return NO;
+    }
+    return YES;
 }
 
 // [0248]/#{SSID}/#{Password}/#{Key}///////#{CRC}
