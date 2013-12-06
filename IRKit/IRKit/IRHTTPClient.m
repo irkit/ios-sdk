@@ -96,8 +96,9 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 + (void)postSignal:(IRSignal *)signal withCompletion:(void (^)(NSError *error))completion {
     NSMutableDictionary *payload = @{}.mutableCopy;
-    payload[ @"freq" ] = signal.frequency;
-    payload[ @"data" ] = signal.data;
+    payload[ @"freq" ]   = signal.frequency;
+    payload[ @"data" ]   = signal.data;
+    payload[ @"format" ] = signal.format;
 
     if (signal.peripheral.isReachableViaWifi) {
         NSURLRequest *request = [self makePOSTJSONRequestToLocalPath:@"/messages"
@@ -114,10 +115,12 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }];
     }
     else {
-        payload[ @"key" ] = signal.peripheral.key;
-        NSURLRequest *request = [self makePOSTJSONRequestToInternetPath:@"/messages"
-                                                             withParams:payload
-                                                        timeoutInterval:DEFAULT_TIMEOUT];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:nil error:nil];
+        NSString *json   = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/messages"
+                                                         withParams:@{ @"message" : json,
+                                                                       @"key"     : signal.peripheral.key }
+                                                    timeoutInterval:DEFAULT_TIMEOUT];
         [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
             if (error) {
                 return completion( error );
@@ -261,6 +264,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 + (void)issueRequest:(NSURLRequest*)request
           completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
+    LOG(@"request: %@", request);
     [IRHTTPJSONOperation sendRequest:request
                              handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
                                  if (! completion) {

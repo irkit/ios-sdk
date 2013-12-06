@@ -38,6 +38,7 @@
     _receivedDate = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"receivedDate"] doubleValue]];
 
     _hostname = dictionary[@"hostname"];
+    _custom   = dictionary[@"custom"];
 
     return self;
 }
@@ -64,6 +65,7 @@
              @"frequency":    _frequency,
              @"receivedDate": [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970],
              @"hostname":     _hostname,
+             @"custom":       _custom ? _custom : [NSNull null],
              };
 }
 
@@ -107,6 +109,7 @@
     [coder encodeObject:_frequency    forKey:@"f"];
     [coder encodeObject:_receivedDate forKey:@"r"];
     [coder encodeObject:_hostname     forKey:@"h"];
+    [coder encodeObject:_custom       forKey:@"c"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
@@ -118,6 +121,7 @@
         _frequency    = [coder decodeObjectForKey:@"f"];
         _receivedDate = [coder decodeObjectForKey:@"r"];
         _hostname     = [coder decodeObjectForKey:@"h"];
+        _custom       = [coder decodeObjectForKey:@"c"];
         
         if ( ! _name ) {
             _name = @"unknown";

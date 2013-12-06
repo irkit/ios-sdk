@@ -14,6 +14,7 @@
 @property (nonatomic) NSString *format; // "raw" only for now
 @property (nonatomic) NSNumber *frequency; // kHz
 @property (nonatomic) NSDate *receivedDate;
+@property (nonatomic) NSDictionary *custom;
 @property (nonatomic) IRPeripheral *peripheral;
 
 @end

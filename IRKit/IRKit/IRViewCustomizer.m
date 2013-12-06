@@ -26,6 +26,7 @@
 
     _viewDidLoad = ^(UIViewController* viewController) {
         viewController.edgesForExtendedLayout = UIRectEdgeNone;
+        viewController.view.backgroundColor = [IRViewCustomizer defaultViewBackgroundColor];
 
         if ([viewController isKindOfClass:[IRNewSignalScene1ViewController class]] ||
             [viewController isKindOfClass:[IRNewPeripheralScene1ViewController class]]) {
@@ -56,31 +57,7 @@
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
             [IRViewCustomizer customizeNavigationBar:bar];
-
-            // custom done button
-//            UIBarButtonItem *original = viewController.navigationItem.rightBarButtonItem;
-//
-//            UIImage *inactiveImage = [IRHelper imageInResourceNamed:@"btn_navibar_disable"];
-//            UIImage *activeImage   = [IRHelper imageInResourceNamed:@"btn_navibar"];
-//            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//            [button setTitle:@"Done" forState:UIControlStateNormal];
-//            [button setTitleColor:[IRViewCustomizer textColor] forState:UIControlStateNormal];
-//            [button setTitleColor:[IRViewCustomizer inactiveFontColor] forState:UIControlStateDisabled];
-//            button.titleLabel.font = [UIFont fontWithName:@"Avenir-Light" size:12.];
-//            [button setBackgroundImage:inactiveImage
-//                              forState:UIControlStateDisabled];
-//            [button setBackgroundImage:activeImage
-//                              forState:UIControlStateNormal];
-//            button.frame = (CGRect){ 0, 0, 45, 30 };
-//            [button setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,0)]; // move the button **px right
-//            [button addTarget:viewController
-//                       action:original.action
-//             forControlEvents:UIControlEventTouchUpInside];
-//            UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
-//
-//            viewController.navigationItem.rightBarButtonItem = item;
         }
-        // viewController.view.backgroundColor = [IRViewCustomizer defaultViewBackgroundColor];
     };
 
 
@@ -101,16 +78,8 @@
     return [UIColor colorWithRed:0x79/255. green:0x7a/255. blue:0x80/255. alpha:1.0];
 }
 
-+ (UIColor*) inactiveButtonBackgroundColor {
-    return [UIColor colorWithRed:0x2b/255. green:0x2d/255. blue:0x33/255. alpha:1.0];
-}
-
-+ (UIColor*) activeButtonBackgroundColor {
-    return [UIColor colorWithRed:0x00/255. green:0xcc/255. blue:0xcc/255. alpha:1.0];
-}
-
 + (UIColor*) defaultViewBackgroundColor {
-    return [UIColor colorWithRed:0x16/255. green:0x16/255. blue:0x1a/255. alpha:1.0];
+    return [UIColor colorWithRed:0xE5/255. green:0xE5/255. blue:0xE5/255. alpha:1.0];
 }
 
 + (void)customizeCancelButton: (UIBarButtonItem*)original
@@ -130,9 +99,9 @@
 }
 
 + (void)customizeNavigationBar: (UINavigationBar*)bar {
-    bar.barTintColor = [UIColor whiteColor];
+    bar.barTintColor = [UIColor colorWithRed:0xF5/255. green:0xF5/255. blue:0xF5/255. alpha:1.0];
     bar.tintColor = [self activeFontColor];
-    // bar.translucent = NO; // if we don't want transparency
+    bar.translucent = NO; // if we don't want transparency
 
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary: [[UINavigationBar appearance] titleTextAttributes]];
     [attributes setObject:[UIFont fontWithName:@"HelveticaNeue-Light" size:20.]

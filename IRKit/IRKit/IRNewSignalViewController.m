@@ -7,8 +7,6 @@
 
 @interface IRNewSignalViewController ()
 
-@property (nonatomic) UINavigationController *navController;
-
 @end
 
 @implementation IRNewSignalViewController

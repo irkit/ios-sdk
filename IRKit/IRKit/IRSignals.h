@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, IRAnimatingType) {
 - (void)saveToStandardUserDefaultsWithKey:(NSString*)key;
 - (NSString*)JSONRepresentation;
 - (void)sendSequentiallyWithCompletion:(void (^)(NSError *error))completion;
+- (NSUInteger) indexOfSignal: (IRSignal*) signal;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 

@@ -89,8 +89,6 @@
     return _signals[ index ];
 }
 
-#pragma mark - Private methods
-
 - (NSUInteger) indexOfSignal: (IRSignal*) signal {
     LOG_CURRENT_METHOD;
 
