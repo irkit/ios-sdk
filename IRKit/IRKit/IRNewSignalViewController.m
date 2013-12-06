@@ -3,6 +3,7 @@
 #import "IRSignal.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
+#import "IRHelper.h"
 
 @interface IRNewSignalViewController ()
 
@@ -18,11 +19,8 @@
     CGRect bounds = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:bounds];
 
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
     IRNewSignalScene1ViewController *first = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
-                                                                                               bundle:resources];
+                                                                                               bundle:[IRHelper resources]];
     first.delegate = self;
 
     _navController = [[UINavigationController alloc] initWithRootViewController:first];

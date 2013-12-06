@@ -36,12 +36,9 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
-                                                                  ofType:@"bundle"]];
-    [self.tableView registerNib:[UINib nibWithNibName:@"IRSignalCell" bundle:resources]
+    [self.tableView registerNib:[UINib nibWithNibName:@"IRSignalCell" bundle:[IRHelper resources]]
          forCellReuseIdentifier:IRKitCellIdentifierSignal];
-    [self.tableView registerNib:[UINib nibWithNibName:@"IRPeripheralCell" bundle:resources]
+    [self.tableView registerNib:[UINib nibWithNibName:@"IRPeripheralCell" bundle:[IRHelper resources]]
          forCellReuseIdentifier:IRKitCellIdentifierPeripheral];
 }
 
@@ -148,8 +145,7 @@
     LOG_CURRENT_METHOD;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    NSBundle *main = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources" ofType:@"bundle"]];
+    NSBundle *resources = [IRHelper resources];
     switch (indexPath.row) {
         case 0:
         {
