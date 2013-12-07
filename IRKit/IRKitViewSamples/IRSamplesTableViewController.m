@@ -106,7 +106,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return 10;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -134,7 +134,17 @@
         case 7:
             return [tableView dequeueReusableCellWithIdentifier:@"IRWifiEdit"];
         case 8:
-            return [tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
+        {
+            UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
+            cell.textLabel.text = @"Morse";
+            return cell;
+        }
+        case 9:
+        {
+            UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
+            cell.textLabel.text = @"Morse (play)";
+            return cell;
+        }
         default:
             return [tableView dequeueReusableCellWithIdentifier:@"IRNewSignalScene1"];
     }
@@ -231,9 +241,23 @@
             break;
         case 8:
         {
-            IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
-            c.delegate = self;
-            [self.navigationController pushViewController:c animated:YES];
+        IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
+        c.delegate = self;
+        [self.navigationController pushViewController:c animated:YES];
+        }
+            break;
+        case 9:
+        {
+        IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
+        c.delegate = self;
+        IRKeys *keys = [[IRKeys alloc] init];
+        keys.ssid = @"ssid";
+        keys.password = @"password";
+        keys.security = IRSecurityTypeWPA2;
+        keys.pairedkey = @"0000";
+        c.keys = keys;
+        [self.navigationController pushViewController:c animated:YES];
+        [c performSelector:@selector(startPlaying) withObject:nil afterDelay:1];
         }
             break;
         default:

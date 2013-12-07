@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IRMorsePlayerViewController">
             <connections>
+                <outlet property="animatingImageView" destination="Mrb-d4-gqn" id="xAD-NZ-jCi"/>
+                <outlet property="fullscreenBackgroundView" destination="wtz-dO-NuY" id="uHo-xk-Sfb"/>
                 <outlet property="startButtonBox" destination="WD0-F1-zgM" id="jp8-mm-iAU"/>
                 <outlet property="view" destination="74" id="104"/>
                 <outlet property="volumeView" destination="k2I-eo-h4L" id="frS-rJ-z8O"/>
@@ -73,16 +75,35 @@
                         <constraint firstItem="xDQ-VL-QGc" firstAttribute="top" secondItem="WD0-F1-zgM" secondAttribute="top" constant="12" id="p59-8B-h1A"/>
                     </constraints>
                 </view>
+                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtz-dO-NuY">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mrb-d4-gqn">
+                    <rect key="frame" x="85" y="209" width="150" height="150"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="W52-vZ-ZQm"/>
+                        <constraint firstAttribute="height" constant="150" id="wew-AW-1Uj"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="Mrb-d4-gqn" secondAttribute="centerX" id="4DK-kn-wP2"/>
                 <constraint firstAttribute="centerX" secondItem="k2I-eo-h4L" secondAttribute="centerX" id="Aum-P1-bFb"/>
                 <constraint firstItem="75I-xP-EJA" firstAttribute="top" secondItem="laK-A4-rN4" secondAttribute="bottom" constant="3" id="C3a-BQ-v3b"/>
+                <constraint firstAttribute="centerY" secondItem="Mrb-d4-gqn" secondAttribute="centerY" id="IAN-9E-cvf"/>
                 <constraint firstAttribute="centerX" secondItem="75I-xP-EJA" secondAttribute="centerX" id="JrE-hd-4PJ"/>
                 <constraint firstAttribute="centerX" secondItem="laK-A4-rN4" secondAttribute="centerX" id="LUl-aw-zuA"/>
+                <constraint firstItem="wtz-dO-NuY" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="RLB-bP-3e4"/>
                 <constraint firstAttribute="centerX" secondItem="WD0-F1-zgM" secondAttribute="centerX" id="UkP-7S-vdd"/>
                 <constraint firstAttribute="centerY" secondItem="75I-xP-EJA" secondAttribute="centerY" id="WZS-Ei-S9w"/>
                 <constraint firstAttribute="bottom" secondItem="WD0-F1-zgM" secondAttribute="bottom" id="YCA-mx-5Hp"/>
+                <constraint firstAttribute="trailing" secondItem="wtz-dO-NuY" secondAttribute="trailing" id="ZYb-yY-IeA"/>
+                <constraint firstAttribute="bottom" secondItem="wtz-dO-NuY" secondAttribute="bottom" id="cyZ-If-43H"/>
+                <constraint firstItem="wtz-dO-NuY" firstAttribute="top" secondItem="74" secondAttribute="top" id="wOI-H3-M2w"/>
                 <constraint firstItem="75I-xP-EJA" firstAttribute="top" secondItem="k2I-eo-h4L" secondAttribute="bottom" constant="-25" id="xKH-3s-IXD"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -7,6 +7,7 @@
 #import "IRMorsePlayerOperation.h"
 #import "IRHTTPClient.h"
 #import "IRKit.h"
+#import "IRHelper.h"
 @import MediaPlayer;
 @import AudioToolbox;
 
@@ -14,8 +15,11 @@
 
 @interface IRMorsePlayerViewController ()
 
-@property (strong, nonatomic) IBOutlet UIView *startButtonBox;
+@property (weak, nonatomic) IBOutlet UIView *startButtonBox;
 @property (weak, nonatomic) IBOutlet MPVolumeView *volumeView;
+@property (weak, nonatomic) IBOutlet UIView *fullscreenBackgroundView;
+@property (weak, nonatomic) IBOutlet UIImageView *animatingImageView;
+
 @property (nonatomic) IRMorsePlayerOperationQueue *player;
 @property (nonatomic) BOOL playing;
 @property (nonatomic) BOOL shownStartButtonView;
@@ -74,6 +78,8 @@
 
     // hide it initially
     _startButtonBox.hidden = YES;
+    _fullscreenBackgroundView.hidden = YES;
+    _animatingImageView.hidden = YES;
 
     AudioSessionInitialize(NULL, NULL, NULL, NULL);
     UInt32 category = kAudioSessionCategory_AmbientSound;
@@ -109,6 +115,43 @@
     LOG_CURRENT_METHOD;
 
     _playing = true;
+
+    // setup views
+
+    _fullscreenBackgroundView.hidden = NO;
+    _fullscreenBackgroundView.alpha = 0;
+    _animatingImageView.hidden = NO;
+    _animatingImageView.alpha = 0;
+    _animatingImageView.animationImages = @[
+                                            [IRHelper imageInResourceNamed:@"anime_01"],
+                                            [IRHelper imageInResourceNamed:@"anime_02"],
+                                            [IRHelper imageInResourceNamed:@"anime_03"],
+                                            [IRHelper imageInResourceNamed:@"anime_04"],
+                                            [IRHelper imageInResourceNamed:@"anime_05"],
+                                            [IRHelper imageInResourceNamed:@"anime_06"],
+                                            [IRHelper imageInResourceNamed:@"anime_07"],
+                                            [IRHelper imageInResourceNamed:@"anime_08"],
+                                            [IRHelper imageInResourceNamed:@"anime_09"],
+                                            [IRHelper imageInResourceNamed:@"anime_10"],
+                                            [IRHelper imageInResourceNamed:@"anime_11"],
+                                            [IRHelper imageInResourceNamed:@"anime_12"],
+                                            [IRHelper imageInResourceNamed:@"anime_13"],
+                                            [IRHelper imageInResourceNamed:@"anime_14"],
+                                            [IRHelper imageInResourceNamed:@"anime_15"],
+                                            [IRHelper imageInResourceNamed:@"anime_16"],
+                                            [IRHelper imageInResourceNamed:@"anime_17"],
+                                            [IRHelper imageInResourceNamed:@"anime_18"],
+                                            [IRHelper imageInResourceNamed:@"anime_19"],
+                                            [IRHelper imageInResourceNamed:@"anime_20"]
+                                            ];
+    [_animatingImageView startAnimating];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         _fullscreenBackgroundView.alpha = 0.2;
+                         _animatingImageView.alpha       = 1.;
+                     }];
+
+    // setup player
 
     _morseMessage = [_keys morseStringRepresentation];
     LOG(@"morseMessage: %@", _morseMessage);

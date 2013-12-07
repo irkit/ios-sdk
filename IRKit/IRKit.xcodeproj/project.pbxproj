@@ -84,6 +84,26 @@
 		C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78F6FE5182B8D89002AAC7B /* IREditCell.xib */; };
 		C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F6FE7182B8E77002AAC7B /* IREditCell.m */; };
 		C79C5949183F5E49002136CD /* IRSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = C79C5948183F5E49002136CD /* IRSearcher.m */; };
+		C79CCB62185356EA00ECB707 /* anime_20@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB4E185356EA00ECB707 /* anime_20@2x.png */; };
+		C79CCB63185356EA00ECB707 /* anime_19@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB4F185356EA00ECB707 /* anime_19@2x.png */; };
+		C79CCB64185356EA00ECB707 /* anime_18@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB50185356EA00ECB707 /* anime_18@2x.png */; };
+		C79CCB65185356EA00ECB707 /* anime_17@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB51185356EA00ECB707 /* anime_17@2x.png */; };
+		C79CCB66185356EA00ECB707 /* anime_16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB52185356EA00ECB707 /* anime_16@2x.png */; };
+		C79CCB67185356EA00ECB707 /* anime_15@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB53185356EA00ECB707 /* anime_15@2x.png */; };
+		C79CCB68185356EA00ECB707 /* anime_14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB54185356EA00ECB707 /* anime_14@2x.png */; };
+		C79CCB69185356EA00ECB707 /* anime_13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB55185356EA00ECB707 /* anime_13@2x.png */; };
+		C79CCB6A185356EA00ECB707 /* anime_12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB56185356EA00ECB707 /* anime_12@2x.png */; };
+		C79CCB6B185356EA00ECB707 /* anime_11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB57185356EA00ECB707 /* anime_11@2x.png */; };
+		C79CCB6C185356EA00ECB707 /* anime_10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB58185356EA00ECB707 /* anime_10@2x.png */; };
+		C79CCB6D185356EA00ECB707 /* anime_08@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB59185356EA00ECB707 /* anime_08@2x.png */; };
+		C79CCB6E185356EA00ECB707 /* anime_09@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB5A185356EA00ECB707 /* anime_09@2x.png */; };
+		C79CCB6F185356EA00ECB707 /* anime_07@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB5B185356EA00ECB707 /* anime_07@2x.png */; };
+		C79CCB70185356EA00ECB707 /* anime_06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB5C185356EA00ECB707 /* anime_06@2x.png */; };
+		C79CCB71185356EA00ECB707 /* anime_05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB5D185356EA00ECB707 /* anime_05@2x.png */; };
+		C79CCB72185356EA00ECB707 /* anime_04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB5E185356EA00ECB707 /* anime_04@2x.png */; };
+		C79CCB73185356EA00ECB707 /* anime_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB5F185356EA00ECB707 /* anime_03@2x.png */; };
+		C79CCB74185356EA00ECB707 /* anime_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB60185356EA00ECB707 /* anime_02@2x.png */; };
+		C79CCB75185356EA00ECB707 /* anime_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C79CCB61185356EA00ECB707 /* anime_01@2x.png */; };
 		C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */; };
 		C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350317AA5D3A00C8679B /* icn_signal.png */; };
 		C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350617AA5D7300C8679B /* icn_device@2x.png */; };
@@ -276,6 +296,26 @@
 		C78F6FE8182B8E77002AAC7B /* IREditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IREditCell.h; sourceTree = "<group>"; };
 		C79C5947183F5E49002136CD /* IRSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSearcher.h; sourceTree = "<group>"; };
 		C79C5948183F5E49002136CD /* IRSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSearcher.m; sourceTree = "<group>"; };
+		C79CCB4E185356EA00ECB707 /* anime_20@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_20@2x.png"; sourceTree = "<group>"; };
+		C79CCB4F185356EA00ECB707 /* anime_19@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_19@2x.png"; sourceTree = "<group>"; };
+		C79CCB50185356EA00ECB707 /* anime_18@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_18@2x.png"; sourceTree = "<group>"; };
+		C79CCB51185356EA00ECB707 /* anime_17@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_17@2x.png"; sourceTree = "<group>"; };
+		C79CCB52185356EA00ECB707 /* anime_16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_16@2x.png"; sourceTree = "<group>"; };
+		C79CCB53185356EA00ECB707 /* anime_15@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_15@2x.png"; sourceTree = "<group>"; };
+		C79CCB54185356EA00ECB707 /* anime_14@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_14@2x.png"; sourceTree = "<group>"; };
+		C79CCB55185356EA00ECB707 /* anime_13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_13@2x.png"; sourceTree = "<group>"; };
+		C79CCB56185356EA00ECB707 /* anime_12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_12@2x.png"; sourceTree = "<group>"; };
+		C79CCB57185356EA00ECB707 /* anime_11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_11@2x.png"; sourceTree = "<group>"; };
+		C79CCB58185356EA00ECB707 /* anime_10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_10@2x.png"; sourceTree = "<group>"; };
+		C79CCB59185356EA00ECB707 /* anime_08@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_08@2x.png"; sourceTree = "<group>"; };
+		C79CCB5A185356EA00ECB707 /* anime_09@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_09@2x.png"; sourceTree = "<group>"; };
+		C79CCB5B185356EA00ECB707 /* anime_07@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_07@2x.png"; sourceTree = "<group>"; };
+		C79CCB5C185356EA00ECB707 /* anime_06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_06@2x.png"; sourceTree = "<group>"; };
+		C79CCB5D185356EA00ECB707 /* anime_05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_05@2x.png"; sourceTree = "<group>"; };
+		C79CCB5E185356EA00ECB707 /* anime_04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_04@2x.png"; sourceTree = "<group>"; };
+		C79CCB5F185356EA00ECB707 /* anime_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_03@2x.png"; sourceTree = "<group>"; };
+		C79CCB60185356EA00ECB707 /* anime_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_02@2x.png"; sourceTree = "<group>"; };
+		C79CCB61185356EA00ECB707 /* anime_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_01@2x.png"; sourceTree = "<group>"; };
 		C79DE3B1176F20A30088679E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C79DE3B3176F20B50088679E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C79DE3B9176F25260088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -571,6 +611,26 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C79CCB4E185356EA00ECB707 /* anime_20@2x.png */,
+				C79CCB4F185356EA00ECB707 /* anime_19@2x.png */,
+				C79CCB50185356EA00ECB707 /* anime_18@2x.png */,
+				C79CCB51185356EA00ECB707 /* anime_17@2x.png */,
+				C79CCB52185356EA00ECB707 /* anime_16@2x.png */,
+				C79CCB53185356EA00ECB707 /* anime_15@2x.png */,
+				C79CCB54185356EA00ECB707 /* anime_14@2x.png */,
+				C79CCB55185356EA00ECB707 /* anime_13@2x.png */,
+				C79CCB56185356EA00ECB707 /* anime_12@2x.png */,
+				C79CCB57185356EA00ECB707 /* anime_11@2x.png */,
+				C79CCB58185356EA00ECB707 /* anime_10@2x.png */,
+				C79CCB59185356EA00ECB707 /* anime_08@2x.png */,
+				C79CCB5A185356EA00ECB707 /* anime_09@2x.png */,
+				C79CCB5B185356EA00ECB707 /* anime_07@2x.png */,
+				C79CCB5C185356EA00ECB707 /* anime_06@2x.png */,
+				C79CCB5D185356EA00ECB707 /* anime_05@2x.png */,
+				C79CCB5E185356EA00ECB707 /* anime_04@2x.png */,
+				C79CCB5F185356EA00ECB707 /* anime_03@2x.png */,
+				C79CCB60185356EA00ECB707 /* anime_02@2x.png */,
+				C79CCB61185356EA00ECB707 /* anime_01@2x.png */,
 				C721651B18521C80000BD43D /* Localizable.strings */,
 				C7AC32111850A64200BB190D /* img_remote3@2x.png */,
 				C75CF063185062600086ED4F /* img_powerup3@2x.png */,
@@ -780,11 +840,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */,
+				C79CCB6D185356EA00ECB707 /* anime_08@2x.png in Resources */,
+				C79CCB65185356EA00ECB707 /* anime_17@2x.png in Resources */,
 				C707ECCF184C7C6E00AC5F0B /* icn_navibar_menu@2x.png in Resources */,
+				C79CCB6A185356EA00ECB707 /* anime_12@2x.png in Resources */,
 				C707ECD1184C7C6E00AC5F0B /* icn_navibar_add@2x.png in Resources */,
 				C707ECD2184C7C6E00AC5F0B /* icn_navibar_back@2x.png in Resources */,
 				C707ECD6184C84CE00AC5F0B /* img_prepare3@2x.png in Resources */,
+				C79CCB6F185356EA00ECB707 /* anime_07@2x.png in Resources */,
 				C75CF064185062600086ED4F /* img_powerup3@2x.png in Resources */,
+				C79CCB75185356EA00ECB707 /* anime_01@2x.png in Resources */,
+				C79CCB71185356EA00ECB707 /* anime_05@2x.png in Resources */,
 				C7E4E31D18520C6B00EC864E /* IRNewPeripheralScene1ViewController.xib in Resources */,
 				C7E4E32F18520CAB00EC864E /* IRWifiEditViewController.xib in Resources */,
 				C707ECD0184C7C6E00AC5F0B /* icn_check2@2x.png in Resources */,
@@ -795,14 +861,28 @@
 				C721651D18521C80000BD43D /* Localizable.strings in Resources */,
 				C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */,
 				C75CFC8617A65E1C00870A1B /* IRPeripheralCell.xib in Resources */,
+				C79CCB6E185356EA00ECB707 /* anime_09@2x.png in Resources */,
 				C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */,
+				C79CCB6B185356EA00ECB707 /* anime_11@2x.png in Resources */,
 				C7E4E32C18520CA700EC864E /* IRSignalNameEditViewController.xib in Resources */,
 				C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */,
+				C79CCB73185356EA00ECB707 /* anime_03@2x.png in Resources */,
+				C79CCB72185356EA00ECB707 /* anime_04@2x.png in Resources */,
+				C79CCB6C185356EA00ECB707 /* anime_10@2x.png in Resources */,
+				C79CCB70185356EA00ECB707 /* anime_06@2x.png in Resources */,
+				C79CCB62185356EA00ECB707 /* anime_20@2x.png in Resources */,
 				C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */,
+				C79CCB64185356EA00ECB707 /* anime_18@2x.png in Resources */,
 				C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */,
+				C79CCB68185356EA00ECB707 /* anime_14@2x.png in Resources */,
+				C79CCB69185356EA00ECB707 /* anime_13@2x.png in Resources */,
 				C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */,
+				C79CCB74185356EA00ECB707 /* anime_02@2x.png in Resources */,
 				C7AC32121850A64200BB190D /* img_remote3@2x.png in Resources */,
+				C79CCB66185356EA00ECB707 /* anime_16@2x.png in Resources */,
+				C79CCB67185356EA00ECB707 /* anime_15@2x.png in Resources */,
 				C7E4E32018520C9100EC864E /* IRMorsePlayerViewController.xib in Resources */,
+				C79CCB63185356EA00ECB707 /* anime_19@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
