@@ -80,6 +80,10 @@
     }];
 }
 
++ (UIColor*) keyColor {
+    return [UIColor colorWithRed:0x00/255. green:0xa8/255. blue:0xff/255. alpha:1.0];
+}
+
 // for navigationbar, normal text
 + (UIColor*) textColor {
     return [UIColor colorWithRed:0x33/255. green:0x33/255. blue:0x33/255. alpha:1.0];
@@ -87,7 +91,7 @@
 
 // for buttons
 + (UIColor*) activeFontColor {
-    return [UIColor colorWithRed:0x00/255. green:0xa8/255. blue:0xff/255. alpha:1.0];
+    return [self keyColor];
 }
 
 + (UIColor*) inactiveFontColor {
