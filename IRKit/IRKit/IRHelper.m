@@ -21,6 +21,13 @@ NSString *IRLocalizedString(NSString* key, NSString* comment) {
 
 #pragma mark - View related
 
++ (void) enumerateSubviewsOfRootView:(UIView*)view usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
+    block(view, 0, 0);
+    for (UIView *subview in view.subviews) {
+        [self enumerateSubviewsOfRootView:subview usingBlock:block];
+    }
+}
+
 + (NSBundle*) resources {
     NSBundle *main      = [NSBundle mainBundle];
     NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"

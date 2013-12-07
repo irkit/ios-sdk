@@ -27,6 +27,7 @@
     _viewDidLoad = ^(UIViewController* viewController) {
         viewController.edgesForExtendedLayout = UIRectEdgeNone;
         viewController.view.backgroundColor = [IRViewCustomizer defaultViewBackgroundColor];
+        [self customizeLabelFonts:viewController.view];
 
         if ([viewController isKindOfClass:[IRNewSignalScene1ViewController class]] ||
             [viewController isKindOfClass:[IRNewPeripheralScene1ViewController class]]) {
@@ -62,6 +63,21 @@
 
 
     return self;
+}
+
+- (void) customizeLabelFonts: (UIView*)rootView {
+    if (! [[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"ja"]) {
+        // only ja needs to change font
+        return;
+    }
+
+    [IRHelper enumerateSubviewsOfRootView:rootView usingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[UILabel class]] || [obj isKindOfClass:[UITextField class]]) {
+            UILabel *label = (UILabel*)obj;
+            UIFont *font   = label.font;
+            label.font     = [IRHelper fontWithSize:font.pointSize];
+        }
+    }];
 }
 
 // for navigationbar, normal text
