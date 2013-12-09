@@ -234,7 +234,7 @@
 
     AudioSessionSetActive(false);
 
-    [IRHTTPClient createKeysWithCompletion: ^(NSHTTPURLResponse *res, NSArray *keys, NSError *error) {
+    [IRHTTPClient createKeysWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
         if (error) {
             // TODO alert
             return;
@@ -244,7 +244,7 @@
         [self startPlaying];
 
         _doorWaiter =
-            [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.mykey
+            [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.clientkey
                                   completion: ^(NSHTTPURLResponse* res, id object, NSError* error) {
                                       LOG(@"res: %@, error: %@", res, error);
 
@@ -261,7 +261,7 @@
                                       if ( ! p ) {
                                           p = [i.peripherals registerPeripheralWithName:name];
                                       }
-                                      p.key = _keys.mykey;
+                                      p.clientkey = _keys.clientkey;
                                       [i.peripherals save];
                                       [p getModelNameAndVersionWithCompletion:^{
                                           [i.peripherals save];

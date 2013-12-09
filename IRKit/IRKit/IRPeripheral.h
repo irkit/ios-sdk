@@ -6,7 +6,7 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *customizedName;
 @property (nonatomic, copy) NSDate   *foundDate;
-@property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy) NSString *clientkey;
 
 @property (nonatomic, copy) NSString *modelName;
 @property (nonatomic, copy) NSString *version;

@@ -86,7 +86,7 @@ struct KeysCRCed
     memset( &crced, 0, sizeof(struct KeysCRCed) );
     strncpy( crced.ssid,     [_ssid UTF8String],      strnlen([_ssid UTF8String],33));
     strncpy( crced.password, [_password UTF8String],  strnlen([_password UTF8String],64));
-    strncpy( crced.temp_key, [_pairedkey UTF8String], strnlen([_pairedkey UTF8String], 33));
+    strncpy( crced.temp_key, [_devicekey UTF8String], strnlen([_devicekey UTF8String], 33));
     crced.wifi_is_set     = true;
     crced.wifi_was_valid  = false;
     crced.security        = _security;
@@ -97,7 +97,7 @@ struct KeysCRCed
         security,
         ssidHex,
         passwordHex,
-        _pairedkey,
+        _devicekey,
         @"", // reserved1
         @"", // reserved2
         @"", // reserved3
@@ -109,10 +109,10 @@ struct KeysCRCed
     return [components componentsJoinedByString:@"/"];
 }
 
-- (void) setKeys: (NSArray*) keys {
+- (void) setKeys: (NSDictionary*) keys {
     LOG( @"keys: %@", keys );
-    _mykey     = keys[0];
-    _pairedkey = keys[1];
+    _clientkey = keys[ @"clientkey" ];
+    _devicekey = keys[ @"devicekey" ];
 }
 
 #pragma mark - Private

@@ -254,7 +254,7 @@
         keys.ssid = @"ssid";
         keys.password = @"password";
         keys.security = IRSecurityTypeWPA2;
-        keys.pairedkey = @"0000";
+        keys.devicekey = @"0000";
         c.keys = keys;
         [self.navigationController pushViewController:c animated:YES];
         [c performSelector:@selector(startPlaying) withObject:nil afterDelay:1];

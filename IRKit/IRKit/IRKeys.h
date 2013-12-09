@@ -19,13 +19,13 @@ NS_ENUM( uint8_t, IRSecurityType ) {
 @property (nonatomic) NSString* ssid;
 @property (nonatomic) NSString* password;
 @property (nonatomic) enum IRSecurityType security;
-@property (nonatomic) NSString* mykey;
-@property (nonatomic) NSString* pairedkey; // send this to IRKit using morse
+@property (nonatomic) NSString* clientkey;
+@property (nonatomic) NSString* devicekey; // send this to IRKit using morse
 
 - (NSString*) securityTypeString;
 + (NSString*) securityTypeStringOf: (enum IRSecurityType) security;
 + (BOOL) isPassword:(NSString*)password validForSecurityType:(enum IRSecurityType)securityType;
 - (NSString*) morseStringRepresentation;
-- (void) setKeys: (NSArray*) keys;
+- (void) setKeys: (NSDictionary*) keys;
 
 @end

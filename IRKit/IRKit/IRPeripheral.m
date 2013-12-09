@@ -28,7 +28,7 @@
     _name             = nil;
     _customizedName   = nil;
     _foundDate        = [NSDate date];
-    _key              = nil;
+    _clientkey        = nil;
 
     // from HTTP response Server header
     // eg: "Server: IRKit/1.3.0.73.ge6e8514"
@@ -45,7 +45,7 @@
 }
 
 - (BOOL)hasKey {
-    return _key ? YES : NO;
+    return _clientkey ? YES : NO;
 }
 
 - (void)setName:(NSString *)name {
@@ -69,7 +69,7 @@
     [IRHTTPClient getKeyFromHost:_name withCompletion:^(NSHTTPURLResponse *res, NSString* key, NSError *err) {
         LOG( @"res: %@, key: %@, err: %@", res, key, err );
         if (key) {
-            _key = key;
+            _clientkey = key;
             NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res];
             if (hostInfo) {
                 _modelName = hostInfo[ @"modelName" ];
@@ -115,7 +115,7 @@
     return @{
              @"name":      _name      ? _name      : [NSNull null],
              @"foundDate": _foundDate ? [NSNumber numberWithDouble:[_foundDate timeIntervalSince1970]] : [NSNull null],
-             @"key":       _key       ? _key       : [NSNull null],
+             @"clientkey": _clientkey ? _clientkey : [NSNull null],
              @"modelName": _modelName ? _modelName : [NSNull null],
              @"version":   _version   ? _version   : [NSNull null]
              };
@@ -142,7 +142,7 @@
     [coder encodeObject:_name           forKey:@"name"];
     [coder encodeObject:_customizedName forKey:@"customizedName"];
     [coder encodeObject:_foundDate      forKey:@"foundDate"];
-    [coder encodeObject:_key            forKey:@"key"];
+    [coder encodeObject:_clientkey      forKey:@"clientkey"];
     [coder encodeObject:_modelName      forKey:@"modelName"];
     [coder encodeObject:_version        forKey:@"version"];
 }
@@ -156,7 +156,7 @@
     _name             = [coder decodeObjectForKey:@"name"];
     _customizedName   = [coder decodeObjectForKey:@"customizedName"];
     _foundDate        = [coder decodeObjectForKey:@"foundDate"];
-    _key              = [coder decodeObjectForKey:@"key"];
+    _clientkey        = [coder decodeObjectForKey:@"clientkey"];
     _modelName        = [coder decodeObjectForKey:@"modelName"];
     _version          = [coder decodeObjectForKey:@"version"];
 

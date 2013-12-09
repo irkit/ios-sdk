@@ -118,8 +118,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:nil error:nil];
         NSString *json   = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/messages"
-                                                         withParams:@{ @"message" : json,
-                                                                       @"key"     : signal.peripheral.key }
+                                                         withParams:@{ @"message"   : json,
+                                                                       @"clientkey" : signal.peripheral.clientkey }
                                                     timeoutInterval:DEFAULT_TIMEOUT];
         [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
             if (error) {
@@ -146,18 +146,18 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                     hostname:hostname];
     [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         completion(res,
-                   object ? object[ @"key" ] : nil,
+                   object ? object[ @"clientkey" ] : nil,
                    error);
     }];
 }
 
-+ (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSArray *keys, NSError *error))completion {
++ (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error))completion {
     NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/keys"
                                                      withParams:nil
                                                 timeoutInterval:DEFAULT_TIMEOUT];
     [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         return completion((NSHTTPURLResponse*)res,
-                          object ? object[ @"keys" ] : nil,
+                          object,
                           error);
     }];
 }
@@ -208,7 +208,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                          completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
     LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makePOSTRequestToInternetPath:@"/door"
-                                                 withParams:@{ @"key": key }
+                                                 withParams:@{ @"clientkey": key }
                                             timeoutInterval:LONGPOLL_TIMEOUT];
     IRHTTPClient *client = [[IRHTTPClient alloc] init];
     client.longPollRequest = req;
