@@ -4,7 +4,6 @@
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRPeripheralNameEditViewController.h"
-#import "IRWebViewController.h"
 #import "IRHelper.h"
 
 @implementation IRViewCustomizer
@@ -41,8 +40,7 @@
                                   forViewController:viewController
                                      withImageNamed:@"icn_navibar_cancel"];
         }
-        else if ([viewController isKindOfClass:[IRNewPeripheralScene2ViewController class]] ||
-                 [viewController isKindOfClass:[IRWebViewController class]]) {
+        else if ([viewController isKindOfClass:[IRNewPeripheralScene2ViewController class]]) {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
             [IRViewCustomizer customizeNavigationBar:bar];

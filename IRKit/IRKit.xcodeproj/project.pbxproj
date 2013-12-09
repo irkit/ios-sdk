@@ -137,8 +137,6 @@
 		C7EF92E417797DCE00D07D81 /* IRPeripheralNameEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */; };
 		C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */; };
 		C7EF92E617797DCE00D07D81 /* IRNewPeripheralScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */; };
-		C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */; };
-		C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 		C7FFC7C8184CCE790007B178 /* IRHTTPJSONOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */; };
 /* End PBXBuildFile section */
@@ -185,7 +183,6 @@
 				C7603E8C17A9FED700A7AF1E /* IRSignalNameEditViewController.h in CopyFiles */,
 				C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */,
 				C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */,
-				C7F7D758178CF74300C3CF0F /* IRWebViewController.h in CopyFiles */,
 				C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */,
 				C7EF92E417797DCE00D07D81 /* IRPeripheralNameEditViewController.h in CopyFiles */,
 				C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */,
@@ -363,8 +360,6 @@
 		C7E4E341185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		C7E4E342185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C7E4E343185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWebViewController.h; sourceTree = "<group>"; };
-		C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWebViewController.m; sourceTree = "<group>"; };
 		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
@@ -689,8 +684,6 @@
 				C763C6B61839AF6D00D1D155 /* IRMorsePlayerViewController.h */,
 				C77150ED17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m */,
 				C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */,
-				C7F7D756178CF4AF00C3CF0F /* IRWebViewController.m */,
-				C7F7D755178CF4AF00C3CF0F /* IRWebViewController.h */,
 			);
 			name = viewcontrollers;
 			sourceTree = "<group>";
@@ -955,7 +948,6 @@
 				C73CB4D717856B5C00B3F2C0 /* IRPeripheralWriteOperation.m in Sources */,
 				C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */,
 				C73CB4DA17856CC200B3F2C0 /* IRPeripheralWriteOperationQueue.m in Sources */,
-				C7F7D757178CF4AF00C3CF0F /* IRWebViewController.m in Sources */,
 				C703E82A183E0DD900B8446C /* CRC8.c in Sources */,
 				C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */,
 				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
