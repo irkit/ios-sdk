@@ -205,7 +205,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     LOG_CURRENT_METHOD;
-    return self.countOfPeripherals;
+    return self.countOfReadyPeripherals;
 }
 
 #pragma mark - UITableViewDelegate
