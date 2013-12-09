@@ -191,8 +191,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
             // timeout -> retry
             LOG( @"retrying" );
-            // return NO;
-            return YES; // for debug only, we should ignore this (it might happen too often...)
+            return NO; // we should ignore this (it might happen too often...)
         }
         if (! error) {
             // custom error
