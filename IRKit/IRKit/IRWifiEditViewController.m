@@ -12,6 +12,8 @@
 #define TAG_PASSWORD_CELL      2
 #define TAG_PASSWORD_TEXTFIELD 3
 
+static NSString *ssidCache = nil;
+
 @interface IRWifiEditViewController ()
 
 @property (nonatomic) IRKeys* keys;
@@ -80,6 +82,8 @@
         return false;
     }
 
+    ssidCache = [ssid copy];
+
     _keys.ssid     = ssid;
     _keys.password = password;
     // _keys.security is set in delegate method
@@ -137,7 +141,13 @@
             cell.editTextField.delegate = self;
             cell.editTextField.placeholder = IRLocalizedString(@"Network Name",@"wifi network name placeholder");
             cell.editTextField.text = _keys.ssid;
+            cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
             cell.tag = TAG_SSID_CELL;
+
+            if (ssidCache) {
+                cell.text = ssidCache;
+            }
+
             return cell;
         }
         case 1:
