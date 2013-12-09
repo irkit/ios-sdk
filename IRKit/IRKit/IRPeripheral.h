@@ -22,4 +22,6 @@
 - (NSString*) iconURL;
 - (NSString*) modelNameAndRevision;
 
+- (NSDictionary*) asDictionary;
+
 @end

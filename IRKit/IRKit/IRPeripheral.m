@@ -111,6 +111,16 @@
     return [NSString stringWithFormat:@"%@/static/images/model/%@.png", STATICENDPOINT_BASE, _modelName ? _modelName : @"IRKit" ];
 }
 
+- (NSDictionary*) asDictionary {
+    return @{
+             @"name":      _name      ? _name      : [NSNull null],
+             @"foundDate": _foundDate ? [NSNumber numberWithDouble:[_foundDate timeIntervalSince1970]] : [NSNull null],
+             @"key":       _key       ? _key       : [NSNull null],
+             @"modelName": _modelName ? _modelName : [NSNull null],
+             @"version":   _version   ? _version   : [NSNull null]
+             };
+}
+
 #pragma mark - Private methods
 
 - (void) startReachability {
