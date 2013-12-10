@@ -18,7 +18,6 @@
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT               5. // short REST like requests
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
-#define HMAC_SECRET                   "hmac_secret"
 
 @interface IRHTTPClient ()
 
@@ -426,7 +425,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 + (NSString*)signatureForString: (NSString*)string {
     unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
 
-    const char *cKey = HMAC_SECRET;
+    const char *cKey  = HMACKEY;
     const char *cData = [string cStringUsingEncoding:NSASCIIStringEncoding];
 
     CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);

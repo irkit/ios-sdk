@@ -6,7 +6,6 @@
 #import "IRPeripheralNameEditViewController.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignalNameEditViewController.h"
-#import "IRWebViewController.h"
 #import "IRSignal.h"
 #import "IRPeripheralCell.h"
 #import "IRMorsePlayerViewController.h"
