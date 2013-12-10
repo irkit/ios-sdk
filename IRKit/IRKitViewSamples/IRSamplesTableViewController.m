@@ -86,7 +86,7 @@
              didFinishWithInfo:(NSDictionary*)info {
     LOG(@"info: %@", info);
     IRKeys *key = info[IRViewControllerResultKeys];
-    [key setKeys:@[@"A",@"B"]];
+    [key setKeys:@{ @"clientkey": @"A", @"devicekey": @"B" }];
     LOG(@"morse: %@", key.morseStringRepresentation);
 }
 
@@ -105,7 +105,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 9;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,8 +121,6 @@
         case 4:
             return [tableView dequeueReusableCellWithIdentifier:@"IRSignalNameEdit"];
         case 5:
-            return [tableView dequeueReusableCellWithIdentifier:@"IRWeb"];
-        case 6:
         {
             IRPeripheralCell *cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
             IRPeripheral *peripheral = [[IRPeripheral alloc] init];
@@ -130,15 +128,15 @@
             cell.peripheral = peripheral;
             return cell;
         }
-        case 7:
+        case 6:
             return [tableView dequeueReusableCellWithIdentifier:@"IRWifiEdit"];
-        case 8:
+        case 7:
         {
             UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
             cell.textLabel.text = @"Morse";
             return cell;
         }
-        case 9:
+        case 8:
         {
             UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"IRMorse"];
             cell.textLabel.text = @"Morse (play)";
@@ -223,29 +221,21 @@
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
-        case 5:
-        {
-            IRWebViewController *c = [[IRWebViewController alloc] init];
-            c.url = @"http://github.com/irkit/";
-            c.title = @"github.com/irkit";
-            [self.navigationController pushViewController:c animated:YES];
-        }
-            break;
-        case 7:
+        case 6:
         {
             IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName:@"IRWifiEditViewController" bundle:resources];
             c.delegate = self;
             [self.navigationController pushViewController:c animated:YES];
         }
             break;
-        case 8:
+        case 7:
         {
         IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
         c.delegate = self;
         [self.navigationController pushViewController:c animated:YES];
         }
             break;
-        case 9:
+        case 8:
         {
         IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
         c.delegate = self;
