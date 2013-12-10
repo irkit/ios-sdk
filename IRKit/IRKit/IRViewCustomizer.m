@@ -70,7 +70,7 @@
     }
 
     [IRHelper enumerateSubviewsOfRootView:rootView usingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:[UILabel class]] || [obj isKindOfClass:[UITextField class]]) {
+        if ([obj isKindOfClass:[UILabel class]]) {
             UILabel *label = (UILabel*)obj;
             UIFont *font   = label.font;
             label.font     = [IRHelper fontWithSize:font.pointSize];
