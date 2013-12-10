@@ -25,10 +25,10 @@
     }
     _writeQueue       = nil;
 
-    _name             = nil;
+    _hostname         = nil;
     _customizedName   = nil;
     _foundDate        = [NSDate date];
-    _clientkey        = nil;
+    _deviceid         = nil;
 
     // from HTTP response Server header
     // eg: "Server: IRKit/1.3.0.73.ge6e8514"
@@ -44,19 +44,19 @@
     LOG_CURRENT_METHOD;
 }
 
-- (BOOL)hasKey {
-    return _clientkey ? YES : NO;
+- (BOOL)hasDeviceID {
+    return _deviceid ? YES : NO;
 }
 
-- (void)setName:(NSString *)name {
+- (void)setHostname:(NSString *)hostname {
     LOG_CURRENT_METHOD;
-    _name = name;
+    _hostname = hostname;
 
     [self startReachability];
 }
 
-- (NSString*) hostname {
-    return [NSString stringWithFormat:@"%@.local", _name];
+- (NSString*) local_hostname {
+    return [NSString stringWithFormat:@"%@.local", _hostname];
 }
 
 - (BOOL)isReachableViaWifi {
@@ -66,10 +66,11 @@
 - (void)getKeyWithCompletion:(void (^)())successfulCompletion {
     LOG_CURRENT_METHOD;
 
-    [IRHTTPClient getKeyFromHost:_name withCompletion:^(NSHTTPURLResponse *res, NSString* key, NSError *err) {
-        LOG( @"res: %@, key: %@, err: %@", res, key, err );
-        if (key) {
-            _clientkey = key;
+    [IRHTTPClient getDeviceIDFromHost:_hostname
+                       withCompletion:^(NSHTTPURLResponse *res, NSString *deviceid, NSError *error) {
+        LOG( @"res: %@, key: %@, err: %@", res, deviceid, error );
+        if (deviceid) {
+            _deviceid = deviceid;
             NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res];
             if (hostInfo) {
                 _modelName = hostInfo[ @"modelName" ];
@@ -84,15 +85,13 @@
     LOG_CURRENT_METHOD;
 
     // GET /message only to see Server header
-    [IRHTTPClient getMessageFromHost:_name
-                      withCompletion:^(NSHTTPURLResponse *res, NSDictionary *message, NSError *error) {
-                          NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res];
-                          if (hostInfo) {
-                              _modelName = hostInfo[ @"modelName" ];
-                              _version   = hostInfo[ @"version" ];
-                          }
-                          successfulCompletion();
-                      }];
+    [IRHTTPClient fetchHostInfoOf:_hostname withCompletion:^(NSHTTPURLResponse *res, NSDictionary *info, NSError *error) {
+        if (info) {
+            _modelName = info[ @"modelName" ];
+            _version   = info[ @"version" ];
+            successfulCompletion();
+        }
+    }];
 }
 
 - (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
@@ -113,9 +112,9 @@
 
 - (NSDictionary*) asDictionary {
     return @{
-             @"name":      _name      ? _name      : [NSNull null],
+             @"hostname":  _hostname  ? _hostname  : [NSNull null],
              @"foundDate": _foundDate ? [NSNumber numberWithDouble:[_foundDate timeIntervalSince1970]] : [NSNull null],
-             @"clientkey": _clientkey ? _clientkey : [NSNull null],
+             @"deviceid":  _deviceid  ? _deviceid  : [NSNull null],
              @"modelName": _modelName ? _modelName : [NSNull null],
              @"version":   _version   ? _version   : [NSNull null]
              };
@@ -126,11 +125,11 @@
 - (void) startReachability {
     LOG_CURRENT_METHOD;
 
-    if (_name) {
+    if (_hostname) {
         if (_reachability) {
             [_reachability stopNotifier];
         }
-        _reachability = [Reachability reachabilityWithHostname:self.hostname];
+        _reachability = [Reachability reachabilityWithHostname:self.local_hostname];
         // we start notifying but don't observe on notifications
         [_reachability startNotifier];
     }
@@ -139,10 +138,10 @@
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder*)coder {
-    [coder encodeObject:_name           forKey:@"name"];
+    [coder encodeObject:_hostname       forKey:@"hostname"];
     [coder encodeObject:_customizedName forKey:@"customizedName"];
     [coder encodeObject:_foundDate      forKey:@"foundDate"];
-    [coder encodeObject:_clientkey      forKey:@"clientkey"];
+    [coder encodeObject:_deviceid       forKey:@"deviceid"];
     [coder encodeObject:_modelName      forKey:@"modelName"];
     [coder encodeObject:_version        forKey:@"version"];
 }
@@ -153,10 +152,10 @@
     if (! self) {
         return nil;
     }
-    _name             = [coder decodeObjectForKey:@"name"];
+    _hostname         = [coder decodeObjectForKey:@"hostname"];
     _customizedName   = [coder decodeObjectForKey:@"customizedName"];
     _foundDate        = [coder decodeObjectForKey:@"foundDate"];
-    _clientkey        = [coder decodeObjectForKey:@"clientkey"];
+    _deviceid         = [coder decodeObjectForKey:@"deviceid"];
     _modelName        = [coder decodeObjectForKey:@"modelName"];
     _version          = [coder decodeObjectForKey:@"version"];
 

@@ -10,6 +10,8 @@
 
 @interface IRNewSignalScene1ViewController ()
 
+@property (nonatomic) IRHTTPClient *waiter;
+
 @end
 
 @implementation IRNewSignalScene1ViewController
@@ -44,7 +46,7 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
-    [[IRKit sharedInstance].peripherals waitForSignalWithCompletion:^(IRSignal *signal, NSError *error) {
+    _waiter = [IRHTTPClient waitForSignalWithCompletion:^(NSHTTPURLResponse *res, IRSignal *signal, NSError *error) {
         if (signal) {
             [self didReceiveSignal:signal];
         }
@@ -64,7 +66,8 @@
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 
-    [[IRKit sharedInstance].peripherals stopWaitingForSignal];
+    [_waiter cancel];
+    _waiter = nil;
 }
 
 - (void) didReceiveSignal: (IRSignal*)signal {

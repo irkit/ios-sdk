@@ -145,7 +145,7 @@ static NSString *ssidCache = nil;
             cell.tag = TAG_SSID_CELL;
 
             if (ssidCache) {
-                cell.text = ssidCache;
+                cell.editTextField.text = ssidCache;
             }
 
             return cell;

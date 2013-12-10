@@ -105,12 +105,12 @@
     IRPeripherals *peripherals = [IRKit sharedInstance].peripherals;
 
     NSString *name = [service.hostName componentsSeparatedByString:@"."][ 0 ];
-    IRPeripheral *p = [peripherals IRPeripheralForName:name];
+    IRPeripheral *p = [peripherals peripheralWithName:name];
     if (!p) {
         p = [peripherals registerPeripheralWithName:name];
         [peripherals save];
     }
-    if (! p.clientkey) {
+    if (! p.deviceid) {
         [p getKeyWithCompletion:^{
             [peripherals save];
 

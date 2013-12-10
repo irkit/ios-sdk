@@ -10,7 +10,6 @@
 
 // NSNetService.hostName => IRPeripheral
 @property (nonatomic) NSMutableDictionary* irperipheralForName;
-@property (nonatomic) NSArray* signalWaitingClients;
 
 @end
 
@@ -34,7 +33,7 @@
     return _irperipheralForName[key];
 }
 
-- (IRPeripheral*)IRPeripheralForName: (NSString*)name {
+- (IRPeripheral*)peripheralWithName: (NSString*)name {
     LOG_CURRENT_METHOD;
     if ( ! name ) {
         return nil;
@@ -54,7 +53,7 @@
 - (NSUInteger) countOfReadyPeripherals {
     LOG_CURRENT_METHOD;
     return [[[_irperipheralForName allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return [(IRPeripheral*)evaluatedObject hasKey];
+            return [(IRPeripheral*)evaluatedObject hasDeviceID];
         }]
     ] count];
 }
@@ -67,48 +66,10 @@
 - (IRPeripheral*)registerPeripheralWithName: (NSString*)hostname {
     LOG( @"hostname: %@", hostname );
     IRPeripheral *peripheral = [[IRPeripheral alloc] init];
-    peripheral.name           = hostname;
+    peripheral.hostname       = hostname;
     peripheral.customizedName = hostname;
     [self addPeripheralsObject:peripheral];
     return peripheral;
-}
-
-- (void)waitForSignalWithCompletion:(void (^)(IRSignal *signal, NSError *error))completion {
-    LOG_CURRENT_METHOD;
-
-    NSMutableArray *clients = @[].mutableCopy;
-    for (IRPeripheral *p in self.peripherals) {
-        IRHTTPClient *client = [IRHTTPClient waitForSignalFromHost:p.name withCompletion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-            [self stopWaitingForSignal];
-            if (error) {
-                [[[UIAlertView alloc] initWithTitle:@"Error"
-                                            message:@""
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
-                completion(nil, error);
-                return;
-            }
-            if (object) {
-                IRSignal *signal = [[IRSignal alloc] initWithDictionary:object fromHostname:p.name];
-                completion(signal, nil);
-                return;
-            }
-            ASSERT(0, @"should always return error or signal");
-        }];
-        [clients addObject:client];
-    }
-    _signalWaitingClients = clients;
-}
-
-- (void)stopWaitingForSignal {
-    LOG_CURRENT_METHOD;
-
-    for (IRHTTPClient *client in _signalWaitingClients) {
-        [client cancel];
-    }
-    [IRHTTPClient cancelWaitForSignal];
-    _signalWaitingClients = nil;
 }
 
 #pragma mark - Private methods
@@ -131,7 +92,7 @@
     LOG_CURRENT_METHOD;
 
     for (IRPeripheral *p in self.peripherals) {
-        if (! [p hasKey]) {
+        if (! [p hasDeviceID]) {
             [p getKeyWithCompletion:^{
                 [self save];
             }];
@@ -160,9 +121,9 @@
 }
 
 - (IRPeripheral*)memberOfPeripherals:(IRPeripheral *)object {
-    NSString *lowercased = object.name.lowercaseString;
+    NSString *lowercased = object.hostname.lowercaseString;
     for (IRPeripheral *p in self.peripherals) {
-        if ([p.name.lowercaseString isEqualToString:lowercased]) {
+        if ([p.hostname.lowercaseString isEqualToString:lowercased]) {
             return p;
         }
     }
@@ -173,18 +134,18 @@
 - (void)addPeripheralsObject:(IRPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
 
-    if ( ! peripheral.name ) {
+    if ( ! peripheral.hostname ) {
         // can't add a peripheral without a name
         return;
     }
 
-    _irperipheralForName[peripheral.name.lowercaseString] = peripheral;
+    _irperipheralForName[peripheral.hostname.lowercaseString] = peripheral;
 }
 
 - (void)removePeripheralsObject: (IRPeripheral*) peripheral {
     LOG( @"peripheral: %@", peripheral );
 
-    [_irperipheralForName removeObjectForKey:peripheral.name.lowercaseString];
+    [_irperipheralForName removeObjectForKey:peripheral.hostname.lowercaseString];
 }
 
 #pragma mark - UITableViewDataSource

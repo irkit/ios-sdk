@@ -111,7 +111,7 @@ struct KeysCRCed
 
 - (void) setKeys: (NSDictionary*) keys {
     LOG( @"keys: %@", keys );
-    _clientkey = keys[ @"clientkey" ];
+    _deviceid  = keys[ @"deviceid" ];
     _devicekey = keys[ @"devicekey" ];
 }
 

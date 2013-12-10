@@ -244,35 +244,34 @@
         [self startPlaying];
 
         _doorWaiter =
-            [IRHTTPClient waitForDoorWithKey: (NSString*) _keys.clientkey
-                                  completion: ^(NSHTTPURLResponse* res, id object, NSError* error) {
-                                      LOG(@"res: %@, error: %@", res, error);
+            [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+                LOG(@"res: %@, error: %@", res, error);
 
-                                      [self stopPlaying];
+                [self stopPlaying];
 
-                                      if (error) {
-                                          // TODO alert
-                                          return;
-                                      }
+                if (error) {
+                    // TODO alert
+                    return;
+                }
 
-                                      NSString *name = object[ @"name" ];
-                                      IRKit *i = [IRKit sharedInstance];
-                                      IRPeripheral *p = [i.peripherals IRPeripheralForName:name];
-                                      if ( ! p ) {
-                                          p = [i.peripherals registerPeripheralWithName:name];
-                                      }
-                                      p.clientkey = _keys.clientkey;
-                                      [i.peripherals save];
-                                      [p getModelNameAndVersionWithCompletion:^{
-                                          [i.peripherals save];
-                                      }];
+                NSString *hostname = object[ @"hostname" ];
+                IRKit *i = [IRKit sharedInstance];
+                IRPeripheral *p = [i.peripherals peripheralWithName:hostname];
+                if ( ! p ) {
+                    p = [i.peripherals registerPeripheralWithName:hostname];
+                }
+                p.deviceid = _keys.deviceid;
+                [i.peripherals save];
+                [p getModelNameAndVersionWithCompletion:^{
+                    [i.peripherals save];
+                }];
 
-                                      [self.delegate morsePlayerViewController:self
-                                                             didFinishWithInfo:@{
-                                                                                 IRViewControllerResultType: IRViewControllerResultTypeDone,
-                                                                                 IRViewControllerResultPeripheral:p
-                                                                                 }];
-                              }];
+                [self.delegate morsePlayerViewController:self
+                                       didFinishWithInfo:@{
+                                                           IRViewControllerResultType: IRViewControllerResultTypeDone,
+                                                           IRViewControllerResultPeripheral:p
+                                                           }];
+            }];
     }];
 }
 

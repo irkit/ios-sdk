@@ -16,11 +16,11 @@ NS_ENUM( uint8_t, IRSecurityType ) {
 
 @interface IRKeys : NSObject
 
-@property (nonatomic) NSString* ssid;
-@property (nonatomic) NSString* password;
+@property (nonatomic, copy) NSString* ssid;
+@property (nonatomic, copy) NSString* password;
 @property (nonatomic) enum IRSecurityType security;
-@property (nonatomic) NSString* clientkey;
-@property (nonatomic) NSString* devicekey; // send this to IRKit using morse
+@property (nonatomic, copy) NSString* deviceid;
+@property (nonatomic, copy) NSString* devicekey; // send this to IRKit using morse
 
 - (NSString*) securityTypeString;
 + (NSString*) securityTypeStringOf: (enum IRSecurityType) security;

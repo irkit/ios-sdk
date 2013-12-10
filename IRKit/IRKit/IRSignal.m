@@ -6,8 +6,6 @@
 
 @interface IRSignal ()
 
-@property (nonatomic, copy) NSString* hostname;
-
 @end
 
 @implementation IRSignal
@@ -24,34 +22,7 @@
     self = [self init];
     if ( ! self ) { return nil; }
 
-    _name   = dictionary[@"name"];
-    _data   = dictionary[@"data"];
-    _format = dictionary[@"format"];
-
-    // either name is fine
-    _frequency = dictionary[@"freq"];
-    if (! _frequency) {
-        _frequency = dictionary[@"frequency"];
-    }
-
-    // receivedDate arrives as a NSNumber of epoch time
-    _receivedDate = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"receivedDate"] doubleValue]];
-
-    _hostname = dictionary[@"hostname"];
-    _custom   = dictionary[@"custom"];
-
-    return self;
-}
-
-- (id) initWithDictionary: (NSDictionary*) dictionary fromHostname:(NSString*)hostname {
-    LOG_CURRENT_METHOD;
-    self = [self initWithDictionary:dictionary];
-    if ( ! self ) { return nil; }
-
-    if ( ! _receivedDate ) {
-        _receivedDate = [NSDate date];
-    }
-    _hostname = hostname;
+    [self inflateFromDictionary:dictionary];
 
     return self;
 }
@@ -65,6 +36,7 @@
              @"frequency":    _frequency,
              @"receivedDate": [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970],
              @"hostname":     _hostname,
+             @"deviceid":     self.peripheral.deviceid,
              @"custom":       _custom ? _custom : [NSNull null],
              };
 }
@@ -91,7 +63,7 @@
         // we can't use [IRKit sharedInstance] inside our initWithCoder (circular call)
         // so we temporary save peripheral.name in _hostname
         // and recover IRPeripheral afterwards (here)
-        _peripheral = [[IRKit sharedInstance].peripherals IRPeripheralForName:_hostname];
+        _peripheral = [[IRKit sharedInstance].peripherals peripheralWithName:_hostname];
         return _peripheral;
     }
     return nil;
@@ -99,6 +71,42 @@
 
 #pragma mark - Private methods
 
+- (void) inflateFromDictionary: (NSDictionary*)dictionary {
+    if (dictionary[ @"message" ]) {
+        [self inflateFromDictionary:dictionary[@"message"]];
+    }
+
+    if (dictionary[@"name"]) {
+        _name = dictionary[@"name"];
+    }
+    if (dictionary[@"data"]) {
+        _data = dictionary[@"data"];
+    }
+    if (dictionary[@"format"]) {
+        _format = dictionary[@"format"];
+    }
+
+    // either name is fine
+    if (dictionary[@"freq"]) {
+        _frequency = dictionary[@"freq"];
+    }
+    if (dictionary[@"frequency"]) {
+        _frequency = dictionary[@"frequency"];
+    }
+
+    // receivedDate arrives as a NSNumber of epoch time
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"receivedDate"] doubleValue]];
+    if (date) {
+        _receivedDate = date;
+    }
+
+    if (dictionary[@"hostname"]) {
+        _hostname = dictionary[@"hostname"];
+    }
+    if (dictionary[@"custom"]) {
+        _custom   = dictionary[@"custom"];
+    }
+}
 
 #pragma mark - NSKeyedArchiving
 
@@ -108,8 +116,8 @@
     [coder encodeObject:_format       forKey:@"fo"];
     [coder encodeObject:_frequency    forKey:@"f"];
     [coder encodeObject:_receivedDate forKey:@"r"];
-    [coder encodeObject:_hostname     forKey:@"h"];
     [coder encodeObject:_custom       forKey:@"c"];
+    [coder encodeObject:_hostname     forKey:@"h"];
 }
 
 - (id)initWithCoder:(NSCoder*)coder {
@@ -120,9 +128,9 @@
         _format       = [coder decodeObjectForKey:@"fo"];
         _frequency    = [coder decodeObjectForKey:@"f"];
         _receivedDate = [coder decodeObjectForKey:@"r"];
-        _hostname     = [coder decodeObjectForKey:@"h"];
         _custom       = [coder decodeObjectForKey:@"c"];
-        
+        _hostname     = [coder decodeObjectForKey:@"h"];
+
         if ( ! _name ) {
             _name = @"unknown";
         }
