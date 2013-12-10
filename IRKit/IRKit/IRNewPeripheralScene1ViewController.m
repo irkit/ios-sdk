@@ -4,6 +4,7 @@
 #import "IRViewCustomizer.h"
 #import "IRKit.h"
 #import "IRWifiEditViewController.h"
+#import "IRHelper.h"
 
 @interface IRNewPeripheralScene1ViewController ()
 

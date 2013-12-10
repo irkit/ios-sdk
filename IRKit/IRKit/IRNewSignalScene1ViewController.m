@@ -6,6 +6,7 @@
 #import "IRSignalNameEditViewController.h"
 #import "IRHTTPClient.h"
 #import "IRKit.h"
+#import "IRHelper.h"
 
 @interface IRNewSignalScene1ViewController ()
 

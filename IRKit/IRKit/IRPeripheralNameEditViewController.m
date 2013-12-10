@@ -3,6 +3,7 @@
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
 #import "IRKit.h"
+#import "IRHelper.h"
 
 @interface IRPeripheralNameEditViewController ()
 

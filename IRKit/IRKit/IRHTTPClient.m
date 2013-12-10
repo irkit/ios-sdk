@@ -13,10 +13,12 @@
 #import "IRConst.h"
 #import "IRHTTPJSONOperation.h"
 #import "Reachability.h"
+#import <CommonCrypto/CommonHMAC.h>
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT               5. // short REST like requests
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
+#define HMAC_SECRET                   "hmac_secret"
 
 @interface IRHTTPClient ()
 
@@ -148,6 +150,23 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         completion(res,
                    object ? object[ @"clientkey" ] : nil,
                    error);
+    }];
+}
+
++ (void)registerWithCompletion: (void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion {
+    NSString *uuid      = [[NSUUID UUID] UUIDString];
+    NSString *signature = [[self signatureForString:uuid] uppercaseString];
+    NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/register"
+                                                     withParams:@{
+                                                                  @"randomid": uuid,
+                                                                  @"signature": signature,
+                                                                  }
+                                                timeoutInterval:DEFAULT_TIMEOUT];
+    [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        NSString *key = ((NSDictionary*)object)[ @"clientkey" ];
+        return completion((NSHTTPURLResponse*)res,
+                          key,
+                          error);
     }];
 }
 
@@ -385,6 +404,35 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                                                  NULL,
                                                                                  (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
                                                                                  kCFStringEncodingUTF8);
+}
+
++ (NSString*)stringFromData:(NSData*)data {
+    const unsigned char *dataBuffer = (const unsigned char *)[data bytes];
+
+    if (!dataBuffer) {
+        return [NSString string];
+    }
+
+    NSUInteger dataLength  = [data length];
+    NSMutableString *hexString = [NSMutableString stringWithCapacity:(dataLength * 2)];
+
+    for (int i = 0; i < dataLength; ++i) {
+        [hexString appendString:[NSString stringWithFormat:@"%02lx", (unsigned long)dataBuffer[i]]];
+    }
+
+    return [NSString stringWithString:hexString];
+}
+
++ (NSString*)signatureForString: (NSString*)string {
+    unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
+
+    const char *cKey = HMAC_SECRET;
+    const char *cData = [string cStringUsingEncoding:NSASCIIStringEncoding];
+
+    CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+
+    NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
+    return [self stringFromData:HMAC];
 }
 
 @end
