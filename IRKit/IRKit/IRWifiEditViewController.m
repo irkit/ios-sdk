@@ -43,6 +43,7 @@ static NSString *ssidCache = nil;
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
+    [IREditCell class];
     [self.tableView registerNib:[UINib nibWithNibName:@"IREditCell" bundle:[IRHelper resources]]
          forCellReuseIdentifier:IRKitCellIdentifierEdit];
 }
