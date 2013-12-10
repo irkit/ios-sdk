@@ -163,7 +163,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                           withParams:@{ @"clienttoken": clienttoken }
                                                      timeoutInterval:DEFAULT_TIMEOUT];
         [self issueRequest:request2 completion:^(NSHTTPURLResponse *res2, id object2, NSError *error2) {
-            NSString *deviceid = object[ @"deviceid" ];
+            NSString *deviceid = object2[ @"deviceid" ];
             return completion(res2, deviceid, error);
         }];
     }];
