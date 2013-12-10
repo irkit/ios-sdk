@@ -68,9 +68,6 @@
     [super viewDidLoad];
 
     self.title = IRLocalizedString(@"WiFi Morse Setup",@"title of IRMorsePlayer");
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                          target:self
-                                                                                          action:@selector(cancelButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
@@ -101,6 +98,8 @@
 - (void) viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
+
+    [self stopPlaying];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -216,17 +215,6 @@
                              _startButtonBox.frame = original;
                          }];
     }
-}
-
-- (void)cancelButtonPressed:(id)sender {
-    LOG_CURRENT_METHOD;
-
-    [self stopPlaying];
-
-    [self.delegate morsePlayerViewController:self
-                           didFinishWithInfo:@{
-           IRViewControllerResultType: IRViewControllerResultTypeCancelled
-     }];
 }
 
 - (IBAction)startButtonPressed:(id)sender {

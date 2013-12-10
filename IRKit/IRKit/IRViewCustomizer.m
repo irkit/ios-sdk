@@ -4,6 +4,8 @@
 #import "IRNewPeripheralScene1ViewController.h"
 #import "IRNewPeripheralScene2ViewController.h"
 #import "IRPeripheralNameEditViewController.h"
+#import "IRWifiEditViewController.h"
+#import "IRMorsePlayerViewController.h"
 #import "IRHelper.h"
 
 @implementation IRViewCustomizer
@@ -40,14 +42,17 @@
                                   forViewController:viewController
                                      withImageNamed:@"icn_navibar_cancel"];
         }
-        else if ([viewController isKindOfClass:[IRNewPeripheralScene2ViewController class]]) {
+        else if ([viewController isKindOfClass:[IRNewPeripheralScene2ViewController class]] ||
+                 [viewController isKindOfClass:[IRWifiEditViewController class]] ||
+                 [viewController isKindOfClass:[IRMorsePlayerViewController class]]) {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
             [IRViewCustomizer customizeNavigationBar:bar];
 
             // custom back button
-            UIBarButtonItem *original = viewController.navigationItem.leftBarButtonItem;
-            [IRViewCustomizer customizeCancelButton:original
+            // this is nil :(
+            // UIBarButtonItem *original = viewController.navigationItem.leftBarButtonItem;
+            [IRViewCustomizer customizeCancelButton:nil
                                   forViewController:viewController
                                      withImageNamed:@"icn_navibar_back"];
         }
@@ -109,9 +114,16 @@
             forState:UIControlStateNormal];
     [button sizeToFit];
     // [button setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,-10)]; // move the button **px right
-    [button addTarget:viewController
-               action:original.action
-     forControlEvents:UIControlEventTouchUpInside];
+    if (original) {
+        [button addTarget:viewController
+                   action:original.action
+         forControlEvents:UIControlEventTouchUpInside];
+    }
+    else {
+        [button addTarget:viewController.navigationController
+                   action:@selector(popViewControllerAnimated:)
+         forControlEvents:UIControlEventTouchUpInside];
+    }
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
     viewController.navigationItem.leftBarButtonItem = item;
 }
