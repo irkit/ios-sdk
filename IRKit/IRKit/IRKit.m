@@ -12,7 +12,6 @@
 @property (nonatomic) id terminateObserver;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) id enterBackgroundObserver;
-@property (nonatomic, copy) NSString *clientkey;
 
 @end
 
@@ -46,7 +45,9 @@
                                                                                queue:[NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
                                                                               LOG( @"became active" );
-                                                                              [self registerIfNot];
+                                                                              [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
+                                                                                  LOG( @"error: %@", error );
+                                                                              }];
                                                                           }];
     _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
                                                                                  object:nil
@@ -56,8 +57,9 @@
                                                                              }];
     [IRViewCustomizer sharedInstance]; // init
 
-    _clientkey = [IRPersistentStore objectForKey:@"clientkey"];
-    [self registerIfNot];
+    [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
+        LOG( @"error: %@", error );
+    }];
 
     return self;
 }
@@ -67,20 +69,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_terminateObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];
-}
-
-- (void) registerIfNot {
-    LOG_CURRENT_METHOD;
-
-    if (! _clientkey) {
-        [IRHTTPClient registerWithCompletion:^(NSHTTPURLResponse *res, NSString *clientkey, NSError *error) {
-            if (clientkey) {
-                _clientkey = clientkey;
-                [IRPersistentStore storeObject:_clientkey forKey:@"clientkey"];
-                LOG( @"successfully registered! clientkey: %@", clientkey );
-            }
-        }];
-    }
 }
 
 - (void) save {

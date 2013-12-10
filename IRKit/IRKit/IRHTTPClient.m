@@ -13,11 +13,14 @@
 #import "IRConst.h"
 #import "IRHTTPJSONOperation.h"
 #import "Reachability.h"
+#import "IRPersistentStore.h"
 #import <CommonCrypto/CommonHMAC.h>
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT               5. // short REST like requests
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
+
+static NSString *clientkey;
 
 @interface IRHTTPClient ()
 
@@ -150,6 +153,23 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                    object ? object[ @"clientkey" ] : nil,
                    error);
     }];
+}
+
++ (void) ensureRegisteredAndCall: (void (^)(NSError *error))next {
+    LOG_CURRENT_METHOD;
+
+    if (! clientkey) {
+        clientkey = [IRPersistentStore objectForKey:@"clientkey"];
+    }
+    if (! clientkey) {
+        [IRHTTPClient registerWithCompletion:^(NSHTTPURLResponse *res, NSString *clientkey_, NSError *error) {
+            if (clientkey_) {
+                clientkey = clientkey_;
+                [IRPersistentStore storeObject:clientkey forKey:@"clientkey"];
+                LOG( @"successfully registered! clientkey: %@", clientkey );
+            }
+        }];
+    }
 }
 
 + (void)registerWithCompletion: (void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion {

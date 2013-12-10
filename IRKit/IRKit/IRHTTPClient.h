@@ -22,6 +22,7 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 + (void)postSignal: (IRSignal*)signal withCompletion: (void (^)(NSError *error))completion;
 + (void)getMessageFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *message, NSError *error))completion;
 + (void)getKeyFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSString *key, NSError *error))completion;
++ (void) ensureRegisteredAndCall: (void (^)(NSError *error))next;
 + (void)registerWithCompletion: (void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion;
 + (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error))completion;
 + (IRHTTPClient*)waitForSignalFromHost:(NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse* res, id object, NSError* error))completion;
