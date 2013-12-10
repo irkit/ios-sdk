@@ -17,7 +17,7 @@
 #import <CommonCrypto/CommonHMAC.h>
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
-#define DEFAULT_TIMEOUT               5. // short REST like requests
+#define DEFAULT_TIMEOUT               10. // short REST like requests
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
 
 static NSString *clientkey;
