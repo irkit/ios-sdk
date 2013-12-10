@@ -229,7 +229,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 + (IRHTTPClient*)waitForSignalWithCompletion: (void (^)(NSHTTPURLResponse* res, IRSignal *signal, NSError* error))completion {
     LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makeGETRequestToInternetPath:@"/messages"
-                                                withParams:@{}
+                                                withParams:@{ @"clear": @"1" }
                                            timeoutInterval:LONGPOLL_TIMEOUT];
     IRHTTPClient *client = [[IRHTTPClient alloc] init];
     client.longPollRequest = req;
@@ -237,6 +237,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     client.longPollDidFinish = (ResponseHandlerBlock)^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG( @"res: %@, object: %@, error: %@", res, object, error );
 
+        bool doRetry = NO;
         if (res && res.statusCode) {
             switch (res.statusCode) {
                 case 200:
@@ -246,7 +247,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                         return YES;
                     }
                     // else, retry
-                    return NO;
+                    doRetry = YES;
+                    break;
                 default:
                     break;
             }
@@ -255,6 +257,13 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
             // timeout -> retry
             LOG( @"retrying" );
+            doRetry = YES;
+        }
+        if (doRetry) {
+            // remove clear=1
+            client.longPollRequest = [self makeGETRequestToInternetPath:@"/messages"
+                                                             withParams:@{}
+                                                        timeoutInterval:LONGPOLL_TIMEOUT];
             return NO;
         }
         if (! error) {
