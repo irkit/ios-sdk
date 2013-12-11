@@ -137,7 +137,7 @@
 }
 
 - (void)removeObjectFromSignalsAtIndex:(NSUInteger)index {
-    IRSignal *object = [self objectInSignalsAtIndex:index];
+//    IRSignal *object = [self objectInSignalsAtIndex:index];
 
     [_signals removeObjectAtIndex:index];
 

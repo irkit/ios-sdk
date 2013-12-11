@@ -44,7 +44,6 @@
 		C735043517A0341D0057D51B /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3B9176F25260088679E /* IRKitResources.bundle */; };
 		C73CB4D717856B5C00B3F2C0 /* IRPeripheralWriteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */; };
 		C73CB4DA17856CC200B3F2C0 /* IRPeripheralWriteOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D917856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.m */; };
-		C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E0174B8EB100872C04 /* IRChartView.m */; };
 		C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */; };
 		C73E37E7174DF20300872C04 /* IRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E6174DF20300872C04 /* IRHelper.m */; };
 		C752D70217462C7B008B644A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
@@ -120,7 +119,6 @@
 		C7B741BD1803FB61005802A7 /* IRMorsePlayerOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BC1803FB61005802A7 /* IRMorsePlayerOperationQueue.m */; };
 		C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */; };
 		C7B741C31803FD5D005802A7 /* IRMorseTesterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741C21803FD5D005802A7 /* IRMorseTesterViewController.m */; };
-		C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C73E37DF174B8EB100872C04 /* IRChartView.h */; };
 		C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; };
 		C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */; };
 		C7C7A30B176F017600C9A62F /* IRNewPeripheralViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */; };
@@ -183,7 +181,6 @@
 				C7603E8C17A9FED700A7AF1E /* IRSignalNameEditViewController.h in CopyFiles */,
 				C7603E7D17A8B48600A7AF1E /* IRHelper.h in CopyFiles */,
 				C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */,
-				C7C0DB7517819D7400AECAC2 /* IRChartView.h in CopyFiles */,
 				C7EF92E417797DCE00D07D81 /* IRPeripheralNameEditViewController.h in CopyFiles */,
 				C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */,
 				C7EF92E617797DCE00D07D81 /* IRNewPeripheralScene1ViewController.h in CopyFiles */,
@@ -244,8 +241,6 @@
 		C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralWriteOperation.m; sourceTree = "<group>"; };
 		C73CB4D817856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralWriteOperationQueue.h; sourceTree = "<group>"; };
 		C73CB4D917856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralWriteOperationQueue.m; sourceTree = "<group>"; };
-		C73E37DF174B8EB100872C04 /* IRChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRChartView.h; sourceTree = "<group>"; };
-		C73E37E0174B8EB100872C04 /* IRChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRChartView.m; sourceTree = "<group>"; };
 		C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPersistentStore.h; sourceTree = "<group>"; };
 		C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPersistentStore.m; sourceTree = "<group>"; };
 		C73E37E5174DF20300872C04 /* IRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelper.h; sourceTree = "<group>"; };
@@ -695,8 +690,6 @@
 		C7C7A30A176EFC9A00C9A62F /* views */ = {
 			isa = PBXGroup;
 			children = (
-				C73E37E0174B8EB100872C04 /* IRChartView.m */,
-				C73E37DF174B8EB100872C04 /* IRChartView.h */,
 				C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */,
 				C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */,
 			);
@@ -940,7 +933,6 @@
 				C763C6B81839AF6D00D1D155 /* IRMorsePlayerViewController.m in Sources */,
 				C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */,
 				C7B741BD1803FB61005802A7 /* IRMorsePlayerOperationQueue.m in Sources */,
-				C73E37E1174B8EB100872C04 /* IRChartView.m in Sources */,
 				C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */,
 				C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */,
 				C73E37E7174DF20300872C04 /* IRHelper.m in Sources */,

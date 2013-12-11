@@ -40,6 +40,7 @@
             ret = IRSecurityTypeWEP;
             break;
         case 2:
+        default:
             ret = IRSecurityTypeWPA2;
             break;
     }
@@ -121,7 +122,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     NSUInteger row = [self rowForSecurityType: _selectedSecurityType];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
 
     _selectedSecurityType = [self securityTypeForRow:indexPath.row];
 

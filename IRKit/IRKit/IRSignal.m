@@ -30,14 +30,14 @@
 - (NSDictionary*)asDictionary {
     LOG_CURRENT_METHOD;
     return @{
-             @"name":         _name,
-             @"data":         _data,
-             @"format":       _format,
-             @"frequency":    _frequency,
-             @"receivedDate": [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970],
-             @"hostname":     _hostname,
-             @"deviceid":     self.peripheral.deviceid,
-             @"custom":       _custom ? _custom : [NSNull null],
+             @"name":         _name                    ? _name : [NSNull null],
+             @"data":         _data                    ? _data : [NSNull null],
+             @"format":       _format                  ? _format : [NSNull null],
+             @"frequency":    _frequency               ? _frequency : [NSNull null],
+             @"receivedDate": _receivedDate            ? [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970] : [NSNull null],
+             @"hostname":     _hostname                ? _hostname : [NSNull null],
+             @"deviceid":     self.peripheral.deviceid ? self.peripheral.deviceid : [NSNull null],
+             @"custom":       _custom                  ? _custom : [NSNull null],
              };
 }
 
