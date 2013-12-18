@@ -214,6 +214,11 @@
                          animations:^{
                              _startButtonBox.frame = original;
                          }];
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Shhh!", @"alertview title before pressing start button in morseviewcontroller")
+                                    message:IRLocalizedString(@"Turn off your TV, audio devices, be quiet and press Start!", @"alertview message before pressing start button in morseviewcontroller")
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
     }
 }
 
