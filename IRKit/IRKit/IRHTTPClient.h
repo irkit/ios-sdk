@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "IRSignal.h"
 
 NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
@@ -29,6 +30,7 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 + (IRHTTPClient*)waitForDoorWithDeviceID: (NSString*)deviceid completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion;
 + (void)cancelWaitForSignal;
 + (void)cancelWaitForDoor;
++ (void)loadImage:(NSString*)url completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler;
 + (void)showAlertOfError:(NSError*)error;
 
 @end

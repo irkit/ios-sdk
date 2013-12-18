@@ -12,7 +12,4 @@ extern NSString *IRLocalizedString(NSString* key, NSString* comment);
 + (UIImage *)imageWithColor:(UIColor *)color;
 + (UIImage *)imageInResourceNamed:(NSString*)name;
 
-+ (void)loadImage:(NSString*)url
-completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler;
-
 @end

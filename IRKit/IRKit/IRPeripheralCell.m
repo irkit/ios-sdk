@@ -1,6 +1,6 @@
 #import "Log.h"
 #import "IRPeripheralCell.h"
-#import "IRHelper.h"
+#import "IRHTTPClient.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface IRPeripheralCell ()
@@ -38,7 +38,8 @@
 
     // load image from internet
     NSString *url = _peripheral.iconURL;
-    [IRHelper loadImage:url completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
+    [IRHTTPClient loadImage:url
+          completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
         if (error || (response.statusCode != 200) || ! image) {
             return;
         }
