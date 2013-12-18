@@ -27,7 +27,6 @@ static NSString *ssidCache = nil;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _keys = [[IRKeys alloc] init];
-        // TODO load from keychain for sane defaults
     }
     return self;
 }

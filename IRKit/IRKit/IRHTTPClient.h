@@ -29,5 +29,6 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 + (IRHTTPClient*)waitForDoorWithDeviceID: (NSString*)deviceid completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion;
 + (void)cancelWaitForSignal;
 + (void)cancelWaitForDoor;
++ (void)showAlertOfError:(NSError*)error;
 
 @end

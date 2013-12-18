@@ -229,7 +229,6 @@
 
     [IRHTTPClient createKeysWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
         if (error) {
-            // TODO alert
             return;
         }
         [_keys setKeys:keys];
@@ -243,7 +242,6 @@
                 [self stopPlaying];
 
                 if (error) {
-                    // TODO alert
                     return;
                 }
 

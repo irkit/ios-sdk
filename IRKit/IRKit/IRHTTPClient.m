@@ -102,13 +102,22 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     return @{ @"modelName": tmp[ 0 ], @"version": tmp[ 1 ] };
 }
 
-+ (NSError*)errorFromResponse: (NSHTTPURLResponse*)res {
++ (NSError*)errorFromResponse: (NSHTTPURLResponse*)res body:(id)object {
     // error object nil but error
     NSInteger code = (res && res.statusCode) ? res.statusCode
                                              : IRKitHTTPStatusCodeUnknown;
+    if (code < 400) {
+        // not an error
+        return nil;
+    }
+
+    NSDictionary *userinfo;
+    if (object && [object isKindOfClass:[NSDictionary class]]) {
+        userinfo = object;
+    }
     return [NSError errorWithDomain:IRKitErrorDomainHTTP
                                code:code
-                           userInfo:nil];
+                           userInfo:userinfo];
 }
 
 + (void)postSignal:(IRSignal *)signal withCompletion:(void (^)(NSError *error))completion {
@@ -122,13 +131,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                           withParams:payload
                                                             hostname:signal.peripheral.hostname];
         [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-            if (error) {
-                return completion( error );
-            }
-            if (res && res.statusCode == 200) {
-                return completion( nil );
-            }
-            return completion( [self errorFromResponse:res] );
+            return completion( error );
         }];
     }
     else {
@@ -139,13 +142,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                                        @"deviceid" : signal.peripheral.deviceid }
                                                     timeoutInterval:DEFAULT_TIMEOUT];
         [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-            if (error) {
-                return completion( error );
-            }
-            if (res && res.statusCode == 200) {
-                return completion( nil );
-            }
-            return completion( [self errorFromResponse:res] );
+            return completion( error );
         }];
     }
 }
@@ -181,11 +178,16 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 return next(error);
             }
             else if (! clientkey_) {
-                return next([self errorFromResponse:res]);
+                // can't happen
+                error = [NSError errorWithDomain:IRKitErrorDomainHTTP
+                                            code:IRKitHTTPStatusCodeUnknown
+                                        userInfo:nil];
+                return next(error);
             }
             clientkey = clientkey_;
             [IRPersistentStore storeObject:clientkey forKey:@"clientkey"];
             LOG( @"successfully registered! clientkey: %@", clientkey );
+            return next(nil);
         }];
         return;
     }
@@ -202,7 +204,10 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                                   }
                                                 timeoutInterval:DEFAULT_TIMEOUT];
     [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-        NSString *key = ((NSDictionary*)object)[ @"clientkey" ];
+        NSString *key;
+        if ([object isKindOfClass:[NSDictionary class]]) {
+            key = object[@"clientkey"];
+        }
         return completion((NSHTTPURLResponse*)res,
                           key,
                           error);
@@ -254,7 +259,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             }
             // TODO sleep exponentially if unexpected error?
         }
-        if (error && (error.code == -1001) && ([error.domain isEqualToString:NSURLErrorDomain])) {
+        if (error && (error.code == NSURLErrorTimedOut) && ([error.domain isEqualToString:NSURLErrorDomain])) {
+            // -1001
             // timeout -> retry
             LOG( @"retrying" );
             doRetry = YES;
@@ -268,7 +274,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }
         if (! error) {
             // custom error
-            error = [self errorFromResponse:res];
+            error = [self errorFromResponse:res body:object];
         }
         completion(res, object, error);
         return YES; // stop if unexpected error
@@ -313,7 +319,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             return YES; // stop if unexpected error
         }
         // error object nil but error
-        completion(res, object, [self errorFromResponse:res]);
+        completion(res, object, [self errorFromResponse:res body:object]);
         return YES;
     };
     [client startPollingRequest];
@@ -332,6 +338,54 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/door"];
 }
 
++ (void)showAlertOfError:(NSError*)error {
+    LOG( @"error: %@", error );
+    if (! error) {
+        return;
+    }
+
+    NSString *message = nil;
+    if ([error.domain isEqualToString:NSURLErrorDomain]) {
+        switch (error.code) {
+            case NSURLErrorNotConnectedToInternet:
+                // -1009
+                message = IRLocalizedString(@"Please check your internet connection", @"-1009 error message");
+                break;
+            default:
+                break;
+        }
+    }
+    else if ([error.domain isEqualToString:IRKitErrorDomainHTTP]) {
+        if (error.userInfo && error.userInfo[@"message"]) {
+            message = error.userInfo[@"message"];
+        }
+        else {
+            switch (error.code) {
+                case 400:
+                    message = IRLocalizedString(@"Invalid Request", @"http status code 400 error message");
+                    break;
+                case 401:
+                    message = IRLocalizedString(@"Unauthorized", @"http status code 401 error message");
+                    break;
+                case 500:
+                    message = IRLocalizedString(@"Something wrong, please try again, or contact us if problem persists", @"http status code 500 error message");
+                    break;
+                case 503:
+                    message = IRLocalizedString(@"We're temporary under maintenance, please wait for a while and try again", @"http status code 503 error message");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    [[[UIAlertView alloc] initWithTitle:message
+                                message:nil
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil] show];
+}
+
 #pragma mark - Private
 
 + (void)issueRequest:(NSURLRequest*)request
@@ -343,6 +397,17 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                  if (! completion) {
                                      return;
                                  }
+                                 if (! error) {
+                                     error = [self errorFromResponse:response body:object];
+                                 }
+
+                                 NSRange range = [request.URL.host rangeOfString:@".local"];
+                                 if (range.location == NSNotFound) {
+                                     // if request was issued against server on internet,
+                                     // alert about error
+                                     [self showAlertOfError:error];
+                                 }
+
                                  // ISHTTPOperation calls our handler in main queue
                                  completion(response, object, error);
                              }];

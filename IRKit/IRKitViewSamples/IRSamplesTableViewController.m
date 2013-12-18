@@ -50,7 +50,6 @@
 #pragma mark - IRNewPeripheralScene1ViewControllerDelegate
 #pragma mark - IRNewSignalScene1ViewControllerDelegate
 
-//  TODO merge all callbacks into a single IRViewController:didFinishWithInfo: message?
 - (void)scene1ViewController:(id)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated:YES];

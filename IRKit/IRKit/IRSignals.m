@@ -112,24 +112,6 @@
 - (void)addSignalsObject:(IRSignal *)object {
 
     [_signals addObject:object];
-
-    // TODO enable after tested
-//    if (_delegate) {
-//        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [_delegate controller:self
-//                      didChangeObject:object
-//                          atIndexPath:nil
-//                        forChangeType:IRAnimatingTypeInsert
-//                         newIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//            });
-//        }
-//        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [_delegate controllerDidChangeContent:self];
-//            });
-//        }
-//    }
 }
 
 - (void)insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index {
@@ -137,27 +119,7 @@
 }
 
 - (void)removeObjectFromSignalsAtIndex:(NSUInteger)index {
-//    IRSignal *object = [self objectInSignalsAtIndex:index];
-
     [_signals removeObjectAtIndex:index];
-
-//    if (_delegate) {
-//        if ([_delegate respondsToSelector:@selector(controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:)]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [_delegate controller:self
-//                      didChangeObject:object
-//                          atIndexPath:[NSIndexPath indexPathForRow:index
-//                                                         inSection:0]
-//                        forChangeType:IRAnimatingTypeDelete
-//                         newIndexPath:nil];
-//            });
-//        }
-//        if ([_delegate respondsToSelector:@selector(controllerDidChangeContent:)]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [_delegate controllerDidChangeContent:self];
-//            });
-//        }
-//    }
 }
 
 @end

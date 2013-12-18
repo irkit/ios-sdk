@@ -51,7 +51,6 @@
             [self didReceiveSignal:signal];
         }
         else {
-            // TODO alert error
             [self cancelButtonPressed:nil];
         }
     }];
