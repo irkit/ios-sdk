@@ -12,6 +12,7 @@
 #import "ISHTTPOperation/ISHTTPOperation.h"
 #import "IRConst.h"
 #import "IRHTTPJSONOperation.h"
+#import "IRHTTPOperationQueue.h"
 #import "Reachability.h"
 #import "IRPersistentStore.h"
 #import <CommonCrypto/CommonHMAC.h>
@@ -79,7 +80,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     NSURLRequest *req = [self makeGETRequestToLocalPath:@"/"
                                              withParams:nil
                                                hostname:hostname];
-    [self issueRequest:req completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+    [self issueLocalRequest:req completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         return completion((NSHTTPURLResponse*)res,
                           [self hostInfoFromResponse:res],
                           error);
@@ -130,7 +131,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         NSURLRequest *request = [self makePOSTJSONRequestToLocalPath:@"/messages"
                                                           withParams:payload
                                                             hostname:signal.peripheral.hostname];
-        [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        [self issueLocalRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
             return completion( error );
         }];
     }
@@ -141,7 +142,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                          withParams:@{ @"message" : json,
                                                                        @"deviceid" : signal.peripheral.deviceid }
                                                     timeoutInterval:DEFAULT_TIMEOUT];
-        [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        [self issueInternetRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
             return completion( error );
         }];
     }
@@ -151,7 +152,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     NSURLRequest *request = [self makePOSTRequestToLocalPath:@"/keys"
                                                   withParams:nil
                                                     hostname:hostname];
-    [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+    [self issueLocalRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         NSString *clienttoken = object[ @"clienttoken" ];
         if (! clienttoken) {
             return completion(res, nil, nil, error);
@@ -159,7 +160,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         NSURLRequest *request2 = [self makePOSTRequestToInternetPath:@"/keys/add"
                                                           withParams:@{ @"clienttoken": clienttoken }
                                                      timeoutInterval:DEFAULT_TIMEOUT];
-        [self issueRequest:request2 completion:^(NSHTTPURLResponse *res2, id object2, NSError *error2) {
+        [self issueInternetRequest:request2 completion:^(NSHTTPURLResponse *res2, id object2, NSError *error2) {
             NSString *deviceid = object2[ @"deviceid" ];
             return completion(res, res2, deviceid, error);
         }];
@@ -203,7 +204,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                                   @"signature": signature,
                                                                   }
                                                 timeoutInterval:DEFAULT_TIMEOUT];
-    [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+    [self issueInternetRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         NSString *key;
         if ([object isKindOfClass:[NSDictionary class]]) {
             key = object[@"clientkey"];
@@ -223,7 +224,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/keys/new"
                                                          withParams:@{}
                                                     timeoutInterval:DEFAULT_TIMEOUT];
-        [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        [self issueInternetRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
             return completion((NSHTTPURLResponse*)res,
                               object,
                               error);
@@ -389,10 +390,29 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 #pragma mark - Private
 
-+ (void)issueRequest:(NSURLRequest*)request
-          completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
++ (void)issueLocalRequest:(NSURLRequest*)request
+               completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
     LOG(@"request: %@", request);
-    
+
+    [IRHTTPJSONOperation sendRequest:request
+                               queue:[IRHTTPOperationQueue localQueue]
+                             handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
+                                 if (! completion) {
+                                     return;
+                                 }
+                                 if (! error) {
+                                     error = [self errorFromResponse:response body:object];
+                                 }
+
+                                 // ISHTTPOperation calls our handler in main queue
+                                 completion(response, object, error);
+                             }];
+}
+
++ (void)issueInternetRequest:(NSURLRequest*)request
+                  completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
+    LOG(@"request: %@", request);
+
     [IRHTTPJSONOperation sendRequest:request
                              handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
                                  if (! completion) {
@@ -402,12 +422,9 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                      error = [self errorFromResponse:response body:object];
                                  }
 
-                                 NSRange range = [request.URL.host rangeOfString:@".local"];
-                                 if (range.location == NSNotFound) {
-                                     // if request was issued against server on internet,
-                                     // alert about error
-                                     [self showAlertOfError:error];
-                                 }
+                                 // if request was issued against server on internet,
+                                 // alert about error
+                                 [self showAlertOfError:error];
 
                                  // ISHTTPOperation calls our handler in main queue
                                  completion(response, object, error);

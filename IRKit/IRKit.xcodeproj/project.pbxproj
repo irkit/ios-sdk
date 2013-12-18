@@ -123,6 +123,7 @@
 		C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */; };
 		C7C7A30B176F017600C9A62F /* IRNewPeripheralViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */; };
 		C7C7A30E176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */; };
+		C7CEF3B9186172DB00B665DA /* IRHTTPOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CEF3B8186172DB00B665DA /* IRHTTPOperationQueue.m */; };
 		C7D0561118041E4F00660217 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D0560F18041E3F00660217 /* AVFoundation.framework */; };
 		C7E4E31D18520C6B00EC864E /* IRNewPeripheralScene1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E31F18520C6B00EC864E /* IRNewPeripheralScene1ViewController.xib */; };
 		C7E4E32018520C9100EC864E /* IRMorsePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32218520C9100EC864E /* IRMorsePlayerViewController.xib */; };
@@ -339,6 +340,8 @@
 		C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralScene1ViewController.m; sourceTree = "<group>"; };
 		C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralScene1ViewController.h; sourceTree = "<group>"; };
 		C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		C7CEF3B7186172DB00B665DA /* IRHTTPOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHTTPOperationQueue.h; sourceTree = "<group>"; };
+		C7CEF3B8186172DB00B665DA /* IRHTTPOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHTTPOperationQueue.m; sourceTree = "<group>"; };
 		C7D0560F18041E3F00660217 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C7E4E332185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRNewPeripheralScene1ViewController.xib; sourceTree = "<group>"; };
 		C7E4E333185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRWifiEditViewController.xib; sourceTree = "<group>"; };
@@ -494,6 +497,8 @@
 				C7B741BE1803FB7A005802A7 /* IRMorsePlayerOperation.h */,
 				C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */,
 				C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */,
+				C7CEF3B7186172DB00B665DA /* IRHTTPOperationQueue.h */,
+				C7CEF3B8186172DB00B665DA /* IRHTTPOperationQueue.m */,
 			);
 			name = operation;
 			sourceTree = "<group>";
@@ -952,6 +957,7 @@
 				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
 				C7603E8B17A9FAE100A7AF1E /* IRSignalNameEditViewController.m in Sources */,
 				C7FFC7C8184CCE790007B178 /* IRHTTPJSONOperation.m in Sources */,
+				C7CEF3B9186172DB00B665DA /* IRHTTPOperationQueue.m in Sources */,
 				C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
