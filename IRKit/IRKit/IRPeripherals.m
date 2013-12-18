@@ -20,7 +20,6 @@
     if (! self) { return nil; }
 
     [self load];
-    [self check];
 
     return self;
 }
@@ -86,18 +85,6 @@
     }
 
     LOG( @"_irperipheralForName: %@", _irperipheralForName );
-}
-
-- (void) check {
-    LOG_CURRENT_METHOD;
-
-    for (IRPeripheral *p in self.peripherals) {
-        if (! [p hasDeviceID]) {
-            [p getKeyWithCompletion:^{
-                [self save];
-            }];
-        }
-    }
 }
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
