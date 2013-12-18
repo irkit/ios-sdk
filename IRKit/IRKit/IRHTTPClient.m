@@ -150,21 +150,21 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     }
 }
 
-+ (void)getDeviceIDFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSString *deviceid, NSError *error))completion {
++ (void)getDeviceIDFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res_local, NSHTTPURLResponse *res_internet, NSString *deviceid, NSError *error))completion {
     NSURLRequest *request = [self makePOSTRequestToLocalPath:@"/keys"
                                                   withParams:nil
                                                     hostname:hostname];
     [self issueRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         NSString *clienttoken = object[ @"clienttoken" ];
         if (! clienttoken) {
-            return completion(res, nil, error);
+            return completion(res, nil, nil, error);
         }
         NSURLRequest *request2 = [self makePOSTRequestToInternetPath:@"/keys/add"
                                                           withParams:@{ @"clienttoken": clienttoken }
                                                      timeoutInterval:DEFAULT_TIMEOUT];
         [self issueRequest:request2 completion:^(NSHTTPURLResponse *res2, id object2, NSError *error2) {
             NSString *deviceid = object2[ @"deviceid" ];
-            return completion(res2, deviceid, error);
+            return completion(res, res2, deviceid, error);
         }];
     }];
 }

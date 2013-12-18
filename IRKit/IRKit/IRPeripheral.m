@@ -67,11 +67,11 @@
     LOG_CURRENT_METHOD;
 
     [IRHTTPClient getDeviceIDFromHost:_hostname
-                       withCompletion:^(NSHTTPURLResponse *res, NSString *deviceid, NSError *error) {
-        LOG( @"res: %@, key: %@, err: %@", res, deviceid, error );
+                       withCompletion:^(NSHTTPURLResponse *res_local, NSHTTPURLResponse *res_internet, NSString *deviceid, NSError *error) {
+        LOG( @"res_local: %@, res_internet: %@, key: %@, err: %@", res_local, res_internet, deviceid, error );
         if (deviceid) {
             _deviceid = deviceid;
-            NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res];
+            NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res_local];
             if (hostInfo) {
                 _modelName = hostInfo[ @"modelName" ];
                 _version   = hostInfo[ @"version" ];
