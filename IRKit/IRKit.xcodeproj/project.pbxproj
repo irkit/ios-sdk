@@ -199,6 +199,7 @@
 
 /* Begin PBXFileReference section */
 		6A92507FB75A49B8B9640873 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C70088D0186170BC00A2C878 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRWifiSecuritySelectViewController.xib; sourceTree = "<group>"; };
 		C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWifiSecuritySelectViewController.m; sourceTree = "<group>"; };
 		C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWifiSecuritySelectViewController.h; sourceTree = "<group>"; };
@@ -996,6 +997,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C721651C18521C80000BD43D /* ja */,
+				C70088D0186170BC00A2C878 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

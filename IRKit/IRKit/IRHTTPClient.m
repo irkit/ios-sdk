@@ -350,7 +350,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         switch (error.code) {
             case NSURLErrorNotConnectedToInternet:
                 // -1009
-                message = IRLocalizedString(@"Please check your internet connection", @"-1009 error message");
+                message = IRLocalizedString(@"-1009 Please check your internet connection", @"-1009 error message");
                 break;
             default:
                 break;
@@ -363,16 +363,16 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         else {
             switch (error.code) {
                 case 400:
-                    message = IRLocalizedString(@"Invalid Request", @"http status code 400 error message");
+                    message = IRLocalizedString(@"400 Invalid Request", @"http status code 400 error message");
                     break;
                 case 401:
-                    message = IRLocalizedString(@"Unauthorized", @"http status code 401 error message");
+                    message = IRLocalizedString(@"401 Unauthorized", @"http status code 401 error message");
                     break;
                 case 500:
-                    message = IRLocalizedString(@"Something wrong, please try again, or contact us if problem persists", @"http status code 500 error message");
+                    message = IRLocalizedString(@"500 Something wrong, please try again, or contact us if problem persists", @"http status code 500 error message");
                     break;
                 case 503:
-                    message = IRLocalizedString(@"We're temporary under maintenance, please wait for a while and try again", @"http status code 503 error message");
+                    message = IRLocalizedString(@"503 We're temporary under maintenance, please wait for a while and try again", @"http status code 503 error message");
                     break;
                 default:
                     break;
