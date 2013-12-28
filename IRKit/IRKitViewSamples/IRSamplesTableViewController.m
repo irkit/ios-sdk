@@ -239,10 +239,10 @@
         IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController" bundle:resources];
         c.delegate = self;
         IRKeys *keys = [[IRKeys alloc] init];
-        keys.ssid = @"ssid";
-        keys.password = @"password";
+        keys.ssid = @"IRKitTester";
+        keys.password = @"irkitone";
         keys.security = IRSecurityTypeWPA2;
-        keys.devicekey = @"0000";
+        keys.devicekey = @"0123456789ABCDEF0123456789ABCDEF";
         c.keys = keys;
         [self.navigationController pushViewController:c animated:YES];
         [c performSelector:@selector(startPlaying) withObject:nil afterDelay:1];
