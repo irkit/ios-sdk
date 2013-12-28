@@ -39,7 +39,6 @@
 		C735042217A029C40057D51B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C735042117A029C40057D51B /* Default-568h@2x.png */; };
 		C735042517A029C40057D51B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C735042317A029C40057D51B /* MainStoryboard.storyboard */; };
 		C735042E17A02B0D0057D51B /* IRSamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */; };
-		C735042F17A0304A0057D51B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */; };
 		C735043217A030A60057D51B /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C735043517A0341D0057D51B /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3B9176F25260088679E /* IRKitResources.bundle */; };
 		C73CB4D717856B5C00B3F2C0 /* IRPeripheralWriteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */; };
@@ -361,7 +360,6 @@
 		C7E4E341185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		C7E4E342185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C7E4E343185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		C7FAB0251746889000125BCB /* IRConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRConst.h; sourceTree = "<group>"; };
@@ -394,7 +392,6 @@
 				C7B741BA1803FA41005802A7 /* libc++.dylib in Frameworks */,
 				C75CFC8817A6671200870A1B /* QuartzCore.framework in Frameworks */,
 				C735043217A030A60057D51B /* libIRKit.a in Frameworks */,
-				C735042F17A0304A0057D51B /* CoreBluetooth.framework in Frameworks */,
 				C735040E17A029C30057D51B /* UIKit.framework in Frameworks */,
 				C735040F17A029C30057D51B /* Foundation.framework in Frameworks */,
 				C735041017A029C30057D51B /* CoreGraphics.framework in Frameworks */,
@@ -543,7 +540,6 @@
 				C75CFC8717A6671200870A1B /* QuartzCore.framework */,
 				C79DE3B3176F20B50088679E /* UIKit.framework */,
 				C79DE3B1176F20A30088679E /* CoreGraphics.framework */,
-				C7FAB01E17467A5400125BCB /* CoreBluetooth.framework */,
 				C752D70117462C7B008B644A /* Foundation.framework */,
 				C752D71017462C7B008B644A /* SenTestingKit.framework */,
 				C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */,
