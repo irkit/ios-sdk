@@ -11,6 +11,7 @@
 
 @interface IRNewPeripheralViewController : UIViewController<
 IRNewPeripheralScene1ViewControllerDelegate,
+IRNewPeripheralScene2ViewControllerDelegate,
 IRWifiEditViewControllerDelegate,
 IRMorsePlayerViewControllerDelegate,
 IRPeripheralNameEditViewControllerDelegate,

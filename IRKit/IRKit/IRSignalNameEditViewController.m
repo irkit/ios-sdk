@@ -72,10 +72,10 @@
 
     NSRegularExpression *regex = [NSRegularExpression
                                   regularExpressionWithPattern:@"^\\s*$"
-                                  options:nil
+                                  options:0
                                   error:nil];
     NSUInteger matches = [regex numberOfMatchesInString:_textField.text
-                                                options:nil
+                                                options:0
                                                   range:NSMakeRange(0,_textField.text.length)];
 
     if (matches > 0) {

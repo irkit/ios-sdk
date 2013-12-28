@@ -6,12 +6,17 @@
 
 #define OUTPUT_BUS          0
 #define SAMPLE_RATE         44100
-#define ASSERT_OR_RETURN(status) \
+
+#ifdef IRKIT_DEBUG
+# define ASSERT_OR_RETURN(status) \
  if (status) { \
   NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
   LOG( @"status: %ld error: %@", status, e ); \
   return; \
  }
+#else
+# define ASSERT_OR_RETURN(status)
+#endif
 
 #define LONGEST_CHARACTER_LENGTH 7 // $
 #define SOUND_SILENCE      0
@@ -36,7 +41,7 @@
     bool *_sequence;
     int _sequenceCount;
     int _nextIndex;
-    int _remainingSamplesOfIndex;
+    size_t _remainingSamplesOfIndex;
     size_t _samplesPerUnit;
 }
 
@@ -292,9 +297,9 @@ static NSDictionary *asciiToMorse;
     audioFormat.mFormatFlags        = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
     audioFormat.mFramesPerPacket    = 1;
     audioFormat.mChannelsPerFrame   = 1; // MONO
-    audioFormat.mBitsPerChannel     = bytesPerSample * 8;
-    audioFormat.mBytesPerPacket     = bytesPerSample;
-    audioFormat.mBytesPerFrame      = bytesPerSample;
+    audioFormat.mBitsPerChannel     = (UInt32) bytesPerSample * 8;
+    audioFormat.mBytesPerPacket     = (UInt32) bytesPerSample;
+    audioFormat.mBytesPerFrame      = (UInt32) bytesPerSample;
 
     // stream formats
 
@@ -333,8 +338,8 @@ static NSDictionary *asciiToMorse;
 }
 
 - (void) play {
-    OSStatus result = AUGraphStart(_graph);
-    ASSERT_OR_RETURN(result);
+    OSStatus result __attribute__((unused)) = AUGraphStart(_graph);
+    LOG( @"%d", result );
 }
 
 OSStatus

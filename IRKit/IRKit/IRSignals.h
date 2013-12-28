@@ -13,14 +13,17 @@
 - (void)sendSequentiallyWithCompletion:(void (^)(NSError *error))completion;
 - (NSUInteger) indexOfSignal: (IRSignal*) signal;
 
-#pragma mark - Key Value Coding - Mutable Unordered Accessors
+#pragma mark - Key Value Coding - Mutable Ordered To-Many Accessors
 
+// Getter Indexed Accessors
 - (NSArray*) signals;
 - (NSUInteger) countOfSignals;
 - (IRSignal*)objectInSignalsAtIndex:(NSUInteger)index;
-- (IRSignal*)memberOfSignals:(IRSignal *)object;
-- (void)addSignalsObject:(IRSignal *)object;
+
+// Mutable Indexed Accessors
 - (void)insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index;
 - (void)removeObjectFromSignalsAtIndex:(NSUInteger)index;
+
+- (void)addSignalsObject:(IRSignal *)object;
 
 @end

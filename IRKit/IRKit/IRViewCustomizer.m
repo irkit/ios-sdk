@@ -25,10 +25,11 @@
         return nil;
     }
 
+    __weak IRViewCustomizer *_self = self;
     _viewDidLoad = ^(UIViewController* viewController) {
         viewController.edgesForExtendedLayout = UIRectEdgeNone;
         viewController.view.backgroundColor = [IRViewCustomizer defaultViewBackgroundColor];
-        [self customizeLabelFonts:viewController.view];
+        [_self customizeLabelFonts:viewController.view];
 
         if ([viewController isKindOfClass:[IRNewSignalScene1ViewController class]] ||
             [viewController isKindOfClass:[IRNewPeripheralScene1ViewController class]]) {
@@ -135,9 +136,9 @@
 
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary: [[UINavigationBar appearance] titleTextAttributes]];
     [attributes setObject:[UIFont fontWithName:@"HelveticaNeue-Light" size:20.]
-                   forKey:UITextAttributeFont ];
+                   forKey:NSFontAttributeName ];
     [attributes setObject:[self textColor]
-                   forKey:UITextAttributeTextColor];
+                   forKey:NSForegroundColorAttributeName];
     [bar setTitleTextAttributes: attributes];
 }
 

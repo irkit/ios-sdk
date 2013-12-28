@@ -58,7 +58,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                 }
                                 if (self.longPollInterval > 0) {
                                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, self.longPollInterval * NSEC_PER_SEC),
-                                                   dispatch_get_current_queue(), ^{
+                                                   dispatch_get_main_queue(), ^{
                                                        [self startPollingRequest];
                                                    });
                                 }
@@ -136,7 +136,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }];
     }
     else {
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:nil error:nil];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:nil];
         NSString *json   = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/messages"
                                                          withParams:@{ @"message" : json,
@@ -240,6 +240,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     IRHTTPClient *client = [[IRHTTPClient alloc] init];
     client.longPollRequest = req;
     client.longPollInterval = GETMESSAGES_LONGPOLL_INTERVAL;
+    __weak IRHTTPClient *_client = client;
     client.longPollDidFinish = (ResponseHandlerBlock)^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG( @"res: %@, object: %@, error: %@", res, object, error );
 
@@ -268,9 +269,9 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }
         if (doRetry) {
             // remove clear=1
-            client.longPollRequest = [self makeGETRequestToInternetPath:@"/messages"
-                                                             withParams:@{}
-                                                        timeoutInterval:LONGPOLL_TIMEOUT];
+            _client.longPollRequest = [self makeGETRequestToInternetPath:@"/messages"
+                                                              withParams:@{}
+                                                         timeoutInterval:LONGPOLL_TIMEOUT];
             return NO;
         }
         if (! error) {
@@ -468,7 +469,7 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
     NSData *data = [[self stringOfURLEncodedDictionary:realParams] dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
 
     return request;
@@ -530,10 +531,10 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
     request.timeoutInterval = DEFAULT_TIMEOUT;
 
-    NSData *data = [NSJSONSerialization dataWithJSONObject:params options:nil error:nil];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:params options:0 error:nil];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
     return request;
 }
@@ -552,7 +553,7 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
     NSData *data = [[self stringOfURLEncodedDictionary:params] dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[data length]] forHTTPHeaderField:@"Content-Length"];
     [request setHTTPBody:data];
     return request;
 }

@@ -15,10 +15,11 @@ Pod::Spec.new do |s|
   s.author       = { "Masakazu OHTSUKA" => "o.masakazu@gmail.com" }
   s.source       = { :git => "https://github.com/irkit/ios-sdk.git", :tag => "1.0.1" }
   s.platform     = :ios, '7.0'
-  s.source_files = 'IRKit/IRKit/*.{h,m}'
+  s.source_files = 'IRKit/IRKit/*.{h,m,c}'
   s.public_header_files = 'IRKit/IRKit/'
-  s.resources = "IRKit/IRKitResources/*"
-  s.frameworks = 'Foundation', 'QuartzCore', 'CoreGraphics', 'UIKit', 'MediaPlayer', 'SystemConfiguration', 'AudioToolbox', 'AudioUnit', 'AVFoundation'
+  s.resources    = "IRKit/IRKitResources/*"
+  s.frameworks   = 'Foundation', 'QuartzCore', 'CoreGraphics', 'UIKit', 'MediaPlayer', 'SystemConfiguration', 'AudioToolbox', 'AVFoundation'
+  s.library      = 'c++'
   s.requires_arc = true
   s.dependency 'ISHTTPOperation', '~> 1.1.0'
   s.dependency 'Reachability', '~> 3.1.1'
