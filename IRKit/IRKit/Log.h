@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 
 NSString *_IRLog(NSString *format, ...);
+void IRKitLog(NSString *format, ...);
 
 // '#define LOG_DISABLED 1' before '#import "Log.h"' in .m file to disable logging only in that file
 #ifndef LOG_DISABLED

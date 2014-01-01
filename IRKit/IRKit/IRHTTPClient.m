@@ -15,6 +15,7 @@
 #import "IRHTTPOperationQueue.h"
 #import "Reachability.h"
 #import "IRPersistentStore.h"
+#import "IRKit.h"
 #import <CommonCrypto/CommonHMAC.h>
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
@@ -138,7 +139,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     else {
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:nil];
         NSString *json   = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/messages"
+        NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/1/messages"
                                                          withParams:@{ @"message" : json,
                                                                        @"deviceid" : signal.peripheral.deviceid }
                                                     timeoutInterval:DEFAULT_TIMEOUT];
@@ -157,7 +158,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         if (! clienttoken) {
             return completion(res, nil, nil, error);
         }
-        NSURLRequest *request2 = [self makePOSTRequestToInternetPath:@"/keys/add"
+        NSURLRequest *request2 = [self makePOSTRequestToInternetPath:@"/1/keys"
                                                           withParams:@{ @"clienttoken": clienttoken }
                                                      timeoutInterval:DEFAULT_TIMEOUT];
         [self issueInternetRequest:request2 completion:^(NSHTTPURLResponse *res2, id object2, NSError *error2) {
@@ -174,7 +175,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         clientkey = [IRPersistentStore objectForKey:@"clientkey"];
     }
     if (! clientkey) {
-        [IRHTTPClient registerWithCompletion:^(NSHTTPURLResponse *res, NSString *clientkey_, NSError *error) {
+        [IRHTTPClient registerClientWithCompletion:^(NSHTTPURLResponse *res, NSString *clientkey_, NSError *error) {
             if (error) {
                 return next(error);
             }
@@ -195,13 +196,16 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     next(nil);
 }
 
-+ (void)registerWithCompletion: (void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion {
-    NSString *uuid      = [[NSUUID UUID] UUIDString];
-    NSString *signature = [[self signatureForString:uuid] uppercaseString];
-    NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/register"
++ (void)registerClientWithCompletion: (void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion {
+    NSString *apikey = [IRKit sharedInstance].apikey;
+    if (! apikey) {
+        IRKitLog( @"call \"[IRKit startWithAPIKey:] first!\nPlease read http://getirkit.com/ to get an API Key\"" );
+        abort();
+    }
+
+    NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/1/clients"
                                                      withParams:@{
-                                                                  @"randomid": uuid,
-                                                                  @"signature": signature,
+                                                                  @"apikey": apikey,
                                                                   }
                                                 timeoutInterval:DEFAULT_TIMEOUT];
     [self issueInternetRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
@@ -215,13 +219,13 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     }];
 }
 
-+ (void)createKeysWithCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error))completion {
++ (void)registerDeviceWithCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error))completion {
     // POST /register should have been called before this, but let's make sure
     [self ensureRegisteredAndCall:^(NSError *error) {
         if (error) {
             return completion(nil,nil,error);
         }
-        NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/keys/new"
+        NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/1/devices"
                                                          withParams:@{}
                                                     timeoutInterval:DEFAULT_TIMEOUT];
         [self issueInternetRequest:request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
@@ -234,7 +238,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 + (IRHTTPClient*)waitForSignalWithCompletion: (void (^)(NSHTTPURLResponse* res, IRSignal *signal, NSError* error))completion {
     LOG_CURRENT_METHOD;
-    NSURLRequest *req = [self makeGETRequestToInternetPath:@"/messages"
+    NSURLRequest *req = [self makeGETRequestToInternetPath:@"/1/messages"
                                                 withParams:@{ @"clear": @"1" }
                                            timeoutInterval:LONGPOLL_TIMEOUT];
     IRHTTPClient *client = [[IRHTTPClient alloc] init];
@@ -269,7 +273,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }
         if (doRetry) {
             // remove clear=1
-            _client.longPollRequest = [self makeGETRequestToInternetPath:@"/messages"
+            _client.longPollRequest = [self makeGETRequestToInternetPath:@"/1/messages"
                                                               withParams:@{}
                                                          timeoutInterval:LONGPOLL_TIMEOUT];
             return NO;
@@ -288,7 +292,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 + (IRHTTPClient*)waitForDoorWithDeviceID: (NSString*)deviceid
                               completion: (void (^)(NSHTTPURLResponse*, id, NSError*))completion {
     LOG_CURRENT_METHOD;
-    NSURLRequest *req = [self makePOSTRequestToInternetPath:@"/door"
+    NSURLRequest *req = [self makePOSTRequestToInternetPath:@"/1/door"
                                                  withParams:@{ @"deviceid": deviceid }
                                             timeoutInterval:LONGPOLL_TIMEOUT];
     IRHTTPClient *client = [[IRHTTPClient alloc] init];
@@ -332,13 +336,13 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 + (void)cancelWaitForSignal {
     LOG_CURRENT_METHOD;
 
-    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/messages"];
+    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/1/messages"];
 }
 
 + (void)cancelWaitForDoor {
     LOG_CURRENT_METHOD;
 
-    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/door"];
+    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/1/door"];
 }
 
 + (void)loadImage:(NSString*)url
@@ -578,35 +582,6 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
                                                                                  NULL,
                                                                                  (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
                                                                                  kCFStringEncodingUTF8);
-}
-
-+ (NSString*)stringFromData:(NSData*)data {
-    const unsigned char *dataBuffer = (const unsigned char *)[data bytes];
-
-    if (!dataBuffer) {
-        return [NSString string];
-    }
-
-    NSUInteger dataLength  = [data length];
-    NSMutableString *hexString = [NSMutableString stringWithCapacity:(dataLength * 2)];
-
-    for (int i = 0; i < dataLength; ++i) {
-        [hexString appendString:[NSString stringWithFormat:@"%02lx", (unsigned long)dataBuffer[i]]];
-    }
-
-    return [NSString stringWithString:hexString];
-}
-
-+ (NSString*)signatureForString: (NSString*)string {
-    unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
-
-    const char *cKey  = HMACKEY;
-    const char *cData = [string cStringUsingEncoding:NSASCIIStringEncoding];
-
-    CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
-
-    NSData *HMAC = [[NSData alloc] initWithBytes:cHMAC length:sizeof(cHMAC)];
-    return [self stringFromData:HMAC];
 }
 
 @end

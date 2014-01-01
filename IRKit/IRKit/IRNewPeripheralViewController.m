@@ -5,6 +5,7 @@
 #import "IRConst.h"
 #import "IRKeys.h"
 #import "IRKit.h"
+#import "IRHTTPClient.h"
 
 @interface IRNewPeripheralViewController ()
 
@@ -48,6 +49,12 @@
 - (void)viewDidLoad {
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
+
+    [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
+        if (! error) {
+            IRKitLog( @"successfully registered!" );
+        }
+    }];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
