@@ -227,7 +227,7 @@
 
     AudioSessionSetActive(false);
 
-    [IRHTTPClient createKeysWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
+    [IRHTTPClient registerDeviceWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
         if (error) {
             return;
         }

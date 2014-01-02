@@ -12,6 +12,7 @@
 @property (nonatomic) id terminateObserver;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) id enterBackgroundObserver;
+@property (nonatomic, copy) NSString *apikey; // allow internal write
 
 @end
 
@@ -57,10 +58,6 @@
                                                                              }];
     [IRViewCustomizer sharedInstance]; // init
 
-    [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
-        LOG( @"error: %@", error );
-    }];
-
     return self;
 }
 
@@ -69,6 +66,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_terminateObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];
+}
+
++ (void) startWithAPIKey: (NSString*)apikey {
+    LOG_CURRENT_METHOD;
+    [IRKit sharedInstance].apikey = apikey;
+
+    [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
+        LOG( @"error: ", error );
+        if (! error) {
+            IRKitLog( @"successfully registered!" );
+        }
+    }];
 }
 
 - (void) save {
