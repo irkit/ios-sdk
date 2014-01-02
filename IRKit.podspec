@@ -17,7 +17,10 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.source_files = 'IRKit/IRKit/*.{h,m,c}'
   s.public_header_files = 'IRKit/IRKit/'
-  s.resource_bundle = { "IRKitResources" => "IRKit/IRKitResources/**/*" }
+  s.preserve_paths = 'IRKit.framework/*'
+  s.vendored_frameworks = 'IRKit/IRKit.framework'
+
+  s.resources    = 'IRKit/IRKit.bundle'
   s.frameworks   = 'Foundation', 'QuartzCore', 'CoreGraphics', 'UIKit', 'MediaPlayer', 'SystemConfiguration', 'AudioToolbox', 'AVFoundation'
   s.library      = 'c++'
   s.requires_arc = true

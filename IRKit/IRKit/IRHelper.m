@@ -30,7 +30,7 @@ NSString *IRLocalizedString(NSString* key, NSString* comment) {
 
 + (NSBundle*) resources {
     NSBundle *main      = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKitResources"
+    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKit"
                                                                   ofType:@"bundle"]];
     return resources;
 }

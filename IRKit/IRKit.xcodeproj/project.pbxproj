@@ -6,6 +6,22 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		C71B3F2C1875C2BE001CE2DA /* Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C71B3F2D1875C2BE001CE2DA /* Build configuration list for PBXAggregateTarget "Framework" */;
+			buildPhases = (
+				C71B3F321875C2E1001CE2DA /* ShellScript */,
+			);
+			dependencies = (
+				C71B3F341875C451001CE2DA /* PBXTargetDependency */,
+				C71B3F311875C2CB001CE2DA /* PBXTargetDependency */,
+			);
+			name = Framework;
+			productName = Framework;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */; };
 		C701BEBF182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */; };
@@ -19,6 +35,7 @@
 		C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */; };
 		C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */; };
 		C707ECD6184C84CE00AC5F0B /* img_prepare3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */; };
+		C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C752D70617462C7B008B644A /* IRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
 		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
 		C71D909F17977D2200CEC73F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C71D909D17977D2200CEC73F /* InfoPlist.strings */; };
@@ -40,7 +57,7 @@
 		C735042517A029C40057D51B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C735042317A029C40057D51B /* MainStoryboard.storyboard */; };
 		C735042E17A02B0D0057D51B /* IRSamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */; };
 		C735043217A030A60057D51B /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
-		C735043517A0341D0057D51B /* IRKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3B9176F25260088679E /* IRKitResources.bundle */; };
+		C735043517A0341D0057D51B /* IRKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3B9176F25260088679E /* IRKit.bundle */; };
 		C73CB4D717856B5C00B3F2C0 /* IRPeripheralWriteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */; };
 		C73CB4DA17856CC200B3F2C0 /* IRPeripheralWriteOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D917856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.m */; };
 		C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */; };
@@ -124,6 +141,40 @@
 		C7C7A30E176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A30C176F05C500C9A62F /* IRNewPeripheralScene1ViewController.m */; };
 		C7CEF3B9186172DB00B665DA /* IRHTTPOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7CEF3B8186172DB00B665DA /* IRHTTPOperationQueue.m */; };
 		C7D0561118041E4F00660217 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D0560F18041E3F00660217 /* AVFoundation.framework */; };
+		C7E07C5B1875D3BE00901967 /* IRSignalSendOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C5C1875D3BE00901967 /* IRSignalSendOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C5D1875D3BE00901967 /* IRPeripheralWriteOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C73CB4D817856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C5E1875D3BE00901967 /* IRPeripheralWriteOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C73CB4D517856B5B00B3F2C0 /* IRPeripheralWriteOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C5F1875D3BE00901967 /* IRMorsePlayerOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B741BB1803FB61005802A7 /* IRMorsePlayerOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C601875D3BE00901967 /* IRMorsePlayerOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B741BE1803FB7A005802A7 /* IRMorsePlayerOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C611875D3BE00901967 /* IRHTTPJSONOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C621875D3BE00901967 /* IRHTTPOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7CEF3B7186172DB00B665DA /* IRHTTPOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C631875D3BE00901967 /* IRNewSignalViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C641875D3BE00901967 /* IRNewSignalScene1ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C651875D3BE00901967 /* IRSignalNameEditViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C661875D3BE00901967 /* IRNewPeripheralViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C671875D3BE00901967 /* IRNewPeripheralScene1ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C7C7A30D176F05C500C9A62F /* IRNewPeripheralScene1ViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C681875D3BE00901967 /* IRWifiEditViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C691875D3BE00901967 /* IRWifiSecuritySelectViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C6A1875D3BE00901967 /* IRNewPeripheralScene2ViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C6B1875D3BE00901967 /* IRMorsePlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C763C6B61839AF6D00D1D155 /* IRMorsePlayerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C6C1875D3BE00901967 /* IRPeripheralNameEditViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C6D1875D3BE00901967 /* IREditCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C78F6FE8182B8E77002AAC7B /* IREditCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C6E1875D3BE00901967 /* IRPeripheralCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C6F1875D3BE00901967 /* IRViewCustomizer.h in Headers */ = {isa = PBXBuildFile; fileRef = C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C701875D3BE00901967 /* IRSignals.h in Headers */ = {isa = PBXBuildFile; fileRef = C75B5687174A7AB100FFE5CB /* IRSignals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C711875D3BE00901967 /* IRSignal.h in Headers */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C721875D3BE00901967 /* IRPeripherals.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F401749F2E000BDF920 /* IRPeripherals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C731875D3BE00901967 /* IRPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C741875D3BE00901967 /* IRFunc.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F1C1749D84C00BDF920 /* IRFunc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C751875D3BE00901967 /* IRConst.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FAB0251746889000125BCB /* IRConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C761875D3BE00901967 /* IRPersistentStore.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C771875D3BE00901967 /* IRHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E37E5174DF20300872C04 /* IRHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C781875D3BE00901967 /* IRKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = C701BEC0182BA72C00C31F4B /* IRKeys.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C791875D3BE00901967 /* IRHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = C703E826183DFA6900B8446C /* IRHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C7A1875D3BE00901967 /* CRC8.h in Headers */ = {isa = PBXBuildFile; fileRef = C703E82B183E0DF600B8446C /* CRC8.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C7B1875D3BE00901967 /* IRSearcher.h in Headers */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C7C1875D3BE00901967 /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FAB02017467CBF00125BCB /* Log.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E4E31D18520C6B00EC864E /* IRNewPeripheralScene1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E31F18520C6B00EC864E /* IRNewPeripheralScene1ViewController.xib */; };
 		C7E4E32018520C9100EC864E /* IRMorsePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32218520C9100EC864E /* IRMorsePlayerViewController.xib */; };
 		C7E4E32318520C9900EC864E /* IRNewPeripheralScene2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32518520C9900EC864E /* IRNewPeripheralScene2ViewController.xib */; };
@@ -140,6 +191,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C71B3F301875C2CB001CE2DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C752D6F617462C7B008B644A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C752D6FD17462C7B008B644A;
+			remoteInfo = IRKit;
+		};
+		C71B3F331875C451001CE2DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C752D6F617462C7B008B644A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C79DE3B8176F25260088679E;
+			remoteInfo = IRKitResources;
+		};
 		C71D90AB17978B0800CEC73F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C752D6F617462C7B008B644A /* Project object */;
@@ -216,7 +281,6 @@
 		C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_cancel@2x.png"; sourceTree = "<group>"; };
 		C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_camera@2x.png"; sourceTree = "<group>"; };
 		C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_prepare3@2x.png"; sourceTree = "<group>"; };
-		C70B6EF6185718C40044D0A6 /* Secret.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Secret.xcconfig; path = ../Secret.xcconfig; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C71D909817977D2200CEC73F /* IRKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71D909C17977D2200CEC73F /* IRKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitTests-Info.plist"; sourceTree = "<group>"; };
@@ -313,7 +377,7 @@
 		C79CCB61185356EA00ECB707 /* anime_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "anime_01@2x.png"; sourceTree = "<group>"; };
 		C79DE3B1176F20A30088679E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C79DE3B3176F20B50088679E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		C79DE3B9176F25260088679E /* IRKitResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		C79DE3B9176F25260088679E /* IRKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79DE3BD176F25260088679E /* IRKitResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitResources-Info.plist"; sourceTree = "<group>"; };
 		C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_signal@2x.png"; sourceTree = "<group>"; };
 		C7A1350317AA5D3A00C8679B /* icn_signal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_signal.png; sourceTree = "<group>"; };
@@ -511,7 +575,6 @@
 				C752D6FF17462C7B008B644A /* Products */,
 				6A92507FB75A49B8B9640873 /* Pods.xcconfig */,
 				C780B3BB185715230023B745 /* Project.xcconfig */,
-				C70B6EF6185718C40044D0A6 /* Secret.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -519,7 +582,7 @@
 			isa = PBXGroup;
 			children = (
 				C752D6FE17462C7B008B644A /* libIRKit.a */,
-				C79DE3B9176F25260088679E /* IRKitResources.bundle */,
+				C79DE3B9176F25260088679E /* IRKit.bundle */,
 				C71D909817977D2200CEC73F /* IRKitTests.octest */,
 				C735040D17A029C30057D51B /* IRKitViewSamples.app */,
 			);
@@ -700,6 +763,51 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		C71B3F2A1875C245001CE2DA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */,
+				C7E07C5B1875D3BE00901967 /* IRSignalSendOperationQueue.h in Headers */,
+				C7E07C5C1875D3BE00901967 /* IRSignalSendOperation.h in Headers */,
+				C7E07C5D1875D3BE00901967 /* IRPeripheralWriteOperationQueue.h in Headers */,
+				C7E07C5E1875D3BE00901967 /* IRPeripheralWriteOperation.h in Headers */,
+				C7E07C5F1875D3BE00901967 /* IRMorsePlayerOperationQueue.h in Headers */,
+				C7E07C601875D3BE00901967 /* IRMorsePlayerOperation.h in Headers */,
+				C7E07C611875D3BE00901967 /* IRHTTPJSONOperation.h in Headers */,
+				C7E07C621875D3BE00901967 /* IRHTTPOperationQueue.h in Headers */,
+				C7E07C631875D3BE00901967 /* IRNewSignalViewController.h in Headers */,
+				C7E07C641875D3BE00901967 /* IRNewSignalScene1ViewController.h in Headers */,
+				C7E07C651875D3BE00901967 /* IRSignalNameEditViewController.h in Headers */,
+				C7E07C661875D3BE00901967 /* IRNewPeripheralViewController.h in Headers */,
+				C7E07C671875D3BE00901967 /* IRNewPeripheralScene1ViewController.h in Headers */,
+				C7E07C681875D3BE00901967 /* IRWifiEditViewController.h in Headers */,
+				C7E07C691875D3BE00901967 /* IRWifiSecuritySelectViewController.h in Headers */,
+				C7E07C6A1875D3BE00901967 /* IRNewPeripheralScene2ViewController.h in Headers */,
+				C7E07C6B1875D3BE00901967 /* IRMorsePlayerViewController.h in Headers */,
+				C7E07C6C1875D3BE00901967 /* IRPeripheralNameEditViewController.h in Headers */,
+				C7E07C6D1875D3BE00901967 /* IREditCell.h in Headers */,
+				C7E07C6E1875D3BE00901967 /* IRPeripheralCell.h in Headers */,
+				C7E07C6F1875D3BE00901967 /* IRViewCustomizer.h in Headers */,
+				C7E07C701875D3BE00901967 /* IRSignals.h in Headers */,
+				C7E07C711875D3BE00901967 /* IRSignal.h in Headers */,
+				C7E07C721875D3BE00901967 /* IRPeripherals.h in Headers */,
+				C7E07C731875D3BE00901967 /* IRPeripheral.h in Headers */,
+				C7E07C741875D3BE00901967 /* IRFunc.h in Headers */,
+				C7E07C751875D3BE00901967 /* IRConst.h in Headers */,
+				C7E07C761875D3BE00901967 /* IRPersistentStore.h in Headers */,
+				C7E07C771875D3BE00901967 /* IRHelper.h in Headers */,
+				C7E07C781875D3BE00901967 /* IRKeys.h in Headers */,
+				C7E07C791875D3BE00901967 /* IRHTTPClient.h in Headers */,
+				C7E07C7A1875D3BE00901967 /* CRC8.h in Headers */,
+				C7E07C7B1875D3BE00901967 /* IRSearcher.h in Headers */,
+				C7E07C7C1875D3BE00901967 /* Log.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		C71D909717977D2200CEC73F /* IRKitTests */ = {
 			isa = PBXNativeTarget;
@@ -744,6 +852,8 @@
 				C752D6FA17462C7B008B644A /* Sources */,
 				C752D6FB17462C7B008B644A /* Frameworks */,
 				C752D6FC17462C7B008B644A /* CopyFiles */,
+				C71B3F2A1875C245001CE2DA /* Headers */,
+				C71B3F291875C104001CE2DA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -770,7 +880,7 @@
 			);
 			name = IRKitResources;
 			productName = IRKitResources;
-			productReference = C79DE3B9176F25260088679E /* IRKitResources.bundle */;
+			productReference = C79DE3B9176F25260088679E /* IRKit.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -801,6 +911,7 @@
 				C79DE3B8176F25260088679E /* IRKitResources */,
 				C71D909717977D2200CEC73F /* IRKitTests */,
 				C735040C17A029C30057D51B /* IRKitViewSamples */,
+				C71B3F2C1875C2BE001CE2DA /* Framework */,
 			);
 		};
 /* End PBXProject section */
@@ -818,7 +929,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C735043517A0341D0057D51B /* IRKitResources.bundle in Resources */,
+				C735043517A0341D0057D51B /* IRKit.bundle in Resources */,
 				C735041617A029C40057D51B /* InfoPlist.strings in Resources */,
 				C735041E17A029C40057D51B /* Default.png in Resources */,
 				C735042017A029C40057D51B /* Default@2x.png in Resources */,
@@ -881,6 +992,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C71B3F291875C104001CE2DA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/A/Headers\"\n";
+		};
+		C71B3F321875C2E1001CE2DA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset +u\n# Avoid recursively calling this script.\nif [[ $SF_MASTER_SCRIPT_RUNNING ]]\nthen\nexit 0\nfi\nset -u\nexport SF_MASTER_SCRIPT_RUNNING=1\n\nSF_TARGET_NAME=${PROJECT_NAME}\nSF_EXECUTABLE_PATH=\"lib${SF_TARGET_NAME}.a\"\nSF_WRAPPER_NAME=\"${SF_TARGET_NAME}.framework\"\n\n# The following conditionals come from\n# https://github.com/kstenerud/iOS-Universal-Framework\n\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]\nthen\nSF_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\necho \"Could not find platform name from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]\nthen\nSF_SDK_VERSION=${BASH_REMATCH[1]}\nelse\necho \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\nif [[ \"$SF_SDK_PLATFORM\" = \"iphoneos\" ]]\nthen\nSF_OTHER_PLATFORM=iphonesimulator\nelse\nSF_OTHER_PLATFORM=iphoneos\nfi\n\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$SF_SDK_PLATFORM$ ]]\nthen\nSF_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${SF_OTHER_PLATFORM}\"\nelse\necho \"Could not find platform name from build products directory: $BUILT_PRODUCTS_DIR\"\nexit 1\nfi\n\n# Build the other platform.\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk ${SF_OTHER_PLATFORM}${SF_SDK_VERSION} BUILD_DIR=\"${BUILD_DIR}\" OBJROOT=\"${OBJROOT}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\" $ACTION\n\n# Smash the two static libraries into one fat binary and store it in the .framework\nlipo -create \"${BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_EXECUTABLE_PATH}\" -output \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n\n# Copy the binary to the other architecture folder to have a complete framework in both.\ncp -a \"${BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\" \"${SF_OTHER_BUILT_PRODUCTS_DIR}/${SF_WRAPPER_NAME}/Versions/A/${SF_TARGET_NAME}\"\n";
+		};
 		C735043717A0361C0057D51B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -892,7 +1029,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -ex\necho $BUILT_PRODUCTS_DIR\necho $TARGET_BUILD_DIR";
+			shellScript = "set -ex\nCOMMAND=\"cp -r ${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME} ${PROJECT_DIR}/\"\necho $COMMAND\n$COMMAND\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -968,6 +1105,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C71B3F311875C2CB001CE2DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C752D6FD17462C7B008B644A /* IRKit */;
+			targetProxy = C71B3F301875C2CB001CE2DA /* PBXContainerItemProxy */;
+		};
+		C71B3F341875C451001CE2DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C79DE3B8176F25260088679E /* IRKitResources */;
+			targetProxy = C71B3F331875C451001CE2DA /* PBXContainerItemProxy */;
+		};
 		C71D90AC17978B0800CEC73F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C752D6FD17462C7B008B644A /* IRKit */;
@@ -1088,6 +1235,20 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		C71B3F2E1875C2BE001CE2DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C71B3F2F1875C2BE001CE2DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		C71D90A217977D2200CEC73F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1163,6 +1324,7 @@
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1187,8 +1349,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SDKROOT = iphoneos;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1210,7 +1374,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
@@ -1226,8 +1391,10 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SDKROOT = iphoneos;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
+				STRIP_STYLE = "non-global";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 				WARNING_CFLAGS = "-Wall";
@@ -1270,7 +1437,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "IRKitResources/IRKitResources-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = IRKit;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -1284,7 +1451,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "IRKitResources/IRKitResources-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = IRKit;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -1292,6 +1459,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C71B3F2D1875C2BE001CE2DA /* Build configuration list for PBXAggregateTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C71B3F2E1875C2BE001CE2DA /* Debug */,
+				C71B3F2F1875C2BE001CE2DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C71D90A117977D2200CEC73F /* Build configuration list for PBXNativeTarget "IRKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
