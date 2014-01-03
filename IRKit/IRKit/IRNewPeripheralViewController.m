@@ -50,12 +50,6 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
-        if (! error) {
-            IRKitLog( @"successfully registered!" );
-        }
-    }];
-
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
     __weak IRNewPeripheralViewController *_self = self;

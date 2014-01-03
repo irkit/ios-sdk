@@ -41,14 +41,21 @@
                                                                            LOG( @"terminating" );
                                                                            [_self save];
                                                                        }];
+    static bool first = YES;
     _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
                                                                               object:nil
                                                                                queue:[NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
                                                                               LOG( @"became active" );
-                                                                              [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
-                                                                                  LOG( @"error: %@", error );
-                                                                              }];
+                                                                              if (first) {
+                                                                                  // ensureRegistered.. should be called first time in startWithAPIKey:
+                                                                                  first = NO;
+                                                                              }
+                                                                              else {
+                                                                                  [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
+                                                                                      LOG( @"error: %@", error );
+                                                                                  }];
+                                                                              }
                                                                           }];
     _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
                                                                                  object:nil
