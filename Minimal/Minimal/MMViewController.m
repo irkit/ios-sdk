@@ -1,7 +1,10 @@
 #import "Log.h"
 #import "MMViewController.h"
+#import "MMSignalsDataSource.h"
 
 @interface MMViewController ()
+
+@property (nonatomic) MMSignalsDataSource *datasource;
 
 @end
 
@@ -11,11 +14,10 @@
 {
     [super viewDidLoad];
 
-    _signals = [[IRSignals alloc] init];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = _signals;
+    _datasource = [[MMSignalsDataSource alloc] init];
 
-    self.view.backgroundColor = [UIColor blackColor];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = _datasource;
 }
 
 - (void)didReceiveMemoryWarning
@@ -29,7 +31,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     static bool did_show = false;
-    if (! _peripheral && ! did_show) {
+    if ( ([IRKit sharedInstance].countOfReadyPeripherals == 0) && ! did_show) {
         IRNewPeripheralViewController *vc = [[IRNewPeripheralViewController alloc] init];
         vc.delegate = self;
         [self presentViewController:vc
@@ -42,7 +44,7 @@
 }
 
 - (IBAction)addButtonTouched:(id)sender {
-    if (! _peripheral) {
+    if ( [IRKit sharedInstance].countOfReadyPeripherals == 0 ) {
         IRNewPeripheralViewController *vc = [[IRNewPeripheralViewController alloc] init];
         vc.delegate = self;
         [self presentViewController:vc
@@ -68,9 +70,6 @@
             didFinishWithPeripheral:(IRPeripheral *)peripheral {
     LOG( @"peripheral: %@", peripheral );
 
-    if (peripheral) {
-        _peripheral = peripheral;
-    }
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  LOG(@"dismissed");
@@ -84,7 +83,7 @@
     LOG( @"signal: %@", signal );
 
     if (signal) {
-        [_signals addSignalsObject:signal];
+        [_datasource addSignalsObject:signal];
         [self.tableView reloadData];
     }
     [self dismissViewControllerAnimated:YES
@@ -96,7 +95,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [IRSignalCell height];
+    return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,7 +103,7 @@
     [tableView deselectRowAtIndexPath:indexPath
                              animated:YES];
 
-    IRSignal *signal = [_signals objectAtIndex:indexPath.row];
+    IRSignal *signal = [_datasource objectAtIndex:indexPath.row];
     [signal sendWithCompletion:^(NSError *error) {
         LOG(@"sent error: %@", error);
     }];
