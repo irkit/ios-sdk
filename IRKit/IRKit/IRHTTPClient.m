@@ -380,6 +380,10 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
                 // -1009
                 message = IRLocalizedString(@"-1009 Please check your internet connection", @"-1009 error message");
                 break;
+            case NSURLErrorTimedOut:
+                // -1001
+                message = IRLocalizedString(@"-1001 Please check your internet connection", @"-1001 error message");
+                break;
             default:
                 break;
         }
@@ -408,11 +412,13 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
         }
     }
 
-    [[[UIAlertView alloc] initWithTitle:message
-                                message:nil
-                               delegate:nil
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
+    if (message) {
+        [[[UIAlertView alloc] initWithTitle:message
+                                    message:nil
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 #pragma mark - Private
