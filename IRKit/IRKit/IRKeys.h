@@ -27,5 +27,6 @@ NS_ENUM( uint8_t, IRSecurityType ) {
 + (BOOL) isPassword:(NSString*)password validForSecurityType:(enum IRSecurityType)securityType;
 - (NSString*) morseStringRepresentation;
 - (void) setKeys: (NSDictionary*) keys;
+- (BOOL) keysAreSet;
 
 @end

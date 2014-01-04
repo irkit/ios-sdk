@@ -50,6 +50,8 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
+    _keys = [[IRKeys alloc] init];
+
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
     __weak IRNewPeripheralViewController *_self = self;
@@ -61,6 +63,7 @@
                                                                               if (! _self.stopSearchCalled) {
                                                                                   [_self startSearch];
                                                                               }
+                                                                              [_self registerDeviceIfNeeded];
                                                                           }];
     [self startSearch];
 }
@@ -78,6 +81,18 @@
 - (void) viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
+}
+
+- (void)registerDeviceIfNeeded {
+    // TODO check if keys are not expired
+    if (! _keys.keysAreSet) {
+        [IRHTTPClient registerDeviceWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
+            if (error) {
+                return;
+            }
+            [_keys setKeys:keys];
+        }];
+    }
 }
 
 #pragma mark - IRSearcher related
@@ -159,9 +174,12 @@
         return;
     }
 
+    [self registerDeviceIfNeeded];
+
     IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName:@"IRWifiEditViewController"
                                                                              bundle:[IRHelper resources]];
     c.delegate = self;
+    c.keys     = _keys;
     [self.navController pushViewController:c animated:YES];
 }
 
@@ -176,7 +194,17 @@
         return;
     }
 
-    _keys = info[ IRViewControllerResultKeys ];
+    if (! _keys.keysAreSet) {
+        [[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Check your internet connection", @"alert view title when not connected to internet")
+                                   message:@""
+                                  delegate:nil
+                         cancelButtonTitle:@"OK"
+                         otherButtonTitles:nil];
+        [self.delegate newPeripheralViewController:self
+                           didFinishWithPeripheral:nil];
+        return;
+    }
+
     IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName:@"IRNewPeripheralScene2ViewController" bundle:[IRHelper resources]];
     c.delegate = self;
     [self.navController pushViewController:c animated:YES];
@@ -198,8 +226,9 @@
 
     IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController"
                                                                                    bundle:[IRHelper resources]];
-    c.delegate = self;
-    c.keys     = _keys;
+    c.delegate                  = self;
+    c.keys                      = _keys;
+    c.showMorseNotWorkingButton = YES; // TODO
     [self.navController pushViewController:c animated:YES];
 }
 
@@ -210,6 +239,27 @@
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController:self
+                           didFinishWithPeripheral:nil];
+        return;
+    }
+
+    IRPeripheral *p = info[IRViewControllerResultPeripheral];
+    if (p) {
+        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController" bundle:[IRHelper resources]];
+        c.delegate = self;
+        c.peripheral = p;
+        [self.navController pushViewController:c animated:YES];
+    }
+}
+
+#pragma mark - IRWifiAdhocViewControllerDelegate
+
+- (void)wifiAdhocViewController:(IRWifiAdhocViewController *)viewController
+              didFinishWithInfo:(NSDictionary *)info {
+    LOG_CURRENT_METHOD;
+
+    if (! [info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
         [self.delegate newPeripheralViewController:self
                            didFinishWithPeripheral:nil];
         return;

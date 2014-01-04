@@ -4,6 +4,7 @@
 #import "IRWifiEditViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRMorsePlayerViewController.h"
+#import "IRWifiAdhocViewController.h"
 #import "IRSearcher.h"
 
 // pre definition for delegate
@@ -14,6 +15,7 @@ IRNewPeripheralScene1ViewControllerDelegate,
 IRNewPeripheralScene2ViewControllerDelegate,
 IRWifiEditViewControllerDelegate,
 IRMorsePlayerViewControllerDelegate,
+IRWifiAdhocViewControllerDelegate,
 IRPeripheralNameEditViewControllerDelegate,
 IRSearcherDelegate,
 UIAlertViewDelegate>

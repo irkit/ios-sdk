@@ -51,13 +51,15 @@
 		C758145A17B0AB9200927E12 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		C758145C17B0AB9200927E12 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		C758145E17B0AB9200927E12 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		C758146117B0AB9200927E12 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C758146317B0AB9200927E12 /* MMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMViewController.h; sourceTree = "<group>"; };
 		C758146417B0AB9200927E12 /* MMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMViewController.m; sourceTree = "<group>"; };
 		C758146F17B0ADCC00927E12 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		C758147017B0ADCC00927E12 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C77103B51876F25C003570B5 /* libIRKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIRKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/IRKit-fjyqyxmyosafytannfluffmchzts/Build/Products/Debug-iphoneos/libIRKit.a"; sourceTree = "<group>"; };
 		C77103B71876F4E6003570B5 /* IRKit.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = IRKit.bundle; path = ../../IRKit/IRKit.bundle; sourceTree = "<group>"; };
+		C77E1991187874E900B457C3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ja; path = ja.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		C77E1992187874E900B457C3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C77E1993187874EF00B457C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C7E07C7D1875D4F000901967 /* MMSignalsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSignalsDataSource.h; sourceTree = "<group>"; };
 		C7E07C7E1875D4F000901967 /* MMSignalsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSignalsDataSource.m; sourceTree = "<group>"; };
 		D6500397054B4D0AADBDF34F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,6 +199,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ja,
+				Base,
 			);
 			mainGroup = C758143C17B0AB9200927E12;
 			productRefGroup = C758144617B0AB9200927E12 /* Products */;
@@ -279,6 +283,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C758145217B0AB9200927E12 /* en */,
+				C77E1992187874E900B457C3 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -286,7 +291,8 @@
 		C758146017B0AB9200927E12 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C758146117B0AB9200927E12 /* en */,
+				C77E1991187874E900B457C3 /* ja */,
+				C77E1993187874EF00B457C3 /* Base */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -322,6 +328,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = Debug;
 		};
@@ -346,6 +353,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -5,13 +5,13 @@
 
 @implementation IRPersistentStore
 
-+ (void) storeObject:(id)object forKey:(NSString *)defaultName {
++ (void) storeObject:(id)object forKey:(NSString *)key {
     LOG_CURRENT_METHOD;
     
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
     [d setObject:object
           forKey:[NSString stringWithFormat:@"%@:%@",
-                  IR_NSUSERDEFAULTS_PREFIX, defaultName]];
+                  IR_NSUSERDEFAULTS_PREFIX, key]];
 }
 
 + (id) objectForKey: (NSString*) key {

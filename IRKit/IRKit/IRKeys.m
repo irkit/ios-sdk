@@ -115,6 +115,10 @@ struct KeysCRCed
     _devicekey = keys[ @"devicekey" ];
 }
 
+- (BOOL) keysAreSet {
+    return (_deviceid && _devicekey);
+}
+
 #pragma mark - Private
 
 - (NSString*) securityStringRepresentation {

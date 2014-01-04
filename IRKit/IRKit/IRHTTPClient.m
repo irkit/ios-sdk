@@ -21,6 +21,7 @@
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT               10. // short REST like requests
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
+#define IRKIT_MODELNAME               @"IRKit"
 
 static NSString *clientkey;
 
@@ -104,6 +105,25 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     return @{ @"modelName": tmp[ 0 ], @"version": tmp[ 1 ] };
 }
 
++ (void)checkIfAdhocWithCompletion: (void (^)(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error))completion {
+    LOG_CURRENT_METHOD;
+
+    NSURLRequest *req = [self makeGETRequestToIP:@"192.168.1.1" path:@"/"];
+    [self issueLocalRequest:req completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        NSDictionary *info = [self hostInfoFromResponse:res];
+        completion( res,
+                   [info[@"modelName"] isEqualToString:IRKIT_MODELNAME],
+                   error );
+    }];
+}
+
++ (void)postWifiKeys:(NSString*)keys withCompletion: (void (^)(NSHTTPURLResponse *res, id body, NSError *error))completion {
+    LOG_CURRENT_METHOD;
+
+    NSURLRequest *req = [self makePOSTRequestToIP:@"192.168.1.1" path:@"/wifi" body:keys];
+    [self issueLocalRequest:req completion:completion];
+}
+
 + (NSError*)errorFromResponse: (NSHTTPURLResponse*)res body:(id)object {
     // error object nil but error
     NSInteger code = (res && res.statusCode) ? res.statusCode
@@ -184,12 +204,14 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 error = [NSError errorWithDomain:IRKitErrorDomainHTTP
                                             code:IRKitHTTPStatusCodeUnknown
                                         userInfo:nil];
-                return next(error);
+                next(error);
+                return;
             }
             clientkey = clientkey_;
             [IRPersistentStore storeObject:clientkey forKey:@"clientkey"];
             LOG( @"successfully registered! clientkey: %@", clientkey );
-            return next(nil);
+            next(nil);
+            return;
         }];
         return;
     }
@@ -197,6 +219,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (void)registerClientWithCompletion: (void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion {
+    LOG_CURRENT_METHOD;
+
     NSString *apikey = [IRKit sharedInstance].apikey;
     if (! apikey) {
         IRKitLog( @"call \"[IRKit startWithAPIKey:] first!\nPlease read http://getirkit.com/ to get an API Key\"" );
@@ -220,7 +244,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (void)registerDeviceWithCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error))completion {
-    // POST /register should have been called before this, but let's make sure
+    // POST /1/clients should have been called before this, but let's make sure
     [self ensureRegisteredAndCall:^(NSError *error) {
         if (error) {
             return completion(nil,nil,error);
@@ -527,6 +551,36 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
     request.timeoutInterval = LONGPOLL_TIMEOUT;
     [request setHTTPMethod:@"GET"];
+    return request;
+}
+
++ (NSURLRequest*)makeGETRequestToIP: (NSString*)ip
+                               path: (NSString*)path {
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/%@", ip, path];
+    NSURL *url          = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL             = url;
+    request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
+    request.timeoutInterval = LONGPOLL_TIMEOUT;
+    [request setHTTPMethod:@"GET"];
+    return request;
+}
+
++ (NSURLRequest*)makePOSTRequestToIP: (NSString*)ip
+                                path: (NSString*)path
+                                body: (NSString*)body {
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/%@", ip, path];
+    NSURL *url          = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL             = url;
+    request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
+    request.timeoutInterval = DEFAULT_TIMEOUT;
+
+    NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[data length]] forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:data];
     return request;
 }
 

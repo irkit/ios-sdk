@@ -21,6 +21,8 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 + (NSURL*)base;
 + (void)fetchHostInfoOf: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *info, NSError *error))completion;
 + (NSDictionary*)hostInfoFromResponse: (NSHTTPURLResponse*)res;
++ (void)checkIfAdhocWithCompletion: (void (^)(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error))completion;
++ (void)postWifiKeys:(NSString*)keys withCompletion: (void (^)(NSHTTPURLResponse *res, id body, NSError *error))completion;
 + (void)postSignal: (IRSignal*)signal withCompletion: (void (^)(NSError *error))completion;
 + (void)getDeviceIDFromHost: (NSString*)hostname withCompletion: (void (^)(NSHTTPURLResponse *res_local, NSHTTPURLResponse *res_internet, NSString *deviceid, NSError *error))completion;
 + (void)ensureRegisteredAndCall: (void (^)(NSError *error))next;
