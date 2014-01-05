@@ -123,11 +123,8 @@ _signals = [[IRSignals alloc] init];
 // and add a signal to the collection
 [_signals addSignalsObject:_signal];
 
-// send multiple IRSignals sequentially
-[_signals sendWithCompletion:^(NSError *error) {
-    NSLog( @"sent with error: %@", error );
-}];
-[_signals sendWithCompletion:^(NSError *error) {
+// send multiple IRSignal-s sequentially
+[_signals sendSequentiallyWithCompletion:^(NSError *error) {
     NSLog( @"sent with error: %@", error );
 }];
 
