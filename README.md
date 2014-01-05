@@ -2,11 +2,11 @@ IRKit iOS SDK
 ===
 
 [IRKit device](https://github.com/irkit/device) and SDK(this library) lets you control your home electronics from your iOS devices.
-IRKit device has a Infrared LED and receiver, and a BluetoothLE module inside.
-BluetoothLE enabled devices can connect with IRKit devices, and make it send IR signals for you.
+IRKit device has a Infrared LED and receiver, and a WiFi module inside.
+Any device with internet or local wifi connection can use IRKit devices to make it send IR signals.
 
 This library does:
-* provide UIViewController subclasses that wraps complex procedures to connect, pair and receive IR signals(to learn before sending) from IRKit devices
+* provide UIViewController subclasses that wraps complex procedures to connect and learn IR signals from IRKit devices
 * provide a simple interface to send IR signals
 
 ## Get IRKit Device
@@ -15,12 +15,13 @@ see [IRKit device](https://github.com/irkit/device)
 
 ## Installing
 
-Use [cocoapods](http://cocoapods.org/)
+Use [cocoapods](http://cocoapods.org/)  
+Currently under heavy development.
 
 ```sh
 $ cat podfile
-platform :ios, '6.0'
-pod 'IRKit', '~> 0.0.2'
+platform :ios, '7.0'
+pod 'IRKit', :git => 'https://github.com/irkit/ios-sdk.git'
 workspace 'MyApp.xcworkspace'
 xcodeproj 'MyApp/MyApp.xcodeproj'
 
@@ -50,15 +51,15 @@ IR signal is represented as a  [IRSignal](https://github.com/irkit/ios-sdk/blob/
 ### How to get an IRSignal?
 
 You get your first `IRSignal` by *learning* it, which means: you point your old infrared remote controller at IRKit device's IR receiver, and press it's button.
-IRKit device will send it over Bluetooth to your paired iOS device.
+IRKit device will send it over to your app(with IRKit iOS SDK).
 
 But first, you need to *pair* with an IRKit device.
 
 ```objective-c
 // in your main view controller
 - (void)viewDidAppear:(BOOL)animated {
-    // pair if you haven't
-    if (! _peripheral) {
+    // find IRKit if none is known
+    if ([IRKit sharedInstance].countOfReadyPeripherals == 0) {
         IRNewPeripheralViewController *vc = [[IRNewPeripheralViewController alloc] init];
         vc.delegate = self;
         [self presentViewController:vc
@@ -75,9 +76,6 @@ But first, you need to *pair* with an IRKit device.
             didFinishWithPeripheral:(IRPeripheral *)peripheral {
     NSLog( @"peripheral: %@", peripheral );
 
-    if (peripheral) {
-        _peripheral = peripheral;
-    }
     [self dismissViewControllerAnimated:YES
                              completion:^{
                                  NSLog(@"dismissed");
@@ -126,7 +124,10 @@ _signals = [[IRSignals alloc] init];
 [_signals addSignalsObject:_signal];
 
 // send multiple IRSignals sequentially
-[_signals sendSequentiallyWithCompletion:^(NSError *error) {
+[_signals sendWithCompletion:^(NSError *error) {
+    NSLog( @"sent with error: %@", error );
+}];
+[_signals sendWithCompletion:^(NSError *error) {
     NSLog( @"sent with error: %@", error );
 }];
 
@@ -142,11 +143,3 @@ NSData *data = [_signals data];
 // or as JSON
 NSString *json = [_signals JSONRepresentation];
 ```
-
-See more in [One Remote](https://github.com/irkit/one) working example.
-
-### Displaying IRSignals
-
-IRSignals conforms to `UITableViewDelegate` and `UITableViewDataSource` protocols, and provides a neat `IRSignalCell`.
-
-See more in [One Remote](https://github.com/irkit/one) working example.
