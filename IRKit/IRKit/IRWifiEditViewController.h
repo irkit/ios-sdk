@@ -10,6 +10,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
+@property (nonatomic) IRKeys* keys;
+
 @end
 
 @protocol IRWifiEditViewControllerDelegate <NSObject>

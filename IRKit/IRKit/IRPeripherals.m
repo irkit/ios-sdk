@@ -71,6 +71,21 @@
     return peripheral;
 }
 
+- (IRPeripheral*)savePeripheralWithName:(NSString*)hostname deviceid:(NSString*)deviceid {
+    LOG( @"hostname: %@ deviceid: %@", hostname, deviceid );
+
+    IRPeripheral *p = [self peripheralWithName:hostname];
+    if ( ! p ) {
+        p = [self registerPeripheralWithName:hostname];
+    }
+    p.deviceid = deviceid;
+    [self save];
+    [p getModelNameAndVersionWithCompletion:^{
+        [self save];
+    }];
+    return p;
+}
+
 #pragma mark - Private methods
 
 - (void) load {

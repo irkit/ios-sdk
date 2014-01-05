@@ -1,4 +1,7 @@
 
+/* Class = "IBUIButton"; normalTitle = "Morse not working ?"; ObjectID = "3gG-sC-Fz9"; */
+"3gG-sC-Fz9.normalTitle" = "モールス通信から先に進めない?";
+
 /* Class = "IBUILabel"; text = "Volume Up
  "; ObjectID = "laK-A4-rN4"; */
 "laK-A4-rN4.text" = "音量を最大にしてください
@@ -6,4 +9,3 @@
 
 /* Class = "IBUIButton"; normalTitle = " Start"; ObjectID = "xDQ-VL-QGc"; */
 "xDQ-VL-QGc.normalTitle" = " Start";
-

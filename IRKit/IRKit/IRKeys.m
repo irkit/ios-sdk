@@ -106,13 +106,17 @@ struct KeysCRCed
         @"", // reserved6
         crcHex,
     ];
-    return [components componentsJoinedByString:@"/"];
+    return [[components componentsJoinedByString:@"/"] uppercaseString];
 }
 
 - (void) setKeys: (NSDictionary*) keys {
     LOG( @"keys: %@", keys );
     _deviceid  = keys[ @"deviceid" ];
     _devicekey = keys[ @"devicekey" ];
+}
+
+- (BOOL) keysAreSet {
+    return (_deviceid && _devicekey);
 }
 
 #pragma mark - Private

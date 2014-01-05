@@ -8,6 +8,7 @@
 #import "IRHTTPClient.h"
 #import "IRKit.h"
 #import "IRHelper.h"
+#import "IRWifiAdhocViewController.h"
 @import MediaPlayer;
 @import AudioToolbox;
 
@@ -19,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet MPVolumeView *volumeView;
 @property (weak, nonatomic) IBOutlet UIView *fullscreenBackgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *animatingImageView;
+@property (weak, nonatomic) IBOutlet UIButton *morseNotWorkingButton;
+
+@property (nonatomic) id volumeChangedObserver;
 
 @property (nonatomic) IRMorsePlayerOperationQueue *player;
 @property (nonatomic) BOOL playing;
@@ -46,10 +50,15 @@
                      options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
                      context:nil];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(volumeChanged:)
-                                                     name:@"AVSystemController_SystemVolumeDidChangeNotification"
-                                                   object:nil];
+        __weak IRMorsePlayerViewController *_self = self;
+        _volumeChangedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"AVSystemController_SystemVolumeDidChangeNotification"
+                                                                                   object:nil
+                                                                                    queue:[NSOperationQueue mainQueue]
+                                                                               usingBlock:^(NSNotification *note) {
+                                                                                   float volume = [[[note userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
+                                                                                   LOG( @"volume: %f", volume );
+                                                                                   [_self updateStartButtonViewWithVolume:volume];
+                                                                               }];
     }
     return self;
 }
@@ -58,7 +67,7 @@
     LOG_CURRENT_METHOD;
     [_player removeObserver:self
                  forKeyPath:@"operationCount"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:_volumeChangedObserver];
 
     AudioSessionSetActive(false);
 }
@@ -78,10 +87,14 @@
     _fullscreenBackgroundView.hidden = YES;
     _animatingImageView.hidden = YES;
 
+    _morseNotWorkingButton.hidden = ! _showMorseNotWorkingButton;
+
     AudioSessionInitialize(NULL, NULL, NULL, NULL);
     UInt32 category = kAudioSessionCategory_AmbientSound;
     AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
     AudioSessionSetActive(true);
+
+    // TODO deprecated
     [self updateStartButtonViewWithVolume:[[MPMusicPlayerController applicationMusicPlayer] volume]];
 }
 
@@ -166,18 +179,33 @@
     LOG_CURRENT_METHOD;
 
     [_doorWaiter cancel];
-    [IRHTTPClient cancelWaitForDoor];
 
     [_player setSuspended:YES];
     [_player cancelAllOperations];
 }
 
-#pragma mark - NSNotification
+- (void)startWaitingForDoor {
+    if (_doorWaiter) {
+        [_doorWaiter cancel];
+    }
+    _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+        LOG(@"res: %@, error: %@", res, error);
 
-- (void)volumeChanged:(NSNotification *)notification {
-    float volume = [[[notification userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
-    LOG( @"volume: %f", volume );
-    [self updateStartButtonViewWithVolume:volume];
+        [self stopPlaying];
+
+        if (error) {
+            return;
+        }
+
+        IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName:object[ @"hostname" ]
+                                                                            deviceid:_keys.deviceid];
+
+        [self.delegate morsePlayerViewController:self
+                               didFinishWithInfo:@{
+                                                   IRViewControllerResultType: IRViewControllerResultTypeDone,
+                                                   IRViewControllerResultPeripheral:p
+                                                   }];
+    }];
 }
 
 #pragma mark - KVO
@@ -194,15 +222,23 @@
             ([(NSNumber*)newValue unsignedIntegerValue]==0)) {
             [_player addOperation: [IRMorsePlayerOperation playMorseFromString:_morseMessage
                                                                  withWordSpeed:[NSNumber numberWithInt:MORSE_WPM]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate morsePlayerViewControllerDidStartPlaying:self];
+            });
         }
     }
-
 }
 
 #pragma mark - UI events
 
 - (void)updateStartButtonViewWithVolume:(float)volume {
     LOG( @"volume: %f", volume );
+
+    if ( ! _keys.keysAreSet ) {
+        // only show "Start" button after we have keys
+        return;
+    }
+
     if ( ! _shownStartButtonView && (volume == 1.0)) {
         _shownStartButtonView = YES;
         _startButtonBox.hidden = NO;
@@ -222,48 +258,22 @@
     }
 }
 
+- (IBAction)morseNotWorkingButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+
+    IRWifiAdhocViewController *c = [[IRWifiAdhocViewController alloc] initWithNibName:@"IRWifiAdhocViewController" bundle:[IRHelper resources]];
+    c.keys = _keys;
+    c.delegate = _delegate;
+    [self.navigationController pushViewController:c animated:YES];
+}
+
 - (IBAction)startButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
     AudioSessionSetActive(false);
 
-    [IRHTTPClient registerDeviceWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
-        if (error) {
-            return;
-        }
-        [_keys setKeys:keys];
-
-        [self startPlaying];
-
-        _doorWaiter =
-            [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-                LOG(@"res: %@, error: %@", res, error);
-
-                [self stopPlaying];
-
-                if (error) {
-                    return;
-                }
-
-                NSString *hostname = object[ @"hostname" ];
-                IRKit *i = [IRKit sharedInstance];
-                IRPeripheral *p = [i.peripherals peripheralWithName:hostname];
-                if ( ! p ) {
-                    p = [i.peripherals registerPeripheralWithName:hostname];
-                }
-                p.deviceid = _keys.deviceid;
-                [i.peripherals save];
-                [p getModelNameAndVersionWithCompletion:^{
-                    [i.peripherals save];
-                }];
-
-                [self.delegate morsePlayerViewController:self
-                                       didFinishWithInfo:@{
-                                                           IRViewControllerResultType: IRViewControllerResultTypeDone,
-                                                           IRViewControllerResultPeripheral:p
-                                                           }];
-            }];
-    }];
+    [self startPlaying];
+    [self startWaitingForDoor];
 }
 
 @end

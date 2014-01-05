@@ -16,8 +16,6 @@ static NSString *ssidCache = nil;
 
 @interface IRWifiEditViewController ()
 
-@property (nonatomic) IRKeys* keys;
-
 @end
 
 @implementation IRWifiEditViewController
@@ -26,7 +24,6 @@ static NSString *ssidCache = nil;
     LOG_CURRENT_METHOD;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _keys = [[IRKeys alloc] init];
     }
     return self;
 }
