@@ -23,7 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *morseNotWorkingButton;
 
 @property (nonatomic) id volumeChangedObserver;
-@property (nonatomic) id becomeActiveObserver;
 
 @property (nonatomic) IRMorsePlayerOperationQueue *player;
 @property (nonatomic) BOOL playing;
@@ -60,15 +59,6 @@
                                                                                    LOG( @"volume: %f", volume );
                                                                                    [_self updateStartButtonViewWithVolume:volume];
                                                                                }];
-        _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
-                                                                                  object:nil
-                                                                                   queue:[NSOperationQueue mainQueue]
-                                                                              usingBlock:^(NSNotification *note) {
-                                                                                  LOG( @"became active" );
-                                                                                  if (_self.keys.keysAreSet) {
-                                                                                      [_self processAdhocSetup];
-                                                                                  }
-                                                                              }];
     }
     return self;
 }
@@ -78,7 +68,6 @@
     [_player removeObserver:self
                  forKeyPath:@"operationCount"];
     [[NSNotificationCenter defaultCenter] removeObserver:_volumeChangedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
 
     AudioSessionSetActive(false);
 }
@@ -133,28 +122,6 @@
 }
 
 #pragma mark - Private
-
-- (void)processAdhocSetup {
-    LOG_CURRENT_METHOD;
-
-    [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
-        if (isAdhoc) {
-            [IRHTTPClient postWifiKeys:[_keys morseStringRepresentation]
-                        withCompletion:^(NSHTTPURLResponse *res, id body, NSError *error) {
-                            if (res.statusCode == 200) {
-                                [[UIAlertView alloc] initWithTitle:IRLocalizedString(@"connect to your home wifi", @"alert title after POST /wifi finished successfully")
-                                                           message:@""
-                                                          delegate:nil
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-                            }
-                        }];
-        }
-        else {
-            [self startWaitingForDoor];
-        }
-    }];
-}
 
 - (void)startPlaying {
     LOG_CURRENT_METHOD;
@@ -232,17 +199,8 @@
             return;
         }
 
-        NSString *hostname = object[ @"hostname" ];
-        IRKit *i = [IRKit sharedInstance];
-        IRPeripheral *p = [i.peripherals peripheralWithName:hostname];
-        if ( ! p ) {
-            p = [i.peripherals registerPeripheralWithName:hostname];
-        }
-        p.deviceid = _keys.deviceid;
-        [i.peripherals save];
-        [p getModelNameAndVersionWithCompletion:^{
-            [i.peripherals save];
-        }];
+        IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName:object[ @"hostname" ]
+                                                                            deviceid:_keys.deviceid];
 
         [self.delegate morsePlayerViewController:self
                                didFinishWithInfo:@{
@@ -266,6 +224,9 @@
             ([(NSNumber*)newValue unsignedIntegerValue]==0)) {
             [_player addOperation: [IRMorsePlayerOperation playMorseFromString:_morseMessage
                                                                  withWordSpeed:[NSNumber numberWithInt:MORSE_WPM]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_delegate morsePlayerViewControllerDidStartPlaying:self];
+            });
         }
     }
 }

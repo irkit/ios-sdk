@@ -14,6 +14,8 @@
 @protocol IRMorsePlayerViewControllerDelegate <NSObject>
 @required
 
+- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController *)viewController;
+
 // Your implementation of this method should dismiss view controller.
 - (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
 

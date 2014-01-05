@@ -11,6 +11,7 @@
 - (NSUInteger) countOfReadyPeripherals;
 - (BOOL) isKnownName: (NSString*)hostname;
 - (IRPeripheral*)registerPeripheralWithName: (NSString*)hostname;
+- (IRPeripheral*)savePeripheralWithName:(NSString*)hostname deviceid:(NSString*)deviceid;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 

@@ -13,6 +13,7 @@
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) IRKeys *keys;
 @property (nonatomic) IRPeripheral *foundPeripheral;
+@property (nonatomic) NSUInteger morsePlayingCount;
 
 // don't search for IRKit device after stopSearch was called
 // we don't want to see timing problems of which (POST /door response or Bonjour) is faster to detect online IRKit
@@ -51,6 +52,7 @@
     [super viewDidLoad];
 
     _keys = [[IRKeys alloc] init];
+    _morsePlayingCount = 0;
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
@@ -228,11 +230,17 @@
                                                                                    bundle:[IRHelper resources]];
     c.delegate                  = self;
     c.keys                      = _keys;
-    c.showMorseNotWorkingButton = YES; // TODO
+    c.showMorseNotWorkingButton = _morsePlayingCount >= 0; // TODO should be >1 ?
     [self.navController pushViewController:c animated:YES];
 }
 
 #pragma mark - IRMorsePlayerViewController
+
+- (void)morsePlayerViewControllerDidStartPlaying {
+    LOG_CURRENT_METHOD;
+
+    _morsePlayingCount ++;
+}
 
 - (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController
                 didFinishWithInfo:(NSDictionary*)info {
