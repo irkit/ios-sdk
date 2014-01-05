@@ -77,6 +77,8 @@ But first, you need to *pair* with an IRKit device.
 ```objective-c
 // in your main view controller
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
     // find IRKit if none is known
     if ([IRKit sharedInstance].countOfReadyPeripherals == 0) {
         IRNewPeripheralViewController *vc = [[IRNewPeripheralViewController alloc] init];
