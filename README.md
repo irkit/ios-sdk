@@ -38,6 +38,25 @@ See [Minimal app](https://github.com/irkit/ios-sdk/tree/master/Minimal/Minimal) 
 #import <IRKit/IRKit.h>
 ```
 
+### Initialize
+
+```objective-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [IRKit startWithAPIKey:@"#{ fill in your apikey }"];
+    return YES;
+}
+```
+
+### Get API key
+
+```sh
+% curl -d "email={your email}" "http://api.getirkit.com/1/apps"
+{"message":"You will receive an email shortly, please click the URL in it to get an apikey"}
+```
+
+and open the URL in the email.
+
 ### Sending IR signals
 
 IR signal is represented as a  [IRSignal](https://github.com/irkit/ios-sdk/blob/master/IRKit/IRKit/IRSignal.h) instance.
