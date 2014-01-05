@@ -1,6 +1,7 @@
 
-/* Class = "IBUILabel"; text = "Put iOS device next to IRKit"; ObjectID = "138"; */
-"138.text" = "IRKitの隣にiPhone
+/* Class = "IBUILabel"; text = "Put iOS device
+next to IRKit"; ObjectID = "138"; */
+"138.text" = "このようにiPhone
 を置いてください";
 
 /* Class = "IBUIButton"; normalTitle = " Done"; ObjectID = "kln-H0-Byk"; */
