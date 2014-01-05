@@ -10,11 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "IRSignal.h"
 
-NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
-    IRHTTPClientNetworkLocal    = 0,
-    IRHTTPClientNetworkInternet = 1,
-};
-
 @interface IRHTTPClient : NSObject
 
 - (void)cancel;

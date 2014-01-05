@@ -106,7 +106,7 @@ struct KeysCRCed
         @"", // reserved6
         crcHex,
     ];
-    return [components componentsJoinedByString:@"/"];
+    return [[components componentsJoinedByString:@"/"] uppercaseString];
 }
 
 - (void) setKeys: (NSDictionary*) keys {

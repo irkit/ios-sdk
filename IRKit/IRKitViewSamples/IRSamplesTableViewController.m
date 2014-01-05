@@ -85,7 +85,7 @@
              didFinishWithInfo:(NSDictionary*)info {
     LOG(@"info: %@", info);
     IRKeys *key = info[IRViewControllerResultKeys];
-    [key setKeys:@{ @"clientkey": @"A", @"devicekey": @"B" }];
+    [key setKeys:@{ @"clientkey": @"A", @"devicekey": @"B" }]; // we're testing morse
     LOG(@"morse: %@", key.morseStringRepresentation);
 }
 

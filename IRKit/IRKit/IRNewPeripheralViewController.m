@@ -12,7 +12,6 @@
 @property (nonatomic) UINavigationController *navController;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) IRKeys *keys;
-@property (nonatomic) IRPeripheral *foundPeripheral;
 @property (nonatomic) NSUInteger morsePlayingCount;
 
 // don't search for IRKit device after stopSearch was called
@@ -132,27 +131,18 @@
         [p getKeyWithCompletion:^{
             [peripherals save];
 
-            _foundPeripheral = p; // temporary retain, til alert dismisses
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"New IRKit Found!"
-                                                            message:@""
-                                                           delegate:self
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"OK", nil];
-            [alert show];
+            [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
+                                        message:@""
+                                       delegate:self
+                              cancelButtonTitle:nil
+                              otherButtonTitles:@"OK", nil] show];
+
+            IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController" bundle:[IRHelper resources]];
+            c.delegate = self;
+            c.peripheral = p;
+            [self.navController pushViewController:c animated:YES];
         }];
     }
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    LOG_CURRENT_METHOD;
-    
-    IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController" bundle:[IRHelper resources]];
-    c.delegate = self;
-    c.peripheral = _foundPeripheral;
-    _foundPeripheral = nil;
-    [self.navController pushViewController:c animated:YES];
 }
 
 #pragma mark - UI events
@@ -197,11 +187,11 @@
     }
 
     if (! _keys.keysAreSet) {
-        [[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Check your internet connection", @"alert view title when not connected to internet")
-                                   message:@""
-                                  delegate:nil
-                         cancelButtonTitle:@"OK"
-                         otherButtonTitles:nil];
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Check your internet connection", @"alert view title when not connected to internet")
+                                    message:@""
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
         [self.delegate newPeripheralViewController:self
                            didFinishWithPeripheral:nil];
         return;

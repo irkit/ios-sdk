@@ -42,7 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [self processAdhocSetup];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -68,21 +68,34 @@
 - (void)processAdhocSetup {
     LOG_CURRENT_METHOD;
 
+    [_doorWaiter cancel];
+    _doorWaiter = nil;
+    [IRHTTPClient cancelLocalRequests];
+
+    [self startWaitingForDoor];
+
+    // we don't want to POST wifi credentials without checking it's really IRKit
     [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
+        LOG( @"isAdhoc: %d error: %@", isAdhoc, error );
         if (isAdhoc) {
             [IRHTTPClient postWifiKeys:[_keys morseStringRepresentation]
                         withCompletion:^(NSHTTPURLResponse *res, id body, NSError *error) {
                             if (res.statusCode == 200) {
-                                [[UIAlertView alloc] initWithTitle:IRLocalizedString(@"connect to your home wifi", @"alert title after POST /wifi finished successfully")
-                                                           message:@""
-                                                          delegate:nil
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
+                                [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Great! Now let's connect back to your home wifi", @"alert title after POST /wifi finished successfully")
+                                                            message:@""
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil] show];
+                            }
+                            else {
+                                // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
+                                [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Something is wrong, please contact developer", @"alert title when POST /wifi failed")
+                                                            message:@""
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil] show];
                             }
                         }];
-        }
-        else {
-            [self startWaitingForDoor];
         }
     }];
 }
@@ -97,6 +110,12 @@
         if (error) {
             return;
         }
+
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
+                                    message:@""
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK", nil] show];
 
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName:object[ @"hostname" ]
                                                                             deviceid:_keys.deviceid];

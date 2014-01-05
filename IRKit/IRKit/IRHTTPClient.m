@@ -20,10 +20,9 @@
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT               10. // short REST like requests
+#define IP_TIMEOUT                    10. // timeout for requests using IP directly, should include WiFi connecting time
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
 #define IRKIT_MODELNAME               @"IRKit"
-
-static NSString *clientkey;
 
 @interface IRHTTPClient ()
 
@@ -46,6 +45,10 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 #pragma mark - Private
+
++ (NSString*)clientkey {
+    return [IRPersistentStore objectForKey:@"clientkey"];
+}
 
 - (void)startPollingRequest {
     LOG_CURRENT_METHOD;
@@ -195,10 +198,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 + (void) ensureRegisteredAndCall: (void (^)(NSError *error))next {
     LOG_CURRENT_METHOD;
 
-    if (! clientkey) {
-        clientkey = [IRPersistentStore objectForKey:@"clientkey"];
-    }
-    if (! clientkey) {
+    if (! [self clientkey]) {
         [IRHTTPClient registerClientWithCompletion:^(NSHTTPURLResponse *res, NSString *clientkey_, NSError *error) {
             if (error) {
                 return next(error);
@@ -211,9 +211,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 next(error);
                 return;
             }
-            clientkey = clientkey_;
-            [IRPersistentStore storeObject:clientkey forKey:@"clientkey"];
-            LOG( @"successfully registered! clientkey: %@", clientkey );
+            [IRPersistentStore storeObject:clientkey_ forKey:@"clientkey"];
+            LOG( @"successfully registered! clientkey: %@", clientkey_ );
             next(nil);
             return;
         }];
@@ -437,6 +436,11 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
     }
 }
 
++ (void)cancelLocalRequests {
+    LOG_CURRENT_METHOD;
+    [[IRHTTPOperationQueue localQueue] cancelAllOperations];
+}
+
 #pragma mark - Private
 
 + (void)issueLocalRequest:(NSURLRequest*)request
@@ -490,6 +494,7 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
     request.timeoutInterval = timeout;
 
     NSMutableDictionary *realParams = [params mutableCopy];
+    NSString *clientkey = [self clientkey];
     realParams[ @"clientkey" ] = clientkey ? clientkey : [NSNull null];
 
     NSData *data = [[self stringOfURLEncodedDictionary:realParams] dataUsingEncoding:NSUTF8StringEncoding];
@@ -506,6 +511,7 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
                               timeoutInterval: (NSTimeInterval)timeout {
 
     NSMutableDictionary *realParams = [params mutableCopy];
+    NSString *clientkey = [self clientkey];
     realParams[ @"clientkey" ] = clientkey ? clientkey : [NSNull null];
 
     NSString *query = [self stringOfURLEncodedDictionary:realParams];
@@ -548,12 +554,12 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
 
 + (NSURLRequest*)makeGETRequestToIP: (NSString*)ip
                                path: (NSString*)path {
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/%@", ip, path];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@%@", ip, path];
     NSURL *url          = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL             = url;
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
-    request.timeoutInterval = LONGPOLL_TIMEOUT;
+    request.timeoutInterval = IP_TIMEOUT;
     [request setHTTPMethod:@"GET"];
     return request;
 }
@@ -561,12 +567,12 @@ completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError
 + (NSURLRequest*)makePOSTRequestToIP: (NSString*)ip
                                 path: (NSString*)path
                                 body: (NSString*)body {
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/%@", ip, path];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@%@", ip, path];
     NSURL *url          = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL             = url;
     request.cachePolicy     = NSURLRequestReloadIgnoringLocalCacheData;
-    request.timeoutInterval = DEFAULT_TIMEOUT;
+    request.timeoutInterval = IP_TIMEOUT;
 
     NSData *data = [body dataUsingEncoding:NSUTF8StringEncoding];
     [request setHTTPMethod:@"POST"];
