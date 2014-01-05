@@ -166,6 +166,7 @@
         return;
     }
 
+    // do here, to make sure request against POST /1/clients is finished
     [self registerDeviceIfNeeded];
 
     IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName:@"IRWifiEditViewController"
@@ -220,13 +221,13 @@
                                                                                    bundle:[IRHelper resources]];
     c.delegate                  = self;
     c.keys                      = _keys;
-    c.showMorseNotWorkingButton = _morsePlayingCount >= 0; // TODO should be >1 ?
+    c.showMorseNotWorkingButton = _morsePlayingCount > 1;
     [self.navController pushViewController:c animated:YES];
 }
 
 #pragma mark - IRMorsePlayerViewController
 
-- (void)morsePlayerViewControllerDidStartPlaying {
+- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController*)viewController {
     LOG_CURRENT_METHOD;
 
     _morsePlayingCount ++;
