@@ -49,7 +49,6 @@
     LOG_CURRENT_METHOD;
 
     [_doorWaiter cancel];
-    [IRHTTPClient cancelWaitForDoor];
     _doorWaiter = nil;
 }
 
@@ -91,7 +90,6 @@
 - (void)startWaitingForDoor {
     if (_doorWaiter) {
         [_doorWaiter cancel];
-        [IRHTTPClient cancelWaitForDoor];
     }
     _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG(@"res: %@, error: %@", res, error);

@@ -49,6 +49,10 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
 - (void)startPollingRequest {
     LOG_CURRENT_METHOD;
+    if (! self.longPollRequest) {
+        // cancelled
+        return;
+    }
     [IRHTTPJSONOperation sendRequest:self.longPollRequest
                             handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
                                 if (! self.longPollRequest) {
@@ -355,18 +359,6 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     };
     [client startPollingRequest];
     return client;
-}
-
-+ (void)cancelWaitForSignal {
-    LOG_CURRENT_METHOD;
-
-    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/1/messages"];
-}
-
-+ (void)cancelWaitForDoor {
-    LOG_CURRENT_METHOD;
-
-    [[ISHTTPOperationQueue defaultQueue] cancelOperationsWithPath:@"/1/door"];
 }
 
 + (void)loadImage:(NSString*)url

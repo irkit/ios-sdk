@@ -30,9 +30,8 @@ NS_ENUM( uint8_t, IRHTTPClientNetwork ) {
 + (void)registerDeviceWithCompletion: (void (^)(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error))completion;
 + (IRHTTPClient*)waitForSignalWithCompletion: (void (^)(NSHTTPURLResponse* res, IRSignal *signal, NSError* error))completion;
 + (IRHTTPClient*)waitForDoorWithDeviceID: (NSString*)deviceid completion: (void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion;
-+ (void)cancelWaitForSignal;
-+ (void)cancelWaitForDoor;
 + (void)loadImage:(NSString*)url completionHandler:(void (^)(NSHTTPURLResponse *response, UIImage *image, NSError *error)) handler;
 + (void)showAlertOfError:(NSError*)error;
++ (void)cancelLocalRequests;
 
 @end

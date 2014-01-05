@@ -179,7 +179,6 @@
     LOG_CURRENT_METHOD;
 
     [_doorWaiter cancel];
-    [IRHTTPClient cancelWaitForDoor];
 
     [_player setSuspended:YES];
     [_player cancelAllOperations];
@@ -188,7 +187,6 @@
 - (void)startWaitingForDoor {
     if (_doorWaiter) {
         [_doorWaiter cancel];
-        [IRHTTPClient cancelWaitForDoor];
     }
     _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG(@"res: %@, error: %@", res, error);
