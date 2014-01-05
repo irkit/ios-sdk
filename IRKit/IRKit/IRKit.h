@@ -16,7 +16,6 @@
 - (void) save;
 
 @property (nonatomic, readonly) NSUInteger countOfReadyPeripherals;
-@property (nonatomic, readonly) NSUInteger countOfPeripherals;
 @property (nonatomic) IRPeripherals *peripherals;
 @property (nonatomic, readonly, copy) NSString *apikey;
 

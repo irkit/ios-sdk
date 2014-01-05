@@ -97,11 +97,6 @@
     return _peripherals.countOfReadyPeripherals;
 }
 
-- (NSUInteger) numberOfPeripherals {
-    LOG_CURRENT_METHOD;
-    return _peripherals.countOfPeripherals;
-}
-
 #pragma mark - Private
 
 @end
