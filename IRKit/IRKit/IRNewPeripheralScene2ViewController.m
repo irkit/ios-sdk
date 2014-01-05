@@ -39,6 +39,15 @@
 - (void) viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
+
+    // warn if iPad
+    if ([[UIDevice currentDevice].model hasPrefix:@"iPad"]) {
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"iPad is not recommended for IRKit setup, please use iPhone", @"alert title to let user use iPhone instead of iPad")
+                                    message:@""
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
