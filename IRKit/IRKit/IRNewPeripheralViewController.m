@@ -86,7 +86,6 @@
 }
 
 - (void)registerDeviceIfNeeded {
-    // TODO check if keys are not expired
     if (! _keys.keysAreSet) {
         [IRHTTPClient registerDeviceWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
             if (error) {
