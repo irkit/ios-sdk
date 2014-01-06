@@ -10,7 +10,6 @@
 #import "IRHelper.h"
 #import "IRWifiAdhocViewController.h"
 @import MediaPlayer;
-@import AudioToolbox;
 
 #define MORSE_WPM 100
 
@@ -68,8 +67,6 @@
     [_player removeObserver:self
                  forKeyPath:@"operationCount"];
     [[NSNotificationCenter defaultCenter] removeObserver:_volumeChangedObserver];
-
-    AudioSessionSetActive(false);
 }
 
 - (void)viewDidLoad {
@@ -88,11 +85,6 @@
     _animatingImageView.hidden = YES;
 
     _morseNotWorkingButton.hidden = ! _showMorseNotWorkingButton;
-
-    AudioSessionInitialize(NULL, NULL, NULL, NULL);
-    UInt32 category = kAudioSessionCategory_AmbientSound;
-    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
-    AudioSessionSetActive(true);
 
     // TODO deprecated
     [self updateStartButtonViewWithVolume:[[MPMusicPlayerController applicationMusicPlayer] volume]];
@@ -269,8 +261,6 @@
 
 - (IBAction)startButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-
-    AudioSessionSetActive(false);
 
     [self startPlaying];
     [self startWaitingForDoor];
