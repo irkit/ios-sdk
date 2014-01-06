@@ -68,32 +68,7 @@
     LOG_CURRENT_METHOD;
 
     [self startWaitingForDoor];
-
-    [IRHTTPClient cancelLocalRequests];
-    // we don't want to POST wifi credentials without checking it's really IRKit
-    [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
-        LOG( @"isAdhoc: %d error: %@", isAdhoc, error );
-        if (isAdhoc) {
-            [IRHTTPClient postWifiKeys:[_keys morseStringRepresentation]
-                        withCompletion:^(NSHTTPURLResponse *res, id body, NSError *error) {
-                            if (res.statusCode == 200) {
-                                [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Great! Now let's connect back to your home wifi", @"alert title after POST /wifi finished successfully")
-                                                            message:@""
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil] show];
-                            }
-                            else {
-                                // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
-                                [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Something is wrong, please contact developer", @"alert title when POST /wifi failed")
-                                                            message:@""
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil] show];
-                            }
-                        }];
-        }
-    }];
+    [self checkAndPostWifiCredentialsIfAdhoc];
 }
 
 - (void)startWaitingForDoor {
@@ -121,6 +96,41 @@
                                                  IRViewControllerResultType: IRViewControllerResultTypeDone,
                                                  IRViewControllerResultPeripheral:p
                                                  }];
+    }];
+}
+
+- (void)checkAndPostWifiCredentialsIfAdhoc {
+    LOG_CURRENT_METHOD;
+
+    [IRHTTPClient cancelLocalRequests];
+    // we don't want to POST wifi credentials without checking it's really IRKit
+
+    __weak IRWifiAdhocViewController *_self = self;
+    [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
+        LOG( @"isAdhoc: %d error: %@", isAdhoc, error );
+        if (isAdhoc) {
+            [IRHTTPClient postWifiKeys:[_self.keys morseStringRepresentation]
+                        withCompletion:^(NSHTTPURLResponse *res, id body, NSError *error) {
+                            if (res.statusCode == 200) {
+                                [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Great! Now let's connect back to your home wifi", @"alert title after POST /wifi finished successfully")
+                                                            message:@""
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil] show];
+                            }
+                            else {
+                                // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
+                                [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Something is wrong, please contact developer", @"alert title when POST /wifi failed")
+                                                            message:@""
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil] show];
+                            }
+                        }];
+        }
+        else {
+            [_self checkAndPostWifiCredentialsIfAdhoc];
+        }
     }];
 }
 
