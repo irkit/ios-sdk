@@ -45,7 +45,8 @@
         }
         else if ([viewController isKindOfClass:[IRNewPeripheralScene2ViewController class]] ||
                  [viewController isKindOfClass:[IRWifiEditViewController class]] ||
-                 [viewController isKindOfClass:[IRMorsePlayerViewController class]]) {
+                 [viewController isKindOfClass:[IRMorsePlayerViewController class]] ||
+                 [viewController isKindOfClass:[IRSignalNameEditViewController class]]) {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
             [IRViewCustomizer customizeNavigationBar:bar];
@@ -57,8 +58,7 @@
                                   forViewController:viewController
                                      withImageNamed:@"icn_navibar_back"];
         }
-        else if ([viewController isKindOfClass:[IRPeripheralNameEditViewController class]] ||
-                 [viewController isKindOfClass:[IRSignalNameEditViewController class]]) {
+        else if ([viewController isKindOfClass:[IRPeripheralNameEditViewController class]]) {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
             [IRViewCustomizer customizeNavigationBar:bar];

@@ -24,7 +24,6 @@
     [super viewDidLoad];
 
     self.title = IRLocalizedString(@"Give a name",@"title of IRSignalNameEdit");
-    self.navigationItem.hidesBackButton    = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                            target:self
                                                                                            action:@selector(doneButtonPressed:)];

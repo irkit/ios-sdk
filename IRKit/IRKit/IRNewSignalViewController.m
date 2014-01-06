@@ -78,6 +78,10 @@
         [self.delegate newSignalViewController:self
                            didFinishWithSignal:signal];
     }
+    else if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
+        [self.delegate newSignalViewController:self
+                            didFinishWithSignal:nil];
+    }
 }
 
 @end
