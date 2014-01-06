@@ -91,6 +91,9 @@
 
 #pragma mark - IRMorsePlayerViewControllerDelegate
 
+- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController*)viewController {
+    LOG_CURRENT_METHOD;
+}
 - (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated:YES];
