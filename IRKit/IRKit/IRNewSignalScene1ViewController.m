@@ -46,12 +46,13 @@
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
+    __weak IRNewSignalScene1ViewController *_self = self;
     _waiter = [IRHTTPClient waitForSignalWithCompletion:^(NSHTTPURLResponse *res, IRSignal *signal, NSError *error) {
         if (signal) {
-            [self didReceiveSignal:signal];
+            [_self didReceiveSignal:signal];
         }
         else {
-            [self cancelButtonPressed:nil];
+            [_self cancelButtonPressed:nil];
         }
     }];
 }
