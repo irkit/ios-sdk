@@ -177,26 +177,29 @@
 }
 
 - (void)startWaitingForDoor {
+    LOG_CURRENT_METHOD;
+
     if (_doorWaiter) {
         [_doorWaiter cancel];
     }
+    __weak IRMorsePlayerViewController *_self = self;
     _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG(@"res: %@, error: %@", res, error);
 
-        [self stopPlaying];
+        [_self stopPlaying];
 
         if (error) {
             return;
         }
 
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName:object[ @"hostname" ]
-                                                                            deviceid:_keys.deviceid];
+                                                                            deviceid:_self.keys.deviceid];
 
-        [self.delegate morsePlayerViewController:self
-                               didFinishWithInfo:@{
-                                                   IRViewControllerResultType: IRViewControllerResultTypeDone,
-                                                   IRViewControllerResultPeripheral:p
-                                                   }];
+        [_self.delegate morsePlayerViewController:_self
+                                didFinishWithInfo:@{
+                                                    IRViewControllerResultType: IRViewControllerResultTypeDone,
+                                                    IRViewControllerResultPeripheral:p
+                                                    }];
     }];
 }
 

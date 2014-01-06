@@ -49,6 +49,8 @@
 
     [_doorWaiter cancel];
     _doorWaiter = nil;
+
+    [IRHTTPClient cancelLocalRequests];
 }
 
 - (void)dealloc {
@@ -75,6 +77,7 @@
     if (_doorWaiter) {
         [_doorWaiter cancel];
     }
+    __weak IRWifiAdhocViewController *_self = self;
     _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG(@"res: %@, error: %@", res, error);
 
@@ -89,9 +92,9 @@
                           otherButtonTitles:@"OK", nil] show];
 
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName:object[ @"hostname" ]
-                                                                            deviceid:_keys.deviceid];
+                                                                            deviceid:_self.keys.deviceid];
 
-        [self.delegate wifiAdhocViewController:self
+        [_self.delegate wifiAdhocViewController:_self
                              didFinishWithInfo:@{
                                                  IRViewControllerResultType: IRViewControllerResultTypeDone,
                                                  IRViewControllerResultPeripheral:p
