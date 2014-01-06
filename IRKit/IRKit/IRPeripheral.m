@@ -126,12 +126,7 @@
     LOG_CURRENT_METHOD;
 
     if (_hostname) {
-        if (_reachability) {
-            [_reachability stopNotifier];
-        }
         _reachability = [Reachability reachabilityWithHostname:self.local_hostname];
-        // we start notifying but don't observe on notifications
-        [_reachability startNotifier];
     }
 }
 

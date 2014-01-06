@@ -156,6 +156,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     payload[ @"format" ] = signal.format;
 
     if (signal.peripheral.isReachableViaWifi) {
+        LOG( @"via wifi" );
         NSURLRequest *request = [self makePOSTJSONRequestToLocalPath:@"/messages"
                                                           withParams:payload
                                                             hostname:signal.peripheral.hostname];
@@ -164,6 +165,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }];
     }
     else {
+        LOG( @"via internet" );
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:payload options:0 error:nil];
         NSString *json   = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         NSURLRequest *request = [self makePOSTRequestToInternetPath:@"/1/messages"
