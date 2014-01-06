@@ -25,8 +25,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-
         __weak IRWifiAdhocViewController *_self = self;
         _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
                                                                                   object:nil
@@ -68,12 +66,9 @@
 - (void)processAdhocSetup {
     LOG_CURRENT_METHOD;
 
-    [_doorWaiter cancel];
-    _doorWaiter = nil;
-    [IRHTTPClient cancelLocalRequests];
-
     [self startWaitingForDoor];
 
+    [IRHTTPClient cancelLocalRequests];
     // we don't want to POST wifi credentials without checking it's really IRKit
     [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
         LOG( @"isAdhoc: %d error: %@", isAdhoc, error );
