@@ -25,6 +25,10 @@
 #define FREQ_SINE          523.8
 #define FREQ_CUTOFF        600.
 
+// warning! this makes the 1st sound long
+// make sure that the protocol's 1st sound is fixed to long
+#define ENVELOPE_LENGTH    2 // number of "dit"s envelope
+
 @interface IRMorsePlayerOperation ()
 
 @property BOOL isExecuting;
@@ -144,6 +148,12 @@ static NSDictionary *asciiToMorse;
     _sequence = malloc(_string.length * (LONGEST_CHARACTER_LENGTH * 4 + 2) + 4);
 
     int sequenceIndex = 0;
+
+    // prepend
+    for (int i=0; i<ENVELOPE_LENGTH; i++) {
+        _sequence[ sequenceIndex ++ ] = SOUND_SINE;
+    }
+
     for (int i=0; i<_string.length; i++) {
         unichar character = [_string characterAtIndex:i];
         NSString *morseCode = asciiToMorse[ [[NSString stringWithFormat:@"%c",character] uppercaseString]];
@@ -399,6 +409,13 @@ audioUnitCallback(void                        *inRefCon,
         else {
             // sine wave
             [_producer produceSamples:samples size:nextSamples];
+        }
+
+        if (_nextIndex < ENVELOPE_LENGTH) {
+            for (size_t n = 0; n < nextSamples; n ++) {
+                double gain = (double)n / (double)nextSamples * ((double)_nextIndex + 1.) / ENVELOPE_LENGTH;
+                samples[n] = (Sample)( gain * (double)samples[n] );
+            }
         }
 
         _remainingSamplesOfIndex -= nextSamples;
