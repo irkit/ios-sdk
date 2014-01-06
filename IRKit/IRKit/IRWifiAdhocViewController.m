@@ -11,6 +11,7 @@
 #import "IRHTTPClient.h"
 #import "IRHelper.h"
 #import "IRKit.h"
+#import "IRConst.h"
 
 @interface IRWifiAdhocViewController ()
 

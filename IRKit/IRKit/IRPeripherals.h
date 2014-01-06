@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "IRPeripheral.h"
-#import "IRSignal.h"
 
 @interface IRPeripherals : NSObject<UITableViewDelegate,UITableViewDataSource>
 

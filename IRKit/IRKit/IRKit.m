@@ -1,11 +1,7 @@
 #import "Log.h"
 #import "IRKit.h"
-#import "IRFunc.h" // private
-#import "IRPeripheral.h"
-#import "IRHelper.h"
-#import "IRViewCustomizer.h"
-#import "IRPersistentStore.h"
 #import "IRHTTPClient.h"
+#import "IRViewCustomizer.h"
 
 @interface IRKit ()
 
