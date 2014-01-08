@@ -150,6 +150,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (void)postSignal:(IRSignal *)signal withCompletion:(void (^)(NSError *error))completion {
+    LOG_CURRENT_METHOD;
+    
     NSMutableDictionary *payload = @{}.mutableCopy;
     payload[ @"freq" ]   = signal.frequency;
     payload[ @"data" ]   = signal.data;
