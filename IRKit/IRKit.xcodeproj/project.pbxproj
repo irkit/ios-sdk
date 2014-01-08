@@ -66,7 +66,6 @@
 		C752D70717462C7B008B644A /* IRKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C752D70617462C7B008B644A /* IRKit.h */; };
 		C752D70917462C7B008B644A /* IRKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C752D70817462C7B008B644A /* IRKit.m */; };
 		C7554F1B1749D61A00BDF920 /* IRConst.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7FAB0251746889000125BCB /* IRConst.h */; };
-		C7554F1E1749D84C00BDF920 /* IRFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F1D1749D84C00BDF920 /* IRFunc.m */; };
 		C7554F321749E65B00BDF920 /* IRPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F311749E65B00BDF920 /* IRPeripheral.m */; };
 		C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F411749F2E000BDF920 /* IRPeripherals.m */; };
 		C75B5682174A405B00FFE5CB /* IRPeripheralCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */; };
@@ -172,7 +171,6 @@
 		C7E07C711875D3BE00901967 /* IRSignal.h in Headers */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C721875D3BE00901967 /* IRPeripherals.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F401749F2E000BDF920 /* IRPeripherals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C731875D3BE00901967 /* IRPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7E07C741875D3BE00901967 /* IRFunc.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F1C1749D84C00BDF920 /* IRFunc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C751875D3BE00901967 /* IRConst.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FAB0251746889000125BCB /* IRConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C761875D3BE00901967 /* IRPersistentStore.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C771875D3BE00901967 /* IRHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E37E5174DF20300872C04 /* IRHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -323,8 +321,6 @@
 		C752D70617462C7B008B644A /* IRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRKit.h; sourceTree = "<group>"; };
 		C752D70817462C7B008B644A /* IRKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRKit.m; sourceTree = "<group>"; };
 		C752D71017462C7B008B644A /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		C7554F1C1749D84C00BDF920 /* IRFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRFunc.h; sourceTree = "<group>"; };
-		C7554F1D1749D84C00BDF920 /* IRFunc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRFunc.m; sourceTree = "<group>"; };
 		C7554F301749E65B00BDF920 /* IRPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheral.h; sourceTree = "<group>"; };
 		C7554F311749E65B00BDF920 /* IRPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheral.m; sourceTree = "<group>"; };
 		C7554F401749F2E000BDF920 /* IRPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripherals.h; sourceTree = "<group>"; };
@@ -639,8 +635,6 @@
 				C7554F411749F2E000BDF920 /* IRPeripherals.m */,
 				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
 				C7554F311749E65B00BDF920 /* IRPeripheral.m */,
-				C7554F1C1749D84C00BDF920 /* IRFunc.h */,
-				C7554F1D1749D84C00BDF920 /* IRFunc.m */,
 				C7FAB0251746889000125BCB /* IRConst.h */,
 				C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */,
 				C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */,
@@ -812,7 +806,6 @@
 				C7E07C711875D3BE00901967 /* IRSignal.h in Headers */,
 				C7E07C721875D3BE00901967 /* IRPeripherals.h in Headers */,
 				C7E07C731875D3BE00901967 /* IRPeripheral.h in Headers */,
-				C7E07C741875D3BE00901967 /* IRFunc.h in Headers */,
 				C7E07C751875D3BE00901967 /* IRConst.h in Headers */,
 				C7E07C761875D3BE00901967 /* IRPersistentStore.h in Headers */,
 				C7E07C771875D3BE00901967 /* IRHelper.h in Headers */,
@@ -1083,7 +1076,6 @@
 				C701BEBF182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m in Sources */,
 				C752D70917462C7B008B644A /* IRKit.m in Sources */,
 				C7FAB02217467CBF00125BCB /* Log.m in Sources */,
-				C7554F1E1749D84C00BDF920 /* IRFunc.m in Sources */,
 				C7554F321749E65B00BDF920 /* IRPeripheral.m in Sources */,
 				C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */,
 				C75B5682174A405B00FFE5CB /* IRPeripheralCell.m in Sources */,
