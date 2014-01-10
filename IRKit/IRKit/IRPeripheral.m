@@ -2,15 +2,12 @@
 #import "IRPeripheral.h"
 #import "IRKit.h"
 #import "IRHelper.h"
-#import "IRPeripheralWriteOperationQueue.h"
-#import "IRPeripheralWriteOperation.h"
 #import "IRConst.h"
 #import "IRHTTPClient.h"
 #import "Reachability.h"
 
 @interface IRPeripheral ()
 
-@property (nonatomic) IRPeripheralWriteOperationQueue *writeQueue;
 @property (nonatomic) Reachability* reachability;
 
 @end
@@ -23,8 +20,6 @@
     if ( ! self ) {
         return nil;
     }
-    _writeQueue       = nil;
-
     _hostname         = nil;
     _customizedName   = nil;
     _foundDate        = [NSDate date];

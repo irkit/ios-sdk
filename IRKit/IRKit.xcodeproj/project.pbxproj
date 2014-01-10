@@ -58,8 +58,6 @@
 		C735042E17A02B0D0057D51B /* IRSamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */; };
 		C735043217A030A60057D51B /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C735043517A0341D0057D51B /* IRKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3B9176F25260088679E /* IRKit.bundle */; };
-		C73CB4D717856B5C00B3F2C0 /* IRPeripheralWriteOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */; };
-		C73CB4DA17856CC200B3F2C0 /* IRPeripheralWriteOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C73CB4D917856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.m */; };
 		C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */; };
 		C73E37E7174DF20300872C04 /* IRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E6174DF20300872C04 /* IRHelper.m */; };
 		C752D70217462C7B008B644A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
@@ -148,8 +146,6 @@
 		C7D0561118041E4F00660217 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D0560F18041E3F00660217 /* AVFoundation.framework */; };
 		C7E07C5B1875D3BE00901967 /* IRSignalSendOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C5C1875D3BE00901967 /* IRSignalSendOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7E07C5D1875D3BE00901967 /* IRPeripheralWriteOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C73CB4D817856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7E07C5E1875D3BE00901967 /* IRPeripheralWriteOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C73CB4D517856B5B00B3F2C0 /* IRPeripheralWriteOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C5F1875D3BE00901967 /* IRMorsePlayerOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B741BB1803FB61005802A7 /* IRMorsePlayerOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C601875D3BE00901967 /* IRMorsePlayerOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B741BE1803FB7A005802A7 /* IRMorsePlayerOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C611875D3BE00901967 /* IRHTTPJSONOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -307,10 +303,6 @@
 		C735042117A029C40057D51B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C735042C17A02B0D0057D51B /* IRSamplesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSamplesTableViewController.h; sourceTree = "<group>"; };
 		C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSamplesTableViewController.m; sourceTree = "<group>"; };
-		C73CB4D517856B5B00B3F2C0 /* IRPeripheralWriteOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralWriteOperation.h; sourceTree = "<group>"; };
-		C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralWriteOperation.m; sourceTree = "<group>"; };
-		C73CB4D817856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralWriteOperationQueue.h; sourceTree = "<group>"; };
-		C73CB4D917856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralWriteOperationQueue.m; sourceTree = "<group>"; };
 		C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPersistentStore.h; sourceTree = "<group>"; };
 		C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPersistentStore.m; sourceTree = "<group>"; };
 		C73E37E5174DF20300872C04 /* IRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelper.h; sourceTree = "<group>"; };
@@ -557,10 +549,6 @@
 				C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */,
 				C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */,
 				C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */,
-				C73CB4D917856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.m */,
-				C73CB4D817856CC100B3F2C0 /* IRPeripheralWriteOperationQueue.h */,
-				C73CB4D617856B5B00B3F2C0 /* IRPeripheralWriteOperation.m */,
-				C73CB4D517856B5B00B3F2C0 /* IRPeripheralWriteOperation.h */,
 				C7B741BC1803FB61005802A7 /* IRMorsePlayerOperationQueue.m */,
 				C7B741BB1803FB61005802A7 /* IRMorsePlayerOperationQueue.h */,
 				C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */,
@@ -783,8 +771,6 @@
 				C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */,
 				C7E07C5B1875D3BE00901967 /* IRSignalSendOperationQueue.h in Headers */,
 				C7E07C5C1875D3BE00901967 /* IRSignalSendOperation.h in Headers */,
-				C7E07C5D1875D3BE00901967 /* IRPeripheralWriteOperationQueue.h in Headers */,
-				C7E07C5E1875D3BE00901967 /* IRPeripheralWriteOperation.h in Headers */,
 				C7E07C5F1875D3BE00901967 /* IRMorsePlayerOperationQueue.h in Headers */,
 				C7E07C601875D3BE00901967 /* IRMorsePlayerOperation.h in Headers */,
 				C7E07C611875D3BE00901967 /* IRHTTPJSONOperation.h in Headers */,
@@ -1094,9 +1080,7 @@
 				C77150EC17720271004F9FE3 /* IRNewPeripheralScene2ViewController.m in Sources */,
 				C77150EF17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m in Sources */,
 				C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */,
-				C73CB4D717856B5C00B3F2C0 /* IRPeripheralWriteOperation.m in Sources */,
 				C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */,
-				C73CB4DA17856CC200B3F2C0 /* IRPeripheralWriteOperationQueue.m in Sources */,
 				C703E82A183E0DD900B8446C /* CRC8.c in Sources */,
 				C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */,
 				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
