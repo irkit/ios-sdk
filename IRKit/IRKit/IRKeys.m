@@ -79,13 +79,18 @@ struct KeysCRCed
     LOG_CURRENT_METHOD;
 
     NSString *security    = [self securityStringRepresentation];
+    LOG( @"security: %@", security );
+    LOG( @"ssid: %@", _ssid);
+    LOG( @"password: %@", _password);
+    LOG( @"devicekey: %@", _devicekey);
+
     NSString *ssidHex     = [self ssidStringRepresentation];
     NSString *passwordHex = [self passwordStringRepresentation];
 
     struct KeysCRCed crced;
     memset( &crced, 0, sizeof(struct KeysCRCed) );
     strncpy( crced.ssid,     [_ssid UTF8String],      strnlen([_ssid UTF8String],33));
-    strncpy( crced.password, [_password UTF8String],  strnlen([_password UTF8String],64));
+    strncpy( crced.password, [self passwordUTF8String],  strnlen([self passwordUTF8String],64));
     strncpy( crced.temp_key, [_devicekey UTF8String], strnlen([_devicekey UTF8String], 33));
     crced.wifi_is_set     = true;
     crced.wifi_was_valid  = false;
@@ -148,24 +153,38 @@ struct KeysCRCed
 // IRKit(GS1011MIPS) expects HEX representation of passwords,
 // and we transfer it's HEX representation,
 // so it's double ASCII -> HEX transformed.
+// ex: when actual password is: "abcde", send "6162636465" to GS,
+//     send "36313632363336343635" over morse
 // WEP ASCII passwords can be 5 or 13 letters
 - (NSString*) passwordStringRepresentation {
+    const char *utf8 = [self passwordUTF8String];
+
+    // passwords should be limited to 63bytes
+    NSMutableString *ret = @"".mutableCopy;
+    for (int i=0; i<strnlen(utf8,64); i++) {
+        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+    }
+    return ret;
+}
+
+- (const char *) passwordUTF8String {
+    if ( (_security == IRSecurityTypeWEP) &&
+        ((_password.length == 5) ||
+         (_password.length == 13)) ) {
+        return [[self wepPasswordStringRepresentation] UTF8String];
+    }
+    else {
+        return [_password UTF8String];
+    }
+}
+
+- (NSString*) wepPasswordStringRepresentation {
     const char *utf8 = [_password UTF8String];
 
     // passwords should be limited to 63bytes
     NSMutableString *ret = @"".mutableCopy;
     for (int i=0; i<strnlen(utf8,64); i++) {
-        if ( (_security == IRSecurityTypeWEP) &&
-             ((_password.length == 5) ||
-              (_password.length == 13)) ) {
-            NSString *letter = [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF];
-            const char *hex = [letter UTF8String];
-            [ret appendString: [NSString stringWithFormat:@"%02x", hex[0] & 0xFF]];
-            [ret appendString: [NSString stringWithFormat:@"%02x", hex[1] & 0xFF]];
-        }
-        else {
-            [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
-        }
+        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }
