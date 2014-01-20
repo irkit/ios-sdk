@@ -139,6 +139,8 @@ static NSString *ssidCache = nil;
             cell.editTextField.placeholder = IRLocalizedString(@"Network Name",@"wifi network name placeholder");
             cell.editTextField.text = _keys.ssid;
             cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
+            cell.editTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            cell.editTextField.autocorrectionType = UITextAutocorrectionTypeNo;
             cell.tag = TAG_SSID_CELL;
 
             if (ssidCache) {
@@ -171,6 +173,8 @@ static NSString *ssidCache = nil;
                 cell.editTextField.returnKeyType = UIReturnKeyDone;
                 cell.editTextField.tag = TAG_PASSWORD_TEXTFIELD;
                 cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
+                cell.editTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+                cell.editTextField.autocorrectionType = UITextAutocorrectionTypeNo;
                 cell.tag = TAG_PASSWORD_CELL;
                 return cell;
             }
