@@ -80,7 +80,7 @@ static NSString *ssidCache = nil;
     }
     if ( [ssid rangeOfString:@","].location != NSNotFound ) {
         // if "," exists in ssid
-        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\"", @"alert title in IRWifiEditViewController")
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\" please change your WiFi settings", @"alert title in IRWifiEditViewController")
                                     message:nil
                                    delegate:nil
                           cancelButtonTitle:@"OK"
@@ -90,7 +90,7 @@ static NSString *ssidCache = nil;
     }
     if ( [password rangeOfString:@","].location != NSNotFound ) {
         // if "," exists in password
-        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\"", @"alert title in IRWifiEditViewController")
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\" please change your WiFi settings", @"alert title in IRWifiEditViewController")
                                     message:nil
                                    delegate:nil
                           cancelButtonTitle:@"OK"
