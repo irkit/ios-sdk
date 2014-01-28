@@ -70,7 +70,27 @@ static NSString *ssidCache = nil;
     }
 
     if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
-        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Password Invalid", @"")
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Password Invalid", @"alert title in IRWifiEditViewController")
+                                    message:nil
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+        [passwordCell becomeFirstResponder];
+        return false;
+    }
+    if ( [ssid rangeOfString:@","].location != NSNotFound ) {
+        // if "," exists in ssid
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\"", @"alert title in IRWifiEditViewController")
+                                    message:nil
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+        [ssidCell becomeFirstResponder];
+        return false;
+    }
+    if ( [password rangeOfString:@","].location != NSNotFound ) {
+        // if "," exists in password
+        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\"", @"alert title in IRWifiEditViewController")
                                     message:nil
                                    delegate:nil
                           cancelButtonTitle:@"OK"
