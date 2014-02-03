@@ -29,15 +29,23 @@
 
 - (NSDictionary*)asDictionary {
     LOG_CURRENT_METHOD;
+    NSMutableDictionary *ret = [self asPublicDictionary].mutableCopy;
+    [ret addEntriesFromDictionary: @{
+             @"receivedDate": _receivedDate            ? _receivedDate : [NSNull null],
+             @"hostname":     _hostname                ? _hostname : [NSNull null],
+             @"deviceid":     self.peripheral.deviceid ? self.peripheral.deviceid : [NSNull null],
+             @"custom":       _custom                  ? _custom : [NSNull null],
+             }];
+    return ret;
+}
+
+- (NSDictionary*)asPublicDictionary {
+    LOG_CURRENT_METHOD;
     return @{
              @"name":         _name                    ? _name : [NSNull null],
              @"data":         _data                    ? _data : [NSNull null],
              @"format":       _format                  ? _format : [NSNull null],
              @"frequency":    _frequency               ? _frequency : [NSNull null],
-             @"receivedDate": _receivedDate            ? [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970] : [NSNull null],
-             @"hostname":     _hostname                ? _hostname : [NSNull null],
-             @"deviceid":     self.peripheral.deviceid ? self.peripheral.deviceid : [NSNull null],
-             @"custom":       _custom                  ? _custom : [NSNull null],
              };
 }
 
