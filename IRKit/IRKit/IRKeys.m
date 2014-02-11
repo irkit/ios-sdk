@@ -9,6 +9,8 @@
 #import "Log.h"
 #import "IRKeys.h"
 #import "CRC8.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 #define MORSE_DELIMITER @"/"
 
@@ -74,7 +76,7 @@ struct KeysCRCed
     return YES;
 }
 
-// [0248]/#{SSID}/#{Password}/#{Key}///////#{CRC}
+// [0248]/#{SSID}/#{Password}/#{Key}/#{RegDomain}//////#{CRC}
 - (NSString*) morseStringRepresentation {
     LOG_CURRENT_METHOD;
 
@@ -103,7 +105,7 @@ struct KeysCRCed
         ssidHex,
         passwordHex,
         _devicekey,
-        @"", // reserved1
+        [self regdomain],
         @"", // reserved2
         @"", // reserved3
         @"", // reserved4
@@ -125,6 +127,34 @@ struct KeysCRCed
 }
 
 #pragma mark - Private
+
+- (NSString*) regdomain {
+    NSString *regdomain;
+
+    // from carrier
+    // might be incorrect if roaming?
+    CTTelephonyNetworkInfo *netInfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [netInfo subscriberCellularProvider];
+    NSString *countryCode = [[carrier isoCountryCode] uppercaseString];
+
+    if (! countryCode) {
+        // this is what user explicitly sets in settings app
+        // which defaults to US
+        countryCode = [[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode] uppercaseString];
+    }
+    if ([countryCode isEqualToString:@"JP"]) {
+        regdomain = @"2"; // TELEC
+    }
+    // Regulatory Domains by Country
+    // http://www.summitdata.com/Documents/Regulatory_Domains.pdf
+    else if ([@[@"CA", @"MX", @"US", @"AU", @"HK", @"IN", @"MY", @"NZ", @"PH", @"TW", @"RU", @"AR", @"BR", @"CL", @"CO", @"CR", @"DO", @"DM", @"EC", @"PA", @"PY", @"PE", @"PR", @"VE"] containsObject:countryCode]) {
+        regdomain = @"1"; // FCC
+    }
+    else {
+        regdomain = @"0"; // ETSI
+    }
+    return regdomain;
+}
 
 - (NSString*) securityStringRepresentation {
     switch (_security) {
