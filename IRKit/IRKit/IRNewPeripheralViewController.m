@@ -61,32 +61,32 @@
                                                                               object:nil
                                                                                queue:[NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
-                                                                              LOG( @"became active" );
-                                                                              if (! _self.stopSearchCalled) {
-                                                                                  [_self startSearch];
-                                                                              }
-                                                                              [_self registerDeviceIfNeeded];
-                                                                          }];
+        LOG(@"became active");
+        if (!_self.stopSearchCalled) {
+            [_self startSearch];
+        }
+        [_self registerDeviceIfNeeded];
+    }];
     [self startSearch];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
 }
 
 - (void)registerDeviceIfNeeded {
-    if (! _keys.keysAreSet) {
+    if (!_keys.keysAreSet) {
         [IRHTTPClient registerDeviceWithCompletion: ^(NSHTTPURLResponse *res, NSDictionary *keys, NSError *error) {
             if (error) {
                 return;
@@ -100,7 +100,7 @@
 
 // start searching for the first 30 seconds,
 // if no new IRKit device found, stop then
-- (void) startSearch {
+- (void)startSearch {
     LOG_CURRENT_METHOD;
     _stopSearchCalled = false;
 
@@ -108,7 +108,7 @@
     [[IRSearcher sharedInstance] startSearching];
 }
 
-- (void) stopSearch {
+- (void)stopSearch {
     LOG_CURRENT_METHOD;
     _stopSearchCalled = YES;
 
@@ -117,8 +117,8 @@
 
 #pragma mark - IRSearcherDelegate
 
-- (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService*)service {
-    LOG( @"service: %@", service );
+- (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService *)service {
+    LOG(@"service: %@", service);
     IRPeripherals *peripherals = [IRKit sharedInstance].peripherals;
 
     NSString *name = [service.hostName componentsSeparatedByString:@"."][ 0 ];
@@ -127,10 +127,10 @@
         p = [peripherals registerPeripheralWithName:name];
         [peripherals save];
     }
-    if (! p.deviceid) {
+    if (!p.deviceid) {
         [p getKeyWithCompletion:^{
             [peripherals save];
-            _foundPeripheral = p; // temporary retain, til alert dismisses
+            _foundPeripheral = p;      // temporary retain, til alert dismisses
 
             // avoid
             // nested push animation can result in corrupted navigation bar
@@ -159,8 +159,7 @@
 
 #pragma mark - UI events
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -169,7 +168,7 @@
 #pragma mark - IRNewPeripheralScene1ViewControllerDelegate
 
 - (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController
-           didFinishWithInfo:(NSDictionary*)info {
+    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -199,7 +198,7 @@
         return;
     }
 
-    if (! _keys.keysAreSet) {
+    if (!_keys.keysAreSet) {
         [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Check your internet connection", @"alert view title when not connected to internet")
                                     message:@""
                                    delegate:nil
@@ -218,7 +217,7 @@
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
 
 - (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController
-           didFinishWithInfo:(NSDictionary*)info {
+    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -239,14 +238,14 @@
 
 #pragma mark - IRMorsePlayerViewController
 
-- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController*)viewController {
+- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController *)viewController {
     LOG_CURRENT_METHOD;
 
-    _morsePlayingCount ++;
+    _morsePlayingCount++;
 }
 
 - (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController
-                didFinishWithInfo:(NSDictionary*)info {
+    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -267,10 +266,10 @@
 #pragma mark - IRWifiAdhocViewControllerDelegate
 
 - (void)wifiAdhocViewController:(IRWifiAdhocViewController *)viewController
-              didFinishWithInfo:(NSDictionary *)info {
+    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if (! [info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
+    if (![info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
         [self.delegate newPeripheralViewController:self
                            didFinishWithPeripheral:nil];
         return;
@@ -288,7 +287,7 @@
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
 - (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController
-             didFinishWithInfo:(NSDictionary*)info {
+    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {

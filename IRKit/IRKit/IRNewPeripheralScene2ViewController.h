@@ -13,6 +13,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController didFinishWithInfo:(NSDictionary *)info;
 
 @end

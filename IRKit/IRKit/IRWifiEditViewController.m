@@ -20,7 +20,7 @@ static NSString *ssidCache = nil;
 
 @implementation IRWifiEditViewController
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -44,32 +44,33 @@ static NSString *ssidCache = nil;
          forCellReuseIdentifier:IRKitCellIdentifierEdit];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
     [self editingChanged:nil];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 }
 
-- (BOOL) processForm {
-    IREditCell* ssidCell = (IREditCell*)[self.view viewWithTag:TAG_SSID_CELL];
-    NSString* ssid = ssidCell.editTextField.text;
-    LOG( @"ssid: %@", ssid );
+- (BOOL)processForm {
+    IREditCell *ssidCell = (IREditCell *)[self.view viewWithTag:TAG_SSID_CELL];
+    NSString *ssid = ssidCell.editTextField.text;
 
-    IREditCell* passwordCell = (IREditCell*)[self.view viewWithTag:TAG_PASSWORD_CELL];
-    NSString* password = passwordCell.editTextField.text;
-    LOG( @"password: %@", password );
+    LOG(@"ssid: %@", ssid);
 
-    if (! ssid.length) {
+    IREditCell *passwordCell = (IREditCell *)[self.view viewWithTag:TAG_PASSWORD_CELL];
+    NSString *password = passwordCell.editTextField.text;
+    LOG(@"password: %@", password);
+
+    if (!ssid.length) {
         return false;
     }
 
-    if (! [IRKeys isPassword:password validForSecurityType:_keys.security]) {
+    if (![IRKeys isPassword:password validForSecurityType:_keys.security]) {
         [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Password Invalid", @"alert title in IRWifiEditViewController")
                                     message:nil
                                    delegate:nil
@@ -78,7 +79,7 @@ static NSString *ssidCache = nil;
         [passwordCell becomeFirstResponder];
         return false;
     }
-    if ( [ssid rangeOfString:@","].location != NSNotFound ) {
+    if ([ssid rangeOfString:@","].location != NSNotFound) {
         // if "," exists in ssid
         [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\" please change your WiFi settings", @"alert title in IRWifiEditViewController")
                                     message:nil
@@ -88,7 +89,7 @@ static NSString *ssidCache = nil;
         [ssidCell becomeFirstResponder];
         return false;
     }
-    if ( [password rangeOfString:@","].location != NSNotFound ) {
+    if ([password rangeOfString:@","].location != NSNotFound) {
         // if "," exists in password
         [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"SSID and Password can't include \",\" please change your WiFi settings", @"alert title in IRWifiEditViewController")
                                     message:nil
@@ -107,16 +108,15 @@ static NSString *ssidCache = nil;
 
     [self.delegate wifiEditViewController:self
                         didFinishWithInfo:@{
-               IRViewControllerResultType: IRViewControllerResultTypeDone,
-               IRViewControllerResultKeys: _keys,
+         IRViewControllerResultType: IRViewControllerResultTypeDone,
+         IRViewControllerResultKeys: _keys,
      }];
     return YES;
 }
 
 #pragma mark - UI events
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -135,7 +135,7 @@ static NSString *ssidCache = nil;
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField*)textField {
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     LOG_CURRENT_METHOD;
     if (textField.tag == TAG_PASSWORD_TEXTFIELD) {
         if ([self processForm]) {
@@ -151,55 +151,55 @@ static NSString *ssidCache = nil;
     LOG_CURRENT_METHOD;
 
     switch (indexPath.section) {
+    case 0:
+    {
+        IREditCell *cell = (IREditCell *)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierEdit];
+        cell.titleLabel.text = IRLocalizedString(@"Name", @"wifi network name");
+        cell.editTextField.delegate = self;
+        cell.editTextField.placeholder = IRLocalizedString(@"Network Name", @"wifi network name placeholder");
+        cell.editTextField.text = _keys.ssid;
+        cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
+        cell.editTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        cell.editTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        cell.tag = TAG_SSID_CELL;
+
+        if (ssidCache) {
+            cell.editTextField.text = ssidCache;
+        }
+
+        return cell;
+    }
+    case 1:
+    {
+        switch (indexPath.row) {
         case 0:
         {
-            IREditCell *cell = (IREditCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierEdit];
-            cell.titleLabel.text = IRLocalizedString(@"Name",@"wifi network name");
-            cell.editTextField.delegate = self;
-            cell.editTextField.placeholder = IRLocalizedString(@"Network Name",@"wifi network name placeholder");
-            cell.editTextField.text = _keys.ssid;
-            cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
-            cell.editTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-            cell.editTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-            cell.tag = TAG_SSID_CELL;
-
-            if (ssidCache) {
-                cell.editTextField.text = ssidCache;
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IRKitWifiEditSecurityCell"];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"IRKitWifiEditSecurityCell"];
             }
-
+            cell.textLabel.text = IRLocalizedString(@"Security", @"security level");
+            cell.detailTextLabel.text = _keys.securityTypeString;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
         }
         case 1:
         {
-        switch (indexPath.row) {
-            case 0:
-            {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IRKitWifiEditSecurityCell"];
-                if (cell == nil) {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"IRKitWifiEditSecurityCell"];
-                }
-                cell.textLabel.text = IRLocalizedString(@"Security",@"security level");
-                cell.detailTextLabel.text = _keys.securityTypeString;
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                return cell;
-            }
-            case 1:
-            {
-                IREditCell *cell = (IREditCell*)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierEdit];
-                cell.titleLabel.text = IRLocalizedString(@"Password",@"wifi password");
-                cell.editTextField.delegate = self;
-                cell.editTextField.placeholder = @"";
-                cell.editTextField.text = _keys.password;
-                cell.editTextField.returnKeyType = UIReturnKeyDone;
-                cell.editTextField.tag = TAG_PASSWORD_TEXTFIELD;
-                cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
-                cell.editTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-                cell.editTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-                cell.tag = TAG_PASSWORD_CELL;
-                return cell;
-            }
+            IREditCell *cell = (IREditCell *)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierEdit];
+            cell.titleLabel.text = IRLocalizedString(@"Password", @"wifi password");
+            cell.editTextField.delegate = self;
+            cell.editTextField.placeholder = @"";
+            cell.editTextField.text = _keys.password;
+            cell.editTextField.returnKeyType = UIReturnKeyDone;
+            cell.editTextField.tag = TAG_PASSWORD_TEXTFIELD;
+            cell.editTextField.keyboardType = UIKeyboardTypeASCIICapable;
+            cell.editTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            cell.editTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+            cell.tag = TAG_PASSWORD_CELL;
+            return cell;
         }
         }
+    }
     }
     return nil;
 }
@@ -210,10 +210,11 @@ static NSString *ssidCache = nil;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0:
-            return 1;
-        case 1:
-            return 2;
+    case 0:
+        return 1;
+
+    case 1:
+        return 2;
     }
     return 0;
 }
@@ -225,8 +226,9 @@ static NSString *ssidCache = nil;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     if ( ((indexPath.section == 0) && (indexPath.row == 0)) ||
-         ((indexPath.section == 1) && (indexPath.row == 1)) ) {
-        IREditCell *cell = (IREditCell*)[tableView cellForRowAtIndexPath:indexPath];
+         ((indexPath.section == 1) && (indexPath.row == 1)) )
+    {
+        IREditCell *cell = (IREditCell *)[tableView cellForRowAtIndexPath:indexPath];
         [cell.editTextField becomeFirstResponder];
     }
     else {

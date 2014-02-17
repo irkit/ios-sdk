@@ -5,7 +5,7 @@
 
 @property (nonatomic) IRSignal *signal;
 
--(id)initWithSignal:(IRSignal*)signal
-         completion:(void (^)(NSError *error))completion;
+- (id)initWithSignal:(IRSignal *)signal
+    completion:(void(^) (NSError * error))completion;
 
 @end

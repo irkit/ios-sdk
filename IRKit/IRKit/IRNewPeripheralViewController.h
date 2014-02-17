@@ -11,14 +11,14 @@
 @protocol IRNewPeripheralViewControllerDelegate;
 
 @interface IRNewPeripheralViewController : UIViewController<
-IRNewPeripheralScene1ViewControllerDelegate,
-IRNewPeripheralScene2ViewControllerDelegate,
-IRWifiEditViewControllerDelegate,
-IRMorsePlayerViewControllerDelegate,
-IRWifiAdhocViewControllerDelegate,
-IRPeripheralNameEditViewControllerDelegate,
-IRSearcherDelegate,
-UIAlertViewDelegate>
+        IRNewPeripheralScene1ViewControllerDelegate,
+        IRNewPeripheralScene2ViewControllerDelegate,
+        IRWifiEditViewControllerDelegate,
+        IRMorsePlayerViewControllerDelegate,
+        IRWifiAdhocViewControllerDelegate,
+        IRPeripheralNameEditViewControllerDelegate,
+        IRSearcherDelegate,
+        UIAlertViewDelegate>
 
 @property (nonatomic, weak) id<IRNewPeripheralViewControllerDelegate> delegate;
 
@@ -29,6 +29,6 @@ UIAlertViewDelegate>
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)newPeripheralViewController:(IRNewPeripheralViewController*)viewController didFinishWithPeripheral:(IRPeripheral*)peripheral;
+- (void)newPeripheralViewController:(IRNewPeripheralViewController *)viewController didFinishWithPeripheral:(IRPeripheral *)peripheral;
 
 @end

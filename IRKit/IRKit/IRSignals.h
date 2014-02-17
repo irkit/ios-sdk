@@ -5,20 +5,20 @@
 @interface IRSignals : NSObject
 
 - (id)objectAtIndex:(NSUInteger)index;
-- (NSData*)data;
-- (void)loadFromData: (NSData*)data;
-- (void)loadFromStandardUserDefaultsKey:(NSString*)key;
-- (void)saveToStandardUserDefaultsWithKey:(NSString*)key;
-- (NSString*)JSONRepresentation;
-- (void)sendSequentiallyWithCompletion:(void (^)(NSError *error))completion;
-- (NSUInteger) indexOfSignal: (IRSignal*) signal;
+- (NSData *)data;
+- (void)loadFromData:(NSData *)data;
+- (void)loadFromStandardUserDefaultsKey:(NSString *)key;
+- (void)saveToStandardUserDefaultsWithKey:(NSString *)key;
+- (NSString *)JSONRepresentation;
+- (void)sendSequentiallyWithCompletion:(void(^) (NSError * error))completion;
+- (NSUInteger)indexOfSignal:(IRSignal *)signal;
 
 #pragma mark - Key Value Coding - Mutable Ordered To-Many Accessors
 
 // Getter Indexed Accessors
-- (NSArray*) signals;
-- (NSUInteger) countOfSignals;
-- (IRSignal*)objectInSignalsAtIndex:(NSUInteger)index;
+- (NSArray *)signals;
+- (NSUInteger)countOfSignals;
+- (IRSignal *)objectInSignalsAtIndex:(NSUInteger)index;
 
 // Mutable Indexed Accessors
 - (void)insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index;

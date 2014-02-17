@@ -16,7 +16,7 @@
 
 @implementation IRNewSignalScene1ViewController
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -33,16 +33,16 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = IRLocalizedString(@"Waiting for Signal ...",@"title of IRNewSignalScene1");
+    self.title = IRLocalizedString(@"Waiting for Signal ...", @"title of IRNewSignalScene1");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                             target:self
-                                             action:@selector(cancelButtonPressed:)];
+                                                                  target:self
+                                                                  action:@selector(cancelButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 
@@ -57,12 +57,12 @@
     }];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 
@@ -70,7 +70,7 @@
     _waiter = nil;
 }
 
-- (void) didReceiveSignal: (IRSignal*)signal {
+- (void)didReceiveSignal:(IRSignal *)signal {
     LOG_CURRENT_METHOD;
 
     IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName:@"IRSignalNameEditViewController"
@@ -79,13 +79,11 @@
     c.signal   = signal;
     [self.navigationController pushViewController:c
                                          animated:YES];
-
 }
 
 #pragma mark - UI events
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -96,7 +94,7 @@
 
     [self.delegate scene1ViewController:self
                       didFinishWithInfo:@{
-           IRViewControllerResultType: IRViewControllerResultTypeCancelled
+         IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }
 

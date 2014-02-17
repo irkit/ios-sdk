@@ -8,16 +8,16 @@
 
 @interface IRPeripheral ()
 
-@property (nonatomic) Reachability* reachability;
+@property (nonatomic) Reachability *reachability;
 
 @end
 
 @implementation IRPeripheral
 
-- (id) init {
+- (id)init {
     LOG_CURRENT_METHOD;
     self = [super init];
-    if ( ! self ) {
+    if (!self) {
         return nil;
     }
     _hostname         = nil;
@@ -50,7 +50,7 @@
     [self startReachability];
 }
 
-- (NSString*) local_hostname {
+- (NSString *)local_hostname {
     return [NSString stringWithFormat:@"%@.local", _hostname];
 }
 
@@ -63,10 +63,10 @@
 
     [IRHTTPClient getDeviceIDFromHost:_hostname
                        withCompletion:^(NSHTTPURLResponse *res_local, NSHTTPURLResponse *res_internet, NSString *deviceid, NSError *error) {
-        LOG( @"res_local: %@, res_internet: %@, key: %@, err: %@", res_local, res_internet, deviceid, error );
+        LOG(@"res_local: %@, res_internet: %@, key: %@, err: %@", res_local, res_internet, deviceid, error);
         if (deviceid) {
             _deviceid = deviceid;
-            NSDictionary* hostInfo = [IRHTTPClient hostInfoFromResponse:res_local];
+            NSDictionary *hostInfo = [IRHTTPClient hostInfoFromResponse:res_local];
             if (hostInfo) {
                 _modelName = hostInfo[ @"modelName" ];
                 _version   = hostInfo[ @"version" ];
@@ -89,35 +89,35 @@
     }];
 }
 
-- (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral {
-    return [self.foundDate compare: otherPeripheral.foundDate];
+- (NSComparisonResult)compareByFirstFoundDate:(IRPeripheral *)otherPeripheral {
+    return [self.foundDate compare:otherPeripheral.foundDate];
 }
 
-- (NSString*) modelNameAndRevision {
+- (NSString *)modelNameAndRevision {
     LOG_CURRENT_METHOD;
-    if ( ! _modelName || ! _version ) {
+    if (!_modelName || !_version) {
         return @"unknown";
     }
-    return [@[_modelName, _version] componentsJoinedByString:@"/"];
+    return [@[_modelName, _version] componentsJoinedByString : @"/"];
 }
 
-- (NSString*)iconURL {
-    return [NSString stringWithFormat:@"%@/images/model/%@.png", STATICENDPOINT_BASE, _modelName ? _modelName : @"IRKit" ];
+- (NSString *)iconURL {
+    return [NSString stringWithFormat:@"%@/images/model/%@.png", STATICENDPOINT_BASE, _modelName ? _modelName:@"IRKit" ];
 }
 
-- (NSDictionary*) asDictionary {
+- (NSDictionary *)asDictionary {
     return @{
-             @"hostname":  _hostname  ? _hostname  : [NSNull null],
-             @"foundDate": _foundDate ? [NSNumber numberWithDouble:[_foundDate timeIntervalSince1970]] : [NSNull null],
-             @"deviceid":  _deviceid  ? _deviceid  : [NSNull null],
-             @"modelName": _modelName ? _modelName : [NSNull null],
-             @"version":   _version   ? _version   : [NSNull null]
-             };
+               @"hostname" : _hostname ? _hostname :[NSNull null],
+               @"foundDate": _foundDate ?[NSNumber numberWithDouble:[_foundDate timeIntervalSince1970]] :[NSNull null],
+               @"deviceid":  _deviceid ? _deviceid :[NSNull null],
+               @"modelName": _modelName ? _modelName :[NSNull null],
+               @"version":   _version ? _version :[NSNull null]
+    };
 }
 
 #pragma mark - Private methods
 
-- (void) startReachability {
+- (void)startReachability {
     LOG_CURRENT_METHOD;
 
     if (_hostname) {
@@ -127,19 +127,19 @@
 
 #pragma mark - NSKeyedArchiving
 
-- (void)encodeWithCoder:(NSCoder*)coder {
-    [coder encodeObject:_hostname       forKey:@"hostname"];
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:_hostname forKey:@"hostname"];
     [coder encodeObject:_customizedName forKey:@"customizedName"];
-    [coder encodeObject:_foundDate      forKey:@"foundDate"];
-    [coder encodeObject:_deviceid       forKey:@"deviceid"];
-    [coder encodeObject:_modelName      forKey:@"modelName"];
-    [coder encodeObject:_version        forKey:@"version"];
+    [coder encodeObject:_foundDate forKey:@"foundDate"];
+    [coder encodeObject:_deviceid forKey:@"deviceid"];
+    [coder encodeObject:_modelName forKey:@"modelName"];
+    [coder encodeObject:_version forKey:@"version"];
 }
 
-- (id)initWithCoder:(NSCoder*)coder {
+- (id)initWithCoder:(NSCoder *)coder {
     LOG_CURRENT_METHOD;
     self = [self init];
-    if (! self) {
+    if (!self) {
         return nil;
     }
     _hostname         = [coder decodeObjectForKey:@"hostname"];

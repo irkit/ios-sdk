@@ -21,15 +21,18 @@
 + (instancetype)sharedInstance {
     static IRSearcher *queue = nil;
     static dispatch_once_t once;
+
     dispatch_once(&once, ^{
         queue = [[IRSearcher alloc] init];
     });
     return queue;
 }
 
-- (instancetype) init {
+- (instancetype)init {
     self = [super init];
-    if (! self) { return nil; }
+    if (!self) {
+        return nil;
+    }
 
     _browser = [[NSNetServiceBrowser alloc] init];
     _browser.delegate = self;
@@ -39,17 +42,17 @@
     return self;
 }
 
-- (void) startSearching {
+- (void)startSearching {
     [_browser searchForServicesOfType:@"_irkit._tcp" inDomain:@""];
 }
 
-- (void) stop {
+- (void)stop {
     [_browser stop];
 }
 
 #pragma mark - Private
 
-- (void) resolveServices {
+- (void)resolveServices {
     LOG_CURRENT_METHOD;
 
     [[_services allObjects] enumerateObjectsUsingBlock:^(NSNetService *service, NSUInteger idx, BOOL *stop) {
@@ -58,14 +61,15 @@
     }];
 }
 
-- (NSString *)copyStringFromTXTDict:(NSDictionary *)dict which:(NSString*)which {
-	// Helper for getting information from the TXT data
-	NSData* data = [dict objectForKey:which];
-	NSString *resultString = nil;
-	if (data) {
-		resultString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	}
-	return resultString;
+- (NSString *)copyStringFromTXTDict:(NSDictionary *)dict which:(NSString *)which {
+    // Helper for getting information from the TXT data
+    NSData *data = [dict objectForKey:which];
+    NSString *resultString = nil;
+
+    if (data) {
+        resultString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    return resultString;
 }
 
 #pragma mark - NSNetServiceDelegate
@@ -74,7 +78,7 @@
     LOG_CURRENT_METHOD;
     [_services removeObject:sender];
 
-    LOG( @"hostName: %@", sender.hostName);
+    LOG(@"hostName: %@", sender.hostName);
 
     if (_delegate) {
         [_delegate searcher:self didResolveService:sender];
@@ -95,9 +99,9 @@
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
     LOG_CURRENT_METHOD;
 
-    [_services addObject: netService];
+    [_services addObject:netService];
 
-    if (! moreServicesComing) {
+    if (!moreServicesComing) {
         [self resolveServices];
     }
 }

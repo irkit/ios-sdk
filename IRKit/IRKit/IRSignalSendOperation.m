@@ -10,19 +10,17 @@
 
 @property (nonatomic) IRPeripheral *peripheral;
 @property (nonatomic) NSData *data;
-//@property (nonatomic) CBUUID *characteristicUUID;
-//@property (nonatomic) CBUUID *serviceUUID;
-@property (nonatomic, copy) void (^completion)(NSError *error);
+@property (nonatomic, copy) void (^ completion)(NSError *error);
 
 @end
 
 @implementation IRSignalSendOperation
 
 - (id)initWithSignal:(IRSignal *)signal
-          completion:(void (^)(NSError *error))completion {
+    completion:(void (^)(NSError *error))completion {
     LOG_CURRENT_METHOD;
     self = [super init];
-    if ( ! self ) {
+    if (!self) {
         return nil;
     }
     _signal = signal;
@@ -30,7 +28,7 @@
     return self;
 }
 
-- (void) start {
+- (void)start {
     LOG_CURRENT_METHOD;
 
     self.isExecuting = YES;
@@ -45,16 +43,14 @@
 
 #pragma mark - KVO
 
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
-{
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
     if ([key isEqualToString:@"isExecuting"] || [key isEqualToString:@"isFinished"]) {
         return YES;
     }
     return [super automaticallyNotifiesObserversForKey:key];
 }
 
-- (BOOL)isConcurrent
-{
+- (BOOL)isConcurrent {
     return NO;
 }
 

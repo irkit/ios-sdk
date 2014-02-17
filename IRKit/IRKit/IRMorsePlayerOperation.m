@@ -4,30 +4,30 @@
 @import AudioUnit;
 @import AVFoundation;
 
-#define OUTPUT_BUS          0
-#define SAMPLE_RATE         44100
+#define OUTPUT_BUS               0
+#define SAMPLE_RATE              44100
 
 #ifdef IRKIT_DEBUG
 # define ASSERT_OR_RETURN(status) \
- if (status) { \
-  NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
-  LOG( @"status: %ld error: %@", status, e ); \
-  return; \
- }
+    if (status) { \
+        NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
+        LOG(@"status: %ld error: %@", status, e); \
+        return; \
+    }
 #else
 # define ASSERT_OR_RETURN(status)
 #endif
 
 #define LONGEST_CHARACTER_LENGTH 7 // $
-#define SOUND_SILENCE      0
-#define SOUND_SINE         1
-#define POST_SILENCE_TIME  30
-#define FREQ_SINE          523.8
-#define FREQ_CUTOFF        600.
+#define SOUND_SILENCE            0
+#define SOUND_SINE               1
+#define POST_SILENCE_TIME        30
+#define FREQ_SINE                523.8
+#define FREQ_CUTOFF              600.
 
 // warning! this makes the 1st sound long
 // make sure that the protocol's 1st sound is fixed to long
-#define ENVELOPE_LENGTH    2 // number of "dit"s envelope
+#define ENVELOPE_LENGTH          2 // number of "dit"s envelope
 
 @interface IRMorsePlayerOperation ()
 
@@ -51,7 +51,7 @@
 
 static NSDictionary *asciiToMorse;
 
-+ (void) load {
++ (void)load {
     LOG_CURRENT_METHOD;
     // 0: short
     // 1: long
@@ -92,7 +92,7 @@ static NSDictionary *asciiToMorse;
     };
 }
 
-- (void) start {
+- (void)start {
     LOG_CURRENT_METHOD;
 
     _producer = [[SineWave alloc] init];
@@ -106,23 +106,23 @@ static NSDictionary *asciiToMorse;
     [self play];
 }
 
-- (void) cancel {
+- (void)cancel {
     LOG_CURRENT_METHOD;
 
     [self finish];
 }
 
-+ (IRMorsePlayerOperation*) playMorseFromString:(NSString*)input
-                                  withWordSpeed:(NSNumber*)wpm {
++ (IRMorsePlayerOperation *)playMorseFromString:(NSString *)input
+    withWordSpeed:(NSNumber *)wpm {
     LOG_CURRENT_METHOD;
 
-    if ( ! input ) {
+    if (!input) {
         return nil;
     }
-    for (int i=0; i<input.length; i++) {
+    for (int i = 0; i < input.length; i++) {
         unichar character = [input characterAtIndex:i];
-        if (! [self isCharacterAllowed:character]) {
-            LOG( @"character: %c is not allowed!!", character );
+        if (![self isCharacterAllowed:character]) {
+            LOG(@"character: %c is not allowed!!", character);
             return nil;
         }
     }
@@ -135,11 +135,11 @@ static NSDictionary *asciiToMorse;
 
 #pragma mark - Private
 
-+ (bool) isCharacterAllowed: (unichar) character {
-    return !! asciiToMorse[ [[NSString stringWithFormat:@"%c", character] uppercaseString] ];
++ (bool)isCharacterAllowed:(unichar)character {
+    return !!asciiToMorse[ [[NSString stringWithFormat:@"%c", character] uppercaseString] ];
 }
 
-- (void) parseAsciiStringIntoSequence {
+- (void)parseAsciiStringIntoSequence {
     // each character can be as long as
     // * 7 dah (dah = 3 dit)
     // * 7 symbol interval (symbol interval = 1 dit)
@@ -150,55 +150,60 @@ static NSDictionary *asciiToMorse;
     int sequenceIndex = 0;
 
     // prepend
-    for (int i=0; i<ENVELOPE_LENGTH; i++) {
-        _sequence[ sequenceIndex ++ ] = SOUND_SINE;
+    for (int i = 0; i < ENVELOPE_LENGTH; i++) {
+        _sequence[ sequenceIndex++ ] = SOUND_SINE;
     }
 
-    for (int i=0; i<_string.length; i++) {
+    for (int i = 0; i < _string.length; i++) {
         unichar character = [_string characterAtIndex:i];
-        NSString *morseCode = asciiToMorse[ [[NSString stringWithFormat:@"%c",character] uppercaseString]];
-        for (int j=0; j<morseCode.length; j++) {
+        NSString *morseCode = asciiToMorse[ [[NSString stringWithFormat:@"%c", character] uppercaseString]];
+        for (int j = 0; j < morseCode.length; j++) {
             unichar shortOrLong = [morseCode characterAtIndex:j];
-            if ( shortOrLong == '0' ) {
+            if (shortOrLong == '0') {
                 // short
-                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
+                _sequence[ sequenceIndex++ ] = SOUND_SINE;
             }
-            else if (shortOrLong == '1' ) {
+            else if (shortOrLong == '1') {
                 // long
-                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
-                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
-                _sequence[ sequenceIndex ++ ] = SOUND_SINE;
+                _sequence[ sequenceIndex++ ] = SOUND_SINE;
+                _sequence[ sequenceIndex++ ] = SOUND_SINE;
+                _sequence[ sequenceIndex++ ] = SOUND_SINE;
             }
 
             // symbol space
-            _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
+            _sequence[ sequenceIndex++ ] = SOUND_SILENCE;
         }
         // letter space
-        _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
-        _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
+        _sequence[ sequenceIndex++ ] = SOUND_SILENCE;
+        _sequence[ sequenceIndex++ ] = SOUND_SILENCE;
     }
     // word space
-    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
-    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
-    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
-    _sequence[ sequenceIndex ++ ] = SOUND_SILENCE;
+    _sequence[ sequenceIndex++ ] = SOUND_SILENCE;
+    _sequence[ sequenceIndex++ ] = SOUND_SILENCE;
+    _sequence[ sequenceIndex++ ] = SOUND_SILENCE;
+    _sequence[ sequenceIndex++ ] = SOUND_SILENCE;
 
     _sequenceCount = sequenceIndex;
     _nextIndex = 0;
     // unit time, or dot duration, in milliseconds
     double unitTime = 1200. / _wpm.floatValue;
-    _samplesPerUnit = (size_t)( (double)(SAMPLE_RATE) * unitTime / 1000. );
+    _samplesPerUnit = (size_t)( (double)(SAMPLE_RATE)*unitTime / 1000. );
     _remainingSamplesOfIndex = _samplesPerUnit;
 }
 
-- (void) initializeAUGraph {
+- (void)initializeAUGraph {
     NSError *error = nil;
     AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
+
     [sessionInstance setPreferredSampleRate:SAMPLE_RATE error:&error];
-    if (error) { LOG( @"error: %@", error ); return; }
+    if (error) {
+        LOG(@"error: %@", error); return;
+    }
 
     [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
-    if (error) { LOG( @"error: %@", error ); return; }
+    if (error) {
+        LOG(@"error: %@", error); return;
+    }
 
 //    // add interruption handler
 //    [[NSNotificationCenter defaultCenter] addObserver:self
@@ -273,7 +278,7 @@ static NSDictionary *asciiToMorse;
     outputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
     outputDescription.componentFlags        = 0;
     outputDescription.componentFlagsMask    = 0;
-    result = AUGraphAddNode (_graph, &outputDescription, &outputNode);
+    result = AUGraphAddNode(_graph, &outputDescription, &outputNode);
     ASSERT_OR_RETURN(result);
 
     // morse -> converter -> low pass -> output
@@ -301,15 +306,15 @@ static NSDictionary *asciiToMorse;
     ASSERT_OR_RETURN(result);
 
     AudioStreamBasicDescription audioFormat;
-    size_t bytesPerSample = sizeof (Sample);
+    size_t bytesPerSample = sizeof(Sample);
     audioFormat.mSampleRate         = SAMPLE_RATE;
     audioFormat.mFormatID           = kAudioFormatLinearPCM;
     audioFormat.mFormatFlags        = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
     audioFormat.mFramesPerPacket    = 1;
     audioFormat.mChannelsPerFrame   = 1; // MONO
-    audioFormat.mBitsPerChannel     = (UInt32) bytesPerSample * 8;
-    audioFormat.mBytesPerPacket     = (UInt32) bytesPerSample;
-    audioFormat.mBytesPerFrame      = (UInt32) bytesPerSample;
+    audioFormat.mBitsPerChannel     = (UInt32)bytesPerSample * 8;
+    audioFormat.mBytesPerPacket     = (UInt32)bytesPerSample;
+    audioFormat.mBytesPerFrame      = (UInt32)bytesPerSample;
 
     // stream formats
 
@@ -325,7 +330,7 @@ static NSDictionary *asciiToMorse;
     // mFormatFlags: 41
     // kAudioFormatFlagIsNonInterleaved | kAudioFormatFlagIsPacked | kAudioFormatFlagIsFloat
     size_t size = sizeof(audioFormat);
-    result = AudioUnitGetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, (UInt32*)&size);
+    result = AudioUnitGetProperty(filterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &audioFormat, (UInt32 *)&size);
     ASSERT_OR_RETURN(result);
 
     result = AudioUnitSetProperty(converterUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &audioFormat, sizeof(audioFormat));
@@ -347,20 +352,21 @@ static NSDictionary *asciiToMorse;
     ASSERT_OR_RETURN(result);
 }
 
-- (void) play {
+- (void)play {
     OSStatus result __attribute__((unused)) = AUGraphStart(_graph);
-    LOG( @"%d", result );
+
+    LOG(@"%d", result);
 }
 
 OSStatus
-audioUnitCallback(void                        *inRefCon,
-                  AudioUnitRenderActionFlags  *ioActionFlags,
-                  const AudioTimeStamp        *inTimeStamp,
-                  UInt32                       inBusNumber,
-                  UInt32                       inNumberFrames,
-                  AudioBufferList             *ioData)
-{
-    IRMorsePlayerOperation *self = (__bridge IRMorsePlayerOperation*)inRefCon;
+audioUnitCallback(void *inRefCon,
+                  AudioUnitRenderActionFlags *ioActionFlags,
+                  const AudioTimeStamp *inTimeStamp,
+                  UInt32 inBusNumber,
+                  UInt32 inNumberFrames,
+                  AudioBufferList *ioData) {
+    IRMorsePlayerOperation *self = (__bridge IRMorsePlayerOperation *)inRefCon;
+
     return [self audioUnitCallback:ioActionFlags
                          timestamp:inTimeStamp
                          busNumber:inBusNumber
@@ -368,24 +374,25 @@ audioUnitCallback(void                        *inRefCon,
                               data:ioData];
 }
 
-- (OSStatus) audioUnitCallback:(AudioUnitRenderActionFlags *)ioActionFlags
-                     timestamp:(const AudioTimeStamp       *)inTimeStamp
-                     busNumber:(UInt32                      )inBusNumber
-                  numberFrames:(UInt32                      )inNumberFrames
-                          data:(AudioBufferList            *)ioData
-{
+- (OSStatus)audioUnitCallback:(AudioUnitRenderActionFlags *)ioActionFlags
+    timestamp:(const AudioTimeStamp *)inTimeStamp
+    busNumber:(UInt32                      )inBusNumber
+    numberFrames:(UInt32                      )inNumberFrames
+    data:(AudioBufferList *)ioData {
     static bool lastSampleSilence = YES;
     static int shouldFinishCounter = POST_SILENCE_TIME;
     bool hasSamples = NO;
 
-    if ( ! _sequence ) { return noErr; }
+    if (!_sequence) {
+        return noErr;
+    }
 
     // we use Monoral
     // mNumberBuffers is 1 anyway
-    Sample * samples     = (Sample*)ioData->mBuffers[0].mData;
+    Sample *samples     = (Sample *)ioData->mBuffers[0].mData;
     size_t samplesToFill = ioData->mBuffers[0].mDataByteSize / sizeof(Sample);
 
-    while ( samplesToFill && (_nextIndex != _sequenceCount) ) {
+    while (samplesToFill && (_nextIndex != _sequenceCount) ) {
         hasSamples = YES;
         shouldFinishCounter = POST_SILENCE_TIME; // reset
 
@@ -402,7 +409,7 @@ audioUnitCallback(void                        *inRefCon,
             lastSampleSilence = YES;
 
             // silence
-            for (size_t n = 0; n < nextSamples; n ++) {
+            for (size_t n = 0; n < nextSamples; n++) {
                 samples[n] = 0;
             }
         }
@@ -412,7 +419,7 @@ audioUnitCallback(void                        *inRefCon,
         }
 
         if (_nextIndex < ENVELOPE_LENGTH) {
-            for (size_t n = 0; n < nextSamples; n ++) {
+            for (size_t n = 0; n < nextSamples; n++) {
                 double gain = (double)n / (double)nextSamples * ((double)_nextIndex + 1.) / ENVELOPE_LENGTH;
                 samples[n] = (Sample)( gain * (double)samples[n] );
             }
@@ -423,15 +430,15 @@ audioUnitCallback(void                        *inRefCon,
         samples                  += nextSamples;
 
         if (_remainingSamplesOfIndex == 0) {
-            _nextIndex ++;
+            _nextIndex++;
             _remainingSamplesOfIndex = _samplesPerUnit;
         }
     }
 
-    if (! hasSamples && (shouldFinishCounter > 0)) {
+    if (!hasSamples && (shouldFinishCounter > 0)) {
         // fill silence after morse for some time
-        shouldFinishCounter --;
-        for (size_t n = 0; n < samplesToFill; n ++) {
+        shouldFinishCounter--;
+        for (size_t n = 0; n < samplesToFill; n++) {
             samples[n] = 0;
         }
     }
@@ -442,7 +449,7 @@ audioUnitCallback(void                        *inRefCon,
     return noErr;
 }
 
-- (void) finish {
+- (void)finish {
     LOG_CURRENT_METHOD;
 
     AUGraphStop(_graph);
@@ -453,23 +460,21 @@ audioUnitCallback(void                        *inRefCon,
     self.isFinished  = YES;
 }
 
-- (void) dealloc {
+- (void)dealloc {
     LOG_CURRENT_METHOD;
     DisposeAUGraph(_graph);
 }
 
 #pragma mark - KVO
 
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key
-{
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
     if ([key isEqualToString:@"isExecuting"] || [key isEqualToString:@"isFinished"]) {
         return YES;
     }
     return [super automaticallyNotifiesObserversForKey:key];
 }
 
-- (BOOL)isConcurrent
-{
+- (BOOL)isConcurrent {
     return NO;
 }
 
@@ -481,18 +486,18 @@ audioUnitCallback(void                        *inRefCon,
     int32_t c; ///< The coefficient in the resonant filter
     Sample s1; ///< The previous output sample
     Sample s2; ///< The output sample before last
-    float  frequency;
+    float frequency;
     Sample peak;
-    float  sampleRate;
+    float sampleRate;
 }
 
 // The scaling factor to apply after multiplication by the
 // coefficient
-static const int32_t scale = (1<<29);
+static const int32_t scale = (1 << 29);
 
 #pragma mark - Public
 
-- (id) init {
+- (id)init {
     if ((self = [super init])) {
         sampleRate = SAMPLE_RATE;
         peak       = 0x7fff;
@@ -502,29 +507,30 @@ static const int32_t scale = (1<<29);
     return self;
 }
 
-- (void) produceSamples:(Sample *)audioBuffer size:(size_t)size {
+- (void)produceSamples:(Sample *)audioBuffer size:(size_t)size {
 #ifdef DEBUG
     fprintf(stderr, ".");
 #endif
 
-    for (size_t n = 0; n < size; n ++) {
+    for (size_t n = 0; n < size; n++) {
         audioBuffer[n] = [self nextSample];
     }
 }
 
 #pragma mark - Private
 
-- (void) setUp {
+- (void)setUp {
     double step = 2.0 * M_PI * frequency / sampleRate;
 
     c  = (2 * cos(step) * scale);
     s1 = (peak * sin(-step));
-    s2 = (peak * sin(-2.0*step));
+    s2 = (peak * sin(-2.0 * step));
 }
 
-- (Sample) nextSample {
+- (Sample)nextSample {
     int64_t temp = (int64_t)c * (int64_t)s1;
-    Sample result = (temp/scale) - s2;
+    Sample result = (temp / scale) - s2;
+
     s2 = s1;
     s1 = result;
     return result;

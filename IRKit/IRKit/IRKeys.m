@@ -12,7 +12,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 
-#define MORSE_DELIMITER @"/"
+#define MORSE_DELIMITER          @"/"
 
 // SSID is max 32 bytes
 // see 7.3.1.2 of IEEE 802.11
@@ -27,43 +27,47 @@
 
 struct KeysCRCed
 {
-    uint8_t    security;
-    char       ssid    [MAX_WIFI_SSID_LENGTH     + 1];
-    char       password[MAX_WIFI_PASSWORD_LENGTH + 1];
-    bool       wifi_is_set;
-    bool       wifi_was_valid;
+    uint8_t security;
+    char ssid    [MAX_WIFI_SSID_LENGTH     + 1];
+    char password[MAX_WIFI_PASSWORD_LENGTH + 1];
+    bool wifi_is_set;
+    bool wifi_was_valid;
 
-    char       temp_key[MAX_KEY_LENGTH           + 1];
-} __attribute__ ((packed));
+    char temp_key[MAX_KEY_LENGTH           + 1];
+} __attribute__((packed));
 
 @implementation IRKeys
 
-- (instancetype) init {
+- (instancetype)init {
     self = [super init];
-    if ( ! self ) { return nil; }
+    if (!self) {
+        return nil;
+    }
 
     // defaults to WPA2
     _security = IRSecurityTypeWPA2;
     return self;
 }
 
-- (NSString*) securityTypeString {
+- (NSString *)securityTypeString {
     return [IRKeys securityTypeStringOf:_security];
 }
 
-+ (NSString*) securityTypeStringOf: (enum IRSecurityType) security {
++ (NSString *)securityTypeStringOf:(enum IRSecurityType)security {
     switch (security) {
-        case IRSecurityTypeNone:
-            return @"None";
-        case IRSecurityTypeWEP:
-            return @"WEP";
-        case IRSecurityTypeWPA2:
-        default:
-            return @"WPA/WPA2";
+    case IRSecurityTypeNone:
+        return @"None";
+
+    case IRSecurityTypeWEP:
+        return @"WEP";
+
+    case IRSecurityTypeWPA2:
+    default:
+        return @"WPA/WPA2";
     }
 }
 
-+ (BOOL) isPassword:(NSString*)password validForSecurityType:(enum IRSecurityType)securityType {
++ (BOOL)isPassword:(NSString *)password validForSecurityType:(enum IRSecurityType)securityType {
     if (securityType == IRSecurityTypeWEP) {
         NSUInteger length = password.length;
         // WEP passwords can only be 5 or 13 in ASCII, 10 or 26 in HEX
@@ -77,27 +81,27 @@ struct KeysCRCed
 }
 
 // [0248]/#{SSID}/#{Password}/#{Key}/#{RegDomain}//////#{CRC}
-- (NSString*) morseStringRepresentation {
+- (NSString *)morseStringRepresentation {
     LOG_CURRENT_METHOD;
 
     NSString *security    = [self securityStringRepresentation];
-    LOG( @"security: %@", security );
-    LOG( @"ssid: %@", _ssid);
-    LOG( @"password: %@", _password);
-    LOG( @"devicekey: %@", _devicekey);
+    LOG(@"security: %@", security);
+    LOG(@"ssid: %@", _ssid);
+    LOG(@"password: %@", _password);
+    LOG(@"devicekey: %@", _devicekey);
 
     NSString *ssidHex     = [self ssidStringRepresentation];
     NSString *passwordHex = [self passwordStringRepresentation];
 
     struct KeysCRCed crced;
-    memset( &crced, 0, sizeof(struct KeysCRCed) );
-    strncpy( crced.ssid,     [_ssid UTF8String],      strnlen([_ssid UTF8String],33));
-    strncpy( crced.password, [self passwordUTF8String],  strnlen([self passwordUTF8String],64));
-    strncpy( crced.temp_key, [_devicekey UTF8String], strnlen([_devicekey UTF8String], 33));
+    memset(&crced, 0, sizeof(struct KeysCRCed) );
+    strncpy(crced.ssid,     [_ssid UTF8String],      strnlen([_ssid UTF8String], 33));
+    strncpy(crced.password, [self passwordUTF8String],  strnlen([self passwordUTF8String], 64));
+    strncpy(crced.temp_key, [_devicekey UTF8String], strnlen([_devicekey UTF8String], 33));
     crced.wifi_is_set     = true;
     crced.wifi_was_valid  = false;
     crced.security        = _security;
-    uint8_t crc           = crc8((uint8_t*)&crced, sizeof(struct KeysCRCed));
+    uint8_t crc           = crc8((uint8_t *)&crced, sizeof(struct KeysCRCed));
     NSString *crcHex      = [NSString stringWithFormat:@"%02x", crc];
 
     NSArray *components = @[
@@ -106,29 +110,29 @@ struct KeysCRCed
         passwordHex,
         _devicekey,
         [self regdomain],
-        @"", // reserved2
-        @"", // reserved3
-        @"", // reserved4
-        @"", // reserved5
-        @"", // reserved6
+        @"",     // reserved2
+        @"",     // reserved3
+        @"",     // reserved4
+        @"",     // reserved5
+        @"",     // reserved6
         crcHex,
-    ];
+                          ];
     return [[components componentsJoinedByString:@"/"] uppercaseString];
 }
 
-- (void) setKeys: (NSDictionary*) keys {
-    LOG( @"keys: %@", keys );
+- (void)setKeys:(NSDictionary *)keys {
+    LOG(@"keys: %@", keys);
     _deviceid  = keys[ @"deviceid" ];
     _devicekey = keys[ @"devicekey" ];
 }
 
-- (BOOL) keysAreSet {
+- (BOOL)keysAreSet {
     return (_deviceid && _devicekey);
 }
 
 #pragma mark - Private
 
-- (NSString*) regdomain {
+- (NSString *)regdomain {
     NSString *regdomain;
 
     // from carrier
@@ -137,7 +141,7 @@ struct KeysCRCed
     CTCarrier *carrier = [netInfo subscriberCellularProvider];
     NSString *countryCode = [[carrier isoCountryCode] uppercaseString];
 
-    if (! countryCode) {
+    if (!countryCode) {
         // this is what user explicitly sets in settings app
         // which defaults to US
         countryCode = [[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode] uppercaseString];
@@ -147,7 +151,7 @@ struct KeysCRCed
     }
     // Regulatory Domains by Country
     // http://www.summitdata.com/Documents/Regulatory_Domains.pdf
-    else if ([@[@"CA", @"MX", @"US", @"AU", @"HK", @"IN", @"MY", @"NZ", @"PH", @"TW", @"RU", @"AR", @"BR", @"CL", @"CO", @"CR", @"DO", @"DM", @"EC", @"PA", @"PY", @"PE", @"PR", @"VE"] containsObject:countryCode]) {
+    else if ([@[@"CA", @"MX", @"US", @"AU", @"HK", @"IN", @"MY", @"NZ", @"PH", @"TW", @"RU", @"AR", @"BR", @"CL", @"CO", @"CR", @"DO", @"DM", @"EC", @"PA", @"PY", @"PE", @"PR", @"VE"] containsObject : countryCode]) {
         regdomain = @"1"; // FCC
     }
     else {
@@ -156,25 +160,28 @@ struct KeysCRCed
     return regdomain;
 }
 
-- (NSString*) securityStringRepresentation {
+- (NSString *)securityStringRepresentation {
     switch (_security) {
-        case IRSecurityTypeNone:
-            return @"0";
-        case IRSecurityTypeWEP:
-            return @"2";
-        case IRSecurityTypeWPA2:
-        default:
-            return @"8";
+    case IRSecurityTypeNone:
+        return @"0";
+
+    case IRSecurityTypeWEP:
+        return @"2";
+
+    case IRSecurityTypeWPA2:
+    default:
+        return @"8";
     }
 }
 
-- (NSString*) ssidStringRepresentation {
+- (NSString *)ssidStringRepresentation {
     const char *utf8 = [_ssid UTF8String];
 
     // ssids should be limited to 32bytes
     NSMutableString *ret = @"".mutableCopy;
-    for (int i=0; i<strnlen(utf8,33); i++) {
-        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+
+    for (int i = 0; i < strnlen(utf8, 33); i++) {
+        [ret appendString:[NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }
@@ -186,21 +193,23 @@ struct KeysCRCed
 // ex: when actual password is: "abcde", send "6162636465" to GS,
 //     send "36313632363336343635" over morse
 // WEP ASCII passwords can be 5 or 13 letters
-- (NSString*) passwordStringRepresentation {
+- (NSString *)passwordStringRepresentation {
     const char *utf8 = [self passwordUTF8String];
 
     // passwords should be limited to 63bytes
     NSMutableString *ret = @"".mutableCopy;
-    for (int i=0; i<strnlen(utf8,64); i++) {
-        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+
+    for (int i = 0; i < strnlen(utf8, 64); i++) {
+        [ret appendString:[NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }
 
-- (const char *) passwordUTF8String {
+- (const char *)passwordUTF8String {
     if ( (_security == IRSecurityTypeWEP) &&
-        ((_password.length == 5) ||
-         (_password.length == 13)) ) {
+         ((_password.length == 5) ||
+          (_password.length == 13)) )
+    {
         return [[self wepPasswordStringRepresentation] UTF8String];
     }
     else {
@@ -208,13 +217,14 @@ struct KeysCRCed
     }
 }
 
-- (NSString*) wepPasswordStringRepresentation {
+- (NSString *)wepPasswordStringRepresentation {
     const char *utf8 = [_password UTF8String];
 
     // passwords should be limited to 63bytes
     NSMutableString *ret = @"".mutableCopy;
-    for (int i=0; i<strnlen(utf8,64); i++) {
-        [ret appendString: [NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+
+    for (int i = 0; i < strnlen(utf8, 64); i++) {
+        [ret appendString:[NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }

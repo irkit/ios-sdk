@@ -10,11 +10,11 @@
 // Otherwise you'll see IRKit's default appearance
 @property (nonatomic, copy) void (^viewDidLoad)(UIViewController *viewController);
 
-+ (instancetype) sharedInstance;
++ (instancetype)sharedInstance;
 
-+ (UIColor*) keyColor;
-+ (UIColor*) textColor;
-+ (UIColor*) activeFontColor;
-+ (UIColor*) inactiveFontColor;
++ (UIColor *)keyColor;
++ (UIColor *)textColor;
++ (UIColor *)activeFontColor;
++ (UIColor *)inactiveFontColor;
 
 @end
