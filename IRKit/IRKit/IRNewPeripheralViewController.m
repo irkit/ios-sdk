@@ -168,7 +168,7 @@
 #pragma mark - IRNewPeripheralScene1ViewControllerDelegate
 
 - (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController
-    didFinishWithInfo:(NSDictionary *)info {
+           didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -217,7 +217,7 @@
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
 
 - (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController
-    didFinishWithInfo:(NSDictionary *)info {
+           didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -245,7 +245,7 @@
 }
 
 - (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController
-    didFinishWithInfo:(NSDictionary *)info {
+                didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -266,7 +266,7 @@
 #pragma mark - IRWifiAdhocViewControllerDelegate
 
 - (void)wifiAdhocViewController:(IRWifiAdhocViewController *)viewController
-    didFinishWithInfo:(NSDictionary *)info {
+              didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if (![info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
@@ -287,7 +287,7 @@
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
 - (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController
-    didFinishWithInfo:(NSDictionary *)info {
+             didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {

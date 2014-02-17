@@ -6,7 +6,7 @@ typedef SInt16 Sample;
 @interface IRMorsePlayerOperation : NSOperation
 
 + (IRMorsePlayerOperation *)playMorseFromString:(NSString *)input
-    withWordSpeed:(NSNumber *)wpm;
+                                  withWordSpeed:(NSNumber *)wpm;
 
 @end
 

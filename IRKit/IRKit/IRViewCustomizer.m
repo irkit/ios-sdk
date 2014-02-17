@@ -110,8 +110,8 @@
 }
 
 + (void)customizeCancelButton:(UIBarButtonItem *)original
-    forViewController:(UIViewController *)viewController
-    withImageNamed:(NSString *)name {
+            forViewController:(UIViewController *)viewController
+               withImageNamed:(NSString *)name {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *image   = [IRHelper imageInResourceNamed:name];
 

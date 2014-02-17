@@ -17,7 +17,7 @@
 @implementation IRSignalSendOperation
 
 - (id)initWithSignal:(IRSignal *)signal
-    completion:(void (^)(NSError *error))completion {
+          completion:(void (^)(NSError *error))completion {
     LOG_CURRENT_METHOD;
     self = [super init];
     if (!self) {
