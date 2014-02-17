@@ -37,13 +37,17 @@
 		C707ECD6184C84CE00AC5F0B /* img_prepare3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */; };
 		C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C752D70617462C7B008B644A /* IRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
-		C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */; };
-		C71D909F17977D2200CEC73F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C71D909D17977D2200CEC73F /* InfoPlist.strings */; };
-		C71D90A617977D6A00CEC73F /* IRKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D90A417977D6A00CEC73F /* IRKitTests.m */; };
-		C71D90A71797809200CEC73F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D71017462C7B008B644A /* SenTestingKit.framework */; };
-		C71D90AA1797862300CEC73F /* IRHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D90A91797862300CEC73F /* IRHelperTests.m */; };
-		C71D90AD17978B1700CEC73F /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
-		C71D90AE17978B2E00CEC73F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
+		C720E6EC18B2108A009A5AB1 /* IRSignalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */; };
+		C720E6ED18B21194009A5AB1 /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
+		C720E6EE18B211AB009A5AB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CF06518506D7E0086ED4F /* MediaPlayer.framework */; };
+		C720E6EF18B211B2009A5AB1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CF061185061180086ED4F /* SystemConfiguration.framework */; };
+		C720E6F018B211C4009A5AB1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7AB0524180ADD40007288EB /* AudioToolbox.framework */; };
+		C720E6F118B211C9009A5AB1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D0560F18041E3F00660217 /* AVFoundation.framework */; };
+		C720E6F218B211D5009A5AB1 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B741B81803FA22005802A7 /* libc++.dylib */; };
+		C720E6F318B211DA009A5AB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CFC8717A6671200870A1B /* QuartzCore.framework */; };
+		C720E6F418B211E4009A5AB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
+		C720E6F618B21244009A5AB1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F518B21244009A5AB1 /* libPods.a */; };
+		C720E6F818B21265009A5AB1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F718B21265009A5AB1 /* CoreTelephony.framework */; };
 		C721651D18521C80000BD43D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C721651B18521C80000BD43D /* Localizable.strings */; };
 		C735040E17A029C30057D51B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
 		C735040F17A029C30057D51B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
@@ -91,7 +95,6 @@
 		C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; };
 		C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */; };
 		C7756778184B23A100C6D4DB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7756777184B23A100C6D4DB /* libPods.a */; };
-		C776CC4017B3A3C500E1824D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
 		C77E1977187859D700B457C3 /* IRWifiAdhocViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77E1975187859D700B457C3 /* IRWifiAdhocViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C77E1978187859D700B457C3 /* IRWifiAdhocViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E1976187859D700B457C3 /* IRWifiAdhocViewController.m */; };
 		C77E197918785D2D00B457C3 /* IRWifiAdhocViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77E1975187859D700B457C3 /* IRWifiAdhocViewController.h */; };
@@ -182,6 +185,11 @@
 		C7E4E32918520CA300EC864E /* IRPeripheralNameEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32B18520CA300EC864E /* IRPeripheralNameEditViewController.xib */; };
 		C7E4E32C18520CA700EC864E /* IRSignalNameEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32E18520CA700EC864E /* IRSignalNameEditViewController.xib */; };
 		C7E4E32F18520CAB00EC864E /* IRWifiEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E33118520CAB00EC864E /* IRWifiEditViewController.xib */; };
+		C7E4EBA418B20EB5008711EF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7E4EB9D18B20E44008711EF /* XCTest.framework */; };
+		C7E4EBA518B20EB5008711EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
+		C7E4EBA618B20EB5008711EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
+		C7E4EBAC18B20EB5008711EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C7E4EBAA18B20EB5008711EF /* InfoPlist.strings */; };
+		C7E4EBAE18B20EB5008711EF /* IRKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E4EBAD18B20EB5008711EF /* IRKitTests.m */; };
 		C7EF92E317794D4A00D07D81 /* IRNewSignalViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */; };
 		C7EF92E417797DCE00D07D81 /* IRPeripheralNameEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */; };
 		C7EF92E517797DCE00D07D81 /* IRNewPeripheralScene2ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77150EB17720271004F9FE3 /* IRNewPeripheralScene2ViewController.h */; };
@@ -205,13 +213,6 @@
 			remoteGlobalIDString = C79DE3B8176F25260088679E;
 			remoteInfo = IRKitResources;
 		};
-		C71D90AB17978B0800CEC73F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C752D6F617462C7B008B644A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C752D6FD17462C7B008B644A;
-			remoteInfo = IRKit;
-		};
 		C735043817A038FB0057D51B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C752D6F617462C7B008B644A /* Project object */;
@@ -225,6 +226,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C79DE3B8176F25260088679E;
 			remoteInfo = IRKitResources;
+		};
+		C7E4EBB018B20EB5008711EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C752D6F617462C7B008B644A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C752D6FD17462C7B008B644A;
+			remoteInfo = IRKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -283,13 +291,9 @@
 		C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_camera@2x.png"; sourceTree = "<group>"; };
 		C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_prepare3@2x.png"; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
-		C71D909817977D2200CEC73F /* IRKitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C71D909C17977D2200CEC73F /* IRKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitTests-Info.plist"; sourceTree = "<group>"; };
-		C71D909E17977D2200CEC73F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C71D90A417977D6A00CEC73F /* IRKitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRKitTests.m; sourceTree = "<group>"; };
-		C71D90A517977D6A00CEC73F /* IRKitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRKitTests.h; sourceTree = "<group>"; };
-		C71D90A81797862300CEC73F /* IRHelperTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelperTests.h; sourceTree = "<group>"; };
-		C71D90A91797862300CEC73F /* IRHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHelperTests.m; sourceTree = "<group>"; };
+		C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalTests.m; sourceTree = "<group>"; };
+		C720E6F518B21244009A5AB1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		C720E6F718B21265009A5AB1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C721651C18521C80000BD43D /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C735040D17A029C30057D51B /* IRKitViewSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRKitViewSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C735041317A029C30057D51B /* IRKitViewSamples-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitViewSamples-Info.plist"; sourceTree = "<group>"; };
@@ -423,8 +427,13 @@
 		C7E4E33F185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRNewSignalScene1ViewController.strings; sourceTree = "<group>"; };
 		C7E4E340185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRSignalNameEditViewController.strings; sourceTree = "<group>"; };
 		C7E4E341185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
-		C7E4E342185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C7E4E343185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C7E4EB9D18B20E44008711EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C7E4EBA318B20EB4008711EF /* IRKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7E4EBA918B20EB5008711EF /* IRKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitTests-Info.plist"; sourceTree = "<group>"; };
+		C7E4EBAB18B20EB5008711EF /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C7E4EBAD18B20EB5008711EF /* IRKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IRKitTests.m; sourceTree = "<group>"; };
+		C7E4EBAF18B20EB5008711EF /* IRKitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IRKitTests-Prefix.pch"; sourceTree = "<group>"; };
 		C7FAB02017467CBF00125BCB /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		C7FAB02117467CBF00125BCB /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 		C7FAB0251746889000125BCB /* IRConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRConst.h; sourceTree = "<group>"; };
@@ -433,18 +442,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C71D909517977D2200CEC73F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C776CC4017B3A3C500E1824D /* CoreGraphics.framework in Frameworks */,
-				C71D90AE17978B2E00CEC73F /* UIKit.framework in Frameworks */,
-				C71D90AD17978B1700CEC73F /* libIRKit.a in Frameworks */,
-				C71D90A71797809200CEC73F /* SenTestingKit.framework in Frameworks */,
-				C71D909917977D2200CEC73F /* CoreFoundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C735040A17A029C30057D51B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,30 +475,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7E4EBA018B20EB4008711EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C720E6F818B21265009A5AB1 /* CoreTelephony.framework in Frameworks */,
+				C720E6F618B21244009A5AB1 /* libPods.a in Frameworks */,
+				C720E6F418B211E4009A5AB1 /* CoreGraphics.framework in Frameworks */,
+				C720E6F318B211DA009A5AB1 /* QuartzCore.framework in Frameworks */,
+				C720E6F218B211D5009A5AB1 /* libc++.dylib in Frameworks */,
+				C720E6F118B211C9009A5AB1 /* AVFoundation.framework in Frameworks */,
+				C720E6F018B211C4009A5AB1 /* AudioToolbox.framework in Frameworks */,
+				C720E6EF18B211B2009A5AB1 /* SystemConfiguration.framework in Frameworks */,
+				C720E6EE18B211AB009A5AB1 /* MediaPlayer.framework in Frameworks */,
+				C720E6ED18B21194009A5AB1 /* libIRKit.a in Frameworks */,
+				C7E4EBA418B20EB5008711EF /* XCTest.framework in Frameworks */,
+				C7E4EBA618B20EB5008711EF /* UIKit.framework in Frameworks */,
+				C7E4EBA518B20EB5008711EF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C71D909A17977D2200CEC73F /* IRKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				C71D90A81797862300CEC73F /* IRHelperTests.h */,
-				C71D90A91797862300CEC73F /* IRHelperTests.m */,
-				C71D90A517977D6A00CEC73F /* IRKitTests.h */,
-				C71D90A417977D6A00CEC73F /* IRKitTests.m */,
-				C71D909B17977D2200CEC73F /* Supporting Files */,
-			);
-			path = IRKitTests;
-			sourceTree = "<group>";
-		};
-		C71D909B17977D2200CEC73F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C71D909C17977D2200CEC73F /* IRKitTests-Info.plist */,
-				C71D909D17977D2200CEC73F /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		C727D2291754FBC20006810C /* cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,8 +562,8 @@
 			children = (
 				C752D70317462C7B008B644A /* IRKit */,
 				C79DE3BB176F25260088679E /* IRKitResources */,
-				C71D909A17977D2200CEC73F /* IRKitTests */,
 				C735041117A029C30057D51B /* IRKitViewSamples */,
+				C7E4EBA718B20EB5008711EF /* IRKitTests */,
 				C752D70017462C7B008B644A /* Frameworks */,
 				C752D6FF17462C7B008B644A /* Products */,
 				6A92507FB75A49B8B9640873 /* Pods.xcconfig */,
@@ -580,8 +576,8 @@
 			children = (
 				C752D6FE17462C7B008B644A /* libIRKit.a */,
 				C79DE3B9176F25260088679E /* IRKit.bundle */,
-				C71D909817977D2200CEC73F /* IRKitTests.octest */,
 				C735040D17A029C30057D51B /* IRKitViewSamples.app */,
+				C7E4EBA318B20EB4008711EF /* IRKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -589,6 +585,9 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C720E6F718B21265009A5AB1 /* CoreTelephony.framework */,
+				C720E6F518B21244009A5AB1 /* libPods.a */,
+				C7E4EB9D18B20E44008711EF /* XCTest.framework */,
 				C75CF06518506D7E0086ED4F /* MediaPlayer.framework */,
 				C75CF061185061180086ED4F /* SystemConfiguration.framework */,
 				C7756777184B23A100C6D4DB /* libPods.a */,
@@ -761,6 +760,26 @@
 			name = views;
 			sourceTree = "<group>";
 		};
+		C7E4EBA718B20EB5008711EF /* IRKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7E4EBAD18B20EB5008711EF /* IRKitTests.m */,
+				C7E4EBA818B20EB5008711EF /* Supporting Files */,
+				C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */,
+			);
+			path = IRKitTests;
+			sourceTree = "<group>";
+		};
+		C7E4EBA818B20EB5008711EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C7E4EBA918B20EB5008711EF /* IRKitTests-Info.plist */,
+				C7E4EBAA18B20EB5008711EF /* InfoPlist.strings */,
+				C7E4EBAF18B20EB5008711EF /* IRKitTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -807,24 +826,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		C71D909717977D2200CEC73F /* IRKitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C71D90A117977D2200CEC73F /* Build configuration list for PBXNativeTarget "IRKitTests" */;
-			buildPhases = (
-				C71D909417977D2200CEC73F /* Sources */,
-				C71D909517977D2200CEC73F /* Frameworks */,
-				C71D909617977D2200CEC73F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C71D90AC17978B0800CEC73F /* PBXTargetDependency */,
-			);
-			name = IRKitTests;
-			productName = IRKitTests;
-			productReference = C71D909817977D2200CEC73F /* IRKitTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 		C735040C17A029C30057D51B /* IRKitViewSamples */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C735042917A029C40057D51B /* Build configuration list for PBXNativeTarget "IRKitViewSamples" */;
@@ -881,6 +882,24 @@
 			productReference = C79DE3B9176F25260088679E /* IRKit.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		C7E4EBA218B20EB4008711EF /* IRKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7E4EBB218B20EB5008711EF /* Build configuration list for PBXNativeTarget "IRKitTests" */;
+			buildPhases = (
+				C7E4EB9F18B20EB4008711EF /* Sources */,
+				C7E4EBA018B20EB4008711EF /* Frameworks */,
+				C7E4EBA118B20EB4008711EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7E4EBB118B20EB5008711EF /* PBXTargetDependency */,
+			);
+			name = IRKitTests;
+			productName = IRKitTests;
+			productReference = C7E4EBA318B20EB4008711EF /* IRKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -890,6 +909,11 @@
 				CLASSPREFIX = IR;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "";
+				TargetAttributes = {
+					C7E4EBA218B20EB4008711EF = {
+						TestTargetID = C752D6FD17462C7B008B644A;
+					};
+				};
 			};
 			buildConfigurationList = C752D6F917462C7B008B644A /* Build configuration list for PBXProject "IRKit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -907,22 +931,14 @@
 			targets = (
 				C752D6FD17462C7B008B644A /* IRKit */,
 				C79DE3B8176F25260088679E /* IRKitResources */,
-				C71D909717977D2200CEC73F /* IRKitTests */,
 				C735040C17A029C30057D51B /* IRKitViewSamples */,
 				C71B3F2C1875C2BE001CE2DA /* Framework */,
+				C7E4EBA218B20EB4008711EF /* IRKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C71D909617977D2200CEC73F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C71D909F17977D2200CEC73F /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C735040B17A029C30057D51B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -990,6 +1006,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7E4EBA118B20EB4008711EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7E4EBAC18B20EB5008711EF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1035,15 +1059,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C71D909417977D2200CEC73F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C71D90A617977D6A00CEC73F /* IRKitTests.m in Sources */,
-				C71D90AA1797862300CEC73F /* IRHelperTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C735040917A029C30057D51B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1101,6 +1116,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C7E4EB9F18B20EB4008711EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C720E6EC18B2108A009A5AB1 /* IRSignalTests.m in Sources */,
+				C7E4EBAE18B20EB5008711EF /* IRKitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1114,11 +1138,6 @@
 			target = C79DE3B8176F25260088679E /* IRKitResources */;
 			targetProxy = C71B3F331875C451001CE2DA /* PBXContainerItemProxy */;
 		};
-		C71D90AC17978B0800CEC73F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C752D6FD17462C7B008B644A /* IRKit */;
-			targetProxy = C71D90AB17978B0800CEC73F /* PBXContainerItemProxy */;
-		};
 		C735043917A038FB0057D51B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C79DE3B8176F25260088679E /* IRKitResources */;
@@ -1129,18 +1148,14 @@
 			target = C79DE3B8176F25260088679E /* IRKitResources */;
 			targetProxy = C79DE3C8176F271A0088679E /* PBXContainerItemProxy */;
 		};
+		C7E4EBB118B20EB5008711EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C752D6FD17462C7B008B644A /* IRKit */;
+			targetProxy = C7E4EBB018B20EB5008711EF /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C71D909D17977D2200CEC73F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C71D909E17977D2200CEC73F /* en */,
-				C7E4E342185210C900EC864E /* ja */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		C721651B18521C80000BD43D /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1240,6 +1255,14 @@
 			name = IRWifiEditViewController.xib;
 			sourceTree = "<group>";
 		};
+		C7E4EBAA18B20EB5008711EF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7E4EBAB18B20EB5008711EF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1254,38 +1277,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		C71D90A217977D2200CEC73F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "IRKit/IRKit-Prefix.pch";
-				INFOPLIST_FILE = "IRKitTests/IRKitTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		C71D90A317977D2200CEC73F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "IRKitTests/IRKitTests-Prefix.pch";
-				INFOPLIST_FILE = "IRKitTests/IRKitTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -1464,6 +1455,59 @@
 			};
 			name = Release;
 		};
+		C7E4EBB318B20EB5008711EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IRKitTests/IRKitTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = "IRKitTests/IRKitTests-Info.plist";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C7E4EBB418B20EB5008711EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IRKitTests/IRKitTests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				INFOPLIST_FILE = "IRKitTests/IRKitTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1472,15 +1516,6 @@
 			buildConfigurations = (
 				C71B3F2E1875C2BE001CE2DA /* Debug */,
 				C71B3F2F1875C2BE001CE2DA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C71D90A117977D2200CEC73F /* Build configuration list for PBXNativeTarget "IRKitTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C71D90A217977D2200CEC73F /* Debug */,
-				C71D90A317977D2200CEC73F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1517,6 +1552,15 @@
 			buildConfigurations = (
 				C79DE3C3176F25260088679E /* Debug */,
 				C79DE3C4176F25260088679E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7E4EBB218B20EB5008711EF /* Build configuration list for PBXNativeTarget "IRKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7E4EBB318B20EB5008711EF /* Debug */,
+				C7E4EBB418B20EB5008711EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

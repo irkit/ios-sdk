@@ -29,15 +29,23 @@
 
 - (NSDictionary*)asDictionary {
     LOG_CURRENT_METHOD;
-    return @{
+    NSMutableDictionary *ret = [self asPublicDictionary].mutableCopy;
+    [ret addEntriesFromDictionary: @{
              @"name":         _name                    ? _name : [NSNull null],
-             @"data":         _data                    ? _data : [NSNull null],
-             @"format":       _format                  ? _format : [NSNull null],
-             @"frequency":    _frequency               ? _frequency : [NSNull null],
-             @"receivedDate": _receivedDate            ? [NSNumber numberWithDouble:_receivedDate.timeIntervalSince1970] : [NSNull null],
+             @"receivedDate": _receivedDate            ? _receivedDate : [NSNull null],
              @"hostname":     _hostname                ? _hostname : [NSNull null],
              @"deviceid":     self.peripheral.deviceid ? self.peripheral.deviceid : [NSNull null],
              @"custom":       _custom                  ? _custom : [NSNull null],
+             }];
+    return ret;
+}
+
+- (NSDictionary*)asPublicDictionary {
+    LOG_CURRENT_METHOD;
+    return @{
+             @"data":         _data                    ? _data : [NSNull null],
+             @"format":       _format                  ? _format : [NSNull null],
+             @"freq":         _frequency               ? _frequency : [NSNull null],
              };
 }
 
@@ -79,6 +87,9 @@
     if (dictionary[@"name"]) {
         _name = dictionary[@"name"];
     }
+    else {
+        _name = @"unknown";
+    }
     if (dictionary[@"data"]) {
         _data = dictionary[@"data"];
     }
@@ -98,6 +109,9 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[dictionary[@"receivedDate"] doubleValue]];
     if (date) {
         _receivedDate = date;
+    }
+    else {
+        _receivedDate = [NSDate date];
     }
 
     if (dictionary[@"hostname"]) {
@@ -130,13 +144,6 @@
         _receivedDate = [coder decodeObjectForKey:@"r"];
         _custom       = [coder decodeObjectForKey:@"c"];
         _hostname     = [coder decodeObjectForKey:@"h"];
-
-        if ( ! _name ) {
-            _name = @"unknown";
-        }
-        if ( ! _receivedDate ) {
-            _receivedDate = [NSDate date];
-        }
     }
     return self;
 }

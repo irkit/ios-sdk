@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.vendored_frameworks = 'IRKit/IRKit.framework'
 
   s.resources    = 'IRKit/IRKit.bundle'
-  s.frameworks   = 'Foundation', 'QuartzCore', 'CoreGraphics', 'UIKit', 'MediaPlayer', 'SystemConfiguration', 'AudioToolbox', 'AVFoundation'
+  s.frameworks   = 'Foundation', 'QuartzCore', 'CoreGraphics', 'CoreTelephony', 'UIKit', 'MediaPlayer', 'SystemConfiguration', 'AudioToolbox', 'AVFoundation'
   s.library      = 'c++'
   s.requires_arc = true
   s.dependency 'ISHTTPOperation', '~> 1.1.0'

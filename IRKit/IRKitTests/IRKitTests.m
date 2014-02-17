@@ -1,27 +1,34 @@
-//  Unit-Test Result Macro Reference
-//  see http://developer.apple.com/library/ios/#documentation/DeveloperTools/Conceptual/UnitTesting/AB-Unit-Test_Result_Macro_Reference/result_macro_reference.html#//apple_ref/doc/uid/TP40002143-CH9-SW1
+//
+//  IRKitTests.m
+//  IRKitTests
+//
+//  Created by Masakazu Ohtsuka on 2014/02/17.
+//
+//
 
-#import "IRKitTests.h"
+#import <XCTest/XCTest.h>
+
+@interface IRKitTests : XCTestCase
+
+@end
 
 @implementation IRKitTests
 
 - (void)setUp
 {
     [super setUp];
-
-    // Set-up code here.
+    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
-
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 - (void)testExample
 {
-    // STFail(@"Unit tests are not implemented yet in IRKitTests");
+    // XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
 @end
