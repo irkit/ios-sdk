@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "IRSignal.h"
 
 @interface IRSignalTests : XCTestCase
 
@@ -26,9 +27,18 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testRound
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    NSDictionary *signalInfo = @{
+                                 @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
+                                 @"format": @"raw",
+                                 @"frequency": @38,
+                                 };
+    IRSignal *signal = [[IRSignal alloc] initWithDictionary:signalInfo];
+    XCTAssertNotNil(signal);
+
+    NSDictionary *signalInfo2 = signal.asPublicDictionary;
+    XCTAssertEqualObjects(signalInfo, signalInfo2);
 }
 
 @end

@@ -37,6 +37,17 @@
 		C707ECD6184C84CE00AC5F0B /* img_prepare3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */; };
 		C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C752D70617462C7B008B644A /* IRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
+		C720E6EC18B2108A009A5AB1 /* IRSignalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */; };
+		C720E6ED18B21194009A5AB1 /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
+		C720E6EE18B211AB009A5AB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CF06518506D7E0086ED4F /* MediaPlayer.framework */; };
+		C720E6EF18B211B2009A5AB1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CF061185061180086ED4F /* SystemConfiguration.framework */; };
+		C720E6F018B211C4009A5AB1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7AB0524180ADD40007288EB /* AudioToolbox.framework */; };
+		C720E6F118B211C9009A5AB1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D0560F18041E3F00660217 /* AVFoundation.framework */; };
+		C720E6F218B211D5009A5AB1 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B741B81803FA22005802A7 /* libc++.dylib */; };
+		C720E6F318B211DA009A5AB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75CFC8717A6671200870A1B /* QuartzCore.framework */; };
+		C720E6F418B211E4009A5AB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
+		C720E6F618B21244009A5AB1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F518B21244009A5AB1 /* libPods.a */; };
+		C720E6F818B21265009A5AB1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F718B21265009A5AB1 /* CoreTelephony.framework */; };
 		C721651D18521C80000BD43D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C721651B18521C80000BD43D /* Localizable.strings */; };
 		C735040E17A029C30057D51B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
 		C735040F17A029C30057D51B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
@@ -280,6 +291,9 @@
 		C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_camera@2x.png"; sourceTree = "<group>"; };
 		C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_prepare3@2x.png"; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalTests.m; sourceTree = "<group>"; };
+		C720E6F518B21244009A5AB1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		C720E6F718B21265009A5AB1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C721651C18521C80000BD43D /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C735040D17A029C30057D51B /* IRKitViewSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRKitViewSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C735041317A029C30057D51B /* IRKitViewSamples-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IRKitViewSamples-Info.plist"; sourceTree = "<group>"; };
@@ -465,6 +479,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C720E6F818B21265009A5AB1 /* CoreTelephony.framework in Frameworks */,
+				C720E6F618B21244009A5AB1 /* libPods.a in Frameworks */,
+				C720E6F418B211E4009A5AB1 /* CoreGraphics.framework in Frameworks */,
+				C720E6F318B211DA009A5AB1 /* QuartzCore.framework in Frameworks */,
+				C720E6F218B211D5009A5AB1 /* libc++.dylib in Frameworks */,
+				C720E6F118B211C9009A5AB1 /* AVFoundation.framework in Frameworks */,
+				C720E6F018B211C4009A5AB1 /* AudioToolbox.framework in Frameworks */,
+				C720E6EF18B211B2009A5AB1 /* SystemConfiguration.framework in Frameworks */,
+				C720E6EE18B211AB009A5AB1 /* MediaPlayer.framework in Frameworks */,
+				C720E6ED18B21194009A5AB1 /* libIRKit.a in Frameworks */,
 				C7E4EBA418B20EB5008711EF /* XCTest.framework in Frameworks */,
 				C7E4EBA618B20EB5008711EF /* UIKit.framework in Frameworks */,
 				C7E4EBA518B20EB5008711EF /* Foundation.framework in Frameworks */,
@@ -561,6 +585,8 @@
 		C752D70017462C7B008B644A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C720E6F718B21265009A5AB1 /* CoreTelephony.framework */,
+				C720E6F518B21244009A5AB1 /* libPods.a */,
 				C7E4EB9D18B20E44008711EF /* XCTest.framework */,
 				C75CF06518506D7E0086ED4F /* MediaPlayer.framework */,
 				C75CF061185061180086ED4F /* SystemConfiguration.framework */,
@@ -739,6 +765,7 @@
 			children = (
 				C7E4EBAD18B20EB5008711EF /* IRKitTests.m */,
 				C7E4EBA818B20EB5008711EF /* Supporting Files */,
+				C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */,
 			);
 			path = IRKitTests;
 			sourceTree = "<group>";
@@ -1093,6 +1120,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C720E6EC18B2108A009A5AB1 /* IRSignalTests.m in Sources */,
 				C7E4EBAE18B20EB5008711EF /* IRKitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1535,6 +1563,7 @@
 				C7E4EBB418B20EB5008711EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
