@@ -94,7 +94,7 @@
         [_self.delegate wifiAdhocViewController:_self
                               didFinishWithInfo:@{
              IRViewControllerResultType: IRViewControllerResultTypeDone,
-             IRViewControllerResultPeripheral:p
+             IRViewControllerResultPeripheral: p
          }];
     }];
 }

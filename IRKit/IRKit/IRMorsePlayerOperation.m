@@ -113,7 +113,7 @@ static NSDictionary *asciiToMorse;
 }
 
 + (IRMorsePlayerOperation *)playMorseFromString:(NSString *)input
-    withWordSpeed:(NSNumber *)wpm {
+                                  withWordSpeed:(NSNumber *)wpm {
     LOG_CURRENT_METHOD;
 
     if (!input) {
@@ -375,10 +375,10 @@ audioUnitCallback(void *inRefCon,
 }
 
 - (OSStatus)audioUnitCallback:(AudioUnitRenderActionFlags *)ioActionFlags
-    timestamp:(const AudioTimeStamp *)inTimeStamp
-    busNumber:(UInt32                      )inBusNumber
-    numberFrames:(UInt32                      )inNumberFrames
-    data:(AudioBufferList *)ioData {
+                    timestamp:(const AudioTimeStamp *)inTimeStamp
+                    busNumber:(UInt32                      )inBusNumber
+                 numberFrames:(UInt32                      )inNumberFrames
+                         data:(AudioBufferList *)ioData {
     static bool lastSampleSilence = YES;
     static int shouldFinishCounter = POST_SILENCE_TIME;
     bool hasSamples = NO;

@@ -324,7 +324,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (IRHTTPClient *)waitForDoorWithDeviceID:(NSString *)deviceid
-    completion:(void (^)(NSHTTPURLResponse *, id, NSError *))completion {
+                               completion:(void (^)(NSHTTPURLResponse *, id, NSError *))completion {
     LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makePOSTRequestToInternetPath:@"/1/door"
                                                  withParams:@{ @"deviceid": deviceid }
@@ -453,7 +453,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 #pragma mark - Private
 
 + (void)issueLocalRequest:(NSURLRequest *)request
-    completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
+               completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
     LOG(@"request: %@", request);
 
     [IRHTTPJSONOperation sendRequest:request
@@ -472,7 +472,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (void)issueInternetRequest:(NSURLRequest *)request
-    completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
+                  completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
     LOG(@"request: %@", request);
 
     [IRHTTPJSONOperation sendRequest:request
@@ -494,8 +494,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (NSURLRequest *)makePOSTRequestToInternetPath:(NSString *)path
-    withParams:(NSDictionary *)params
-    timeoutInterval:(NSTimeInterval)timeout {
+                                     withParams:(NSDictionary *)params
+                                timeoutInterval:(NSTimeInterval)timeout {
     NSURL *url = [NSURL URLWithString:path relativeToURL:[self base]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
 
@@ -517,8 +517,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (NSURLRequest *)makeGETRequestToInternetPath:(NSString *)path
-    withParams:(NSDictionary *)params
-    timeoutInterval:(NSTimeInterval)timeout {
+                                    withParams:(NSDictionary *)params
+                               timeoutInterval:(NSTimeInterval)timeout {
     NSMutableDictionary *realParams = [params mutableCopy];
     NSString *clientkey = [self clientkey];
 
@@ -543,8 +543,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (NSURLRequest *)makeGETRequestToLocalPath:(NSString *)path
-    withParams:(NSDictionary *)params
-    hostname:(NSString *)hostname {
+                                 withParams:(NSDictionary *)params
+                                   hostname:(NSString *)hostname {
     NSString *query = [self stringOfURLEncodedDictionary:params];
     NSString *urlString;
 
@@ -564,7 +564,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (NSURLRequest *)makeGETRequestToIP:(NSString *)ip
-    path:(NSString *)path {
+                                path:(NSString *)path {
     NSString *urlString = [NSString stringWithFormat:@"http://%@%@", ip, path];
     NSURL *url          = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -577,8 +577,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (NSURLRequest *)makePOSTRequestToIP:(NSString *)ip
-    path:(NSString *)path
-    body:(NSString *)body {
+                                 path:(NSString *)path
+                                 body:(NSString *)body {
     NSString *urlString = [NSString stringWithFormat:@"http://%@%@", ip, path];
     NSURL *url          = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -596,8 +596,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (NSURLRequest *)makePOSTJSONRequestToLocalPath:(NSString *)path
-    withParams:(NSDictionary *)params
-    hostname:(NSString *)hostname {
+                                      withParams:(NSDictionary *)params
+                                        hostname:(NSString *)hostname {
     NSURL *base = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@.local", hostname]];
     NSURL *url  = [NSURL URLWithString:path relativeToURL:base];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -615,8 +615,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 + (NSURLRequest *)makePOSTRequestToLocalPath:(NSString *)path
-    withParams:(NSDictionary *)params
-    hostname:(NSString *)hostname {
+                                  withParams:(NSDictionary *)params
+                                    hostname:(NSString *)hostname {
     NSURL *base = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@.local", hostname]];
     NSURL *url  = [NSURL URLWithString:path relativeToURL:base];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

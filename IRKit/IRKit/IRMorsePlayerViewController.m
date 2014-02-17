@@ -198,7 +198,7 @@
         [_self.delegate morsePlayerViewController:_self
                                 didFinishWithInfo:@{
              IRViewControllerResultType: IRViewControllerResultTypeDone,
-             IRViewControllerResultPeripheral:p
+             IRViewControllerResultPeripheral: p
          }];
     }];
 }
@@ -206,9 +206,9 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
-    ofObject:(id)object
-    change:(NSDictionary *)change
-    context:(void *)context {
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
     LOG(@"keyPath: %@", keyPath);
 
     if ([keyPath isEqualToString:@"operationCount"]) {

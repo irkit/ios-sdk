@@ -66,7 +66,7 @@
 #pragma mark - IRPeripheralNameEditViewControllerDelegate
 
 - (void)nameEditViewController:(IRPeripheralNameEditViewController *)viewController
-    didFinishWithInfo:(NSDictionary*)info {
+             didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -82,7 +82,7 @@
 #pragma mark - IRWifiEditViewControllerDelegate
 
 - (void)wifiEditViewController:(IRWifiEditViewController *)viewController
-    didFinishWithInfo:(NSDictionary*)info {
+             didFinishWithInfo:(NSDictionary*)info {
     LOG(@"info: %@", info);
     IRKeys *key = info[IRViewControllerResultKeys];
     [key setKeys:@{ @"clientkey": @"A", @"devicekey": @"B" }]; // we're testing morse
