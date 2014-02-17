@@ -191,7 +191,7 @@
 			attributes = {
 				CLASSPREFIX = MM;
 				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = "KAYAC Inc.";
+				ORGANIZATIONNAME = maaash.jp;
 			};
 			buildConfigurationList = C758144017B0AB9200927E12 /* Build configuration list for PBXProject "Minimal" */;
 			compatibilityVersion = "Xcode 3.2";
