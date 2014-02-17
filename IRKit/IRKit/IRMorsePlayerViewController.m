@@ -198,7 +198,7 @@
         [_self.delegate morsePlayerViewController:_self
                                 didFinishWithInfo:@{
              IRViewControllerResultType: IRViewControllerResultTypeDone,
-             IRViewControllerResultPeripheral:p
+             IRViewControllerResultPeripheral: p
          }];
     }];
 }
