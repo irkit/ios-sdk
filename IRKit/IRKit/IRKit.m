@@ -14,9 +14,10 @@
 
 @implementation IRKit
 
-+ (instancetype) sharedInstance {
-    static IRKit* instance;
++ (instancetype)sharedInstance {
+    static IRKit *instance;
     static dispatch_once_t pred;
+
     dispatch_once(&pred, ^{
         instance = [[IRKit alloc] init];
     });
@@ -25,7 +26,9 @@
 
 - (instancetype)init {
     self = [super init];
-    if (! self) { return nil; }
+    if (!self) {
+        return nil;
+    }
 
     _peripherals = [[IRPeripherals alloc] init];
 
@@ -34,31 +37,31 @@
                                                                            object:nil
                                                                             queue:[NSOperationQueue mainQueue]
                                                                        usingBlock:^(NSNotification *note) {
-                                                                           LOG( @"terminating" );
-                                                                           [_self save];
-                                                                       }];
+        LOG(@"terminating");
+        [_self save];
+    }];
     static bool first = YES;
     _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
                                                                               object:nil
                                                                                queue:[NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
-                                                                              LOG( @"became active" );
-                                                                              if (first) {
-                                                                                  // ensureRegistered.. should be called first time in startWithAPIKey:
-                                                                                  first = NO;
-                                                                              }
-                                                                              else {
-                                                                                  [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
-                                                                                      LOG( @"error: %@", error );
-                                                                                  }];
-                                                                              }
-                                                                          }];
+        LOG(@"became active");
+        if (first) {
+            // ensureRegistered.. should be called first time in startWithAPIKey:
+            first = NO;
+        }
+        else {
+            [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
+                    LOG(@"error: %@", error);
+                }];
+        }
+    }];
     _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
                                                                                  object:nil
                                                                                   queue:[NSOperationQueue mainQueue]
                                                                              usingBlock:^(NSNotification *note) {
-                                                                                 LOG( @"entered background" );
-                                                                             }];
+        LOG(@"entered background");
+    }];
     [IRViewCustomizer sharedInstance]; // init
 
     return self;
@@ -71,24 +74,24 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];
 }
 
-+ (void) startWithAPIKey: (NSString*)apikey {
++ (void)startWithAPIKey:(NSString *)apikey {
     LOG_CURRENT_METHOD;
     [IRKit sharedInstance].apikey = apikey;
 
     [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
-        LOG( @"error: ", error );
-        if (! error) {
-            IRKitLog( @"successfully registered!" );
+        LOG(@"error: ", error);
+        if (!error) {
+            IRKitLog(@"successfully registered!");
         }
     }];
 }
 
-- (void) save {
+- (void)save {
     LOG_CURRENT_METHOD;
     [_peripherals save];
 }
 
-- (NSUInteger) countOfReadyPeripherals {
+- (NSUInteger)countOfReadyPeripherals {
     LOG_CURRENT_METHOD;
     return _peripherals.countOfReadyPeripherals;
 }

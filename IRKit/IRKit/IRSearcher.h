@@ -10,18 +10,18 @@
 
 @protocol IRSearcherDelegate;
 
-@interface IRSearcher : NSObject<NSNetServiceBrowserDelegate,NSNetServiceDelegate>
+@interface IRSearcher : NSObject<NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
 @property (nonatomic, weak) id<IRSearcherDelegate> delegate;
 
-+ (instancetype) sharedInstance;
-- (void) startSearching;
-- (void) stop;
++ (instancetype)sharedInstance;
+- (void)startSearching;
+- (void)stop;
 
 @end
 
 @protocol IRSearcherDelegate <NSObject>
 
-- (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService*)service;
+- (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService *)service;
 
 @end

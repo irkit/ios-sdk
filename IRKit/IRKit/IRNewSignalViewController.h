@@ -5,7 +5,7 @@
 // pre definition for delegate
 @protocol IRNewSignalViewControllerDelegate;
 
-@interface IRNewSignalViewController : UIViewController<IRNewSignalScene1ViewControllerDelegate,IRSignalNameEditViewControllerDelegate>
+@interface IRNewSignalViewController : UIViewController<IRNewSignalScene1ViewControllerDelegate, IRSignalNameEditViewControllerDelegate>
 
 @property (nonatomic) UINavigationController *navController;
 @property (nonatomic, weak) id<IRNewSignalViewControllerDelegate> delegate;
@@ -17,6 +17,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)newSignalViewController:(IRNewSignalViewController *)viewController didFinishWithSignal:(IRSignal*)signal;
+- (void)newSignalViewController:(IRNewSignalViewController *)viewController didFinishWithSignal:(IRSignal *)signal;
 
 @end

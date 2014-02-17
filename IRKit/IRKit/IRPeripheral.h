@@ -5,26 +5,26 @@
 
 @property (nonatomic, copy) NSString *hostname;
 @property (nonatomic, copy) NSString *customizedName;
-@property (nonatomic, copy) NSDate   *foundDate;
+@property (nonatomic, copy) NSDate *foundDate;
 @property (nonatomic, copy) NSString *deviceid;
 
 @property (nonatomic, copy) NSString *modelName;
 @property (nonatomic, copy) NSString *version;
 
-- (BOOL) hasDeviceID;
+- (BOOL)hasDeviceID;
 - (void)setHostname:(NSString *)hostname;
-- (NSString*) local_hostname;
+- (NSString *)local_hostname;
 
 // this takes time on 1st call, so you might want to prefetch on viewDidLoad or something
-- (BOOL) isReachableViaWifi;
+- (BOOL)isReachableViaWifi;
 
-- (void) getKeyWithCompletion:(void (^)())successfulCompletion;
-- (void) getModelNameAndVersionWithCompletion:(void (^)())successfulCompletion;
-- (NSComparisonResult) compareByFirstFoundDate: (IRPeripheral*) otherPeripheral;
+- (void)getKeyWithCompletion:(void(^) ())successfulCompletion;
+- (void)getModelNameAndVersionWithCompletion:(void(^) ())successfulCompletion;
+- (NSComparisonResult)compareByFirstFoundDate:(IRPeripheral *)otherPeripheral;
 
-- (NSString*) iconURL;
-- (NSString*) modelNameAndRevision;
+- (NSString *)iconURL;
+- (NSString *)modelNameAndRevision;
 
-- (NSDictionary*) asDictionary;
+- (NSDictionary *)asDictionary;
 
 @end

@@ -8,7 +8,7 @@
 
 @interface IRSignals ()
 
-@property (nonatomic) NSMutableArray* signals;
+@property (nonatomic) NSMutableArray *signals;
 
 @end
 
@@ -16,50 +16,53 @@
 
 - (id)init {
     self = [super init];
-    if (! self) { return nil; }
+    if (!self) {
+        return nil;
+    }
     _signals = [NSMutableArray arrayWithCapacity:0];
-    
+
     return self;
 }
 
-- (NSData*)data {
+- (NSData *)data {
     return [NSKeyedArchiver archivedDataWithRootObject:_signals];
 }
 
-- (void)loadFromData: (NSData*)data {
-    NSMutableArray *array = data ? ((NSArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data]).mutableCopy
-                                 : nil;
-    if ( array ) {
+- (void)loadFromData:(NSData *)data {
+    NSMutableArray *array = data ? ((NSArray *)[NSKeyedUnarchiver unarchiveObjectWithData:data]).mutableCopy
+                            : nil;
+
+    if (array) {
         _signals = array;
     }
     else {
         _signals = [[NSMutableArray alloc] init];
     }
-    LOG( @"loaded signals: %@", _signals );
+    LOG(@"loaded signals: %@", _signals);
 }
 
-- (void)loadFromStandardUserDefaultsKey:(NSString*)key {
-    LOG( @"key: %@", key );
+- (void)loadFromStandardUserDefaultsKey:(NSString *)key {
+    LOG(@"key: %@", key);
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-    NSData *data = [d objectForKey: key];
+    NSData *data = [d objectForKey:key];
     [self loadFromData:data];
 }
 
-- (void)saveToStandardUserDefaultsWithKey:(NSString*)key {
-    LOG( @"key: %@", key );
+- (void)saveToStandardUserDefaultsWithKey:(NSString *)key {
+    LOG(@"key: %@", key);
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
     [d setObject:self.data
           forKey:key];
     [d synchronize];
 }
 
-- (NSString*)JSONRepresentation {
+- (NSString *)JSONRepresentation {
     LOG_CURRENT_METHOD;
 
     NSArray *signals = [IRHelper mapObjects:self.signals
-                                 usingBlock:(id)^(id obj, NSUInteger idx) {
-                                     return ((IRSignal*)obj).asDictionary;
-                                 }];
+                                 usingBlock:(id) ^ (id obj, NSUInteger idx) {
+                            return ((IRSignal *)obj).asDictionary;
+                        }];
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:signals
                                                        options:0
@@ -78,18 +81,18 @@
     for (IRSignal *signal in self.signals) {
         IRSignalSendOperation *op = [[IRSignalSendOperation alloc] initWithSignal:signal
                                                                        completion:^(NSError *error) {
-                                                                           LOG(@"error: %@", error);
-                                                                       }];
+            LOG(@"error: %@", error);
+        }];
         [q addOperation:op];
     }
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
-    LOG( @"index: %d", index);
+    LOG(@"index: %d", index);
     return _signals[ index ];
 }
 
-- (NSUInteger) indexOfSignal: (IRSignal*) signal {
+- (NSUInteger)indexOfSignal:(IRSignal *)signal {
     LOG_CURRENT_METHOD;
 
     return [_signals indexOfObject:signal];
@@ -97,20 +100,19 @@
 
 #pragma mark - Key Value Coding - Mutable Indexed Accessors
 
-- (NSArray*) signals {
+- (NSArray *)signals {
     return _signals;
 }
 
-- (NSUInteger) countOfSignals {
+- (NSUInteger)countOfSignals {
     return [_signals count];
 }
 
-- (IRSignal*)objectInSignalsAtIndex:(NSUInteger)index {
+- (IRSignal *)objectInSignalsAtIndex:(NSUInteger)index {
     return _signals[ index ];
 }
 
 - (void)addSignalsObject:(IRSignal *)object {
-
     [_signals addObject:object];
 }
 

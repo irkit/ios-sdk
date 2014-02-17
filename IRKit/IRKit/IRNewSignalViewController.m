@@ -34,20 +34,19 @@
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 }
 
 #pragma mark - UI events
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -56,7 +55,7 @@
 #pragma mark - IRNewSignalScene1ViewControllerDelegate
 
 - (void)scene1ViewController:(IRNewSignalScene1ViewController *)viewController
-           didFinishWithInfo:(NSDictionary*)info {
+    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
@@ -69,7 +68,7 @@
 #pragma mark - IRSignalNameEditViewControllerDelegate
 
 - (void)signalNameEditViewController:(IRSignalNameEditViewController *)viewController
-                   didFinishWithInfo:(NSDictionary*)info {
+    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
     if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
@@ -80,7 +79,7 @@
     }
     else if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
         [self.delegate newSignalViewController:self
-                            didFinishWithSignal:nil];
+                           didFinishWithSignal:nil];
     }
 }
 

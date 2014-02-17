@@ -12,7 +12,7 @@
 
 @implementation IRNewPeripheralScene1ViewController
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -25,7 +25,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = IRLocalizedString(@"Setup IRKit",@"title of IRNewPeripheralScene1");
+    self.title = IRLocalizedString(@"Setup IRKit", @"title of IRNewPeripheralScene1");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancelButtonPressed:)];
@@ -36,17 +36,17 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear:animated];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 }
@@ -63,15 +63,16 @@
     LOG_CURRENT_METHOD;
     [self.delegate scene1ViewController:self
                       didFinishWithInfo:@{
-           IRViewControllerResultType: IRViewControllerResultTypeCancelled
+         IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }
+
 - (void)doneButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
     [self.delegate scene1ViewController:self
                       didFinishWithInfo:@{
-            IRViewControllerResultType: IRViewControllerResultTypeDone
-    }];
+         IRViewControllerResultType: IRViewControllerResultTypeDone
+     }];
 }
 
 - (IBAction)buyButtonPressed:(id)sender {

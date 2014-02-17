@@ -9,10 +9,10 @@
 
 @implementation IRSignalSendOperationQueue
 
-- (id) init {
+- (id)init {
     LOG_CURRENT_METHOD;
     self = [super init];
-    if ( ! self ) {
+    if (!self) {
         return nil;
     }
 
@@ -21,15 +21,15 @@
 
     [self addObserver:self
            forKeyPath:@"operationCount"
-              options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
               context:nil];
 
     return self;
 }
 
-- (void) dealloc {
+- (void)dealloc {
     LOG_CURRENT_METHOD;
-    if (! _didRemoveObserver) {
+    if (!_didRemoveObserver) {
         [self removeObserver:self
                   forKeyPath:@"operationCount"];
     }
@@ -38,14 +38,14 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    LOG( @"keyPath: %@", keyPath );
+    ofObject:(id)object
+    change:(NSDictionary *)change
+    context:(void *)context {
+    LOG(@"keyPath: %@", keyPath);
 
     if ([keyPath isEqualToString:@"operationCount"]) {
         NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
-        if (newValue && ([(NSNumber*)newValue unsignedIntegerValue]==0)) {
+        if (newValue && ([(NSNumber *)newValue unsignedIntegerValue] == 0)) {
             _didRemoveObserver = YES;
             [self removeObserver:self
                       forKeyPath:@"operationCount"];

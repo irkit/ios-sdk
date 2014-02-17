@@ -10,7 +10,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
-@property (nonatomic) IRKeys* keys;
+@property (nonatomic) IRKeys *keys;
 
 @end
 
@@ -18,6 +18,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)wifiEditViewController:(IRWifiEditViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)wifiEditViewController:(IRWifiEditViewController *)viewController didFinishWithInfo:(NSDictionary *)info;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation IRWifiSecuritySelectViewController
 
-- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -30,45 +30,47 @@
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
-- (enum IRSecurityType) securityTypeForRow: (NSUInteger)row {
+- (enum IRSecurityType)securityTypeForRow:(NSUInteger)row {
     enum IRSecurityType ret;
+
     switch (row) {
-        case 0:
-            ret = IRSecurityTypeNone;
-            break;
-        case 1:
-            ret = IRSecurityTypeWEP;
-            break;
-        case 2:
-        default:
-            ret = IRSecurityTypeWPA2;
-            break;
+    case 0:
+        ret = IRSecurityTypeNone;
+        break;
+    case 1:
+        ret = IRSecurityTypeWEP;
+        break;
+    case 2:
+    default:
+        ret = IRSecurityTypeWPA2;
+        break;
     }
     return ret;
 }
 
-- (NSUInteger) rowForSecurityType: (enum IRSecurityType)type {
+- (NSUInteger)rowForSecurityType:(enum IRSecurityType)type {
     NSUInteger ret;
+
     switch (type) {
-        case IRSecurityTypeNone:
-            ret = 0;
-            break;
-        case IRSecurityTypeWEP:
-            ret = 1;
-            break;
-        case IRSecurityTypeWPA2:
-            ret = 2;
-            break;
+    case IRSecurityTypeNone:
+        ret = 0;
+        break;
+    case IRSecurityTypeWEP:
+        ret = 1;
+        break;
+    case IRSecurityTypeWPA2:
+        ret = 2;
+        break;
     }
     return ret;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear:animated];
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillDisappear:animated];
 
@@ -90,7 +92,7 @@
     LOG_CURRENT_METHOD;
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IRWifiSecuritySelectCell"];
-    if (! cell) {
+    if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:@"IRWifiSecuritySelectCell"];
     }
@@ -121,7 +123,7 @@
     LOG_CURRENT_METHOD;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    NSUInteger row = [self rowForSecurityType: _selectedSecurityType];
+    NSUInteger row = [self rowForSecurityType:_selectedSecurityType];
 
     _selectedSecurityType = [self securityTypeForRow:indexPath.row];
 

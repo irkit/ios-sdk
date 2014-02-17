@@ -5,8 +5,8 @@ typedef SInt16 Sample;
 
 @interface IRMorsePlayerOperation : NSOperation
 
-+ (IRMorsePlayerOperation*) playMorseFromString:(NSString*)input
-                                  withWordSpeed:(NSNumber*)wpm;
++ (IRMorsePlayerOperation *)playMorseFromString:(NSString *)input
+    withWordSpeed:(NSNumber *)wpm;
 
 @end
 
@@ -15,6 +15,6 @@ typedef SInt16 Sample;
 
 // Fills a buffer with "size" samples.
 // The buffer should be filled in with interleaved stereo samples.
-- (void) produceSamples:(Sample *)audioBuffer size:(size_t)size;
+- (void)produceSamples:(Sample *)audioBuffer size:(size_t)size;
 
 @end

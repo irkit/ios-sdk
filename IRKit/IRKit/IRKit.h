@@ -9,10 +9,10 @@
 
 @interface IRKit : NSObject
 
-+ (instancetype) sharedInstance;
-+ (void) startWithAPIKey: (NSString*)apikey;
++ (instancetype)sharedInstance;
++ (void)startWithAPIKey:(NSString *)apikey;
 
-- (void) save;
+- (void)save;
 
 @property (nonatomic, readonly) NSUInteger countOfReadyPeripherals;
 @property (nonatomic, readonly) IRPeripherals *peripherals;

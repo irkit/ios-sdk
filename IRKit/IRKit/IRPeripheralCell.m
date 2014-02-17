@@ -24,7 +24,7 @@
 }
 
 - (void)setPeripheral:(IRPeripheral *)peripheral {
-    LOG( @"peripheral: %@", peripheral);
+    LOG(@"peripheral: %@", peripheral);
 
     if (_peripheral) {
         // don't double addObserver, nor removeObserver before addObserver
@@ -32,7 +32,7 @@
                          forKeyPath:@"peripheral"];
     }
     _peripheral = peripheral;
-    
+
     self.nameLabel.text   = peripheral.customizedName;
     self.detailLabel.text = self.detailLabelText;
 
@@ -40,7 +40,7 @@
     NSString *url = _peripheral.iconURL;
     [IRHTTPClient loadImage:url
           completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
-        if (error || (response.statusCode != 200) || ! image) {
+        if (error || (response.statusCode != 200) || !image) {
             return;
         }
         self.iconView.image = image;
@@ -48,11 +48,11 @@
 
     [_peripheral addObserver:self
                   forKeyPath:@"peripheral"
-                     options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld
+                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
                      context:NULL];
 }
 
-- (NSString*)detailLabelText {
+- (NSString *)detailLabelText {
     return [NSString stringWithFormat:@"%@ %@", _peripheral.hostname, _peripheral.modelNameAndRevision];
 }
 
@@ -63,10 +63,10 @@
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    LOG( @"keyPath: %@", keyPath );
+    ofObject:(id)object
+    change:(NSDictionary *)change
+    context:(void *)context {
+    LOG(@"keyPath: %@", keyPath);
 
     dispatch_async(dispatch_get_main_queue(), ^{
         self.nameLabel.text = _peripheral.customizedName;

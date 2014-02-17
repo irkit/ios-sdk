@@ -14,6 +14,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)scene1ViewController:(IRNewSignalScene1ViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)scene1ViewController:(IRNewSignalScene1ViewController *)viewController didFinishWithInfo:(NSDictionary *)info;
 
 @end

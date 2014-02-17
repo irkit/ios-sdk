@@ -14,6 +14,7 @@
 - (id)processData:(NSData *)data {
     NSError *error = nil;
     id object = nil;
+
     // don't try to parse empty string
     if (data.length) {
         object = [NSJSONSerialization JSONObjectWithData:data

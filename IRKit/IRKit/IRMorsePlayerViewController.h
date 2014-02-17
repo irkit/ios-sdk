@@ -6,7 +6,7 @@
 
 @interface IRMorsePlayerViewController : UIViewController
 
-@property (nonatomic, weak) id<IRMorsePlayerViewControllerDelegate,IRWifiAdhocViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRMorsePlayerViewControllerDelegate, IRWifiAdhocViewControllerDelegate> delegate;
 @property (nonatomic) IRKeys *keys; // passed from IRNewPerpheralViewController
 @property (nonatomic) BOOL showMorseNotWorkingButton;
 
@@ -18,6 +18,6 @@
 - (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController *)viewController;
 
 // Your implementation of this method should dismiss view controller.
-- (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController didFinishWithInfo:(NSDictionary *)info;
 
 @end

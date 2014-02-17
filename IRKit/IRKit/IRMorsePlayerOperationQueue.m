@@ -6,10 +6,10 @@
 
 @implementation IRMorsePlayerOperationQueue
 
-- (instancetype) init {
+- (instancetype)init {
     LOG_CURRENT_METHOD;
     self = [super init];
-    if ( ! self ) {
+    if (!self) {
         return nil;
     }
 

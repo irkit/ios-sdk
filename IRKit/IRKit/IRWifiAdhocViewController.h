@@ -22,6 +22,6 @@
 @required
 
 // Your implementation of this method should dismiss view controller.
-- (void)wifiAdhocViewController:(IRWifiAdhocViewController *)viewController didFinishWithInfo:(NSDictionary*)info;
+- (void)wifiAdhocViewController:(IRWifiAdhocViewController *)viewController didFinishWithInfo:(NSDictionary *)info;
 
 @end

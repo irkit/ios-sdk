@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-extern uint8_t crc8 (uint8_t* data, uint16_t size);
+extern uint8_t crc8(uint8_t *data, uint16_t size);
 
 #ifdef __cplusplus
 }

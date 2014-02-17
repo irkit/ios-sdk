@@ -10,10 +10,10 @@
 
 @implementation IRHTTPOperationQueue
 
-+ (instancetype)localQueue
-{
++ (instancetype)localQueue {
     static IRHTTPOperationQueue *queue = nil;
     static dispatch_once_t onceToken;
+
     dispatch_once(&onceToken, ^{
         queue = [[IRHTTPOperationQueue alloc] init];
     });
