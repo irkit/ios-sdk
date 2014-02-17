@@ -32,7 +32,7 @@
     NSDictionary *signalInfo = @{
                                  @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
                                  @"format": @"raw",
-                                 @"frequency": @38,
+                                 @"freq": @38,
                                  };
     IRSignal *signal = [[IRSignal alloc] initWithDictionary:signalInfo];
     XCTAssertNotNil(signal);

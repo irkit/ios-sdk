@@ -45,7 +45,7 @@
     return @{
              @"data":         _data                    ? _data : [NSNull null],
              @"format":       _format                  ? _format : [NSNull null],
-             @"frequency":    _frequency               ? _frequency : [NSNull null],
+             @"freq":         _frequency               ? _frequency : [NSNull null],
              };
 }
 
