@@ -13,7 +13,7 @@
         return nil;
     }
 
-    [self setMaxConcurrentOperationCount:1];
+    [self setMaxConcurrentOperationCount: 1];
     return self;
 }
 

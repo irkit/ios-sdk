@@ -23,12 +23,12 @@
 @implementation IRWifiAdhocViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
         __weak IRWifiAdhocViewController *_self = self;
-        _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
-                                                                                  object:nil
-                                                                                   queue:[NSOperationQueue mainQueue]
+        _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidBecomeActiveNotification
+                                                                                  object: nil
+                                                                                   queue: [NSOperationQueue mainQueue]
                                                                               usingBlock:^(NSNotification *note) {
             LOG(@"became active");
             [_self processAdhocSetup];
@@ -53,7 +53,7 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,24 +75,24 @@
         [_doorWaiter cancel];
     }
     __weak IRWifiAdhocViewController *_self = self;
-    _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+    _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID: _keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG(@"res: %@, error: %@", res, error);
 
         if (error) {
             return;
         }
 
-        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
-                                    message:@""
-                                   delegate:nil
-                          cancelButtonTitle:nil
-                          otherButtonTitles:@"OK", nil] show];
+        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
+                                    message: @""
+                                   delegate: nil
+                          cancelButtonTitle: nil
+                          otherButtonTitles: @"OK", nil] show];
 
-        IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName:object[ @"hostname" ]
-                                                                            deviceid:_self.keys.deviceid];
+        IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
+                                                                            deviceid: _self.keys.deviceid];
 
-        [_self.delegate wifiAdhocViewController:_self
-                              didFinishWithInfo:@{
+        [_self.delegate wifiAdhocViewController: _self
+                              didFinishWithInfo: @{
              IRViewControllerResultType: IRViewControllerResultTypeDone,
              IRViewControllerResultPeripheral: p
          }];
@@ -109,22 +109,22 @@
     [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
         LOG(@"isAdhoc: %d error: %@", isAdhoc, error);
         if (isAdhoc) {
-            [IRHTTPClient postWifiKeys:[_self.keys morseStringRepresentation]
+            [IRHTTPClient postWifiKeys: [_self.keys morseStringRepresentation]
                         withCompletion:^(NSHTTPURLResponse *res, id body, NSError *error) {
                     if (res.statusCode == 200) {
-                        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Great! Now let's connect back to your home wifi", @"alert title after POST /wifi finished successfully")
-                                                    message:@""
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil] show];
+                        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home wifi", @"alert title after POST /wifi finished successfully")
+                                                    message: @""
+                                                   delegate: nil
+                                          cancelButtonTitle: @"OK"
+                                          otherButtonTitles: nil] show];
                     }
                     else {
                         // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
-                        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Something is wrong, please contact developer", @"alert title when POST /wifi failed")
-                                                    message:@""
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil] show];
+                        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Something is wrong, please contact developer", @"alert title when POST /wifi failed")
+                                                    message: @""
+                                                   delegate: nil
+                                          cancelButtonTitle: @"OK"
+                                          otherButtonTitles: nil] show];
                     }
                 }];
         }

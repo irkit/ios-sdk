@@ -51,7 +51,7 @@
 }
 
 - (NSString *)local_hostname {
-    return [NSString stringWithFormat:@"%@.local", _hostname];
+    return [NSString stringWithFormat: @"%@.local", _hostname];
 }
 
 - (BOOL)isReachableViaWifi {
@@ -61,12 +61,12 @@
 - (void)getKeyWithCompletion:(void (^)())successfulCompletion {
     LOG_CURRENT_METHOD;
 
-    [IRHTTPClient getDeviceIDFromHost:_hostname
+    [IRHTTPClient getDeviceIDFromHost: _hostname
                        withCompletion:^(NSHTTPURLResponse *res_local, NSHTTPURLResponse *res_internet, NSString *deviceid, NSError *error) {
         LOG(@"res_local: %@, res_internet: %@, key: %@, err: %@", res_local, res_internet, deviceid, error);
         if (deviceid) {
             _deviceid = deviceid;
-            NSDictionary *hostInfo = [IRHTTPClient hostInfoFromResponse:res_local];
+            NSDictionary *hostInfo = [IRHTTPClient hostInfoFromResponse: res_local];
             if (hostInfo) {
                 _modelName = hostInfo[ @"modelName" ];
                 _version   = hostInfo[ @"version" ];
@@ -80,7 +80,7 @@
     LOG_CURRENT_METHOD;
 
     // GET /message only to see Server header
-    [IRHTTPClient fetchHostInfoOf:_hostname withCompletion:^(NSHTTPURLResponse *res, NSDictionary *info, NSError *error) {
+    [IRHTTPClient fetchHostInfoOf: _hostname withCompletion:^(NSHTTPURLResponse *res, NSDictionary *info, NSError *error) {
         if (info) {
             _modelName = info[ @"modelName" ];
             _version   = info[ @"version" ];
@@ -90,7 +90,7 @@
 }
 
 - (NSComparisonResult)compareByFirstFoundDate:(IRPeripheral *)otherPeripheral {
-    return [self.foundDate compare:otherPeripheral.foundDate];
+    return [self.foundDate compare: otherPeripheral.foundDate];
 }
 
 - (NSString *)modelNameAndRevision {
@@ -102,16 +102,16 @@
 }
 
 - (NSString *)iconURL {
-    return [NSString stringWithFormat:@"%@/images/model/%@.png", STATICENDPOINT_BASE, _modelName ? _modelName:@"IRKit" ];
+    return [NSString stringWithFormat: @"%@/images/model/%@.png", STATICENDPOINT_BASE, _modelName ? _modelName: @"IRKit" ];
 }
 
 - (NSDictionary *)asDictionary {
     return @{
-               @"hostname" : _hostname ? _hostname :[NSNull null],
-               @"foundDate": _foundDate ?[NSNumber numberWithDouble:[_foundDate timeIntervalSince1970]] :[NSNull null],
-               @"deviceid":  _deviceid ? _deviceid :[NSNull null],
-               @"modelName": _modelName ? _modelName :[NSNull null],
-               @"version":   _version ? _version :[NSNull null]
+               @"hostname" : _hostname ? _hostname : [NSNull null],
+               @"foundDate": _foundDate ? [NSNumber numberWithDouble: [_foundDate timeIntervalSince1970]] : [NSNull null],
+               @"deviceid":  _deviceid ? _deviceid : [NSNull null],
+               @"modelName": _modelName ? _modelName : [NSNull null],
+               @"version":   _version ? _version : [NSNull null]
     };
 }
 
@@ -121,19 +121,19 @@
     LOG_CURRENT_METHOD;
 
     if (_hostname) {
-        _reachability = [Reachability reachabilityWithHostname:self.local_hostname];
+        _reachability = [Reachability reachabilityWithHostname: self.local_hostname];
     }
 }
 
 #pragma mark - NSKeyedArchiving
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-    [coder encodeObject:_hostname forKey:@"hostname"];
-    [coder encodeObject:_customizedName forKey:@"customizedName"];
-    [coder encodeObject:_foundDate forKey:@"foundDate"];
-    [coder encodeObject:_deviceid forKey:@"deviceid"];
-    [coder encodeObject:_modelName forKey:@"modelName"];
-    [coder encodeObject:_version forKey:@"version"];
+    [coder encodeObject: _hostname forKey: @"hostname"];
+    [coder encodeObject: _customizedName forKey: @"customizedName"];
+    [coder encodeObject: _foundDate forKey: @"foundDate"];
+    [coder encodeObject: _deviceid forKey: @"deviceid"];
+    [coder encodeObject: _modelName forKey: @"modelName"];
+    [coder encodeObject: _version forKey: @"version"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -142,12 +142,12 @@
     if (!self) {
         return nil;
     }
-    _hostname         = [coder decodeObjectForKey:@"hostname"];
-    _customizedName   = [coder decodeObjectForKey:@"customizedName"];
-    _foundDate        = [coder decodeObjectForKey:@"foundDate"];
-    _deviceid         = [coder decodeObjectForKey:@"deviceid"];
-    _modelName        = [coder decodeObjectForKey:@"modelName"];
-    _version          = [coder decodeObjectForKey:@"version"];
+    _hostname         = [coder decodeObjectForKey: @"hostname"];
+    _customizedName   = [coder decodeObjectForKey: @"customizedName"];
+    _foundDate        = [coder decodeObjectForKey: @"foundDate"];
+    _deviceid         = [coder decodeObjectForKey: @"deviceid"];
+    _modelName        = [coder decodeObjectForKey: @"modelName"];
+    _version          = [coder decodeObjectForKey: @"version"];
 
     [self startReachability];
 

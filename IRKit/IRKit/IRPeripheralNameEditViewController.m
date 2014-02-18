@@ -13,7 +13,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -26,26 +26,26 @@
 
     self.title = IRLocalizedString(@"Give a name", @"title of IRPeripheralNameEdit");
     self.navigationItem.hidesBackButton    = YES;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self
-                                                                                           action:@selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+                                                                                           target: self
+                                                                                           action: @selector(doneButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillAppear:animated];
+    [super viewWillAppear: animated];
 
     // set .peripheral before viewWillAppear
     _textField.text = _peripheral.customizedName;
 
-    [self editingChanged:nil];
+    [self editingChanged: nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear: animated];
 }
 
 - (IBAction)processTextField:(id)sender {
@@ -58,8 +58,8 @@
     _peripheral.customizedName = _textField.text;
     [[IRKit sharedInstance] save];
 
-    [self.delegate nameEditViewController:self
-                        didFinishWithInfo:@{
+    [self.delegate nameEditViewController: self
+                        didFinishWithInfo: @{
          IRViewControllerResultType: IRViewControllerResultTypeDone,
          IRViewControllerResultPeripheral: _peripheral,
          IRViewControllerResultText: _textField.text,
@@ -72,12 +72,12 @@
     }
 
     NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:@"^\\s*$"
-                                                       options:0
-                                                         error:nil];
-    NSUInteger matches = [regex numberOfMatchesInString:_textField.text
-                                                options:0
-                                                  range:NSMakeRange(0, _textField.text.length)];
+                                  regularExpressionWithPattern: @"^\\s*$"
+                                                       options: 0
+                                                         error: nil];
+    NSUInteger matches = [regex numberOfMatchesInString: _textField.text
+                                                options: 0
+                                                  range: NSMakeRange(0, _textField.text.length)];
 
     if (matches > 0) {
         // empty or whitespace only
@@ -96,20 +96,20 @@
 
 - (void)doneButtonPressed:(id)selector {
     LOG(@"text: %@", self.textField.text);
-    [self processTextField:nil];
+    [self processTextField: nil];
 }
 
 - (IBAction)editingChanged:(id)sender {
     BOOL valid = [self isTextValid];
 
     self.navigationItem.rightBarButtonItem.enabled = valid;
-    self.textField.textColor = valid ?[IRViewCustomizer textColor] :[IRViewCustomizer inactiveFontColor];
+    self.textField.textColor = valid ? [IRViewCustomizer textColor] : [IRViewCustomizer inactiveFontColor];
 }
 
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self processTextField:nil];
+    [self processTextField: nil];
     return NO;
 }
 

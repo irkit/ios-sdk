@@ -43,7 +43,7 @@
 }
 
 - (void)startSearching {
-    [_browser searchForServicesOfType:@"_irkit._tcp" inDomain:@""];
+    [_browser searchForServicesOfType: @"_irkit._tcp" inDomain: @""];
 }
 
 - (void)stop {
@@ -57,17 +57,17 @@
 
     [[_services allObjects] enumerateObjectsUsingBlock:^(NSNetService *service, NSUInteger idx, BOOL *stop) {
         service.delegate = self;
-        [service resolveWithTimeout:0];
+        [service resolveWithTimeout: 0];
     }];
 }
 
 - (NSString *)copyStringFromTXTDict:(NSDictionary *)dict which:(NSString *)which {
     // Helper for getting information from the TXT data
-    NSData *data = [dict objectForKey:which];
+    NSData *data = [dict objectForKey: which];
     NSString *resultString = nil;
 
     if (data) {
-        resultString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        resultString = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     }
     return resultString;
 }
@@ -76,18 +76,18 @@
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender {
     LOG_CURRENT_METHOD;
-    [_services removeObject:sender];
+    [_services removeObject: sender];
 
     LOG(@"hostName: %@", sender.hostName);
 
     if (_delegate) {
-        [_delegate searcher:self didResolveService:sender];
+        [_delegate searcher: self didResolveService: sender];
     }
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
     LOG(@"errorDict:%@", errorDict);
-    [_services removeObject:sender];
+    [_services removeObject: sender];
 }
 
 #pragma mark - NSNetServiceBrowserDelegate
@@ -99,7 +99,7 @@
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
     LOG_CURRENT_METHOD;
 
-    [_services addObject:netService];
+    [_services addObject: netService];
 
     if (!moreServicesComing) {
         [self resolveServices];

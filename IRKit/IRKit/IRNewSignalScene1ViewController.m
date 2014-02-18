@@ -18,7 +18,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -35,36 +35,36 @@
 
     self.title = IRLocalizedString(@"Waiting for Signal ...", @"title of IRNewSignalScene1");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                  target:self
-                                                                  action:@selector(cancelButtonPressed:)];
+                                             initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
+                                                                  target: self
+                                                                  action: @selector(cancelButtonPressed:)];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillAppear:animated];
+    [super viewWillAppear: animated];
 
     __weak IRNewSignalScene1ViewController *_self = self;
     _waiter = [IRHTTPClient waitForSignalWithCompletion:^(NSHTTPURLResponse *res, IRSignal *signal, NSError *error) {
         if (signal) {
-            [_self didReceiveSignal:signal];
+            [_self didReceiveSignal: signal];
         }
         else {
-            [_self cancelButtonPressed:nil];
+            [_self cancelButtonPressed: nil];
         }
     }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewDidAppear:animated];
+    [super viewDidAppear: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear: animated];
 
     [_waiter cancel];
     _waiter = nil;
@@ -73,12 +73,12 @@
 - (void)didReceiveSignal:(IRSignal *)signal {
     LOG_CURRENT_METHOD;
 
-    IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName:@"IRSignalNameEditViewController"
-                                                                                         bundle:[IRHelper resources]];
+    IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName: @"IRSignalNameEditViewController"
+                                                                                         bundle: [IRHelper resources]];
     c.delegate = (id<IRSignalNameEditViewControllerDelegate>)self.delegate;
     c.signal   = signal;
-    [self.navigationController pushViewController:c
-                                         animated:YES];
+    [self.navigationController pushViewController: c
+                                         animated: YES];
 }
 
 #pragma mark - UI events
@@ -92,8 +92,8 @@
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
-    [self.delegate scene1ViewController:self
-                      didFinishWithInfo:@{
+    [self.delegate scene1ViewController: self
+                      didFinishWithInfo: @{
          IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }

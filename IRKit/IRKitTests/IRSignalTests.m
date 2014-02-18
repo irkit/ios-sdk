@@ -34,7 +34,7 @@
         @"format": @"raw",
         @"freq": @38,
     };
-    IRSignal *signal = [[IRSignal alloc] initWithDictionary:signalInfo];
+    IRSignal *signal = [[IRSignal alloc] initWithDictionary: signalInfo];
     XCTAssertNotNil(signal);
 
     NSDictionary *signalInfo2 = signal.asPublicDictionary;

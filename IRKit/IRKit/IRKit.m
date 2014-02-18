@@ -33,17 +33,17 @@
     _peripherals = [[IRPeripherals alloc] init];
 
     __weak IRKit *_self = self;
-    _terminateObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillTerminateNotification
-                                                                           object:nil
-                                                                            queue:[NSOperationQueue mainQueue]
+    _terminateObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationWillTerminateNotification
+                                                                           object: nil
+                                                                            queue: [NSOperationQueue mainQueue]
                                                                        usingBlock:^(NSNotification *note) {
         LOG(@"terminating");
         [_self save];
     }];
     static bool first = YES;
-    _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
-                                                                              object:nil
-                                                                               queue:[NSOperationQueue mainQueue]
+    _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidBecomeActiveNotification
+                                                                              object: nil
+                                                                               queue: [NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
         LOG(@"became active");
         if (first) {
@@ -56,9 +56,9 @@
                 }];
         }
     }];
-    _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification
-                                                                                 object:nil
-                                                                                  queue:[NSOperationQueue mainQueue]
+    _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidEnterBackgroundNotification
+                                                                                 object: nil
+                                                                                  queue: [NSOperationQueue mainQueue]
                                                                              usingBlock:^(NSNotification *note) {
         LOG(@"entered background");
     }];
@@ -69,9 +69,9 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [[NSNotificationCenter defaultCenter] removeObserver:_terminateObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_enterBackgroundObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver: _terminateObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver: _enterBackgroundObserver];
 }
 
 + (void)startWithAPIKey:(NSString *)apikey {
