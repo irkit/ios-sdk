@@ -6,16 +6,16 @@
 #import "IRHelper.h"
 
 NSString * IRLocalizedString(NSString *key, NSString *comment) {
-    return [[IRHelper resources] localizedStringForKey:key value:key table:nil];
+    return [[IRHelper resources] localizedStringForKey: key value: key table: nil];
 }
 
 @implementation IRHelper
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^)(id obj, NSUInteger idx))block {
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:[array count]];
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity: [array count]];
 
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [result addObject:block(obj, idx)];
+        [result addObject: block(obj, idx)];
     }];
     return result;
 }
@@ -25,26 +25,26 @@ NSString * IRLocalizedString(NSString *key, NSString *comment) {
 + (void)enumerateSubviewsOfRootView:(UIView *)view usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
     block(view, 0, 0);
     for (UIView *subview in view.subviews) {
-        [self enumerateSubviewsOfRootView:subview usingBlock:block];
+        [self enumerateSubviewsOfRootView: subview usingBlock: block];
     }
 }
 
 + (NSBundle *)resources {
     NSBundle *main      = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath:[main pathForResource:@"IRKit"
-                                                                  ofType:@"bundle"]];
+    NSBundle *resources = [NSBundle bundleWithPath: [main pathForResource: @"IRKit"
+                                                                   ofType: @"bundle"]];
 
     return resources;
 }
 
 + (UIFont *)fontWithSize:(CGFloat)size {
-    NSString *lang = [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSString *lang = [[NSLocale preferredLanguages] objectAtIndex: 0];
 
-    if ([lang isEqualToString:@"ja"]) {
-        return [UIFont fontWithName:@"HiraKakuProN-W3" size:size];
+    if ([lang isEqualToString: @"ja"]) {
+        return [UIFont fontWithName: @"HiraKakuProN-W3" size: size];
     }
     else {
-        return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
+        return [UIFont fontWithName: @"HelveticaNeue-Light" size: size];
     }
 }
 
@@ -65,13 +65,13 @@ NSString * IRLocalizedString(NSString *key, NSString *comment) {
 
 + (UIImage *)imageInResourceNamed:(NSString *)name {
     NSBundle *bundle = [self resources];
-    NSString *path2x = [bundle pathForResource:[NSString stringWithFormat:@"%@@2x", name]
-                                        ofType:@"png"];
-    UIImage *ret = [UIImage imageWithContentsOfFile:path2x];
+    NSString *path2x = [bundle pathForResource: [NSString stringWithFormat: @"%@@2x", name]
+                                        ofType: @"png"];
+    UIImage *ret = [UIImage imageWithContentsOfFile: path2x];
 
     if (!ret) {
-        ret = [UIImage imageWithContentsOfFile:[bundle pathForResource:name
-                                                                ofType:@"png"]];
+        ret = [UIImage imageWithContentsOfFile: [bundle pathForResource: name
+                                                                 ofType: @"png"]];
     }
     return ret;
 }

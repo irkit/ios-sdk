@@ -50,7 +50,7 @@ struct KeysCRCed
 }
 
 - (NSString *)securityTypeString {
-    return [IRKeys securityTypeStringOf:_security];
+    return [IRKeys securityTypeStringOf: _security];
 }
 
 + (NSString *)securityTypeStringOf:(enum IRSecurityType)security {
@@ -102,7 +102,7 @@ struct KeysCRCed
     crced.wifi_was_valid  = false;
     crced.security        = _security;
     uint8_t crc           = crc8((uint8_t *)&crced, sizeof(struct KeysCRCed));
-    NSString *crcHex      = [NSString stringWithFormat:@"%02x", crc];
+    NSString *crcHex      = [NSString stringWithFormat: @"%02x", crc];
 
     NSArray *components = @[
         security,
@@ -117,7 +117,7 @@ struct KeysCRCed
         @"",     // reserved6
         crcHex,
                           ];
-    return [[components componentsJoinedByString:@"/"] uppercaseString];
+    return [[components componentsJoinedByString: @"/"] uppercaseString];
 }
 
 - (void)setKeys:(NSDictionary *)keys {
@@ -144,9 +144,9 @@ struct KeysCRCed
     if (!countryCode) {
         // this is what user explicitly sets in settings app
         // which defaults to US
-        countryCode = [[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode] uppercaseString];
+        countryCode = [[[NSLocale currentLocale] objectForKey: NSLocaleCountryCode] uppercaseString];
     }
-    if ([countryCode isEqualToString:@"JP"]) {
+    if ([countryCode isEqualToString: @"JP"]) {
         regdomain = @"2"; // TELEC
     }
     // Regulatory Domains by Country
@@ -181,7 +181,7 @@ struct KeysCRCed
     NSMutableString *ret = @"".mutableCopy;
 
     for (int i = 0; i < strnlen(utf8, 33); i++) {
-        [ret appendString:[NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+        [ret appendString: [NSString stringWithFormat: @"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }
@@ -200,7 +200,7 @@ struct KeysCRCed
     NSMutableString *ret = @"".mutableCopy;
 
     for (int i = 0; i < strnlen(utf8, 64); i++) {
-        [ret appendString:[NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+        [ret appendString: [NSString stringWithFormat: @"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }
@@ -224,7 +224,7 @@ struct KeysCRCed
     NSMutableString *ret = @"".mutableCopy;
 
     for (int i = 0; i < strnlen(utf8, 64); i++) {
-        [ret appendString:[NSString stringWithFormat:@"%02x", utf8[i] & 0xFF]];
+        [ret appendString: [NSString stringWithFormat: @"%02x", utf8[i] & 0xFF]];
     }
     return ret;
 }

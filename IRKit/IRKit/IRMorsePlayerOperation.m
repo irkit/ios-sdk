@@ -10,7 +10,7 @@
 #ifdef IRKIT_DEBUG
 # define ASSERT_OR_RETURN(status) \
     if (status) { \
-        NSError *e = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil]; \
+        NSError *e = [NSError errorWithDomain: NSOSStatusErrorDomain code: status userInfo: nil]; \
         LOG(@"status: %ld error: %@", status, e); \
         return; \
     }
@@ -120,8 +120,8 @@ static NSDictionary *asciiToMorse;
         return nil;
     }
     for (int i = 0; i < input.length; i++) {
-        unichar character = [input characterAtIndex:i];
-        if (![self isCharacterAllowed:character]) {
+        unichar character = [input characterAtIndex: i];
+        if (![self isCharacterAllowed: character]) {
             LOG(@"character: %c is not allowed!!", character);
             return nil;
         }
@@ -136,7 +136,7 @@ static NSDictionary *asciiToMorse;
 #pragma mark - Private
 
 + (bool)isCharacterAllowed:(unichar)character {
-    return !!asciiToMorse[ [[NSString stringWithFormat:@"%c", character] uppercaseString] ];
+    return !!asciiToMorse[ [[NSString stringWithFormat: @"%c", character] uppercaseString] ];
 }
 
 - (void)parseAsciiStringIntoSequence {
@@ -155,10 +155,10 @@ static NSDictionary *asciiToMorse;
     }
 
     for (int i = 0; i < _string.length; i++) {
-        unichar character = [_string characterAtIndex:i];
-        NSString *morseCode = asciiToMorse[ [[NSString stringWithFormat:@"%c", character] uppercaseString]];
+        unichar character = [_string characterAtIndex: i];
+        NSString *morseCode = asciiToMorse[ [[NSString stringWithFormat: @"%c", character] uppercaseString]];
         for (int j = 0; j < morseCode.length; j++) {
-            unichar shortOrLong = [morseCode characterAtIndex:j];
+            unichar shortOrLong = [morseCode characterAtIndex: j];
             if (shortOrLong == '0') {
                 // short
                 _sequence[ sequenceIndex++ ] = SOUND_SINE;
@@ -195,12 +195,12 @@ static NSDictionary *asciiToMorse;
     NSError *error = nil;
     AVAudioSession *sessionInstance = [AVAudioSession sharedInstance];
 
-    [sessionInstance setPreferredSampleRate:SAMPLE_RATE error:&error];
+    [sessionInstance setPreferredSampleRate: SAMPLE_RATE error: &error];
     if (error) {
         LOG(@"error: %@", error); return;
     }
 
-    [sessionInstance setCategory:AVAudioSessionCategoryPlayback error:&error];
+    [sessionInstance setCategory: AVAudioSessionCategoryPlayback error: &error];
     if (error) {
         LOG(@"error: %@", error); return;
     }
@@ -229,7 +229,7 @@ static NSDictionary *asciiToMorse;
 
 
 
-    [sessionInstance setActive:YES error:&error];
+    [sessionInstance setActive: YES error: &error];
 
     AUNode morsePlayerNode;
     AUNode converterNode;
@@ -367,11 +367,11 @@ audioUnitCallback(void *inRefCon,
                   AudioBufferList *ioData) {
     IRMorsePlayerOperation *self = (__bridge IRMorsePlayerOperation *)inRefCon;
 
-    return [self audioUnitCallback:ioActionFlags
-                         timestamp:inTimeStamp
-                         busNumber:inBusNumber
-                      numberFrames:inNumberFrames
-                              data:ioData];
+    return [self audioUnitCallback: ioActionFlags
+                         timestamp: inTimeStamp
+                         busNumber: inBusNumber
+                      numberFrames: inNumberFrames
+                              data: ioData];
 }
 
 - (OSStatus)audioUnitCallback:(AudioUnitRenderActionFlags *)ioActionFlags
@@ -415,7 +415,7 @@ audioUnitCallback(void *inRefCon,
         }
         else {
             // sine wave
-            [_producer produceSamples:samples size:nextSamples];
+            [_producer produceSamples: samples size: nextSamples];
         }
 
         if (_nextIndex < ENVELOPE_LENGTH) {
@@ -468,10 +468,10 @@ audioUnitCallback(void *inRefCon,
 #pragma mark - KVO
 
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-    if ([key isEqualToString:@"isExecuting"] || [key isEqualToString:@"isFinished"]) {
+    if ([key isEqualToString: @"isExecuting"] || [key isEqualToString: @"isFinished"]) {
         return YES;
     }
-    return [super automaticallyNotifiesObserversForKey:key];
+    return [super automaticallyNotifiesObserversForKey: key];
 }
 
 - (BOOL)isConcurrent {

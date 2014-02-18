@@ -28,14 +28,14 @@
     LOG_CURRENT_METHOD;
 
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    UIView *view = [[UIView alloc] initWithFrame:bounds];
+    UIView *view = [[UIView alloc] initWithFrame: bounds];
 
-    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] initWithNibName:@"IRNewPeripheralScene1ViewController"
-                                                                                                       bundle:[IRHelper resources]];
+    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] initWithNibName: @"IRNewPeripheralScene1ViewController"
+                                                                                                       bundle: [IRHelper resources]];
     first.delegate = self;
 
-    _navController = [[UINavigationController alloc] initWithRootViewController:first];
-    [view addSubview:_navController.view];
+    _navController = [[UINavigationController alloc] initWithRootViewController: first];
+    [view addSubview: _navController.view];
 
     self.view = view;
 }
@@ -44,7 +44,7 @@
     LOG_CURRENT_METHOD;
 
     [self stopSearch];
-    [[NSNotificationCenter defaultCenter] removeObserver:_becomeActiveObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
 }
 
 - (void)viewDidLoad {
@@ -57,9 +57,9 @@
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
     __weak IRNewPeripheralViewController *_self = self;
-    _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification
-                                                                              object:nil
-                                                                               queue:[NSOperationQueue mainQueue]
+    _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidBecomeActiveNotification
+                                                                              object: nil
+                                                                               queue: [NSOperationQueue mainQueue]
                                                                           usingBlock:^(NSNotification *note) {
         LOG(@"became active");
         if (!_self.stopSearchCalled) {
@@ -72,17 +72,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillAppear:animated];
+    [super viewWillAppear: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear: animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewDidAppear:animated];
+    [super viewDidAppear: animated];
 }
 
 - (void)registerDeviceIfNeeded {
@@ -91,7 +91,7 @@
             if (error) {
                 return;
             }
-            [_keys setKeys:keys];
+            [_keys setKeys: keys];
         }];
     }
 }
@@ -121,10 +121,10 @@
     LOG(@"service: %@", service);
     IRPeripherals *peripherals = [IRKit sharedInstance].peripherals;
 
-    NSString *name = [service.hostName componentsSeparatedByString:@"."][ 0 ];
-    IRPeripheral *p = [peripherals peripheralWithName:name];
+    NSString *name = [service.hostName componentsSeparatedByString: @"."][ 0 ];
+    IRPeripheral *p = [peripherals peripheralWithName: name];
     if (!p) {
-        p = [peripherals registerPeripheralWithName:name];
+        p = [peripherals registerPeripheralWithName: name];
         [peripherals save];
     }
     if (!p.deviceid) {
@@ -136,11 +136,11 @@
             // nested push animation can result in corrupted navigation bar
             // Finishing up a navigation transition in an unexpected state. Navigation Bar subview tree might get corrupted.
             // pushViewController after alertview is dismissed
-            [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
-                                        message:@""
-                                       delegate:self
-                              cancelButtonTitle:nil
-                              otherButtonTitles:@"OK", nil] show];
+            [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
+                                        message: @""
+                                       delegate: self
+                              cancelButtonTitle: nil
+                              otherButtonTitles: @"OK", nil] show];
         }];
     }
 }
@@ -150,11 +150,11 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     LOG_CURRENT_METHOD;
 
-    IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController" bundle:[IRHelper resources]];
+    IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
     c.delegate = self;
     c.peripheral = _foundPeripheral;
     _foundPeripheral = nil;
-    [self.navController pushViewController:c animated:YES];
+    [self.navController pushViewController: c animated: YES];
 }
 
 #pragma mark - UI events
@@ -171,20 +171,20 @@
            didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController:self
-                           didFinishWithPeripheral:nil];
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController: self
+                           didFinishWithPeripheral: nil];
         return;
     }
 
     // do here, to make sure request against POST /1/clients is finished
     [self registerDeviceIfNeeded];
 
-    IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName:@"IRWifiEditViewController"
-                                                                             bundle:[IRHelper resources]];
+    IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName: @"IRWifiEditViewController"
+                                                                             bundle: [IRHelper resources]];
     c.delegate = self;
     c.keys     = _keys;
-    [self.navController pushViewController:c animated:YES];
+    [self.navController pushViewController: c animated: YES];
 }
 
 #pragma mark - IRWifiEditViewControllerDelegate
@@ -192,26 +192,26 @@
 - (void)wifiEditViewController:(IRWifiEditViewController *)viewController didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController:self
-                           didFinishWithPeripheral:nil];
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController: self
+                           didFinishWithPeripheral: nil];
         return;
     }
 
     if (!_keys.keysAreSet) {
-        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Check your internet connection", @"alert view title when not connected to internet")
-                                    message:@""
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-        [self.delegate newPeripheralViewController:self
-                           didFinishWithPeripheral:nil];
+        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Check your internet connection", @"alert view title when not connected to internet")
+                                    message: @""
+                                   delegate: nil
+                          cancelButtonTitle: @"OK"
+                          otherButtonTitles: nil] show];
+        [self.delegate newPeripheralViewController: self
+                           didFinishWithPeripheral: nil];
         return;
     }
 
-    IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName:@"IRNewPeripheralScene2ViewController" bundle:[IRHelper resources]];
+    IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName: @"IRNewPeripheralScene2ViewController" bundle: [IRHelper resources]];
     c.delegate = self;
-    [self.navController pushViewController:c animated:YES];
+    [self.navController pushViewController: c animated: YES];
 }
 
 #pragma mark - IRNewPeripheralScene2ViewControllerDelegate
@@ -220,20 +220,20 @@
            didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController:self
-                           didFinishWithPeripheral:nil];
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController: self
+                           didFinishWithPeripheral: nil];
         return;
     }
 
     [self stopSearch];
 
-    IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName:@"IRMorsePlayerViewController"
-                                                                                   bundle:[IRHelper resources]];
+    IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName: @"IRMorsePlayerViewController"
+                                                                                   bundle: [IRHelper resources]];
     c.delegate                  = self;
     c.keys                      = _keys;
     c.showMorseNotWorkingButton = _morsePlayingCount > 1;
-    [self.navController pushViewController:c animated:YES];
+    [self.navController pushViewController: c animated: YES];
 }
 
 #pragma mark - IRMorsePlayerViewController
@@ -248,18 +248,18 @@
                 didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController:self
-                           didFinishWithPeripheral:nil];
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        [self.delegate newPeripheralViewController: self
+                           didFinishWithPeripheral: nil];
         return;
     }
 
     IRPeripheral *p = info[IRViewControllerResultPeripheral];
     if (p) {
-        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController" bundle:[IRHelper resources]];
+        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
         c.delegate = self;
         c.peripheral = p;
-        [self.navController pushViewController:c animated:YES];
+        [self.navController pushViewController: c animated: YES];
     }
 }
 
@@ -269,18 +269,18 @@
               didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if (![info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
-        [self.delegate newPeripheralViewController:self
-                           didFinishWithPeripheral:nil];
+    if (![info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeDone]) {
+        [self.delegate newPeripheralViewController: self
+                           didFinishWithPeripheral: nil];
         return;
     }
 
     IRPeripheral *p = info[IRViewControllerResultPeripheral];
     if (p) {
-        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName:@"IRPeripheralNameEditViewController" bundle:[IRHelper resources]];
+        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
         c.delegate = self;
         c.peripheral = p;
-        [self.navController pushViewController:c animated:YES];
+        [self.navController pushViewController: c animated: YES];
     }
 }
 
@@ -290,10 +290,10 @@
              didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeDone]) {
         IRPeripheral *peripheral = info[IRViewControllerResultPeripheral];
-        [self.delegate newPeripheralViewController:self
-                           didFinishWithPeripheral:peripheral];
+        [self.delegate newPeripheralViewController: self
+                           didFinishWithPeripheral: peripheral];
     }
 }
 

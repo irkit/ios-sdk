@@ -29,8 +29,8 @@
 - (id)objectAtIndex:(NSUInteger)index {
     LOG(@"index: %d", index);
 
-    NSArray *keys = [_irperipheralForName keysSortedByValueUsingSelector:@selector(compareByFirstFoundDate:)];
-    NSString *key = [keys objectAtIndex:index];
+    NSArray *keys = [_irperipheralForName keysSortedByValueUsingSelector: @selector(compareByFirstFoundDate:)];
+    NSString *key = [keys objectAtIndex: index];
     return _irperipheralForName[key];
 }
 
@@ -45,15 +45,15 @@
 - (void)save {
     LOG_CURRENT_METHOD;
 
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_irperipheralForName];
-    [IRPersistentStore storeObject:data
-                            forKey:@"peripherals"];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: _irperipheralForName];
+    [IRPersistentStore storeObject: data
+                            forKey: @"peripherals"];
     [IRPersistentStore synchronize];
 }
 
 - (NSUInteger)countOfReadyPeripherals {
     LOG_CURRENT_METHOD;
-    return [[[_irperipheralForName allValues] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL (id evaluatedObject, NSDictionary *bindings) {
+    return [[[_irperipheralForName allValues] filteredArrayUsingPredicate: [NSPredicate predicateWithBlock:^BOOL (id evaluatedObject, NSDictionary *bindings) {
                 return [(IRPeripheral *)evaluatedObject hasDeviceID];
             }]
             ] count];
@@ -69,16 +69,16 @@
     IRPeripheral *peripheral = [[IRPeripheral alloc] init];
     peripheral.hostname       = hostname;
     peripheral.customizedName = hostname;
-    [self addPeripheralsObject:peripheral];
+    [self addPeripheralsObject: peripheral];
     return peripheral;
 }
 
 - (IRPeripheral *)savePeripheralWithName:(NSString *)hostname deviceid:(NSString *)deviceid {
     LOG(@"hostname: %@ deviceid: %@", hostname, deviceid);
 
-    IRPeripheral *p = [self peripheralWithName:hostname];
+    IRPeripheral *p = [self peripheralWithName: hostname];
     if (!p) {
-        p = [self registerPeripheralWithName:hostname];
+        p = [self registerPeripheralWithName: hostname];
     }
     p.deviceid = deviceid;
     [self save];
@@ -93,9 +93,9 @@
 - (void)load {
     LOG_CURRENT_METHOD;
 
-    NSData *data = [IRPersistentStore objectForKey:@"peripherals"];
+    NSData *data = [IRPersistentStore objectForKey: @"peripherals"];
 
-    _irperipheralForName = data ?[[NSKeyedUnarchiver unarchiveObjectWithData:data] mutableCopy]
+    _irperipheralForName = data ? [[NSKeyedUnarchiver unarchiveObjectWithData: data] mutableCopy]
                            : nil;
     if (!_irperipheralForName) {
         _irperipheralForName = @{}.mutableCopy;
@@ -121,14 +121,14 @@
 - (NSEnumerator *)enumeratorOfPeripherals {
     LOG_CURRENT_METHOD;
 
-    return [_irperipheralForName.allValues sortedArrayUsingSelector:@selector(compareByFirstFoundDate:)].objectEnumerator;
+    return [_irperipheralForName.allValues sortedArrayUsingSelector: @selector(compareByFirstFoundDate:)].objectEnumerator;
 }
 
 - (IRPeripheral *)memberOfPeripherals:(IRPeripheral *)object {
     NSString *lowercased = object.hostname.lowercaseString;
 
     for (IRPeripheral *p in self.peripherals) {
-        if ([p.hostname.lowercaseString isEqualToString:lowercased]) {
+        if ([p.hostname.lowercaseString isEqualToString: lowercased]) {
             return p;
         }
     }
@@ -150,7 +150,7 @@
 - (void)removePeripheralsObject:(IRPeripheral *)peripheral {
     LOG(@"peripheral: %@", peripheral);
 
-    [_irperipheralForName removeObjectForKey:peripheral.hostname.lowercaseString];
+    [_irperipheralForName removeObjectForKey: peripheral.hostname.lowercaseString];
 }
 
 #pragma mark - UITableViewDataSource
@@ -158,14 +158,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG(@"indexPath.row: %d", indexPath.row);
 
-    IRPeripheralCell *cell = (IRPeripheralCell *)[tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
+    IRPeripheralCell *cell = (IRPeripheralCell *)[tableView dequeueReusableCellWithIdentifier: IRKitCellIdentifierPeripheral];
     if (cell == nil) {
-        [tableView registerNib:[UINib nibWithNibName:@"IRPeripheralCell" bundle:[IRHelper resources]]
-         forCellReuseIdentifier:IRKitCellIdentifierPeripheral];
+        [tableView registerNib: [UINib nibWithNibName: @"IRPeripheralCell" bundle: [IRHelper resources]]
+         forCellReuseIdentifier: IRKitCellIdentifierPeripheral];
 
-        cell = [tableView dequeueReusableCellWithIdentifier:IRKitCellIdentifierPeripheral];
+        cell = [tableView dequeueReusableCellWithIdentifier: IRKitCellIdentifierPeripheral];
     }
-    cell.peripheral = [self objectAtIndex:indexPath.row];
+    cell.peripheral = [self objectAtIndex: indexPath.row];
     return cell;
 }
 

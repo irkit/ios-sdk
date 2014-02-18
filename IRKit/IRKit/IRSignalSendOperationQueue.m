@@ -16,13 +16,13 @@
         return nil;
     }
 
-    [self setSuspended:NO];
-    [self setMaxConcurrentOperationCount:1];
+    [self setSuspended: NO];
+    [self setMaxConcurrentOperationCount: 1];
 
-    [self addObserver:self
-           forKeyPath:@"operationCount"
-              options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-              context:nil];
+    [self addObserver: self
+           forKeyPath: @"operationCount"
+              options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+              context: nil];
 
     return self;
 }
@@ -30,8 +30,8 @@
 - (void)dealloc {
     LOG_CURRENT_METHOD;
     if (!_didRemoveObserver) {
-        [self removeObserver:self
-                  forKeyPath:@"operationCount"];
+        [self removeObserver: self
+                  forKeyPath: @"operationCount"];
     }
 }
 
@@ -43,12 +43,12 @@
                        context:(void *)context {
     LOG(@"keyPath: %@", keyPath);
 
-    if ([keyPath isEqualToString:@"operationCount"]) {
-        NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
+    if ([keyPath isEqualToString: @"operationCount"]) {
+        NSObject *newValue = [change objectForKey: NSKeyValueChangeNewKey];
         if (newValue && ([(NSNumber *)newValue unsignedIntegerValue] == 0)) {
             _didRemoveObserver = YES;
-            [self removeObserver:self
-                      forKeyPath:@"operationCount"];
+            [self removeObserver: self
+                      forKeyPath: @"operationCount"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _completion(_error);
             });

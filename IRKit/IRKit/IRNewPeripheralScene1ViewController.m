@@ -14,7 +14,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -26,29 +26,29 @@
     [super viewDidLoad];
 
     self.title = IRLocalizedString(@"Setup IRKit", @"title of IRNewPeripheralScene1");
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                          target:self
-                                                                                          action:@selector(cancelButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                           target:self
-                                                                                           action:@selector(doneButtonPressed:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
+                                                                                          target: self
+                                                                                          action: @selector(cancelButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+                                                                                           target: self
+                                                                                           action: @selector(doneButtonPressed:)];
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent animated: YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillAppear:animated];
+    [super viewWillAppear: animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewDidAppear:animated];
+    [super viewDidAppear: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear: animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,24 +61,24 @@
 
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene1ViewController:self
-                      didFinishWithInfo:@{
+    [self.delegate scene1ViewController: self
+                      didFinishWithInfo: @{
          IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }
 
 - (void)doneButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene1ViewController:self
-                      didFinishWithInfo:@{
+    [self.delegate scene1ViewController: self
+                      didFinishWithInfo: @{
          IRViewControllerResultType: IRViewControllerResultTypeDone
      }];
 }
 
 - (IBAction)buyButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    NSString *url = [NSString stringWithFormat:@"%@/store", APIENDPOINT_BASE];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    NSString *url = [NSString stringWithFormat: @"%@/store", APIENDPOINT_BASE];
+    [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
 }
 
 @end

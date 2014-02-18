@@ -9,17 +9,17 @@
     LOG_CURRENT_METHOD;
 
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-    [d setObject:object
-          forKey:[NSString stringWithFormat:@"%@:%@",
-                  IR_NSUSERDEFAULTS_PREFIX, key]];
+    [d setObject: object
+          forKey: [NSString stringWithFormat: @"%@:%@",
+                   IR_NSUSERDEFAULTS_PREFIX, key]];
 }
 
 + (id)objectForKey:(NSString *)key {
     LOG_CURRENT_METHOD;
 
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-    return [d objectForKey:[NSString stringWithFormat:@"%@:%@",
-                            IR_NSUSERDEFAULTS_PREFIX, key]];
+    return [d objectForKey: [NSString stringWithFormat: @"%@:%@",
+                             IR_NSUSERDEFAULTS_PREFIX, key]];
 }
 
 + (void)synchronize {

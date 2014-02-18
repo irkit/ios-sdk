@@ -13,7 +13,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
@@ -67,15 +67,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillAppear:animated];
+    [super viewWillAppear: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear: animated];
 
-    [_delegate securitySelectviewController:self
-                  didFinishWithSecurityType:_selectedSecurityType];
+    [_delegate securitySelectviewController: self
+                  didFinishWithSecurityType: _selectedSecurityType];
 }
 
 #pragma mark - UI events
@@ -91,16 +91,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IRWifiSecuritySelectCell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: @"IRWifiSecuritySelectCell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:@"IRWifiSecuritySelectCell"];
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                      reuseIdentifier: @"IRWifiSecuritySelectCell"];
     }
 
-    enum IRSecurityType security = [self securityTypeForRow:indexPath.row];
-    cell.textLabel.text = [IRKeys securityTypeStringOf:security];
+    enum IRSecurityType security = [self securityTypeForRow: indexPath.row];
+    cell.textLabel.text = [IRKeys securityTypeStringOf: security];
 
-    if ([self securityTypeForRow:indexPath.row] == _selectedSecurityType) {
+    if ([self securityTypeForRow: indexPath.row] == _selectedSecurityType) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
@@ -121,16 +121,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
 
-    NSUInteger row = [self rowForSecurityType:_selectedSecurityType];
+    NSUInteger row = [self rowForSecurityType: _selectedSecurityType];
 
-    _selectedSecurityType = [self securityTypeForRow:indexPath.row];
+    _selectedSecurityType = [self securityTypeForRow: indexPath.row];
 
     if (indexPath.row != row) {
-        NSArray *indexPaths = @[[NSIndexPath indexPathForRow:row inSection:0], indexPath];
+        NSArray *indexPaths = @[[NSIndexPath indexPathForRow: row inSection: 0], indexPath];
         [tableView beginUpdates];
-        [tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        [tableView reloadRowsAtIndexPaths: indexPaths withRowAnimation: UITableViewRowAnimationNone];
         [tableView endUpdates];
     }
 }

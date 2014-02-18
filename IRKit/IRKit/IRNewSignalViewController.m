@@ -15,14 +15,14 @@
     LOG_CURRENT_METHOD;
 
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    UIView *view = [[UIView alloc] initWithFrame:bounds];
+    UIView *view = [[UIView alloc] initWithFrame: bounds];
 
-    IRNewSignalScene1ViewController *first = [[IRNewSignalScene1ViewController alloc] initWithNibName:@"IRNewSignalScene1ViewController"
-                                                                                               bundle:[IRHelper resources]];
+    IRNewSignalScene1ViewController *first = [[IRNewSignalScene1ViewController alloc] initWithNibName: @"IRNewSignalScene1ViewController"
+                                                                                               bundle: [IRHelper resources]];
     first.delegate = self;
 
-    _navController = [[UINavigationController alloc] initWithRootViewController:first];
-    [view addSubview:_navController.view];
+    _navController = [[UINavigationController alloc] initWithRootViewController: first];
+    [view addSubview: _navController.view];
 
     self.view = view;
 }
@@ -36,12 +36,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillAppear:animated];
+    [super viewWillAppear: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear: animated];
 }
 
 #pragma mark - UI events
@@ -58,9 +58,9 @@
            didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        [self.delegate newSignalViewController:self
-                           didFinishWithSignal:nil];
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        [self.delegate newSignalViewController: self
+                           didFinishWithSignal: nil];
     }
     ASSERT(1, @"non cancelled results should be handled elsewhere");
 }
@@ -71,15 +71,15 @@
                    didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
-    if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeDone]) {
+    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeDone]) {
         IRSignal *signal = info[IRViewControllerResultSignal];
 
-        [self.delegate newSignalViewController:self
-                           didFinishWithSignal:signal];
+        [self.delegate newSignalViewController: self
+                           didFinishWithSignal: signal];
     }
-    else if ([info[IRViewControllerResultType] isEqualToString:IRViewControllerResultTypeCancelled]) {
-        [self.delegate newSignalViewController:self
-                           didFinishWithSignal:nil];
+    else if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
+        [self.delegate newSignalViewController: self
+                           didFinishWithSignal: nil];
     }
 }
 

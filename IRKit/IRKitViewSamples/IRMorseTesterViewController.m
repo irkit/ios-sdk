@@ -36,8 +36,8 @@
         NSNumber *wpm = [[[NSNumberFormatter alloc] init] numberFromString: _wpmField.text];
         LOG(@"wpm: %@", wpm);
 
-        [_player addOperation: [IRMorsePlayerOperation playMorseFromString:message
-                                                             withWordSpeed:wpm]];
+        [_player addOperation: [IRMorsePlayerOperation playMorseFromString: message
+                                                             withWordSpeed: wpm]];
     }
 }
 
@@ -45,7 +45,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
     LOG_CURRENT_METHOD;
-    [self processTextField:textField];
+    [self processTextField: textField];
     return NO;
 }
 

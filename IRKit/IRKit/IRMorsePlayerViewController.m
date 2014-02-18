@@ -36,7 +36,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
         // Custom initialization
         _player = [[IRMorsePlayerOperationQueue alloc] init];
@@ -44,19 +44,19 @@
         _playing = false;
         _shownStartButtonView = false;
 
-        [_player addObserver:self
-                  forKeyPath:@"operationCount"
-                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                     context:nil];
+        [_player addObserver: self
+                  forKeyPath: @"operationCount"
+                     options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                     context: nil];
 
         __weak IRMorsePlayerViewController *_self = self;
-        _volumeChangedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"AVSystemController_SystemVolumeDidChangeNotification"
-                                                                                   object:nil
-                                                                                    queue:[NSOperationQueue mainQueue]
+        _volumeChangedObserver = [[NSNotificationCenter defaultCenter] addObserverForName: @"AVSystemController_SystemVolumeDidChangeNotification"
+                                                                                   object: nil
+                                                                                    queue: [NSOperationQueue mainQueue]
                                                                                usingBlock:^(NSNotification *note) {
-            float volume = [[[note userInfo] objectForKey:@"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
+            float volume = [[[note userInfo] objectForKey: @"AVSystemController_AudioVolumeNotificationParameter"] floatValue];
             LOG(@"volume: %f", volume);
-            [_self updateStartButtonViewWithVolume:volume];
+            [_self updateStartButtonViewWithVolume: volume];
         }];
     }
     return self;
@@ -64,9 +64,9 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [_player removeObserver:self
-                 forKeyPath:@"operationCount"];
-    [[NSNotificationCenter defaultCenter] removeObserver:_volumeChangedObserver];
+    [_player removeObserver: self
+                 forKeyPath: @"operationCount"];
+    [[NSNotificationCenter defaultCenter] removeObserver: _volumeChangedObserver];
 }
 
 - (void)viewDidLoad {
@@ -87,22 +87,22 @@
     _morseNotWorkingButton.hidden = !_showMorseNotWorkingButton;
 
     // TODO deprecated
-    [self updateStartButtonViewWithVolume:[[MPMusicPlayerController applicationMusicPlayer] volume]];
+    [self updateStartButtonViewWithVolume: [[MPMusicPlayerController applicationMusicPlayer] volume]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillAppear:animated];
+    [super viewWillAppear: animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewDidAppear:animated];
+    [super viewDidAppear: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     LOG_CURRENT_METHOD;
-    [super viewWillDisappear:animated];
+    [super viewWillDisappear: animated];
 
     [self stopPlaying];
 }
@@ -127,29 +127,29 @@
     _animatingImageView.hidden = NO;
     _animatingImageView.alpha = 0;
     _animatingImageView.animationImages = @[
-        [IRHelper imageInResourceNamed:@"anime_01"],
-        [IRHelper imageInResourceNamed:@"anime_02"],
-        [IRHelper imageInResourceNamed:@"anime_03"],
-        [IRHelper imageInResourceNamed:@"anime_04"],
-        [IRHelper imageInResourceNamed:@"anime_05"],
-        [IRHelper imageInResourceNamed:@"anime_06"],
-        [IRHelper imageInResourceNamed:@"anime_07"],
-        [IRHelper imageInResourceNamed:@"anime_08"],
-        [IRHelper imageInResourceNamed:@"anime_09"],
-        [IRHelper imageInResourceNamed:@"anime_10"],
-        [IRHelper imageInResourceNamed:@"anime_11"],
-        [IRHelper imageInResourceNamed:@"anime_12"],
-        [IRHelper imageInResourceNamed:@"anime_13"],
-        [IRHelper imageInResourceNamed:@"anime_14"],
-        [IRHelper imageInResourceNamed:@"anime_15"],
-        [IRHelper imageInResourceNamed:@"anime_16"],
-        [IRHelper imageInResourceNamed:@"anime_17"],
-        [IRHelper imageInResourceNamed:@"anime_18"],
-        [IRHelper imageInResourceNamed:@"anime_19"],
-        [IRHelper imageInResourceNamed:@"anime_20"]
+        [IRHelper imageInResourceNamed: @"anime_01"],
+        [IRHelper imageInResourceNamed: @"anime_02"],
+        [IRHelper imageInResourceNamed: @"anime_03"],
+        [IRHelper imageInResourceNamed: @"anime_04"],
+        [IRHelper imageInResourceNamed: @"anime_05"],
+        [IRHelper imageInResourceNamed: @"anime_06"],
+        [IRHelper imageInResourceNamed: @"anime_07"],
+        [IRHelper imageInResourceNamed: @"anime_08"],
+        [IRHelper imageInResourceNamed: @"anime_09"],
+        [IRHelper imageInResourceNamed: @"anime_10"],
+        [IRHelper imageInResourceNamed: @"anime_11"],
+        [IRHelper imageInResourceNamed: @"anime_12"],
+        [IRHelper imageInResourceNamed: @"anime_13"],
+        [IRHelper imageInResourceNamed: @"anime_14"],
+        [IRHelper imageInResourceNamed: @"anime_15"],
+        [IRHelper imageInResourceNamed: @"anime_16"],
+        [IRHelper imageInResourceNamed: @"anime_17"],
+        [IRHelper imageInResourceNamed: @"anime_18"],
+        [IRHelper imageInResourceNamed: @"anime_19"],
+        [IRHelper imageInResourceNamed: @"anime_20"]
                                           ];
     [_animatingImageView startAnimating];
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration: 0.3
                      animations:^{
         _fullscreenBackgroundView.alpha = 0.2;
         _animatingImageView.alpha       = 1.;
@@ -161,10 +161,10 @@
     LOG(@"morseMessage: %@", _morseMessage);
 
     // fire key value observer
-    [self observeValueForKeyPath:@"operationCount"
-                        ofObject:nil
-                          change:@{ NSKeyValueChangeNewKey: @0 }
-                         context:nil];
+    [self observeValueForKeyPath: @"operationCount"
+                        ofObject: nil
+                          change: @{ NSKeyValueChangeNewKey: @0 }
+                         context: nil];
 }
 
 - (void)stopPlaying {
@@ -172,7 +172,7 @@
 
     [_doorWaiter cancel];
 
-    [_player setSuspended:YES];
+    [_player setSuspended: YES];
     [_player cancelAllOperations];
 }
 
@@ -183,7 +183,7 @@
         [_doorWaiter cancel];
     }
     __weak IRMorsePlayerViewController *_self = self;
-    _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID:_keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
+    _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID: _keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG(@"res: %@, error: %@", res, error);
 
         [_self stopPlaying];
@@ -192,11 +192,11 @@
             return;
         }
 
-        IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName:object[ @"hostname" ]
-                                                                            deviceid:_self.keys.deviceid];
+        IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
+                                                                            deviceid: _self.keys.deviceid];
 
-        [_self.delegate morsePlayerViewController:_self
-                                didFinishWithInfo:@{
+        [_self.delegate morsePlayerViewController: _self
+                                didFinishWithInfo: @{
              IRViewControllerResultType: IRViewControllerResultTypeDone,
              IRViewControllerResultPeripheral: p
          }];
@@ -211,15 +211,15 @@
                        context:(void *)context {
     LOG(@"keyPath: %@", keyPath);
 
-    if ([keyPath isEqualToString:@"operationCount"]) {
-        NSObject *newValue = [change objectForKey:NSKeyValueChangeNewKey];
+    if ([keyPath isEqualToString: @"operationCount"]) {
+        NSObject *newValue = [change objectForKey: NSKeyValueChangeNewKey];
         if (newValue &&
             ([(NSNumber *)newValue unsignedIntegerValue] == 0))
         {
-            [_player addOperation:[IRMorsePlayerOperation playMorseFromString:_morseMessage
-                                                                withWordSpeed:[NSNumber numberWithInt:MORSE_WPM]]];
+            [_player addOperation: [IRMorsePlayerOperation playMorseFromString: _morseMessage
+                                                                 withWordSpeed: [NSNumber numberWithInt: MORSE_WPM]]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [_delegate morsePlayerViewControllerDidStartPlaying:self];
+                [_delegate morsePlayerViewControllerDidStartPlaying: self];
             });
         }
     }
@@ -242,25 +242,25 @@
         CGRect frame = _startButtonBox.frame;
         frame.origin.y += 70;
         _startButtonBox.frame = frame;
-        [UIView animateWithDuration:0.3
+        [UIView animateWithDuration: 0.3
                          animations:^{
             _startButtonBox.frame = original;
         }];
-        [[[UIAlertView alloc] initWithTitle:IRLocalizedString(@"Shhh!", @"alertview title before pressing start button in morseviewcontroller")
-                                    message:IRLocalizedString(@"Turn off your TV, audio devices, be quiet and press Start!", @"alertview message before pressing start button in morseviewcontroller")
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Shhh!", @"alertview title before pressing start button in morseviewcontroller")
+                                    message: IRLocalizedString(@"Turn off your TV, audio devices, be quiet and press Start!", @"alertview message before pressing start button in morseviewcontroller")
+                                   delegate: nil
+                          cancelButtonTitle: @"OK"
+                          otherButtonTitles: nil] show];
     }
 }
 
 - (IBAction)morseNotWorkingButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
-    IRWifiAdhocViewController *c = [[IRWifiAdhocViewController alloc] initWithNibName:@"IRWifiAdhocViewController" bundle:[IRHelper resources]];
+    IRWifiAdhocViewController *c = [[IRWifiAdhocViewController alloc] initWithNibName: @"IRWifiAdhocViewController" bundle: [IRHelper resources]];
     c.keys = _keys;
     c.delegate = _delegate;
-    [self.navigationController pushViewController:c animated:YES];
+    [self.navigationController pushViewController: c animated: YES];
 }
 
 - (IBAction)startButtonPressed:(id)sender {

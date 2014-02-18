@@ -19,8 +19,8 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [_peripheral removeObserver:self
-                     forKeyPath:@"peripheral"];
+    [_peripheral removeObserver: self
+                     forKeyPath: @"peripheral"];
 }
 
 - (void)setPeripheral:(IRPeripheral *)peripheral {
@@ -28,8 +28,8 @@
 
     if (_peripheral) {
         // don't double addObserver, nor removeObserver before addObserver
-        [_peripheral removeObserver:self
-                         forKeyPath:@"peripheral"];
+        [_peripheral removeObserver: self
+                         forKeyPath: @"peripheral"];
     }
     _peripheral = peripheral;
 
@@ -38,7 +38,7 @@
 
     // load image from internet
     NSString *url = _peripheral.iconURL;
-    [IRHTTPClient loadImage:url
+    [IRHTTPClient loadImage: url
           completionHandler:^(NSHTTPURLResponse *response, UIImage *image, NSError *error) {
         if (error || (response.statusCode != 200) || !image) {
             return;
@@ -46,14 +46,14 @@
         self.iconView.image = image;
     }];
 
-    [_peripheral addObserver:self
-                  forKeyPath:@"peripheral"
-                     options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
-                     context:NULL];
+    [_peripheral addObserver: self
+                  forKeyPath: @"peripheral"
+                     options: NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld
+                     context: NULL];
 }
 
 - (NSString *)detailLabelText {
-    return [NSString stringWithFormat:@"%@ %@", _peripheral.hostname, _peripheral.modelNameAndRevision];
+    return [NSString stringWithFormat: @"%@ %@", _peripheral.hostname, _peripheral.modelNameAndRevision];
 }
 
 + (CGFloat)height {

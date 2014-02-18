@@ -44,10 +44,10 @@
 #pragma mark - KVO
 
 + (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-    if ([key isEqualToString:@"isExecuting"] || [key isEqualToString:@"isFinished"]) {
+    if ([key isEqualToString: @"isExecuting"] || [key isEqualToString: @"isFinished"]) {
         return YES;
     }
-    return [super automaticallyNotifiesObserversForKey:key];
+    return [super automaticallyNotifiesObserversForKey: key];
 }
 
 - (BOOL)isConcurrent {

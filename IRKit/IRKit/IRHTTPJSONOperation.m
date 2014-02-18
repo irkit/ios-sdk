@@ -17,9 +17,9 @@
 
     // don't try to parse empty string
     if (data.length) {
-        object = [NSJSONSerialization JSONObjectWithData:data
-                                                 options:NSJSONReadingAllowFragments
-                                                   error:&error];
+        object = [NSJSONSerialization JSONObjectWithData: data
+                                                 options: NSJSONReadingAllowFragments
+                                                   error: &error];
         if (error) {
             LOG(@"JSON error: %@", error);
         }
