@@ -70,6 +70,7 @@
 		C7554F1B1749D61A00BDF920 /* IRConst.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7FAB0251746889000125BCB /* IRConst.h */; };
 		C7554F321749E65B00BDF920 /* IRPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F311749E65B00BDF920 /* IRPeripheral.m */; };
 		C7554F421749F2E000BDF920 /* IRPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = C7554F411749F2E000BDF920 /* IRPeripherals.m */; };
+		C758E3D318B5C97A000984A2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F718B21265009A5AB1 /* CoreTelephony.framework */; };
 		C75B5682174A405B00FFE5CB /* IRPeripheralCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */; };
 		C75B5685174A79DD00FFE5CB /* IRPeripherals.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F401749F2E000BDF920 /* IRPeripherals.h */; };
 		C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */ = {isa = PBXBuildFile; fileRef = C75B5686174A7AB100FFE5CB /* IRSignals.m */; };
@@ -446,6 +447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C758E3D318B5C97A000984A2 /* CoreTelephony.framework in Frameworks */,
 				C75CF06618506D7E0086ED4F /* MediaPlayer.framework in Frameworks */,
 				C75CF062185061180086ED4F /* SystemConfiguration.framework in Frameworks */,
 				C7756778184B23A100C6D4DB /* libPods.a in Frameworks */,
