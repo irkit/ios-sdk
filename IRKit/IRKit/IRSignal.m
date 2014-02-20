@@ -36,7 +36,6 @@
     NSMutableDictionary *ret = [self asPublicDictionary].mutableCopy;
     [ret addEntriesFromDictionary: @{
          @"name":         _name                    ? _name                    : [NSNull null],
-         @"receivedDate": _receivedDate            ? _receivedDate            : [NSNull null],
          @"hostname":     _hostname                ? _hostname                : [NSNull null],
          @"deviceid":     self.peripheral.deviceid ? self.peripheral.deviceid : [NSNull null],
          @"custom":       _custom                  ? _custom                  : [NSNull null],
@@ -52,10 +51,6 @@
                @"freq":         _frequency ? _frequency : [NSNull null],
                @"type":         @"single"
     };
-}
-
-- (NSComparisonResult)compareByReceivedDate:(IRSignal *)otherSignal {
-    return [otherSignal.receivedDate compare: _receivedDate];
 }
 
 #pragma mark - IRSendable protocol
@@ -112,15 +107,6 @@
         _frequency = dictionary[@"frequency"];
     }
 
-    // receivedDate arrives as a NSNumber of epoch time
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970: [dictionary[@"receivedDate"] doubleValue]];
-    if (date) {
-        _receivedDate = date;
-    }
-    else {
-        _receivedDate = [NSDate date];
-    }
-
     if (dictionary[@"hostname"]) {
         _hostname = dictionary[@"hostname"];
     }
@@ -136,7 +122,6 @@
     [coder encodeObject: _data forKey: @"d"];
     [coder encodeObject: _format forKey: @"fo"];
     [coder encodeObject: _frequency forKey: @"f"];
-    [coder encodeObject: _receivedDate forKey: @"r"];
     [coder encodeObject: _custom forKey: @"c"];
     [coder encodeObject: _hostname forKey: @"h"];
 }
@@ -148,7 +133,6 @@
         _data         = [coder decodeObjectForKey: @"d"];
         _format       = [coder decodeObjectForKey: @"fo"];
         _frequency    = [coder decodeObjectForKey: @"f"];
-        _receivedDate = [coder decodeObjectForKey: @"r"];
         _custom       = [coder decodeObjectForKey: @"c"];
         _hostname     = [coder decodeObjectForKey: @"h"];
     }

@@ -5,9 +5,6 @@
 
 @interface IRSignal : NSObject<IRSendable, NSCoding>
 
-/// Used to order IRSignal collection.
-- (NSComparisonResult)compareByReceivedDate:(IRSignal *)otherSignal;
-
 #pragma mark - included in asPublicDictionary
 
 @property (nonatomic) NSArray *data;
@@ -21,7 +18,6 @@
 #pragma mark - also included in asDictionary
 
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic) NSDate *receivedDate;
 @property (nonatomic) IRPeripheral *peripheral;
 @property (nonatomic, copy) NSString *hostname;
 @property (nonatomic) NSDictionary *custom;
