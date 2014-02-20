@@ -137,6 +137,7 @@
 		C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */; };
 		C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; };
 		C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; };
+		C7B5734A18B594E900949D12 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F718B21265009A5AB1 /* CoreTelephony.framework */; };
 		C7B741BA1803FA41005802A7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B741B81803FA22005802A7 /* libc++.dylib */; };
 		C7B741BD1803FB61005802A7 /* IRMorsePlayerOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BC1803FB61005802A7 /* IRMorsePlayerOperationQueue.m */; };
 		C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */; };
@@ -292,7 +293,7 @@
 		C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_prepare3@2x.png"; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalTests.m; sourceTree = "<group>"; };
-		C720E6F518B21244009A5AB1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		C720E6F518B21244009A5AB1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		C720E6F718B21265009A5AB1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		C721651C18521C80000BD43D /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C735040D17A029C30057D51B /* IRKitViewSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IRKitViewSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -446,6 +447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7B5734A18B594E900949D12 /* CoreTelephony.framework in Frameworks */,
 				C75CF06618506D7E0086ED4F /* MediaPlayer.framework in Frameworks */,
 				C75CF062185061180086ED4F /* SystemConfiguration.framework in Frameworks */,
 				C7756778184B23A100C6D4DB /* libPods.a in Frameworks */,
