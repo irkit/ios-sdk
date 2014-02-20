@@ -1,21 +1,6 @@
 #ifndef IRKit_IRConst_h
 #define IRKit_IRConst_h
 
-#pragma mark - NSNotification names
-
-// discovered unauthenticated peripheral
-#define IRKitDidDiscoverUnauthenticatedPeripheralNotification @"IRKit::DiscoveredUnauthenticated"
-
-// user authenticated peripheral for the 1st time
-#define IRKitDidAuthenticatePeripheralNotification            @"IRKit::Authenticated"
-
-// connected to peripheral and ready to send
-#define IRKitDidConnectPeripheralNotification                 @"IRKit::DidConnect"
-#define IRKitDidDisconnectPeripheralNotification              @"IRKit::DidDisconnect"
-#define IRKitDidReceiveSignalNotification                     @"IRKit::ReceivedSignal"
-
-#define IRKitSignalUserInfoKey                                @"signal"
-
 #pragma mark - UITableViewCell identifiers
 
 #define IRKitCellIdentifierSignal                             @"IRSignalCell"
@@ -36,9 +21,6 @@
 
 #define IRKitErrorDomain                                      @"irkit"
 #define IRKitErrorDomainHTTP                                  @"irkit.http"
-#define IRKIT_ERROR_CODE_NOT_READY                            1
-#define IRKIT_ERROR_CODE_DISCONNECTED                         2
-#define IRKIT_ERROR_CODE_C12C_NOT_FOUND                       3
 
 #define IRKitHTTPStatusCodeUnknown                            999
 
