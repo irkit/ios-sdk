@@ -17,9 +17,10 @@
 
 #pragma mark - also included in asDictionary
 
-@property (nonatomic, copy) NSString *name;
 @property (nonatomic) IRPeripheral *peripheral;
 @property (nonatomic, copy) NSString *hostname;
+
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic) NSDictionary *custom;
 
 @end

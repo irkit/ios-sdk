@@ -47,7 +47,20 @@
 
     NSArray* signals   = dictionary[ @"signals" ];
     NSArray* intervals = dictionary[ @"intervals" ];
-    return [self initWithSignals: signals andIntervals: intervals];
+    self = [self initWithSignals: signals andIntervals: intervals];
+
+    if (dictionary[@"name"]) {
+        _name = dictionary[@"name"];
+    }
+    else {
+        _name = @"unknown";
+    }
+
+    if (dictionary[@"custom"]) {
+        _custom = dictionary[@"custom"];
+    }
+
+    return self;
 }
 
 #pragma mark - IRSendable protocol
@@ -82,6 +95,20 @@
     }
 }
 
+- (NSDictionary*)asDictionary {
+    LOG_CURRENT_METHOD;
+
+    NSArray *signals = [IRHelper mapObjects: _signals usingBlock:^id (id obj, NSUInteger idx) {
+        return [obj asDictionary];
+    }];
+    return @{
+               @"name":      _name   ? _name   : [NSNull null],
+               @"custom":    _custom ? _custom : [NSNull null],
+               @"signals":   signals,
+               @"intervals": _intervals,
+    };
+}
+
 - (NSDictionary *)asPublicDictionary {
     LOG_CURRENT_METHOD;
 
@@ -95,22 +122,11 @@
     };
 }
 
-- (NSDictionary*)asDictionary {
-    LOG_CURRENT_METHOD;
-
-    NSArray *signals = [IRHelper mapObjects: _signals usingBlock:^id (id obj, NSUInteger idx) {
-        return [obj asDictionary];
-    }];
-    return @{
-               @"type":      @"sequence",
-               @"signals":   signals,
-               @"intervals": _intervals,
-    };
-}
-
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject: _name forKey: @"n"];
+    [coder encodeObject: _custom forKey: @"c"];
     [coder encodeObject: _signals forKey: @"s"];
     [coder encodeObject: _intervals forKey: @"i"];
 }
@@ -118,6 +134,8 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super init];
     if (self) {
+        _name      = [coder decodeObjectForKey: @"n"];
+        _custom    = [coder decodeObjectForKey: @"c"];
         _signals   = [coder decodeObjectForKey: @"s"];
         _intervals = [coder decodeObjectForKey: @"i"];
     }

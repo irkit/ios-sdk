@@ -46,10 +46,10 @@
 - (NSDictionary *)asPublicDictionary {
     LOG_CURRENT_METHOD;
     return @{
-               @"data":         _data      ? _data      : [NSNull null],
-               @"format":       _format    ? _format    : [NSNull null],
-               @"freq":         _frequency ? _frequency : [NSNull null],
-               @"type":         @"single"
+               @"data":   _data      ? _data      : [NSNull null],
+               @"format": _format    ? _format    : [NSNull null],
+               @"freq":   _frequency ? _frequency : [NSNull null],
+               @"type":   @"single"
     };
 }
 
@@ -129,12 +129,12 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super init];
     if (self) {
-        _name         = [coder decodeObjectForKey: @"n"];
-        _data         = [coder decodeObjectForKey: @"d"];
-        _format       = [coder decodeObjectForKey: @"fo"];
-        _frequency    = [coder decodeObjectForKey: @"f"];
-        _custom       = [coder decodeObjectForKey: @"c"];
-        _hostname     = [coder decodeObjectForKey: @"h"];
+        _name      = [coder decodeObjectForKey: @"n"];
+        _data      = [coder decodeObjectForKey: @"d"];
+        _format    = [coder decodeObjectForKey: @"fo"];
+        _frequency = [coder decodeObjectForKey: @"f"];
+        _custom    = [coder decodeObjectForKey: @"c"];
+        _hostname  = [coder decodeObjectForKey: @"h"];
     }
     return self;
 }
