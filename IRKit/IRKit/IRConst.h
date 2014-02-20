@@ -27,6 +27,6 @@
 #pragma mark - URLs
 
 #define STATICENDPOINT_BASE                                   @"http://getirkit.com"
-#define APIENDPOINT_BASE                                      @"http://api.getirkit.com"
+#define APIENDPOINT_BASE                                      @"https://api.getirkit.com"
 
 #endif // ifndef IRKit_IRConst_h
