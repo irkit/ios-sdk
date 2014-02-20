@@ -33,7 +33,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = IRLocalizedString(@"Waiting for Signal ...", @"title of IRNewSignalScene1");
+    self.title                            = IRLocalizedString(@"Waiting for Signal ...", @"title of IRNewSignalScene1");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                                   target: self
@@ -45,6 +45,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewWillAppear: animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    LOG_CURRENT_METHOD;
+    [super viewDidAppear: animated];
 
     __weak IRNewSignalScene1ViewController *_self = self;
     _waiter = [IRHTTPClient waitForSignalWithCompletion:^(NSHTTPURLResponse *res, IRSignal *signal, NSError *error) {
@@ -55,11 +60,6 @@
             [_self cancelButtonPressed: nil];
         }
     }];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    LOG_CURRENT_METHOD;
-    [super viewDidAppear: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
