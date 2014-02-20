@@ -1,13 +1,16 @@
 PODS:
   - ISHTTPOperation (1.1.0)
+  - OHHTTPStubs (3.0.4)
   - Reachability (3.1.1)
 
 DEPENDENCIES:
   - ISHTTPOperation (~> 1.1.0)
+  - OHHTTPStubs (~> 3.0.4)
   - Reachability (~> 3.1.1)
 
 SPEC CHECKSUMS:
   ISHTTPOperation: a6c80ecc70ddb92fdd7f9dfa290dead9b74eafa2
+  OHHTTPStubs: 711cd3376438340d0c2538f66d6e9c1b3e8c5b7d
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
 
 COCOAPODS: 0.29.0

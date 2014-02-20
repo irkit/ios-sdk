@@ -4,3 +4,7 @@ pod 'Reachability', '~> 3.1.1'
 workspace 'IRKit'
 xcodeproj 'IRKit/IRKit'
 link_with ['Minimal','IRKitViewSamples','IRKitTests']
+
+target 'IRKitTests', :exclusive => true do
+  pod 'OHHTTPStubs', '~> 3.0.4'
+end

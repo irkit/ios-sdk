@@ -79,9 +79,13 @@
     q.completion = completion;
 
     for (IRSignal *signal in self.signals) {
+        __weak IRSignalSendOperationQueue *_q = q;
         IRSignalSendOperation *op = [[IRSignalSendOperation alloc] initWithSignal: signal
                                                                        completion:^(NSError *error) {
             LOG(@"error: %@", error);
+            if (error) {
+                _q.error = error;
+            }
         }];
         [q addOperation: op];
     }
