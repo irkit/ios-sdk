@@ -63,7 +63,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="hro-ef-BRm" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="5Qt-gB-7eF"/>
                 <constraint firstAttribute="centerX" secondItem="138" secondAttribute="centerX" id="Jyn-iF-JYg"/>
