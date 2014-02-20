@@ -10,6 +10,7 @@
 #import "Log.h"
 #import "IRSignalSendOperationQueue.h"
 #import "IRSignalSendOperation.h"
+#import "IRHelper.h"
 
 @interface IRSignalSequence ()
 
@@ -36,7 +37,20 @@
     return self;
 }
 
-#pragma mark - IRSendalbe protocol
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+    LOG_CURRENT_METHOD;
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+    NSAssert( [dictionary[@"type"] isEqualToString: @"sequence"], @"dictionary.type must be \"sequence \"" );
+
+    NSArray* signals   = dictionary[ @"signals" ];
+    NSArray* intervals = dictionary[ @"intervals" ];
+    return [self initWithSignals: signals andIntervals: intervals];
+}
+
+#pragma mark - IRSendable protocol
 
 - (void)sendWithCompletion:(void (^)(NSError *))completion {
     LOG_CURRENT_METHOD;
@@ -66,7 +80,48 @@
             [q addOperation: b];
         }
     }
+}
 
+- (NSDictionary *)asPublicDictionary {
+    LOG_CURRENT_METHOD;
+
+    NSArray *signals = [IRHelper mapObjects: _signals usingBlock:^id (id obj, NSUInteger idx) {
+        return [obj asPublicDictionary];
+    }];
+    return @{
+               @"type":      @"sequence",
+               @"signals":   signals,
+               @"intervals": _intervals,
+    };
+}
+
+- (NSDictionary*)asDictionary {
+    LOG_CURRENT_METHOD;
+
+    NSArray *signals = [IRHelper mapObjects: _signals usingBlock:^id (id obj, NSUInteger idx) {
+        return [obj asDictionary];
+    }];
+    return @{
+               @"type":      @"sequence",
+               @"signals":   signals,
+               @"intervals": _intervals,
+    };
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject: _signals forKey: @"s"];
+    [coder encodeObject: _intervals forKey: @"i"];
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super init];
+    if (self) {
+        _signals   = [coder decodeObjectForKey: @"s"];
+        _intervals = [coder decodeObjectForKey: @"i"];
+    }
+    return self;
 }
 
 @end

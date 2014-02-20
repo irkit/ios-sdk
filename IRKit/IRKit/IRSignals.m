@@ -56,78 +56,12 @@
     [d synchronize];
 }
 
-- (NSString *)JSONRepresentation {
-    LOG_CURRENT_METHOD;
-
-    NSArray *signals = [IRHelper mapObjects: self.signals
-                                 usingBlock: (id) ^ (id obj, NSUInteger idx) {
-                            return ((IRSignal *)obj).asDictionary;
-                        }];
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: signals
-                                                       options: 0
-                                                         error: &error];
-    NSString *json = [[NSString alloc] initWithData: jsonData
-                                           encoding: NSUTF8StringEncoding];
-    return json;
-}
-
-- (void)sendSequentiallyWithCompletion:(void (^)(NSError *))completion {
-    LOG_CURRENT_METHOD;
-
-    IRSignalSendOperationQueue *q = [[IRSignalSendOperationQueue alloc] init];
-    q.completion = completion;
-
-    for (IRSignal *signal in self.signals) {
-        __weak IRSignalSendOperationQueue *_q = q;
-        IRSignalSendOperation *op             = [[IRSignalSendOperation alloc] initWithSignal: signal
-                                                                                   completion:^(NSError *error) {
-            LOG(@"error: %@", error);
-            if (error) {
-                _q.error = error;
-            }
-        }];
-        [q addOperation: op];
-    }
-}
-
--(void)sendSequentiallyWithIntervals:(NSArray*)intervals completion:(void (^)(NSError *))completion {
-    LOG_CURRENT_METHOD;
-    NSAssert( self.countOfSignals == (intervals.count + 1), @"number of intervals should be `countofSignals - 1`" );
-
-    IRSignalSendOperationQueue *q = [[IRSignalSendOperationQueue alloc] init];
-    q.completion = completion;
-
-    for (int i=0; i<self.signals.count; i++) {
-        IRSignal *signal                      = self.signals[ i ];
-        __weak IRSignalSendOperationQueue *_q = q;
-        IRSignalSendOperation *op             = [[IRSignalSendOperation alloc] initWithSignal: signal
-                                                                                   completion:^(NSError *error) {
-            LOG(@"error: %@", error);
-            if (error) {
-                _q.error = error;
-            }
-        }];
-        [q addOperation: op];
-
-        if (i != self.signals.count - 1) {
-            NSTimeInterval interval = ((NSNumber*)intervals[ i ]).doubleValue;
-            NSBlockOperation *b     = [NSBlockOperation blockOperationWithBlock:^{
-                LOG( @"will sleep for: %.1f sec", interval );
-                [NSThread sleepForTimeInterval: interval];
-                LOG( @"slept for: %.1f sec", interval );
-            }];
-            [q addOperation: b];
-        }
-    }
-}
-
 - (id)objectAtIndex:(NSUInteger)index {
     LOG(@"index: %d", index);
     return _signals[ index ];
 }
 
-- (NSUInteger)indexOfSignal:(IRSignal *)signal {
+- (NSUInteger)indexOfSignal:(id<IRSendable>)signal {
     LOG_CURRENT_METHOD;
 
     return [_signals indexOfObject: signal];
@@ -143,15 +77,15 @@
     return [_signals count];
 }
 
-- (IRSignal *)objectInSignalsAtIndex:(NSUInteger)index {
+- (id<IRSendable>)objectInSignalsAtIndex:(NSUInteger)index {
     return _signals[ index ];
 }
 
-- (void)addSignalsObject:(IRSignal *)object {
+- (void)addSignalsObject:(id<IRSendable>)object {
     [_signals addObject: object];
 }
 
-- (void)insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index {
+- (void)insertObject:(id<IRSendable>)object inSignalsAtIndex:(NSUInteger)index {
     [_signals insertObject: object atIndex: index];
 }
 

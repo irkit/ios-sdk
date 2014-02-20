@@ -37,6 +37,37 @@
     [super tearDown];
 }
 
+
+- (void)testRound {
+    NSDictionary *signalInfo = @{
+        @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
+        @"format": @"raw",
+        @"freq": @38,
+        @"type": @"single",
+    };
+    IRSignal *signal           = [[IRSignal alloc] initWithDictionary: signalInfo];
+    IRSignalSequence *sequence = [[IRSignalSequence alloc] initWithSignals: @[ signal ] andIntervals: @[]];
+    XCTAssertNotNil(sequence);
+
+    NSDictionary *signalInfo2 = sequence.asPublicDictionary;
+    NSDictionary *expected    = @{
+        @"type": @"sequence",
+        @"signals": @[ signalInfo ],
+        @"intervals": @[],
+    };
+    XCTAssertEqualObjects(signalInfo2, expected);
+}
+
+- (void)testInitThrows {
+    IRSignal *signal = [IRKitTests makeTestSignal];
+    signal.peripheral = [IRKitTests makeTestPeripheral];
+    IRSignal *signal2 = [IRKitTests makeTestSignal];
+    signal2.peripheral = [IRKitTests makeTestPeripheral];
+    NSArray *signals = @[ signal, signal2 ];
+
+    XCTAssertThrows( [[IRSignalSequence alloc] initWithSignals: signals andIntervals: @[] ] );
+}
+
 - (void)testInitAndSend1 {
     IRSignal *signal = [IRKitTests makeTestSignal];
     signal.peripheral = [IRKitTests makeTestPeripheral];

@@ -50,6 +50,7 @@
                @"data":         _data      ? _data      : [NSNull null],
                @"format":       _format    ? _format    : [NSNull null],
                @"freq":         _frequency ? _frequency : [NSNull null],
+               @"type":         @"single"
     };
 }
 
@@ -128,7 +129,7 @@
     }
 }
 
-#pragma mark - NSKeyedArchiving
+#pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject: _name forKey: @"n"];

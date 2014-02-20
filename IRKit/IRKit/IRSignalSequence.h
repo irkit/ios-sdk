@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IRSignal.h"
 
-@interface IRSignalSequence : NSObject<IRSendable>
+@interface IRSignalSequence : NSObject<IRSendable,NSCoding>
 
 - (instancetype)initWithSignals:(NSArray*)signals andIntervals:(NSArray*)intervals;
 

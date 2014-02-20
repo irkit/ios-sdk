@@ -20,6 +20,7 @@
         @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
         @"format": @"raw",
         @"freq": @38,
+        @"type": @"single",
     };
     return [[IRSignal alloc] initWithDictionary: signalInfo];
 }
