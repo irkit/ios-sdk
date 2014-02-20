@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
 #import "IRPeripheral.h"
 
-@interface IRSignal : NSObject
+@protocol IRSendable;
+
+@interface IRSignal : NSObject<IRSendable>
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
@@ -18,11 +20,6 @@
 
 /// Used to order IRSignal collection.
 - (NSComparisonResult)compareByReceivedDate:(IRSignal *)otherSignal;
-
-/// Send this!
-/// You need to set `peripheral` or `hostname` readwrite property,
-/// to specify from which IRKit device to send this.
-- (void)sendWithCompletion:(void(^) (NSError * error))block;
 
 #pragma mark - included in asPublicDictionary
 
@@ -41,5 +38,15 @@
 @property (nonatomic) IRPeripheral *peripheral;
 @property (nonatomic, copy) NSString *hostname;
 @property (nonatomic) NSDictionary *custom;
+
+@end
+
+@protocol IRSendable
+
+@required
+/// Send this!
+/// You need to set `peripheral` or `hostname` readwrite property,
+/// to specify from which IRKit device to send this.
+- (void)sendWithCompletion:(void (^) (NSError * error))block;
 
 @end

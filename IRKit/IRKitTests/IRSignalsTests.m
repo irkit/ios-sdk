@@ -11,12 +11,8 @@
 #import "IRSignals.h"
 #import "IRPeripherals.h"
 #import "Log.h"
-#define ASYNC_TEST_INIT __block BOOL isFinished = NO
-#define ASYNC_TEST_WAIT while (!isFinished) { \
-        [[NSRunLoop currentRunLoop] runUntilDate: [NSDate dateWithTimeIntervalSinceNow: 0.5]]; \
-} \
-    XCTAssertTrue(isFinished)
-#define ASYNC_TEST_FINISHED isFinished = YES
+#import "XCTestCase+Async.h"
+#import "IRKitTests.h"
 
 @interface IRSignalsTests : XCTestCase
 
@@ -41,52 +37,34 @@
     [super tearDown];
 }
 
-- (IRSignal*)makeTestSignal {
-    NSDictionary *signalInfo = @{
-        @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
-        @"format": @"raw",
-        @"freq": @38,
-    };
-    return [[IRSignal alloc] initWithDictionary: signalInfo];
-}
-
-- (IRPeripheral*)makeTestPeripheral {
-    IRPeripherals *peripherals = [[IRPeripherals alloc] init];
-    return [peripherals savePeripheralWithName: @"IRKitTEST" deviceid: @"xxx"];
-}
-
 - (void)testSendSequentiallyWithCompletion {
-    ASYNC_TEST_INIT;
-
     IRSignals *signals = [[IRSignals alloc] init];
-    IRSignal *signal   = [self makeTestSignal];
-    signal.peripheral = [self makeTestPeripheral];
+    IRSignal *signal   = [IRKitTests makeTestSignal];
+    signal.peripheral = [IRKitTests makeTestPeripheral];
     [signals addSignalsObject: signal];
 
     [signals sendSequentiallyWithCompletion:^(NSError *error) {
         LOG(@"error: %@", error);
         XCTAssertNil(error);
-        ASYNC_TEST_FINISHED;
+        [self stopWaiting];
     }];
 
-    ASYNC_TEST_WAIT;
+    [self startWaiting];
 }
 
 - (void)testSendSequentiallyWithIntervalsCompletionThrows {
     IRSignals *signals = [[IRSignals alloc] init];
-    IRSignal *signal   = [self makeTestSignal];
-    signal.peripheral = [self makeTestPeripheral];
+    IRSignal *signal   = [IRKitTests makeTestSignal];
+    signal.peripheral = [IRKitTests makeTestPeripheral];
     [signals addSignalsObject: signal];
 
     XCTAssertThrows( [signals sendSequentiallyWithIntervals: @[ @0 ] completion:^(NSError *error) {}] );
 }
 
 - (void)testSendSequentiallyWithIntervalsCompletion {
-    ASYNC_TEST_INIT;
-
     IRSignals *signals = [[IRSignals alloc] init];
-    IRSignal *signal   = [self makeTestSignal];
-    signal.peripheral = [self makeTestPeripheral];
+    IRSignal *signal   = [IRKitTests makeTestSignal];
+    signal.peripheral = [IRKitTests makeTestPeripheral];
     [signals addSignalsObject: signal];
     [signals addSignalsObject: signal];
     [signals addSignalsObject: signal];
@@ -94,16 +72,16 @@
     [signals sendSequentiallyWithIntervals: @[ @0, @0 ] completion:^(NSError *error) {
         LOG(@"error: %@", error);
         XCTAssertNil(error);
-        ASYNC_TEST_FINISHED;
+        [self stopWaiting];
     }];
 
-    ASYNC_TEST_WAIT;
+    [self startWaiting];
 }
 
 - (void)testSaveAndRestore {
     IRSignals *signals = [[IRSignals alloc] init];
-    IRSignal *signal   = [self makeTestSignal];
-    signal.peripheral = [self makeTestPeripheral];
+    IRSignal *signal   = [IRKitTests makeTestSignal];
+    signal.peripheral = [IRKitTests makeTestPeripheral];
     [signals addSignalsObject: signal];
 
     NSData *data = signals.data;

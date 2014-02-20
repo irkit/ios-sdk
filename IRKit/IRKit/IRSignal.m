@@ -57,6 +57,8 @@
     return [otherSignal.receivedDate compare: _receivedDate];
 }
 
+#pragma mark - IRSendable protocol
+
 - (void)sendWithCompletion:(void (^)(NSError *error))completion {
     LOG_CURRENT_METHOD;
 
@@ -122,7 +124,7 @@
         _hostname = dictionary[@"hostname"];
     }
     if (dictionary[@"custom"]) {
-        _custom   = dictionary[@"custom"];
+        _custom = dictionary[@"custom"];
     }
 }
 
