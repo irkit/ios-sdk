@@ -100,4 +100,18 @@
     ASYNC_TEST_WAIT;
 }
 
+- (void)testSaveAndRestore {
+    IRSignals *signals = [[IRSignals alloc] init];
+    IRSignal *signal   = [self makeTestSignal];
+    signal.peripheral = [self makeTestPeripheral];
+    [signals addSignalsObject: signal];
+
+    NSData *data = signals.data;
+    XCTAssertNotNil(data);
+
+    IRSignals *signals2 = [[IRSignals alloc] init];
+    [signals2 loadFromData: data];
+    XCTAssertEqual(signals2.countOfSignals, (NSUInteger)1);
+}
+
 @end
