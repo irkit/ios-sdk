@@ -72,4 +72,32 @@
     ASYNC_TEST_WAIT;
 }
 
+- (void)testSendSequentiallyWithIntervalsCompletionThrows {
+    IRSignals *signals = [[IRSignals alloc] init];
+    IRSignal *signal   = [self makeTestSignal];
+    signal.peripheral = [self makeTestPeripheral];
+    [signals addSignalsObject: signal];
+
+    XCTAssertThrows( [signals sendSequentiallyWithIntervals: @[ @0 ] completion:^(NSError *error) {}] );
+}
+
+- (void)testSendSequentiallyWithIntervalsCompletion {
+    ASYNC_TEST_INIT;
+
+    IRSignals *signals = [[IRSignals alloc] init];
+    IRSignal *signal   = [self makeTestSignal];
+    signal.peripheral = [self makeTestPeripheral];
+    [signals addSignalsObject: signal];
+    [signals addSignalsObject: signal];
+    [signals addSignalsObject: signal];
+
+    [signals sendSequentiallyWithIntervals: @[ @0, @0 ] completion:^(NSError *error) {
+        LOG(@"error: %@", error);
+        XCTAssertNil(error);
+        ASYNC_TEST_FINISHED;
+    }];
+
+    ASYNC_TEST_WAIT;
+}
+
 @end

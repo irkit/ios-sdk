@@ -44,7 +44,7 @@
 - (void)loadFromStandardUserDefaultsKey:(NSString *)key {
     LOG(@"key: %@", key);
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-    NSData *data = [d objectForKey: key];
+    NSData *data      = [d objectForKey: key];
     [self loadFromData: data];
 }
 
@@ -80,14 +80,45 @@
 
     for (IRSignal *signal in self.signals) {
         __weak IRSignalSendOperationQueue *_q = q;
-        IRSignalSendOperation *op = [[IRSignalSendOperation alloc] initWithSignal: signal
-                                                                       completion:^(NSError *error) {
+        IRSignalSendOperation *op             = [[IRSignalSendOperation alloc] initWithSignal: signal
+                                                                                   completion:^(NSError *error) {
             LOG(@"error: %@", error);
             if (error) {
                 _q.error = error;
             }
         }];
         [q addOperation: op];
+    }
+}
+
+-(void)sendSequentiallyWithIntervals:(NSArray*)intervals completion:(void (^)(NSError *))completion {
+    LOG_CURRENT_METHOD;
+    NSAssert( self.countOfSignals == (intervals.count + 1), @"number of intervals should be `countofSignals - 1`" );
+
+    IRSignalSendOperationQueue *q = [[IRSignalSendOperationQueue alloc] init];
+    q.completion = completion;
+
+    for (int i=0; i<self.signals.count; i++) {
+        IRSignal *signal                      = self.signals[ i ];
+        __weak IRSignalSendOperationQueue *_q = q;
+        IRSignalSendOperation *op             = [[IRSignalSendOperation alloc] initWithSignal: signal
+                                                                                   completion:^(NSError *error) {
+            LOG(@"error: %@", error);
+            if (error) {
+                _q.error = error;
+            }
+        }];
+        [q addOperation: op];
+
+        if (i != self.signals.count - 1) {
+            NSTimeInterval interval = ((NSNumber*)intervals[ i ]).doubleValue;
+            NSBlockOperation *b     = [NSBlockOperation blockOperationWithBlock:^{
+                LOG( @"will sleep for: %.1f sec", interval );
+                [NSThread sleepForTimeInterval: interval];
+                LOG( @"slept for: %.1f sec", interval );
+            }];
+            [q addOperation: b];
+        }
     }
 }
 

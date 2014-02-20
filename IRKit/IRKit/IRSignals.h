@@ -10,7 +10,8 @@
 - (void)loadFromStandardUserDefaultsKey:(NSString *)key;
 - (void)saveToStandardUserDefaultsWithKey:(NSString *)key;
 - (NSString *)JSONRepresentation;
-- (void)sendSequentiallyWithCompletion:(void(^) (NSError * error))completion;
+- (void)sendSequentiallyWithCompletion:(void (^) (NSError * error))completion;
+- (void)sendSequentiallyWithIntervals:(NSArray*)intervals completion:(void (^)(NSError *))completion;
 - (NSUInteger)indexOfSignal:(IRSignal *)signal;
 
 #pragma mark - Key Value Coding - Mutable Ordered To-Many Accessors
