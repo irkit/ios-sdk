@@ -89,9 +89,6 @@
     if (dictionary[@"name"]) {
         _name = dictionary[@"name"];
     }
-    else {
-        _name = @"unknown";
-    }
     if (dictionary[@"data"]) {
         _data = dictionary[@"data"];
     }
