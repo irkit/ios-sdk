@@ -36,7 +36,6 @@
     NSMutableDictionary *ret = [self asPublicDictionary].mutableCopy;
     [ret addEntriesFromDictionary: @{
          @"name":         _name                    ? _name                    : [NSNull null],
-         @"receivedDate": _receivedDate            ? _receivedDate            : [NSNull null],
          @"hostname":     _hostname                ? _hostname                : [NSNull null],
          @"deviceid":     self.peripheral.deviceid ? self.peripheral.deviceid : [NSNull null],
          @"custom":       _custom                  ? _custom                  : [NSNull null],
@@ -47,15 +46,14 @@
 - (NSDictionary *)asPublicDictionary {
     LOG_CURRENT_METHOD;
     return @{
-               @"data":         _data      ? _data      : [NSNull null],
-               @"format":       _format    ? _format    : [NSNull null],
-               @"freq":         _frequency ? _frequency : [NSNull null],
+               @"data":   _data      ? _data      : [NSNull null],
+               @"format": _format    ? _format    : [NSNull null],
+               @"freq":   _frequency ? _frequency : [NSNull null],
+               @"type":   @"single"
     };
 }
 
-- (NSComparisonResult)compareByReceivedDate:(IRSignal *)otherSignal {
-    return [otherSignal.receivedDate compare: _receivedDate];
-}
+#pragma mark - IRSendable protocol
 
 - (void)sendWithCompletion:(void (^)(NSError *error))completion {
     LOG_CURRENT_METHOD;
@@ -91,9 +89,6 @@
     if (dictionary[@"name"]) {
         _name = dictionary[@"name"];
     }
-    else {
-        _name = @"unknown";
-    }
     if (dictionary[@"data"]) {
         _data = dictionary[@"data"];
     }
@@ -109,31 +104,21 @@
         _frequency = dictionary[@"frequency"];
     }
 
-    // receivedDate arrives as a NSNumber of epoch time
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970: [dictionary[@"receivedDate"] doubleValue]];
-    if (date) {
-        _receivedDate = date;
-    }
-    else {
-        _receivedDate = [NSDate date];
-    }
-
     if (dictionary[@"hostname"]) {
         _hostname = dictionary[@"hostname"];
     }
     if (dictionary[@"custom"]) {
-        _custom   = dictionary[@"custom"];
+        _custom = dictionary[@"custom"];
     }
 }
 
-#pragma mark - NSKeyedArchiving
+#pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject: _name forKey: @"n"];
     [coder encodeObject: _data forKey: @"d"];
     [coder encodeObject: _format forKey: @"fo"];
     [coder encodeObject: _frequency forKey: @"f"];
-    [coder encodeObject: _receivedDate forKey: @"r"];
     [coder encodeObject: _custom forKey: @"c"];
     [coder encodeObject: _hostname forKey: @"h"];
 }
@@ -141,13 +126,12 @@
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super init];
     if (self) {
-        _name         = [coder decodeObjectForKey: @"n"];
-        _data         = [coder decodeObjectForKey: @"d"];
-        _format       = [coder decodeObjectForKey: @"fo"];
-        _frequency    = [coder decodeObjectForKey: @"f"];
-        _receivedDate = [coder decodeObjectForKey: @"r"];
-        _custom       = [coder decodeObjectForKey: @"c"];
-        _hostname     = [coder decodeObjectForKey: @"h"];
+        _name      = [coder decodeObjectForKey: @"n"];
+        _data      = [coder decodeObjectForKey: @"d"];
+        _format    = [coder decodeObjectForKey: @"fo"];
+        _frequency = [coder decodeObjectForKey: @"f"];
+        _custom    = [coder decodeObjectForKey: @"c"];
+        _hostname  = [coder decodeObjectForKey: @"h"];
     }
     return self;
 }

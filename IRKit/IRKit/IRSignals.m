@@ -44,7 +44,7 @@
 - (void)loadFromStandardUserDefaultsKey:(NSString *)key {
     LOG(@"key: %@", key);
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-    NSData *data = [d objectForKey: key];
+    NSData *data      = [d objectForKey: key];
     [self loadFromData: data];
 }
 
@@ -56,43 +56,12 @@
     [d synchronize];
 }
 
-- (NSString *)JSONRepresentation {
-    LOG_CURRENT_METHOD;
-
-    NSArray *signals = [IRHelper mapObjects: self.signals
-                                 usingBlock: (id) ^ (id obj, NSUInteger idx) {
-                            return ((IRSignal *)obj).asDictionary;
-                        }];
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: signals
-                                                       options: 0
-                                                         error: &error];
-    NSString *json = [[NSString alloc] initWithData: jsonData
-                                           encoding: NSUTF8StringEncoding];
-    return json;
-}
-
-- (void)sendSequentiallyWithCompletion:(void (^)(NSError *))completion {
-    LOG_CURRENT_METHOD;
-
-    IRSignalSendOperationQueue *q = [[IRSignalSendOperationQueue alloc] init];
-    q.completion = completion;
-
-    for (IRSignal *signal in self.signals) {
-        IRSignalSendOperation *op = [[IRSignalSendOperation alloc] initWithSignal: signal
-                                                                       completion:^(NSError *error) {
-            LOG(@"error: %@", error);
-        }];
-        [q addOperation: op];
-    }
-}
-
 - (id)objectAtIndex:(NSUInteger)index {
     LOG(@"index: %d", index);
     return _signals[ index ];
 }
 
-- (NSUInteger)indexOfSignal:(IRSignal *)signal {
+- (NSUInteger)indexOfSignal:(id<IRSendable>)signal {
     LOG_CURRENT_METHOD;
 
     return [_signals indexOfObject: signal];
@@ -108,15 +77,15 @@
     return [_signals count];
 }
 
-- (IRSignal *)objectInSignalsAtIndex:(NSUInteger)index {
+- (id<IRSendable>)objectInSignalsAtIndex:(NSUInteger)index {
     return _signals[ index ];
 }
 
-- (void)addSignalsObject:(IRSignal *)object {
+- (void)addSignalsObject:(id<IRSendable>)object {
     [_signals addObject: object];
 }
 
-- (void)insertObject:(IRSignal *)object inSignalsAtIndex:(NSUInteger)index {
+- (void)insertObject:(id<IRSendable>)object inSignalsAtIndex:(NSUInteger)index {
     [_signals insertObject: object atIndex: index];
 }
 
