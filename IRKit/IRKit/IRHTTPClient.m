@@ -345,6 +345,11 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 completion(res, object, nil);
                 return YES;         // stop long polling
 
+            case 400:
+                // must be a bug (or from IRKitViewSamples)
+                completion(res, object, [self errorFromResponse: res body: object]);
+                return YES;
+
             case 408:
                 // retry
                 return NO;
