@@ -35,7 +35,6 @@
 		C707ECD2184C7C6E00AC5F0B /* icn_navibar_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */; };
 		C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */; };
 		C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */; };
-		C707ECD6184C84CE00AC5F0B /* img_prepare3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */; };
 		C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C752D70617462C7B008B644A /* IRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; };
 		C720E6EC18B2108A009A5AB1 /* IRSignalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */; };
@@ -102,8 +101,6 @@
 		C77E1977187859D700B457C3 /* IRGuideWifiViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77E1975187859D700B457C3 /* IRGuideWifiViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C77E1978187859D700B457C3 /* IRGuideWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E1976187859D700B457C3 /* IRGuideWifiViewController.m */; };
 		C77E197918785D2D00B457C3 /* IRGuideWifiViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77E1975187859D700B457C3 /* IRGuideWifiViewController.h */; };
-		C77E197E187861B900B457C3 /* adhoc_guide_ja.png in Resources */ = {isa = PBXBuildFile; fileRef = C77E197C187861B900B457C3 /* adhoc_guide_ja.png */; };
-		C77E197F187861B900B457C3 /* adhoc_guide_en.png in Resources */ = {isa = PBXBuildFile; fileRef = C77E197D187861B900B457C3 /* adhoc_guide_en.png */; };
 		C77E1980187861F000B457C3 /* IRGuideWifiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C77E1982187861F000B457C3 /* IRGuideWifiViewController.xib */; };
 		C78F6FE1182B8134002AAC7B /* IRWifiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */; };
 		C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78F6FE5182B8D89002AAC7B /* IREditCell.xib */; };
@@ -226,6 +223,13 @@
 			remoteGlobalIDString = C79DE3B8176F25260088679E;
 			remoteInfo = IRKitResources;
 		};
+		C7526FA918C75D80000A3F54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C752D6F617462C7B008B644A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C752D6FD17462C7B008B644A;
+			remoteInfo = IRKit;
+		};
 		C79DE3C8176F271A0088679E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C752D6F617462C7B008B644A /* Project object */;
@@ -297,7 +301,6 @@
 		C707ECCC184C7C6D00AC5F0B /* icn_navibar_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_back@2x.png"; sourceTree = "<group>"; };
 		C707ECCD184C7C6D00AC5F0B /* icn_navibar_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_cancel@2x.png"; sourceTree = "<group>"; };
 		C707ECCE184C7C6E00AC5F0B /* icn_navibar_camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_camera@2x.png"; sourceTree = "<group>"; };
-		C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_prepare3@2x.png"; sourceTree = "<group>"; };
 		C714890E17C46D6E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalTests.m; sourceTree = "<group>"; };
 		C720E6F518B21244009A5AB1 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
@@ -360,10 +363,7 @@
 		C7756777184B23A100C6D4DB /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "../Debug-iphonesimulator/libPods.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C77E1975187859D700B457C3 /* IRGuideWifiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRGuideWifiViewController.h; sourceTree = "<group>"; };
 		C77E1976187859D700B457C3 /* IRGuideWifiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRGuideWifiViewController.m; sourceTree = "<group>"; };
-		C77E197C187861B900B457C3 /* adhoc_guide_ja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adhoc_guide_ja.png; sourceTree = "<group>"; };
-		C77E197D187861B900B457C3 /* adhoc_guide_en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adhoc_guide_en.png; sourceTree = "<group>"; };
 		C77E1981187861F000B457C3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRGuideWifiViewController.xib; sourceTree = "<group>"; };
-		C77E1990187873AB00B457C3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/IRGuideWifiViewController.xib; sourceTree = "<group>"; };
 		C780B3BB185715230023B745 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Project.xcconfig; path = ../Project.xcconfig; sourceTree = "<group>"; };
 		C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWifiEditViewController.m; sourceTree = "<group>"; };
 		C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRWifiEditViewController.h; sourceTree = "<group>"; };
@@ -682,10 +682,8 @@
 			children = (
 				C7B4EBD118C715C500AB2E46 /* img_connect_01@2x.png */,
 				C7B4EBD218C715C500AB2E46 /* img_connect_02@2x.png */,
-				C7B4EBD318C715C500AB2E46 /* icn_chart_02@2x.png */,
 				C7B4EBD418C715C500AB2E46 /* icn_chart_01@2x.png */,
-				C77E197C187861B900B457C3 /* adhoc_guide_ja.png */,
-				C77E197D187861B900B457C3 /* adhoc_guide_en.png */,
+				C7B4EBD318C715C500AB2E46 /* icn_chart_02@2x.png */,
 				C79CCB4E185356EA00ECB707 /* anime_20@2x.png */,
 				C79CCB4F185356EA00ECB707 /* anime_19@2x.png */,
 				C79CCB50185356EA00ECB707 /* anime_18@2x.png */,
@@ -709,7 +707,6 @@
 				C721651B18521C80000BD43D /* Localizable.strings */,
 				C7AC32111850A64200BB190D /* img_remote3@2x.png */,
 				C75CF063185062600086ED4F /* img_powerup3@2x.png */,
-				C707ECD5184C84CE00AC5F0B /* img_prepare3@2x.png */,
 				C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */,
 				C707ECCA184C7C6D00AC5F0B /* icn_check2@2x.png */,
 				C7A1350617AA5D7300C8679B /* icn_device@2x.png */,
@@ -859,6 +856,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C7526FAA18C75D80000A3F54 /* PBXTargetDependency */,
 				C735043917A038FB0057D51B /* PBXTargetDependency */,
 			);
 			name = IRKitViewSamples;
@@ -988,7 +986,6 @@
 				C707ECD1184C7C6E00AC5F0B /* icn_navibar_add@2x.png in Resources */,
 				C7B4EBD718C715C500AB2E46 /* icn_chart_02@2x.png in Resources */,
 				C707ECD2184C7C6E00AC5F0B /* icn_navibar_back@2x.png in Resources */,
-				C707ECD6184C84CE00AC5F0B /* img_prepare3@2x.png in Resources */,
 				C7B4EBD518C715C500AB2E46 /* img_connect_01@2x.png in Resources */,
 				C79CCB6F185356EA00ECB707 /* anime_07@2x.png in Resources */,
 				C75CF064185062600086ED4F /* img_powerup3@2x.png in Resources */,
@@ -998,7 +995,6 @@
 				C7E4E32F18520CAB00EC864E /* IRWifiEditViewController.xib in Resources */,
 				C707ECD0184C7C6E00AC5F0B /* icn_check2@2x.png in Resources */,
 				C77E1980187861F000B457C3 /* IRGuideWifiViewController.xib in Resources */,
-				C77E197E187861B900B457C3 /* adhoc_guide_ja.png in Resources */,
 				C7E4E32918520CA300EC864E /* IRPeripheralNameEditViewController.xib in Resources */,
 				C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */,
 				C7E4E32618520C9D00EC864E /* IRNewSignalScene1ViewController.xib in Resources */,
@@ -1014,7 +1010,6 @@
 				C79CCB72185356EA00ECB707 /* anime_04@2x.png in Resources */,
 				C79CCB6C185356EA00ECB707 /* anime_10@2x.png in Resources */,
 				C7B4EBD618C715C500AB2E46 /* img_connect_02@2x.png in Resources */,
-				C77E197F187861B900B457C3 /* adhoc_guide_en.png in Resources */,
 				C79CCB70185356EA00ECB707 /* anime_06@2x.png in Resources */,
 				C79CCB62185356EA00ECB707 /* anime_20@2x.png in Resources */,
 				C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */,
@@ -1202,6 +1197,11 @@
 			target = C79DE3B8176F25260088679E /* IRKitResources */;
 			targetProxy = C735043817A038FB0057D51B /* PBXContainerItemProxy */;
 		};
+		C7526FAA18C75D80000A3F54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C752D6FD17462C7B008B644A /* IRKit */;
+			targetProxy = C7526FA918C75D80000A3F54 /* PBXContainerItemProxy */;
+		};
 		C79DE3C9176F271A0088679E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C79DE3B8176F25260088679E /* IRKitResources */;
@@ -1246,7 +1246,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				C77E1981187861F000B457C3 /* Base */,
-				C77E1990187873AB00B457C3 /* ja */,
 			);
 			name = IRGuideWifiViewController.xib;
 			sourceTree = "<group>";

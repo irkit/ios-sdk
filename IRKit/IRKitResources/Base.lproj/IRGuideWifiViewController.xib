@@ -14,47 +14,79 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbM-PP-EQ3">
-                    <rect key="frame" x="19" y="98" width="282" height="282"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOSの設定からWi-Fiを選択" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11a-Gk-UQb">
+                    <rect key="frame" x="88" y="185" width="165" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adhoc_guide_en.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qod-jS-fjp">
-                            <rect key="frame" x="1" y="1" width="280" height="280"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="Qod-jS-fjp" firstAttribute="top" secondItem="hbM-PP-EQ3" secondAttribute="top" constant="1" id="YzC-3R-B87"/>
-                        <constraint firstAttribute="height" constant="282" id="bPr-6P-04n"/>
-                        <constraint firstItem="Qod-jS-fjp" firstAttribute="leading" secondItem="hbM-PP-EQ3" secondAttribute="leading" constant="1" id="d7I-2n-vtG"/>
-                        <constraint firstAttribute="trailing" secondItem="Qod-jS-fjp" secondAttribute="trailing" constant="1" id="itX-7y-ydb"/>
-                        <constraint firstAttribute="width" constant="282" id="kxb-fs-LJk"/>
-                        <constraint firstAttribute="bottom" secondItem="Qod-jS-fjp" secondAttribute="bottom" constant="1" id="rM0-0w-anP"/>
-                    </constraints>
-                </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OK, Let's try another way. Please open Settings app - Wi-Fi and join IRKitXXXX network" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="Dbi-Gr-jmh">
-                    <rect key="frame" x="10" y="6" width="300" height="80"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="hC9-nX-d4r"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IRKitのネットワークに接続してください" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uP4-H7-H3S">
+                    <rect key="frame" x="48" y="516" width="251" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_connect_02.png" translatesAutoresizingMaskIntoConstraints="NO" id="871-Bk-GRq">
+                    <rect key="frame" x="59" y="354" width="203" height="150"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_chart_02.png" translatesAutoresizingMaskIntoConstraints="NO" id="lqv-OE-gQj">
+                    <rect key="frame" x="21" y="516" width="17" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="0Zc-pO-v3Q"/>
+                        <constraint firstAttribute="width" constant="17" id="tJh-Xr-bQo"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_connect_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLB-LK-4Oh">
+                    <rect key="frame" x="8" y="53" width="304" height="120"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="304" id="H36-l9-J00"/>
+                        <constraint firstAttribute="height" constant="120" id="ivM-JN-zAH"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_chart_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="6WT-gf-ziW">
+                    <rect key="frame" x="61" y="185" width="17" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="17" id="LZc-zB-CEw"/>
+                        <constraint firstAttribute="height" constant="17" id="Q2T-G4-VtU"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJO-Uf-yxa">
+                    <rect key="frame" x="0.0" y="284" width="320" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.75559085607528687" green="0.75556832551956177" blue="0.7555810809135437" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Run-ok-XQh"/>
+                        <constraint firstAttribute="width" constant="320" id="rPw-Dy-CIg"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="Dbi-Gr-jmh" secondAttribute="centerX" id="12s-Fd-aJe"/>
-                <constraint firstItem="hbM-PP-EQ3" firstAttribute="top" secondItem="Dbi-Gr-jmh" secondAttribute="bottom" constant="12" id="9Er-eT-izJ"/>
-                <constraint firstAttribute="centerX" secondItem="hbM-PP-EQ3" secondAttribute="centerX" id="QRc-Ea-XO7"/>
-                <constraint firstItem="Dbi-Gr-jmh" firstAttribute="top" secondItem="foL-ro-lZb" secondAttribute="top" constant="6" id="SdC-ds-PV2"/>
-                <constraint firstAttribute="trailing" secondItem="Dbi-Gr-jmh" secondAttribute="trailing" constant="10" id="Sie-6m-94E"/>
-                <constraint firstItem="Dbi-Gr-jmh" firstAttribute="leading" secondItem="foL-ro-lZb" secondAttribute="leading" constant="10" id="USn-QL-MYR"/>
+                <constraint firstItem="6WT-gf-ziW" firstAttribute="leading" secondItem="foL-ro-lZb" secondAttribute="leading" constant="61" id="9H5-ho-8wa"/>
+                <constraint firstItem="qLB-LK-4Oh" firstAttribute="centerX" secondItem="foL-ro-lZb" secondAttribute="centerX" id="EcH-M5-3HC"/>
+                <constraint firstItem="11a-Gk-UQb" firstAttribute="leading" secondItem="6WT-gf-ziW" secondAttribute="trailing" constant="10" id="Frm-tT-eGI"/>
+                <constraint firstAttribute="bottom" secondItem="871-Bk-GRq" secondAttribute="bottom" constant="64" id="LdH-se-iAY"/>
+                <constraint firstItem="qLB-LK-4Oh" firstAttribute="top" secondItem="foL-ro-lZb" secondAttribute="top" constant="53" id="Men-sH-I7X"/>
+                <constraint firstItem="6WT-gf-ziW" firstAttribute="top" secondItem="qLB-LK-4Oh" secondAttribute="bottom" constant="12" id="MhS-k3-1iz"/>
+                <constraint firstItem="lqv-OE-gQj" firstAttribute="top" secondItem="871-Bk-GRq" secondAttribute="bottom" constant="12" id="Pah-NI-Bul"/>
+                <constraint firstItem="qLB-LK-4Oh" firstAttribute="centerX" secondItem="871-Bk-GRq" secondAttribute="centerX" id="RdA-HY-6HR"/>
+                <constraint firstItem="lqv-OE-gQj" firstAttribute="centerY" secondItem="uP4-H7-H3S" secondAttribute="centerY" id="TWE-VC-IF5"/>
+                <constraint firstItem="uP4-H7-H3S" firstAttribute="leading" secondItem="lqv-OE-gQj" secondAttribute="trailing" constant="10" id="UpX-Ip-mAR"/>
+                <constraint firstItem="6WT-gf-ziW" firstAttribute="centerY" secondItem="11a-Gk-UQb" secondAttribute="centerY" id="WyJ-rO-Lh7"/>
+                <constraint firstItem="lqv-OE-gQj" firstAttribute="leading" secondItem="foL-ro-lZb" secondAttribute="leading" constant="21" id="bxJ-7C-vIV"/>
+                <constraint firstAttribute="centerX" secondItem="iJO-Uf-yxa" secondAttribute="centerX" id="gxN-PP-FKn"/>
+                <constraint firstAttribute="centerY" secondItem="iJO-Uf-yxa" secondAttribute="centerY" id="zxr-D7-TTA"/>
             </constraints>
         </view>
     </objects>
     <resources>
-        <image name="adhoc_guide_en.png" width="640" height="640"/>
+        <image name="icn_chart_01.png" width="17" height="17"/>
+        <image name="icn_chart_02.png" width="17" height="17"/>
+        <image name="img_connect_01.png" width="304" height="120"/>
+        <image name="img_connect_02.png" width="203" height="150"/>
     </resources>
 </document>

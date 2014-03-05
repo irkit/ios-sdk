@@ -39,6 +39,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [IRViewCustomizer sharedInstance].viewDidLoad(self);
+
     [self processAdhocSetup];
 }
 

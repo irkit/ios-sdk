@@ -2,6 +2,7 @@
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignalNameEditViewController.h"
 #import "IRGuidePowerViewController.h"
+#import "IRGuideWifiViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRWifiEditViewController.h"
 #import "IRMorsePlayerViewController.h"
@@ -44,7 +45,8 @@
                                   forViewController: viewController
                                      withImageNamed: @"icn_navibar_cancel"];
         }
-        else if ([viewController isKindOfClass: [IRWifiEditViewController class]] ||
+        else if ([viewController isKindOfClass: [IRGuideWifiViewController class]] ||
+                 [viewController isKindOfClass: [IRWifiEditViewController class]] ||
                  [viewController isKindOfClass: [IRMorsePlayerViewController class]] ||
                  [viewController isKindOfClass: [IRSignalNameEditViewController class]])
         {
