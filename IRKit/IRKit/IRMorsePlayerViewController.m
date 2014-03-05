@@ -8,7 +8,7 @@
 #import "IRHTTPClient.h"
 #import "IRKit.h"
 #import "IRHelper.h"
-#import "IRWifiAdhocViewController.h"
+#import "IRGuideWifiViewController.h"
 @import MediaPlayer;
 
 #define MORSE_WPM 100
@@ -41,7 +41,7 @@
         // Custom initialization
         _player = [[IRMorsePlayerOperationQueue alloc] init];
 
-        _playing = false;
+        _playing              = false;
         _shownStartButtonView = false;
 
         [_player addObserver: self
@@ -80,9 +80,9 @@
     _volumeView.showsRouteButton = false;
 
     // hide it initially
-    _startButtonBox.hidden = YES;
+    _startButtonBox.hidden           = YES;
     _fullscreenBackgroundView.hidden = YES;
-    _animatingImageView.hidden = YES;
+    _animatingImageView.hidden       = YES;
 
     _morseNotWorkingButton.hidden = !_showMorseNotWorkingButton;
 
@@ -122,10 +122,10 @@
 
     // setup views
 
-    _fullscreenBackgroundView.hidden = NO;
-    _fullscreenBackgroundView.alpha = 0;
-    _animatingImageView.hidden = NO;
-    _animatingImageView.alpha = 0;
+    _fullscreenBackgroundView.hidden    = NO;
+    _fullscreenBackgroundView.alpha     = 0;
+    _animatingImageView.hidden          = NO;
+    _animatingImageView.alpha           = 0;
     _animatingImageView.animationImages = @[
         [IRHelper imageInResourceNamed: @"anime_01"],
         [IRHelper imageInResourceNamed: @"anime_02"],
@@ -236,11 +236,11 @@
     }
 
     if (!_shownStartButtonView && (volume == 1.0)) {
-        _shownStartButtonView = YES;
+        _shownStartButtonView  = YES;
         _startButtonBox.hidden = NO;
         CGRect original = _startButtonBox.frame;
-        CGRect frame = _startButtonBox.frame;
-        frame.origin.y += 70;
+        CGRect frame    = _startButtonBox.frame;
+        frame.origin.y       += 70;
         _startButtonBox.frame = frame;
         [UIView animateWithDuration: 0.3
                          animations:^{
@@ -257,8 +257,8 @@
 - (IBAction)morseNotWorkingButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
 
-    IRWifiAdhocViewController *c = [[IRWifiAdhocViewController alloc] initWithNibName: @"IRWifiAdhocViewController" bundle: [IRHelper resources]];
-    c.keys = _keys;
+    IRGuideWifiViewController *c = [[IRGuideWifiViewController alloc] initWithNibName: @"IRWifiAdhocViewController" bundle: [IRHelper resources]];
+    c.keys     = _keys;
     c.delegate = _delegate;
     [self.navigationController pushViewController: c animated: YES];
 }

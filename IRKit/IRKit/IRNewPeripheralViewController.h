@@ -1,21 +1,19 @@
 #import <UIKit/UIKit.h>
-#import "IRNewPeripheralScene1ViewController.h"
-#import "IRNewPeripheralScene2ViewController.h"
+#import "IRGuidePowerViewController.h"
 #import "IRWifiEditViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRMorsePlayerViewController.h"
-#import "IRWifiAdhocViewController.h"
+#import "IRGuideWifiViewController.h"
 #import "IRSearcher.h"
 
 // pre definition for delegate
 @protocol IRNewPeripheralViewControllerDelegate;
 
 @interface IRNewPeripheralViewController : UIViewController<
-        IRNewPeripheralScene1ViewControllerDelegate,
-        IRNewPeripheralScene2ViewControllerDelegate,
+        IRGuidePowerViewControllerDelegate,
         IRWifiEditViewControllerDelegate,
         IRMorsePlayerViewControllerDelegate,
-        IRWifiAdhocViewControllerDelegate,
+        IRGuideWifiViewControllerDelegate,
         IRPeripheralNameEditViewControllerDelegate,
         IRSearcherDelegate,
         UIAlertViewDelegate>

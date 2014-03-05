@@ -1,15 +1,12 @@
 
-/* Class = "IBUILabel"; text = "IRNewPeripheralScene1"; ObjectID = "1R9-va-7Ru"; */
-"1R9-va-7Ru.text" = "IRNewPeripheralScene1";
+/* Class = "IBUILabel"; text = "IRGuidePower"; ObjectID = "1R9-va-7Ru"; */
+"1R9-va-7Ru.text" = "IRGuidePower";
 
 /* Class = "IBUILabel"; text = "words per minute"; ObjectID = "8yK-pC-NUm"; */
 "8yK-pC-NUm.text" = "words per minute";
 
 /* Class = "IBUILabel"; text = "IRWifiEdit"; ObjectID = "GFg-hH-QIv"; */
 "GFg-hH-QIv.text" = "IRWifiEdit";
-
-/* Class = "IBUILabel"; text = "IRNewPeripheralScene2"; ObjectID = "H7p-z1-pdE"; */
-"H7p-z1-pdE.text" = "IRNewPeripheralScene2";
 
 /* Class = "IBUILabel"; text = "message"; ObjectID = "cxq-yd-1ny"; */
 "cxq-yd-1ny.text" = "message";

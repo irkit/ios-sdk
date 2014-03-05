@@ -1,8 +1,7 @@
 #import "IRViewCustomizer.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignalNameEditViewController.h"
-#import "IRNewPeripheralScene1ViewController.h"
-#import "IRNewPeripheralScene2ViewController.h"
+#import "IRGuidePowerViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRWifiEditViewController.h"
 #import "IRMorsePlayerViewController.h"
@@ -33,7 +32,7 @@
         [_self customizeLabelFonts: viewController.view];
 
         if ([viewController isKindOfClass: [IRNewSignalScene1ViewController class]] ||
-            [viewController isKindOfClass: [IRNewPeripheralScene1ViewController class]])
+            [viewController isKindOfClass: [IRGuidePowerViewController class]])
         {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
@@ -45,8 +44,7 @@
                                   forViewController: viewController
                                      withImageNamed: @"icn_navibar_cancel"];
         }
-        else if ([viewController isKindOfClass: [IRNewPeripheralScene2ViewController class]] ||
-                 [viewController isKindOfClass: [IRWifiEditViewController class]] ||
+        else if ([viewController isKindOfClass: [IRWifiEditViewController class]] ||
                  [viewController isKindOfClass: [IRMorsePlayerViewController class]] ||
                  [viewController isKindOfClass: [IRSignalNameEditViewController class]])
         {

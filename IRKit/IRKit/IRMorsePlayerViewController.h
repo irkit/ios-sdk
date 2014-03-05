@@ -1,12 +1,12 @@
 #import <UIKit/UIKit.h>
 #import "IRKeys.h"
-#import "IRWifiAdhocViewController.h"
+#import "IRGuideWifiViewController.h"
 
 @protocol IRMorsePlayerViewControllerDelegate;
 
 @interface IRMorsePlayerViewController : UIViewController
 
-@property (nonatomic, weak) id<IRMorsePlayerViewControllerDelegate, IRWifiAdhocViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<IRMorsePlayerViewControllerDelegate, IRGuideWifiViewControllerDelegate> delegate;
 @property (nonatomic) IRKeys *keys; // passed from IRNewPerpheralViewController
 @property (nonatomic) BOOL showMorseNotWorkingButton;
 

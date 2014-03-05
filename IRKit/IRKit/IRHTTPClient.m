@@ -230,7 +230,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }];
         return;
     }
-            next(nil);
+    next(nil);
 }
 
 + (void)registerClientWithCompletion:(void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion {
@@ -332,7 +332,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                completion:(void (^)(NSHTTPURLResponse *, id, NSError *))completion {
     LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makePOSTRequestToInternetPath: @"/1/door"
-                                                 withParams: @{ @"deviceid": deviceid }
+                                                 withParams: @{ @"deviceid": deviceid ? deviceid : @"" }
                                             timeoutInterval: LONGPOLL_TIMEOUT];
     IRHTTPClient *client = [[IRHTTPClient alloc] init];
     client.longPollRequest   = req;
@@ -367,7 +367,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             return YES; // stop if unexpected error
         }
         // error object nil but error
-            completion(res, object, [self errorFromResponse: res body: object]);
+        completion(res, object, [self errorFromResponse: res body: object]);
         return YES;
     };
     [client startPollingRequest];

@@ -7,25 +7,25 @@
 //
 
 #import "Log.h"
-#import "IRWifiAdhocViewController.h"
+#import "IRGuideWifiViewController.h"
 #import "IRHTTPClient.h"
 #import "IRHelper.h"
 #import "IRKit.h"
 #import "IRConst.h"
 
-@interface IRWifiAdhocViewController ()
+@interface IRGuideWifiViewController ()
 
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) IRHTTPClient *doorWaiter;
 
 @end
 
-@implementation IRWifiAdhocViewController
+@implementation IRGuideWifiViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
-        __weak IRWifiAdhocViewController *_self = self;
+        __weak IRGuideWifiViewController *_self = self;
         _becomeActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidBecomeActiveNotification
                                                                                   object: nil
                                                                                    queue: [NSOperationQueue mainQueue]
@@ -74,7 +74,7 @@
     if (_doorWaiter) {
         [_doorWaiter cancel];
     }
-    __weak IRWifiAdhocViewController *_self = self;
+    __weak IRGuideWifiViewController *_self = self;
     _doorWaiter = [IRHTTPClient waitForDoorWithDeviceID: _keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
         LOG(@"res: %@, error: %@", res, error);
 
@@ -91,7 +91,7 @@
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
                                                                             deviceid: _self.keys.deviceid];
 
-        [_self.delegate wifiAdhocViewController: _self
+        [_self.delegate guideWifiViewController: _self
                               didFinishWithInfo: @{
              IRViewControllerResultType: IRViewControllerResultTypeDone,
              IRViewControllerResultPeripheral: p
@@ -105,7 +105,7 @@
     [IRHTTPClient cancelLocalRequests];
     // we don't want to POST wifi credentials without checking it's really IRKit
 
-    __weak IRWifiAdhocViewController *_self = self;
+    __weak IRGuideWifiViewController *_self = self;
     [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
         LOG(@"isAdhoc: %d error: %@", isAdhoc, error);
         if (isAdhoc) {

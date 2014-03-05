@@ -1,19 +1,22 @@
 #import "Log.h"
-#import "IRNewPeripheralScene2ViewController.h"
+#import "IRGuidePowerViewController.h"
 #import "IRConst.h"
 #import "IRViewCustomizer.h"
+#import "IRKit.h"
+#import "IRWifiEditViewController.h"
 #import "IRHelper.h"
 
-@interface IRNewPeripheralScene2ViewController ()
+@interface IRGuidePowerViewController ()
 
 @end
 
-@implementation IRNewPeripheralScene2ViewController
+@implementation IRGuidePowerViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     LOG_CURRENT_METHOD;
     self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     if (self) {
+        // Custom initialization
     }
     return self;
 }
@@ -22,11 +25,13 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    self.title = IRLocalizedString(@"Prepare for Morse", @"title of IRNewPeripheralScene2");
+    self.title                            = IRLocalizedString(@"Setup IRKit", @"title of IRGuidePowerViewController");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                                                           target: self
                                                                                           action: @selector(cancelButtonPressed:)];
-
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
+                                                                                           target: self
+                                                                                           action: @selector(doneButtonPressed:)];
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent animated: YES];
 }
@@ -39,15 +44,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     LOG_CURRENT_METHOD;
     [super viewDidAppear: animated];
-
-    // warn if iPad
-    if ([[UIDevice currentDevice].model hasPrefix: @"iPad"]) {
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"iPad is not recommended for IRKit setup, please use iPhone", @"alert title to let user use iPhone instead of iPad")
-                                    message: @""
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -55,32 +51,34 @@
     [super viewWillDisappear: animated];
 }
 
-- (void)didAuthenticate {
-    LOG_CURRENT_METHOD;
-}
-
-#pragma mark - UI events
-
 - (void)didReceiveMemoryWarning {
     LOG_CURRENT_METHOD;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UI events
+
 - (void)cancelButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene2ViewController: self
+    [self.delegate scene1ViewController: self
                       didFinishWithInfo: @{
          IRViewControllerResultType: IRViewControllerResultTypeCancelled
      }];
 }
 
-- (IBAction)doneButtonPressed:(id)sender {
+- (void)doneButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-    [self.delegate scene2ViewController: self
+    [self.delegate scene1ViewController: self
                       didFinishWithInfo: @{
          IRViewControllerResultType: IRViewControllerResultTypeDone
      }];
+}
+
+- (IBAction)buyButtonPressed:(id)sender {
+    LOG_CURRENT_METHOD;
+    NSString *url = [NSString stringWithFormat: @"%@/store", APIENDPOINT_BASE];
+    [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
 }
 
 @end
