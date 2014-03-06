@@ -132,7 +132,9 @@
                 }];
         }
         else {
-            [_self checkAndPostWifiCredentialsIfAdhoc];
+            [_self performSelector: @selector(checkAndPostWifiCredentialsIfAdhoc)
+                        withObject: Nil
+                        afterDelay: 1.0];
         }
     }];
 }
