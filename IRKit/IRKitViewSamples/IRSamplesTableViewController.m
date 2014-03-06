@@ -7,7 +7,6 @@
 #import "IRSignalNameEditViewController.h"
 #import "IRSignal.h"
 #import "IRPeripheralCell.h"
-#import "IRMorsePlayerViewController.h"
 #import "IRWifiEditViewController.h"
 #import "IRHelper.h"
 

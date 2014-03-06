@@ -84,7 +84,7 @@ struct KeysCRCed
 - (NSString *)morseStringRepresentation {
     LOG_CURRENT_METHOD;
 
-    NSString *security    = [self securityStringRepresentation];
+    NSString *security = [self securityStringRepresentation];
     LOG(@"security: %@", security);
     LOG(@"ssid: %@", _ssid);
     LOG(@"password: %@", _password);
@@ -98,11 +98,11 @@ struct KeysCRCed
     strncpy(crced.ssid,     [_ssid UTF8String],      strnlen([_ssid UTF8String], 33));
     strncpy(crced.password, [self passwordUTF8String],  strnlen([self passwordUTF8String], 64));
     strncpy(crced.temp_key, [_devicekey UTF8String], strnlen([_devicekey UTF8String], 33));
-    crced.wifi_is_set     = true;
-    crced.wifi_was_valid  = false;
-    crced.security        = _security;
-    uint8_t crc           = crc8((uint8_t *)&crced, sizeof(struct KeysCRCed));
-    NSString *crcHex      = [NSString stringWithFormat: @"%02x", crc];
+    crced.wifi_is_set    = true;
+    crced.wifi_was_valid = false;
+    crced.security       = _security;
+    uint8_t crc      = crc8((uint8_t *)&crced, sizeof(struct KeysCRCed));
+    NSString *crcHex = [NSString stringWithFormat: @"%02x", crc];
 
     NSArray *components = @[
         security,
@@ -138,8 +138,8 @@ struct KeysCRCed
     // from carrier
     // might be incorrect if roaming?
     CTTelephonyNetworkInfo *netInfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = [netInfo subscriberCellularProvider];
-    NSString *countryCode = [[carrier isoCountryCode] uppercaseString];
+    CTCarrier *carrier              = [netInfo subscriberCellularProvider];
+    NSString *countryCode           = [[carrier isoCountryCode] uppercaseString];
 
     if (!countryCode) {
         // this is what user explicitly sets in settings app
@@ -191,7 +191,7 @@ struct KeysCRCed
 // and we transfer it's HEX representation,
 // so it's double ASCII -> HEX transformed.
 // ex: when actual password is: "abcde", send "6162636465" to GS,
-//     send "36313632363336343635" over morse
+//     send "36313632363336343635" over morse (limitedAP)
 // WEP ASCII passwords can be 5 or 13 letters
 - (NSString *)passwordStringRepresentation {
     const char *utf8 = [self passwordUTF8String];

@@ -5,7 +5,6 @@
 #import "IRGuideWifiViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRWifiEditViewController.h"
-#import "IRMorsePlayerViewController.h"
 #import "IRHelper.h"
 
 @implementation IRViewCustomizer
@@ -47,7 +46,6 @@
         }
         else if ([viewController isKindOfClass: [IRGuideWifiViewController class]] ||
                  [viewController isKindOfClass: [IRWifiEditViewController class]] ||
-                 [viewController isKindOfClass: [IRMorsePlayerViewController class]] ||
                  [viewController isKindOfClass: [IRSignalNameEditViewController class]])
         {
             // bar

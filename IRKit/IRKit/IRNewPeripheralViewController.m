@@ -13,11 +13,10 @@
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) IRKeys *keys;
 @property (nonatomic) IRPeripheral *foundPeripheral;
-@property (nonatomic) NSUInteger morsePlayingCount;
 
 // don't search for IRKit device after stopSearch was called
-// we don't want to see timing problems of which (POST /door response or Bonjour) is faster to detect online IRKit
-// prioritize POST /door response, and stop searching Bonjour after showing MorsePlayerVC
+// we don't want to see timing problems of which (POST /1/door response or Bonjour) is faster to detect online IRKit
+// prioritize POST /1/door response, and stop searching Bonjour after showing WifiEditVC
 @property (nonatomic) BOOL stopSearchCalled;
 
 @end
@@ -51,8 +50,7 @@
     LOG_CURRENT_METHOD;
     [super viewDidLoad];
 
-    _keys              = [[IRKeys alloc] init];
-    _morsePlayingCount = 0;
+    _keys = [[IRKeys alloc] init];
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
@@ -209,36 +207,11 @@
         return;
     }
 
+    [self stopSearch];
+
     IRGuideWifiViewController *c = [[IRGuideWifiViewController alloc] initWithNibName: @"IRGuideWifiViewController" bundle: [IRHelper resources]];
     c.delegate = self;
     [self.navController pushViewController: c animated: YES];
-}
-
-#pragma mark - IRMorsePlayerViewController
-
-- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController *)viewController {
-    LOG_CURRENT_METHOD;
-
-    _morsePlayingCount++;
-}
-
-- (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController
-                didFinishWithInfo:(NSDictionary *)info {
-    LOG_CURRENT_METHOD;
-
-    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController: self
-                           didFinishWithPeripheral: nil];
-        return;
-    }
-
-    IRPeripheral *p = info[IRViewControllerResultPeripheral];
-    if (p) {
-        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
-        c.delegate   = self;
-        c.peripheral = p;
-        [self.navController pushViewController: c animated: YES];
-    }
 }
 
 #pragma mark - IRGuideWifiViewControllerDelegate

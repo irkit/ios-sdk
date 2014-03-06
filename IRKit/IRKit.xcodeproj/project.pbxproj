@@ -93,8 +93,6 @@
 		C763C6B31839ACC500D1D155 /* IRWifiEditViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */; };
 		C763C6B41839ACDE00D1D155 /* IRWifiSecuritySelectViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */; };
 		C763C6B51839ACEC00D1D155 /* IRKeys.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C701BEC0182BA72C00C31F4B /* IRKeys.h */; };
-		C763C6B81839AF6D00D1D155 /* IRMorsePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C763C6B71839AF6D00D1D155 /* IRMorsePlayerViewController.m */; };
-		C763C6BD1839B6FF00D1D155 /* IRMorsePlayerViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C763C6B61839AF6D00D1D155 /* IRMorsePlayerViewController.h */; };
 		C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */; };
 		C77150EF17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150ED17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m */; };
 		C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; };
@@ -146,8 +144,6 @@
 		C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; };
 		C7B5734A18B594E900949D12 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F718B21265009A5AB1 /* CoreTelephony.framework */; };
 		C7B741BA1803FA41005802A7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B741B81803FA22005802A7 /* libc++.dylib */; };
-		C7B741BD1803FB61005802A7 /* IRMorsePlayerOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BC1803FB61005802A7 /* IRMorsePlayerOperationQueue.m */; };
-		C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */; };
 		C7C397DE1756507800868B79 /* IRPeripheral.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; };
 		C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */; };
 		C7C7A30B176F017600C9A62F /* IRNewPeripheralViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */; };
@@ -156,8 +152,6 @@
 		C7D0561118041E4F00660217 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D0560F18041E3F00660217 /* AVFoundation.framework */; };
 		C7E07C5B1875D3BE00901967 /* IRSignalSendOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C5C1875D3BE00901967 /* IRSignalSendOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7E07C5F1875D3BE00901967 /* IRMorsePlayerOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B741BB1803FB61005802A7 /* IRMorsePlayerOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7E07C601875D3BE00901967 /* IRMorsePlayerOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B741BE1803FB7A005802A7 /* IRMorsePlayerOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C611875D3BE00901967 /* IRHTTPJSONOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C621875D3BE00901967 /* IRHTTPOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = C7CEF3B7186172DB00B665DA /* IRHTTPOperationQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C631875D3BE00901967 /* IRNewSignalViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77150F81772DF4A004F9FE3 /* IRNewSignalViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -167,7 +161,6 @@
 		C7E07C671875D3BE00901967 /* IRGuidePowerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C7C7A30D176F05C500C9A62F /* IRGuidePowerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C681875D3BE00901967 /* IRWifiEditViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C691875D3BE00901967 /* IRWifiSecuritySelectViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7E07C6B1875D3BE00901967 /* IRMorsePlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C763C6B61839AF6D00D1D155 /* IRMorsePlayerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C6C1875D3BE00901967 /* IRPeripheralNameEditViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C6D1875D3BE00901967 /* IREditCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C78F6FE8182B8E77002AAC7B /* IREditCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C6E1875D3BE00901967 /* IRPeripheralCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -185,7 +178,6 @@
 		C7E07C7B1875D3BE00901967 /* IRSearcher.h in Headers */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C7C1875D3BE00901967 /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FAB02017467CBF00125BCB /* Log.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E4E31D18520C6B00EC864E /* IRGuidePowerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E31F18520C6B00EC864E /* IRGuidePowerViewController.xib */; };
-		C7E4E32018520C9100EC864E /* IRMorsePlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32218520C9100EC864E /* IRMorsePlayerViewController.xib */; };
 		C7E4E32618520C9D00EC864E /* IRNewSignalScene1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32818520C9D00EC864E /* IRNewSignalScene1ViewController.xib */; };
 		C7E4E32918520CA300EC864E /* IRPeripheralNameEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32B18520CA300EC864E /* IRPeripheralNameEditViewController.xib */; };
 		C7E4E32C18520CA700EC864E /* IRSignalNameEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32E18520CA700EC864E /* IRSignalNameEditViewController.xib */; };
@@ -257,7 +249,6 @@
 			files = (
 				C77E197918785D2D00B457C3 /* IRGuideWifiViewController.h in CopyFiles */,
 				C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */,
-				C763C6BD1839B6FF00D1D155 /* IRMorsePlayerViewController.h in CopyFiles */,
 				C763C6B51839ACEC00D1D155 /* IRKeys.h in CopyFiles */,
 				C763C6B41839ACDE00D1D155 /* IRWifiSecuritySelectViewController.h in CopyFiles */,
 				C763C6B31839ACC500D1D155 /* IRWifiEditViewController.h in CopyFiles */,
@@ -358,8 +349,6 @@
 		C7603E8317A8BC6F00A7AF1E /* IRViewCustomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRViewCustomizer.m; sourceTree = "<group>"; };
 		C7603E8917A9FAE000A7AF1E /* IRSignalNameEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalNameEditViewController.m; sourceTree = "<group>"; };
 		C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalNameEditViewController.h; sourceTree = "<group>"; };
-		C763C6B61839AF6D00D1D155 /* IRMorsePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRMorsePlayerViewController.h; sourceTree = "<group>"; };
-		C763C6B71839AF6D00D1D155 /* IRMorsePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRMorsePlayerViewController.m; sourceTree = "<group>"; };
 		C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow@2x.png"; sourceTree = "<group>"; };
 		C77150ED17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralNameEditViewController.m; sourceTree = "<group>"; };
 		C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralNameEditViewController.h; sourceTree = "<group>"; };
@@ -418,10 +407,6 @@
 		C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperation.m; sourceTree = "<group>"; };
 		C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSendOperation.h; sourceTree = "<group>"; };
 		C7B741B81803FA22005802A7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		C7B741BB1803FB61005802A7 /* IRMorsePlayerOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRMorsePlayerOperationQueue.h; sourceTree = "<group>"; };
-		C7B741BC1803FB61005802A7 /* IRMorsePlayerOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRMorsePlayerOperationQueue.m; sourceTree = "<group>"; };
-		C7B741BE1803FB7A005802A7 /* IRMorsePlayerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRMorsePlayerOperation.h; sourceTree = "<group>"; };
-		C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRMorsePlayerOperation.m; sourceTree = "<group>"; };
 		C7C7A305176EFC6C00C9A62F /* IRNewPeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewPeripheralViewController.m; sourceTree = "<group>"; };
 		C7C7A306176EFC6C00C9A62F /* IRNewPeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewPeripheralViewController.h; sourceTree = "<group>"; };
 		C7C7A30C176F05C500C9A62F /* IRGuidePowerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRGuidePowerViewController.m; sourceTree = "<group>"; };
@@ -432,18 +417,16 @@
 		C7D0560F18041E3F00660217 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C7E4E332185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRGuidePowerViewController.xib; sourceTree = "<group>"; };
 		C7E4E333185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRWifiEditViewController.xib; sourceTree = "<group>"; };
-		C7E4E335185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRMorsePlayerViewController.xib; sourceTree = "<group>"; };
 		C7E4E336185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRPeripheralNameEditViewController.xib; sourceTree = "<group>"; };
 		C7E4E337185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRNewSignalScene1ViewController.xib; sourceTree = "<group>"; };
 		C7E4E338185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRSignalNameEditViewController.xib; sourceTree = "<group>"; };
 		C7E4E339185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C7E4E33A185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRGuidePowerViewController.strings; sourceTree = "<group>"; };
 		C7E4E33B185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRWifiEditViewController.strings; sourceTree = "<group>"; };
-		C7E4E33D185210C900EC864E /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRMorsePlayerViewController.strings; sourceTree = "<group>"; };
 		C7E4E33E185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRPeripheralNameEditViewController.strings; sourceTree = "<group>"; };
 		C7E4E33F185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRNewSignalScene1ViewController.strings; sourceTree = "<group>"; };
 		C7E4E340185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRSignalNameEditViewController.strings; sourceTree = "<group>"; };
-		C7E4E341185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		C7E4E341185210C900EC864E /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		C7E4E343185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C7E4EB9D18B20E44008711EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		C7E4EBA318B20EB4008711EF /* IRKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IRKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -562,10 +545,6 @@
 				C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */,
 				C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */,
 				C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */,
-				C7B741BC1803FB61005802A7 /* IRMorsePlayerOperationQueue.m */,
-				C7B741BB1803FB61005802A7 /* IRMorsePlayerOperationQueue.h */,
-				C7B741BF1803FB7A005802A7 /* IRMorsePlayerOperation.m */,
-				C7B741BE1803FB7A005802A7 /* IRMorsePlayerOperation.h */,
 				C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */,
 				C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */,
 				C7CEF3B7186172DB00B665DA /* IRHTTPOperationQueue.h */,
@@ -728,7 +707,6 @@
 				C7E4E31F18520C6B00EC864E /* IRGuidePowerViewController.xib */,
 				C7E4E33118520CAB00EC864E /* IRWifiEditViewController.xib */,
 				C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */,
-				C7E4E32218520C9100EC864E /* IRMorsePlayerViewController.xib */,
 				C77E1982187861F000B457C3 /* IRGuideWifiViewController.xib */,
 				C7E4E32B18520CA300EC864E /* IRPeripheralNameEditViewController.xib */,
 				C7E4E32818520C9D00EC864E /* IRNewSignalScene1ViewController.xib */,
@@ -762,8 +740,6 @@
 				C78F6FE0182B8134002AAC7B /* IRWifiEditViewController.h */,
 				C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */,
 				C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */,
-				C763C6B71839AF6D00D1D155 /* IRMorsePlayerViewController.m */,
-				C763C6B61839AF6D00D1D155 /* IRMorsePlayerViewController.h */,
 				C77E1976187859D700B457C3 /* IRGuideWifiViewController.m */,
 				C77E1975187859D700B457C3 /* IRGuideWifiViewController.h */,
 				C77150ED17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m */,
@@ -816,8 +792,6 @@
 				C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */,
 				C7E07C5B1875D3BE00901967 /* IRSignalSendOperationQueue.h in Headers */,
 				C7E07C5C1875D3BE00901967 /* IRSignalSendOperation.h in Headers */,
-				C7E07C5F1875D3BE00901967 /* IRMorsePlayerOperationQueue.h in Headers */,
-				C7E07C601875D3BE00901967 /* IRMorsePlayerOperation.h in Headers */,
 				C7E07C611875D3BE00901967 /* IRHTTPJSONOperation.h in Headers */,
 				C7E07C621875D3BE00901967 /* IRHTTPOperationQueue.h in Headers */,
 				C7E07C631875D3BE00901967 /* IRNewSignalViewController.h in Headers */,
@@ -828,7 +802,6 @@
 				C7E07C671875D3BE00901967 /* IRGuidePowerViewController.h in Headers */,
 				C7E07C681875D3BE00901967 /* IRWifiEditViewController.h in Headers */,
 				C7E07C691875D3BE00901967 /* IRWifiSecuritySelectViewController.h in Headers */,
-				C7E07C6B1875D3BE00901967 /* IRMorsePlayerViewController.h in Headers */,
 				C7E07C6C1875D3BE00901967 /* IRPeripheralNameEditViewController.h in Headers */,
 				C7E07C6D1875D3BE00901967 /* IREditCell.h in Headers */,
 				C7E07C6E1875D3BE00901967 /* IRPeripheralCell.h in Headers */,
@@ -1032,7 +1005,6 @@
 				C7AC32121850A64200BB190D /* img_remote3@2x.png in Resources */,
 				C79CCB66185356EA00ECB707 /* anime_16@2x.png in Resources */,
 				C79CCB67185356EA00ECB707 /* anime_15@2x.png in Resources */,
-				C7E4E32018520C9100EC864E /* IRMorsePlayerViewController.xib in Resources */,
 				C79CCB63185356EA00ECB707 /* anime_19@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1144,9 +1116,7 @@
 				C78F6FE1182B8134002AAC7B /* IRWifiEditViewController.m in Sources */,
 				C703E828183DFA6900B8446C /* IRHTTPClient.m in Sources */,
 				C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */,
-				C763C6B81839AF6D00D1D155 /* IRMorsePlayerViewController.m in Sources */,
 				C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */,
-				C7B741BD1803FB61005802A7 /* IRMorsePlayerOperationQueue.m in Sources */,
 				C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */,
 				C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */,
 				C73E37E7174DF20300872C04 /* IRHelper.m in Sources */,
@@ -1157,7 +1127,6 @@
 				C727C87B18B5DEEE00867C1A /* IRSignalSequence.m in Sources */,
 				C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */,
 				C703E82A183E0DD900B8446C /* CRC8.c in Sources */,
-				C7B741C01803FB7A005802A7 /* IRMorsePlayerOperation.m in Sources */,
 				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
 				C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */,
 				C7603E8417A8BC6F00A7AF1E /* IRViewCustomizer.m in Sources */,
@@ -1267,15 +1236,6 @@
 				C7E4E33A185210C900EC864E /* ja */,
 			);
 			name = IRGuidePowerViewController.xib;
-			sourceTree = "<group>";
-		};
-		C7E4E32218520C9100EC864E /* IRMorsePlayerViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C7E4E335185210BC00EC864E /* Base */,
-				C7E4E33D185210C900EC864E /* ja */,
-			);
-			name = IRMorsePlayerViewController.xib;
 			sourceTree = "<group>";
 		};
 		C7E4E32818520C9D00EC864E /* IRNewSignalScene1ViewController.xib */ = {

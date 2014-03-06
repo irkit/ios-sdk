@@ -2,7 +2,6 @@
 #import "IRGuidePowerViewController.h"
 #import "IRWifiEditViewController.h"
 #import "IRPeripheralNameEditViewController.h"
-#import "IRMorsePlayerViewController.h"
 #import "IRGuideWifiViewController.h"
 #import "IRSearcher.h"
 
@@ -12,7 +11,6 @@
 @interface IRNewPeripheralViewController : UIViewController<
         IRGuidePowerViewControllerDelegate,
         IRWifiEditViewControllerDelegate,
-        IRMorsePlayerViewControllerDelegate,
         IRGuideWifiViewControllerDelegate,
         IRPeripheralNameEditViewControllerDelegate,
         IRSearcherDelegate,
