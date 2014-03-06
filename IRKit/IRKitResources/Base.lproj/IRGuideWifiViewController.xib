@@ -54,7 +54,6 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="11a-Gk-UQb" firstAttribute="centerY" secondItem="6WT-gf-ziW" secondAttribute="centerY" id="4cv-Sg-yJU"/>
                         <constraint firstItem="6WT-gf-ziW" firstAttribute="leading" secondItem="Utj-yC-yf8" secondAttribute="leading" constant="67" id="7rI-Xp-anM"/>
@@ -91,7 +90,6 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="lqv-OE-gQj" firstAttribute="centerY" secondItem="uP4-H7-H3S" secondAttribute="centerY" id="KAF-DQ-6P4"/>
                         <constraint firstAttribute="centerX" secondItem="871-Bk-GRq" secondAttribute="centerX" id="Rfv-BI-c3w"/>

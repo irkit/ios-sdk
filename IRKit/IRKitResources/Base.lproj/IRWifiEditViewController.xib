@@ -59,7 +59,6 @@
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="eqc-ev-qIW" secondAttribute="trailing" id="0YD-1V-OYL"/>
                 <constraint firstItem="eqc-ev-qIW" firstAttribute="top" secondItem="74" secondAttribute="top" id="HH5-OB-55f"/>

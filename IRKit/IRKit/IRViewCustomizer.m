@@ -106,7 +106,7 @@
 }
 
 + (UIColor *)defaultViewBackgroundColor {
-    return [UIColor colorWithRed: 0xF0 / 255. green: 0xF0 / 255. blue: 0xF2 / 255. alpha: 1.0];
+    return [UIColor colorWithRed: 0xEB / 255. green: 0xEB / 255. blue: 0xEB / 255. alpha: 1.0];
 }
 
 + (void)customizeCancelButton:(UIBarButtonItem *)original
