@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = IRLocalizedString(@"Connect Wi-Fi", @"title of IRGuideWifiViewController");
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
     [self processAdhocSetup];
