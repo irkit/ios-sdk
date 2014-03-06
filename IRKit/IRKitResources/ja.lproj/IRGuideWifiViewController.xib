@@ -27,7 +27,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_connect_01.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLB-LK-4Oh">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_connect_01_jp.png" translatesAutoresizingMaskIntoConstraints="NO" id="qLB-LK-4Oh">
                             <rect key="frame" x="8" y="70" width="304" height="120"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
@@ -43,7 +43,7 @@
                                 <constraint firstAttribute="height" constant="17" id="Q2T-G4-VtU"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Navigate to Settings > Wi-Fi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11a-Gk-UQb">
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOSの設定からWi-Fiを選択" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11a-Gk-UQb">
                             <rect key="frame" x="92" y="202" width="191" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
@@ -67,13 +67,13 @@
                     <rect key="frame" x="0.0" y="285" width="320" height="283"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose IRKit Wi-Fi network" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uP4-H7-H3S">
-                            <rect key="frame" x="88" y="217" width="167" height="17"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IRKitのネットワークに接続してください" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uP4-H7-H3S">
+                            <rect key="frame" x="49" y="217" width="251" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_connect_02.png" translatesAutoresizingMaskIntoConstraints="NO" id="871-Bk-GRq">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_connect_02_jp.png" translatesAutoresizingMaskIntoConstraints="NO" id="871-Bk-GRq">
                             <rect key="frame" x="58" y="54" width="204" height="151"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
@@ -82,7 +82,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_chart_02.png" translatesAutoresizingMaskIntoConstraints="NO" id="lqv-OE-gQj">
-                            <rect key="frame" x="63" y="217" width="17" height="17"/>
+                            <rect key="frame" x="24" y="217" width="17" height="17"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="17" id="tJh-Xr-bQo"/>
@@ -93,7 +93,7 @@
                     <constraints>
                         <constraint firstItem="lqv-OE-gQj" firstAttribute="centerY" secondItem="uP4-H7-H3S" secondAttribute="centerY" id="KAF-DQ-6P4"/>
                         <constraint firstAttribute="centerX" secondItem="871-Bk-GRq" secondAttribute="centerX" id="Rfv-BI-c3w"/>
-                        <constraint firstItem="lqv-OE-gQj" firstAttribute="leading" secondItem="3pj-jV-boq" secondAttribute="leading" constant="63" id="SfR-eG-MD3"/>
+                        <constraint firstItem="lqv-OE-gQj" firstAttribute="leading" secondItem="3pj-jV-boq" secondAttribute="leading" constant="24" id="SfR-eG-MD3"/>
                         <constraint firstAttribute="centerY" secondItem="871-Bk-GRq" secondAttribute="centerY" constant="12" id="UqF-cO-asj"/>
                         <constraint firstItem="uP4-H7-H3S" firstAttribute="top" secondItem="871-Bk-GRq" secondAttribute="bottom" constant="12" id="rjX-DD-YCz"/>
                         <constraint firstItem="uP4-H7-H3S" firstAttribute="leading" secondItem="lqv-OE-gQj" secondAttribute="trailing" constant="8" id="zIM-38-Deh"/>
@@ -117,7 +117,7 @@
     <resources>
         <image name="icn_chart_01.png" width="17" height="17"/>
         <image name="icn_chart_02.png" width="17" height="17"/>
-        <image name="img_connect_01.png" width="304" height="120"/>
-        <image name="img_connect_02.png" width="204" height="151"/>
+        <image name="img_connect_01_jp.png" width="304" height="120"/>
+        <image name="img_connect_02_jp.png" width="204" height="151"/>
     </resources>
 </document>

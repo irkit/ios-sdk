@@ -68,6 +68,8 @@
 		C735043517A0341D0057D51B /* IRKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3B9176F25260088679E /* IRKit.bundle */; };
 		C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */; };
 		C73E37E7174DF20300872C04 /* IRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E6174DF20300872C04 /* IRHelper.m */; };
+		C751C38B18C888A900F3DD81 /* img_connect_02_jp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C751C38918C888A900F3DD81 /* img_connect_02_jp@2x.png */; };
+		C751C38C18C888A900F3DD81 /* img_connect_01_jp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C751C38A18C888A900F3DD81 /* img_connect_01_jp@2x.png */; };
 		C752D70217462C7B008B644A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
 		C752D70717462C7B008B644A /* IRKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C752D70617462C7B008B644A /* IRKit.h */; };
 		C752D70917462C7B008B644A /* IRKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C752D70817462C7B008B644A /* IRKit.m */; };
@@ -328,6 +330,9 @@
 		C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPersistentStore.m; sourceTree = "<group>"; };
 		C73E37E5174DF20300872C04 /* IRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelper.h; sourceTree = "<group>"; };
 		C73E37E6174DF20300872C04 /* IRHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHelper.m; sourceTree = "<group>"; };
+		C751C38818C8867E00F3DD81 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/IRGuideWifiViewController.xib; sourceTree = "<group>"; };
+		C751C38918C888A900F3DD81 /* img_connect_02_jp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_connect_02_jp@2x.png"; sourceTree = "<group>"; };
+		C751C38A18C888A900F3DD81 /* img_connect_01_jp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_connect_01_jp@2x.png"; sourceTree = "<group>"; };
 		C752D6FE17462C7B008B644A /* libIRKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIRKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C752D70117462C7B008B644A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C752D70517462C7B008B644A /* IRKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IRKit-Prefix.pch"; sourceTree = "<group>"; };
@@ -680,6 +685,8 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C751C38918C888A900F3DD81 /* img_connect_02_jp@2x.png */,
+				C751C38A18C888A900F3DD81 /* img_connect_01_jp@2x.png */,
 				C7B4EBD118C715C500AB2E46 /* img_connect_01@2x.png */,
 				C7B4EBD218C715C500AB2E46 /* img_connect_02@2x.png */,
 				C7B4EBD418C715C500AB2E46 /* icn_chart_01@2x.png */,
@@ -995,6 +1002,7 @@
 				C7E4E32F18520CAB00EC864E /* IRWifiEditViewController.xib in Resources */,
 				C707ECD0184C7C6E00AC5F0B /* icn_check2@2x.png in Resources */,
 				C77E1980187861F000B457C3 /* IRGuideWifiViewController.xib in Resources */,
+				C751C38C18C888A900F3DD81 /* img_connect_01_jp@2x.png in Resources */,
 				C7E4E32918520CA300EC864E /* IRPeripheralNameEditViewController.xib in Resources */,
 				C707ECD4184C7C6E00AC5F0B /* icn_navibar_camera@2x.png in Resources */,
 				C7E4E32618520C9D00EC864E /* IRNewSignalScene1ViewController.xib in Resources */,
@@ -1015,6 +1023,7 @@
 				C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */,
 				C79CCB64185356EA00ECB707 /* anime_18@2x.png in Resources */,
 				C707ECD3184C7C6E00AC5F0B /* icn_navibar_cancel@2x.png in Resources */,
+				C751C38B18C888A900F3DD81 /* img_connect_02_jp@2x.png in Resources */,
 				C79CCB68185356EA00ECB707 /* anime_14@2x.png in Resources */,
 				C79CCB69185356EA00ECB707 /* anime_13@2x.png in Resources */,
 				C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */,
@@ -1246,6 +1255,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C77E1981187861F000B457C3 /* Base */,
+				C751C38818C8867E00F3DD81 /* ja */,
 			);
 			name = IRGuideWifiViewController.xib;
 			sourceTree = "<group>";

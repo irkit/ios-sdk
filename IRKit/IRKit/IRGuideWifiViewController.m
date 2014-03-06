@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = IRLocalizedString(@"Connect Wi-Fi", @"title of IRGuideWifiViewController");
+    self.title = IRLocalizedString(@"Connect to IRKit Wi-Fi", @"title of IRGuideWifiViewController");
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
     [self processAdhocSetup];
@@ -116,7 +116,7 @@
             [IRHTTPClient postWifiKeys: [_self.keys morseStringRepresentation]
                         withCompletion:^(NSHTTPURLResponse *res, id body, NSError *error) {
                     if (res.statusCode == 200) {
-                        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home wifi", @"alert title after POST /wifi finished successfully")
+                        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home Wi-Fi", @"alert title after POST /wifi finished successfully")
                                                     message: @""
                                                    delegate: nil
                                           cancelButtonTitle: @"OK"
