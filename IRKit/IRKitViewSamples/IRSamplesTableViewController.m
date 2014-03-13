@@ -2,6 +2,7 @@
 #import "IRSamplesTableViewController.h"
 #import "IRconst.h"
 #import "IRGuidePowerViewController.h"
+#import "IRGuideWifiViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignalNameEditViewController.h"

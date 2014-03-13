@@ -211,6 +211,7 @@
 
     IRGuideWifiViewController *c = [[IRGuideWifiViewController alloc] initWithNibName: @"IRGuideWifiViewController" bundle: [IRHelper resources]];
     c.delegate = self;
+    c.keys     = _keys;
     [self.navController pushViewController: c animated: YES];
 }
 
