@@ -936,7 +936,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IR;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					C7E4EBA218B20EB4008711EF = {
@@ -1398,7 +1398,7 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SDKROOT = iphoneos;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
@@ -1455,7 +1455,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A92507FB75A49B8B9640873 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/IRKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRKit/IRKit-Prefix.pch";
@@ -1469,7 +1468,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A92507FB75A49B8B9640873 /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/IRKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRKit/IRKit-Prefix.pch";
@@ -1510,7 +1508,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 92E0590F6E1144DEB0175952 /* Pods-IRKitTests.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -1539,7 +1536,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 92E0590F6E1144DEB0175952 /* Pods-IRKitTests.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
