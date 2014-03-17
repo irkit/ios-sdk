@@ -55,7 +55,8 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
             LOG(@"became active");
             _self.becameActiveAt = [NSDate date];
 
-            // show HUD
+            // show HUD (hide before show to avoid double)
+            [IRProgressView hideHUDForView: _self.navigationController.view afterDelay: 0];
             [IRProgressView showHUDAddedTo: _self.navigationController.view];
 
             if (!_self.postWifiSucceeded) {
