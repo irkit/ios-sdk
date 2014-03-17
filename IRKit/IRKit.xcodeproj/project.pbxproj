@@ -106,6 +106,7 @@
 		C77E1978187859D700B457C3 /* IRGuideWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E1976187859D700B457C3 /* IRGuideWifiViewController.m */; };
 		C77E197918785D2D00B457C3 /* IRGuideWifiViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77E1975187859D700B457C3 /* IRGuideWifiViewController.h */; };
 		C77E1980187861F000B457C3 /* IRGuideWifiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C77E1982187861F000B457C3 /* IRGuideWifiViewController.xib */; };
+		C78B777A18D73BE90049C526 /* IRReachability.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7BD941A18D7024F008C9C72 /* IRReachability.h */; };
 		C78F6FE1182B8134002AAC7B /* IRWifiEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F6FDF182B8134002AAC7B /* IRWifiEditViewController.m */; };
 		C78F6FE6182B8D89002AAC7B /* IREditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C78F6FE5182B8D89002AAC7B /* IREditCell.xib */; };
 		C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C78F6FE7182B8E77002AAC7B /* IREditCell.m */; };
@@ -255,6 +256,7 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C78B777A18D73BE90049C526 /* IRReachability.h in CopyFiles */,
 				C704474518D5F7B600B73810 /* IRProgressView.h in CopyFiles */,
 				C77E197918785D2D00B457C3 /* IRGuideWifiViewController.h in CopyFiles */,
 				C71B7C5D18443633009F8D20 /* IRSearcher.h in CopyFiles */,
