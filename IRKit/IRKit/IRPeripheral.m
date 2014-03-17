@@ -4,11 +4,11 @@
 #import "IRHelper.h"
 #import "IRConst.h"
 #import "IRHTTPClient.h"
-#import "Reachability.h"
+#import "IRReachability.h"
 
 @interface IRPeripheral ()
 
-@property (nonatomic) Reachability *reachability;
+@property (nonatomic) IRReachability *reachability;
 
 @end
 
@@ -20,17 +20,17 @@
     if (!self) {
         return nil;
     }
-    _hostname         = nil;
-    _customizedName   = nil;
-    _foundDate        = [NSDate date];
-    _deviceid         = nil;
+    _hostname       = nil;
+    _customizedName = nil;
+    _foundDate      = [NSDate date];
+    _deviceid       = nil;
 
     // from HTTP response Server header
     // eg: "Server: IRKit/1.3.0.73.ge6e8514"
     // "IRKit" is modelName
     // "1.3.0.73.ge6e8514" is version
-    _modelName        = nil;
-    _version          = nil;
+    _modelName = nil;
+    _version   = nil;
 
     return self;
 }
@@ -55,7 +55,7 @@
 }
 
 - (BOOL)isReachableViaWifi {
-    return _reachability.isReachableViaWiFi;
+    return _reachability.isReachableViaWiFiAndDirect;
 }
 
 - (void)getKeyWithCompletion:(void (^)())successfulCompletion {
@@ -121,7 +121,7 @@
     LOG_CURRENT_METHOD;
 
     if (_hostname) {
-        _reachability = [Reachability reachabilityWithHostname: self.local_hostname];
+        _reachability = [IRReachability reachabilityWithHostname: self.local_hostname];
     }
 }
 
@@ -142,12 +142,12 @@
     if (!self) {
         return nil;
     }
-    _hostname         = [coder decodeObjectForKey: @"hostname"];
-    _customizedName   = [coder decodeObjectForKey: @"customizedName"];
-    _foundDate        = [coder decodeObjectForKey: @"foundDate"];
-    _deviceid         = [coder decodeObjectForKey: @"deviceid"];
-    _modelName        = [coder decodeObjectForKey: @"modelName"];
-    _version          = [coder decodeObjectForKey: @"version"];
+    _hostname       = [coder decodeObjectForKey: @"hostname"];
+    _customizedName = [coder decodeObjectForKey: @"customizedName"];
+    _foundDate      = [coder decodeObjectForKey: @"foundDate"];
+    _deviceid       = [coder decodeObjectForKey: @"deviceid"];
+    _modelName      = [coder decodeObjectForKey: @"modelName"];
+    _version        = [coder decodeObjectForKey: @"version"];
 
     [self startReachability];
 
