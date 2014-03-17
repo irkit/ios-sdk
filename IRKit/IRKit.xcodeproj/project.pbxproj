@@ -182,6 +182,7 @@
 		C7E07C7A1875D3BE00901967 /* CRC8.h in Headers */ = {isa = PBXBuildFile; fileRef = C703E82B183E0DF600B8446C /* CRC8.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C7B1875D3BE00901967 /* IRSearcher.h in Headers */ = {isa = PBXBuildFile; fileRef = C79C5947183F5E49002136CD /* IRSearcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C7C1875D3BE00901967 /* Log.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FAB02017467CBF00125BCB /* Log.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E2126C18D6F4B900D1059E /* IRReachabilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E2126B18D6F4B900D1059E /* IRReachabilityTests.m */; };
 		C7E4E31D18520C6B00EC864E /* IRGuidePowerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E31F18520C6B00EC864E /* IRGuidePowerViewController.xib */; };
 		C7E4E32618520C9D00EC864E /* IRNewSignalScene1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32818520C9D00EC864E /* IRNewSignalScene1ViewController.xib */; };
 		C7E4E32918520CA300EC864E /* IRPeripheralNameEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7E4E32B18520CA300EC864E /* IRPeripheralNameEditViewController.xib */; };
@@ -425,6 +426,7 @@
 		C7CEF3B7186172DB00B665DA /* IRHTTPOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHTTPOperationQueue.h; sourceTree = "<group>"; };
 		C7CEF3B8186172DB00B665DA /* IRHTTPOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHTTPOperationQueue.m; sourceTree = "<group>"; };
 		C7D0560F18041E3F00660217 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C7E2126B18D6F4B900D1059E /* IRReachabilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRReachabilityTests.m; sourceTree = "<group>"; };
 		C7E4E332185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRGuidePowerViewController.xib; sourceTree = "<group>"; };
 		C7E4E333185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRWifiEditViewController.xib; sourceTree = "<group>"; };
 		C7E4E336185210BC00EC864E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IRPeripheralNameEditViewController.xib; sourceTree = "<group>"; };
@@ -782,6 +784,7 @@
 				C720E6EB18B2108A009A5AB1 /* IRSignalTests.m */,
 				C7040C7818B36295006BEDAC /* IRSignalsTests.m */,
 				C727C87618B5DE8300867C1A /* IRSignalSequenceTests.m */,
+				C7E2126B18D6F4B900D1059E /* IRReachabilityTests.m */,
 			);
 			path = IRKitTests;
 			sourceTree = "<group>";
@@ -1168,6 +1171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C720E6EC18B2108A009A5AB1 /* IRSignalTests.m in Sources */,
+				C7E2126C18D6F4B900D1059E /* IRReachabilityTests.m in Sources */,
 				C7040C7918B36295006BEDAC /* IRSignalsTests.m in Sources */,
 				C7E4EBAE18B20EB5008711EF /* IRKitTests.m in Sources */,
 				C727C87E18B5E37B00867C1A /* XCTestCase+Async.m in Sources */,
