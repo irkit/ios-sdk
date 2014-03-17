@@ -176,7 +176,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
     [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Open Settings app and connect to a Wi-Fi network named like IRKitXXXX", @"alert title when reachable")
                                 message: @""
                                delegate: nil
-                      cancelButtonTitle: IRLocalizedString(@"OK", @"")
+                      cancelButtonTitle: @"OK"
                       otherButtonTitles: nil] show];
 }
 
@@ -196,8 +196,8 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
                                     message: @""
                                    delegate: nil
-                          cancelButtonTitle: nil
-                          otherButtonTitles: @"OK", nil] show];
+                          cancelButtonTitle: @"OK"
+                          otherButtonTitles: nil] show];
 
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
                                                                             deviceid: _self.keys.deviceid];
