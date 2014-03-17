@@ -112,7 +112,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
     [IRHTTPClient checkIfAdhocWithCompletion:^(NSHTTPURLResponse *res, BOOL isAdhoc, NSError *error) {
         LOG(@"isAdhoc: %d error: %@", isAdhoc, error);
 
-        if (error && (error.code == NSURLErrorTimedOut) && ([error.domain isEqualToString: NSURLErrorDomain])) {
+        if (error && (error.code == NSURLErrorTimedOut) && [error.domain isEqualToString: NSURLErrorDomain]) {
             // if we've waited for XX seconds
             // we must haven't been connected to IRKit's Wi-Fi
             if ([[NSDate date] timeIntervalSinceDate: _self.becameActiveAt] > kWiFiConnectTimeout) {
@@ -140,6 +140,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
 
             [IRHTTPClient postWifiKeys: [_self.keys morseStringRepresentation]
                         withCompletion: ^(NSHTTPURLResponse *res, id body, NSError *error) {
+                    LOG( @"res: %@, body: %@, error: %@", res, body, error );
 
                     // hide HUD
                     [IRProgressView hideHUDForView: _self.navigationController.view afterDelay: kIntervalToHideHUD];
@@ -164,9 +165,11 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
                 }];
         }
         else {
+            LOG( @"unexpected error res: %@ error: %@", res, error );
 
-            LOG( @"what?!" );
-
+            // connected to different network?
+            // don't retry
+            [_self alertAndHideHUD];
         }
     }];
 }
