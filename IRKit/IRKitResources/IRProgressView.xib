@@ -10,6 +10,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_progress.png" translatesAutoresizingMaskIntoConstraints="NO" id="XYR-Es-CH7">
+                    <rect key="frame" x="98" y="222" width="125" height="125"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="125" id="X68-td-omy"/>
+                        <constraint firstAttribute="height" constant="125" id="jfD-DV-c59"/>
+                    </constraints>
+                </imageView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="P36-rV-ziV">
                     <rect key="frame" x="142" y="265" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -25,16 +33,20 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="XYR-Es-CH7" secondAttribute="centerX" id="22V-Ko-kYt"/>
                 <constraint firstAttribute="centerX" secondItem="ETr-aA-4za" secondAttribute="centerX" id="RmQ-B8-ubX"/>
+                <constraint firstAttribute="centerY" secondItem="XYR-Es-CH7" secondAttribute="centerY" id="cSv-i1-EOx"/>
                 <constraint firstAttribute="centerY" secondItem="ETr-aA-4za" secondAttribute="centerY" id="qaG-BH-Dpc"/>
             </constraints>
             <connections>
                 <outlet property="checkmarkImageView" destination="ETr-aA-4za" id="yeV-jH-BO1"/>
+                <outlet property="circleBackgroundImageView" destination="XYR-Es-CH7" id="iKg-Gy-hQe"/>
                 <outlet property="indicatorView" destination="P36-rV-ziV" id="AHC-1B-mBb"/>
             </connections>
         </view>
     </objects>
     <resources>
+        <image name="bg_progress.png" width="125" height="125"/>
         <image name="icn_check2.png" width="24" height="24"/>
     </resources>
 </document>

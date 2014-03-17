@@ -134,6 +134,7 @@
 		C7A1350517AA5D3A00C8679B /* icn_signal.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350317AA5D3A00C8679B /* icn_signal.png */; };
 		C7A1350817AA5D7300C8679B /* icn_device@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1350617AA5D7300C8679B /* icn_device@2x.png */; };
 		C7A1351217AA621B00C8679B /* IRViewCustomizer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7603E8217A8BC6F00A7AF1E /* IRViewCustomizer.h */; };
+		C7A1378E18D6C688000FD522 /* bg_progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7A1378D18D6C688000FD522 /* bg_progress@2x.png */; };
 		C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C7A66E8D17A7BB3A00EDE589 /* IRSignalSendOperationQueue.m */; };
 		C7AB0525180ADD40007288EB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7AB0524180ADD40007288EB /* AudioToolbox.framework */; };
 		C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */; };
@@ -401,6 +402,7 @@
 		C7A1350217AA5D3A00C8679B /* icn_signal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_signal@2x.png"; sourceTree = "<group>"; };
 		C7A1350317AA5D3A00C8679B /* icn_signal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icn_signal.png; sourceTree = "<group>"; };
 		C7A1350617AA5D7300C8679B /* icn_device@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_device@2x.png"; sourceTree = "<group>"; };
+		C7A1378D18D6C688000FD522 /* bg_progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_progress@2x.png"; sourceTree = "<group>"; };
 		C7A66E8D17A7BB3A00EDE589 /* IRSignalSendOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperationQueue.m; sourceTree = "<group>"; };
 		C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSendOperationQueue.h; sourceTree = "<group>"; };
 		C7AB0522180ADCEA007288EB /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -672,6 +674,7 @@
 		C79DE3C5176F25750088679E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7A1378D18D6C688000FD522 /* bg_progress@2x.png */,
 				C751C38918C888A900F3DD81 /* img_connect_02_jp@2x.png */,
 				C751C38A18C888A900F3DD81 /* img_connect_01_jp@2x.png */,
 				C7B4EBD118C715C500AB2E46 /* img_connect_01@2x.png */,
@@ -1000,6 +1003,7 @@
 				C79CCB6B185356EA00ECB707 /* anime_11@2x.png in Resources */,
 				C7E4E32C18520CA700EC864E /* IRSignalNameEditViewController.xib in Resources */,
 				C7A1350417AA5D3A00C8679B /* icn_signal@2x.png in Resources */,
+				C7A1378E18D6C688000FD522 /* bg_progress@2x.png in Resources */,
 				C79CCB73185356EA00ECB707 /* anime_03@2x.png in Resources */,
 				C79CCB72185356EA00ECB707 /* anime_04@2x.png in Resources */,
 				C79CCB6C185356EA00ECB707 /* anime_10@2x.png in Resources */,
