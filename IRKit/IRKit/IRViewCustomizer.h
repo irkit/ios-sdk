@@ -16,5 +16,7 @@
 + (UIColor *)textColor;
 + (UIColor *)activeFontColor;
 + (UIColor *)inactiveFontColor;
++ (UIColor *)defaultViewBackgroundColor;
++ (void)customizeNavigationBar:(UINavigationBar *)bar;
 
 @end
