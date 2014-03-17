@@ -13,11 +13,10 @@
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) IRKeys *keys;
 @property (nonatomic) IRPeripheral *foundPeripheral;
-@property (nonatomic) NSUInteger morsePlayingCount;
 
 // don't search for IRKit device after stopSearch was called
-// we don't want to see timing problems of which (POST /door response or Bonjour) is faster to detect online IRKit
-// prioritize POST /door response, and stop searching Bonjour after showing MorsePlayerVC
+// we don't want to see timing problems of which (POST /1/door response or Bonjour) is faster to detect online IRKit
+// prioritize POST /1/door response, and stop searching Bonjour after showing WifiEditVC
 @property (nonatomic) BOOL stopSearchCalled;
 
 @end
@@ -28,10 +27,10 @@
     LOG_CURRENT_METHOD;
 
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    UIView *view = [[UIView alloc] initWithFrame: bounds];
+    UIView *view  = [[UIView alloc] initWithFrame: bounds];
 
-    IRNewPeripheralScene1ViewController *first = [[IRNewPeripheralScene1ViewController alloc] initWithNibName: @"IRNewPeripheralScene1ViewController"
-                                                                                                       bundle: [IRHelper resources]];
+    IRGuidePowerViewController *first = [[IRGuidePowerViewController alloc] initWithNibName: @"IRGuidePowerViewController"
+                                                                                     bundle: [IRHelper resources]];
     first.delegate = self;
 
     _navController = [[UINavigationController alloc] initWithRootViewController: first];
@@ -52,7 +51,6 @@
     [super viewDidLoad];
 
     _keys = [[IRKeys alloc] init];
-    _morsePlayingCount = 0;
 
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 
@@ -121,7 +119,7 @@
     LOG(@"service: %@", service);
     IRPeripherals *peripherals = [IRKit sharedInstance].peripherals;
 
-    NSString *name = [service.hostName componentsSeparatedByString: @"."][ 0 ];
+    NSString *name  = [service.hostName componentsSeparatedByString: @"."][ 0 ];
     IRPeripheral *p = [peripherals peripheralWithName: name];
     if (!p) {
         p = [peripherals registerPeripheralWithName: name];
@@ -151,8 +149,8 @@
     LOG_CURRENT_METHOD;
 
     IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
-    c.delegate = self;
-    c.peripheral = _foundPeripheral;
+    c.delegate       = self;
+    c.peripheral     = _foundPeripheral;
     _foundPeripheral = nil;
     [self.navController pushViewController: c animated: YES];
 }
@@ -165,9 +163,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - IRNewPeripheralScene1ViewControllerDelegate
+#pragma mark - IRGuidePowerViewControllerDelegate
 
-- (void)scene1ViewController:(IRNewPeripheralScene1ViewController *)viewController
+- (void)scene1ViewController:(IRGuidePowerViewController *)viewController
            didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
@@ -209,63 +207,17 @@
         return;
     }
 
-    IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName: @"IRNewPeripheralScene2ViewController" bundle: [IRHelper resources]];
-    c.delegate = self;
-    [self.navController pushViewController: c animated: YES];
-}
-
-#pragma mark - IRNewPeripheralScene2ViewControllerDelegate
-
-- (void)scene2ViewController:(IRNewPeripheralScene2ViewController *)viewController
-           didFinishWithInfo:(NSDictionary *)info {
-    LOG_CURRENT_METHOD;
-
-    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController: self
-                           didFinishWithPeripheral: nil];
-        return;
-    }
-
     [self stopSearch];
 
-    IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName: @"IRMorsePlayerViewController"
-                                                                                   bundle: [IRHelper resources]];
-    c.delegate                  = self;
-    c.keys                      = _keys;
-    c.showMorseNotWorkingButton = _morsePlayingCount > 1;
+    IRGuideWifiViewController *c = [[IRGuideWifiViewController alloc] initWithNibName: @"IRGuideWifiViewController" bundle: [IRHelper resources]];
+    c.delegate = self;
+    c.keys     = _keys;
     [self.navController pushViewController: c animated: YES];
 }
 
-#pragma mark - IRMorsePlayerViewController
+#pragma mark - IRGuideWifiViewControllerDelegate
 
-- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController *)viewController {
-    LOG_CURRENT_METHOD;
-
-    _morsePlayingCount++;
-}
-
-- (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController
-                didFinishWithInfo:(NSDictionary *)info {
-    LOG_CURRENT_METHOD;
-
-    if ([info[IRViewControllerResultType] isEqualToString: IRViewControllerResultTypeCancelled]) {
-        [self.delegate newPeripheralViewController: self
-                           didFinishWithPeripheral: nil];
-        return;
-    }
-
-    IRPeripheral *p = info[IRViewControllerResultPeripheral];
-    if (p) {
-        IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
-        c.delegate = self;
-        c.peripheral = p;
-        [self.navController pushViewController: c animated: YES];
-    }
-}
-
-#pragma mark - IRWifiAdhocViewControllerDelegate
-
-- (void)wifiAdhocViewController:(IRWifiAdhocViewController *)viewController
+- (void)guideWifiViewController:(IRGuideWifiViewController *)viewController
               didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
 
@@ -278,7 +230,7 @@
     IRPeripheral *p = info[IRViewControllerResultPeripheral];
     if (p) {
         IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
-        c.delegate = self;
+        c.delegate   = self;
         c.peripheral = p;
         [self.navController pushViewController: c animated: YES];
     }

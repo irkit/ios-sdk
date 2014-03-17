@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IRNewPeripheralScene1ViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IRGuidePowerViewController">
             <connections>
                 <outlet property="view" destination="74" id="104"/>
             </connections>
@@ -52,7 +52,7 @@
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tNE-IP-onh">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.70588235290000001" green="0.70588235290000001" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75559085607528687" green="0.75556832551956177" blue="0.7555810809135437" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUU-7e-4ed">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -85,7 +85,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="57" firstAttribute="top" secondItem="12" secondAttribute="bottom" constant="3" id="0FH-ar-AHd"/>
                 <constraint firstItem="N0I-xf-e06" firstAttribute="top" secondItem="57" secondAttribute="bottom" constant="-65" id="0ba-AK-Xuc"/>

@@ -13,14 +13,13 @@
 #import "IRConst.h"
 #import "IRHTTPJSONOperation.h"
 #import "IRHTTPOperationQueue.h"
-#import "Reachability.h"
 #import "IRPersistentStore.h"
 #import "IRKit.h"
 #import <CommonCrypto/CommonHMAC.h>
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT               10. // short REST like requests
-#define IP_TIMEOUT                    10. // timeout for requests using IP directly, should include WiFi connecting time
+#define IP_TIMEOUT                    1. // timeout for requests using IP directly, should not include WiFi connecting time
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
 #define IRKIT_MODELNAME               @"IRKit"
 
@@ -230,7 +229,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         }];
         return;
     }
-            next(nil);
+    next(nil);
 }
 
 + (void)registerClientWithCompletion:(void (^)(NSHTTPURLResponse *res, NSString *clientkey, NSError *error))completion {
@@ -332,7 +331,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                completion:(void (^)(NSHTTPURLResponse *, id, NSError *))completion {
     LOG_CURRENT_METHOD;
     NSURLRequest *req = [self makePOSTRequestToInternetPath: @"/1/door"
-                                                 withParams: @{ @"deviceid": deviceid }
+                                                 withParams: @{ @"deviceid": deviceid ? deviceid : @"" }
                                             timeoutInterval: LONGPOLL_TIMEOUT];
     IRHTTPClient *client = [[IRHTTPClient alloc] init];
     client.longPollRequest   = req;
@@ -344,6 +343,11 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             case 200:
                 completion(res, object, nil);
                 return YES;         // stop long polling
+
+            case 400:
+                // must be a bug (or from IRKitViewSamples)
+                completion(res, object, [self errorFromResponse: res body: object]);
+                return YES;
 
             case 408:
                 // retry
@@ -367,7 +371,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             return YES; // stop if unexpected error
         }
         // error object nil but error
-            completion(res, object, [self errorFromResponse: res body: object]);
+        completion(res, object, [self errorFromResponse: res body: object]);
         return YES;
     };
     [client startPollingRequest];

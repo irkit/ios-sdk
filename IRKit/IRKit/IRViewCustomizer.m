@@ -1,11 +1,10 @@
 #import "IRViewCustomizer.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignalNameEditViewController.h"
-#import "IRNewPeripheralScene1ViewController.h"
-#import "IRNewPeripheralScene2ViewController.h"
+#import "IRGuidePowerViewController.h"
+#import "IRGuideWifiViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRWifiEditViewController.h"
-#import "IRMorsePlayerViewController.h"
 #import "IRHelper.h"
 
 @implementation IRViewCustomizer
@@ -33,7 +32,7 @@
         [_self customizeLabelFonts: viewController.view];
 
         if ([viewController isKindOfClass: [IRNewSignalScene1ViewController class]] ||
-            [viewController isKindOfClass: [IRNewPeripheralScene1ViewController class]])
+            [viewController isKindOfClass: [IRGuidePowerViewController class]])
         {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
@@ -45,9 +44,8 @@
                                   forViewController: viewController
                                      withImageNamed: @"icn_navibar_cancel"];
         }
-        else if ([viewController isKindOfClass: [IRNewPeripheralScene2ViewController class]] ||
+        else if ([viewController isKindOfClass: [IRGuideWifiViewController class]] ||
                  [viewController isKindOfClass: [IRWifiEditViewController class]] ||
-                 [viewController isKindOfClass: [IRMorsePlayerViewController class]] ||
                  [viewController isKindOfClass: [IRSignalNameEditViewController class]])
         {
             // bar
@@ -106,7 +104,7 @@
 }
 
 + (UIColor *)defaultViewBackgroundColor {
-    return [UIColor colorWithRed: 0xF0 / 255. green: 0xF0 / 255. blue: 0xF2 / 255. alpha: 1.0];
+    return [UIColor colorWithRed: 0xEB / 255. green: 0xEB / 255. blue: 0xEB / 255. alpha: 1.0];
 }
 
 + (void)customizeCancelButton:(UIBarButtonItem *)original

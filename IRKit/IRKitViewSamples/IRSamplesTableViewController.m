@@ -1,14 +1,13 @@
 #import "Log.h"
 #import "IRSamplesTableViewController.h"
 #import "IRconst.h"
-#import "IRNewPeripheralScene1ViewController.h"
-#import "IRNewPeripheralScene2ViewController.h"
+#import "IRGuidePowerViewController.h"
+#import "IRGuideWifiViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRNewSignalScene1ViewController.h"
 #import "IRSignalNameEditViewController.h"
 #import "IRSignal.h"
 #import "IRPeripheralCell.h"
-#import "IRMorsePlayerViewController.h"
 #import "IRWifiEditViewController.h"
 #import "IRHelper.h"
 
@@ -18,8 +17,7 @@
 
 @implementation IRSamplesTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle: style];
     if (self) {
         // Custom initialization
@@ -47,18 +45,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - IRNewPeripheralScene1ViewControllerDelegate
-#pragma mark - IRNewSignalScene1ViewControllerDelegate
+#pragma mark - IRGuidePowerViewControllerDelegate
 
 - (void)scene1ViewController:(id)viewController didFinishWithInfo:(NSDictionary*)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated: YES];
 }
 
-#pragma mark - IRNewPeripheralScene2ViewControllerDelegate
-#pragma mark - IRSignalNameEditViewControllerDelegate
+#pragma mark - IRWifiEditViewControllerDelegate
 
-- (void)scene2ViewController:(id)viewController didFinishWithInfo:(NSDictionary*)info {
+- (void)wifiEditViewController:(IRWifiEditViewController *)viewController
+             didFinishWithInfo:(NSDictionary*)info {
+    LOG(@"info: %@", info);
+    IRKeys *key = info[IRViewControllerResultKeys];
+    [key setKeys: @{ @"clientkey": @"A", @"devicekey": @"B" }]; // we're testing morse
+    LOG(@"morse: %@", key.morseStringRepresentation);
+}
+
+#pragma mark - IRGuideWifiViewControllerDelegate
+
+- (void)guideWifiViewController:(IRGuideWifiViewController *)viewController didFinishWithInfo:(NSDictionary *)info {
     LOG_CURRENT_METHOD;
     [self.navigationController popViewControllerAnimated: YES];
 }
@@ -78,70 +84,36 @@
     [self.navigationController popViewControllerAnimated: YES];
 }
 
-
-#pragma mark - IRWifiEditViewControllerDelegate
-
-- (void)wifiEditViewController:(IRWifiEditViewController *)viewController
-             didFinishWithInfo:(NSDictionary*)info {
-    LOG(@"info: %@", info);
-    IRKeys *key = info[IRViewControllerResultKeys];
-    [key setKeys: @{ @"clientkey": @"A", @"devicekey": @"B" }]; // we're testing morse
-    LOG(@"morse: %@", key.morseStringRepresentation);
-}
-
-#pragma mark - IRMorsePlayerViewControllerDelegate
-
-- (void)morsePlayerViewControllerDidStartPlaying:(IRMorsePlayerViewController*)viewController {
-    LOG_CURRENT_METHOD;
-}
-- (void)morsePlayerViewController:(IRMorsePlayerViewController *)viewController didFinishWithInfo:(NSDictionary*)info {
-    LOG_CURRENT_METHOD;
-    [self.navigationController popViewControllerAnimated: YES];
-}
-
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return 7;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
     case 0:
-        return [tableView dequeueReusableCellWithIdentifier: @"IRNewPeripheralScene1"];
+        return [tableView dequeueReusableCellWithIdentifier: @"IRGuidePower"];
     case 1:
-        return [tableView dequeueReusableCellWithIdentifier: @"IRNewPeripheralScene2"];
+        return [tableView dequeueReusableCellWithIdentifier: @"IRWifiEdit"];
     case 2:
-        return [tableView dequeueReusableCellWithIdentifier: @"IRPeripheralNameEdit"];
+        return [tableView dequeueReusableCellWithIdentifier: @"IRGuideWifi"];
     case 3:
-        return [tableView dequeueReusableCellWithIdentifier: @"IRNewSignalScene1"];
+        return [tableView dequeueReusableCellWithIdentifier: @"IRPeripheralNameEdit"];
     case 4:
-        return [tableView dequeueReusableCellWithIdentifier: @"IRSignalNameEdit"];
+        return [tableView dequeueReusableCellWithIdentifier: @"IRNewSignalScene1"];
     case 5:
+        return [tableView dequeueReusableCellWithIdentifier: @"IRSignalNameEdit"];
+    case 6:
     {
-        IRPeripheralCell *cell = [tableView dequeueReusableCellWithIdentifier: IRKitCellIdentifierPeripheral];
+        IRPeripheralCell *cell   = [tableView dequeueReusableCellWithIdentifier: IRKitCellIdentifierPeripheral];
         IRPeripheral *peripheral = [[IRPeripheral alloc] init];
         peripheral.customizedName = @"my IRKit";
-        cell.peripheral = peripheral;
-        return cell;
-    }
-    case 6:
-        return [tableView dequeueReusableCellWithIdentifier: @"IRWifiEdit"];
-    case 7:
-    {
-        UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"IRMorse"];
-        cell.textLabel.text = @"Morse";
-        return cell;
-    }
-    case 8:
-    {
-        UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier: @"IRMorse"];
-        cell.textLabel.text = @"Morse (play)";
+        cell.peripheral           = peripheral;
         return cell;
     }
     default:
@@ -161,8 +133,7 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     LOG_CURRENT_METHOD;
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
 
@@ -170,8 +141,8 @@
     switch (indexPath.row) {
     case 0:
     {
-        IRNewPeripheralScene1ViewController *c = [[IRNewPeripheralScene1ViewController alloc] initWithNibName: @"IRNewPeripheralScene1ViewController"
-                                                                                                       bundle: resources];
+        IRGuidePowerViewController *c = [[IRGuidePowerViewController alloc] initWithNibName: @"IRGuidePowerViewController"
+                                                                                     bundle: resources];
         c.delegate = self;
 
         [self.navigationController pushViewController: c animated: YES];
@@ -179,14 +150,21 @@
     break;
     case 1:
     {
-        IRNewPeripheralScene2ViewController *c = [[IRNewPeripheralScene2ViewController alloc] initWithNibName: @"IRNewPeripheralScene2ViewController"
-                                                                                                       bundle: resources];
+        IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName: @"IRWifiEditViewController" bundle: resources];
+        c.delegate = self;
+        [self.navigationController pushViewController: c animated: YES];
+    }
+    break;
+    case 2:
+    {
+        IRGuideWifiViewController *c = [[IRGuideWifiViewController alloc] initWithNibName: @"IRGuideWifiViewController"
+                                                                                   bundle: resources];
         c.delegate = self;
 
         [self.navigationController pushViewController: c animated: YES];
     }
     break;
-    case 2:
+    case 3:
     {
         IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController"
                                                                                                      bundle: resources];
@@ -197,7 +175,7 @@
         [self.navigationController pushViewController: c animated: YES];
     }
     break;
-    case 3:
+    case 4:
     {
         IRNewSignalScene1ViewController *c = [[IRNewSignalScene1ViewController alloc] initWithNibName: @"IRNewSignalScene1ViewController"
                                                                                                bundle: resources];
@@ -206,49 +184,21 @@
         [self.navigationController pushViewController: c animated: YES];
     }
     break;
-    case 4:
+    case 5:
     {
         IRSignalNameEditViewController *c = [[IRSignalNameEditViewController alloc] initWithNibName: @"IRSignalNameEditViewController"
                                                                                              bundle: resources];
         c.delegate = self;
         unsigned short data[10] = { 100,100,100,100,100,100,100,100,100,100 };
-        NSData *irdata = [NSData dataWithBytes: data length: 10];
-        IRSignal *signal = [[IRSignal alloc] initWithDictionary: @{
-                                @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
-                                @"format": @"raw",
-                                @"freq": @38,
-                            }];
+        NSData *irdata          = [NSData dataWithBytes: data length: 10];
+        IRSignal *signal        = [[IRSignal alloc] initWithDictionary: @{
+                                       @"data": @[ @100,@100,@100,@100,@100,@100,@100,@100,@100,@100 ],
+                                       @"format": @"raw",
+                                       @"freq": @38,
+                                   }];
         c.signal = signal;
 
         [self.navigationController pushViewController: c animated: YES];
-    }
-    break;
-    case 6:
-    {
-        IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName: @"IRWifiEditViewController" bundle: resources];
-        c.delegate = self;
-        [self.navigationController pushViewController: c animated: YES];
-    }
-    break;
-    case 7:
-    {
-        IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName: @"IRMorsePlayerViewController" bundle: resources];
-        c.delegate = self;
-        [self.navigationController pushViewController: c animated: YES];
-    }
-    break;
-    case 8:
-    {
-        IRMorsePlayerViewController *c = [[IRMorsePlayerViewController alloc] initWithNibName: @"IRMorsePlayerViewController" bundle: resources];
-        c.delegate = self;
-        IRKeys *keys = [[IRKeys alloc] init];
-        keys.ssid = @"IRKitTester";
-        keys.password = @"irkitone";
-        keys.security = IRSecurityTypeWPA2;
-        keys.devicekey = @"0123456789ABCDEF0123456789ABCDEF";
-        c.keys = keys;
-        [self.navigationController pushViewController: c animated: YES];
-        [c performSelector: @selector(startPlaying) withObject: nil afterDelay: 1];
     }
     break;
     default:
