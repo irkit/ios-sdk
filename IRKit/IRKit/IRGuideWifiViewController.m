@@ -142,10 +142,10 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
                         withCompletion: ^(NSHTTPURLResponse *res, id body, NSError *error) {
                     LOG( @"res: %@, body: %@, error: %@", res, body, error );
 
-                    // hide HUD
-                    [IRProgressView hideHUDForView: _self.navigationController.view afterDelay: kIntervalToHideHUD];
-
                     if (res.statusCode == 200) {
+                        // hide HUD
+                        [IRProgressView hideHUDForView: _self.navigationController.view afterDelay: kIntervalToHideHUD];
+
                         _self.postWifiSucceeded = YES;
 
                         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home Wi-Fi", @"alert title after POST /wifi finished successfully")
@@ -156,11 +156,11 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
                     }
                     else {
                         // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
-                        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Something is wrong, please contact developer", @"alert title when POST /wifi failed")
-                                                    message: @""
-                                                   delegate: nil
-                                          cancelButtonTitle: @"OK"
-                                          otherButtonTitles: nil] show];
+                        // retry if other errors
+                        LOG( @"retrying" );
+                        [_self performSelector: @selector(checkAndPostWifiCredentialsIfAdhoc)
+                                    withObject: Nil
+                                    afterDelay: 1.0];
                     }
                 }];
         }
