@@ -7,6 +7,7 @@ extern NSString * IRLocalizedString(NSString *key, NSString *comment);
 
 + (NSArray *)mapObjects:(NSArray *)array usingBlock:(id (^) (id obj, NSUInteger idx))block;
 + (NSString *)localIPAddress;
++ (NSString *)currentWifiSSID;
 + (void)enumerateSubviewsOfRootView:(UIView *)view usingBlock:(void (^) (id obj, NSUInteger idx, BOOL * stop))block;
 + (NSBundle *)resources;
 + (UIFont *)fontWithSize:(CGFloat)size;

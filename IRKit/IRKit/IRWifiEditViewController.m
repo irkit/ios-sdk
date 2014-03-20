@@ -168,6 +168,10 @@ static NSString *ssidCache = nil;
         if (ssidCache) {
             cell.editTextField.text = ssidCache;
         }
+        else {
+            NSString *ssid = [IRHelper currentWifiSSID];
+            cell.editTextField.text = ssid;
+        }
 
         return cell;
     }

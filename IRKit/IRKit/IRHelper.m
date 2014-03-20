@@ -6,7 +6,7 @@
 #import "IRHelper.h"
 #include <ifaddrs.h>
 #include <arpa/inet.h>
-
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 NSString * IRLocalizedString(NSString *key, NSString *comment) {
     return [[IRHelper resources] localizedStringForKey: key value: key table: nil];
@@ -50,6 +50,21 @@ NSString * IRLocalizedString(NSString *key, NSString *comment) {
     // Free memory
     freeifaddrs(interfaces);
     return address;
+}
+
+// thanks to http://stackoverflow.com/a/15236634/105194
++ (NSString *)currentWifiSSID {
+    // Does not work on the simulator.
+    NSString *ssid = nil;
+    NSArray *ifs   = (__bridge_transfer id)CNCopySupportedInterfaces();
+    for (NSString *ifnam in ifs) {
+        NSDictionary *info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        LOG( @"info: %@", info );
+        if (info[@"SSID"]) {
+            ssid = info[@"SSID"];
+        }
+    }
+    return ssid;
 }
 
 #pragma mark - View related
