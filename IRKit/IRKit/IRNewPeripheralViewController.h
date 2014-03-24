@@ -17,6 +17,7 @@
         UIAlertViewDelegate>
 
 @property (nonatomic, weak) id<IRNewPeripheralViewControllerDelegate> delegate;
+@property (nonatomic) UINavigationController *navController;
 
 @end
 
