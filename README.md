@@ -161,3 +161,6 @@ NSData *data = [_signals data];
 // or as JSON
 NSString *json = [_signals JSONRepresentation];
 ```
+
+## [Contributing](Contributing.md)
+
