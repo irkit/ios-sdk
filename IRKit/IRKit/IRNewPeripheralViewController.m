@@ -9,7 +9,6 @@
 
 @interface IRNewPeripheralViewController ()
 
-@property (nonatomic) UINavigationController *navController;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) IRKeys *keys;
 @property (nonatomic) IRPeripheral *foundPeripheral;
