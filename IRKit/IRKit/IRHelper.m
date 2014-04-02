@@ -23,6 +23,14 @@ NSString * IRLocalizedString(NSString *key, NSString *comment) {
     return result;
 }
 
++ (NSBundle *)resources {
+    NSBundle *main      = [NSBundle mainBundle];
+    NSBundle *resources = [NSBundle bundleWithPath: [main pathForResource: @"IRKit"
+                                                                   ofType: @"bundle"]];
+
+    return resources;
+}
+
 #pragma mark - Network related
 
 // thanks to http://stackoverflow.com/questions/6807788/how-to-get-ip-address-of-iphone-programatically
@@ -52,6 +60,7 @@ NSString * IRLocalizedString(NSString *key, NSString *comment) {
     return address;
 }
 
+#if TARGET_OS_IPHONE
 // thanks to http://stackoverflow.com/a/15236634/105194
 + (NSString *)currentWifiSSID {
     // Does not work on the simulator.
@@ -66,61 +75,6 @@ NSString * IRLocalizedString(NSString *key, NSString *comment) {
     }
     return ssid;
 }
-
-#pragma mark - View related
-
-+ (void)enumerateSubviewsOfRootView:(UIView *)view usingBlock:(void (^)(id obj, NSUInteger idx, BOOL *stop))block {
-    block(view, 0, 0);
-    for (UIView *subview in view.subviews) {
-        [self enumerateSubviewsOfRootView: subview usingBlock: block];
-    }
-}
-
-+ (NSBundle *)resources {
-    NSBundle *main      = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath: [main pathForResource: @"IRKit"
-                                                                   ofType: @"bundle"]];
-
-    return resources;
-}
-
-+ (UIFont *)fontWithSize:(CGFloat)size {
-    NSString *lang = [[NSLocale preferredLanguages] objectAtIndex: 0];
-
-    if ([lang isEqualToString: @"ja"]) {
-        return [UIFont fontWithName: @"HiraKakuProN-W3" size: size];
-    }
-    else {
-        return [UIFont fontWithName: @"HelveticaNeue-Light" size: size];
-    }
-}
-
-+ (UIImage *)imageWithColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
-    return image;
-}
-
-+ (UIImage *)imageInResourceNamed:(NSString *)name {
-    NSBundle *bundle = [self resources];
-    NSString *path2x = [bundle pathForResource: [NSString stringWithFormat: @"%@@2x", name]
-                                        ofType: @"png"];
-    UIImage *ret = [UIImage imageWithContentsOfFile: path2x];
-
-    if (!ret) {
-        ret = [UIImage imageWithContentsOfFile: [bundle pathForResource: name
-                                                                 ofType: @"png"]];
-    }
-    return ret;
-}
+#endif // TARGET_OS_IPHONE
 
 @end

@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "IRPeripheral.h"
 #import "IRKeys.h"
 
 @protocol IRWifiSecuritySelectViewControllerDelegate;

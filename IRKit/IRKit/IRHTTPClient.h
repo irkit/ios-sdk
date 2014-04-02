@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "IRSignal.h"
 
 @interface IRHTTPClient : NSObject
@@ -26,7 +25,6 @@
 + (void)registerDeviceWithCompletion:(void (^) (NSHTTPURLResponse * res, NSDictionary * keys, NSError * error))completion;
 + (IRHTTPClient *)waitForSignalWithCompletion:(void (^) (NSHTTPURLResponse * res, IRSignal * signal, NSError * error))completion;
 + (IRHTTPClient *)waitForDoorWithDeviceID:(NSString *)deviceid completion:(void (^) (NSHTTPURLResponse * res, id object, NSError * error))completion;
-+ (void)loadImage:(NSString *)url completionHandler:(void (^) (NSHTTPURLResponse * response, UIImage * image, NSError * error))handler;
 + (void)showAlertOfError:(NSError *)error;
 + (void)cancelLocalRequests;
 

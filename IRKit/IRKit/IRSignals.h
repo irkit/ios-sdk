@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "IRSignal.h"
 
 /// Collection of id<IRSendable>

@@ -1,7 +1,6 @@
 #import "Log.h"
 #import "IRKit.h"
 #import "IRHTTPClient.h"
-#import "IRViewCustomizer.h"
 
 @interface IRKit ()
 
@@ -32,6 +31,7 @@
 
     _peripherals = [[IRPeripherals alloc] init];
 
+#if TARGET_OS_IPHONE
     __weak IRKit *_self = self;
     _terminateObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationWillTerminateNotification
                                                                            object: nil
@@ -56,13 +56,8 @@
                 }];
         }
     }];
-    _enterBackgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidEnterBackgroundNotification
-                                                                                 object: nil
-                                                                                  queue: [NSOperationQueue mainQueue]
-                                                                             usingBlock:^(NSNotification *note) {
-        LOG(@"entered background");
-    }];
     [IRViewCustomizer sharedInstance]; // init
+#endif
 
     return self;
 }

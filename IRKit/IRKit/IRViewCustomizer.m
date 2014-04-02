@@ -6,6 +6,7 @@
 #import "IRPeripheralNameEditViewController.h"
 #import "IRWifiEditViewController.h"
 #import "IRHelper.h"
+#import "IRViewHelper.h"
 
 @implementation IRViewCustomizer
 
@@ -76,11 +77,11 @@
         return;
     }
 
-    [IRHelper enumerateSubviewsOfRootView: rootView usingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+    [IRViewHelper enumerateSubviewsOfRootView: rootView usingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
         if ([obj isKindOfClass: [UILabel class]]) {
             UILabel *label = (UILabel *)obj;
             UIFont *font   = label.font;
-            label.font     = [IRHelper fontWithSize: font.pointSize];
+            label.font     = [IRViewHelper fontWithSize: font.pointSize];
         }
     }];
 }
@@ -111,7 +112,7 @@
             forViewController:(UIViewController *)viewController
                withImageNamed:(NSString *)name {
     UIButton *button = [UIButton buttonWithType: UIButtonTypeCustom];
-    UIImage *image   = [IRHelper imageInResourceNamed: name];
+    UIImage *image   = [IRViewHelper imageInResourceNamed: name];
 
     [button setImage: image
             forState: UIControlStateNormal];
