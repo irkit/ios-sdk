@@ -3,6 +3,7 @@
 #import "IRPeripherals.h"
 #import "IRHelper.h"
 #import "IRSignals.h"
+#import "IRSignalSequence.h"
 #import "IRPersistentStore.h"
 #if TARGET_OS_IPHONE
 # import "IRPeripheralCell.h"

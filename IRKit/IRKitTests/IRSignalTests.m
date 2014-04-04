@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "IRSignal.h"
+#import "IRKit.h"
 
 @interface IRSignalTests : XCTestCase
 

@@ -8,9 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <OHHTTPStubs/OHHTTPStubs.h>
-#import "IRSignals.h"
-#import "IRSignal.h"
-#import "IRSignalSequence.h"
+#import "IRKit.h"
 #import "XCTestCase+Async.h"
 #import "IRKitTests.h"
 
