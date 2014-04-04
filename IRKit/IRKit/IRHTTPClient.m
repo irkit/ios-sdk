@@ -223,6 +223,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 return;
             }
             [IRPersistentStore storeObject: clientkey_ forKey: @"clientkey"];
+            [IRPersistentStore synchronize];
             LOG(@"successfully registered! clientkey: %@", clientkey_);
             next(nil);
             return;
