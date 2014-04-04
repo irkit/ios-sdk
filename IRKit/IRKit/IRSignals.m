@@ -1,10 +1,5 @@
 #import "Log.h"
 #import "IRSignals.h"
-#import "IRPersistentStore.h"
-#import "IRConst.h"
-#import "IRHelper.h"
-#import "IRSignalSendOperationQueue.h"
-#import "IRSignalSendOperation.h"
 
 @interface IRSignals ()
 
