@@ -67,7 +67,7 @@
 		C735042E17A02B0D0057D51B /* IRSamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */; };
 		C735043217A030A60057D51B /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D6FE17462C7B008B644A /* libIRKit.a */; };
 		C735043517A0341D0057D51B /* IRKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C79DE3B9176F25260088679E /* IRKit.bundle */; };
-		C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */; };
+		C73E37E4174DB9AE00872C04 /* IRUserDefaultsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E3174DB9AE00872C04 /* IRUserDefaultsStore.m */; };
 		C73E37E7174DF20300872C04 /* IRHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C73E37E6174DF20300872C04 /* IRHelper.m */; };
 		C751C38B18C888A900F3DD81 /* img_connect_02_jp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C751C38918C888A900F3DD81 /* img_connect_02_jp@2x.png */; };
 		C751C38C18C888A900F3DD81 /* img_connect_01_jp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C751C38A18C888A900F3DD81 /* img_connect_01_jp@2x.png */; };
@@ -186,7 +186,7 @@
 		C7E07C721875D3BE00901967 /* IRPeripherals.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F401749F2E000BDF920 /* IRPeripherals.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C731875D3BE00901967 /* IRPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = C7554F301749E65B00BDF920 /* IRPeripheral.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C751875D3BE00901967 /* IRConst.h in Headers */ = {isa = PBXBuildFile; fileRef = C7FAB0251746889000125BCB /* IRConst.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7E07C761875D3BE00901967 /* IRPersistentStore.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7E07C761875D3BE00901967 /* IRUserDefaultsStore.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E37E2174DB9AE00872C04 /* IRUserDefaultsStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C771875D3BE00901967 /* IRHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C73E37E5174DF20300872C04 /* IRHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C781875D3BE00901967 /* IRKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = C701BEC0182BA72C00C31F4B /* IRKeys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C7E07C791875D3BE00901967 /* IRHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = C703E826183DFA6900B8446C /* IRHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -338,8 +338,8 @@
 		C735042117A029C40057D51B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C735042C17A02B0D0057D51B /* IRSamplesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSamplesTableViewController.h; sourceTree = "<group>"; };
 		C735042D17A02B0D0057D51B /* IRSamplesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSamplesTableViewController.m; sourceTree = "<group>"; };
-		C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPersistentStore.h; sourceTree = "<group>"; };
-		C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPersistentStore.m; sourceTree = "<group>"; };
+		C73E37E2174DB9AE00872C04 /* IRUserDefaultsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRUserDefaultsStore.h; sourceTree = "<group>"; };
+		C73E37E3174DB9AE00872C04 /* IRUserDefaultsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRUserDefaultsStore.m; sourceTree = "<group>"; };
 		C73E37E5174DF20300872C04 /* IRHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHelper.h; sourceTree = "<group>"; };
 		C73E37E6174DF20300872C04 /* IRHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHelper.m; sourceTree = "<group>"; };
 		C751C38818C8867E00F3DD81 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/IRGuideWifiViewController.xib; sourceTree = "<group>"; };
@@ -429,6 +429,7 @@
 		C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene1ViewController.h; sourceTree = "<group>"; };
 		C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene1ViewController.m; sourceTree = "<group>"; };
 		C7AC32111850A64200BB190D /* img_remote3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_remote3@2x.png"; sourceTree = "<group>"; };
+		C7B1A38718EEA79500EFB915 /* IRPersistentStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRPersistentStore.h; sourceTree = "<group>"; };
 		C7B4EBD118C715C500AB2E46 /* img_connect_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_connect_01@2x.png"; sourceTree = "<group>"; };
 		C7B4EBD218C715C500AB2E46 /* img_connect_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_connect_02@2x.png"; sourceTree = "<group>"; };
 		C7B4EBD318C715C500AB2E46 /* icn_chart_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_chart_02@2x.png"; sourceTree = "<group>"; };
@@ -641,6 +642,7 @@
 		C752D70317462C7B008B644A /* IRKit */ = {
 			isa = PBXGroup;
 			children = (
+				C7B1A38618EEA75100EFB915 /* persistentstore */,
 				C7C14F19180FEA070025B865 /* dependencies */,
 				C73CB4DB17856CD100B3F2C0 /* operation */,
 				C7C7A308176EFC7300C9A62F /* viewcontrollers */,
@@ -659,8 +661,6 @@
 				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
 				C7554F311749E65B00BDF920 /* IRPeripheral.m */,
 				C7FAB0251746889000125BCB /* IRConst.h */,
-				C73E37E2174DB9AE00872C04 /* IRPersistentStore.h */,
-				C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */,
 				C73E37E5174DF20300872C04 /* IRHelper.h */,
 				C73E37E6174DF20300872C04 /* IRHelper.m */,
 				C76CCA7E18EAD53200644C0E /* IRViewHelper.h */,
@@ -758,6 +758,16 @@
 				C772C4CF18D5E53E00EF819D /* IRProgressView.xib */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		C7B1A38618EEA75100EFB915 /* persistentstore */ = {
+			isa = PBXGroup;
+			children = (
+				C73E37E2174DB9AE00872C04 /* IRUserDefaultsStore.h */,
+				C73E37E3174DB9AE00872C04 /* IRUserDefaultsStore.m */,
+				C7B1A38718EEA79500EFB915 /* IRPersistentStore.h */,
+			);
+			name = persistentstore;
 			sourceTree = "<group>";
 		};
 		C7C14F19180FEA070025B865 /* dependencies */ = {
@@ -864,7 +874,7 @@
 				C7B544F118EBDD9200B54504 /* IRHTTPClient+UIKit.h in Headers */,
 				C7E07C791875D3BE00901967 /* IRHTTPClient.h in Headers */,
 				C7E07C751875D3BE00901967 /* IRConst.h in Headers */,
-				C7E07C761875D3BE00901967 /* IRPersistentStore.h in Headers */,
+				C7E07C761875D3BE00901967 /* IRUserDefaultsStore.h in Headers */,
 				C7E07C771875D3BE00901967 /* IRHelper.h in Headers */,
 				C7E07C781875D3BE00901967 /* IRKeys.h in Headers */,
 				C7E07C7A1875D3BE00901967 /* CRC8.h in Headers */,
@@ -1172,7 +1182,7 @@
 				C7B544F218EBDD9200B54504 /* IRHTTPClient+UIKit.m in Sources */,
 				C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */,
 				C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */,
-				C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */,
+				C73E37E4174DB9AE00872C04 /* IRUserDefaultsStore.m in Sources */,
 				C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */,
 				C73E37E7174DF20300872C04 /* IRHelper.m in Sources */,
 				C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */,

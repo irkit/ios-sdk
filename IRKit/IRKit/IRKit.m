@@ -1,6 +1,9 @@
 #import "Log.h"
 #import "IRKit.h"
 #import "IRHTTPClient.h"
+#import "IRUserDefaultsStore.h"
+
+static id<IRPersistentStore> store;
 
 @interface IRKit ()
 
@@ -23,13 +26,25 @@
     return instance;
 }
 
++ (void)setPersistentStore:(id<IRPersistentStore>)store_ {
+    store = store_;
+}
+
 - (instancetype)init {
     self = [super init];
     if (!self) {
         return nil;
     }
 
-    _peripherals = [[IRPeripherals alloc] init];
+    if (store) {
+        _store = store;
+        store  = nil;
+    }
+    else {
+        // defaults to NSUserDefaults, but you can set store using class method
+        _store = [[IRUserDefaultsStore alloc] init];
+    }
+    _peripherals = [[IRPeripherals alloc] initWithPersistentStore: _store];
 
 #if TARGET_OS_IPHONE
     __weak IRKit *_self = self;

@@ -1,16 +1,8 @@
-//
-//  IRPersistentStore.h
-//  IRKit
-//
-//  Created by Masakazu Ohtsuka on 2014/04/04.
-//
-//
-
 #import <Foundation/Foundation.h>
+#import "IRPersistentStore.h"
 
-@protocol IRPersistentStore <NSObject>
+@interface IRUserDefaultsStore : NSObject<IRPersistentStore>
 
-@required
 - (void)storeObject:(id)object forKey:(NSString *)key;
 - (id)objectForKey:(NSString *)key;
 - (void)synchronize;

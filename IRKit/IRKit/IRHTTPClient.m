@@ -9,11 +9,10 @@
 #import "Log.h"
 #import "IRHTTPClient.h"
 #import "IRHelper.h"
-#import "ISHTTPOperation/ISHTTPOperation.h"
 #import "IRConst.h"
 #import "IRHTTPJSONOperation.h"
 #import "IRHTTPOperationQueue.h"
-#import "IRPersistentStore.h"
+#import "IRUserDefaultsStore.h"
 #import "IRKit.h"
 #import <CommonCrypto/CommonHMAC.h>
 
@@ -46,7 +45,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 #pragma mark - Private
 
 + (NSString *)clientkey {
-    return [IRPersistentStore objectForKey: @"clientkey"];
+    return [IRKit sharedInstance].clientkey;
 }
 
 - (void)startPollingRequest {
@@ -222,8 +221,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 next(error);
                 return;
             }
-            [IRPersistentStore storeObject: clientkey_ forKey: @"clientkey"];
-            [IRPersistentStore synchronize];
+            [[IRKit sharedInstance].store storeObject: clientkey_ forKey: @"clientkey"];
+            [[IRKit sharedInstance].store synchronize];
             LOG(@"successfully registered! clientkey: %@", clientkey_);
             next(nil);
             return;
@@ -456,7 +455,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
             error = [self errorFromResponse: response body: object];
         }
 
-        // ISHTTPOperation calls our handler in main queue
+        // IRHTTPOperation calls our handler in main queue
         completion(response, object, error);
     }];
 }
@@ -478,7 +477,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         // alert about error
         [self showAlertOfError: error];
 
-        // ISHTTPOperation calls our handler in main queue
+        // IRHTTPOperation calls our handler in main queue
         completion(response, object, error);
     }];
 }

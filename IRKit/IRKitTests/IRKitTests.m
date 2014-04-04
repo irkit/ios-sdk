@@ -8,6 +8,7 @@
 
 #import "IRSignal.h"
 #import "IRPeripherals.h"
+#import "IRUserDefaultsStore.h"
 
 @interface IRKitTests : NSObject
 
@@ -26,7 +27,8 @@
 }
 
 + (IRPeripheral*)makeTestPeripheral {
-    IRPeripherals *peripherals = [[IRPeripherals alloc] init];
+    IRUserDefaultsStore *store = [[IRUserDefaultsStore alloc] init];
+    IRPeripherals *peripherals = [[IRPeripherals alloc] initWithPersistentStore: store];
     return [peripherals savePeripheralWithName: @"IRKitTEST" deviceid: @"xxx"];
 }
 

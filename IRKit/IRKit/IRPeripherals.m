@@ -1,6 +1,6 @@
 #import "Log.h"
 #import "IRPeripherals.h"
-#import "IRPersistentStore.h"
+#import "IRUserDefaultsStore.h"
 #import "IRHelper.h"
 #import "IRConst.h"
 #import "IRHTTPClient.h"
@@ -9,19 +9,19 @@
 
 // NSNetService.hostName => IRPeripheral
 @property (nonatomic) NSMutableDictionary *irperipheralForName;
+@property (nonatomic) id<IRPersistentStore> store;
 
 @end
 
 @implementation IRPeripherals
 
-- (instancetype)init {
+- (instancetype)initWithPersistentStore:(id<IRPersistentStore>)store {
     self = [super init];
     if (!self) {
         return nil;
     }
-
+    self.store = store;
     [self load];
-
     return self;
 }
 
@@ -45,9 +45,9 @@
     LOG_CURRENT_METHOD;
 
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject: _irperipheralForName];
-    [IRPersistentStore storeObject: data
-                            forKey: @"peripherals"];
-    [IRPersistentStore synchronize];
+    [_store storeObject: data
+                 forKey: @"peripherals"];
+    [_store synchronize];
 }
 
 - (NSUInteger)countOfReadyPeripherals {
@@ -92,7 +92,7 @@
 - (void)load {
     LOG_CURRENT_METHOD;
 
-    NSData *data = [IRPersistentStore objectForKey: @"peripherals"];
+    NSData *data = [_store objectForKey: @"peripherals"];
 
     _irperipheralForName = data ? [[NSKeyedUnarchiver unarchiveObjectWithData: data] mutableCopy]
                            : nil;

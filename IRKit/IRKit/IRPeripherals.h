@@ -1,8 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "IRPeripheral.h"
+#import "IRPersistentStore.h"
 
 @interface IRPeripherals : NSObject
 
+- (instancetype)initWithPersistentStore:(id<IRPersistentStore>)store;
 - (id)objectAtIndex:(NSUInteger)index;
 - (IRPeripheral *)peripheralWithName:(NSString *)name;
 - (void)save;
