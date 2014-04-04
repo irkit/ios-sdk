@@ -9,12 +9,6 @@ NSString * _IRLog(NSString *format, ...) {
     return str;
 }
 
-void IRKitLog(NSString *format, ...) {
-    va_list args;
-
-    va_start(args, format);
-    NSString *prepended_format = [NSString stringWithFormat: @"[IRKit]%@", format];
-    va_end(args);
-
-    NSLog(prepended_format, args);
+void IRKitLog(NSString *msg) {
+    NSLog(@"[IRKit]%@", msg);
 }

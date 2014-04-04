@@ -1,6 +1,7 @@
 #import "Log.h"
 #import "IRPeripheralCell.h"
 #import "IRHTTPClient.h"
+#import "IRHTTPClient+UIKit.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface IRPeripheralCell ()
@@ -13,7 +14,7 @@
     LOG_CURRENT_METHOD;
     [super awakeFromNib];
 
-    self.iconView.layer.cornerRadius = 6.;
+    self.iconView.layer.cornerRadius  = 6.;
     self.iconView.layer.masksToBounds = YES;
 }
 

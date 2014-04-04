@@ -1,8 +1,7 @@
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "IRPeripheral.h"
 
-@interface IRPeripherals : NSObject<UITableViewDelegate, UITableViewDataSource>
+@interface IRPeripherals : NSObject
 
 - (id)objectAtIndex:(NSUInteger)index;
 - (IRPeripheral *)peripheralWithName:(NSString *)name;

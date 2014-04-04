@@ -2,10 +2,14 @@
 #import "IRConst.h"
 #import "IRPeripherals.h"
 #import "IRHelper.h"
-#import "IRNewPeripheralViewController.h"
-#import "IRNewSignalViewController.h"
 #import "IRSignals.h"
-#import "IRViewCustomizer.h"
+#if TARGET_OS_IPHONE
+# import "IRPeripheralCell.h"
+# import "IRPeripherals+UIKit.h"
+# import "IRNewPeripheralViewController.h"
+# import "IRNewSignalViewController.h"
+# import "IRViewCustomizer.h"
+#endif
 
 @interface IRKit : NSObject
 

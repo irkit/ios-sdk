@@ -3,7 +3,6 @@
 #import "IRPersistentStore.h"
 #import "IRHelper.h"
 #import "IRConst.h"
-#import "IRPeripheralCell.h"
 #import "IRHTTPClient.h"
 
 @interface IRPeripherals ()
@@ -151,34 +150,6 @@
     LOG(@"peripheral: %@", peripheral);
 
     [_irperipheralForName removeObjectForKey: peripheral.hostname.lowercaseString];
-}
-
-#pragma mark - UITableViewDataSource
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LOG(@"indexPath.row: %d", indexPath.row);
-
-    IRPeripheralCell *cell = (IRPeripheralCell *)[tableView dequeueReusableCellWithIdentifier: IRKitCellIdentifierPeripheral];
-    if (cell == nil) {
-        [tableView registerNib: [UINib nibWithNibName: @"IRPeripheralCell" bundle: [IRHelper resources]]
-         forCellReuseIdentifier: IRKitCellIdentifierPeripheral];
-
-        cell = [tableView dequeueReusableCellWithIdentifier: IRKitCellIdentifierPeripheral];
-    }
-    cell.peripheral = [self objectAtIndex: indexPath.row];
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    LOG_CURRENT_METHOD;
-    return self.countOfReadyPeripherals;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LOG_CURRENT_METHOD;
-    return [IRPeripheralCell height];
 }
 
 @end

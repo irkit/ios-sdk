@@ -8,7 +8,7 @@
 
 #import "IRReachability.h"
 #import "Log.h"
-@import SystemConfiguration;
+#import <SystemConfiguration/SystemConfiguration.h>
 
 @interface IRReachability ()
 
@@ -30,7 +30,11 @@ static void NetworkReachabilityCallback(SCNetworkReachabilityRef __unused target
 
 static NSString *NSStringFromNetworkReachabilityFlags(SCNetworkReachabilityFlags flags) {
     return [NSString stringWithFormat: @"Reachability Flag Status: %c%c %c%c%c%c%c%c%c",
+#if TARGET_OS_IPHONE
             (flags & kSCNetworkReachabilityFlagsIsWWAN)               ? 'W' : '-',
+#else
+            '-',
+#endif
             (flags & kSCNetworkReachabilityFlagsReachable)            ? 'R' : '-',
             (flags & kSCNetworkReachabilityFlagsTransientConnection)  ? 't' : '-',
             (flags & kSCNetworkReachabilityFlagsConnectionRequired)   ? 'c' : '-',
@@ -118,14 +122,22 @@ static NSString *NSStringFromNetworkReachabilityFlags(SCNetworkReachabilityFlags
 -(BOOL)isReachableViaWiFi {
     // reachable and not on WWAN
     return (_flags & kSCNetworkReachabilityFlagsReachable) &&
+#if TARGET_OS_IPHONE
            !(_flags & kSCNetworkReachabilityFlagsIsWWAN);
+#else
+           1;
+#endif
 }
 
 -(BOOL)isReachableViaWiFiAndDirect {
     // reachable, direct and not on WWAN
     return (_flags & kSCNetworkReachabilityFlagsReachable) &&
            (_flags & kSCNetworkReachabilityFlagsIsDirect) &&
+#if TARGET_OS_IPHONE
            !(_flags & kSCNetworkReachabilityFlagsIsWWAN);
+#else
+           1;
+#endif
 }
 
 @end

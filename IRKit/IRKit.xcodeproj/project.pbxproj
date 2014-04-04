@@ -95,6 +95,11 @@
 		C763C6B41839ACDE00D1D155 /* IRWifiSecuritySelectViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C701BEBE182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.h */; };
 		C763C6B51839ACEC00D1D155 /* IRKeys.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C701BEC0182BA72C00C31F4B /* IRKeys.h */; };
 		C7693F8717A12AF900EC43FC /* icn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */; };
+		C76CCA8018EAD53200644C0E /* IRViewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C76CCA7E18EAD53200644C0E /* IRViewHelper.h */; };
+		C76CCA8118EAD53200644C0E /* IRViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CCA7F18EAD53200644C0E /* IRViewHelper.m */; };
+		C76CCA8418EAD5BE00644C0E /* IRPeripherals+UIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C76CCA8218EAD5BE00644C0E /* IRPeripherals+UIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C76CCA8518EAD5BE00644C0E /* IRPeripherals+UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C76CCA8318EAD5BE00644C0E /* IRPeripherals+UIKit.m */; };
+		C76CCA8618EADB1F00644C0E /* IRPeripherals+UIKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C76CCA8218EAD5BE00644C0E /* IRPeripherals+UIKit.h */; };
 		C77150EF17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150ED17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m */; };
 		C77150F31772D681004F9FE3 /* IRSignal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5689174A7AB200FFE5CB /* IRSignal.h */; };
 		C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */; };
@@ -145,6 +150,9 @@
 		C7B4EBD618C715C500AB2E46 /* img_connect_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B4EBD218C715C500AB2E46 /* img_connect_02@2x.png */; };
 		C7B4EBD718C715C500AB2E46 /* icn_chart_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B4EBD318C715C500AB2E46 /* icn_chart_02@2x.png */; };
 		C7B4EBD818C715C500AB2E46 /* icn_chart_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B4EBD418C715C500AB2E46 /* icn_chart_01@2x.png */; };
+		C7B544F118EBDD9200B54504 /* IRHTTPClient+UIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C7B544EF18EBDD9200B54504 /* IRHTTPClient+UIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7B544F218EBDD9200B54504 /* IRHTTPClient+UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B544F018EBDD9200B54504 /* IRHTTPClient+UIKit.m */; };
+		C7B544F318EBDFFC00B54504 /* IRHTTPClient+UIKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B544EF18EBDD9200B54504 /* IRHTTPClient+UIKit.h */; };
 		C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */; };
 		C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; };
 		C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; };
@@ -256,6 +264,8 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C7B544F318EBDFFC00B54504 /* IRHTTPClient+UIKit.h in CopyFiles */,
+				C76CCA8618EADB1F00644C0E /* IRPeripherals+UIKit.h in CopyFiles */,
 				C78B777A18D73BE90049C526 /* IRReachability.h in CopyFiles */,
 				C704474518D5F7B600B73810 /* IRProgressView.h in CopyFiles */,
 				C77E197918785D2D00B457C3 /* IRGuideWifiViewController.h in CopyFiles */,
@@ -361,6 +371,10 @@
 		C7603E8917A9FAE000A7AF1E /* IRSignalNameEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalNameEditViewController.m; sourceTree = "<group>"; };
 		C7603E8A17A9FAE000A7AF1E /* IRSignalNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalNameEditViewController.h; sourceTree = "<group>"; };
 		C7693F8517A12AF900EC43FC /* icn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow@2x.png"; sourceTree = "<group>"; };
+		C76CCA7E18EAD53200644C0E /* IRViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRViewHelper.h; sourceTree = "<group>"; };
+		C76CCA7F18EAD53200644C0E /* IRViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRViewHelper.m; sourceTree = "<group>"; };
+		C76CCA8218EAD5BE00644C0E /* IRPeripherals+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IRPeripherals+UIKit.h"; sourceTree = "<group>"; };
+		C76CCA8318EAD5BE00644C0E /* IRPeripherals+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IRPeripherals+UIKit.m"; sourceTree = "<group>"; };
 		C77150ED17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralNameEditViewController.m; sourceTree = "<group>"; };
 		C77150EE17728F9C004F9FE3 /* IRPeripheralNameEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralNameEditViewController.h; sourceTree = "<group>"; };
 		C77150F71772DF4A004F9FE3 /* IRNewSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalViewController.m; sourceTree = "<group>"; };
@@ -419,6 +433,8 @@
 		C7B4EBD218C715C500AB2E46 /* img_connect_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_connect_02@2x.png"; sourceTree = "<group>"; };
 		C7B4EBD318C715C500AB2E46 /* icn_chart_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_chart_02@2x.png"; sourceTree = "<group>"; };
 		C7B4EBD418C715C500AB2E46 /* icn_chart_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_chart_01@2x.png"; sourceTree = "<group>"; };
+		C7B544EF18EBDD9200B54504 /* IRHTTPClient+UIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IRHTTPClient+UIKit.h"; sourceTree = "<group>"; };
+		C7B544F018EBDD9200B54504 /* IRHTTPClient+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IRHTTPClient+UIKit.m"; sourceTree = "<group>"; };
 		C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperation.m; sourceTree = "<group>"; };
 		C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSendOperation.h; sourceTree = "<group>"; };
 		C7B741B81803FA22005802A7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
@@ -638,6 +654,8 @@
 				C727C87918B5DEEE00867C1A /* IRSignalSequence.m */,
 				C7554F401749F2E000BDF920 /* IRPeripherals.h */,
 				C7554F411749F2E000BDF920 /* IRPeripherals.m */,
+				C76CCA8218EAD5BE00644C0E /* IRPeripherals+UIKit.h */,
+				C76CCA8318EAD5BE00644C0E /* IRPeripherals+UIKit.m */,
 				C7554F301749E65B00BDF920 /* IRPeripheral.h */,
 				C7554F311749E65B00BDF920 /* IRPeripheral.m */,
 				C7FAB0251746889000125BCB /* IRConst.h */,
@@ -645,12 +663,16 @@
 				C73E37E3174DB9AE00872C04 /* IRPersistentStore.m */,
 				C73E37E5174DF20300872C04 /* IRHelper.h */,
 				C73E37E6174DF20300872C04 /* IRHelper.m */,
+				C76CCA7E18EAD53200644C0E /* IRViewHelper.h */,
+				C76CCA7F18EAD53200644C0E /* IRViewHelper.m */,
 				C701BEC0182BA72C00C31F4B /* IRKeys.h */,
 				C701BEC1182BA72C00C31F4B /* IRKeys.m */,
 				C752D70617462C7B008B644A /* IRKit.h */,
 				C752D70817462C7B008B644A /* IRKit.m */,
 				C703E826183DFA6900B8446C /* IRHTTPClient.h */,
 				C703E827183DFA6900B8446C /* IRHTTPClient.m */,
+				C7B544EF18EBDD9200B54504 /* IRHTTPClient+UIKit.h */,
+				C7B544F018EBDD9200B54504 /* IRHTTPClient+UIKit.m */,
 				C703E829183E0DD900B8446C /* CRC8.c */,
 				C703E82B183E0DF600B8446C /* CRC8.h */,
 				C79C5947183F5E49002136CD /* IRSearcher.h */,
@@ -816,6 +838,7 @@
 			files = (
 				C71B3F2B1875C279001CE2DA /* IRKit.h in Headers */,
 				C7E07C5B1875D3BE00901967 /* IRSignalSendOperationQueue.h in Headers */,
+				C76CCA8018EAD53200644C0E /* IRViewHelper.h in Headers */,
 				C7E07C5C1875D3BE00901967 /* IRSignalSendOperation.h in Headers */,
 				C7E07C611875D3BE00901967 /* IRHTTPJSONOperation.h in Headers */,
 				C7E07C621875D3BE00901967 /* IRHTTPOperationQueue.h in Headers */,
@@ -832,16 +855,18 @@
 				C7E07C6D1875D3BE00901967 /* IREditCell.h in Headers */,
 				C7E07C6E1875D3BE00901967 /* IRPeripheralCell.h in Headers */,
 				C7E07C6F1875D3BE00901967 /* IRViewCustomizer.h in Headers */,
+				C76CCA8418EAD5BE00644C0E /* IRPeripherals+UIKit.h in Headers */,
 				C7BD941C18D7024F008C9C72 /* IRReachability.h in Headers */,
 				C7E07C701875D3BE00901967 /* IRSignals.h in Headers */,
 				C7E07C711875D3BE00901967 /* IRSignal.h in Headers */,
 				C7E07C721875D3BE00901967 /* IRPeripherals.h in Headers */,
 				C7E07C731875D3BE00901967 /* IRPeripheral.h in Headers */,
+				C7B544F118EBDD9200B54504 /* IRHTTPClient+UIKit.h in Headers */,
+				C7E07C791875D3BE00901967 /* IRHTTPClient.h in Headers */,
 				C7E07C751875D3BE00901967 /* IRConst.h in Headers */,
 				C7E07C761875D3BE00901967 /* IRPersistentStore.h in Headers */,
 				C7E07C771875D3BE00901967 /* IRHelper.h in Headers */,
 				C7E07C781875D3BE00901967 /* IRKeys.h in Headers */,
-				C7E07C791875D3BE00901967 /* IRHTTPClient.h in Headers */,
 				C7E07C7A1875D3BE00901967 /* CRC8.h in Headers */,
 				C7E07C7B1875D3BE00901967 /* IRSearcher.h in Headers */,
 				C77E1977187859D700B457C3 /* IRGuideWifiViewController.h in Headers */,
@@ -1144,6 +1169,7 @@
 				C79C5949183F5E49002136CD /* IRSearcher.m in Sources */,
 				C78F6FE1182B8134002AAC7B /* IRWifiEditViewController.m in Sources */,
 				C703E828183DFA6900B8446C /* IRHTTPClient.m in Sources */,
+				C7B544F218EBDD9200B54504 /* IRHTTPClient+UIKit.m in Sources */,
 				C75B568A174A7AB200FFE5CB /* IRSignals.m in Sources */,
 				C75B568B174A7AB200FFE5CB /* IRSignal.m in Sources */,
 				C73E37E4174DB9AE00872C04 /* IRPersistentStore.m in Sources */,
@@ -1151,6 +1177,7 @@
 				C73E37E7174DF20300872C04 /* IRHelper.m in Sources */,
 				C7C7A307176EFC6C00C9A62F /* IRNewPeripheralViewController.m in Sources */,
 				C7C7A30E176F05C500C9A62F /* IRGuidePowerViewController.m in Sources */,
+				C76CCA8518EAD5BE00644C0E /* IRPeripherals+UIKit.m in Sources */,
 				C77150EF17728F9C004F9FE3 /* IRPeripheralNameEditViewController.m in Sources */,
 				C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */,
 				C772C4D418D5E59100EF819D /* IRProgressView.m in Sources */,
@@ -1166,6 +1193,7 @@
 				C7CEF3B9186172DB00B665DA /* IRHTTPOperationQueue.m in Sources */,
 				C77E1978187859D700B457C3 /* IRGuideWifiViewController.m in Sources */,
 				C7B5495C17ABD5DA005D91D1 /* IRSignalSendOperation.m in Sources */,
+				C76CCA8118EAD53200644C0E /* IRViewHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1399,6 +1427,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SDKROOT = iphoneos;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
@@ -1441,6 +1470,7 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SDKROOT = iphoneos;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
