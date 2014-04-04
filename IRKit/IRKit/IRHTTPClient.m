@@ -14,6 +14,7 @@
 #import "IRHTTPOperationQueue.h"
 #import "IRUserDefaultsStore.h"
 #import "IRKit.h"
+#import "IRKit+Internal.h"
 #import <CommonCrypto/CommonHMAC.h>
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
@@ -221,8 +222,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 next(error);
                 return;
             }
-            [[IRKit sharedInstance].store storeObject: clientkey_ forKey: @"clientkey"];
-            [[IRKit sharedInstance].store synchronize];
+            [[IRKit sharedInstance] setClientkey: clientkey_];
             LOG(@"successfully registered! clientkey: %@", clientkey_);
             next(nil);
             return;

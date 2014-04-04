@@ -26,8 +26,5 @@
 
 @property (nonatomic, readonly) NSUInteger countOfReadyPeripherals;
 @property (nonatomic, readonly) IRPeripherals *peripherals;
-@property (nonatomic, readonly, copy) NSString *apikey;
-@property (nonatomic, copy) NSString *clientkey; // TODO readonly
-@property (nonatomic) id<IRPersistentStore> store;
 
 @end

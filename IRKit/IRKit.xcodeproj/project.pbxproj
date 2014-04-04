@@ -146,6 +146,8 @@
 		C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */; };
 		C7AB418D179532F500E934C3 /* IRNewSignalScene1ViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */; };
 		C7AC32121850A64200BB190D /* img_remote3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7AC32111850A64200BB190D /* img_remote3@2x.png */; };
+		C7AFAB5918EEB085001F4C87 /* IRKit+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = C7AFAB5718EEB085001F4C87 /* IRKit+Internal.h */; };
+		C7AFAB5A18EEB085001F4C87 /* IRKit+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = C7AFAB5818EEB085001F4C87 /* IRKit+Internal.m */; };
 		C7B4EBD518C715C500AB2E46 /* img_connect_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B4EBD118C715C500AB2E46 /* img_connect_01@2x.png */; };
 		C7B4EBD618C715C500AB2E46 /* img_connect_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B4EBD218C715C500AB2E46 /* img_connect_02@2x.png */; };
 		C7B4EBD718C715C500AB2E46 /* icn_chart_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7B4EBD318C715C500AB2E46 /* icn_chart_02@2x.png */; };
@@ -429,6 +431,8 @@
 		C7AB418A179530D300E934C3 /* IRNewSignalScene1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRNewSignalScene1ViewController.h; sourceTree = "<group>"; };
 		C7AB418B179530D300E934C3 /* IRNewSignalScene1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRNewSignalScene1ViewController.m; sourceTree = "<group>"; };
 		C7AC32111850A64200BB190D /* img_remote3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_remote3@2x.png"; sourceTree = "<group>"; };
+		C7AFAB5718EEB085001F4C87 /* IRKit+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IRKit+Internal.h"; sourceTree = "<group>"; };
+		C7AFAB5818EEB085001F4C87 /* IRKit+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IRKit+Internal.m"; sourceTree = "<group>"; };
 		C7B1A38718EEA79500EFB915 /* IRPersistentStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRPersistentStore.h; sourceTree = "<group>"; };
 		C7B4EBD118C715C500AB2E46 /* img_connect_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_connect_01@2x.png"; sourceTree = "<group>"; };
 		C7B4EBD218C715C500AB2E46 /* img_connect_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_connect_02@2x.png"; sourceTree = "<group>"; };
@@ -669,6 +673,8 @@
 				C701BEC1182BA72C00C31F4B /* IRKeys.m */,
 				C752D70617462C7B008B644A /* IRKit.h */,
 				C752D70817462C7B008B644A /* IRKit.m */,
+				C7AFAB5718EEB085001F4C87 /* IRKit+Internal.h */,
+				C7AFAB5818EEB085001F4C87 /* IRKit+Internal.m */,
 				C703E826183DFA6900B8446C /* IRHTTPClient.h */,
 				C703E827183DFA6900B8446C /* IRHTTPClient.m */,
 				C7B544EF18EBDD9200B54504 /* IRHTTPClient+UIKit.h */,
@@ -871,6 +877,7 @@
 				C7E07C711875D3BE00901967 /* IRSignal.h in Headers */,
 				C7E07C721875D3BE00901967 /* IRPeripherals.h in Headers */,
 				C7E07C731875D3BE00901967 /* IRPeripheral.h in Headers */,
+				C7AFAB5918EEB085001F4C87 /* IRKit+Internal.h in Headers */,
 				C7B544F118EBDD9200B54504 /* IRHTTPClient+UIKit.h in Headers */,
 				C7E07C791875D3BE00901967 /* IRHTTPClient.h in Headers */,
 				C7E07C751875D3BE00901967 /* IRConst.h in Headers */,
@@ -1194,6 +1201,7 @@
 				C727C87B18B5DEEE00867C1A /* IRSignalSequence.m in Sources */,
 				C7BD941D18D7024F008C9C72 /* IRReachability.m in Sources */,
 				C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */,
+				C7AFAB5A18EEB085001F4C87 /* IRKit+Internal.m in Sources */,
 				C703E82A183E0DD900B8446C /* CRC8.c in Sources */,
 				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
 				C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */,

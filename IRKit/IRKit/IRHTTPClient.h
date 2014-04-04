@@ -21,7 +21,6 @@
 + (void)postSignal:(IRSignal *)signal toPeripheral:(IRPeripheral*)peripheral withCompletion:(void (^)(NSError *error))completion;
 + (void)getDeviceIDFromHost:(NSString *)hostname withCompletion:(void (^) (NSHTTPURLResponse * res_local, NSHTTPURLResponse * res_internet, NSString * deviceid, NSError * error))completion;
 + (void)ensureRegisteredAndCall:(void (^) (NSError * error))next;
-+ (void)registerClientWithCompletion:(void (^) (NSHTTPURLResponse * res, NSString * clientkey, NSError * error))completion;
 + (void)registerDeviceWithCompletion:(void (^) (NSHTTPURLResponse * res, NSDictionary * keys, NSError * error))completion;
 + (IRHTTPClient *)waitForSignalWithCompletion:(void (^) (NSHTTPURLResponse * res, IRSignal * signal, NSError * error))completion;
 + (IRHTTPClient *)waitForDoorWithDeviceID:(NSString *)deviceid completion:(void (^) (NSHTTPURLResponse * res, id object, NSError * error))completion;

@@ -1,8 +1,10 @@
 #import "Log.h"
 #import "IRKit.h"
+#import "IRKit+Internal.h"
 #import "IRHTTPClient.h"
 #import "IRUserDefaultsStore.h"
 
+// a place to save id<IRPersistentStore> before [IRKit sharedInstance] is called
 static id<IRPersistentStore> store;
 
 @interface IRKit ()
@@ -10,7 +12,8 @@ static id<IRPersistentStore> store;
 @property (nonatomic) id terminateObserver;
 @property (nonatomic) id becomeActiveObserver;
 @property (nonatomic) id enterBackgroundObserver;
-@property (nonatomic, copy) NSString *apikey; // allow internal write
+@property (nonatomic, copy) NSString *apikey;
+@property (nonatomic) id<IRPersistentStore> store;
 
 @end
 
@@ -37,14 +40,15 @@ static id<IRPersistentStore> store;
     }
 
     if (store) {
-        _store = store;
-        store  = nil;
+        self.store = store;
+        store      = nil;
     }
     else {
         // defaults to NSUserDefaults, but you can set store using class method
-        _store = [[IRUserDefaultsStore alloc] init];
+        self.store = [[IRUserDefaultsStore alloc] init];
     }
-    _peripherals = [[IRPeripherals alloc] initWithPersistentStore: _store];
+
+    _peripherals = [[IRPeripherals alloc] initWithPersistentStore: self.store];
 
 #if TARGET_OS_IPHONE
     __weak IRKit *_self = self;
@@ -107,5 +111,14 @@ static id<IRPersistentStore> store;
 }
 
 #pragma mark - Private
+
+- (NSString*) clientkey {
+    return [self.store objectForKey: @"clientkey"];
+}
+
+- (void) setClientkey:(NSString *)clientkey {
+    [self.store storeObject: clientkey forKey: @"clientkey"];
+    [self.store synchronize];
+}
 
 @end
