@@ -18,9 +18,13 @@
                         <constraint firstAttribute="height" constant="125" id="jfD-DV-c59"/>
                     </constraints>
                 </imageView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="P36-rV-ziV">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="P36-rV-ziV">
                     <rect key="frame" x="142" y="265" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="37" id="gCw-QU-2mC"/>
+                        <constraint firstAttribute="height" constant="37" id="s3Z-1y-Brb"/>
+                    </constraints>
                 </activityIndicatorView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_check2.png" translatesAutoresizingMaskIntoConstraints="NO" id="ETr-aA-4za">
                     <rect key="frame" x="148" y="272" width="24" height="24"/>
@@ -34,6 +38,8 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="XYR-Es-CH7" secondAttribute="centerX" id="22V-Ko-kYt"/>
+                <constraint firstAttribute="centerX" secondItem="P36-rV-ziV" secondAttribute="centerX" id="BJK-qv-jqf"/>
+                <constraint firstAttribute="centerY" secondItem="P36-rV-ziV" secondAttribute="centerY" id="HPH-XJ-F0U"/>
                 <constraint firstAttribute="centerX" secondItem="ETr-aA-4za" secondAttribute="centerX" id="RmQ-B8-ubX"/>
                 <constraint firstAttribute="centerY" secondItem="XYR-Es-CH7" secondAttribute="centerY" id="cSv-i1-EOx"/>
                 <constraint firstAttribute="centerY" secondItem="ETr-aA-4za" secondAttribute="centerY" id="qaG-BH-Dpc"/>

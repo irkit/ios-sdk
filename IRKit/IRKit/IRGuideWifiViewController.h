@@ -11,7 +11,7 @@
 
 @protocol IRGuideWifiViewControllerDelegate;
 
-@interface IRGuideWifiViewController : UIViewController
+@interface IRGuideWifiViewController : UIViewController<UIAlertViewDelegate>
 
 @property (nonatomic, weak) id<IRGuideWifiViewControllerDelegate> delegate;
 @property (nonatomic) IRKeys *keys; // passed from IRNewPerpheralViewController

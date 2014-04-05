@@ -41,6 +41,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
 @property (nonatomic) IRHTTPClient *doorWaiter;
 @property (nonatomic) BOOL postWifiSucceeded;
 @property (nonatomic) NSDate *becameActiveAt;
+@property (nonatomic) NSTimer *doorWaiterLimitTimer;
 
 @end
 
@@ -58,11 +59,18 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
             _self.becameActiveAt = [NSDate date];
 
             // show HUD (hide before show to avoid double)
-            [IRProgressView hideHUDForView: _self.navigationController.view afterDelay: 0];
-            [IRProgressView showHUDAddedTo: _self.navigationController.view];
+            [IRProgressView hideHUDForView: _self.view afterDelay: 0];
+            [IRProgressView showHUDAddedTo: _self.view];
 
             if (!_self.postWifiSucceeded) {
                 [_self checkAndPostWifiCredentialsIfAdhoc];
+            }
+            else {
+                _self.doorWaiterLimitTimer = [NSTimer scheduledTimerWithTimeInterval: 30
+                                                                              target: _self
+                                                                            selector: @selector(doorWaiterTimeout:)
+                                                                            userInfo: NULL
+                                                                             repeats: NO];
             }
             [_self startWaitingForDoor];
         }];
@@ -85,12 +93,16 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
     [_doorWaiter cancel];
     _doorWaiter = nil;
 
+    [_doorWaiterLimitTimer invalidate];
+    _doorWaiterLimitTimer = nil;
+
     [IRHTTPClient cancelLocalRequests];
+
+    [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
 }
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,7 +156,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
 
                     if (res.statusCode == 200) {
                         // hide HUD
-                        [IRProgressView hideHUDForView: _self.navigationController.view afterDelay: kIntervalToHideHUD];
+                        [IRProgressView hideHUDForView: _self.view afterDelay: kIntervalToHideHUD];
 
                         _self.postWifiSucceeded = YES;
 
@@ -175,7 +187,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
 }
 
 - (void) alertAndHideHUD {
-    [IRProgressView hideHUDForView: self.navigationController.view afterDelay: kIntervalToHideHUD];
+    [IRProgressView hideHUDForView: self.view afterDelay: kIntervalToHideHUD];
 
     [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Open Settings app and connect to a Wi-Fi network named like IRKitXXXX", @"alert title when reachable")
                                 message: @""
@@ -195,7 +207,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
         }
 
         // hide HUD immediately
-        [IRProgressView hideHUDForView: _self.navigationController.view afterDelay: 0];
+        [IRProgressView hideHUDForView: _self.view afterDelay: 0];
 
         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
                                     message: @""
@@ -212,6 +224,25 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
              IRViewControllerResultPeripheral: p
          }];
     }];
+}
+
+- (void)doorWaiterTimeout:(NSTimer*)timer {
+    [_doorWaiter cancel];
+    _doorWaiter = nil;
+
+    [IRProgressView hideHUDForView: self.view afterDelay: 0];
+
+    [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"IRKit couldn't connect to Wi-Fi. Check Wi-Fi settings and try again", @"alert title timeout")
+                                message: @""
+                               delegate: self
+                      cancelButtonTitle: @"OK"
+                      otherButtonTitles: nil] show];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 @end
