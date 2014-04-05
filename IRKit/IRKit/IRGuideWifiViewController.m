@@ -7,10 +7,12 @@
 //
 // successful behaviour:
 // viewDidLoad
+// wait til POST /1/door succeeds
 // launch settings app, connect to IRKit wi-fi, back to our app
 // DidBecomeActive
 // show HUD
 // wait til GET / against 192.168.1.1 succeeds
+// wait til POST /1/door succeeds
 // POST /wifi
 // hide HUD
 // alert("connect to home wi-fi")
@@ -62,9 +64,7 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
             if (!_self.postWifiSucceeded) {
                 [_self checkAndPostWifiCredentialsIfAdhoc];
             }
-            else {
-                [_self startWaitingForDoor];
-            }
+            [_self startWaitingForDoor];
         }];
     }
     return self;
