@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { "Masakazu OHTSUKA" => "o.masakazu@gmail.com" }
   s.source       = { :git => "https://github.com/irkit/ios-sdk.git", :tag => "1.0.1" }
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '6.0'
   s.source_files = 'IRKit/IRKit/*.{h,m,c}'
   s.public_header_files = 'IRKit/IRKit/'
   s.preserve_paths = 'IRKit.framework/*'

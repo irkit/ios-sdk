@@ -28,8 +28,10 @@
 
     __weak IRViewCustomizer *_self = self;
     _viewDidLoad = ^(UIViewController *viewController) {
-        viewController.edgesForExtendedLayout = UIRectEdgeNone;
-        viewController.view.backgroundColor   = [IRViewCustomizer defaultViewBackgroundColor];
+        if ([viewController respondsToSelector: @selector(setEdgesForExtendedLayout:)]) {
+            viewController.edgesForExtendedLayout = UIRectEdgeNone;
+        }
+        viewController.view.backgroundColor = [IRViewCustomizer defaultViewBackgroundColor];
         [_self customizeLabelFonts: viewController.view];
 
         if ([viewController isKindOfClass: [IRNewSignalScene1ViewController class]] ||
@@ -133,9 +135,11 @@
 }
 
 + (void)customizeNavigationBar:(UINavigationBar *)bar {
-    bar.barTintColor = [UIColor colorWithRed: 0xF5 / 255. green: 0xF5 / 255. blue: 0xF5 / 255. alpha: 1.0];
-    bar.tintColor    = [self activeFontColor];
-    bar.translucent  = NO; // if we don't want transparency
+    if ([bar respondsToSelector: @selector(setBarTintColor:)]) {
+        bar.barTintColor = [UIColor colorWithRed: 0xF5 / 255. green: 0xF5 / 255. blue: 0xF5 / 255. alpha: 1.0];
+    }
+    bar.tintColor   = [self activeFontColor];
+    bar.translucent = NO;  // if we don't want transparency
 
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary: [[UINavigationBar appearance] titleTextAttributes]];
     [attributes setObject: [UIFont fontWithName: @"HelveticaNeue-Light" size: 20.]
