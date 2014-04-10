@@ -29,9 +29,10 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel
                                                                                           target: self
                                                                                           action: @selector(cancelButtonPressed:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemDone
-                                                                                           target: self
-                                                                                           action: @selector(doneButtonPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle: IRLocalizedString(@"Next", @"button title of IRGuidePowerViewController")
+                                                                              style: UIBarButtonItemStyleDone
+                                                                             target: self
+                                                                             action: @selector(doneButtonPressed:)];
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent animated: YES];
 }
