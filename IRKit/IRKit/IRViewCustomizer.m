@@ -5,6 +5,7 @@
 #import "IRGuideWifiViewController.h"
 #import "IRPeripheralNameEditViewController.h"
 #import "IRWifiEditViewController.h"
+#import "IRFAQViewController.h"
 #import "IRHelper.h"
 #import "IRViewHelper.h"
 
@@ -33,7 +34,8 @@
         [_self customizeLabelFonts: viewController.view];
 
         if ([viewController isKindOfClass: [IRNewSignalScene1ViewController class]] ||
-            [viewController isKindOfClass: [IRGuidePowerViewController class]])
+            [viewController isKindOfClass: [IRGuidePowerViewController class]] ||
+            [viewController isKindOfClass: [IRFAQViewController class]])
         {
             // bar
             UINavigationBar *bar = viewController.navigationController.navigationBar;
