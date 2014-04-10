@@ -66,6 +66,9 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
                 [_self checkAndPostWifiCredentialsIfAdhoc];
             }
             else {
+                if (_self.doorWaiterLimitTimer) {
+                    [_self.doorWaiterLimitTimer invalidate];
+                }
                 _self.doorWaiterLimitTimer = [NSTimer scheduledTimerWithTimeInterval: 30
                                                                               target: _self
                                                                             selector: @selector(doorWaiterTimeout:)
@@ -229,6 +232,9 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
 - (void)doorWaiterTimeout:(NSTimer*)timer {
     [_doorWaiter cancel];
     _doorWaiter = nil;
+
+    [_doorWaiterLimitTimer invalidate];
+    _doorWaiterLimitTimer = nil;
 
     [IRProgressView hideHUDForView: self.view afterDelay: 0];
 
