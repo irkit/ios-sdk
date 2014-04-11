@@ -35,6 +35,8 @@
 
 const NSTimeInterval kIntervalToHideHUD  = 0.3;
 const NSTimeInterval kWiFiConnectTimeout = 15.0;
+const NSInteger kAlertTag401             = 401;
+const NSInteger kAlertTagTimeout         = 499;
 
 @interface IRGuideWifiViewController ()
 
@@ -206,12 +208,21 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
     }
     __weak typeof(self) _self = self;
     _doorWaiter               = [IRHTTPClient waitForDoorWithDeviceID: _keys.deviceid completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-        if (error) {
-            return;
-        }
-
         // hide HUD immediately
         [IRProgressView hideHUDForView: _self.view afterDelay: 0];
+
+        if (error) {
+            if ((error.domain == IRKitErrorDomainHTTP) && (error.code == 401)) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Session expired, please restart app and try again.", @"alert title when POST /1/door returned 401")
+                                                                message: @""
+                                                               delegate: self
+                                                      cancelButtonTitle: @"OK"
+                                                      otherButtonTitles: nil];
+                alert.tag = kAlertTag401;
+                [alert show];
+            }
+            return;
+        }
 
         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
                                     message: @""
@@ -239,16 +250,26 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
 
     [IRProgressView hideHUDForView: self.view afterDelay: 0];
 
-    [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"IRKit couldn't connect to Wi-Fi. Check Wi-Fi settings and try again", @"alert title timeout")
-                                message: @""
-                               delegate: self
-                      cancelButtonTitle: @"OK"
-                      otherButtonTitles: IRLocalizedString(@"Show FAQ", @"title of button to FAQ on alert in IRGuideWiFiViewController"), nil] show];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"IRKit couldn't connect to Wi-Fi. Check Wi-Fi settings and try again", @"alert title timeout")
+                                                    message: @""
+                                                   delegate: self
+                                          cancelButtonTitle: @"OK"
+                                          otherButtonTitles: IRLocalizedString(@"Show FAQ", @"title of button to FAQ on alert in IRGuideWiFiViewController"), nil];
+    alert.tag = kAlertTagTimeout;
+    [alert show];
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == kAlertTag401) {
+        [self.delegate guideWifiViewController: self
+                             didFinishWithInfo: @{
+             IRViewControllerResultType: IRViewControllerResultTypeCancelled
+         }];
+        return;
+    }
+
     if (buttonIndex == alertView.cancelButtonIndex) {
         [self.navigationController popViewControllerAnimated: YES];
         return;
