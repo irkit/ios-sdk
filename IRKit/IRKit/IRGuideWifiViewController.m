@@ -31,6 +31,7 @@
 #import "IRKit.h"
 #import "IRConst.h"
 #import "IRProgressView.h"
+#import "IRFAQViewController.h"
 
 const NSTimeInterval kIntervalToHideHUD  = 0.3;
 const NSTimeInterval kWiFiConnectTimeout = 15.0;
@@ -242,13 +243,34 @@ const NSTimeInterval kWiFiConnectTimeout = 15.0;
                                 message: @""
                                delegate: self
                       cancelButtonTitle: @"OK"
-                      otherButtonTitles: nil] show];
+                      otherButtonTitles: IRLocalizedString(@"Show FAQ", @"title of button to FAQ on alert in IRGuideWiFiViewController"), nil] show];
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self.navigationController popViewControllerAnimated: YES];
+    if (buttonIndex == alertView.cancelButtonIndex) {
+        [self.navigationController popViewControllerAnimated: YES];
+        return;
+    }
+
+    // show FAQ
+    NSBundle *resources    = [IRHelper resources];
+    IRFAQViewController *c = [[IRFAQViewController alloc] initWithNibName: @"IRFAQViewController" bundle: resources];
+    c.delegate = self;
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController: c];
+    [self presentViewController: nc animated: YES completion:^{
+        LOG(@"presented");
+    }];
+}
+
+#pragma mark - IRFAQViewControllerDelegate
+
+- (void)faqViewControllerDidFinish:(IRFAQViewController *)controller {
+    __weak typeof(self) _self = self;
+    [self dismissViewControllerAnimated: controller.navigationController completion:^{
+        [_self.navigationController popViewControllerAnimated: YES];
+    }];
 }
 
 @end

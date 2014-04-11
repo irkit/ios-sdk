@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "IRKeys.h"
+#import "IRFAQViewController.h"
 
 @protocol IRGuideWifiViewControllerDelegate;
 
-@interface IRGuideWifiViewController : UIViewController<UIAlertViewDelegate>
+@interface IRGuideWifiViewController : UIViewController<UIAlertViewDelegate,IRFAQViewControllerDelegate>
 
 @property (nonatomic, weak) id<IRGuideWifiViewControllerDelegate> delegate;
 @property (nonatomic) IRKeys *keys; // passed from IRNewPerpheralViewController
