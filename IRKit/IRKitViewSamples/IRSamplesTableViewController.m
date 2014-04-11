@@ -60,6 +60,8 @@
     IRKeys *key = info[IRViewControllerResultKeys];
     [key setKeys: @{ @"clientkey": @"A", @"devicekey": @"B" }]; // we're testing morse
     LOG(@"morse: %@", key.morseStringRepresentation);
+
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 #pragma mark - IRGuideWifiViewControllerDelegate
@@ -152,6 +154,7 @@
     {
         IRWifiEditViewController *c = [[IRWifiEditViewController alloc] initWithNibName: @"IRWifiEditViewController" bundle: resources];
         c.delegate = self;
+        c.keys     = [[IRKeys alloc] init];
         [self.navigationController pushViewController: c animated: YES];
     }
     break;
