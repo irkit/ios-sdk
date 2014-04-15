@@ -2,7 +2,9 @@
 #import "IRKit.h"
 #import "IRKit+Internal.h"
 #import "IRHTTPClient.h"
-#import "IRUserDefaultsStore.h"
+#if TARGET_OS_IPHONE
+# import "IRUserDefaultsStore.h"
+#endif
 
 // a place to save id<IRPersistentStore> before [IRKit sharedInstance] is called
 static id<IRPersistentStore> store;
@@ -44,8 +46,10 @@ static id<IRPersistentStore> store;
         store      = nil;
     }
     else {
+#if TARGET_OS_IPHONE
         // defaults to NSUserDefaults, but you can set store using class method
         self.store = [[IRUserDefaultsStore alloc] init];
+#endif
     }
 
     _peripherals = [[IRPeripherals alloc] initWithPersistentStore: self.store];
