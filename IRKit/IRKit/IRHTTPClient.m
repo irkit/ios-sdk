@@ -349,6 +349,11 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 completion(res, object, [self errorFromResponse: res body: object]);
                 return YES;
 
+            case 401:
+                // session expired
+                completion(res, object, [self errorFromResponse: res body: object]);
+                return YES;
+
             case 408:
                 // retry
                 return NO;
