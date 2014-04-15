@@ -12,7 +12,6 @@
 #import "IRConst.h"
 #import "IRHTTPJSONOperation.h"
 #import "IRHTTPOperationQueue.h"
-#import "IRUserDefaultsStore.h"
 #import "IRKit.h"
 #import "IRKit+Internal.h"
 #import <CommonCrypto/CommonHMAC.h>

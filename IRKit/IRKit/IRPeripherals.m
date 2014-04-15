@@ -1,6 +1,5 @@
 #import "Log.h"
 #import "IRPeripherals.h"
-#import "IRUserDefaultsStore.h"
 #import "IRHelper.h"
 #import "IRConst.h"
 #import "IRHTTPClient.h"
