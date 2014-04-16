@@ -19,7 +19,8 @@
 + (void)startWithAPIKey:(NSString *)apikey;
 
 /// call before startWithAPIKey,
-/// to save clientkey and peripherals information into somewhere else than NSUserDefaults
+/// to save clientkey and peripherals information into somewhere else than NSUserDefaults.
+/// IRKit will have a strong reference to this.
 + (void)setPersistentStore:(id<IRPersistentStore>)store;
 
 - (void)save;
