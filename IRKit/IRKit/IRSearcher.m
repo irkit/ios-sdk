@@ -13,6 +13,9 @@
 
 @property (nonatomic) NSNetServiceBrowser *browser;
 @property (nonatomic) NSMutableSet *services;
+@property (nonatomic) NSTimer *timeoutTimer;
+@property (nonatomic) NSTimer *waitTimer;
+@property (nonatomic) NSTimeInterval searchInterval;
 
 @end
 
@@ -34,7 +37,7 @@
         return nil;
     }
 
-    _browser = [[NSNetServiceBrowser alloc] init];
+    _browser          = [[NSNetServiceBrowser alloc] init];
     _browser.delegate = self;
 
     _services = [[NSMutableSet alloc] init];
@@ -43,11 +46,44 @@
 }
 
 - (void)startSearching {
+    LOG_CURRENT_METHOD;
+    [self.delegate searcherWillStartSearching: self];
     [_browser searchForServicesOfType: @"_irkit._tcp" inDomain: @""];
+}
+
+- (void)startSearchingForTimeInterval:(NSTimeInterval)interval {
+    LOG(@"interval: %.1f", interval);
+
+    [self.delegate searcherWillStartSearching: self];
+    [_browser searchForServicesOfType: @"_irkit._tcp" inDomain: @""];
+    [_timeoutTimer invalidate];
+    _timeoutTimer = [NSTimer timerWithTimeInterval: interval
+                                            target: self
+                                          selector: @selector(timeout:)
+                                          userInfo: nil
+                                           repeats: NO];
+    [[NSRunLoop currentRunLoop] addTimer: _timeoutTimer forMode: NSRunLoopCommonModes];
+}
+
+- (void)startSearchingAfterTimeInterval:(NSTimeInterval)waitInterval forTimeInterval:(NSTimeInterval)interval {
+    LOG(@"waitInterval: %1.f interval: %.1f", waitInterval, interval);
+
+    [_waitTimer invalidate];
+    _waitTimer = [NSTimer timerWithTimeInterval: waitInterval
+                                         target: self
+                                       selector: @selector(waitTimeout:)
+                                       userInfo: nil
+                                        repeats: NO];
+    _searchInterval = interval;
+    [[NSRunLoop currentRunLoop] addTimer: _waitTimer forMode: NSRunLoopCommonModes];
 }
 
 - (void)stop {
     [_browser stop];
+    [_timeoutTimer invalidate];
+    _timeoutTimer = nil;
+    [_waitTimer invalidate];
+    _waitTimer = nil;
 }
 
 #pragma mark - Private
@@ -61,9 +97,28 @@
     }];
 }
 
+- (void)timeout:(NSTimer*)timer {
+    LOG_CURRENT_METHOD;
+
+    [_timeoutTimer invalidate];
+    _timeoutTimer = nil;
+    [_waitTimer invalidate];
+    _waitTimer = nil;
+    [_browser stop];
+    [_delegate searcherDidTimeout: self];
+}
+
+- (void)waitTimeout:(NSTimer*)timer {
+    LOG_CURRENT_METHOD;
+
+    [_waitTimer invalidate];
+    _waitTimer = nil;
+    [self startSearchingForTimeInterval: _searchInterval];
+}
+
 - (NSString *)copyStringFromTXTDict:(NSDictionary *)dict which:(NSString *)which {
     // Helper for getting information from the TXT data
-    NSData *data = [dict objectForKey: which];
+    NSData *data           = [dict objectForKey: which];
     NSString *resultString = nil;
 
     if (data) {
