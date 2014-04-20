@@ -41,6 +41,7 @@ const NSInteger kAlertTagTimeout         = 499;
 @interface IRGuideWifiViewController ()
 
 @property (nonatomic) id becomeActiveObserver;
+@property (nonatomic) id willResignActiveObserver;
 @property (nonatomic) IRHTTPClient *doorWaiter;
 @property (nonatomic) BOOL postWifiSucceeded;
 @property (nonatomic) NSDate *becameActiveAt;
@@ -80,6 +81,13 @@ const NSInteger kAlertTagTimeout         = 499;
             }
             [_self startWaitingForDoor];
         }];
+        _willResignActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationWillResignActiveNotification
+                                                                                      object: nil
+                                                                                       queue: [NSOperationQueue mainQueue]
+                                                                                  usingBlock:^(NSNotification *note) {
+            LOG(@"will resign active");
+            [IRHTTPClient cancelLocalRequests];
+        }];
     }
     return self;
 }
@@ -105,6 +113,7 @@ const NSInteger kAlertTagTimeout         = 499;
     [IRHTTPClient cancelLocalRequests];
 
     [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver: _willResignActiveObserver];
 }
 
 - (void)dealloc {
@@ -193,6 +202,7 @@ const NSInteger kAlertTagTimeout         = 499;
 }
 
 - (void) alertAndHideHUD {
+    LOG_CURRENT_METHOD;
     [IRProgressView hideHUDForView: self.view afterDelay: kIntervalToHideHUD];
 
     [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Open Settings app and connect to a Wi-Fi network named like IRKitXXXX", @"alert title when reachable")
