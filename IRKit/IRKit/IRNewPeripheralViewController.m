@@ -142,6 +142,14 @@
     }
 }
 
+- (void)searcherWillStartSearching:(IRSearcher *)searcher {
+    LOG_CURRENT_METHOD;
+}
+
+- (void)searcherDidTimeout:(IRSearcher *)searcher {
+    LOG_CURRENT_METHOD;
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

@@ -25,8 +25,8 @@
 @protocol IRSearcherDelegate <NSObject>
 
 @required
-- (void)searcherWillStartSearching:(IRSearcher*)searcher;
 - (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService *)service;
+- (void)searcherWillStartSearching:(IRSearcher*)searcher;
 - (void)searcherDidTimeout:(IRSearcher *)searcher;
 
 @end

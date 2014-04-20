@@ -212,7 +212,7 @@ const NSInteger kAlertTagTimeout         = 499;
         [IRProgressView hideHUDForView: _self.view afterDelay: 0];
 
         if (error) {
-            if ((error.domain == IRKitErrorDomainHTTP) && (error.code == 401)) {
+            if (([error.domain isEqualToString: IRKitErrorDomainHTTP]) && (error.code == 401)) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Session expired, please restart app and try again.", @"alert title when POST /1/door returned 401")
                                                                 message: @""
                                                                delegate: self
@@ -289,7 +289,7 @@ const NSInteger kAlertTagTimeout         = 499;
 
 - (void)faqViewControllerDidFinish:(IRFAQViewController *)controller {
     __weak typeof(self) _self = self;
-    [self dismissViewControllerAnimated: controller.navigationController completion:^{
+    [self dismissViewControllerAnimated: YES completion:^{
         [_self.navigationController popViewControllerAnimated: YES];
     }];
 }
