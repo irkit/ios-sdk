@@ -28,5 +28,6 @@
 
 #define STATICENDPOINT_BASE                                   @"http://getirkit.com"
 #define APIENDPOINT_BASE                                      @"https://api.getirkit.com"
+#define APIENDPOINT_APPS                                      @"http://api.getirkit.com/1/apps/recommended"
 
 #endif // ifndef IRKit_IRConst_h
