@@ -25,5 +25,4 @@ Pod::Spec.new do |s|
   s.library      = 'c++'
   s.requires_arc = true
   s.dependency 'ISHTTPOperation', '~> 1.1.0'
-  s.dependency 'Reachability', '~> 3.1.1'
 end
