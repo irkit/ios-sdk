@@ -362,6 +362,7 @@
 		C7554F311749E65B00BDF920 /* IRPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheral.m; sourceTree = "<group>"; };
 		C7554F401749F2E000BDF920 /* IRPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripherals.h; sourceTree = "<group>"; };
 		C7554F411749F2E000BDF920 /* IRPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripherals.m; sourceTree = "<group>"; };
+		C75AE4E419138774008F9A50 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/IRNewSignalScene1ViewController.xib; sourceTree = "<group>"; };
 		C75B5680174A405B00FFE5CB /* IRPeripheralCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRPeripheralCell.m; sourceTree = "<group>"; };
 		C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRPeripheralCell.h; sourceTree = "<group>"; };
 		C75B5686174A7AB100FFE5CB /* IRSignals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignals.m; sourceTree = "<group>"; };
@@ -471,7 +472,6 @@
 		C7E4E33A185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRGuidePowerViewController.strings; sourceTree = "<group>"; };
 		C7E4E33B185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRWifiEditViewController.strings; sourceTree = "<group>"; };
 		C7E4E33E185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRPeripheralNameEditViewController.strings; sourceTree = "<group>"; };
-		C7E4E33F185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRNewSignalScene1ViewController.strings; sourceTree = "<group>"; };
 		C7E4E340185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/IRSignalNameEditViewController.strings; sourceTree = "<group>"; };
 		C7E4E341185210C900EC864E /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		C7E4E343185210C900EC864E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1334,7 +1334,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C7E4E337185210BC00EC864E /* Base */,
-				C7E4E33F185210C900EC864E /* ja */,
+				C75AE4E419138774008F9A50 /* ja */,
 			);
 			name = IRNewSignalScene1ViewController.xib;
 			sourceTree = "<group>";
