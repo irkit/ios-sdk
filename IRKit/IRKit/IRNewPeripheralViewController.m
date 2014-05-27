@@ -18,6 +18,8 @@
 // prioritize POST /1/door response, and stop searching Bonjour after showing WifiEditVC
 @property (nonatomic) BOOL stopSearchCalled;
 
+@property (nonatomic) UIAlertView *currentAlertView;
+
 @end
 
 @implementation IRNewPeripheralViewController
@@ -40,6 +42,8 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
+
+    _currentAlertView.delegate = nil;
 
     [self stopSearch];
     [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
@@ -125,19 +129,22 @@
         [peripherals save];
     }
     if (!p.deviceid) {
+        __weak typeof(self) _self = self;
         [p getKeyWithCompletion:^{
             [peripherals save];
-            _foundPeripheral = p;      // temporary retain, til alert dismisses
+            _self.foundPeripheral = p;      // temporary retain, til alert dismisses
 
             // avoid
             // nested push animation can result in corrupted navigation bar
             // Finishing up a navigation transition in an unexpected state. Navigation Bar subview tree might get corrupted.
             // pushViewController after alertview is dismissed
-            [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
-                                        message: @""
-                                       delegate: self
-                              cancelButtonTitle: nil
-                              otherButtonTitles: @"OK", nil] show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
+                                                            message: @""
+                                                           delegate: self
+                                                  cancelButtonTitle: nil
+                                                  otherButtonTitles: @"OK", nil];
+            _self.currentAlertView = alert;
+            [alert show];
         }];
     }
 }
@@ -154,6 +161,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     LOG_CURRENT_METHOD;
+
+    _currentAlertView = nil;
 
     IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
     c.delegate       = self;

@@ -46,6 +46,7 @@ const NSInteger kAlertTagTimeout         = 499;
 @property (nonatomic) BOOL postWifiSucceeded;
 @property (nonatomic) NSDate *becameActiveAt;
 @property (nonatomic) NSTimer *doorWaiterLimitTimer;
+@property (nonatomic) UIAlertView *currentAlertView;
 
 @end
 
@@ -92,6 +93,11 @@ const NSInteger kAlertTagTimeout         = 499;
     return self;
 }
 
+- (void)dealloc {
+    LOG_CURRENT_METHOD;
+    _currentAlertView.delegate = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -114,10 +120,6 @@ const NSInteger kAlertTagTimeout         = 499;
 
     [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
     [[NSNotificationCenter defaultCenter] removeObserver: _willResignActiveObserver];
-}
-
-- (void)dealloc {
-    LOG_CURRENT_METHOD;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -229,6 +231,7 @@ const NSInteger kAlertTagTimeout         = 499;
                                                       cancelButtonTitle: @"OK"
                                                       otherButtonTitles: nil];
                 alert.tag = kAlertTag401;
+                _self.currentAlertView = alert;
                 [alert show];
             }
             return;
@@ -265,13 +268,16 @@ const NSInteger kAlertTagTimeout         = 499;
                                                    delegate: self
                                           cancelButtonTitle: @"OK"
                                           otherButtonTitles: IRLocalizedString(@"Show FAQ", @"title of button to FAQ on alert in IRGuideWiFiViewController"), nil];
-    alert.tag = kAlertTagTimeout;
+    alert.tag         = kAlertTagTimeout;
+    _currentAlertView = alert;
     [alert show];
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    _currentAlertView = nil;
+
     if (alertView.tag == kAlertTag401) {
         [self.delegate guideWifiViewController: self
                              didFinishWithInfo: @{
