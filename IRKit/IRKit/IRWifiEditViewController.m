@@ -180,7 +180,13 @@ static NSString *ssidCache = nil;
         }
         else {
             NSString *ssid = [IRHelper currentWifiSSID];
-            cell.editTextField.text = ssid;
+            if ([ssid rangeOfString: @"IRKit" options: NSCaseInsensitiveSearch|NSAnchoredSearch].location != NSNotFound) {
+                // if we're connected to a network name starting with "IRKit", ignore it.
+                cell.editTextField.text = @"";
+            }
+            else {
+                cell.editTextField.text = ssid;
+            }
         }
 
         return cell;
