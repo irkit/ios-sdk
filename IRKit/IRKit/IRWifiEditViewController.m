@@ -91,6 +91,16 @@ static NSString *ssidCache = nil;
         [ssidCell becomeFirstResponder];
         return false;
     }
+    if ([ssid rangeOfString: @"IRKit" options: NSCaseInsensitiveSearch|NSAnchoredSearch].location != NSNotFound) {
+        // I bet your home wi-fi network name doesn't start with "IRKit"
+        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Input your HOME Wi-Fi information", @"alert title to input HOME Wi-Fi information in IRWifiEditViewController")
+                                    message: nil
+                                   delegate: nil
+                          cancelButtonTitle: @"OK"
+                          otherButtonTitles: nil] show];
+        [ssidCell becomeFirstResponder];
+        return false;
+    }
     if ([password rangeOfString: @","].location != NSNotFound) {
         // if "," exists in password
         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"SSID and Password can't include \",\" please change your Wi-Fi settings", @"alert title in IRWifiEditViewController")
