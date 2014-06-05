@@ -107,11 +107,12 @@
 
 - (NSDictionary *)asDictionary {
     return @{
-               @"hostname" : _hostname ? _hostname : [NSNull null],
-               @"foundDate": _foundDate ? [NSNumber numberWithDouble: [_foundDate timeIntervalSince1970]] : [NSNull null],
-               @"deviceid":  _deviceid ? _deviceid : [NSNull null],
-               @"modelName": _modelName ? _modelName : [NSNull null],
-               @"version":   _version ? _version : [NSNull null]
+               @"hostname"       : _hostname       ? _hostname : [NSNull null],
+               @"customizedName" : _customizedName ? _customizedName : [NSNull null],
+               @"foundDate"      : _foundDate      ? [NSNumber numberWithDouble: [_foundDate timeIntervalSince1970]] : [NSNull null],
+               @"deviceid"       :  _deviceid      ? _deviceid : [NSNull null],
+               @"modelName"      : _modelName      ? _modelName : [NSNull null],
+               @"version"        :   _version      ? _version : [NSNull null],
     };
 }
 
