@@ -43,17 +43,15 @@
 - (void)save {
     LOG_CURRENT_METHOD;
 
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: _irperipheralForName];
-    [_store storeObject: data
-                 forKey: @"peripherals"];
+    [_store storePeripherals: _irperipheralForName];
     [_store synchronize];
 }
 
 - (NSUInteger)countOfReadyPeripherals {
     LOG_CURRENT_METHOD;
     return [[[_irperipheralForName allValues] filteredArrayUsingPredicate: [NSPredicate predicateWithBlock:^BOOL (id evaluatedObject, NSDictionary *bindings) {
-                return [(IRPeripheral *)evaluatedObject hasDeviceID];
-            }]
+        return [(IRPeripheral *)evaluatedObject hasDeviceID];
+    }]
             ] count];
 }
 
@@ -91,10 +89,7 @@
 - (void)load {
     LOG_CURRENT_METHOD;
 
-    NSData *data = [_store objectForKey: @"peripherals"];
-
-    _irperipheralForName = data ? [[NSKeyedUnarchiver unarchiveObjectWithData: data] mutableCopy]
-                           : nil;
+    _irperipheralForName = [[_store loadPeripherals] mutableCopy];
     if (!_irperipheralForName) {
         _irperipheralForName = @{}.mutableCopy;
     }
