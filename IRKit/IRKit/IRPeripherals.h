@@ -6,6 +6,7 @@
 
 - (instancetype)initWithPersistentStore:(id<IRPersistentStore>)store;
 - (id)objectAtIndex:(NSUInteger)index;
+- (NSUInteger)indexOfObject:(id)object;
 - (IRPeripheral *)peripheralWithName:(NSString *)name;
 - (void)save;
 - (NSUInteger)countOfReadyPeripherals;

@@ -32,6 +32,10 @@
     return _irperipheralForName[key];
 }
 
+- (NSUInteger)indexOfObject:(id)object {
+    return [self.peripherals indexOfObject: object];
+}
+
 - (IRPeripheral *)peripheralWithName:(NSString *)name {
     LOG_CURRENT_METHOD;
     if (!name) {
@@ -102,7 +106,7 @@
 - (NSArray *)peripherals {
     LOG_CURRENT_METHOD;
 
-    return [_irperipheralForName allValues];
+    return [_irperipheralForName.allValues sortedArrayUsingSelector: @selector(compareByFirstFoundDate:)];
 }
 
 - (NSUInteger)countOfPeripherals {
@@ -114,7 +118,7 @@
 - (NSEnumerator *)enumeratorOfPeripherals {
     LOG_CURRENT_METHOD;
 
-    return [_irperipheralForName.allValues sortedArrayUsingSelector: @selector(compareByFirstFoundDate:)].objectEnumerator;
+    return self.peripherals.objectEnumerator;
 }
 
 - (IRPeripheral *)memberOfPeripherals:(IRPeripheral *)object {
