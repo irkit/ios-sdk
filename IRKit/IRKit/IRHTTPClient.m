@@ -39,7 +39,8 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 }
 
 - (void)cancel {
-    self.longPollRequest = nil;
+    self.longPollDidFinish = nil;
+    self.longPollRequest   = nil;
 }
 
 #pragma mark - Private
@@ -54,23 +55,24 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
         // cancelled
         return;
     }
+    __weak typeof(self) _self = self;
     [IRHTTPJSONOperation sendRequest: self.longPollRequest
                              handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
-        if (!self.longPollRequest) {
+        if (!_self.longPollRequest) {
             // cancelled
             return;
         }
-        if (self.longPollDidFinish(response, object, error)) {
+        if (_self.longPollDidFinish && _self.longPollDidFinish(response, object, error)) {
             return;
         }
-        if (self.longPollInterval > 0) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, self.longPollInterval * NSEC_PER_SEC),
+        if (_self.longPollInterval > 0) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, _self.longPollInterval * NSEC_PER_SEC),
                            dispatch_get_main_queue(), ^{
-                    [self startPollingRequest];
-                });
+                [_self startPollingRequest];
+            });
         }
         else {
-            [self startPollingRequest];
+            [_self startPollingRequest];
         }
     }];
 }
@@ -199,9 +201,9 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                           withParams: @{ @"clienttoken": clienttoken }
                                                      timeoutInterval: DEFAULT_TIMEOUT];
         [self issueInternetRequest: request2 completion:^(NSHTTPURLResponse *res2, id object2, NSError *error2) {
-                NSString *deviceid = object2[ @"deviceid" ];
-                return completion(res, res2, deviceid, error);
-            }];
+            NSString *deviceid = object2[ @"deviceid" ];
+            return completion(res, res2, deviceid, error);
+        }];
     }];
 }
 
@@ -266,10 +268,10 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                                                          withParams: @{}
                                                     timeoutInterval: DEFAULT_TIMEOUT];
         [self issueInternetRequest: request completion:^(NSHTTPURLResponse *res, id object, NSError *error) {
-                return completion((NSHTTPURLResponse *)res,
-                                  object,
-                                  error);
-            }];
+            return completion((NSHTTPURLResponse *)res,
+                              object,
+                              error);
+        }];
     }];
 }
 
@@ -632,11 +634,11 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
     }
     NSString *body = [[IRHelper mapObjects: params.allKeys
                                 usingBlock:^id (id key, NSUInteger idx) {
-            if (params[key] == [NSNull null]) {
-                return [NSString stringWithFormat: @"%@=", key];
-            }
-            return [NSString stringWithFormat: @"%@=%@", key, [self URLEscapeString: params[key]]];
-        }] componentsJoinedByString: @"&"];
+        if (params[key] == [NSNull null]) {
+            return [NSString stringWithFormat: @"%@=", key];
+        }
+        return [NSString stringWithFormat: @"%@=%@", key, [self URLEscapeString: params[key]]];
+    }] componentsJoinedByString: @"&"];
     return body;
 }
 
