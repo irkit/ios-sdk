@@ -10,7 +10,7 @@
 
 @implementation IRSignal
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (!self) {
         return nil;
@@ -19,7 +19,7 @@
     return self;
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     LOG_CURRENT_METHOD;
     self = [self init];
     if (!self) {
@@ -123,7 +123,7 @@
     [coder encodeObject: _hostname forKey: @"h"];
 }
 
-- (id)initWithCoder:(NSCoder *)coder {
+- (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super init];
     if (self) {
         _name      = [coder decodeObjectForKey: @"n"];

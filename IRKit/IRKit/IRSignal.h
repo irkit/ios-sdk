@@ -9,7 +9,7 @@
 /// to specify from which IRKit device to send this.
 - (void)sendWithCompletion:(void (^) (NSError * error))block;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 /// Public, safe to share information about IR signal.
 /// You can transfer this dictionary to other end users and `initWithDictionary:`
