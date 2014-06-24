@@ -13,6 +13,7 @@
 @interface IRSearcher : NSObject<NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
 @property (nonatomic, weak) id<IRSearcherDelegate> delegate;
+@property (nonatomic, readonly) BOOL searching;
 
 + (instancetype)sharedInstance;
 - (void)startSearching;

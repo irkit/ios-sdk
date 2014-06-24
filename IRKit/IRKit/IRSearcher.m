@@ -47,12 +47,17 @@
 
 - (void)startSearching {
     LOG_CURRENT_METHOD;
+
+    _searching = YES;
+
     [self.delegate searcherWillStartSearching: self];
     [_browser searchForServicesOfType: @"_irkit._tcp" inDomain: @""];
 }
 
 - (void)startSearchingForTimeInterval:(NSTimeInterval)interval {
     LOG(@"interval: %.1f", interval);
+
+    _searching = YES;
 
     [self.delegate searcherWillStartSearching: self];
     [_browser searchForServicesOfType: @"_irkit._tcp" inDomain: @""];
@@ -79,6 +84,7 @@
 }
 
 - (void)stop {
+    _searching = NO;
     [_browser stop];
     [_timeoutTimer invalidate];
     _timeoutTimer = nil;
@@ -100,11 +106,7 @@
 - (void)timeout:(NSTimer*)timer {
     LOG_CURRENT_METHOD;
 
-    [_timeoutTimer invalidate];
-    _timeoutTimer = nil;
-    [_waitTimer invalidate];
-    _waitTimer = nil;
-    [_browser stop];
+    [self stop];
     [_delegate searcherDidTimeout: self];
 }
 
