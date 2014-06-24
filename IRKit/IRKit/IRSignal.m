@@ -43,6 +43,16 @@
     return ret;
 }
 
+- (NSDictionary *)asSendableDictionary {
+    LOG_CURRENT_METHOD;
+    NSMutableDictionary *ret = [self asPublicDictionary].mutableCopy;
+    [ret addEntriesFromDictionary: @{
+         @"name":         _name                    ? _name                    : [NSNull null],
+         @"hostname":     _hostname                ? _hostname                : [NSNull null],
+     }];
+    return ret;
+}
+
 - (NSDictionary *)asPublicDictionary {
     LOG_CURRENT_METHOD;
     return @{

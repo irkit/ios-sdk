@@ -18,8 +18,15 @@
 /// to specify from which IRKit device to send this.
 - (NSDictionary *)asPublicDictionary;
 
+/// Includes enough information to send this signal from one IRKit.
+/// Does include IRKit device's hostname but not it's deviceid (valid only when used with it's paired clientid).
+/// Use this to share signal information within multiple clients used against single IRKit device.
+/// ex: OK to Share between multiple client apps on single iPhone/Mac
+- (NSDictionary *)asSendableDictionary;
+
 /// Includes information about end user's IRKit device's hostname and so on,
 /// so use `asPublicDictionary` when you want to share signal information over to other end users.
+/// Use this to backup signals information inside single app.
 - (NSDictionary *)asDictionary;
 
 @end
