@@ -152,10 +152,10 @@ struct KeysCRCed
     // Regulatory Domains by Country
     // http://www.summitdata.com/Documents/Regulatory_Domains.pdf
     else if ([@[@"CA", @"MX", @"US", @"AU", @"HK", @"IN", @"MY", @"NZ", @"PH", @"TW", @"RU", @"AR", @"BR", @"CL", @"CO", @"CR", @"DO", @"DM", @"EC", @"PA", @"PY", @"PE", @"PR", @"VE"] containsObject : countryCode]) {
-        regdomain = @"1"; // FCC
+        regdomain = @"0"; // FCC
     }
     else {
-        regdomain = @"0"; // ETSI
+        regdomain = @"1"; // ETSI
     }
     return regdomain;
 }
