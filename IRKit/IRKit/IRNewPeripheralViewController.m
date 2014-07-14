@@ -213,7 +213,7 @@
     }
 
     if (!_keys.keysAreSet) {
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Check your internet connection", @"alert view title when not connected to internet")
+        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Check your internet connection. Connect to your home Wi-Fi network first.", @"alert view title when ! keysAreSet")
                                     message: @""
                                    delegate: nil
                           cancelButtonTitle: @"OK"
