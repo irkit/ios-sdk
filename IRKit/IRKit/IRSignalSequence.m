@@ -102,8 +102,23 @@
         return [obj asDictionary];
     }];
     return @{
+               @"type":      @"sequence",
                @"name":      _name   ? _name   : [NSNull null],
                @"custom":    _custom ? _custom : [NSNull null],
+               @"signals":   signals,
+               @"intervals": _intervals,
+    };
+}
+
+- (NSDictionary *)asSendableDictionary {
+    LOG_CURRENT_METHOD;
+
+    NSArray *signals = [IRHelper mapObjects: _signals usingBlock:^id (id obj, NSUInteger idx) {
+        return [obj asSendableDictionary];
+    }];
+    return @{
+               @"type":      @"sequence",
+               @"name":      _name   ? _name   : [NSNull null],
                @"signals":   signals,
                @"intervals": _intervals,
     };
