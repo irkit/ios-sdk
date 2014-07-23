@@ -245,6 +245,8 @@ const NSInteger kAlertTagTimeout         = 499;
 
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
                                                                             deviceid: _self.keys.deviceid];
+        // for debug purpose only; remember which regdomain we used to setup
+        p.regdomain = _self.keys.regdomain;
 
         [_self.delegate guideWifiViewController: _self
                               didFinishWithInfo: @{

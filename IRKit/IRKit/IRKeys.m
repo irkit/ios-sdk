@@ -130,8 +130,6 @@ struct KeysCRCed
     return (_deviceid && _devicekey);
 }
 
-#pragma mark - Private
-
 - (NSString *)regdomain {
     NSString *regdomain;
 
@@ -159,6 +157,8 @@ struct KeysCRCed
     }
     return regdomain;
 }
+
+#pragma mark - Private
 
 - (NSString *)securityStringRepresentation {
     switch (_security) {

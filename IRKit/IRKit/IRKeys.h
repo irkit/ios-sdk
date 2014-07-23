@@ -28,5 +28,6 @@ NS_ENUM(uint8_t, IRSecurityType) {
 - (NSString *)morseStringRepresentation;
 - (void)setKeys:(NSDictionary *)keys;
 - (BOOL)keysAreSet;
+- (NSString *)regdomain;
 
 @end

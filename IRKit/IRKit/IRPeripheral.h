@@ -10,6 +10,7 @@
 
 @property (nonatomic, copy) NSString *modelName;
 @property (nonatomic, copy) NSString *version;
+@property (nonatomic, copy) NSString *regdomain; // for debug purpose only
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (BOOL)hasDeviceID;

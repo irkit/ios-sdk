@@ -31,6 +31,7 @@
     // "1.3.0.73.ge6e8514" is version
     _modelName = nil;
     _version   = nil;
+    _regdomain = nil;
 
     return self;
 }
@@ -125,6 +126,7 @@
                @"deviceid"       : _deviceid       ? _deviceid : [NSNull null],
                @"modelName"      : _modelName      ? _modelName : [NSNull null],
                @"version"        : _version        ? _version : [NSNull null],
+               @"regdomain"      : _regdomain      ? _regdomain : [NSNull null],
     };
 }
 
@@ -132,7 +134,7 @@
     if (dictionary[@"foundDate"]) {
         _foundDate = [NSDate dateWithTimeIntervalSince1970: [(NSNumber*)dictionary[@"foundDate"] doubleValue]];
     }
-    for (NSString *key in @[ @"hostname", @"customizedName", @"deviceid", @"modelName", @"version" ]) {
+    for (NSString *key in @[ @"hostname", @"customizedName", @"deviceid", @"modelName", @"version", @"regdomain" ]) {
         if (dictionary[ key ]) {
             [self setValue: dictionary[ key ] forKey: key];
         }
@@ -158,6 +160,7 @@
     [coder encodeObject: _deviceid forKey: @"deviceid"];
     [coder encodeObject: _modelName forKey: @"modelName"];
     [coder encodeObject: _version forKey: @"version"];
+    [coder encodeObject: _regdomain forKey: @"regdomain"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
@@ -172,6 +175,7 @@
     _deviceid       = [coder decodeObjectForKey: @"deviceid"];
     _modelName      = [coder decodeObjectForKey: @"modelName"];
     _version        = [coder decodeObjectForKey: @"version"];
+    _regdomain      = [coder decodeObjectForKey: @"regdomain"];
 
     [self startReachability];
 
