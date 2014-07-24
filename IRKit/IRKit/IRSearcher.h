@@ -27,6 +27,8 @@
 
 @required
 - (void)searcher:(IRSearcher *)searcher didResolveService:(NSNetService *)service;
+
+@optional
 - (void)searcherWillStartSearching:(IRSearcher*)searcher;
 - (void)searcherDidTimeout:(IRSearcher *)searcher;
 
