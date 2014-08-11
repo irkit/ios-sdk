@@ -54,8 +54,8 @@
 - (NSUInteger)countOfReadyPeripherals {
     LOG_CURRENT_METHOD;
     return [[[_irperipheralForName allValues] filteredArrayUsingPredicate: [NSPredicate predicateWithBlock:^BOOL (id evaluatedObject, NSDictionary *bindings) {
-        return [(IRPeripheral *)evaluatedObject hasDeviceID];
-    }]
+                return [(IRPeripheral *)evaluatedObject hasDeviceID];
+            }]
             ] count];
 }
 
@@ -86,6 +86,11 @@
         [self save];
     }];
     return p;
+}
+
+- (void)clearPeripherals {
+    LOG_CURRENT_METHOD;
+    _irperipheralForName = @{}.mutableCopy;
 }
 
 #pragma mark - Private methods

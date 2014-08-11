@@ -13,6 +13,7 @@
 - (BOOL)isKnownName:(NSString *)hostname;
 - (IRPeripheral *)registerPeripheralWithName:(NSString *)hostname;
 - (IRPeripheral *)savePeripheralWithName:(NSString *)hostname deviceid:(NSString *)deviceid;
+- (void)clearPeripherals;
 
 #pragma mark - Key Value Coding - Mutable Unordered Accessors
 
