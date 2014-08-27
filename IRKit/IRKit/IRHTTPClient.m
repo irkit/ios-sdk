@@ -18,7 +18,7 @@
 
 #define LONGPOLL_TIMEOUT              25. // heroku timeout
 #define DEFAULT_TIMEOUT               10. // short REST like requests
-#define IP_TIMEOUT                    1. // timeout for requests using IP directly, should not include WiFi connecting time
+#define IP_TIMEOUT                    3. // timeout for requests using IP directly, should not include WiFi connecting time
 #define GETMESSAGES_LONGPOLL_INTERVAL 0.5 // don't ab agains IRKit
 #define IRKIT_MODELNAME               @"IRKit"
 
