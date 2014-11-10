@@ -7,6 +7,8 @@
 // a place to save id<IRPersistentStore> before [IRKit sharedInstance] is called
 static id<IRPersistentStore> store;
 
+NSString *const IRClientDidRegisterNotification = @"IRClientDidRegisterNotification";
+
 @interface IRKit ()
 
 @property (nonatomic) id terminateObserver;

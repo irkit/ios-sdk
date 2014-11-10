@@ -30,4 +30,8 @@
 #define APIENDPOINT_BASE                                      @"https://api.getirkit.com"
 #define APIENDPOINT_APPS                                      @"http://api.getirkit.com/1/apps/recommended"
 
+#pragma mark - Notifications
+
+extern NSString *const IRClientDidRegisterNotification;
+
 #endif // ifndef IRKit_IRConst_h
