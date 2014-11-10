@@ -17,7 +17,7 @@
 #pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LOG(@"indexPath.row: %d", indexPath.row);
+    LOG(@"indexPath.row: %ld", (long)indexPath.row);
 
     IRPeripheralCell *cell = (IRPeripheralCell *)[tableView dequeueReusableCellWithIdentifier: IRKitCellIdentifierPeripheral];
     if (cell == nil) {

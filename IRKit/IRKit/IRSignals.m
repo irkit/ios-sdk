@@ -52,7 +52,7 @@
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
-    LOG(@"index: %d", index);
+    LOG(@"index: %lu", (unsigned long)index);
     return _signals[ index ];
 }
 

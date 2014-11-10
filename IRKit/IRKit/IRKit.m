@@ -95,7 +95,7 @@ NSString *const IRClientDidRegisterNotification = @"IRClientDidRegisterNotificat
     [IRKit sharedInstance].apikey = apikey;
 
     [IRHTTPClient ensureRegisteredAndCall:^(NSError *error) {
-        LOG(@"error: ", error);
+        LOG(@"error: %@", error);
         if (!error) {
             IRKitLog(@"successfully registered!");
         }

@@ -28,7 +28,10 @@ static void NetworkReachabilityCallback(SCNetworkReachabilityRef __unused target
     LOG( @"reachability for host:%@ %@", _self.hostname, NSStringFromNetworkReachabilityFlags(flags) );
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
 static NSString *NSStringFromNetworkReachabilityFlags(SCNetworkReachabilityFlags flags) {
+#pragma clang diagnostic pop
     return [NSString stringWithFormat: @"Reachability Flag Status: %c%c %c%c%c%c%c%c%c",
 #if TARGET_OS_IPHONE
             (flags & kSCNetworkReachabilityFlagsIsWWAN)               ? 'W' : '-',

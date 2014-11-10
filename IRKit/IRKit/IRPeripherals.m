@@ -25,7 +25,7 @@
 }
 
 - (id)objectAtIndex:(NSUInteger)index {
-    LOG(@"index: %d", index);
+    LOG(@"index: %lu", (unsigned long)index);
 
     NSArray *keys = [_irperipheralForName keysSortedByValueUsingSelector: @selector(compareByFirstFoundDate:)];
     NSString *key = [keys objectAtIndex: index];
