@@ -54,6 +54,9 @@
 		C727C87A18B5DEEE00867C1A /* IRSignalSequence.h in Headers */ = {isa = PBXBuildFile; fileRef = C727C87818B5DEEE00867C1A /* IRSignalSequence.h */; };
 		C727C87B18B5DEEE00867C1A /* IRSignalSequence.m in Sources */ = {isa = PBXBuildFile; fileRef = C727C87918B5DEEE00867C1A /* IRSignalSequence.m */; };
 		C727C87E18B5E37B00867C1A /* XCTestCase+Async.m in Sources */ = {isa = PBXBuildFile; fileRef = C727C87C18B5E37B00867C1A /* XCTestCase+Async.m */; };
+		C72A4FF71A277D1C00369B4F /* IRPersistentStore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B1A38718EEA79500EFB915 /* IRPersistentStore.h */; };
+		C72A4FF81A277D2700369B4F /* IRSignalSequence.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C727C87818B5DEEE00867C1A /* IRSignalSequence.h */; };
+		C72A4FF91A277D3300369B4F /* IRPeripheralCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C75B5681174A405B00FFE5CB /* IRPeripheralCell.h */; };
 		C735040E17A029C30057D51B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B3176F20B50088679E /* UIKit.framework */; };
 		C735040F17A029C30057D51B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C752D70117462C7B008B644A /* Foundation.framework */; };
 		C735041017A029C30057D51B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79DE3B1176F20A30088679E /* CoreGraphics.framework */; };
@@ -270,6 +273,9 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
+				C72A4FF91A277D3300369B4F /* IRPeripheralCell.h in CopyFiles */,
+				C72A4FF81A277D2700369B4F /* IRSignalSequence.h in CopyFiles */,
+				C72A4FF71A277D1C00369B4F /* IRPersistentStore.h in CopyFiles */,
 				C79B7B3618F6C12A00E4CC34 /* IRFAQViewController.h in CopyFiles */,
 				C7B544F318EBDFFC00B54504 /* IRHTTPClient+UIKit.h in CopyFiles */,
 				C76CCA8618EADB1F00644C0E /* IRPeripherals+UIKit.h in CopyFiles */,
