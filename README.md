@@ -15,11 +15,12 @@ see [IRKit device](https://github.com/irkit/device)
 
 ## Installing
 
-Use [cocoapods](http://cocoapods.org/)  
+Use [cocoapods](http://cocoapods.org/) 0.35.x or higher  
 Currently under heavy development.
 
 ```sh
 $ cat podfile
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.0'
 pod 'IRKit', :git => 'https://github.com/irkit/ios-sdk.git'
 workspace 'MyApp.xcworkspace'

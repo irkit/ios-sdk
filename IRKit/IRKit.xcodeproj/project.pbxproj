@@ -23,6 +23,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9015C939E7A729CAD848D170 /* libPods-IRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEDD2CC6F3E254B432C1FDF /* libPods-IRKit.a */; };
 		C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */; };
 		C701BEBF182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */; };
 		C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEC1182BA72C00C31F4B /* IRKeys.m */; };
@@ -109,7 +110,6 @@
 		C772C4D018D5E53E00EF819D /* IRProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C772C4CF18D5E53E00EF819D /* IRProgressView.xib */; };
 		C772C4D318D5E59100EF819D /* IRProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = C772C4D118D5E59100EF819D /* IRProgressView.h */; };
 		C772C4D418D5E59100EF819D /* IRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C772C4D218D5E59100EF819D /* IRProgressView.m */; };
-		C7756778184B23A100C6D4DB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7756777184B23A100C6D4DB /* libPods.a */; };
 		C77E1977187859D700B457C3 /* IRGuideWifiViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C77E1975187859D700B457C3 /* IRGuideWifiViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C77E1978187859D700B457C3 /* IRGuideWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C77E1976187859D700B457C3 /* IRGuideWifiViewController.m */; };
 		C77E197918785D2D00B457C3 /* IRGuideWifiViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C77E1975187859D700B457C3 /* IRGuideWifiViewController.h */; };
@@ -308,9 +308,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00F878B05C67F9BF54E9E7B3 /* Pods-IRKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitTests/Pods-IRKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3D5ACDCE91F5EBAD599144C9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3E31DE5C5CF50CFF5C3EEA43 /* Pods-IRKitViewSamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitViewSamples.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitViewSamples/Pods-IRKitViewSamples.debug.xcconfig"; sourceTree = "<group>"; };
 		5D1421C9FA864A43B9FEE98B /* libPods-IRKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IRKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6A92507FB75A49B8B9640873 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		92E0590F6E1144DEB0175952 /* Pods-IRKitTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitTests.xcconfig"; path = "../Pods/Pods-IRKitTests.xcconfig"; sourceTree = "<group>"; };
+		5EBBEFDB8DC13EAAD3FC68F7 /* Pods-IRKitViewSamples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitViewSamples.release.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitViewSamples/Pods-IRKitViewSamples.release.xcconfig"; sourceTree = "<group>"; };
+		6DD118DA3E7228172FE7DD1E /* Pods-IRKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKit.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKit/Pods-IRKit.debug.xcconfig"; sourceTree = "<group>"; };
+		7E2BC135F55832C5D0C833B0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		8D8F836D74F2E58D206B44EF /* Pods-IRKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKit.release.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKit/Pods-IRKit.release.xcconfig"; sourceTree = "<group>"; };
+		8EEDD2CC6F3E254B432C1FDF /* libPods-IRKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IRKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA3DB3D2F2D998FD2DB325D2 /* libPods-IRKitViewSamples.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IRKitViewSamples.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C27309377994DCB43F160E52 /* Pods-IRKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitTests/Pods-IRKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		C70088D0186170BC00A2C878 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRWifiSecuritySelectViewController.xib; sourceTree = "<group>"; };
 		C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRWifiSecuritySelectViewController.m; sourceTree = "<group>"; };
@@ -502,7 +510,6 @@
 				C7B5734A18B594E900949D12 /* CoreTelephony.framework in Frameworks */,
 				C75CF06618506D7E0086ED4F /* MediaPlayer.framework in Frameworks */,
 				C75CF062185061180086ED4F /* SystemConfiguration.framework in Frameworks */,
-				C7756778184B23A100C6D4DB /* libPods.a in Frameworks */,
 				C7AB0525180ADD40007288EB /* AudioToolbox.framework in Frameworks */,
 				C7D0561118041E4F00660217 /* AVFoundation.framework in Frameworks */,
 				C7B741BA1803FA41005802A7 /* libc++.dylib in Frameworks */,
@@ -519,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C752D70217462C7B008B644A /* Foundation.framework in Frameworks */,
+				9015C939E7A729CAD848D170 /* libPods-IRKit.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,9 +623,8 @@
 				C7E4EBA718B20EB5008711EF /* IRKitTests */,
 				C752D70017462C7B008B644A /* Frameworks */,
 				C752D6FF17462C7B008B644A /* Products */,
-				6A92507FB75A49B8B9640873 /* Pods.xcconfig */,
 				C780B3BB185715230023B745 /* Project.xcconfig */,
-				92E0590F6E1144DEB0175952 /* Pods-IRKitTests.xcconfig */,
+				C9C772A21C6BF338E720F17C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -653,6 +660,8 @@
 				C752D71017462C7B008B644A /* SenTestingKit.framework */,
 				C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */,
 				5D1421C9FA864A43B9FEE98B /* libPods-IRKitTests.a */,
+				AA3DB3D2F2D998FD2DB325D2 /* libPods-IRKitViewSamples.a */,
+				8EEDD2CC6F3E254B432C1FDF /* libPods-IRKit.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -862,6 +871,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C9C772A21C6BF338E720F17C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E2BC135F55832C5D0C833B0 /* Pods.debug.xcconfig */,
+				3D5ACDCE91F5EBAD599144C9 /* Pods.release.xcconfig */,
+				00F878B05C67F9BF54E9E7B3 /* Pods-IRKitTests.debug.xcconfig */,
+				C27309377994DCB43F160E52 /* Pods-IRKitTests.release.xcconfig */,
+				3E31DE5C5CF50CFF5C3EEA43 /* Pods-IRKitViewSamples.debug.xcconfig */,
+				5EBBEFDB8DC13EAAD3FC68F7 /* Pods-IRKitViewSamples.release.xcconfig */,
+				6DD118DA3E7228172FE7DD1E /* Pods-IRKit.debug.xcconfig */,
+				8D8F836D74F2E58D206B44EF /* Pods-IRKit.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -935,11 +959,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C752D72317462C7B008B644A /* Build configuration list for PBXNativeTarget "IRKit" */;
 			buildPhases = (
+				677F09D292AB01FA12FA25C4 /* Check Pods Manifest.lock */,
 				C752D6FA17462C7B008B644A /* Sources */,
 				C752D6FB17462C7B008B644A /* Frameworks */,
 				C752D6FC17462C7B008B644A /* CopyFiles */,
 				C71B3F2A1875C245001CE2DA /* Headers */,
 				C71B3F291875C104001CE2DA /* ShellScript */,
+				61CD0ED540CA9CA8CA7295E0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1125,6 +1151,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		61CD0ED540CA9CA8CA7295E0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-IRKit/Pods-IRKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		677F09D292AB01FA12FA25C4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		ACDF22ED334D4A7F9D1D2070 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1137,7 +1193,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Pods-IRKitTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-IRKitTests/Pods-IRKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C71B3F291875C104001CE2DA /* ShellScript */ = {
@@ -1417,7 +1473,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IRKitViewSamples/IRKitViewSamples-Prefix.pch";
 				INFOPLIST_FILE = "IRKitViewSamples/IRKitViewSamples-Info.plist";
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_CFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1521,7 +1577,7 @@
 		};
 		C752D72417462C7B008B644A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A92507FB75A49B8B9640873 /* Pods.xcconfig */;
+			baseConfigurationReference = 6DD118DA3E7228172FE7DD1E /* Pods-IRKit.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/IRKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1534,7 +1590,7 @@
 		};
 		C752D72517462C7B008B644A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A92507FB75A49B8B9640873 /* Pods.xcconfig */;
+			baseConfigurationReference = 8D8F836D74F2E58D206B44EF /* Pods-IRKit.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/IRKit.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1574,7 +1630,7 @@
 		};
 		C7E4EBB318B20EB5008711EF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92E0590F6E1144DEB0175952 /* Pods-IRKitTests.xcconfig */;
+			baseConfigurationReference = 00F878B05C67F9BF54E9E7B3 /* Pods-IRKitTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1602,7 +1658,7 @@
 		};
 		C7E4EBB418B20EB5008711EF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92E0590F6E1144DEB0175952 /* Pods-IRKitTests.xcconfig */;
+			baseConfigurationReference = C27309377994DCB43F160E52 /* Pods-IRKitTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_BOOL_CONVERSION = YES;

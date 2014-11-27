@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7135D397EF6E4216ACF0B06A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6500397054B4D0AADBDF34F /* libPods.a */; };
 		C714891117C46D8E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714891017C46D8E00713890 /* libstdc++.dylib */; };
 		C7549C15183AEF7C0011215C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7549C0E183AEEB30011215C /* AudioToolbox.framework */; };
 		C7549C16183AEF9E0011215C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7549C12183AEF3B0011215C /* AVFoundation.framework */; };
 		C7549C1A183AF6670011215C /* icn_actionbar_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = C7549C18183AF6670011215C /* icn_actionbar_menu.png */; };
 		C7549C1B183AF6670011215C /* icn_actionbar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C7549C19183AF6670011215C /* icn_actionbar_menu@2x.png */; };
+		C75504C11A27892700D0061D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75504C01A27892700D0061D /* CoreTelephony.framework */; };
+		C75504C31A27893600D0061D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C75504C21A27893600D0061D /* SystemConfiguration.framework */; };
 		C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144817B0AB9200927E12 /* UIKit.framework */; };
 		C758144B17B0AB9200927E12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144A17B0AB9200927E12 /* Foundation.framework */; };
 		C758144D17B0AB9200927E12 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C758144C17B0AB9200927E12 /* CoreGraphics.framework */; };
@@ -31,13 +32,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3DB505FD6FBE4CF88D3B4541 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		95C0EB5203A0EDFA369BBAAF /* Pods-Minimal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minimal.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Minimal/Pods-Minimal.debug.xcconfig"; sourceTree = "<group>"; };
+		9E41184C1E0C695149E4C9B6 /* Pods-Minimal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minimal.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Minimal/Pods-Minimal.release.xcconfig"; sourceTree = "<group>"; };
 		C714891017C46D8E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		C7549C0E183AEEB30011215C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C7549C0F183AEEB30011215C /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		C7549C12183AEF3B0011215C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C7549C18183AF6670011215C /* icn_actionbar_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icn_actionbar_menu.png; path = Resources/icn_actionbar_menu.png; sourceTree = "<group>"; };
 		C7549C19183AF6670011215C /* icn_actionbar_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icn_actionbar_menu@2x.png"; path = "Resources/icn_actionbar_menu@2x.png"; sourceTree = "<group>"; };
+		C75504C01A27892700D0061D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		C75504C21A27893600D0061D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C758144517B0AB9200927E12 /* Minimal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Minimal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C758144817B0AB9200927E12 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C758144A17B0AB9200927E12 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,6 +67,7 @@
 		C7E07C7D1875D4F000901967 /* MMSignalsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSignalsDataSource.h; sourceTree = "<group>"; };
 		C7E07C7E1875D4F000901967 /* MMSignalsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSignalsDataSource.m; sourceTree = "<group>"; };
 		D6500397054B4D0AADBDF34F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E14BF18B24C7554003DC028F /* libPods-Minimal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Minimal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75504C31A27893600D0061D /* SystemConfiguration.framework in Frameworks */,
+				C75504C11A27892700D0061D /* CoreTelephony.framework in Frameworks */,
 				C77103B61876F25C003570B5 /* libIRKit.a in Frameworks */,
 				C7549C16183AEF9E0011215C /* AVFoundation.framework in Frameworks */,
 				C7549C15183AEF7C0011215C /* AudioToolbox.framework in Frameworks */,
@@ -77,13 +84,21 @@
 				C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */,
 				C758144B17B0AB9200927E12 /* Foundation.framework in Frameworks */,
 				C758144D17B0AB9200927E12 /* CoreGraphics.framework in Frameworks */,
-				7135D397EF6E4216ACF0B06A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6AA31B7331F0A661D4818249 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				95C0EB5203A0EDFA369BBAAF /* Pods-Minimal.debug.xcconfig */,
+				9E41184C1E0C695149E4C9B6 /* Pods-Minimal.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C7549C17183AF5F30011215C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +117,7 @@
 				C7549C17183AF5F30011215C /* Resources */,
 				C758144717B0AB9200927E12 /* Frameworks */,
 				C758144617B0AB9200927E12 /* Products */,
-				3DB505FD6FBE4CF88D3B4541 /* Pods.xcconfig */,
+				6AA31B7331F0A661D4818249 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +132,8 @@
 		C758144717B0AB9200927E12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C75504C21A27893600D0061D /* SystemConfiguration.framework */,
+				C75504C01A27892700D0061D /* CoreTelephony.framework */,
 				C77103B51876F25C003570B5 /* libIRKit.a */,
 				C7549C12183AEF3B0011215C /* AVFoundation.framework */,
 				C7549C0E183AEEB30011215C /* AudioToolbox.framework */,
@@ -126,6 +143,7 @@
 				C758144A17B0AB9200927E12 /* Foundation.framework */,
 				C758144C17B0AB9200927E12 /* CoreGraphics.framework */,
 				D6500397054B4D0AADBDF34F /* libPods.a */,
+				E14BF18B24C7554003DC028F /* libPods-Minimal.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -168,11 +186,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C758146817B0AB9200927E12 /* Build configuration list for PBXNativeTarget "Minimal" */;
 			buildPhases = (
-				7A2416FAACCD4739BD9AFD1E /* Check Pods Manifest.lock */,
 				C758144117B0AB9200927E12 /* Sources */,
 				C758144217B0AB9200927E12 /* Frameworks */,
 				C758144317B0AB9200927E12 /* Resources */,
-				B577D04CBF12477FAA2F457A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,39 +245,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		7A2416FAACCD4739BD9AFD1E /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B577D04CBF12477FAA2F457A /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C758144117B0AB9200927E12 /* Sources */ = {
@@ -360,7 +343,6 @@
 		};
 		C758146917B0AB9200927E12 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DB505FD6FBE4CF88D3B4541 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";
@@ -374,7 +356,6 @@
 		};
 		C758146A17B0AB9200927E12 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3DB505FD6FBE4CF88D3B4541 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";
