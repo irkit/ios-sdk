@@ -10,6 +10,7 @@
 
 - (void)loadFromStandardUserDefaultsKey:(NSString *)key;
 - (void)saveToStandardUserDefaultsWithKey:(NSString *)key;
+- (void)saveToUserDefaults:(NSUserDefaults*) defaults withKey:(NSString *)key;
 
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfSignal:(id<IRSendable>)signal;

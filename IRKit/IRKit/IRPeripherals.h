@@ -9,6 +9,7 @@
 - (NSUInteger)indexOfObject:(id)object;
 - (IRPeripheral *)peripheralWithName:(NSString *)name;
 - (void)save;
+- (void)saveToStore:(id<IRPersistentStore>)store;
 - (NSUInteger)countOfReadyPeripherals;
 - (BOOL)isKnownName:(NSString *)hostname;
 - (IRPeripheral *)registerPeripheralWithName:(NSString *)hostname;

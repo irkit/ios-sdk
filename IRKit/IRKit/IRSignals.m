@@ -44,11 +44,15 @@
 }
 
 - (void)saveToStandardUserDefaultsWithKey:(NSString *)key {
+    [self saveToUserDefaults: [NSUserDefaults standardUserDefaults]
+                     withKey: key];
+}
+
+- (void)saveToUserDefaults:(NSUserDefaults*) defaults withKey:(NSString *)key {
     LOG(@"key: %@", key);
-    NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-    [d setObject: self.data
-          forKey: key];
-    [d synchronize];
+    [defaults setObject: self.data
+                 forKey: key];
+    [defaults synchronize];
 }
 
 - (id)objectAtIndex:(NSUInteger)index {

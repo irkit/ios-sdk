@@ -47,8 +47,14 @@
 - (void)save {
     LOG_CURRENT_METHOD;
 
-    [_store storePeripherals: _irperipheralForName];
-    [_store synchronize];
+    [self saveToStore:_store];
+}
+
+- (void)saveToStore:(id<IRPersistentStore>)store {
+    LOG_CURRENT_METHOD;
+
+    [store storePeripherals: _irperipheralForName];
+    [store synchronize];
 }
 
 - (NSUInteger)countOfReadyPeripherals {
