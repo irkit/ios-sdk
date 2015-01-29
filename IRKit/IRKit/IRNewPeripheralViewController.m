@@ -128,10 +128,11 @@
         p = [peripherals registerPeripheralWithName: name];
         [peripherals save];
     }
+
     if (!p.deviceid) {
         __weak typeof(self) _self = self;
         [p getKeyWithCompletion:^{
-            [peripherals save];
+            [[IRKit sharedInstance].peripherals save];
             _self.foundPeripheral = p;      // temporary retain, til alert dismisses
 
             // avoid
@@ -145,6 +146,13 @@
                                                   otherButtonTitles: @"OK", nil];
             _self.currentAlertView = alert;
             [alert show];
+        }];
+    }
+    else {
+        // refresh deviceid
+        // in case this IRKit had been reset and re-setup using other app
+        [p getKeyWithCompletion:^{
+            [[IRKit sharedInstance].peripherals save];
         }];
     }
 }
