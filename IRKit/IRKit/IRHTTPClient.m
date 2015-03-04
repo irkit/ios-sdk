@@ -433,11 +433,13 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
     if (message) {
 #if TARGET_OS_IPHONE
+# ifndef TARGET_IS_EXTENSION
         [[[UIAlertView alloc] initWithTitle: message
                                     message: nil
                                    delegate: nil
                           cancelButtonTitle: @"OK"
                           otherButtonTitles: nil] show];
+# endif
 #endif
     }
 }

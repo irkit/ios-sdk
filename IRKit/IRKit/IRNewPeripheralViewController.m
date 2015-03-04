@@ -139,6 +139,7 @@
             // nested push animation can result in corrupted navigation bar
             // Finishing up a navigation transition in an unexpected state. Navigation Bar subview tree might get corrupted.
             // pushViewController after alertview is dismissed
+#ifndef TARGET_IS_EXTENSION
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
                                                             message: @""
                                                            delegate: self
@@ -146,6 +147,7 @@
                                                   otherButtonTitles: @"OK", nil];
             _self.currentAlertView = alert;
             [alert show];
+#endif
         }];
     }
     else {
@@ -221,11 +223,13 @@
     }
 
     if (!_keys.keysAreSet) {
+#ifndef TARGET_IS_EXTENSION
         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Check your internet connection. Connect to your home Wi-Fi network first.", @"alert view title when ! keysAreSet")
                                     message: @""
                                    delegate: nil
                           cancelButtonTitle: @"OK"
                           otherButtonTitles: nil] show];
+#endif
         [self.delegate newPeripheralViewController: self
                            didFinishWithPeripheral: nil];
         return;

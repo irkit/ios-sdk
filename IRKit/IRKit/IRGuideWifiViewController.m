@@ -168,30 +168,31 @@ const NSInteger kAlertTagTimeout         = 499;
             }
 
             [IRHTTPClient postWifiKeys: [_self.keys morseStringRepresentation]
-                        withCompletion: ^(NSHTTPURLResponse *res, id body, NSError *error) {
-                    LOG( @"res: %@, body: %@, error: %@", res, body, error );
+                        withCompletion : ^(NSHTTPURLResponse *res, id body, NSError *error) {
+                LOG( @"res: %@, body: %@, error: %@", res, body, error );
 
-                    if (res.statusCode == 200) {
-                        // hide HUD
-                        [IRProgressView hideHUDForView: _self.view afterDelay: kIntervalToHideHUD];
+                if (res.statusCode == 200) {
+                    // hide HUD
+                    [IRProgressView hideHUDForView: _self.view afterDelay: kIntervalToHideHUD];
 
-                        _self.postWifiSucceeded = YES;
-
-                        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home Wi-Fi", @"alert title after POST /wifi finished successfully")
-                                                    message: @""
-                                                   delegate: nil
-                                          cancelButtonTitle: @"OK"
-                                          otherButtonTitles: nil] show];
-                    }
-                    else {
-                        // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
-                        // retry if other errors
-                        LOG( @"retrying" );
-                        [_self performSelector: @selector(checkAndPostWifiCredentialsIfAdhoc)
-                                    withObject: Nil
-                                    afterDelay: 1.0];
-                    }
-                }];
+                    _self.postWifiSucceeded = YES;
+#ifndef TARGET_IS_EXTENSION
+                    [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home Wi-Fi", @"alert title after POST /wifi finished successfully")
+                                                message: @""
+                                               delegate: nil
+                                      cancelButtonTitle: @"OK"
+                                      otherButtonTitles: nil] show];
+#endif
+                }
+                else {
+                    // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
+                    // retry if other errors
+                    LOG( @"retrying" );
+                    [_self performSelector: @selector(checkAndPostWifiCredentialsIfAdhoc)
+                                withObject: Nil
+                                afterDelay: 1.0];
+                }
+            }];
         }
         else {
             LOG( @"unexpected error res: %@ error: %@", res, error );
@@ -207,11 +208,13 @@ const NSInteger kAlertTagTimeout         = 499;
     LOG_CURRENT_METHOD;
     [IRProgressView hideHUDForView: self.view afterDelay: kIntervalToHideHUD];
 
+#ifndef TARGET_IS_EXTENSION
     [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Open Settings app and connect to a Wi-Fi network named like IRKitXXXX", @"alert title when reachable")
                                 message: @""
                                delegate: nil
                       cancelButtonTitle: @"OK"
                       otherButtonTitles: nil] show];
+#endif
 }
 
 - (void)startWaitingForDoor {
@@ -225,6 +228,7 @@ const NSInteger kAlertTagTimeout         = 499;
 
         if (error) {
             if (([error.domain isEqualToString: IRKitErrorDomainHTTP]) && (error.code == 401)) {
+#ifndef TARGET_IS_EXTENSION
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Session expired, please restart app and try again.", @"alert title when POST /1/door returned 401")
                                                                 message: @""
                                                                delegate: self
@@ -233,15 +237,17 @@ const NSInteger kAlertTagTimeout         = 499;
                 alert.tag = kAlertTag401;
                 _self.currentAlertView = alert;
                 [alert show];
+#endif
             }
             return;
         }
-
+#ifndef TARGET_IS_EXTENSION
         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
                                     message: @""
                                    delegate: nil
                           cancelButtonTitle: @"OK"
                           otherButtonTitles: nil] show];
+#endif
 
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
                                                                             deviceid: _self.keys.deviceid];
@@ -264,7 +270,7 @@ const NSInteger kAlertTagTimeout         = 499;
     _doorWaiterLimitTimer = nil;
 
     [IRProgressView hideHUDForView: self.view afterDelay: 0];
-
+#ifndef TARGET_IS_EXTENSION
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"IRKit couldn't connect to Wi-Fi. Check Wi-Fi settings and try again", @"alert title timeout")
                                                     message: @""
                                                    delegate: self
@@ -273,6 +279,7 @@ const NSInteger kAlertTagTimeout         = 499;
     alert.tag         = kAlertTagTimeout;
     _currentAlertView = alert;
     [alert show];
+#endif
 }
 
 #pragma mark - UIAlertViewDelegate

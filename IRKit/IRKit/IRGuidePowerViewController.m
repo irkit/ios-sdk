@@ -34,7 +34,9 @@
                                                                              target: self
                                                                              action: @selector(doneButtonPressed:)];
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
+#ifndef TARGET_IS_EXTENSION
     [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent animated: YES];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,7 +81,9 @@
 - (IBAction)buyButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
     NSString *url = [NSString stringWithFormat: @"%@/store", APIENDPOINT_BASE];
+#ifndef TARGET_IS_EXTENSION
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+#endif
 }
 
 @end

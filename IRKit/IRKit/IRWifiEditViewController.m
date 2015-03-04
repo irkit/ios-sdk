@@ -72,6 +72,7 @@ static NSString *ssidCache = nil;
         return false;
     }
 
+#ifndef TARGET_IS_EXTENSION
     if (![IRKeys isPassword: password validForSecurityType: _keys.security]) {
         [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Password Invalid", @"alert title in IRWifiEditViewController")
                                     message: nil
@@ -111,6 +112,7 @@ static NSString *ssidCache = nil;
         [passwordCell becomeFirstResponder];
         return false;
     }
+#endif
 
     ssidCache = [ssid copy];
 
