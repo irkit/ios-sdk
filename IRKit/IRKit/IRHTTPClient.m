@@ -224,7 +224,7 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                 return;
             }
             [[IRKit sharedInstance] setClientkey: clientkey_];
-            [[NSNotificationCenter defaultCenter] postNotificationName:IRClientDidRegisterNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName: IRClientDidRegisterNotification object: nil];
 
             LOG(@"successfully registered! clientkey: %@", clientkey_);
             next(nil);
