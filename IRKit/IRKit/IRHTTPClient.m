@@ -455,7 +455,10 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
                completion:(void (^)(NSHTTPURLResponse *res, id object, NSError *error))completion {
     LOG(@"request: %@", request);
 
-    [IRHTTPJSONOperation sendRequest: request
+    NSMutableURLRequest *mutableRequest = request.mutableCopy;
+    [mutableRequest setValue:@"iOS-SDK" forHTTPHeaderField:@"X-Requested-With"];
+
+    [IRHTTPJSONOperation sendRequest: mutableRequest
                                queue: [IRHTTPOperationQueue localQueue]
                              handler:^(NSHTTPURLResponse *response, id object, NSError *error) {
         if (!completion) {
