@@ -80,10 +80,13 @@
 
 - (IBAction)buyButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
     NSString *url = [NSString stringWithFormat: @"%@/store", APIENDPOINT_BASE];
 #ifndef TARGET_IS_EXTENSION
     [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
 #endif
+#pragma clang diagnostic pop
 }
 
 @end
