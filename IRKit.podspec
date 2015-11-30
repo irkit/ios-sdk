@@ -1,4 +1,4 @@
-osx_source_files = %w{Log IRKit IRPersistentStore IRHelper IRHTTPJSONOperation IRHTTPOperationQueue IRHTTPClient IRReachability IRPeripheral IRPeripherals IRSignal IRSignals IRSignalSequence IRSignalSendOperationQueue IRSignalSendOperation IRSearcher IRUserDefaultsStore IRConst}
+osx_source_files = %w{Log IRKit IRKit+Internal IRPersistentStore IRHelper IRHTTPJSONOperation IRHTTPOperationQueue IRHTTPClient IRReachability IRPeripheral IRPeripherals IRSignal IRSignals IRSignalSequence IRSignalSendOperationQueue IRSignalSendOperation IRSearcher IRUserDefaultsStore IRConst}
 
 Pod::Spec.new do |s|
   s.name         = "IRKit"
