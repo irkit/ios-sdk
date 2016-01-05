@@ -285,6 +285,7 @@
 /* Begin XCBuildConfiguration section */
 		C758146617B0AB9200927E12 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95C0EB5203A0EDFA369BBAAF /* Pods-Minimal.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -317,6 +318,7 @@
 		};
 		C758146717B0AB9200927E12 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E41184C1E0C695149E4C9B6 /* Pods-Minimal.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -343,6 +345,7 @@
 		};
 		C758146917B0AB9200927E12 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95C0EB5203A0EDFA369BBAAF /* Pods-Minimal.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";
@@ -356,6 +359,7 @@
 		};
 		C758146A17B0AB9200927E12 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E41184C1E0C695149E4C9B6 /* Pods-Minimal.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";

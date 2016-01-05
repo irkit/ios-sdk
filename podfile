@@ -3,8 +3,17 @@ platform :ios, "7.0"
 workspace 'IRKit'
 xcodeproj 'IRKit/IRKit.xcodeproj'
 
+pod 'ISHTTPOperation', '~> 1.1.0'
+
+target 'Minimal' do
+  xcodeproj 'Minimal/Minimal.xcodeproj'
+end
+
 target 'IRKit' do
-  pod 'ISHTTPOperation', '~> 1.1.0'
+  xcodeproj 'IRKit/IRKit.xcodeproj'
+end
+
+target 'IRKitViewSamples' do
   xcodeproj 'IRKit/IRKit.xcodeproj'
 end
 
