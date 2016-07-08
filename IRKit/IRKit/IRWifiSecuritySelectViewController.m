@@ -30,8 +30,8 @@
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
 }
 
-- (enum IRSecurityType)securityTypeForRow:(NSUInteger)row {
-    enum IRSecurityType ret;
+- (IRSecurityType)securityTypeForRow:(NSUInteger)row {
+    IRSecurityType ret;
 
     switch (row) {
     case 0:
@@ -48,7 +48,7 @@
     return ret;
 }
 
-- (NSUInteger)rowForSecurityType:(enum IRSecurityType)type {
+- (NSUInteger)rowForSecurityType:(IRSecurityType)type {
     NSUInteger ret;
 
     switch (type) {
@@ -97,7 +97,7 @@
                                       reuseIdentifier: @"IRWifiSecuritySelectCell"];
     }
 
-    enum IRSecurityType security = [self securityTypeForRow: indexPath.row];
+    IRSecurityType security = [self securityTypeForRow: indexPath.row];
     cell.textLabel.text = [IRKeys securityTypeStringOf: security];
 
     if ([self securityTypeForRow: indexPath.row] == _selectedSecurityType) {

@@ -265,7 +265,7 @@ static NSString *ssidCache = nil;
 
 #pragma mark - IRWifiSecuritySelectViewControllerDelegate
 
-- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(enum IRSecurityType)securityType {
+- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(IRSecurityType)securityType {
     LOG_CURRENT_METHOD;
     _keys.security = securityType;
 

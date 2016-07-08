@@ -7,13 +7,13 @@
 
 @property (nonatomic, weak) id<IRWifiSecuritySelectViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) enum IRSecurityType selectedSecurityType;
+@property (nonatomic, assign) IRSecurityType selectedSecurityType;
 
 @end
 
 @protocol IRWifiSecuritySelectViewControllerDelegate <NSObject>
 @required
 
-- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(enum IRSecurityType)securityType;
+- (void)securitySelectviewController:(IRWifiSecuritySelectViewController *)viewController didFinishWithSecurityType:(IRSecurityType)securityType;
 
 @end

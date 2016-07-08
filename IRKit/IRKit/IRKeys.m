@@ -53,7 +53,7 @@ struct KeysCRCed
     return [IRKeys securityTypeStringOf: _security];
 }
 
-+ (NSString *)securityTypeStringOf:(enum IRSecurityType)security {
++ (NSString *)securityTypeStringOf:(IRSecurityType)security {
     switch (security) {
     case IRSecurityTypeNone:
         return @"None";
@@ -67,7 +67,7 @@ struct KeysCRCed
     }
 }
 
-+ (BOOL)isPassword:(NSString *)password validForSecurityType:(enum IRSecurityType)securityType {
++ (BOOL)isPassword:(NSString *)password validForSecurityType:(IRSecurityType)securityType {
     if (securityType == IRSecurityTypeWEP) {
         NSUInteger length = password.length;
         // WEP passwords can only be 5 or 13 in ASCII, 10 or 26 in HEX
