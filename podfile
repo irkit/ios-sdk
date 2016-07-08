@@ -4,9 +4,8 @@ use_frameworks!
 platform :ios, "7.0"
 workspace 'IRKit'
 xcodeproj 'IRKit/IRKit.xcodeproj'
-pod 'ISHTTPOperation', '~> 1.1.0'
 
-pod 'ISHTTPOperation', '~> 1.1.0'
+pod 'ISHTTPOperation', '~> 1.2.0'
 
 target 'Minimal' do
   xcodeproj 'Minimal/Minimal.xcodeproj'
