@@ -433,13 +433,18 @@ typedef BOOL (^ResponseHandlerBlock)(NSURLResponse *res, id object, NSError *err
 
     if (message) {
 #if TARGET_OS_IPHONE
-# ifndef TARGET_IS_EXTENSION
-        [[[UIAlertView alloc] initWithTitle: message
-                                    message: nil
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
-# endif
+        UIAlertController* c = [UIAlertController alertControllerWithTitle: message
+                                                                   message: @""
+                                                            preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK"
+                                                     style: UIAlertActionStyleDefault
+                                                   handler: ^(UIAlertAction* action) {}];
+        [c addAction: ok];
+        Class UIApplicationClass = NSClassFromString(@"UIApplication");
+        if(UIApplicationClass && [UIApplicationClass respondsToSelector:@selector(sharedApplication)]) {
+            UIApplication *application = [UIApplication performSelector:@selector(sharedApplication)];
+            [[[application keyWindow] rootViewController] presentViewController: c animated: YES completion: nil];
+        }
 #endif
     }
 }

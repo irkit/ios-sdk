@@ -34,9 +34,12 @@
                                                                              target: self
                                                                              action: @selector(doneButtonPressed:)];
     [IRViewCustomizer sharedInstance].viewDidLoad(self);
-#ifndef TARGET_IS_EXTENSION
-    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent animated: YES];
-#endif
+
+    Class UIApplicationClass = NSClassFromString(@"UIApplication");
+    if(UIApplicationClass && [UIApplicationClass respondsToSelector:@selector(sharedApplication)]) {
+        UIApplication *application = [UIApplication performSelector:@selector(sharedApplication)];
+        [application setStatusBarStyle: UIStatusBarStyleLightContent animated: YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -80,13 +83,13 @@
 
 - (IBAction)buyButtonPressed:(id)sender {
     LOG_CURRENT_METHOD;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-variable"
+
     NSString *url = [NSString stringWithFormat: @"%@/store", APIENDPOINT_BASE];
-#ifndef TARGET_IS_EXTENSION
-    [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
-#endif
-#pragma clang diagnostic pop
+    Class UIApplicationClass = NSClassFromString(@"UIApplication");
+    if(UIApplicationClass && [UIApplicationClass respondsToSelector:@selector(sharedApplication)]) {
+        UIApplication *application = [UIApplication performSelector:@selector(sharedApplication)];
+        [application performSelector:@selector(openURL:) withObject: [NSURL URLWithString: url]];
+    }
 }
 
 @end

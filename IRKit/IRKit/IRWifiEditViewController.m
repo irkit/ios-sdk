@@ -72,47 +72,53 @@ static NSString *ssidCache = nil;
         return false;
     }
 
-#ifndef TARGET_IS_EXTENSION
     if (![IRKeys isPassword: password validForSecurityType: _keys.security]) {
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Password Invalid", @"alert title in IRWifiEditViewController")
-                                    message: nil
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
+        UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"Password Invalid", @"alert title in IRWifiEditViewController")
+                                                                   message: @""
+                                                            preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                   handler: ^(UIAlertAction* action) {}];
+        [c addAction: ok];
+        [self presentViewController: c animated: YES completion: nil];
         [passwordCell becomeFirstResponder];
         return false;
     }
     if ([ssid rangeOfString: @","].location != NSNotFound) {
         // if "," exists in ssid
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"SSID and Password can't include \",\" please change your Wi-Fi settings", @"alert title in IRWifiEditViewController")
-                                    message: nil
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
+        UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"SSID and Password can't include \",\" please change your Wi-Fi settings", @"alert title in IRWifiEditViewController")
+                                                                   message: @""
+                                                            preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                   handler: ^(UIAlertAction* action) {}];
+        [c addAction: ok];
+        [self presentViewController: c animated: YES completion: nil];
         [ssidCell becomeFirstResponder];
         return false;
     }
     if ([ssid rangeOfString: @"IRKit" options: NSCaseInsensitiveSearch|NSAnchoredSearch].location != NSNotFound) {
         // I bet your home wi-fi network name doesn't start with "IRKit"
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Input your HOME Wi-Fi information", @"alert title to input HOME Wi-Fi information in IRWifiEditViewController")
-                                    message: nil
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
+        UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"Input your HOME Wi-Fi information", @"alert title to input HOME Wi-Fi information in IRWifiEditViewController")
+                                                                   message: @""
+                                                            preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                   handler: ^(UIAlertAction* action) {}];
+        [c addAction: ok];
+        [self presentViewController: c animated: YES completion: nil];
         [ssidCell becomeFirstResponder];
         return false;
     }
     if ([password rangeOfString: @","].location != NSNotFound) {
         // if "," exists in password
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"SSID and Password can't include \",\" please change your Wi-Fi settings", @"alert title in IRWifiEditViewController")
-                                    message: nil
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
+        UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"SSID and Password can't include \",\" please change your Wi-Fi settings", @"alert title in IRWifiEditViewController")
+                                                                   message: @""
+                                                            preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                   handler: ^(UIAlertAction* action) {}];
+        [c addAction: ok];
+        [self presentViewController: c animated: YES completion: nil];
         [passwordCell becomeFirstResponder];
         return false;
     }
-#endif
 
     ssidCache = [ssid copy];
 

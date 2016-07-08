@@ -46,7 +46,6 @@ const NSInteger kAlertTagTimeout         = 499;
 @property (nonatomic) BOOL postWifiSucceeded;
 @property (nonatomic) NSDate *becameActiveAt;
 @property (nonatomic) NSTimer *doorWaiterLimitTimer;
-@property (nonatomic) UIAlertView *currentAlertView;
 
 @end
 
@@ -95,7 +94,6 @@ const NSInteger kAlertTagTimeout         = 499;
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-    _currentAlertView.delegate = nil;
 }
 
 - (void)viewDidLoad {
@@ -176,13 +174,13 @@ const NSInteger kAlertTagTimeout         = 499;
                     [IRProgressView hideHUDForView: _self.view afterDelay: kIntervalToHideHUD];
 
                     _self.postWifiSucceeded = YES;
-#ifndef TARGET_IS_EXTENSION
-                    [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home Wi-Fi", @"alert title after POST /wifi finished successfully")
-                                                message: @""
-                                               delegate: nil
-                                      cancelButtonTitle: @"OK"
-                                      otherButtonTitles: nil] show];
-#endif
+                    UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"Great! Now let's connect back to your home Wi-Fi", @"alert title after POST /wifi finished successfully")
+                                                                               message: @""
+                                                                        preferredStyle: UIAlertControllerStyleAlert];
+                    UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                               handler: ^(UIAlertAction* action) {}];
+                    [c addAction: ok];
+                    [self presentViewController: c animated: YES completion: nil];
                 }
                 else {
                     // this can't happen, IRKit responds with non 200 -> 400 when CRC is wrong, but that's not gonna happen
@@ -208,13 +206,13 @@ const NSInteger kAlertTagTimeout         = 499;
     LOG_CURRENT_METHOD;
     [IRProgressView hideHUDForView: self.view afterDelay: kIntervalToHideHUD];
 
-#ifndef TARGET_IS_EXTENSION
-    [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Open Settings app and connect to a Wi-Fi network named like IRKitXXXX", @"alert title when reachable")
-                                message: @""
-                               delegate: nil
-                      cancelButtonTitle: @"OK"
-                      otherButtonTitles: nil] show];
-#endif
+    UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"Open Settings app and connect to a Wi-Fi network named like IRKitXXXX", @"alert title when reachable")
+                                                               message: @""
+                                                        preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                               handler: ^(UIAlertAction* action) {}];
+    [c addAction: ok];
+    [self presentViewController: c animated: YES completion: nil];
 }
 
 - (void)startWaitingForDoor {
@@ -228,26 +226,29 @@ const NSInteger kAlertTagTimeout         = 499;
 
         if (error) {
             if (([error.domain isEqualToString: IRKitErrorDomainHTTP]) && (error.code == 401)) {
-#ifndef TARGET_IS_EXTENSION
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Session expired, please restart app and try again.", @"alert title when POST /1/door returned 401")
-                                                                message: @""
-                                                               delegate: self
-                                                      cancelButtonTitle: @"OK"
-                                                      otherButtonTitles: nil];
-                alert.tag = kAlertTag401;
-                _self.currentAlertView = alert;
-                [alert show];
-#endif
+                UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"Session expired, please restart app and try again.", @"alert title when POST /1/door returned 401")
+                                                                           message: @""
+                                                                    preferredStyle: UIAlertControllerStyleAlert];
+                __weak typeof(self) _self = self;
+                UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                           handler: ^(UIAlertAction* action) {
+                                                               [_self.delegate guideWifiViewController: _self
+                                                                                     didFinishWithInfo: @{
+                                                                                                          IRViewControllerResultType: IRViewControllerResultTypeCancelled
+                                                                                                          }];
+                                                           }];
+                [c addAction: ok];
+                [self presentViewController: c animated: YES completion: nil];
             }
             return;
         }
-#ifndef TARGET_IS_EXTENSION
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
-                                    message: @""
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
-#endif
+        UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
+                                                                   message: @""
+                                                            preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                   handler: ^(UIAlertAction* action) {}];
+        [c addAction: ok];
+        [self presentViewController: c animated: YES completion: nil];
 
         IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
                                                                             deviceid: _self.keys.deviceid];
@@ -270,44 +271,34 @@ const NSInteger kAlertTagTimeout         = 499;
     _doorWaiterLimitTimer = nil;
 
     [IRProgressView hideHUDForView: self.view afterDelay: 0];
-#ifndef TARGET_IS_EXTENSION
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"IRKit couldn't connect to Wi-Fi. Check Wi-Fi settings and try again", @"alert title timeout")
-                                                    message: @""
-                                                   delegate: self
-                                          cancelButtonTitle: @"OK"
-                                          otherButtonTitles: IRLocalizedString(@"Show FAQ", @"title of button to FAQ on alert in IRGuideWiFiViewController"), nil];
-    alert.tag         = kAlertTagTimeout;
-    _currentAlertView = alert;
-    [alert show];
-#endif
-}
 
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    _currentAlertView = nil;
-
-    if (alertView.tag == kAlertTag401) {
-        [self.delegate guideWifiViewController: self
-                             didFinishWithInfo: @{
-             IRViewControllerResultType: IRViewControllerResultTypeCancelled
-         }];
-        return;
-    }
-
-    if (buttonIndex == alertView.cancelButtonIndex) {
-        [self.navigationController popViewControllerAnimated: YES];
-        return;
-    }
-
-    // show FAQ
-    NSBundle *resources    = [IRHelper resources];
-    IRFAQViewController *c = [[IRFAQViewController alloc] initWithNibName: @"IRFAQViewController" bundle: resources];
-    c.delegate = self;
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController: c];
-    [self presentViewController: nc animated: YES completion:^{
-        LOG(@"presented");
-    }];
+    UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"IRKit couldn't connect to Wi-Fi. Check Wi-Fi settings and try again", @"alert title timeout")
+                                                               message: @""
+                                                        preferredStyle: UIAlertControllerStyleAlert];
+    __weak typeof(self) _self = self;
+    UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK"
+                                                 style: UIAlertActionStyleDefault
+                                               handler: ^(UIAlertAction* action) {
+                                                   [[_self navigationController] popViewControllerAnimated: YES];
+                                               }];
+    [c addAction: ok];
+    UIAlertAction* faq = [UIAlertAction actionWithTitle: IRLocalizedString(@"Show FAQ", @"title of button to FAQ on alert in IRGuideWiFiViewController")
+                                                  style: UIAlertActionStyleDefault
+                                                handler: ^(UIAlertAction* action) {
+                                                    if (!_self) {
+                                                        return;
+                                                    }
+                                                    // show FAQ
+                                                    NSBundle *resources    = [IRHelper resources];
+                                                    IRFAQViewController *c = [[IRFAQViewController alloc] initWithNibName: @"IRFAQViewController" bundle: resources];
+                                                    c.delegate = _self;
+                                                    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController: c];
+                                                    [_self presentViewController: nc animated: YES completion:^{
+                                                        LOG(@"presented");
+                                                    }];
+                                                }];
+    [c addAction: faq];
+    [self presentViewController: c animated: YES completion: nil];
 }
 
 #pragma mark - IRFAQViewControllerDelegate

@@ -13,8 +13,8 @@
         IRWifiEditViewControllerDelegate,
         IRGuideWifiViewControllerDelegate,
         IRPeripheralNameEditViewControllerDelegate,
-        IRSearcherDelegate,
-        UIAlertViewDelegate>
+        IRSearcherDelegate
+        >
 
 @property (nonatomic, weak) id<IRNewPeripheralViewControllerDelegate> delegate;
 @property (nonatomic) UINavigationController *navController;

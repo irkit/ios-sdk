@@ -18,8 +18,6 @@
 // prioritize POST /1/door response, and stop searching Bonjour after showing WifiEditVC
 @property (nonatomic) BOOL stopSearchCalled;
 
-@property (nonatomic) UIAlertView *currentAlertView;
-
 @end
 
 @implementation IRNewPeripheralViewController
@@ -42,8 +40,6 @@
 
 - (void)dealloc {
     LOG_CURRENT_METHOD;
-
-    _currentAlertView.delegate = nil;
 
     [self stopSearch];
     [[NSNotificationCenter defaultCenter] removeObserver: _becomeActiveObserver];
@@ -139,15 +135,22 @@
             // nested push animation can result in corrupted navigation bar
             // Finishing up a navigation transition in an unexpected state. Navigation Bar subview tree might get corrupted.
             // pushViewController after alertview is dismissed
-#ifndef TARGET_IS_EXTENSION
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
-                                                            message: @""
-                                                           delegate: self
-                                                  cancelButtonTitle: nil
-                                                  otherButtonTitles: @"OK", nil];
-            _self.currentAlertView = alert;
-            [alert show];
-#endif
+            UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"New IRKit found!", @"alert title when new IRKit is found")
+                                                                       message: @""
+                                                                preferredStyle: UIAlertControllerStyleAlert];
+            UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                       handler: ^(UIAlertAction* action) {
+                                                           if (!_self) {
+                                                               return;
+                                                           }
+                                                           IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
+                                                           c.delegate       = _self;
+                                                           c.peripheral     = _self.foundPeripheral;
+                                                           _self.foundPeripheral = nil;
+                                                           [_self.navController pushViewController: c animated: YES];
+                                                       }];
+            [c addAction: ok];
+            [self presentViewController: c animated: YES completion: nil];
         }];
     }
     else {
@@ -165,20 +168,6 @@
 
 - (void)searcherDidTimeout:(IRSearcher *)searcher {
     LOG_CURRENT_METHOD;
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    LOG_CURRENT_METHOD;
-
-    _currentAlertView = nil;
-
-    IRPeripheralNameEditViewController *c = [[IRPeripheralNameEditViewController alloc] initWithNibName: @"IRPeripheralNameEditViewController" bundle: [IRHelper resources]];
-    c.delegate       = self;
-    c.peripheral     = _foundPeripheral;
-    _foundPeripheral = nil;
-    [self.navController pushViewController: c animated: YES];
 }
 
 #pragma mark - UI events
@@ -223,13 +212,14 @@
     }
 
     if (!_keys.keysAreSet) {
-#ifndef TARGET_IS_EXTENSION
-        [[[UIAlertView alloc] initWithTitle: IRLocalizedString(@"Check your internet connection. Connect to your home Wi-Fi network first.", @"alert view title when ! keysAreSet")
-                                    message: @""
-                                   delegate: nil
-                          cancelButtonTitle: @"OK"
-                          otherButtonTitles: nil] show];
-#endif
+        UIAlertController* c = [UIAlertController alertControllerWithTitle: IRLocalizedString(@"Check your internet connection. Connect to your home Wi-Fi network first.", @"alert view title when ! keysAreSet")
+                                                                   message: @""
+                                                            preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                                   handler: ^(UIAlertAction* action) {}];
+        [c addAction: ok];
+        [self presentViewController: c animated: YES completion: nil];
+
         [self.delegate newPeripheralViewController: self
                            didFinishWithPeripheral: nil];
         return;
