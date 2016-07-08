@@ -4,10 +4,6 @@ workspace 'IRKit'
 xcodeproj 'IRKit/IRKit.xcodeproj'
 pod 'ISHTTPOperation', '~> 1.1.0'
 
-target 'Minimal' do
-  xcodeproj 'Minimal/Minimal.xcodeproj'
-end
-
 pod 'ISHTTPOperation', '~> 1.1.0'
 
 target 'Minimal' do
