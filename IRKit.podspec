@@ -2,7 +2,7 @@ osx_source_files = %w{Log IRKit IRKit+Internal IRPersistentStore IRHelper IRHTTP
 
 Pod::Spec.new do |s|
   s.name         = "IRKit"
-  s.version      = "1.0.1"
+  s.version      = "3.0.0"
   s.summary      = "Send/Receive Infrared signals via IRKit device."
   s.description  = <<-DESC
                      IRKit device and SDK(this library) lets you control your home electronics from your iOS devices.
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.homepage     = "http://github.com/irkit/ios-sdk"
   s.license      = 'MIT'
   s.author       = { "Masakazu OHTSUKA" => "o.masakazu@gmail.com" }
-  s.source       = { :git => "https://github.com/irkit/ios-sdk.git", :tag => "1.0.1" }
+  s.source       = { :git => "https://github.com/irkit/ios-sdk.git", :tag => "3.0.0" }
   s.ios.deployment_target = '6.0'
   # s.osx.deployment_target = '10.9'
   s.ios.source_files = 'IRKit/IRKit/*.{h,m,c}'
