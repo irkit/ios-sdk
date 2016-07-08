@@ -101,7 +101,7 @@ struct KeysCRCed
     crced.wifi_is_set    = true;
     crced.wifi_was_valid = false;
     crced.security       = _security;
-    uint8_t crc      = crc8((uint8_t *)&crced, sizeof(struct KeysCRCed));
+    uint8_t crc      = [CRC8 crc8: &crced size: sizeof(struct KeysCRCed)];
     NSString *crcHex = [NSString stringWithFormat: @"%02x", crc];
 
     NSArray *components = @[

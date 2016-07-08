@@ -1,9 +1,11 @@
-#include <inttypes.h>
+#include "CRC8.h"
 
 #define CRC8INIT 0x00
 #define CRC8POLY 0x31 // = X^8+X^5+X^4+X^0
 
-uint8_t crc8(uint8_t *data, uint16_t size) {
+@implementation CRC8
+
++ (uint8_t)crc8:(uint8_t *)data size: (uint16_t)size {
     uint8_t crc, i;
 
     crc = CRC8INIT;
@@ -24,3 +26,4 @@ uint8_t crc8(uint8_t *data, uint16_t size) {
     return crc;
 }
 
+@end
