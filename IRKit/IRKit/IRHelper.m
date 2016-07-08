@@ -23,11 +23,12 @@ NSString * IRLocalizedString(NSString *key, NSString *comment) {
     return result;
 }
 
+// if we're running Minimal.app, we have IRKit.bundle in the app bundle
+// if we're running other app that uses cocoapods to link IRKit.framework, we use IRKit.bundle inside IRKit.framework
 + (NSBundle *)resources {
-    NSBundle *main      = [NSBundle mainBundle];
-    NSBundle *resources = [NSBundle bundleWithPath: [main pathForResource: @"IRKit"
-                                                                   ofType: @"bundle"]];
-
+    NSBundle *framework = [NSBundle bundleForClass:self];
+    NSBundle *resources = [NSBundle bundleWithPath: [framework pathForResource: @"IRKit"
+                                                                        ofType: @"bundle"]];
     return resources;
 }
 

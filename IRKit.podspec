@@ -22,7 +22,9 @@ Pod::Spec.new do |s|
   # s.osx.source_files = osx_source_files.map { |file| "IRKit/IRKit/#{file}.{h,m,c}" }
   s.public_header_files = 'IRKit/IRKit/'
 
-  s.resources    = 'IRKit/IRKit.bundle'
+  s.ios.resource_bundle = {
+    'IRKit' => 'IRKit/IRKitResources/**/*.{png,xib,plist,strings}'
+  }
   s.ios.frameworks   = 'Foundation', 'QuartzCore', 'CoreGraphics', 'CoreTelephony', 'UIKit', 'MediaPlayer', 'SystemConfiguration', 'AudioToolbox', 'AVFoundation'
   # s.osx.frameworks   = 'Foundation', 'QuartzCore', 'CoreGraphics', 'SystemConfiguration'
   s.library      = 'c++'
