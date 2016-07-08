@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
                      * provide UIViewController subclasses that wraps complex procedures to connect and receive IR signals(to learn before sending) from IRKit devices
                      * provide a simple interface to send IR signals
                     DESC
-  s.homepage     = "http://irkit.github.io/"
+  s.homepage     = "http://github.com/irkit/ios-sdk"
   s.license      = 'MIT'
   s.author       = { "Masakazu OHTSUKA" => "o.masakazu@gmail.com" }
   s.source       = { :git => "https://github.com/irkit/ios-sdk.git", :tag => "1.0.1" }
@@ -21,8 +21,6 @@ Pod::Spec.new do |s|
   s.ios.source_files = 'IRKit/IRKit/*.{h,m,c}'
   # s.osx.source_files = osx_source_files.map { |file| "IRKit/IRKit/#{file}.{h,m,c}" }
   s.public_header_files = 'IRKit/IRKit/'
-  s.preserve_paths = 'IRKit.framework/*'
-  s.vendored_frameworks = 'IRKit/IRKit.framework'
 
   s.resources    = 'IRKit/IRKit.bundle'
   s.ios.frameworks   = 'Foundation', 'QuartzCore', 'CoreGraphics', 'CoreTelephony', 'UIKit', 'MediaPlayer', 'SystemConfiguration', 'AudioToolbox', 'AVFoundation'
