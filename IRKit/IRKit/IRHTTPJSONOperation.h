@@ -6,7 +6,6 @@
 //
 //
 
-// #import "ISHTTPOperation.h"
 @import ISHTTPOperation;
 
 @interface IRHTTPJSONOperation : ISHTTPOperation

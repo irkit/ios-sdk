@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A78C2504D81BE94663B4A3B /* libPods-Minimal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14BF18B24C7554003DC028F /* libPods-Minimal.a */; };
 		C714891117C46D8E00713890 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C714891017C46D8E00713890 /* libstdc++.dylib */; };
 		C7549C15183AEF7C0011215C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7549C0E183AEEB30011215C /* AudioToolbox.framework */; };
 		C7549C16183AEF9E0011215C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7549C12183AEF3B0011215C /* AVFoundation.framework */; };
@@ -30,9 +29,11 @@
 		C77103B61876F25C003570B5 /* libIRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C77103B51876F25C003570B5 /* libIRKit.a */; };
 		C77103B81876F4E6003570B5 /* IRKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C77103B71876F4E6003570B5 /* IRKit.bundle */; };
 		C7E07C7F1875D4F000901967 /* MMSignalsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E07C7E1875D4F000901967 /* MMSignalsDataSource.m */; };
+		CF954FFDCADC5203F73F36C7 /* Pods_Minimal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 040EC2C7E31AA4FE8340D385 /* Pods_Minimal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040EC2C7E31AA4FE8340D385 /* Pods_Minimal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Minimal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C0EB5203A0EDFA369BBAAF /* Pods-Minimal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minimal.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-Minimal/Pods-Minimal.debug.xcconfig"; sourceTree = "<group>"; };
 		9E41184C1E0C695149E4C9B6 /* Pods-Minimal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minimal.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Minimal/Pods-Minimal.release.xcconfig"; sourceTree = "<group>"; };
 		C714891017C46D8E00713890 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -68,7 +69,6 @@
 		C7E07C7D1875D4F000901967 /* MMSignalsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSignalsDataSource.h; sourceTree = "<group>"; };
 		C7E07C7E1875D4F000901967 /* MMSignalsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSignalsDataSource.m; sourceTree = "<group>"; };
 		D6500397054B4D0AADBDF34F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		E14BF18B24C7554003DC028F /* libPods-Minimal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Minimal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 				C758144917B0AB9200927E12 /* UIKit.framework in Frameworks */,
 				C758144B17B0AB9200927E12 /* Foundation.framework in Frameworks */,
 				C758144D17B0AB9200927E12 /* CoreGraphics.framework in Frameworks */,
-				9A78C2504D81BE94663B4A3B /* libPods-Minimal.a in Frameworks */,
+				CF954FFDCADC5203F73F36C7 /* Pods_Minimal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +145,7 @@
 				C758144A17B0AB9200927E12 /* Foundation.framework */,
 				C758144C17B0AB9200927E12 /* CoreGraphics.framework */,
 				D6500397054B4D0AADBDF34F /* libPods.a */,
-				E14BF18B24C7554003DC028F /* libPods-Minimal.a */,
+				040EC2C7E31AA4FE8340D385 /* Pods_Minimal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";
 				INFOPLIST_FILE = "Minimal/Minimal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -417,7 +417,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Minimal/Minimal-Prefix.pch";
 				INFOPLIST_FILE = "Minimal/Minimal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

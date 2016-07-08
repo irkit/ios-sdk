@@ -23,13 +23,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		9015C939E7A729CAD848D170 /* libPods-IRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEDD2CC6F3E254B432C1FDF /* libPods-IRKit.a */; };
-		BBEB9D63671D020ED262CE53 /* libPods-IRKitViewSamples.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3DB3D2F2D998FD2DB325D2 /* libPods-IRKitViewSamples.a */; };
+		86C917669157ECC15603DEF5 /* Pods_IRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B47FC68CB3C9D9EAF155BDB1 /* Pods_IRKit.framework */; };
+		A205C09AFABE30F629D84F01 /* Pods_IRKitViewSamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D294294FEE86C8BADB2B946F /* Pods_IRKitViewSamples.framework */; };
 		C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */; };
 		C701BEBF182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */; };
 		C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEC1182BA72C00C31F4B /* IRKeys.m */; };
 		C703E828183DFA6900B8446C /* IRHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C703E827183DFA6900B8446C /* IRHTTPClient.m */; };
-		C703E82A183E0DD900B8446C /* CRC8.c in Sources */ = {isa = PBXBuildFile; fileRef = C703E829183E0DD900B8446C /* CRC8.c */; };
 		C7040C7918B36295006BEDAC /* IRSignalsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C7040C7818B36295006BEDAC /* IRSignalsTests.m */; };
 		C704474518D5F7B600B73810 /* IRProgressView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C772C4D118D5E59100EF819D /* IRProgressView.h */; };
 		C707ECCF184C7C6E00AC5F0B /* icn_navibar_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C707ECC9184C7C6D00AC5F0B /* icn_navibar_menu@2x.png */; };
@@ -167,6 +166,7 @@
 		C7B5495D17ABD873005D91D1 /* IRSignalSendOperationQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7A66E8E17A7BB3A00EDE589 /* IRSignalSendOperationQueue.h */; };
 		C7B5495E17ABD873005D91D1 /* IRSignalSendOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */; };
 		C7B5734A18B594E900949D12 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C720E6F718B21265009A5AB1 /* CoreTelephony.framework */; };
+		C7B71FBC1D2F93430085CCED /* CRC8.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B71FBB1D2F93430085CCED /* CRC8.m */; };
 		C7B741BA1803FA41005802A7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B741B81803FA22005802A7 /* libc++.dylib */; };
 		C7BD941C18D7024F008C9C72 /* IRReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = C7BD941A18D7024F008C9C72 /* IRReachability.h */; };
 		C7BD941D18D7024F008C9C72 /* IRReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C7BD941B18D7024F008C9C72 /* IRReachability.m */; };
@@ -219,7 +219,7 @@
 		C7EF92E617797DCE00D07D81 /* IRGuidePowerViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C7C7A30D176F05C500C9A62F /* IRGuidePowerViewController.h */; };
 		C7FAB02217467CBF00125BCB /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FAB02117467CBF00125BCB /* Log.m */; };
 		C7FFC7C8184CCE790007B178 /* IRHTTPJSONOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */; };
-		D5A83E32CFF843C3BC37FA0F /* libPods-IRKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D1421C9FA864A43B9FEE98B /* libPods-IRKitTests.a */; };
+		F488BC5144C90F8853F050AC /* Pods_IRKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFE69043AAF0640E8C225B7 /* Pods_IRKitTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -312,13 +312,11 @@
 		00F878B05C67F9BF54E9E7B3 /* Pods-IRKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitTests/Pods-IRKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D5ACDCE91F5EBAD599144C9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3E31DE5C5CF50CFF5C3EEA43 /* Pods-IRKitViewSamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitViewSamples.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitViewSamples/Pods-IRKitViewSamples.debug.xcconfig"; sourceTree = "<group>"; };
-		5D1421C9FA864A43B9FEE98B /* libPods-IRKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IRKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBBEFDB8DC13EAAD3FC68F7 /* Pods-IRKitViewSamples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitViewSamples.release.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitViewSamples/Pods-IRKitViewSamples.release.xcconfig"; sourceTree = "<group>"; };
 		6DD118DA3E7228172FE7DD1E /* Pods-IRKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKit.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKit/Pods-IRKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7E2BC135F55832C5D0C833B0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8D8F836D74F2E58D206B44EF /* Pods-IRKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKit.release.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKit/Pods-IRKit.release.xcconfig"; sourceTree = "<group>"; };
-		8EEDD2CC6F3E254B432C1FDF /* libPods-IRKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IRKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA3DB3D2F2D998FD2DB325D2 /* libPods-IRKitViewSamples.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IRKitViewSamples.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B47FC68CB3C9D9EAF155BDB1 /* Pods_IRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IRKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C27309377994DCB43F160E52 /* Pods-IRKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IRKitTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-IRKitTests/Pods-IRKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		C70088D0186170BC00A2C878 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IRWifiSecuritySelectViewController.xib; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 		C701BEC1182BA72C00C31F4B /* IRKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRKeys.m; sourceTree = "<group>"; };
 		C703E826183DFA6900B8446C /* IRHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHTTPClient.h; sourceTree = "<group>"; };
 		C703E827183DFA6900B8446C /* IRHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHTTPClient.m; sourceTree = "<group>"; };
-		C703E829183E0DD900B8446C /* CRC8.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CRC8.c; sourceTree = "<group>"; };
 		C703E82B183E0DF600B8446C /* CRC8.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRC8.h; sourceTree = "<group>"; };
 		C7040C7818B36295006BEDAC /* IRSignalsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalsTests.m; sourceTree = "<group>"; };
 		C707ECC9184C7C6D00AC5F0B /* icn_navibar_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_navibar_menu@2x.png"; sourceTree = "<group>"; };
@@ -466,6 +463,7 @@
 		C7B544F018EBDD9200B54504 /* IRHTTPClient+UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IRHTTPClient+UIKit.m"; sourceTree = "<group>"; };
 		C7B5495A17ABD5DA005D91D1 /* IRSignalSendOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRSignalSendOperation.m; sourceTree = "<group>"; };
 		C7B5495B17ABD5DA005D91D1 /* IRSignalSendOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRSignalSendOperation.h; sourceTree = "<group>"; };
+		C7B71FBB1D2F93430085CCED /* CRC8.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRC8.m; sourceTree = "<group>"; };
 		C7B741B81803FA22005802A7 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		C7BD941A18D7024F008C9C72 /* IRReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRReachability.h; sourceTree = "<group>"; };
 		C7BD941B18D7024F008C9C72 /* IRReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRReachability.m; sourceTree = "<group>"; };
@@ -501,6 +499,8 @@
 		C7FAB0251746889000125BCB /* IRConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IRConst.h; sourceTree = "<group>"; };
 		C7FFC7C6184CCE790007B178 /* IRHTTPJSONOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRHTTPJSONOperation.h; sourceTree = "<group>"; };
 		C7FFC7C7184CCE790007B178 /* IRHTTPJSONOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRHTTPJSONOperation.m; sourceTree = "<group>"; };
+		CBFE69043AAF0640E8C225B7 /* Pods_IRKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IRKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D294294FEE86C8BADB2B946F /* Pods_IRKitViewSamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IRKitViewSamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -519,7 +519,7 @@
 				C735040E17A029C30057D51B /* UIKit.framework in Frameworks */,
 				C735040F17A029C30057D51B /* Foundation.framework in Frameworks */,
 				C735041017A029C30057D51B /* CoreGraphics.framework in Frameworks */,
-				BBEB9D63671D020ED262CE53 /* libPods-IRKitViewSamples.a in Frameworks */,
+				A205C09AFABE30F629D84F01 /* Pods_IRKitViewSamples.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C752D70217462C7B008B644A /* Foundation.framework in Frameworks */,
-				9015C939E7A729CAD848D170 /* libPods-IRKit.a in Frameworks */,
+				86C917669157ECC15603DEF5 /* Pods_IRKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,7 +556,7 @@
 				C7E4EBA418B20EB5008711EF /* XCTest.framework in Frameworks */,
 				C7E4EBA618B20EB5008711EF /* UIKit.framework in Frameworks */,
 				C7E4EBA518B20EB5008711EF /* Foundation.framework in Frameworks */,
-				D5A83E32CFF843C3BC37FA0F /* libPods-IRKitTests.a in Frameworks */,
+				F488BC5144C90F8853F050AC /* Pods_IRKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,9 +661,9 @@
 				C752D70117462C7B008B644A /* Foundation.framework */,
 				C752D71017462C7B008B644A /* SenTestingKit.framework */,
 				C7C7A317176F0FC400C9A62F /* CoreFoundation.framework */,
-				5D1421C9FA864A43B9FEE98B /* libPods-IRKitTests.a */,
-				AA3DB3D2F2D998FD2DB325D2 /* libPods-IRKitViewSamples.a */,
-				8EEDD2CC6F3E254B432C1FDF /* libPods-IRKit.a */,
+				B47FC68CB3C9D9EAF155BDB1 /* Pods_IRKit.framework */,
+				CBFE69043AAF0640E8C225B7 /* Pods_IRKitTests.framework */,
+				D294294FEE86C8BADB2B946F /* Pods_IRKitViewSamples.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -704,7 +704,7 @@
 				C703E827183DFA6900B8446C /* IRHTTPClient.m */,
 				C7B544EF18EBDD9200B54504 /* IRHTTPClient+UIKit.h */,
 				C7B544F018EBDD9200B54504 /* IRHTTPClient+UIKit.m */,
-				C703E829183E0DD900B8446C /* CRC8.c */,
+				C7B71FBB1D2F93430085CCED /* CRC8.m */,
 				C703E82B183E0DF600B8446C /* CRC8.h */,
 				C79C5947183F5E49002136CD /* IRSearcher.h */,
 				C79C5948183F5E49002136CD /* IRSearcher.m */,
@@ -1340,10 +1340,10 @@
 				C77150F91772DF4A004F9FE3 /* IRNewSignalViewController.m in Sources */,
 				C772C4D418D5E59100EF819D /* IRProgressView.m in Sources */,
 				C727C87B18B5DEEE00867C1A /* IRSignalSequence.m in Sources */,
+				C7B71FBC1D2F93430085CCED /* CRC8.m in Sources */,
 				C7BD941D18D7024F008C9C72 /* IRReachability.m in Sources */,
 				C78F6FE9182B8E77002AAC7B /* IREditCell.m in Sources */,
 				C7AFAB5A18EEB085001F4C87 /* IRKit+Internal.m in Sources */,
-				C703E82A183E0DD900B8446C /* CRC8.c in Sources */,
 				C78EA54C18F6B7CA00987A25 /* IRFAQViewController.m in Sources */,
 				C7AB418C179530D300E934C3 /* IRNewSignalScene1ViewController.m in Sources */,
 				C7A66E9017A7BB3B00EDE589 /* IRSignalSendOperationQueue.m in Sources */,
