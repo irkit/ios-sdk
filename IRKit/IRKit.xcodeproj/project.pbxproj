@@ -24,6 +24,7 @@
 
 /* Begin PBXBuildFile section */
 		9015C939E7A729CAD848D170 /* libPods-IRKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EEDD2CC6F3E254B432C1FDF /* libPods-IRKit.a */; };
+		BBEB9D63671D020ED262CE53 /* libPods-IRKitViewSamples.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3DB3D2F2D998FD2DB325D2 /* libPods-IRKitViewSamples.a */; };
 		C701BEBC182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C701BEBB182B9F5C00C31F4B /* IRWifiSecuritySelectViewController.xib */; };
 		C701BEBF182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEBD182B9F6D00C31F4B /* IRWifiSecuritySelectViewController.m */; };
 		C701BEC2182BA72C00C31F4B /* IRKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = C701BEC1182BA72C00C31F4B /* IRKeys.m */; };
@@ -518,6 +519,7 @@
 				C735040E17A029C30057D51B /* UIKit.framework in Frameworks */,
 				C735040F17A029C30057D51B /* Foundation.framework in Frameworks */,
 				C735041017A029C30057D51B /* CoreGraphics.framework in Frameworks */,
+				BBEB9D63671D020ED262CE53 /* libPods-IRKitViewSamples.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -940,9 +942,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C735042917A029C40057D51B /* Build configuration list for PBXNativeTarget "IRKitViewSamples" */;
 			buildPhases = (
+				7306EAFE3AB3C2674046E6E9 /* 📦 Check Pods Manifest.lock */,
 				C735040917A029C30057D51B /* Sources */,
 				C735040A17A029C30057D51B /* Frameworks */,
 				C735040B17A029C30057D51B /* Resources */,
+				50F4C07F0F2585FAAA1598F1 /* 📦 Embed Pods Frameworks */,
+				639BB16C80C61484766808F8 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1167,6 +1172,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		50F4C07F0F2585FAAA1598F1 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-IRKitViewSamples/Pods-IRKitViewSamples-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		61CD0ED540CA9CA8CA7295E0 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1182,7 +1202,37 @@
 			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-IRKit/Pods-IRKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		639BB16C80C61484766808F8 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-IRKitViewSamples/Pods-IRKitViewSamples-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		677F09D292AB01FA12FA25C4 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7306EAFE3AB3C2674046E6E9 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1471,6 +1521,7 @@
 		};
 		C735042A17A029C40057D51B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E31DE5C5CF50CFF5C3EEA43 /* Pods-IRKitViewSamples.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1484,6 +1535,7 @@
 		};
 		C735042B17A029C40057D51B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EBBEFDB8DC13EAAD3FC68F7 /* Pods-IRKitViewSamples.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
