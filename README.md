@@ -15,16 +15,22 @@ see [IRKit device](https://github.com/irkit/device)
 
 ## Installing
 
-Use [cocoapods](http://cocoapods.org/) 0.35.x or higher  
-Currently under heavy development.
+Use [cocoapods](http://cocoapods.org/) 1.0.0 or higher  
 
 ```sh
-$ cat podfile
+$ cat Podfile
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '7.0'
-pod 'IRKit', :git => 'https://github.com/irkit/ios-sdk.git'
+use_frameworks!
+
+platform :ios, '8.0'
 workspace 'MyApp.xcworkspace'
-xcodeproj 'MyApp/MyApp.xcodeproj'
+project 'MyApp/MyApp.xcodeproj'
+
+pod 'IRKit', '~> 3.0'
+
+target 'MyApp' do
+  project 'MyApp/MyApp.xcodeproj'
+end
 
 $ pod install
 ```
@@ -161,6 +167,19 @@ NSData *data = [_signals data];
 
 // or as JSON
 NSString *json = [_signals JSONRepresentation];
+```
+
+### App Transport Security
+
+IRKit's Device HTTP API doesn't support HTTPS.  
+Add following lines in your `Info.plist`.
+
+```xml
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 ```
 
 ## [Contributing](Contributing.md)
