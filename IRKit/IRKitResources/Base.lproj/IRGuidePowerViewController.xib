@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14D87h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IRGuidePowerViewController">
@@ -12,42 +16,39 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="74">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Power Up your IRKit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="12">
-                    <rect key="frame" x="0.0" y="81" width="320" height="88"/>
+                    <rect key="frame" x="27.5" y="130" width="320" height="88"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="88" id="Fi3-3u-yIf"/>
                         <constraint firstAttribute="width" constant="320" id="qfw-kp-GBf"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="32"/>
-                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="img_powerup3.png" translatesAutoresizingMaskIntoConstraints="NO" id="57">
-                    <rect key="frame" x="0.0" y="172" width="320" height="225"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="225" id="SZT-Ru-x9Y"/>
-                        <constraint firstAttribute="width" constant="320" id="wLn-dM-XR4"/>
-                    </constraints>
+                    <rect key="frame" x="0.0" y="221" width="375" height="225"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Connect USB Micro-B" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="N0I-xf-e06">
-                    <rect key="frame" x="0.0" y="332" width="150" height="88"/>
+                    <rect key="frame" x="27.5" y="381" width="150" height="88"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="0yM-AI-iGx"/>
                         <constraint firstAttribute="height" constant="88" id="wvX-V7-C5G"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sI7-6u-aWJ">
-                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tNE-IP-onh">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                            <color key="backgroundColor" red="0.75559085607528687" green="0.75556832551956177" blue="0.7555810809135437" alpha="1" colorSpace="calibratedRGB"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.75559085607528687" green="0.75556832551956177" blue="0.7555810809135437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUU-7e-4ed">
                             <rect key="frame" x="14" y="0.0" width="320" height="44"/>
@@ -57,8 +58,8 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <state key="normal" title="Buy IRKit, we ship worldwide">
-                                <color key="titleColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.97037827968597412" green="0.97034925222396851" blue="0.97036570310592651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="buyButtonPressed:" destination="-1" eventType="touchUpInside" id="Q5X-0M-WgH"/>
@@ -68,10 +69,9 @@
                             <rect key="frame" x="309" y="14" width="15" height="15"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.6588235294" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="nUU-7e-4ed" firstAttribute="leading" secondItem="sI7-6u-aWJ" secondAttribute="leading" constant="14" id="B9M-Ao-OoB"/>
-                        <constraint firstAttribute="width" constant="320" id="BYt-P3-Hff"/>
                         <constraint firstAttribute="height" constant="44" id="Q6P-Qm-h06"/>
                         <constraint firstAttribute="centerY" secondItem="TcD-ae-oeX" secondAttribute="centerY" id="e6j-Bs-BtT"/>
                         <constraint firstItem="TcD-ae-oeX" firstAttribute="leading" secondItem="nUU-7e-4ed" secondAttribute="trailing" constant="-25" id="e9g-hp-dDn"/>
@@ -84,10 +84,14 @@
                 <constraint firstItem="N0I-xf-e06" firstAttribute="top" secondItem="57" secondAttribute="bottom" constant="-65" id="0ba-AK-Xuc"/>
                 <constraint firstAttribute="centerX" secondItem="57" secondAttribute="centerX" id="3il-X0-dwb"/>
                 <constraint firstAttribute="centerX" secondItem="sI7-6u-aWJ" secondAttribute="centerX" id="5TB-ep-zwL"/>
+                <constraint firstAttribute="trailing" secondItem="sI7-6u-aWJ" secondAttribute="trailing" id="5yV-V0-goe"/>
+                <constraint firstItem="57" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="9sU-Zl-HMT"/>
                 <constraint firstItem="N0I-xf-e06" firstAttribute="centerX" secondItem="57" secondAttribute="centerX" constant="-85" id="NqM-0x-mx2"/>
+                <constraint firstItem="sI7-6u-aWJ" firstAttribute="leading" secondItem="74" secondAttribute="leading" id="pPT-J0-joU"/>
                 <constraint firstAttribute="bottom" secondItem="sI7-6u-aWJ" secondAttribute="bottom" id="qse-Ym-Dql"/>
                 <constraint firstAttribute="centerY" secondItem="57" secondAttribute="centerY" id="t8A-Fb-wEw"/>
                 <constraint firstAttribute="centerX" secondItem="12" secondAttribute="centerX" id="wZm-3B-tbP"/>
+                <constraint firstAttribute="trailing" secondItem="57" secondAttribute="trailing" id="y9M-hp-NTJ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
         </view>
@@ -99,6 +103,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
 </document>
