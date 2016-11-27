@@ -246,20 +246,20 @@ const NSInteger kAlertTagTimeout         = 499;
                                                                    message: @""
                                                             preferredStyle: UIAlertControllerStyleAlert];
         UIAlertAction* ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
-                                                   handler: ^(UIAlertAction* action) {}];
+                                                   handler: ^(UIAlertAction* action) {
+                                                       IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
+                                                                                                                           deviceid: _self.keys.deviceid];
+                                                       // for debug purpose only; remember which regdomain we used to setup
+                                                       p.regdomain = _self.keys.regdomain;
+
+                                                       [_self.delegate guideWifiViewController: _self
+                                                                             didFinishWithInfo: @{
+                                                                                                  IRViewControllerResultType: IRViewControllerResultTypeDone,
+                                                                                                  IRViewControllerResultPeripheral: p
+                                                                                                  }];
+                                                   }];
         [c addAction: ok];
         [self presentViewController: c animated: YES completion: nil];
-
-        IRPeripheral *p = [[IRKit sharedInstance].peripherals savePeripheralWithName: object[ @"hostname" ]
-                                                                            deviceid: _self.keys.deviceid];
-        // for debug purpose only; remember which regdomain we used to setup
-        p.regdomain = _self.keys.regdomain;
-
-        [_self.delegate guideWifiViewController: _self
-                              didFinishWithInfo: @{
-             IRViewControllerResultType: IRViewControllerResultTypeDone,
-             IRViewControllerResultPeripheral: p
-         }];
     }];
 }
 
